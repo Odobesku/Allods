@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.projectile.ProjectileResource>
+    <Header>
+        <resourceId>322290</resourceId>
+    </Header>
+    <visObject href="/Spells/FX/Spells/NecromancerHowlOfDeath_part.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+    <altitude>0</altitude>
+    <lifeLengthCap>3000</lifeLengthCap>
+    <impactsOnStart>
+        <Item type="gameMechanics.elements.impacts.EntityImpactCreaturesAround">
+            <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+            <radius>3</radius>
+            <affectGroup>Enemies</affectGroup>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.EntityImpactsDeferred">
+                    <delay>1000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.DirectHeal">
+                                    <heal>1</heal>
+                                    <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                        <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                            <multiplier>0.02</multiplier>
+                                        </mulCalcer>
+                                    </scalerTarget>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>1500</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                            <element>SHADOW</element>
+                            <threatMultiplier>0</threatMultiplier>
+                            <damage>40</damage>
+                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <filter type="gameMechanics.constructor.basicElements.FilterOr">
+                <filters>
+                    <Item type="gameMechanics.world.creature.AvatarFilter" />
+                </filters>
+            </filter>
+        </Item>
+    </impactsOnStart>
+</gameMechanics.world.projectile.ProjectileResource>

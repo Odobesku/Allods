@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>316358</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Events/EventSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="SnowBallQuest.(SpellSingleTarget).Name.txt" />
+    <Description href="SnowBallQuest.(SpellSingleTarget).Description.txt" />
+    <visualScripts href="/Spells/VisScripts/Fireworks/NY_Snowball.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>30</value>
+    </range>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <iffPolicy>Everyone</iffPolicy>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="NewYear02.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Started</status>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="/World/Quests/ZoneLeague1/NewYear02/NewYear02.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Started</status>
+                    </Item>
+                </predicates>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/Spells/Events/NewYear/SnowBall/SnowCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </targetConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceActiveItem" />
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                <id href="/World/Quests/ZoneLeague1/NewYear02/CountId_1.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                <id href="CountId_1.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/Spells/Events/NewYear/SnowBall/SnowCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

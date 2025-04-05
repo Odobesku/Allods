@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>309496</resourceId>
+    </Header>
+    <Name href="Pride_7_2_Concentration.(BuffResource).Name.txt" />
+    <Description href="Pride_7_2_Concentration.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Mage/MageMeditation.(UISingleTexture).xdb" />
+    <visScript href="Pride_7_2_Concentration.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActionsExceptGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/QuestSpells.xdb" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactDismount" />
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                <quest href="Pride_7_2.xdb" />
+                                <counterResource href="CountId_2.xdb" />
+                            </predicate>
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                            <quest href="Pride_7_2.xdb" />
+                            <counterResource href="CountId_1.xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                            <id href="CountId_1.xdb" />
+                            <value>-1</value>
+                            <targetAvatarOnly>true</targetAvatarOnly>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                            <spawn>
+                                <scriptID>PS_NPC_SaadUduk</scriptID>
+                                <map href="/Maps/PridensStart/MapResource.xdb" />
+                            </spawn>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                    <data href="Pride_7_2_ConcentrationFail.(ClientData).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOff>
+            <rerunOnLoad>true</rerunOnLoad>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Rotate</Item>
+            </actions>
+            <rooted>true</rooted>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToHarmfulSpells" />
+        <Item type="gameMechanics.elements.effects.LifeGuard">
+            <level>1</level>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>2000</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="Pride_7_2_CA1.(BuffResource).xdb" />
+                        </Item>
+                    </impactsOn>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectAddContextActions">
+            <actions>
+                <Item href="Pride_7_2_CA1.(SpellSingleTarget).xdb" />
+                <Item href="Pride_7_2_CA2.(SpellSingleTarget).xdb" />
+                <Item href="Pride_7_2_CA3.(SpellSingleTarget).xdb" />
+                <Item href="Pride_7_2_CA4.(SpellSingleTarget).xdb" />
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectStackTrigger">
+            <count>5</count>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                    <id href="CountId_2.xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectHandleLeaveMission">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                <quest href="Pride_7_2.xdb" />
+                                <counterResource href="CountId_2.xdb" />
+                            </predicate>
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                            <quest href="Pride_7_2.xdb" />
+                            <counterResource href="CountId_1.xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                            <id href="CountId_1.xdb" />
+                            <value>-1</value>
+                            <targetAvatarOnly>true</targetAvatarOnly>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                            <spawn>
+                                <scriptID>PS_NPC_SaadUduk</scriptID>
+                                <map href="/Maps/PridensStart/MapResource.xdb" />
+                            </spawn>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                    <data href="Pride_7_2_ConcentrationFail.(ClientData).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <stackLimit>5</stackLimit>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+        <Item href="/Mechanics/Spells/Groups/QuestSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/Dismount.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

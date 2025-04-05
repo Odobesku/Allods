@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>320775</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Aura">
+            <radius>30</radius>
+            <impactsIn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                            <quest href="WW_5_11.xdb" />
+                            <status>Started</status>
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                            <quest href="WW_5_11.xdb" />
+                            <counterResource href="Counter1.(QuestCountId).xdb" />
+                            <value>1</value>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="ContextAction.(BuffResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsIn>
+            <impactsOut>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="ContextAction.(BuffResource).xdb" />
+                </Item>
+            </impactsOut>
+            <filter type="gameMechanics.world.creature.AvatarFilter" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>0</coeff>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddPlane">
+            <plane href="BulbasWildPlane.(Plane).xdb" />
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

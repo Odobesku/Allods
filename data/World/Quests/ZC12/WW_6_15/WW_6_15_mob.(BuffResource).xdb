@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>321534</resourceId>
+    </Header>
+    <image href="/Interface/Icons/Spells/Psionic/Meditation.(UISingleTexture).xdb" />
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.AddParticularVisibilityRule">
+            <visibilityRule>
+                <channel>Visibility</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="WW_6_15_mob.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddParticularVisibilityRule">
+            <visibilityRule>
+                <channel>Visibility</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="WW_6_15_mob.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddParticularVisibilityRule">
+            <visibilityRule>
+                <channel>Influence</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="WW_6_15_mob.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddParticularVisibilityRule">
+            <visibilityRule>
+                <channel>Influence</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="WW_6_15_mob.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddParticularVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="WW_6_15_mob.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddParticularVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="WW_6_15_mob.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectZoneEnterLeaveChecker">
+            <impactsOnLeave>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="WW_6_15_mob.(BuffResource).xdb" />
+                    <anyRank>false</anyRank>
+                </Item>
+            </impactsOnLeave>
+            <impactsOnTimeout>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="WW_6_15_mob.(BuffResource).xdb" />
+                    <anyRank>false</anyRank>
+                </Item>
+            </impactsOnTimeout>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CasterLostWatcherGeneric">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="WW_6_15_mob.(BuffResource).xdb" />
+                    <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                        <quest href="WW_6_15.xdb" />
+                                        <status>Completed</status>
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+                                    <quest href="WW_6_15.xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EventTrigger">
+            <eventClasses>
+                <Item>gameMechanics.elements.events.EventDeath</Item>
+            </eventClasses>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="WW_6_15_mob.(BuffResource).xdb" />
+                    <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                </Item>
+            </impacts>
+            <eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                            <quest href="WW_6_15.xdb" />
+                            <status>Active</status>
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                <quest href="WW_6_15.xdb" />
+                                <status>Completed</status>
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+                            <quest href="WW_6_15.xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.TickableAura">
+            <affectGroup>All</affectGroup>
+            <radius>70</radius>
+            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                        <mobs>
+                            <Item href="/Creatures/ArchitectRanger/Instances/ZC12/WW_6_15_Architect_MiniBoss.(MobWorld).xdb" />
+                        </mobs>
+                    </Item>
+                </predicates>
+            </filter>
+            <holderImpactsOut>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                <quest href="WW_6_15.xdb" />
+                                <status>Completed</status>
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+                            <quest href="WW_6_15.xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </holderImpactsOut>
+        </Item>
+    </effects>
+    <duration>300000</duration>
+    <isHelpful>true</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

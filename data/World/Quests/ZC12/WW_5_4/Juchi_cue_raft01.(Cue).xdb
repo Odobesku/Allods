@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.mob.interaction.Cue>
+    <Header>
+        <resourceId>321395</resourceId>
+    </Header>
+    <name href="Juchi_cue_raft01.(Cue).Name.txt" />
+    <text href="Juchi_cue_raft01.(Cue).Text.txt" />
+    <conditions>
+        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+            <quest href="WW_5_4.xdb" />
+            <status>Started</status>
+        </Item>
+    </conditions>
+    <additionalConditions>
+        <Item type="gameMechanics.elements.predicates.PredicateToInterlocutor">
+            <predicates>
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="RaftCooldown.(BuffResource).xdb" />
+                        </predicate>
+                    </Item>
+                </predicates>
+            </predicates>
+        </Item>
+    </additionalConditions>
+    <impacts>
+        <Item type="gameMechanics.elements.impacts.ImpactsToInterlocutor">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>3000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactStopTalk" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="RaftCooldown.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.impacts.EntityLaunchTourTraveller">
+            <tour href="/Maps/ZC12/GlobalObjects/Tours/Raft_WW_5_4.(Tour).xdb" />
+            <map href="/Maps/ZC12/MapResource.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                    <zone href="/Maps/ZC12/ScriptZones/WW_5_4_RaftPlace.(ScriptZone).xdb" />
+                </Item>
+            </predicates>
+            <impactsIf>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>500</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                                        <locator>
+                                            <scriptID>WW_5_4_mob1</scriptID>
+                                            <map href="/Maps/ZC12/MapResource.xdb" />
+                                        </locator>
+                                    </destination>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsIf>
+        </Item>
+    </impacts>
+</gameMechanics.world.mob.interaction.Cue>

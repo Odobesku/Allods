@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.mob.interaction.Cue>
+    <Header>
+        <resourceId>313894</resourceId>
+    </Header>
+    <name href="Umoir_Smeyana_00_02.(Cue).Name.txt" />
+    <text href="Umoir_Smeyana_00_02.(Cue).Text.txt" />
+    <conditions>
+        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+            <quest href="U_2_01_check.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+            <status>Active</status>
+        </Item>
+        <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+            <quest href="U_2_01_check.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+            <counterResource href="CountId_3.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+            <value>1</value>
+        </Item>
+        <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+            <quest href="U_2_01_check.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+            <counterResource href="CountId_4.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+            <value>1</value>
+        </Item>
+        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+            <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                <quest href="U_2_01_check.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                <counterResource href="CountId_5.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                <value>1</value>
+            </predicate>
+        </Item>
+    </conditions>
+    <impacts>
+        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                    <zone href="/Maps/Umoir/Zones/Umoir/Umoir.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                </Item>
+            </predicates>
+            <impactsIf>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="/World/Quests/ArchipelagoContested4/Q_27e/Teleport.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>2500</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                                    <zone href="/Maps/Umoir/Zones/Umoir/Umoir.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                                        <locator>
+                                            <scriptID>Umoir_Smeyana</scriptID>
+                                            <map href="/Maps/Umoir/City_MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                        </locator>
+                                    </destination>
+                                    <finishImpacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                            <id href="CountId_5.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                        </Item>
+                                    </finishImpacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsIf>
+        </Item>
+    </impacts>
+</gameMechanics.world.mob.interaction.Cue>

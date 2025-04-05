@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.quest.QuestResource>
+    <Header>
+        <resourceId>313682</resourceId>
+    </Header>
+    <name href="UI04_Q03.(QuestResource).Name.txt" />
+    <goal href="UI04_Q03.(QuestResource).Goal.txt" />
+    <startText href="UI04_Q03.(QuestResource).StartText.txt" />
+    <checkText href="UI04_Q03.(QuestResource).CheckText.txt" />
+    <finishText href="UI04_Q03.(QuestResource).FinishText.txt" />
+    <plotline />
+    <canCancel>true</canCancel>
+    <pvp>false</pvp>
+    <itemMall>false</itemMall>
+    <autoSetReturnLocation>false</autoSetReturnLocation>
+    <returnLocation>
+        <zone href="/Maps/UmoirIsland04/Zones/UI04_NayanTower_Floor01.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+        <position x="5562.430176" y="5687.910156" z="101.419998" />
+    </returnLocation>
+    <finisher type="gameMechanics.elements.quest.QuestFinisherMob">
+        <mobWorld href="/Characters/Kania_male/Instances/UmoirIsland04/TowerServant.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+    </finisher>
+    <rewardImpacts>
+        <Item type="gameMechanics.elements.impacts.ImpactFreezeQuestCounter">
+            <quest href="/World/Quests/Umoir/U_isle_03/U_isle_03.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+            <counterResource href="/World/Quests/Umoir/U_isle_03/UI04_Q03.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+        </Item>
+    </rewardImpacts>
+    <abandonImpacts>
+        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+            <predicates>
+                <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                            <zone href="/Maps/UmoirIsland04/Zones/UI04_Dungeon.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                            <zone href="/Maps/UmoirIsland04/Zones/UI04_Dungeon_JumpGameplay.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                            <zone href="/Maps/UmoirIsland04/Zones/UI04_NayanTower.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                            <zone href="/Maps/UmoirIsland04/Zones/UI04_Transit.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                        </Item>
+                    </predicates>
+                </Item>
+            </predicates>
+            <impactsIf>
+                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                        <locator>
+                            <scriptID>ui04_tm_portal</scriptID>
+                            <map href="/Maps/UmoirIsland04/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                        </locator>
+                    </destination>
+                    <finishImpacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Items/QuestItems/UmoirIsland04/Illusion.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+                            <impacts>
+                                <Item type="gameMechanics.world.avatar.assistants.ImpactsToAssistant">
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Characters/Hadagan_male/Instances/UmoirIsland04/ChangeVisPortGuard.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impacts>
+                                    <assistantResource href="/Mechanics/Characters/Hadagan_male/UmoirIsland04/Miloslavin.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </finishImpacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
+                    <device>
+                        <scriptID>TimeMachineIsland</scriptID>
+                        <map href="/Maps/UmoirIsland04/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                    </device>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="/Items/InteractiveObjects/UmoirIsland04/MageKillEvent.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="TM_Transit.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsIf>
+        </Item>
+    </abandonImpacts>
+    <startConditions>
+        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+            <quest href="/World/Quests/UmoirIsland04/UI04_Q02/UI04_Q02.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+            <status>Finished</status>
+        </Item>
+        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+            <quest href="/World/Quests/Umoir/U_isle_03/U_isle_03.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+        </Item>
+    </startConditions>
+    <counters>
+        <Item type="gameMechanics.elements.quest.QuestCountSpecial">
+            <customName href="UI04_Q03.(QuestResource).CustomName.txt" />
+            <locations>
+                <Item>
+                    <zone href="/Maps/UmoirIsland04/Zones/UmoirIsland04.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                    <position x="3114.500000" y="3130.199951" z="82.699997" />
+                </Item>
+            </locations>
+            <relatedMobsAndDevices>
+                <Item href="/Items/InteractiveObjects/UmoirIsland04/TimeMachineSwitch03.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+            </relatedMobsAndDevices>
+            <limit>1</limit>
+            <id href="CountID01.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+        </Item>
+        <Item type="gameMechanics.elements.quest.QuestCountKill">
+            <customName href="UI04_Q03.(QuestResource).CustomName06.txt" />
+            <description href="UI04_Q03.(QuestResource).Description02.txt" />
+            <locations>
+                <Item>
+                    <zone href="/Maps/UmoirIsland04/Zones/UI04_Transit.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                    <position x="2905.199951" y="5844.299805" z="8.500000" />
+                </Item>
+            </locations>
+            <limit>1</limit>
+            <dependencies>
+                <Item href="CountID01.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+            </dependencies>
+            <objects>
+                <Item href="/Characters/Kania_male/Instances/UmoirIsland04/TM_TowerMages.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+            </objects>
+        </Item>
+    </counters>
+    <triggerAgents>
+        <Item type="gameMechanics.elements.trigger.TriggerAgentSelf">
+            <trigger href="UI04_Q03.(TriggerResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.trigger.TriggerResource)" />
+        </Item>
+    </triggerAgents>
+    <reward>
+        <experience>15</experience>
+        <money>391155</money>
+    </reward>
+    <secretSequence>false</secretSequence>
+    <tutorial>false</tutorial>
+    <type>QUEST_TYPE_SOLO</type>
+    <internalName>UI04_Q03</internalName>
+    <lowPriority>false</lowPriority>
+    <zone href="/Maps/UmoirIsland04/Zones/UI04_NayanTower.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+    <canBeSkipped>false</canBeSkipped>
+    <requiredLevel type="gameMechanics.formulas.IntConstantValue">
+        <value>56</value>
+    </requiredLevel>
+    <level type="gameMechanics.formulas.IntConstantValue">
+        <value>57</value>
+    </level>
+</gameMechanics.constructor.schemes.quest.QuestResource>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>309937</resourceId>
+    </Header>
+    <Name href="Pride_6_3_2_Dagger.(SpellSingleTarget).Name.txt" />
+    <Description href="Pride_6_3_2_Dagger.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Equipment/Dagger/DaggerVendor.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Exploits/UseStanding.(ExploitVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <prepareDuration>1000</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>5000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                <quest href="Pride_6_3_2.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                <status>Started</status>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                    <quest href="Pride_6_3_2.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                    <counterResource href="/Creatures/ParasiteShadow/Instances/PridensStart/Pride_6_3_2.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                <quest href="Pride_6_3_2.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                <counterResource href="CountId_0.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                <zone href="/Maps/PridensStart/ScriptZones/Pride_6_4_Fire.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                <destination type="gameMechanics.map.destination.RelativePos">
+                    <coord x="2" y="2" />
+                </destination>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.TagMobForKill" />
+                    <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="Pride_6_3_2_AgroBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impacts>
+                <object href="/Creatures/ParasiteShadow/Instances/PridensStart/Pride_6_3_2.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

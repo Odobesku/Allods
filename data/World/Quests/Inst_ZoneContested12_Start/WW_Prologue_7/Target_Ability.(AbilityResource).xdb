@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>317082</resourceId>
+    </Header>
+    <name href="Target_Ability.(AbilityResource).Name.txt" />
+    <visualScript type="CreatureEffectsAction">
+        <visualEffects>
+            <Item>
+                <effectFx href="/Spells/FX/Mobs/Architect_Scan.(VisObjectTemplate).xdb" />
+                <lockScale>true</lockScale>
+                <ignoreParentRotation>true</ignoreParentRotation>
+            </Item>
+        </visualEffects>
+    </visualScript>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Aura">
+            <affectGroup>Enemies</affectGroup>
+            <radius>10</radius>
+            <impactsIn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="StopTarget.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                    <projectileData>
+                                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                            <destination type="gameMechanics.map.destination.RelativePos" />
+                                        </moveType>
+                                        <resource href="Bomb.(ProjectileResource).xdb" />
+                                    </projectileData>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsIn>
+            <filter type="gameMechanics.world.creature.AvatarFilter" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.DamageZeroSuppressor" />
+        <Item type="gameMechanics.elements.effects.AddPlane">
+            <plane href="TargetPlane.(Plane).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.Enlarge">
+            <factor>0.01</factor>
+        </Item>
+    </effects>
+    <disableWhileDead>true</disableWhileDead>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

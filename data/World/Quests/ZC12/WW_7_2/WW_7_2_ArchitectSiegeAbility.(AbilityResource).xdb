@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>320995</resourceId>
+    </Header>
+    <visualScript type="CreatureEffectsAction">
+        <visualEffects>
+            <Item>
+                <effectFx href="/Spells/FX/Mobs/ArchitectMiniboss_Shield.(VisObjectTemplate).xdb" />
+                <scale>1</scale>
+                <locator>Slot_BodyFX</locator>
+            </Item>
+        </visualEffects>
+    </visualScript>
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                            <zone href="/Maps/ZC12/ScriptZones/WW_7_2.(ScriptZone).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="WW_7_2_Cast.(BuffResource).xdb" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="WW_7_2_Move.(BuffResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+            <tick>60000</tick>
+            <initialDelay>1000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.LifeGuard">
+            <level>1</level>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectNoAggro" />
+        <Item type="gameMechanics.elements.effects.EffectNoAggroChecks" />
+        <Item type="gameMechanics.elements.effects.EffectDoesNotAggro" />
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.2</coeff>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>1000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="WW_7_2_Cast.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+    <disableWhileDead>true</disableWhileDead>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

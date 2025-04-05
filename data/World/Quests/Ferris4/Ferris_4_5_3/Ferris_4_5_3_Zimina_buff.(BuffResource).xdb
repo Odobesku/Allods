@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>313105</resourceId>
+    </Header>
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EventTrigger">
+            <eventClasses>
+                <Item>gameMechanics.world.mob.behaviour.aiEvents.GoneThroughPathEvent</Item>
+            </eventClasses>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.SpawnSingleMob">
+                    <mob>
+                        <scriptID>Ferris4_Zimina_06_spawn_fin</scriptID>
+                        <map href="/Maps/Ferris4/inst_MapResource.(MapResource).xdb#xpointer(/mapLoader.MapResource)" />
+                    </mob>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                            <id href="CountId_1.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.TickableAura">
+            <affectGroup>All</affectGroup>
+            <radius>40</radius>
+            <filter type="gameMechanics.world.creature.AvatarFilter" />
+            <impactsOut>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>1000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                    <quest href="Ferris_4_5_3.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                    <status>Completed</status>
+                                </Item>
+                            </predicates>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+                                    <quest href="Ferris_4_5_3.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOut>
+        </Item>
+    </effects>
+    <duration>600000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

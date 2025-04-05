@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>310600</resourceId>
+    </Header>
+    <Name href="Bombardment.(SpellArea).Name.txt" />
+    <Description href="Bombardment.(SpellArea).Description.txt" />
+    <image href="/Interface/Icons/Equipment/Ships/ComplexTarget.(UISingleTexture).xdb" />
+    <visualScripts href="PointAtTargetArea.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <prepareDuration>3000</prepareDuration>
+    <targetType>STTPoint</targetType>
+    <iffPolicy>Everyone</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>7000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                <quest href="WW_10_7.xdb" />
+                <status>Started</status>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                    <quest href="WW_10_7.xdb" />
+                    <counterResource href="/Creatures/Colossus/Instances/ZC12_Map02/WW_10_7_Colossus.(MobWorld).xdb" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                <zone href="/Maps/ZC12_Map02/ScriptZones/Mortar_zone.(ScriptZone).xdb" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                <projectileData>
+                    <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                        <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+                        <directed>false</directed>
+                    </moveType>
+                    <resource href="Bombardment.(ProjectileResource).xdb" />
+                </projectileData>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <radius>10</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

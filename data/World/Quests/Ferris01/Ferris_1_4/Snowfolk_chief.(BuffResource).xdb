@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>313298</resourceId>
+    </Header>
+    <needVisualize>false</needVisualize>
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <effects>
+        <Item type="gameMechanics.elements.effects.LifeGuard">
+            <level>0.3</level>
+        </Item>
+        <Item type="gameMechanics.elements.effects.HealthTrigger">
+            <healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
+                <multiplier>0.3</multiplier>
+            </healthOn>
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                            <id href="Counter4_1.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="Chief_defeated.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                    <data href="Cheif_defeated.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>3000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                        <quest href="Ferris_1_4.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                        <counterResource href="Counter4_1.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+                                    <quest href="Ferris_1_4.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.7</coeff>
+            </scaler>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

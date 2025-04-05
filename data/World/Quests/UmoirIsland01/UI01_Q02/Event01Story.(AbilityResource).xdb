@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>322362</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.HealthTrigger">
+            <healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
+                <multiplier>0.1</multiplier>
+            </healthOn>
+            <impactsOn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Characters/Kania_male/Instances/UmoirIsland01/Death_Stun.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactSetHealthToFull" />
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="Disable.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </predicates>
+                    <effectsElse>
+                        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+                            <delay>3000</delay>
+                            <effects>
+                                <Item type="gameMechanics.elements.effects.Switch">
+                                    <impactsOn>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                            <data href="Event01_story1.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                        </Item>
+                                    </impactsOn>
+                                </Item>
+                            </effects>
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+                            <delay>9000</delay>
+                            <effects>
+                                <Item type="gameMechanics.elements.effects.Switch">
+                                    <impactsOn>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                            <data href="Event01_story2.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                        </Item>
+                                    </impactsOn>
+                                </Item>
+                            </effects>
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.Switch">
+                            <impactsOn>
+                                <Item type="gameMechanics.elements.impacts.ImpactGoTo">
+                                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                                        <locator>
+                                            <scriptID>Event01_Story</scriptID>
+                                            <map href="/Maps/UmoirIsland01/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                        </locator>
+                                    </destination>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="Event01_Story2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impacts>
+                                    <spawnResource href="/Maps/UmoirIsland01/SpawnTables/DwarfWarrior01.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                                </Item>
+                            </impactsOn>
+                        </Item>
+                    </effectsElse>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

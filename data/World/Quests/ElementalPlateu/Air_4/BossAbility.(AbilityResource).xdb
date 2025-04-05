@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>321687</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                            <radius>15</radius>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactCopyAggroList" />
+                            </impacts>
+                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                        <mobs>
+                                            <Item href="/Creatures/AirElemental/ElementalPlateu/ThunderBoss.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                            <Item href="/Creatures/AirElemental/ElementalPlateu/AirBoss.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                        </mobs>
+                                    </Item>
+                                </predicates>
+                            </filter>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onEnter>
+            <effects>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="/Creatures/AirElemental/ElementalPlateu/ThunderBoss.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactMobMorph">
+                                    <newMobWorld href="/Creatures/AirElemental/ElementalPlateu/AirBoss.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                    <delay>500</delay>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                                            <spell href="AirPush.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactMobMorph">
+                                    <newMobWorld href="/Creatures/AirElemental/ElementalPlateu/ThunderBoss.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impacts>
+                    <tick>12000</tick>
+                    <initialDelay>12000</initialDelay>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Jump</Item>
+                <Item>Move</Item>
+            </actions>
+            <rooted>true</rooted>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactEntitiesAround">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateDevice">
+                                    <deviceResources>
+                                        <Item href="/Items/InteractiveObjects/ElementalPlateu/Whirlwind/Whirlwind1.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+                                        <Item href="/Items/InteractiveObjects/ElementalPlateu/Whirlwind/Whirlwind2.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+                                    </deviceResources>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

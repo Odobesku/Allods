@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>321385</resourceId>
+    </Header>
+    <Name href="WW_3_12_item_spell.(SpellSingleTarget).Name.txt" />
+    <Description href="WW_3_12_item_spell.(SpellSingleTarget).Description.txt" />
+    <visualScripts href="/Spells/VisScripts/Items/Gadget.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>30</value>
+    </range>
+    <prepareDuration>1500</prepareDuration>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="WW_3_12.xdb" />
+                        <status>Active</status>
+                    </Item>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                            <quest href="WW_3_12.xdb" />
+                            <counterResource href="CountId_2.xdb" />
+                            <value>1</value>
+                        </predicate>
+                    </Item>
+                </predicates>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
+                    <assistantResource href="WW_3_12_Assistant.(AssistantResource).xdb" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                <mobs>
+                    <Item href="/Characters/HumMobs/ZC12/ZC12_Heartless_3_11.(MobWorld).xdb" />
+                </mobs>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.RandomImpact">
+                <entries>
+                    <Item>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                <quest href="WW_3_12.xdb" />
+                                                <status>Active</status>
+                                            </Item>
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                    <quest href="WW_3_12.xdb" />
+                                                    <counterResource href="CountId_1.xdb" />
+                                                    <value>1</value>
+                                                </predicate>
+                                            </Item>
+                                        </predicates>
+                                        <impactsIf>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                <id href="CountId_1.xdb" />
+                                            </Item>
+                                        </impactsIf>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                                        </impacts>
+                                    </Item>
+                                    <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+                                        <destination type="gameMechanics.map.destination.DestinationModified">
+                                            <destination type="gameMechanics.map.destination.RelativePos">
+                                                <coord x="3" y="3" />
+                                            </destination>
+                                            <modifiers>
+                                                <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                                    <verticalRange min="0" max="0" />
+                                                    <horizontalRange min="3" max="3" />
+                                                </Item>
+                                            </modifiers>
+                                        </destination>
+                                        <assistantResource href="WW_3_12_Assistant.(AssistantResource).xdb" />
+                                        <mobResource href="/Characters/HumMobs/ZC12/ZC12_Heartless_3_12_Assistant.(MobWorld).xdb" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                        </impacts>
+                        <chance>0.7</chance>
+                    </Item>
+                </entries>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

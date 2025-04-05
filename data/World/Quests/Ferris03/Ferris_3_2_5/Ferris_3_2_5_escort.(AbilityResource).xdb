@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>322492</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.8</coeff>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddPlane">
+            <plane href="Ferris_3_2_5_escort_plane.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.Aura">
+            <radius>20</radius>
+            <impactsIn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                            <mobs>
+                                <Item href="/Creatures/Echidna/Instances/Ferris03/Echidna_Ferris_65.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                            </mobs>
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/World/Quests/Umoir/U_4_04/U_4_04_wait.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="Ferris_3_2_5_escort_plane.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                            <delay>1000</delay>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsIn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactSetHealthToFull" />
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                    <quest href="Ferris_3_2_5.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                    <status>Active</status>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+                                    <quest href="Ferris_3_2_5.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.5</coeff>
+            </scaler>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

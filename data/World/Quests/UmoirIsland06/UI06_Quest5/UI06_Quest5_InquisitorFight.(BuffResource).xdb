@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>311913</resourceId>
+    </Header>
+    <Name href="UI06_Quest5_InquisitorFight.(BuffResource).Name.txt" />
+    <Description href="UI06_Quest5_InquisitorFight.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Paladin/PaladinBlessedShield.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <effects>
+        <Item type="gameMechanics.elements.effects.HealthTrigger">
+            <healthOn type="gameMechanics.elements.calcers.FloatData">
+                <value>0</value>
+            </healthOn>
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                    <quest href="UI06_Quest5.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                    <status>Started</status>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+                                    <quest href="UI06_Quest5.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                    <value>100</value>
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                            <value>100</value>
+                        </Item>
+                    </impacts>
+                    <spawnResource href="/Maps/UmoirIsland06/SpawnTables/UmoirIsland06/UI06_Angel.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                </Item>
+            </impacts>
+            <tick>6000</tick>
+            <initialDelay>1000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.6</coeff>
+            </scaler>
+            <attackerConditions>
+                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                    <mobs>
+                        <Item href="/Creatures/Archangel/Instances/UmoirIsland06/UI06_Angel.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    </mobs>
+                </Item>
+            </attackerConditions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>10000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                            <spawn>
+                                <scriptID>UI06_Veronika</scriptID>
+                                <map href="/Maps/UmoirIsland06/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                            </spawn>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="UI06_Quest5_VeronicaChat.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactMobChat">
+                                    <msg href="UI06_Quest5_VeronicaChat.(TextMessage).xdb#xpointer(/gameMechanics.world.TextMessage)" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>true</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/QuestSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/EvadeProtectedBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>311958</resourceId>
+    </Header>
+    <needVisualize>false</needVisualize>
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                            <quest href="UI06_Quest2.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                            <counterResource href="CountId_2.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                            <value>1</value>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                            <id href="CountId_2.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                            <value>-1</value>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                            <data href="UI06_Quest2_Request2.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                        </Item>
+                    </impacts>
+                    <spawnResource href="/Maps/UmoirIsland06/SpawnTables/UmoirIsland06/UI06_Builders.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                </Item>
+            </impacts>
+            <tick>5000</tick>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="UI06_Quest2_ConstructionFake2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                    <spawnResource href="/Maps/UmoirIsland06/SpawnTables/UmoirIsland06/UI06_Builders.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="UI06_Quest2_ConstructionFake2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                    <spawnResource href="/Maps/UmoirIsland06/SpawnTables/UmoirIsland06/UI06_Builders.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                </Item>
+            </impactsOff>
+        </Item>
+    </effects>
+    <duration>8000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

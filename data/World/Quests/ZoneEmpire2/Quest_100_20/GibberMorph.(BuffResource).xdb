@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>311664</resourceId>
+    </Header>
+    <Name href="GibberMorph_Name.txt" />
+    <Description href="GibberMorph_Desc.txt" />
+    <image href="/Interface/Icons/Spells/Necromancer/NecromancerBloodpact.(UISingleTexture).xdb" />
+    <visScript href="ChangePlayerVisual_2Gibberling.(BuffVisScripts).xdb" />
+    <nameTemplate href="GibberMorph_Name.txt" />
+    <descTemplate href="GibberMorph_Desc.txt" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectHandleLeaveMission">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+                    <quest href="Quest_100_20.xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="GibberMorph.(BuffResource).xdb" />
+                    <anyRank>false</anyRank>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+                    <quest href="/World/Quests/ZoneEmpire2/Quest_100_30/Quest_100_30.xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSetReputation">
+            <faction href="/World/Factions/League.xdb" />
+            <value>25000</value>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                <zone href="/Maps/Hadagan/ScriptZones/ZoneEmpire2/GibbZone.(ScriptZone).xdb" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+                            <quest href="Quest_100_20.xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+                            <quest href="/World/Quests/ZoneEmpire2/Quest_100_30/Quest_100_30.xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="GibberMorph.(BuffResource).xdb" />
+                            <anyRank>false</anyRank>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactDismount" />
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                    <quest href="/World/Quests/ZoneEmpire2/Quest_100_30/Quest_100_30.xdb" />
+                                    <status>Started</status>
+                                </Item>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                        <quest href="/World/Quests/ZoneEmpire2/Quest_100_30/Quest_100_30.xdb" />
+                                        <counterResource href="/World/Quests/ZoneEmpire2/Quest_100_30/CountId_1.xdb" />
+                                        <value>1</value>
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+                            <quest href="/World/Quests/ZoneEmpire2/Quest_100_30/Quest_100_30.xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DisableSpellsPredicate">
+            <predicate type="gameMechanics.elements.predicates.PredicateIsMountAction" />
+        </Item>
+    </effects>
+    <duration>360000</duration>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <canBeSaved>true</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Transformation.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/Dismount.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

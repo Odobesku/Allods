@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>310535</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactSetHealthToFull" />
+                                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                    <delay>3000</delay>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                    <buff href="ArchitectTrip.(BuffResource).xdb" />
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                    <destination type="gameMechanics.map.destination.DestinationModified">
+                                                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                        <modifiers>
+                                                            <Item type="gameMechanics.map.destination.modifier.ModifierSelectReachable">
+                                                                <alternatives>
+                                                                    <Item type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
+                                                                        <radius type="gameMechanics.elements.calcers.FloatData">
+                                                                            <value>25</value>
+                                                                        </radius>
+                                                                    </Item>
+                                                                </alternatives>
+                                                            </Item>
+                                                        </modifiers>
+                                                    </destination>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                                                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                            <delay>240000</delay>
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                                                            </impacts>
+                                                        </Item>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="/World/Quests/ZC12/WW_1_8/Arc_plane.(BuffResource).xdb" />
+                                                        </Item>
+                                                    </impacts>
+                                                    <object href="/Creatures/Tripod/Instances/ZC12_Map02/Archont.(MobWorld).xdb" />
+                                                    <pool href="TripPool.(SummonPool).xdb" />
+                                                    <isPersonalPool>true</isPersonalPool>
+                                                </Item>
+                                            </impactsIf>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                    <data href="Heal.(ClientData).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.world.creature.AvatarFilter" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impactsIf>
+                </Item>
+            </onLeave>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

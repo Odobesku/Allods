@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>310274</resourceId>
+    </Header>
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/Camera_CutScene.(VisObjectTemplate).xdb" />
+        </Item>
+    </visualEffects>
+    <visScript href="WW_14_10_OrcSoldier_run_Player.(BuffVisScripts).xdb" />
+    <needVisualize>false</needVisualize>
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Rotate</Item>
+                <Item>Jump</Item>
+            </actions>
+            <rooted>true</rooted>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+        <Item type="gameMechanics.elements.effects.ImmunityToBuffs">
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.PredicateBuffHarmful" />
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactClientData">
+                    <data href="/Mechanics/RaidInstances/FerrisRaid/CutScene/InterfaceActive.(ClientData).xdb" />
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactClientData">
+                    <data href="/Mechanics/RaidInstances/FerrisRaid/CutScene/InterfaceDeactive.(ClientData).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                    <table href="/Maps/ZC12_RiftInstance7/SpawnTables/ZC12_RI7_ArchitectMiniboss.(SpawnTable).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactGoTo">
+                            <destination type="gameMechanics.map.destination.DestinationLocator">
+                                <locator>
+                                    <scriptID>WW_14_10_Miniboss</scriptID>
+                                    <map href="/Maps/ZC12_RiftInstance7/MapResource.xdb" />
+                                </locator>
+                            </destination>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                    <table href="/Maps/ZC12_RiftInstance7/SpawnTables/ZC12_RI7_Soldiers3.(SpawnTable).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="/Characters/Orc_male/Instances/ZC12_Map02/ZC12_RI7_OrcSoldier.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="WW_14_10_OrcSoldier_Fall.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="WW_14_10_OrcSoldier_run.(BuffResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ResetSpawnTable">
+                            <table href="/Maps/ZC12_RiftInstance7/SpawnTables/ZC12_RI7_Soldiers2.(SpawnTable).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOff>
+        </Item>
+    </effects>
+    <duration>7000</duration>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+        <Item href="/Mechanics/Spells/Groups/EvadeProtectedBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/QuestSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/CutScene.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

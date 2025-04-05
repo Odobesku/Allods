@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>320931</resourceId>
+    </Header>
+    <visScript href="GatheringSeaProducts.(BuffVisScripts).xdb" />
+    <needVisualize>false</needVisualize>
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <effects>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactCopyAggroList" />
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                    <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                        <value>0.7</value>
+                    </chanceCalcer>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                            <data href="CallToChief.(ClientData).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </onEnter>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.5</coeff>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>0.5</coeff>
+            </scaler>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/EvadeProtectedBuffs.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>315380</resourceId>
+    </Header>
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectMoveByTour">
+            <route href="/Maps/Tropical_Atoll/GlobalObjects/Tours/ReturnToQuestGiver.(Tour).xdb#xpointer(/gameMechanics.map.tour.Tour)" />
+            <impactsOnArrive>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="ReturnToQuestGiver.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="GiveSpells.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOnArrive>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="ScoreFast.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <consumeStacks>10</consumeStacks>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactFreezeQuestCounter">
+                            <quest href="ChargeTraceRepeatable.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                            <counterResource href="ChargeTraceRepeatable2.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="WinnerFX.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                            <data href="WinnerText.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+                            <quest href="ChargeTraceRepeatable.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="ScoreFast.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <canBeSaved>false</canBeSaved>
+    <ignoreLevelDelta>true</ignoreLevelDelta>
+    <groups>
+        <Item href="ChargeTrace.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/Events/EventBuffs.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

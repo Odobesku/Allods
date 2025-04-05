@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.quest.trigger.TriggerResource>
+    <Header>
+        <resourceId>322129</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectHandleEnterMission">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                            <quest href="Ferris_2_8.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                            <counterResource href="Counter1.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                <quest href="Ferris_2_8.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                <counterResource href="Counter2.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                            <id href="Counter1.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                            <value>-1</value>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="Pulling.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="Pulling.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                            <zone href="/Maps/Ferris/ScriptZones/Ferris_2_8_SpawnBeast.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                            <destination type="gameMechanics.map.destination.DestinationLocator">
+                                                <locator>
+                                                    <scriptID>Ferris_terminal</scriptID>
+                                                    <map href="/Maps/Ferris/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                </locator>
+                                            </destination>
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="ResolventBeast.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.quest.trigger.TriggerResource>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>322170</resourceId>
+    </Header>
+    <Name href="Ferris_2_9_script_stun.(BuffResource).Name.txt" />
+    <Description href="Ferris_2_9_script_stun.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/TepSoulSteal.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Rotate</Item>
+                <Item>Jump</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+        <Item type="gameMechanics.elements.effects.HealthTrigger">
+            <healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
+                <multiplier>0.3</multiplier>
+            </healthOn>
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                    <id href="Counter3.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                        <locator>
+                            <scriptID>Ferris_tp</scriptID>
+                            <map href="/Maps/Ferris/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                        </locator>
+                    </destination>
+                    <finishImpacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/World/Quests/Ferris01/Ferris_1_6/Sleep.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </finishImpacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Ferris_2_9_script_stun.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.LifeGuard">
+            <level>0.1</level>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactSetHealthToFull" />
+            </impactsOn>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>313799</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.LifeGuard">
+            <level>0.2</level>
+        </Item>
+        <Item type="gameMechanics.elements.effects.HealthTrigger">
+            <healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
+                <multiplier>0.3</multiplier>
+            </healthOn>
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                    <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+                        <range min="0" max="60" />
+                        <withinRange>true</withinRange>
+                        <minCandidatesCount>0</minCandidatesCount>
+                        <targetCount>0</targetCount>
+                    </selector>
+                    <filter type="gameMechanics.world.creature.AvatarFilter" />
+                    <impacts>
+                        <Item>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                            <quest href="U_10_11.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                            <status>Active</status>
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                <quest href="U_10_11.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                                <counterResource href="CountId_2.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                                <value>1</value>
+                                            </predicate>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                            <delay>4000</delay>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                    <id href="CountId_2.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                                                    <table href="/Maps/Umoir/SpawnTables/Umoir/Umoir_Veronika_FinalInst.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                    <delay>500</delay>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                                                            </impacts>
+                                                            <spawnResource href="/Maps/Umoir/SpawnTables/Umoir/Umoir_Veronika_FinalInst.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                            <delay>1000</delay>
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                                            <data href="U_10_11_Replika_04.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                                        </Item>
+                                                                    </impacts>
+                                                                    <spawnResource href="/Maps/Umoir/SpawnTables/Umoir/Umoir_Veronika_FinalInst.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                                                                </Item>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactMobChat">
+                                                                    <msg href="U_10_11_Replika_04.(TextMessage).xdb#xpointer(/gameMechanics.world.TextMessage)" />
+                                                                    <defaultSpeaker href="/Characters/Kania_female/Instances/Umoir/Umoir_Veronika_FinalInst.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                            <delay>2000</delay>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                                    <projectileData>
+                                                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                            <destination type="gameMechanics.map.destination.DestinationLocator">
+                                                                <locator>
+                                                                    <scriptID>Umoir_Veronika_FinalInst_loc</scriptID>
+                                                                    <map href="/Maps/Umoir/SmeyanaInst_MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                                </locator>
+                                                            </destination>
+                                                        </moveType>
+                                                        <resource href="U_10_11_Summon_effect.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                                                    </projectileData>
+                                                    <pool href="/World/Quests/Umoir/U_10_10/Pool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactSetHealthToFull" />
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="U_10_11_Smeyana_Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </Item>
+                                            </impacts>
+                                            <spawnResource href="/Maps/Umoir/SpawnTables/Umoir/Umoir_Smeyana_Final_inst.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                            <delay>500</delay>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                    <delay>2000</delay>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff href="U_10_11_Veronika.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </Item>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                                    <delay>2000</delay>
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.elements.impacts.ImpactMobChat">
+                                                                            <msg href="U_10_11_Replika_06.(TextMessage).xdb#xpointer(/gameMechanics.world.TextMessage)" />
+                                                                            <defaultSpeaker href="/Characters/Kania_female/Instances/Umoir/Umoir_Veronika_FinalInst.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                                        </Item>
+                                                                        <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                                                                            <impacts>
+                                                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                                                    <data href="U_10_11_Replika_06.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                                                </Item>
+                                                                            </impacts>
+                                                                            <spawnResource href="/Maps/Umoir/SpawnTables/Umoir/Umoir_Veronika_FinalInst.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                                                                        </Item>
+                                                                    </impacts>
+                                                                </Item>
+                                                            </impacts>
+                                                            <spawnResource href="/Maps/Umoir/SpawnTables/Umoir/Umoir_Veronika_FinalInst.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                            <id href="CountId_4.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactSetHealthToFull" />
+                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                            <buff href="U_10_11_Smeyana_Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </Item>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="U_10_11_Smeyana_vs_Veronika.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </Item>
+                                                    </impacts>
+                                                    <spawnResource href="/Maps/Umoir/SpawnTables/Umoir/Umoir_Smeyana_Final_inst.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ImpactMobChat">
+                                                    <msg href="U_10_11_Replika_05.(TextMessage).xdb#xpointer(/gameMechanics.world.TextMessage)" />
+                                                    <defaultSpeaker href="/Characters/Kania_female/Instances/Umoir/Umoir_Smeyana_Final_inst.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                            <data href="U_10_11_Replika_05.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                        </Item>
+                                                    </impacts>
+                                                    <spawnResource href="/Maps/Umoir/SpawnTables/Umoir/Umoir_Smeyana_Final_inst.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                    </impacts>
+                    <spawnResource href="/Maps/Umoir/SpawnTables/Umoir/Umoir_Veronika_FinalInst.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                </Item>
+            </impacts>
+            <tick>3000</tick>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

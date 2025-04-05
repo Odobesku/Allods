@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>314114</resourceId>
+    </Header>
+    <Name href="IsleKick.(BuffResource).Name.txt" />
+    <Description href="IsleKick.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Special/Cues/IconTeleport.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <nameTemplate href="IsleKick.(BuffResource)_Name.txt.template" />
+    <descTemplate href="IsleKick.(BuffResource)_Desc.txt.template" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ZoneDistributor">
+                        <zone type="gameMechanics.elements.calcers.ZoneDistributor$OwnZone" />
+                        <faction type="gameMechanics.elements.calcers.ZoneDistributor$AnyFaction" />
+                    </distributor>
+                    <data href="/World/Quests/UmoirIsland01/UI01_Q03/KickWarning.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>9000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="IsleKick.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                    <data href="/Spells/ClientData/FadeOutScreen.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                    <data href="/Items/InteractiveObjects/ArchipelagoContested5/AC5_K_10_firewood/FadeOutSound.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                            <destination type="gameMechanics.map.destination.DestinationLocator">
+                                <locator>
+                                    <scriptID>U_V_gorod</scriptID>
+                                    <map href="/Maps/Umoir/City_MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                </locator>
+                            </destination>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DamageZeroSuppressor" />
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Jump</Item>
+                <Item>Rotate</Item>
+            </actions>
+            <rooted>true</rooted>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+        <Item type="gameMechanics.elements.effects.Hover" />
+    </effects>
+    <duration>10000</duration>
+    <isStackable>false</isStackable>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>true</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

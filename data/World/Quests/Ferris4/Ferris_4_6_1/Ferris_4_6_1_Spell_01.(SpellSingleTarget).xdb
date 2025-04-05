@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>312906</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Operation.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/ActionBarChange.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="Ferris_4_6_1_ColossusScout.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <element>LIGHTNING</element>
+    <Name href="Ferris_4_6_1_Spell_01.(SpellSingleTarget).Name.txt" />
+    <Description href="Ferris_4_6_1_Spell_01.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Spells/Druid/ChainLightning.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Mechanics/Spells/Architects/ArchitectBotDirectSpam.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <sysName>1</sysName>
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <prepareDuration>300</prepareDuration>
+    <isAggro>false</isAggro>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>1000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="Ferris_4_6_1_Colossus_Chennel.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="Ferris_4_6_1_ColossusScout_Pull.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="Ferris_4_6_1_ColossusScout_Pull_01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="Ferris_4_6_1_ColossusScout_Pull_02.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.TagMobForKill" />
+            <Item type="gameMechanics.elements.impacts.ForceAggro" />
+            <Item type="gameMechanics.elements.impacts.ProbabilisticImpactBinary">
+                <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                    <value>0.5</value>
+                </chanceCalcer>
+                <impactsSuccess>
+                    <Item type="gameMechanics.elements.impacts.ProbabilisticImpactBinary">
+                        <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                            <value>0.5</value>
+                        </chanceCalcer>
+                        <impactsSuccess>
+                            <Item type="gameMechanics.elements.impacts.DirectDamage">
+                                <damage>1</damage>
+                                <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                        <multiplier>0.4</multiplier>
+                                    </mulCalcer>
+                                </scalerTarget>
+                            </Item>
+                        </impactsSuccess>
+                        <impactsFailure>
+                            <Item type="gameMechanics.elements.impacts.DirectDamage">
+                                <damage>1</damage>
+                                <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                        <multiplier>0.45</multiplier>
+                                    </mulCalcer>
+                                </scalerTarget>
+                            </Item>
+                        </impactsFailure>
+                    </Item>
+                </impactsSuccess>
+                <impactsFailure>
+                    <Item type="gameMechanics.elements.impacts.ProbabilisticImpactBinary">
+                        <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                            <value>0.5</value>
+                        </chanceCalcer>
+                        <impactsSuccess>
+                            <Item type="gameMechanics.elements.impacts.DirectDamage">
+                                <damage>1</damage>
+                                <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                        <multiplier>0.35</multiplier>
+                                    </mulCalcer>
+                                </scalerTarget>
+                            </Item>
+                        </impactsSuccess>
+                        <impactsFailure>
+                            <Item type="gameMechanics.elements.impacts.DirectDamage">
+                                <damage>1</damage>
+                                <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                        <multiplier>0.5</multiplier>
+                                    </mulCalcer>
+                                </scalerTarget>
+                            </Item>
+                        </impactsFailure>
+                    </Item>
+                </impactsFailure>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>50</speed>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

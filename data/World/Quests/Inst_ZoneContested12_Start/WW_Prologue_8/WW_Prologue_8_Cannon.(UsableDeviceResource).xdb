@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.device.UsableDeviceResource>
+    <Header>
+        <resourceId>317092</resourceId>
+    </Header>
+    <parts>
+        <Item type="DeviceRotationPart" />
+        <Item type="RotationAnimationPart">
+            <yawBones>
+                <Item>
+                    <bone>Base</bone>
+                </Item>
+            </yawBones>
+            <pitchBones>
+                <Item>
+                    <bone>Gun</bone>
+                </Item>
+            </pitchBones>
+        </Item>
+        <Item type="ProjectileHolderPart" />
+        <Item type="UsableDeviceClientPart">
+            <type>USDEV_CANNON_AVATAR_CONTROLLED</type>
+        </Item>
+        <Item type="InteractionAnimationPart">
+            <interactionStartAction type="CreatureAnimationAction">
+                <mode>LOOP</mode>
+                <animations>
+                    <Item>useStandingStart</Item>
+                    <Item>useStandingLoop</Item>
+                </animations>
+            </interactionStartAction>
+            <interactionEndAction type="CreatureAnimationAction">
+                <animations>
+                    <Item>useStandingEnd</Item>
+                </animations>
+            </interactionEndAction>
+        </Item>
+    </parts>
+    <persistentParts>
+        <Item type="gameMechanics.world.device.parts.ClientRotetable">
+            <yawRange type="constructor.basicElements.AngleDegrees">
+                <value>90</value>
+            </yawRange>
+            <pitchRange type="constructor.basicElements.AngleDegrees">
+                <value>50</value>
+            </pitchRange>
+        </Item>
+        <Item type="gameMechanics.elements.bunchparts.BunchPartAttachEffects">
+            <effects>
+                <Item type="gameMechanics.world.ship.elements.DeviceUseTrigger">
+                    <userImpactsOnStartUse>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="CannonLeave.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="DontMove.(BuffResource).xdb" />
+                        </Item>
+                    </userImpactsOnStartUse>
+                    <userImpactsOnFinishUse>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                    <quest href="WW_Prologue_8.xdb" />
+                                    <status>Started</status>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="CannonLeave.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                    <data href="Return_to_cannon.(ClientData).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="DontMove.(BuffResource).xdb" />
+                        </Item>
+                    </userImpactsOnFinishUse>
+                    <deviceImpactsOnFinishUse>
+                        <Item type="gameMechanics.world.device.impacts.ImpactResetDeviceTurn" />
+                    </deviceImpactsOnFinishUse>
+                </Item>
+                <Item type="gameMechanics.world.device.parts.ImpactsOnUserGeneric">
+                    <userImpactsOnStartUse>
+                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                            <addresseeFinder type="gameMechanics.world.device.AddresseeFinderUsingDevice" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.bunchImpacts.ImpactCopyIFF" />
+                            </impacts>
+                        </Item>
+                    </userImpactsOnStartUse>
+                </Item>
+                <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+                    <visibilityRule>
+                        <channel>Select</channel>
+                        <vector>Incoming</vector>
+                        <direction>Outgoing</direction>
+                        <plane href="Plane.(Plane).xdb" />
+                    </visibilityRule>
+                </Item>
+                <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+                    <visibilityRule>
+                        <channel>Select</channel>
+                        <vector>Outgoing</vector>
+                        <direction>Incoming</direction>
+                        <plane href="Plane.(Plane).xdb" />
+                    </visibilityRule>
+                </Item>
+                <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+                    <visibilityRule>
+                        <channel>Influence</channel>
+                        <vector>Incoming</vector>
+                        <direction>Outgoing</direction>
+                        <plane href="Plane.(Plane).xdb" />
+                    </visibilityRule>
+                </Item>
+                <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+                    <visibilityRule>
+                        <channel>Influence</channel>
+                        <vector>Outgoing</vector>
+                        <direction>Incoming</direction>
+                        <plane href="Plane.(Plane).xdb" />
+                    </visibilityRule>
+                </Item>
+            </effects>
+        </Item>
+    </persistentParts>
+    <name href="WW_Prologue_8_Cannon.(UsableDeviceResource).Name.txt" />
+    <spawnLocation>
+        <position x="10891.598633" y="10760.476563" z="69.990196" />
+        <zone href="/Maps/Inst_ZoneContested12_Start/Zones/Inst_ZoneContested12_04.(ZoneResource).xdb" />
+    </spawnLocation>
+    <visObj href="/Ships/Components/Cannon_01C/Cannon_01C.(VisObjectTemplate).xdb" />
+    <collision href="/Ships/Components/Cannon_01C/Cannon_01C.(Collision).xdb" />
+    <collisionObject>true</collisionObject>
+    <exploitingText href="WW_Prologue_8_Cannon.(UsableDeviceResource).ExploitingText.txt" />
+    <scale>1.5</scale>
+    <spell href="WW_Prologue_8_Cannon.(SpellSingleTarget).xdb" />
+    <viewSight>
+        <isBinding>true</isBinding>
+        <hasCrosshair>true</hasCrosshair>
+        <position y="6" z="5" />
+    </viewSight>
+    <deviceSpells>
+        <Item href="CannonSpell.(SpellArea).xdb" />
+    </deviceSpells>
+</gameMechanics.world.device.UsableDeviceResource>

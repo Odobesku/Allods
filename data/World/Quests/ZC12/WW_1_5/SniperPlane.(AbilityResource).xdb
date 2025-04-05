@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>320963</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.AddPlane">
+            <plane href="SniperPlane.(Plane).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.5</coeff>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <affectGroup>Enemies</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                            <time>300</time>
+                            <impactsOnLand>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                            <id href="Counter2.(QuestCountId).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.world.avatar.assistants.ImpactDismissAssistant">
+                                            <assistantResource href="Quest_assistant.(AssistantResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="KnockdownFade.(BuffResource).xdb" />
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impactsOnLand>
+                            <distance>10</distance>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="/World/Quests/Inst_ZoneContested12_Start/WW_Prologue_8/ArchitectExplosionR15.(ClientData).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impactsIf>
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.3</coeff>
+            </scaler>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

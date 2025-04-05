@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>321187</resourceId>
+    </Header>
+    <visualScript type="VisActionList">
+        <elements>
+            <Item type="CreatureIndependentFxAction">
+                <visObject href="/Spells/FX/World/ZC12_Bombing_House.(VisObjectTemplate).xdb" />
+                <lifeTime>6</lifeTime>
+            </Item>
+            <Item type="VisActionDelay">
+                <time>100</time>
+            </Item>
+            <Item type="VisActionList">
+                <play>Simultaneously</play>
+                <elements>
+                    <Item type="CreatureSetTransparencyAction">
+                        <transparency>0</transparency>
+                    </Item>
+                    <Item type="VisActionList">
+                        <elements>
+                            <Item type="VisActionDelay">
+                                <time>4500</time>
+                            </Item>
+                            <Item type="VisActionList">
+                                <play>Simultaneously</play>
+                                <elements>
+                                    <Item type="CreatureEffectsAction">
+                                        <visualEffects>
+                                            <Item>
+                                                <effectFx href="/Spells/FX/Spells/Architect_PoisonCloud.(VisObjectTemplate).xdb" />
+                                                <lockScale>true</lockScale>
+                                                <ignoreParentRotation>true</ignoreParentRotation>
+                                            </Item>
+                                        </visualEffects>
+                                    </Item>
+                                </elements>
+                            </Item>
+                        </elements>
+                    </Item>
+                </elements>
+            </Item>
+        </elements>
+    </visualScript>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>5000</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.TickableAura">
+                    <affectGroup>All</affectGroup>
+                    <radius>10</radius>
+                    <filter type="gameMechanics.world.creature.AvatarFilter" />
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/World/Quests/ZC12/ZC12_13_0/ZC12_13_0_PoisonedPlayer.(BuffResource).xdb" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIn>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/World/Quests/ZC12/ZC12_13_0/ZC12_13_0_PoisonedPlayer.(BuffResource).xdb" />
+                        </Item>
+                    </impactsIn>
+                </Item>
+                <Item type="gameMechanics.elements.effects.TickableAura">
+                    <affectGroup>All</affectGroup>
+                    <radius>10</radius>
+                    <filter type="gameMechanics.world.creature.AvatarFilter" />
+                    <impactsOut>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/World/Quests/ZC12/ZC12_13_0/ZC12_13_0_PoisonedPlayer.(BuffResource).xdb" />
+                        </Item>
+                    </impactsOut>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectDisorient">
+                    <radius>15</radius>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>15000</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impactsOn>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.5</coeff>
+            </effectScaler>
+        </Item>
+    </effects>
+    <disableWhileDead>true</disableWhileDead>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

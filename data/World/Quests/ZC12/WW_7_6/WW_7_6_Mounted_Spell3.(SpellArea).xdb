@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>320689</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/ActionBarChange.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb" />
+    </groups>
+    <Name href="WW_7_6_Mounted_Spell3.(SpellArea).Name.txt" />
+    <Description href="WW_7_6_Mounted_Spell3.(SpellArea).Description.txt" />
+    <image href="/Interface/Icons/Spells/Mage/MageFireballUpgrade.(UISingleTexture).xdb" />
+    <visualScripts href="WW_7_6_Mounted_Spell3.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <prepareDuration>0</prepareDuration>
+    <targetType>STTPoint</targetType>
+    <iffPolicy>Enemies</iffPolicy>
+    <launchWhenReady>true</launchWhenReady>
+    <mechanics>
+        <cooldown>
+            <duration>10000</duration>
+        </cooldown>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+                        <quality href="/Mechanics/MobQualities/Boss.xdb" />
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.PureDamage">
+                        <damage>1</damage>
+                        <scaler type="gameMechanics.elements.scalers.TrivialScaler" />
+                        <scalerTarget type="gameMechanics.elements.scalers.ScalerIf">
+                            <condition type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+                                <quality href="/Mechanics/MobQualities/Miniboss.xdb" />
+                            </condition>
+                            <scalerIf type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                    <multiplier>1</multiplier>
+                                </mulCalcer>
+                            </scalerIf>
+                            <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                <condition type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+                                    <quality href="/Mechanics/MobQualities/Boss.xdb" />
+                                </condition>
+                                <scalerIf type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                        <multiplier>0.6</multiplier>
+                                    </mulCalcer>
+                                </scalerIf>
+                                <scalerElse type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                        <multiplier>0.2</multiplier>
+                                    </mulCalcer>
+                                </scalerElse>
+                            </scalerElse>
+                        </scalerTarget>
+                        <offends>true</offends>
+                        <forceAE>true</forceAE>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.PureDamage">
+                        <damage>1</damage>
+                        <scaler type="gameMechanics.elements.scalers.TrivialScaler" />
+                        <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                <multiplier>0.2</multiplier>
+                            </mulCalcer>
+                        </scalerTarget>
+                        <offends>true</offends>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>25</speed>
+    <radius>15</radius>
+    <stopOnNoTargets>false</stopOnNoTargets>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

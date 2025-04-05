@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.quest.QuestResource>
+    <Header>
+        <resourceId>321148</resourceId>
+    </Header>
+    <name href="Name.txt" />
+    <goal href="ZC12_13_0.(QuestResource).Goal.txt" />
+    <startText href="ZC12_13_0.(QuestResource).StartText.txt" />
+    <checkText href="ZC12_13_0.(QuestResource).CheckText.txt" />
+    <finishText href="ZC12_13_0.(QuestResource).FinishText.txt" />
+    <returnLocation>
+        <zone href="/Maps/ZC12_Map02/Zones/ZC12_Zone_10_01.(ZoneResource).xdb" />
+        <position x="12428.655270" y="13587.710939" z="25.266600" />
+    </returnLocation>
+    <finisher type="gameMechanics.elements.quest.QuestFinisherMob">
+        <mobWorld href="/Characters/Orc_male/Instances/ZC12_Map02/ZC12_Map_02_Shturm.(MobWorld).xdb" />
+    </finisher>
+    <rewardImpacts>
+        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+            <id href="/World/Quests/ZC12_Map02/WW_13_0/CountId_3.xdb" />
+        </Item>
+    </rewardImpacts>
+    <abandonImpacts>
+        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                    <zone href="/Maps/ZC12_RiftInstance4/Zones/ZC12_RiftInstance4/ZC12_RiftInstance4.(ZoneResource).xdb" />
+                </Item>
+            </predicates>
+            <impactsIf>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/World/Quests/ZC12/WW_1_10/ExitRift.(BuffResource).xdb" />
+                </Item>
+            </impactsIf>
+            <impactsElse>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                            <zone href="/Maps/ZC12_Map02/ScriptZones/ZC12_Map02_RI4.(ScriptZone).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="WW_13_0_PlaneResolvent.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/World/Quests/ZC12_Map02/WW_14_1/Osovic_plane_vis.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/World/Quests/ZC12_Map02/WW_14_1/Osovic_before.(BuffResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsElse>
+        </Item>
+        <Item type="gameMechanics.world.avatar.assistants.ImpactDismissAssistant">
+            <assistantResource href="ZC12_13_0_Assists.(AssistantResource).xdb" />
+        </Item>
+        <Item type="gameMechanics.world.avatar.assistants.ImpactDismissAssistant">
+            <assistantResource href="ZC12_13_0_Assists2.(AssistantResource).xdb" />
+        </Item>
+        <Item type="gameMechanics.world.avatar.assistants.ImpactDismissAssistant">
+            <assistantResource href="ZC12_13_0_Assists3.(AssistantResource).xdb" />
+        </Item>
+    </abandonImpacts>
+    <startConditions>
+        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+            <predicates>
+                <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                            <quest href="/World/Quests/ZC12_Map02/WW_13_0/WW_13_0.xdb" />
+                            <status>Active</status>
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                            <quest href="/World/Quests/ZC12_Map02/WW_13_0/WW_13_0.xdb" />
+                            <counterResource href="/World/Quests/ZC12_Map02/WW_13_0/CountId_1.xdb" />
+                        </Item>
+                    </predicates>
+                </Item>
+                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                    <quest href="/World/Quests/ZC12_Map02/WW_13_0/WW_13_0.xdb" />
+                    <status>Finished</status>
+                </Item>
+            </predicates>
+        </Item>
+    </startConditions>
+    <counters>
+        <Item type="gameMechanics.elements.quest.QuestCountSpecial">
+            <customName href="CounterCustomName_1.txt" />
+            <locations>
+                <Item>
+                    <zone href="/Maps/ZC12_Map02/Zones/ZC12_Map02/ZC12_Map02.(ZoneResource).xdb" />
+                    <position x="12439.716801" y="13572.118440" z="32.759800" />
+                </Item>
+            </locations>
+            <relatedMobsAndDevices>
+                <Item href="/Items/InteractiveObjects/ZC12/RiftEnter_WW_13_0/RiftEnter_WW_13_0.(SteleResource).xdb" />
+            </relatedMobsAndDevices>
+            <limit>1</limit>
+            <id href="CountId_1.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.quest.QuestCountKill">
+            <customName href="ZC12_13_0.(QuestResource).CustomName.txt" />
+            <showCounterValue>false</showCounterValue>
+            <locations>
+                <Item>
+                    <zone href="/Maps/ZC12_RiftInstance4/Zones/ZC12_RiftInstance4/ZC12_RiftInstance4.(ZoneResource).xdb" />
+                    <position x="12432.608400" y="13616.683201" z="26.446400" />
+                    <radius>30</radius>
+                </Item>
+            </locations>
+            <limit>6</limit>
+            <dependencies>
+                <Item href="CountId_1.xdb" />
+            </dependencies>
+            <objects>
+                <Item href="/Creatures/ArchitectBot/Instances/ZC12/ZC12_RI4_ArchitectBot.(MobWorld).xdb" />
+                <Item href="/Creatures/ArchitectMele/Instances/ZC12/ZC12_RI4_ArchitectMelee.(MobWorld).xdb" />
+                <Item href="/Creatures/ArchitectRanger/Instances/ZC12/ZC12_RI4_ArchitectRanger.(MobWorld).xdb" />
+            </objects>
+        </Item>
+        <Item type="gameMechanics.elements.quest.QuestCountSpecial">
+            <customName href="CounterCustomName_2.txt" />
+            <locations>
+                <Item>
+                    <zone href="/Maps/ZC12_RiftInstance4/Zones/ZC12_RiftInstance4/ZC12_RiftInstance4.(ZoneResource).xdb" />
+                    <position x="12432.941410" y="13617.167000" z="26.374500" />
+                </Item>
+            </locations>
+            <relatedMobsAndDevices>
+                <Item href="/Characters/Hadagan_male/Instances/ZC12/ZC12_RI4_Commander.(MobWorld).xdb" />
+            </relatedMobsAndDevices>
+            <limit>1</limit>
+            <dependencies>
+                <Item href="/Creatures/ArchitectBot/Instances/ZC12/ZC12_RI4_ArchitectBot.(MobWorld).xdb" />
+            </dependencies>
+            <id href="CountId_2.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.quest.QuestCountSpecial">
+            <customName href="CounterCustomName_3.txt" />
+            <showCounterValue>false</showCounterValue>
+            <locations>
+                <Item>
+                    <zone href="/Maps/ZC12_RiftInstance4/Zones/ZC12_RiftInstance4/ZC12_RiftInstance4.(ZoneResource).xdb" />
+                    <position x="12432.608400" y="13616.683201" z="26.446400" />
+                    <radius>30</radius>
+                </Item>
+            </locations>
+            <relatedMobsAndDevices>
+                <Item href="/Characters/Hadagan_male/Instances/ZC12/ZC12_RI4_SoldierWounded1.(MobWorld).xdb" />
+                <Item href="/Characters/Hadagan_male/Instances/ZC12/ZC12_RI4_SoldierWounded2.(MobWorld).xdb" />
+                <Item href="/Characters/Hadagan_male/Instances/ZC12/ZC12_RI4_SoldierWounded1_2.(MobWorld).xdb" />
+            </relatedMobsAndDevices>
+            <limit>3</limit>
+            <dependencies>
+                <Item href="CountId_2.xdb" />
+            </dependencies>
+            <id href="CountId_3.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.quest.QuestCountKill">
+            <customName href="ZC12_13_0.(QuestResource).CustomName02.txt" />
+            <description href="ZC12_13_0.(QuestResource).Description02.txt" />
+            <locations>
+                <Item>
+                    <zone href="/Maps/ZC12_RiftInstance4/Zones/ZC12_RiftInstance4/ZC12_RiftInstance4.(ZoneResource).xdb" />
+                    <position x="12455.184570" y="13605.561700" z="30.699800" />
+                    <radius>15</radius>
+                </Item>
+            </locations>
+            <limit>1</limit>
+            <objects>
+                <Item href="/Creatures/UmoirExoskeletonArchitector/Instances/ZC12/ZC12_RI4_Architect_Miniboss1.(MobWorld).xdb" />
+            </objects>
+        </Item>
+        <Item type="gameMechanics.elements.quest.QuestCountSpecial">
+            <customName href="CounterCustomName_4.txt" />
+            <locations>
+                <Item>
+                    <zone href="/Maps/ZC12_RiftInstance4/Zones/ZC12_RiftInstance4/ZC12_RiftInstance4.(ZoneResource).xdb" />
+                    <position x="12426.594730" y="13615.831200" z="27.090900" />
+                    <radius>0</radius>
+                </Item>
+            </locations>
+            <relatedMobsAndDevices>
+                <Item href="/Characters/Hadagan_male/Instances/ZC12/ZC12_RI4_SoldierPoisoned.(MobWorld).xdb" />
+                <Item href="/Characters/Hadagan_male/Instances/ZC12/ZC12_RI4_SoldierPoisoned2.(MobWorld).xdb" />
+            </relatedMobsAndDevices>
+            <limit>1</limit>
+            <id href="CountId_4.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.quest.QuestCountKill">
+            <customName href="ZC12_13_0.(QuestResource).CustomName03.txt" />
+            <locations>
+                <Item>
+                    <zone href="/Maps/ZC12_RiftInstance4/Zones/ZC12_RiftInstance4/ZC12_RiftInstance4.(ZoneResource).xdb" />
+                    <position x="12611.040040" y="13669.471000" z="27.805500" />
+                    <radius>0</radius>
+                </Item>
+                <Item>
+                    <zone href="/Maps/ZC12_RiftInstance4/Zones/ZC12_RiftInstance4/ZC12_RiftInstance4.(ZoneResource).xdb" />
+                    <position x="12578.276370" y="13633.705900" z="23.320000" />
+                    <radius>0</radius>
+                </Item>
+                <Item>
+                    <zone href="/Maps/ZC12_RiftInstance4/Zones/ZC12_RiftInstance4/ZC12_RiftInstance4.(ZoneResource).xdb" />
+                    <position x="12638.302731" y="13576.631980" z="24.363001" />
+                    <radius>0</radius>
+                </Item>
+                <Item>
+                    <zone href="/Maps/ZC12_RiftInstance4/Zones/ZC12_RiftInstance4/ZC12_RiftInstance4.(ZoneResource).xdb" />
+                    <position x="12671.290039" y="13523.643999" z="30.158899" />
+                    <radius>0</radius>
+                </Item>
+                <Item>
+                    <zone href="/Maps/ZC12_RiftInstance4/Zones/ZC12_RiftInstance4/ZC12_RiftInstance4.(ZoneResource).xdb" />
+                    <position x="12608.929690" y="13531.041000" z="23.190500" />
+                    <radius>0</radius>
+                </Item>
+            </locations>
+            <limit>5</limit>
+            <objects>
+                <Item href="/Creatures/ArchitectSiege/Instances/ZC12/ZC12_RI4_ArchitectSiege.(MobWorld).xdb" />
+            </objects>
+        </Item>
+        <Item type="gameMechanics.elements.quest.QuestCountKill">
+            <limit>1</limit>
+            <isInternal>true</isInternal>
+            <objects>
+                <Item href="/Items/InteractiveObjects/ZC12/RiftEnter_WW_13_0/RiftEnter_WW_13_0.(SteleResource).xdb" />
+            </objects>
+        </Item>
+    </counters>
+    <triggerAgents>
+        <Item type="gameMechanics.elements.trigger.TriggerAgentSelf">
+            <trigger href="ZC12_13_0_SelfTrigger.(TriggerResource).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.trigger.TriggerAgentSelf">
+            <trigger href="ZC12_13_0_CounterTrigger.(TriggerResource).xdb" />
+        </Item>
+    </triggerAgents>
+    <reward>
+        <experience>25</experience>
+        <money>2142961</money>
+    </reward>
+    <type>QUEST_TYPE_SOLO</type>
+    <internalName>ZC12_13_0</internalName>
+    <zone href="/Maps/ZC12_Map02/Zones/ZC12_Map02/ZC12_Map02.(ZoneResource).xdb" />
+    <canBeSkipped>false</canBeSkipped>
+    <requiredLevel type="gameMechanics.formulas.IntConstantValue">
+        <value>69</value>
+    </requiredLevel>
+    <level type="gameMechanics.formulas.IntConstantValue">
+        <value>69</value>
+    </level>
+</gameMechanics.constructor.schemes.quest.QuestResource>

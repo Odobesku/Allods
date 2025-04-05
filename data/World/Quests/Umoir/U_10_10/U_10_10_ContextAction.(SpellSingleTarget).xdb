@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>313746</resourceId>
+    </Header>
+    <Name href="U_10_10_ContextAction.(SpellSingleTarget).Name.txt" />
+    <Description href="U_10_10_ContextAction.(SpellSingleTarget).Description.txt" />
+    <nameTemplate href="U_10_10_ContextAction.(SpellSingleTarget).NameTemplate.txt" />
+    <descTemplate href="U_10_10_ContextAction.(SpellSingleTarget).DescTemplate.txt" />
+    <prepareDuration>2000</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <mechanics>
+        <cooldown>
+            <duration>30000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateMobNear">
+                    <radius>40</radius>
+                    <mobs>
+                        <Item href="/Characters/Kania_female/Instances/Umoir/Umoir_Veronika_inst.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    </mobs>
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                <zone href="/Maps/Umoir/ScriptZones/U_10_10.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="U_10_10.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Active</status>
+                    </Item>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                <quest href="U_10_10.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                <status>Finished</status>
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                <quest href="/World/Quests/Umoir/U_10_11/U_10_11.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                <status>NotInQuestBook</status>
+                            </Item>
+                        </predicates>
+                    </Item>
+                </predicates>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="U_10_10.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Active</status>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                        <destination type="gameMechanics.map.destination.DestinationSamePosAnotherMap">
+                            <map href="/Maps/Umoir/SmeyanaInst_MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                        </destination>
+                        <finishImpacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                <destination type="gameMechanics.map.destination.DestinationModified">
+                                    <destination type="gameMechanics.map.destination.RelativePos">
+                                        <yaw type="constructor.basicElements.AngleRadians" />
+                                    </destination>
+                                    <modifiers>
+                                        <Item type="gameMechanics.map.destination.modifier.ModifierTrail">
+                                            <modifier type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                                <verticalRange min="0" max="0" />
+                                                <horizontalRange min="0" max="5" />
+                                            </modifier>
+                                        </Item>
+                                    </modifiers>
+                                </destination>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                        <delay>60000</delay>
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                                        </impacts>
+                                    </Item>
+                                </impacts>
+                                <object href="/Characters/Kania_female/Instances/Umoir/Umoir_Veronika_inst.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                <pool href="Pool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                <id href="CountId_2.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                            </Item>
+                        </finishImpacts>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                <quest href="U_10_10.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                <status>Finished</status>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                <destination type="gameMechanics.map.destination.DestinationModified">
+                                    <destination type="gameMechanics.map.destination.RelativePos">
+                                        <yaw type="constructor.basicElements.AngleRadians" />
+                                    </destination>
+                                    <modifiers>
+                                        <Item type="gameMechanics.map.destination.modifier.ModifierTrail">
+                                            <modifier type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                                <verticalRange min="0" max="0" />
+                                                <horizontalRange min="0" max="5" />
+                                            </modifier>
+                                        </Item>
+                                    </modifiers>
+                                </destination>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                        <delay>60000</delay>
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                                        </impacts>
+                                    </Item>
+                                </impacts>
+                                <object href="/Characters/Kania_female/Instances/Umoir/Umoir_Veronika_inst.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                <pool href="Pool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <iffPolicy>Friends</iffPolicy>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

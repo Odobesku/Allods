@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>310466</resourceId>
+    </Header>
+    <Name href="ZC12_RI6_FlyerMiniboss2_ForceMove.(BuffResource).Name.txt" />
+    <visScript href="/World/Quests/ZC12/WW_4_3/ZC12_RI3_ArchitectSiege_Shield.(BuffVisScripts).xdb" />
+    <needVisualize>false</needVisualize>
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectForceMove">
+            <destinations>
+                <Item type="gameMechanics.map.destination.DestinationLocator">
+                    <locator>
+                        <scriptID>ZC12_RI6_FlyerMiniboss2_Fly</scriptID>
+                        <map href="/Maps/ZC12_RiftInstance6/MapResource.xdb" />
+                    </locator>
+                </Item>
+            </destinations>
+            <impactsOnArrived>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="ZC12_RI6_FlyerMiniboss2_Fly.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="ZC12_RI6_FlyerMiniboss2_ForceMove.(BuffResource).xdb" />
+                </Item>
+            </impactsOnArrived>
+            <impactsOnPathNotFound>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="ZC12_RI6_FlyerMiniboss2_Fly.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="ZC12_RI6_FlyerMiniboss2_ForceMove.(BuffResource).xdb" />
+                </Item>
+            </impactsOnPathNotFound>
+            <baseSpeedFactor>-1</baseSpeedFactor>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                    <projectileData>
+                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                            <destination type="gameMechanics.map.destination.DestinationModified">
+                                <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                <modifiers>
+                                    <Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
+                                </modifiers>
+                            </destination>
+                        </moveType>
+                        <resource href="/Mechanics/Spells/Rifts/Abilities/HealingSphere.(ProjectileResource).xdb" />
+                    </projectileData>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.RepeatedImpact">
+                            <impact type="gameMechanics.elements.impacts.ImpactSummon">
+                                <destination type="gameMechanics.map.destination.DestinationModified">
+                                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                    <modifiers>
+                                        <Item type="gameMechanics.map.destination.modifier.ModifierTrail">
+                                            <modifier type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                                <horizontalRange min="2" max="5" />
+                                            </modifier>
+                                        </Item>
+                                    </modifiers>
+                                </destination>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactCopyAggroList" />
+                                </impacts>
+                                <object href="/Creatures/ArchitectBot/Instances/ZC12/ZC12_RI6_ArchitectBot.(MobWorld).xdb" />
+                                <pool href="WW_8_9_1_Bots.(SummonPool).xdb" />
+                            </impact>
+                            <count type="gameMechanics.elements.calcers.FloatData">
+                                <value>2</value>
+                            </count>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

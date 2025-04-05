@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.mob.interaction.Cue>
+    <Header>
+        <resourceId>310830</resourceId>
+    </Header>
+    <name href="WW_add_13_4_Cue_01.(Cue).Name.txt" />
+    <text href="WW_add_13_4_Cue_01.(Cue).Text.txt" />
+    <conditions>
+        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+            <quest href="WW_add_13_4.xdb" />
+            <status>Active</status>
+        </Item>
+        <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+            <quest href="WW_add_13_4.xdb" />
+            <counterResource href="/Creatures/Werebear/Instances/ZC12_Map02/ZC12_Werebear_Miniboss.(MobWorld).xdb" />
+            <value>1</value>
+        </Item>
+        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+            <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                <quest href="WW_add_13_4.xdb" />
+                <counterResource href="CountId_1.xdb" />
+                <value>1</value>
+            </predicate>
+        </Item>
+    </conditions>
+    <impacts>
+        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+            <id href="CountId_1.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+            <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                <item href="/Items/QuestItems/ZC12_Map02/WW_add_13_4_item/WW_add_13_4_item.(ItemResource).xdb" />
+            </item>
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+            <delay>1000</delay>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                            <quest href="/World/Quests/ZC12_Map02/WW_14_1/WW_14_1.xdb" />
+                            <status>Finished</status>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                            <id href="CountId_2.(QuestCountId).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+        </Item>
+    </impacts>
+</gameMechanics.world.mob.interaction.Cue>

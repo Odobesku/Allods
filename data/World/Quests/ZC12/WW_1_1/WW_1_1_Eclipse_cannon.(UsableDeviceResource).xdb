@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.device.UsableDeviceResource>
+    <Header>
+        <resourceId>320793</resourceId>
+    </Header>
+    <parts>
+        <Item type="DeviceRotationPart" />
+        <Item type="RotationAnimationPart">
+            <yawBones>
+                <Item>
+                    <bone>Base</bone>
+                </Item>
+            </yawBones>
+            <pitchBones>
+                <Item>
+                    <bone>Gun</bone>
+                </Item>
+            </pitchBones>
+        </Item>
+        <Item type="ProjectileHolderPart" />
+        <Item type="UsableDeviceClientPart">
+            <type>USDEV_CANNON_AVATAR_CONTROLLED</type>
+        </Item>
+        <Item type="InteractionAnimationPart">
+            <interactionStartAction type="CreatureAnimationAction">
+                <mode>LOOP</mode>
+                <animations>
+                    <Item>useStandingStart</Item>
+                    <Item>useStandingLoop</Item>
+                </animations>
+            </interactionStartAction>
+            <interactionEndAction type="CreatureAnimationAction">
+                <animations>
+                    <Item>useStandingEnd</Item>
+                </animations>
+            </interactionEndAction>
+        </Item>
+    </parts>
+    <persistentParts>
+        <Item type="gameMechanics.world.device.parts.ClientRotetable">
+            <yawRange type="constructor.basicElements.AngleDegrees">
+                <value>90</value>
+            </yawRange>
+            <pitchRange type="constructor.basicElements.AngleDegrees">
+                <value>50</value>
+            </pitchRange>
+        </Item>
+        <Item type="gameMechanics.elements.bunchparts.BunchPartAttachEffects">
+            <effects>
+                <Item type="gameMechanics.world.ship.elements.DeviceUseTrigger">
+                    <userImpactsOnFinishUse>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                    <quest href="WW_1_1.xdb" />
+                                    <status>Active</status>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.basicElements.ImpactNull" />
+                            </impactsIf>
+                        </Item>
+                    </userImpactsOnFinishUse>
+                    <deviceImpactsOnFinishUse>
+                        <Item type="gameMechanics.world.device.impacts.ImpactResetDeviceTurn" />
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="ShootCount.(BuffResource).xdb" />
+                        </Item>
+                    </deviceImpactsOnFinishUse>
+                </Item>
+                <Item type="gameMechanics.world.device.parts.ImpactsOnUserGeneric">
+                    <userImpactsOnStartUse>
+                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                            <addresseeFinder type="gameMechanics.world.device.AddresseeFinderUsingDevice" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.bunchImpacts.ImpactCopyIFF" />
+                            </impacts>
+                        </Item>
+                    </userImpactsOnStartUse>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.world.cellReplication.MapWideReplicated" />
+    </persistentParts>
+    <name href="WW_1_1_Eclipse_cannon.(UsableDeviceResource).Name.txt" />
+    <visObj href="/Ships/Components/Cannon_01C/Cannon_01C.(VisObjectTemplate).xdb" />
+    <collision href="/Ships/Components/Cannon_01C/Cannon_01C.(Collision).xdb" />
+    <collisionObject>true</collisionObject>
+    <exploitingText href="WW_1_1_Eclipse_cannon.(UsableDeviceResource).ExploitingText.txt" />
+    <scale>2</scale>
+    <spell href="WW_1_1_Eclipse_cannon.(SpellSingleTarget).xdb" />
+    <viewSight>
+        <isBinding>true</isBinding>
+        <hasCrosshair>true</hasCrosshair>
+        <position y="5" z="7" />
+    </viewSight>
+    <deviceSpells>
+        <Item href="Eclipse_cannon_spell.(SpellArea).xdb" />
+    </deviceSpells>
+</gameMechanics.world.device.UsableDeviceResource>

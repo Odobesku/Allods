@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>313691</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="MiloslavinWithAmulet.(SpellSingleTarget).Name.txt" />
+    <image href="/Interface/Icons/Misc/Quest/ArtifactColorBlood.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>60</value>
+    </range>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <isAggro>false</isAggro>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>10000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                <zone href="/Maps/UmoirIsland04/ScriptZones/NT_Generator_Floor.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                <quest href="UI04_Q03_02.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                <status>Active</status>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                <quest href="UI04_Q03_02.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                <counterResource href="GetToTheRoof.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                <value>0</value>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                        <mobs>
+                            <Item href="/Creatures/ManaElemental/Instances/UmoirIsland04/ManaElementalRed.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                            <Item href="/Creatures/ManaElemental/Instances/UmoirIsland04/ManaElementalBoss.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                            <Item href="/Creatures/ManaElemental/Instances/UmoirIsland04/ManaElementalBoss_Add.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                        </mobs>
+                    </Item>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                        <predicates>
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/Creatures/ManaElemental/Instances/UmoirIsland04/ME_Red.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/Creatures/ManaElemental/Instances/UmoirIsland04/ME_Red_Boss.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </predicates>
+                    </Item>
+                </predicates>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/Creatures/ManaElemental/Instances/UmoirIsland04/MEBoss_Red_Add.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+                        <impacts>
+                            <Item type="gameMechanics.world.avatar.assistants.ImpactsToAssistant">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactActivateAggro" />
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="MiloslavinAmuletCast.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                </impacts>
+                                <assistantResource href="/Mechanics/Characters/Hadagan_male/UmoirIsland04/Miloslavin.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

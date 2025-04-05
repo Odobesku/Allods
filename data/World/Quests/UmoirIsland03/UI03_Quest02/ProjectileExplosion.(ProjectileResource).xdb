@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.projectile.ProjectileResource>
+    <Header>
+        <resourceId>310163</resourceId>
+    </Header>
+    <name href="ProjectileExplosion.(ProjectileResource).Name.txt" />
+    <visObject href="/Spells/FX/World/Predator_explosion_Fx_3.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+    <altitude>-1</altitude>
+    <lifeLengthCap>4666</lifeLengthCap>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>666</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                            <spawn>
+                                <scriptID>LabDoor00</scriptID>
+                                <map href="/Maps/UmoirIsland03/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                            </spawn>
+                            <impacts>
+                                <Item type="gameMechanics.elements.device.DoorSwitch">
+                                    <switchType>Open</switchType>
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.EntityImpactCreaturesAround">
+                            <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+                            <radius>16</radius>
+                            <affectGroup>Enemies</affectGroup>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                    <element>LIGHTNING</element>
+                                    <damage>45</damage>
+                                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="ExplosionCameraShake.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                </Item>
+                            </impacts>
+                            <filter type="gameMechanics.constructor.basicElements.FilterOr">
+                                <filters>
+                                    <Item type="gameMechanics.world.creature.AvatarFilter" />
+                                    <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            </Item>
+                                        </predicates>
+                                    </Item>
+                                </filters>
+                            </filter>
+                        </Item>
+                    </impactsOn>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+</gameMechanics.world.projectile.ProjectileResource>

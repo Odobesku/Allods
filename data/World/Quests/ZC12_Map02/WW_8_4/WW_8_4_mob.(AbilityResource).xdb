@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>310707</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.AddPlane">
+            <plane href="ZC12_WW_8_4_escort.(Plane).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EventTrigger">
+            <eventClasses>
+                <Item>gameMechanics.world.mob.behaviour.aiEvents.GoneThroughPathEvent</Item>
+            </eventClasses>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                            <radius>40</radius>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactsIf">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromMaster">
+                                        <buff href="ZC12_WW_8_4_escort.(BuffResource).xdb" />
+                                    </predicate>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                            <id href="CountId_2.xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="ZC12_WW_8_4_NPC.(BuffResource).xdb" />
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impacts>
+                            <filter type="gameMechanics.world.creature.AvatarFilter" />
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>2000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactGoTo">
+                            <destination type="gameMechanics.map.destination.DestinationLocator">
+                                <locator>
+                                    <scriptID>Escort16</scriptID>
+                                    <map href="/Maps/Kania_AL1/MapResource.xdb" />
+                                </locator>
+                            </destination>
+                            <runningMode>true</runningMode>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>2000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+            </impacts>
+            <eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>200</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.TickableAura">
+            <affectGroup>All</affectGroup>
+            <radius>50</radius>
+            <filter type="gameMechanics.world.creature.AvatarFilter" />
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                    <quest href="WW_8_4.xdb" />
+                    <status>Active</status>
+                </Item>
+            </predicates>
+            <conditions>
+                <Item type="gameMechanics.elements.predicates.PredicateHasBuffFromMaster">
+                    <buff href="ZC12_WW_8_4_escort.(BuffResource).xdb" />
+                </Item>
+            </conditions>
+            <impactsOut>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                    <quest href="WW_8_4.xdb" />
+                                    <status>Active</status>
+                                </Item>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                        <quest href="WW_8_4.xdb" />
+                                        <counterResource href="CountId_2.xdb" />
+                                        <value>1</value>
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+                            <quest href="WW_8_4.xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                            <data href="WW_8_4_replika_04.(ClientData).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="ZC12_WW_8_4_escort.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOut>
+        </Item>
+        <Item type="gameMechanics.elements.effects.TickableAura">
+            <affectGroup>All</affectGroup>
+            <radius>8</radius>
+            <filter type="gameMechanics.world.creature.AvatarFilter" />
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                    <quest href="WW_8_4.xdb" />
+                    <status>Started</status>
+                </Item>
+            </predicates>
+            <conditions>
+                <Item type="gameMechanics.elements.predicates.PredicateHasBuffFromMaster">
+                    <buff href="ZC12_WW_8_4_escort.(BuffResource).xdb" />
+                </Item>
+            </conditions>
+            <impactsIn>
+                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/QuestSchemes/Maintenance/Speed.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                            <data href="WW_8_4_replika_03.(ClientData).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsIn>
+            <impactsOut>
+                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/Mechanics/QuestSchemes/Maintenance/Speed.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOut>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

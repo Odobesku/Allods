@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>320918</resourceId>
+    </Header>
+    <Name href="KnockdownQuest.(BuffResource).Name.txt" />
+    <Description href="KnockdownQuest.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Warrior/WarriorShieldBash.(UISingleTexture).xdb" />
+    <visScript href="/Spells/BuffVisScripts/KnockDown.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Rotate</Item>
+                <Item>Jump</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="QuestPersonalPool.(SummonPool).xdb" />
+                    <isPersonalPool>true</isPersonalPool>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                    <destination type="gameMechanics.map.destination.RelativePos" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="QuestPersonalVisibility.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                            <delay>300000</delay>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <plane href="QuestPersonalVisibilityPlane.(Plane).xdb" />
+                    <object href="/Creatures/Minotaur/Instances/ZC12/WW_9)6_Knut_Agressive.(MobWorld).xdb" />
+                    <pool href="QuestPersonalPool.(SummonPool).xdb" />
+                    <isPersonalPool>true</isPersonalPool>
+                </Item>
+                <Item type="gameMechanics.world.avatar.assistants.ImpactDismissAssistant">
+                    <assistantResource href="/World/Quests/ZC12/WW_1_5/Quest_assistant.(AssistantResource).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <duration>5000</duration>
+    <isHelpful>false</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>320640</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllSpells" />
+        <Item type="gameMechanics.elements.effects.EffectModifyHealthRegen">
+            <multiplier type="gameMechanics.constructor.basicElements.FloatZero" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.IncomingHealModifier">
+            <priority>Multiplier</priority>
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-1</coeff>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Aura">
+            <affectGroup>Enemies</affectGroup>
+            <radius>30</radius>
+            <impactsIn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                    </impactsIf>
+                </Item>
+            </impactsIn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="ZC12_RI2_Miners_Explosion.(ClientData).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnCell">
+                    <impacts>
+                        <Item type="gameMechanics.world.avatar.assistants.ImpactDismissAssistant">
+                            <assistantResource href="ZC12_RI2_ZemEngineer.(AssistantResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="ZC12_RI2_ZoneTracker.(BuffResource).xdb" />
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

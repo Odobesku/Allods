@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>317063</resourceId>
+    </Header>
+    <visualScript type="VisActionLoopAction">
+        <actionToLoop type="CreatureAnimationAction">
+            <use>USE_RANDOM_FROM_LIST</use>
+            <animations>
+                <Item>attack</Item>
+                <Item>attack01</Item>
+                <Item>attack02</Item>
+            </animations>
+            <advanced>
+                <denyAutoHasten>true</denyAutoHasten>
+            </advanced>
+        </actionToLoop>
+    </visualScript>
+    <effects>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                    </impacts>
+                    <spawnResource href="/Maps/Inst_ZoneContested12_Start/SpawnTables/WW_Prologue_3_E_Luka.(SpawnTable).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                    </impacts>
+                    <spawnResource href="/Maps/Inst_ZoneContested12_Start/SpawnTables/WW_Prologue_3_L_Ilya.(SpawnTable).xdb" />
+                </Item>
+            </onEnter>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectNoAggroChecks" />
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                            <quest href="WW_Prologue_3_E.xdb" />
+                                            <status>Started</status>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                            <id href="Counter2.(QuestCountId).xdb" />
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                            <id href="/World/Quests/Inst_ZoneContested12_Start/WW_Prologue_3_L/Counter2.(QuestCountId).xdb" />
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <disableWhileDead>true</disableWhileDead>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

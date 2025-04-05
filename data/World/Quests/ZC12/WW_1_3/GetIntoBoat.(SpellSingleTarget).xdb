@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>321132</resourceId>
+    </Header>
+    <Name href="GetIntoBoat.(SpellSingleTarget).Name.txt" />
+    <Description href="GetIntoBoat.(SpellSingleTarget).Description.txt" />
+    <isExploit>true</isExploit>
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>10</value>
+    </range>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <iffPolicy>Everyone</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                <quest href="WW_1_3.xdb" />
+                <status>InQuestBook</status>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                    <quest href="WW_1_3.xdb" />
+                    <status>Failed</status>
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="WW_1_3.xdb" />
+                        <status>Started</status>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="Assaul_boat_tour.(BuffResource).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                    <quest href="WW_1_3.xdb" />
+                                    <counterResource href="Counter2.(QuestCountId).xdb" />
+                                </predicate>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                <id href="Counter2.(QuestCountId).xdb" />
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                        <quest href="/World/Quests/ZC12/WW_7_7/WW_7_7.xdb" />
+                                        <status>Completed</status>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                        <quest href="/World/Quests/ZC12/WW_7_7/WW_7_7.xdb" />
+                                        <status>Finished</status>
+                                    </Item>
+                                </predicates>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                <destination type="gameMechanics.map.destination.DestinationLocator">
+                                    <locator>
+                                        <scriptID>ZC12_Coast_start_v2</scriptID>
+                                        <map href="/Maps/ZC12_Map02/MapResource.xdb" />
+                                    </locator>
+                                </destination>
+                            </Item>
+                        </impactsIf>
+                        <impactsElse>
+                            <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                <destination type="gameMechanics.map.destination.DestinationLocator">
+                                    <locator>
+                                        <scriptID>ZC12_Coast_start</scriptID>
+                                        <map href="/Maps/ZC12/MapResource.xdb" />
+                                    </locator>
+                                </destination>
+                            </Item>
+                        </impactsElse>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.Disintegrate" />
+        </targetImpacts>
+    </mechanics>
+    <canStartNotBeeingInSpellbook>true</canStartNotBeeingInSpellbook>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

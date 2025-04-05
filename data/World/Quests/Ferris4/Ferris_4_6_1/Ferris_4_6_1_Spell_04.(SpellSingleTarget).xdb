@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>312910</resourceId>
+    </Header>
+    <groups>
+        <Item href="Ferris_4_6_1_ColossusScout.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/ActionBarChange.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="Ferris_4_6_1_Spell_04.(SpellSingleTarget).Name.txt" />
+    <Description href="Ferris_4_6_1_Spell_04.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Spells/Paladin/Fervor.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Mage/MirrorImage.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <sysName>4</sysName>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>1000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="Ferris_4_6_1_Colossus_Chennel.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="Ferris_4_6_1_ColossusScout_Pull_01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="Ferris_4_6_1_ColossusScout_Pull_02.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </predicates>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="Ferris_4_6_1_Colossus_Chennel.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                            <quest href="Ferris_4_6_1.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                            <counterResource href="CountId_1.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                            <value>1</value>
+                        </predicate>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                        <id href="CountId_1.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="Ferris_4_6_1_Colossus_Chennel.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                        <delay>1000</delay>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                <spawn>
+                                    <scriptID>Ferris4_Boss_CutScene</scriptID>
+                                    <map href="/Maps/Ferris4/inst_MapResource.(MapResource).xdb#xpointer(/mapLoader.MapResource)" />
+                                </spawn>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                        <data href="Ferris_4_6_1_Replika_02.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsIf>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="Ferris_4_6_1_ColossusScout_Pull_01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                        <quest href="Ferris_4_6_1.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <counterResource href="CountId_1.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                        <value>1</value>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                <buff href="Ferris_4_6_1_ColossusScout_Pull_01_Stack.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                <range>
+                                    <min>4</min>
+                                    <max>4</max>
+                                </range>
+                            </Item>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                    <quest href="Ferris_4_6_1.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                    <counterResource href="/Creatures/ArchitectBot/Instances/Ferris4/Ferris4_ArchitectBot_inst.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                    <value>4</value>
+                                </predicate>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                <buff href="Ferris_4_6_1_ColossusScout_Pull_01_Stack.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                <buff href="Ferris_4_6_1_ColossusScout_Pull_01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                            <quest href="Ferris_4_6_1.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                            <counterResource href="CountId_3.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                            <value>1</value>
+                                        </predicate>
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                        <id href="CountId_3.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                        <delay>3000</delay>
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                                                        <zone href="/Maps/Ferris4/Zones/Ferris4_03.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                        <quest href="Ferris_4_6_1.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                                        <status>Active</status>
+                                                    </Item>
+                                                </predicates>
+                                                <impactsIf>
+                                                    <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                                                        <table href="/Maps/Ferris4/SpawnTables/Ferris4/Ferris4_ArchitectBot_Inst.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                                <delay>1000</delay>
+                                                                <impacts>
+                                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                                        <data href="/World/Quests/Ferris4/Ferris_4_5_1/Ferris_4_5_1_Mob_spawn.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                                                                </impacts>
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impactsIf>
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </impactsIf>
+                            </Item>
+                        </impactsIf>
+                        <impactsElse>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="Ferris_4_6_1_ColossusScout_Pull_01_Stack.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impactsElse>
+                    </Item>
+                </impactsIf>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

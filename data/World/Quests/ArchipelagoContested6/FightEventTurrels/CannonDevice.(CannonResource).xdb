@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.device.UsableDeviceResource>
+    <Header>
+        <resourceId>322008</resourceId>
+        <Prototype href="/Mechanics/ObjectTemplates/ShipDevice.(UsableDeviceResource).xdb#xpointer(/bunch.BunchResource)" />
+    </Header>
+    <parts>
+        <Item type="DeviceRotationPart" />
+        <Item type="RotationAnimationPart">
+            <yawBones>
+                <Item>
+                    <bone>Base</bone>
+                </Item>
+            </yawBones>
+            <pitchBones>
+                <Item>
+                    <bone>Gun</bone>
+                </Item>
+            </pitchBones>
+        </Item>
+        <Item type="ProjectileHolderPart" />
+        <Item type="UsableDeviceClientPart">
+            <type>USDEV_CANNON</type>
+        </Item>
+    </parts>
+    <persistentParts>
+        <Item type="gameMechanics.world.device.parts.ClientRotetable">
+            <yawRange type="constructor.basicElements.AngleDegrees">
+                <value>90</value>
+            </yawRange>
+            <pitchRange type="constructor.basicElements.AngleDegrees">
+                <value>30</value>
+            </pitchRange>
+        </Item>
+        <Item type="gameMechanics.elements.bunchparts.BunchPartAttachEffects">
+            <effects>
+                <Item type="gameMechanics.world.ship.elements.DeviceUseTrigger">
+                    <userImpactsOnStartUse>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="ResolveBuffResource.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </userImpactsOnStartUse>
+                    <userImpactsOnFinishUse>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="ResolveBuffResource.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </userImpactsOnFinishUse>
+                    <deviceImpactsOnFinishUse>
+                        <Item type="gameMechanics.world.device.impacts.ImpactResetDeviceTurn" />
+                    </deviceImpactsOnFinishUse>
+                </Item>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactsDeferredGeneric">
+                            <delay>300000</delay>
+                            <impacts>
+                                <Item type="gameMechanics.elements.device.ImpactDeviceDisintergrate" />
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="ResolveBuffResource.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                            <delay>298000</delay>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                            <radius>10</radius>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                    <buff href="ResolveBuffResource.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </Item>
+                                            </impacts>
+                                            <filter type="gameMechanics.world.creature.AvatarFilter" />
+                                            <targetsLimit>1</targetsLimit>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsOn>
+                </Item>
+                <Item type="gameMechanics.world.device.parts.ImpactsOnUserGeneric">
+                    <userImpactsOnStartUse>
+                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                            <addresseeFinder type="gameMechanics.world.device.AddresseeFinderUsingDevice" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.bunchImpacts.ImpactCopyIFF" />
+                            </impacts>
+                        </Item>
+                    </userImpactsOnStartUse>
+                </Item>
+            </effects>
+        </Item>
+    </persistentParts>
+    <name href="CannonDevice.txt" />
+    <visObj href="/Ships/Components/Cannon_01/Cannon_01.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+    <collision href="/Ships/Components/Cannon_01/Cannon_01.(Collision).xdb#xpointer(/Collision)" />
+    <collisionObject>false</collisionObject>
+    <title href="" />
+    <exploitingText href="/Mechanics/Ships/ShipDeviceExploitText.txt" />
+    <spell href="Exploit.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+    <viewSight>
+        <isBinding>true</isBinding>
+        <hasCrosshair>true</hasCrosshair>
+        <position x="0" y="1" z="2.4" />
+    </viewSight>
+    <deviceSpells>
+        <Item href="FireAntiShield_Self.(SpellCasterSelf).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+    </deviceSpells>
+</gameMechanics.world.device.UsableDeviceResource>

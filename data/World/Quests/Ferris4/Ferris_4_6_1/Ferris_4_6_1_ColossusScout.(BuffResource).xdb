@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>312896</resourceId>
+    </Header>
+    <Name href="Ferris_4_6_1_ColossusScout.(BuffResource).Name.txt" />
+    <image href="/Interface/Icons/Mounts/BattleMountZemSpider.(UISingleTexture).xdb" />
+    <visScript href="Ferris_4_6_1_ColossusScout.(BuffVisScripts).xdb" />
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.SummandStat">
+            <stat type="gameMechanics.elements.stat.StatStamina" />
+            <value>50</value>
+        </Item>
+        <Item type="gameMechanics.elements.effects.SummandStat">
+            <stat type="gameMechanics.elements.stat.InnateStat">
+                <stat>Plain</stat>
+            </stat>
+            <value>10</value>
+            <scaler type="gameMechanics.elements.scalers.LinearScaler">
+                <multiplier>10</multiplier>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.SummandStat">
+            <stat type="gameMechanics.elements.stat.SpecialStat">
+                <stat href="/Mechanics/SpecialStats/CritChance.(SpecialStatResource).xdb" />
+            </stat>
+            <value>10</value>
+            <scaler type="gameMechanics.elements.scalers.LinearScaler">
+                <multiplier>10</multiplier>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateInZone">
+                                <zone href="/Maps/Ferris4/Zones/Ferris4_03.(ZoneResource).xdb" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Ferris_4_6_1_ColossusScout.(BuffResource).xdb" />
+                            <anyRank>false</anyRank>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+            <tick>4000</tick>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Jump</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                        <locator>
+                            <scriptID>Ferris4_Architect_Friend</scriptID>
+                            <map href="/Maps/Ferris4/inst_MapResource.(MapResource).xdb" />
+                        </locator>
+                    </destination>
+                    <finishImpacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                            <delay>1500</delay>
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="Ferris_4_6_1_ColossusScout_Pull.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </finishImpacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactDismount" />
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                            <quest href="Ferris_4_6_1.xdb" />
+                            <status>Active</status>
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                <quest href="Ferris_4_6_1.xdb" />
+                                <counterResource href="CountId_4.xdb" />
+                                <value>1</value>
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+                            <quest href="Ferris_4_6_1.xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                            <zone href="/Maps/Ferris4/Zones/Ferris4_03.(ZoneResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                            <destination type="gameMechanics.map.destination.DestinationLocator">
+                                <locator>
+                                    <scriptID>Ferris4_Player</scriptID>
+                                    <map href="/Maps/Ferris4/inst_MapResource.(MapResource).xdb" />
+                                </locator>
+                            </destination>
+                            <finishImpacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactHealAll" />
+                            </finishImpacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.HealthTrigger">
+            <healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
+                <multiplier>0.1</multiplier>
+            </healthOn>
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactHealAll" />
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Ferris_4_6_1_ColossusScout.(BuffResource).xdb" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.LifeGuard">
+            <level>0.05</level>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DisableAllActionsExceptGroupGeneric">
+            <group href="Ferris_4_6_1_ColossusScout.(ActionGroup).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectGiveSpell">
+            <spell href="Ferris_4_6_1_Spell_01.(SpellSingleTarget).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectGiveSpell">
+            <spell href="Ferris_4_6_1_Spell_02.(SpellArea).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectGiveSpell">
+            <spell href="Ferris_4_6_1_Spell_03.(SpellSingleTarget).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectHandleEnterMission">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Ferris_4_6_1_ColossusScout.(BuffResource).xdb" />
+                    <anyRank>false</anyRank>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.constructor.basicElements.EffectList">
+            <effectsResource href="/Mechanics/GameRoot/Mount/HidePetMountAbility.(EffectListResource).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.SimpleEffectScaler">
+                <scaler type="gameMechanics.elements.scalers.LinearScaler">
+                    <multiplier>0.6</multiplier>
+                </scaler>
+            </effectScaler>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/Transformation.(ActionGroup).xdb" />
+        <Item href="Ferris_4_6_1.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

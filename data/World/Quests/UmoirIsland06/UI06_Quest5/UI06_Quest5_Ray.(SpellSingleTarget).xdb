@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>311916</resourceId>
+    </Header>
+    <Name href="UI06_Quest5_Ray.(SpellSingleTarget).Name.txt" />
+    <Description href="UI06_Quest5_Ray.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Misc/Quest/PrintJuneau02.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="UI06_Quest5_Ray.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="UI06_Quest5_Ray.(SpellSingleTarget).Name.txt" />
+    <descTemplate href="UI06_Quest5_Ray.(SpellSingleTarget).Description.txt" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>50</value>
+    </range>
+    <prepareDuration>3000</prepareDuration>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>5000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                <mobs>
+                    <Item href="/Creatures/Archangel/Instances/UmoirIsland06/UI06_Angel.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                </mobs>
+            </Item>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="/Mechanics/Creatures/Archangel/Instances/UmoirIsland06/UI06Angel_Invulnerability.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </targetConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="UI06_Quest5_Charge.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                <consumeStacks>4</consumeStacks>
+            </Item>
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                <table href="/Maps/UmoirIsland06/SpawnTables/UmoirIsland06/UI06_Quest5_Stele1.(MobSpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.StackBuff">
+                <buff href="/Mechanics/Creatures/Archangel/Instances/UmoirIsland06/UI06Angel_Invulnerability.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                <resetTimer>false</resetTimer>
+                <delta type="gameMechanics.elements.calcers.FloatData">
+                    <value>-1</value>
+                </delta>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                        <delay>500</delay>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/Creatures/Archangel/Instances/UmoirIsland06/UI06Angel_Invulnerability.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.RepeatedImpact">
+                                                <impact type="gameMechanics.elements.impacts.ImpactSummon">
+                                                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                                                        <locator>
+                                                            <scriptID>UI06_Angel</scriptID>
+                                                            <map href="/Maps/UmoirIsland06/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                        </locator>
+                                                    </destination>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                                                    </impacts>
+                                                    <object href="/Creatures/Willowisp/Instances/UmoirIsland06/UI06_LightWisp.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                    <pool href="UI06_Quest5_Ray.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                                                    <isPersonalPool>true</isPersonalPool>
+                                                </impact>
+                                                <count type="gameMechanics.elements.calcers.FloatData">
+                                                    <value>3</value>
+                                                </count>
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </impactsIf>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

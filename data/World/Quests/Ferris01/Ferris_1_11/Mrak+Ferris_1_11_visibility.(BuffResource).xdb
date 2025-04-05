@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>313492</resourceId>
+    </Header>
+    <needVisualize>false</needVisualize>
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <effects>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="Mrak_enprisoned_plane.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Influence</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="Mrak_enprisoned_plane.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Visibility</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="Mrak_enprisoned_plane.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="Mrak_enprisoned_plane.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Influence</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="Mrak_enprisoned_plane.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Visibility</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="Mrak_enprisoned_plane.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="Timer.(BuffResource).xdb" />
+                            </predicate>
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                            <zone href="/Maps/Ferris/ScriptZones/Ferris_1_11.(ScriptZone).xdb" />
+                        </Item>
+                    </predicates>
+                    <effectsIf>
+                        <Item type="gameMechanics.elements.effects.Switch">
+                            <impactsOn>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="Timer.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                    <data href="WarningStealthFailed.(ClientData).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                                        <locator>
+                                            <scriptID>Ferris_1_11_snowfolk</scriptID>
+                                            <map href="/Maps/Ferris/MapResource.xdb" />
+                                        </locator>
+                                    </destination>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                            <delay>30000</delay>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                    <impactsFromTarget>
+                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="ExecutorVisibility.(BuffResource).xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impactsFromTarget>
+                                    <object href="/Creatures/SnowFolk/Instances/Ferris/Snowfolk_Ferris_1_11_executor.(MobWorld).xdb" />
+                                    <pool href="Executor.(SummonPool).xdb" />
+                                    <isPersonalPool>true</isPersonalPool>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <radius>20</radius>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                            <value>1000</value>
+                                        </Item>
+                                    </impacts>
+                                    <filter type="gameMechanics.world.creature.MobFilter" />
+                                </Item>
+                            </impactsOn>
+                        </Item>
+                    </effectsIf>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

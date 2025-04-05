@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>310538</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactSetHealthToFull" />
+                                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                    <delay>3000</delay>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="ArchitectTrip.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                    <id href="Counter2.(QuestCountId).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                    <data href="Heal.(ClientData).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="/World/Quests/ZC12/WW_1_8/Arc_vis.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.world.creature.AvatarFilter" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.LayeredHealthTrigger">
+            <layers>
+                <Item>
+                    <percent>0.75</percent>
+                    <mechanics>
+                        <impactsOn>
+                            <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                                <spell href="/Mechanics/Creatures/ArchitectBossCaster/ZC12_Map02/109_SavantChannel.(SpellSingleTarget).xdb" />
+                                <duration>
+                                    <minute>10</minute>
+                                </duration>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                                <spell href="/Mechanics/Creatures/ArchitectBossCaster/ZC12_Map02/109_SavantTargetPhase.(SpellSingleTarget).xdb" />
+                                <duration>
+                                    <second>5</second>
+                                </duration>
+                            </Item>
+                        </impactsOn>
+                    </mechanics>
+                </Item>
+            </layers>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impactsIf>
+                </Item>
+            </onLeave>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

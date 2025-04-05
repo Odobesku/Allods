@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>320842</resourceId>
+    </Header>
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/Camera_CutScene.(VisObjectTemplate).xdb" />
+        </Item>
+    </visualEffects>
+    <visScript href="WW_4_3_CutScene2.(BuffVisScripts).xdb" />
+    <needVisualize>false</needVisualize>
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                    <table href="/Maps/ZC12_RiftInstance3/SpawnTables/ZC12_RI3_Colossus.(SpawnTable).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                                        <locator>
+                                            <scriptID>ZC12_RI3_Colossus</scriptID>
+                                            <map href="/Maps/ZC12_RiftInstance3/MapResource.xdb" />
+                                        </locator>
+                                    </destination>
+                                    <finishImpacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="WW_4_3_Stop.(BuffResource).xdb" />
+                                        </Item>
+                                    </finishImpacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                    <id href="CountId_7.(QuestCountId).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHasItemsCount">
+                            <items>
+                                <Item href="/Items/QuestItems/ZC12/WW_4_2_items/WW_4_2_items.(ItemResource).xdb" />
+                            </items>
+                            <totalCount>1</totalCount>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactDestroyItem">
+                            <item href="/Items/QuestItems/ZC12/WW_4_2_items/WW_4_2_items.(ItemResource).xdb" />
+                            <count>10</count>
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactClientData">
+                    <data href="/Mechanics/RaidInstances/FerrisRaid/CutScene/InterfaceActive.(ClientData).xdb" />
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                        <locator>
+                            <scriptID>ZC12_RI3_Exit</scriptID>
+                            <map href="/Maps/ZC12/MapResource.xdb" />
+                        </locator>
+                    </destination>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactClientData">
+                    <data href="/Mechanics/RaidInstances/FerrisRaid/CutScene/InterfaceDeactive.(ClientData).xdb" />
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactMobChat">
+                                    <msg href="WW_4_3_CutScene2_PanfilovSay.(TextMessage).xdb" />
+                                </Item>
+                            </impacts>
+                            <spawnResource href="/Maps/ZC12_RiftInstance3/SpawnTables/ZC12_RI3_Panfilov.(SpawnTable).xdb" />
+                        </Item>
+                    </impactsOn>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectsDeferred">
+                    <delay>3000</delay>
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.Switch">
+                            <impactsOn>
+                                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                            <data href="WW_4_3_CutScene2Explosion.(ClientData).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                            <delay>1500</delay>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                    <spawnResource href="/Maps/ZC12_RiftInstance3/SpawnTables/ZC12_RI3_Panfilov.(SpawnTable).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                                    </impacts>
+                                    <spawnResource href="/Maps/ZC12_RiftInstance3/SpawnTables/ZC12_RI3_Colossus.(SpawnTable).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                    <spawn>
+                                        <scriptID>ZC12_RI3_Bridge1</scriptID>
+                                        <map href="/Maps/ZC12_RiftInstance3/MapResource.xdb" />
+                                    </spawn>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                                            <visualState>2</visualState>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsOn>
+                        </Item>
+                    </effects>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToAllActions" />
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Rotate</Item>
+                <Item>Jump</Item>
+            </actions>
+            <rooted>true</rooted>
+        </Item>
+    </effects>
+    <duration>10000</duration>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+        <Item href="/Mechanics/Spells/Groups/QuestSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/CutScene.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>310842</resourceId>
+    </Header>
+    <Name href="WW_10_4_ArchitectSpell.(SpellSingleTarget).Name.txt" />
+    <Description href="WW_10_4_ArchitectSpell.(SpellSingleTarget).Description.txt" />
+    <visualScripts href="/Spells/VisScripts/Items/Gadget.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>35</value>
+    </range>
+    <prepareDuration>3000</prepareDuration>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                <quest href="WW_10_4.xdb" />
+                <status>Started</status>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                    <quest href="WW_10_4.xdb" />
+                    <counterResource href="WW_10_4_CountIDAmulet.(QuestCountId).xdb" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                <mobs>
+                    <Item href="/Creatures/ArchitectRanger/Instances/WW_10_7_ArchitectRanger.(MobWorld).xdb" />
+                    <Item href="/Creatures/ArchitectMele/Instances/WW_10_7_ArchitectMele.(MobWorld).xdb" />
+                </mobs>
+            </Item>
+        </targetConditions>
+        <conditions>
+            <Item type="gameMechanics.constructor.basicElements.BinaryPredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromMaster">
+                    <buff href="Checked.(BuffResource).xdb" />
+                </predicate>
+            </Item>
+        </conditions>
+        <targetImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="Checked.(BuffResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                <data href="WW_10_4_ArtifactClientData.(ClientData).xdb" />
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

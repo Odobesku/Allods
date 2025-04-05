@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>313364</resourceId>
+    </Header>
+    <Name href="YakMount.(BuffResource).Name02.txt" />
+    <Description href="YakMount.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Misc/Mobparts/HoofCommon.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="YakMount.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActionsExceptGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/QuestSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="Disorient.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impacts>
+            <tick>6000</tick>
+            <initialDelay>6000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Jump</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectAddContextActions">
+            <actions>
+                <Item href="BombSpell.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellGroupDeactivate">
+                    <group href="/Mechanics/Spells/Groups/SpeedBoosts.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                    <id href="Counter1.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateInZone">
+                                <zone href="/Maps/Ferris/Zones/Ferris01/Ferris01_06.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="NoAggro.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                <quest href="Ferris_1_14.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                <counterResource href="/Creatures/SnowFolk/Instances/Ferris/Snwofolk_Ferris_1_14.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                <value>10</value>
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                            <id href="Counter1.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                            <value>-1</value>
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="NoAggro.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Disorient.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>1.5</coeff>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToSpellFromGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/CrowdControlSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToBuffs">
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                        <Item href="/Mechanics/Spells/Groups/Knockdowns.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                        <Item href="/Mechanics/Spells/Groups/MovementImpairingSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                        <Item href="/Mechanics/Spells/Groups/CrowdControlSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                        <Item href="/Mechanics/Spells/Groups/Stuns.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                        <Item href="/Mechanics/Spells/Groups/Disarms.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                    </groups>
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.constructor.basicElements.EffectList">
+            <effectsResource href="/Mechanics/GameRoot/Mount/HidePetMountAbility.(EffectListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.EffectListResource)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.CastOnMove">
+            <spells>
+                <Item href="YakPunch.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+            </spells>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffInterceptor">
+            <impactsOnAttach>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="YakMount.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOnAttach>
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.PredicateBuffEquals">
+                    <buff href="/Mechanics/GameRoot/AvatarStuckBuff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </predicates>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>321475</resourceId>
+    </Header>
+    <contextActionInfo>
+        <priority>1</priority>
+    </contextActionInfo>
+    <interruptsActionGroups />
+    <groups />
+    <Name href="WW_6_4_Spell.(SpellSingleTarget).Name.txt" />
+    <Description href="WW_6_4_Spell.(SpellSingleTarget).Description.txt" />
+    <descVars />
+    <descTemplate href="WW_6_4_Spell.(SpellSingleTarget).DescTemplate.txt" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>3</value>
+    </range>
+    <ranks />
+    <modifiers />
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                <zone href="/Maps/ZC12/ScriptZones/WW_6_4_01.(ScriptZone).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                    <quest href="WW_6_4.xdb" />
+                                    <counterResource href="CountId_1.xdb" />
+                                    <value>4</value>
+                                </predicate>
+                            </Item>
+                        </predicates>
+                    </Item>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                <zone href="/Maps/ZC12/ScriptZones/WW_6_4_02.(ScriptZone).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                    <quest href="WW_6_4.xdb" />
+                                    <counterResource href="CountId_2.xdb" />
+                                    <value>4</value>
+                                </predicate>
+                            </Item>
+                        </predicates>
+                    </Item>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                <zone href="/Maps/ZC12/ScriptZones/WW_6_4_03.(ScriptZone).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                    <quest href="WW_6_4.xdb" />
+                                    <counterResource href="CountId_3.xdb" />
+                                    <value>4</value>
+                                </predicate>
+                            </Item>
+                        </predicates>
+                    </Item>
+                </predicates>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                <quest href="WW_6_4.xdb" />
+                <counterResource href="/Items/QuestItems/ZC12/WW_6_4_item/WW_6_4_item.(ItemResource).xdb" />
+                <value>12</value>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                <mobs>
+                    <Item href="/Characters/Hadagan_male/Instances/ZC12/ZC12_Guard_Capital.(MobWorld).xdb" />
+                    <Item href="/Characters/Kania_male/Instances/ZC12/ZC12_Guard_Capital_01.(MobWorld).xdb" />
+                </mobs>
+            </Item>
+        </targetConditions>
+        <conditions />
+        <casterResources />
+        <casterChannelingEffects />
+        <casterImpacts />
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactsIf">
+                <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromMaster">
+                    <buff href="WW_6_4_Buff.(BuffResource).xdb" />
+                </predicate>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                <data href="WW_6_4_ClientData.(ClientData).xdb" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="WW_6_4_Buff.(BuffResource).xdb" />
+                        <impactsOnAttach />
+                        <impactsOnFail />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                        <zone href="/Maps/ZC12/ScriptZones/WW_6_4_01.(ScriptZone).xdb" />
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                        <id href="CountId_1.xdb" />
+                                    </Item>
+                                </impactsIf>
+                                <impactsElse>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                                <zone href="/Maps/ZC12/ScriptZones/WW_6_4_02.(ScriptZone).xdb" />
+                                            </Item>
+                                        </predicates>
+                                        <impactsIf>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                <id href="CountId_2.xdb" />
+                                            </Item>
+                                        </impactsIf>
+                                        <impactsElse>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                <id href="CountId_3.xdb" />
+                                            </Item>
+                                        </impactsElse>
+                                    </Item>
+                                </impactsElse>
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactDestroyItem">
+                                <item href="/Items/QuestItems/ZC12/WW_6_4_item/WW_6_4_item.(ItemResource).xdb" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
