@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mapLoader.MapTemplate>
+	<Header>
+		<resourceId>739910007</resourceId>
+	</Header>
+	<hasPatches>true</hasPatches>
+	<headParts>
+		<parts>
+			<Item type="mapLoader.parts.PlayerCountResource" />
+			<Item type="mapLoader.parts.MapDestroyerResource">
+				<instanceLifeTime>60000</instanceLifeTime>
+			</Item>
+			<Item type="gameMechanics.map.basicElements.MapSpecificEffects">
+				<effects>
+					<Item type="gameMechanics.elements.effects.EffectsIfTarget">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicateIsMob" />
+						</predicates>
+						<effectsIf>
+							<Item type="gameMechanics.world.mob.behaviour.components.effects.EffectCanBeAggred" />
+						</effectsIf>
+					</Item>
+					<Item type="gameMechanics.elements.effects.EffectsIfTarget">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+						</predicates>
+						<effectsIf>
+							<Item type="gameMechanics.constructor.basicElements.EffectList">
+								<effectsResource href="/Mechanics/Mounts/Prototypes/InstanceDismount.(EffectListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.EffectListResource)" />
+							</Item>
+						</effectsIf>
+					</Item>
+					<Item type="gameMechanics.elements.effects.Switch">
+						<impactsOn>
+							<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+								<predicates>
+									<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+								</predicates>
+								<impactsIf>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="/Mechanics/Spells/Mercenaries/InstSpecificBuff/CanSummonMercs.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+								</impactsIf>
+							</Item>
+						</impactsOn>
+						<impactsOff>
+							<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+								<predicates>
+									<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+								</predicates>
+								<impactsIf>
+									<Item type="gameMechanics.elements.impacts.BuffDetacher">
+										<buff href="/Mechanics/Spells/Mercenaries/InstSpecificBuff/CanSummonMercs.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+										<anyRank>false</anyRank>
+									</Item>
+								</impactsIf>
+							</Item>
+						</impactsOff>
+					</Item>
+					<Item type="gameMechanics.elements.effects.EffectsIfTarget">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+						</predicates>
+						<effectsIf>
+							<Item type="gameMechanics.elements.effects.EffectSetDisconnectTimeout">
+								<disconnectTime>1200000</disconnectTime>
+							</Item>
+						</effectsIf>
+					</Item>
+				</effects>
+			</Item>
+		</parts>
+	</headParts>
+	<cellParts>
+		<parts>
+			<Item type="gameMechanics.world.mob.MobCellCountResource">
+				<limit>100</limit>
+				<softLimit>40</softLimit>
+			</Item>
+			<Item type="gameMechanics.map.instance.AvatarLevelControlResource">
+				<maxLevelDifference>4</maxLevelDifference>
+			</Item>
+			<Item type="gameMechanics.map.spawn.SummonPoolManager">
+				<globalPool href="/System/GlobalSummonPools/SummonPoolRaidInstance.xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+			</Item>
+			<Item type="gameMechanics.map.basicElements.MapEvacuatorResource">
+				<evacuator type="gameMechanics.map.basicElements.StoredPosAvatarMapEvacuator" />
+			</Item>
+		</parts>
+	</cellParts>
+	<entrance type="gameMechanics.map.instance.GroupInstanceEntrance" />
+	<mechanicsSettings>
+		<forceSleep>false</forceSleep>
+		<prohibitWorldDrop>true</prohibitWorldDrop>
+		<requireExit>true</requireExit>
+		<forDwellersOnly>true</forDwellersOnly>
+		<evadeMob>false</evadeMob>
+		<allowInvites>false</allowInvites>
+	</mechanicsSettings>
+</mapLoader.MapTemplate>
