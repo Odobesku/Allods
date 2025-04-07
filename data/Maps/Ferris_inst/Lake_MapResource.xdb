@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mapLoader.MapResource>
+    <Header>
+        <resourceId>14301</resourceId>
+    </Header>
+    <minimapLight>
+        <SunLightYaw>45</SunLightYaw>
+        <SunLightPitch>45</SunLightPitch>
+        <terrainLightmapBias>0.01</terrainLightmapBias>
+        <objectsLightmapBias>0.0125</objectsLightmapBias>
+        <minAmbientOcclusionValue>0</minAmbientOcclusionValue>
+    </minimapLight>
+    <name href="Lake_MapResource.(MapResource).Name.txt" />
+    <mapPrefix>Lake</mapPrefix>
+    <exit type="mapLoader.pointer.MapPointer">
+        <scriptID>Ferris_start</scriptID>
+        <map href="/Maps/Ferris/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+    </exit>
+    <mapTemplate href="/System/MapTemplates/PersonalInstance_InstReset.(MapTemplate).xdb#xpointer(/mapLoader.MapTemplate)" />
+    <parts>
+        <parts>
+            <Item type="gameMechanics.map.basicElements.MapSpecificEffects">
+                <effects>
+                    <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                            <zone href="ScriptZones/ArchitectStone.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                                        </predicate>
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacherStackRange">
+                                        <buff href="/World/Quests/Ferris01/Ferris_1_6/Lake_cold.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        <range>
+                                            <min>1</min>
+                                            <max>1</max>
+                                        </range>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.DirectDamage">
+                                        <damage>1</damage>
+                                        <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                            <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                                <multiplier>0.03</multiplier>
+                                            </mulCalcer>
+                                        </scaler>
+                                    </Item>
+                                </impactsIf>
+                            </Item>
+                        </impacts>
+                        <tick>3000</tick>
+                    </Item>
+                    <Item type="gameMechanics.elements.effects.DeathTrigger">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                        <id href="/World/Quests/Ferris01/Ferris_1_6/Counter3.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                        <value>-1</value>
+                                    </Item>
+                                </impactsIf>
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.effects.DisableSpellsPredicate">
+                        <predicate type="gameMechanics.elements.predicates.PredicateIsMountAction" />
+                    </Item>
+                    <Item type="gameMechanics.elements.effects.Switch">
+                        <impactsOn>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.ImpactSetHealthToFull" />
+                                </impactsIf>
+                            </Item>
+                        </impactsOn>
+                        <impactsOff>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                        <quest href="/World/Quests/Ferris01/Ferris_1_6/Ferris_1_6.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                            <quest href="/World/Quests/Ferris01/Ferris_1_6/Ferris_1_6.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                            <counterResource href="/World/Quests/Ferris01/Ferris_1_6/Counter4.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                        </predicate>
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                <quest href="/World/Quests/Ferris01/Ferris_1_6/Ferris_1_6.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                                <counterResource href="/World/Quests/Ferris01/Ferris_1_6/Counter3.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                            </Item>
+                                        </predicates>
+                                        <impactsIf>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                <id href="/World/Quests/Ferris01/Ferris_1_6/Counter3.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                                <value>-1</value>
+                                            </Item>
+                                        </impactsIf>
+                                    </Item>
+                                </impactsIf>
+                            </Item>
+                        </impactsOff>
+                    </Item>
+                </effects>
+            </Item>
+        </parts>
+    </parts>
+    <autoNavigationState>Disable</autoNavigationState>
+</mapLoader.MapResource>

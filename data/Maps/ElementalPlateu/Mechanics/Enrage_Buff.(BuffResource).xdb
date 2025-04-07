@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>50756</resourceId>
+    </Header>
+    <Name href="Enrage_Buff.(BuffResource).Name.txt" />
+    <Description href="Enrage_Buff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Warrior/WarriorInnerRage.(UISingleTexture).xdb" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/World/SkullFire.chn.(VisObjectTemplate).xdb" />
+            <scale>1.4</scale>
+            <locator>Slot_TopFX</locator>
+        </Item>
+    </visualEffects>
+    <visScript href="/Mechanics/Spells/HuntingGrounds/HG_Enrage.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>0.1</coeff>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                            <radius>8</radius>
+                            <affectHolder>false</affectHolder>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="/Mechanics/Spells/HuntingGrounds/Link_Chain.(ClientData).xdb" />
+                                    <calcers>
+                                        <addressEntries>
+                                            <Item>
+                                                <name>caster</name>
+                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                            </Item>
+                                            <Item>
+                                                <name>target</name>
+                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                            </Item>
+                                        </addressEntries>
+                                    </calcers>
+                                </Item>
+                            </impacts>
+                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="Enrage_Buff.(BuffResource).xdb" />
+                                    </Item>
+                                </predicates>
+                            </filter>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>5000</tick>
+            <initialDelay>500</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.SummandStat">
+            <stat type="gameMechanics.elements.stat.InnateStat">
+                <stat>Lifesteal</stat>
+            </stat>
+            <value>20</value>
+            <scaler type="gameMechanics.elements.scalers.LinearScaler">
+                <multiplier>10</multiplier>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>0.3</coeff>
+            </effectScaler>
+        </Item>
+    </effects>
+    <duration>7000</duration>
+    <stackLimit>5</stackLimit>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>true</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>
