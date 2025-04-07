@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>475342</resourceId>
+    </Header>
+    <Name href="GadgetSpell_Name.txt" />
+    <Description href="GadgetSpell_Desc.txt" />
+    <visualScripts href="/Spells/VisScripts/Items/Gadget.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="GadgetSpell_Name.txt" />
+    <descTemplate href="GadgetSpell_Desc.txt" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>30</value>
+    </range>
+    <prepareDuration>3000</prepareDuration>
+    <iffPolicy>Everyone</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>5000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                <mobs>
+                    <Item href="/Creatures/Boar/Instances/ArchipelagoGipatsShard/BoarGhost40_40.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    <Item href="/Creatures/Toad/Instances/ArchipelagoGipatsShard/ToadGhost40_40.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    <Item href="/Creatures/Wolf/Instances/ArchipelagoGipatsShard/WolfKindGhost40_40.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                </mobs>
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ForceAggro" />
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="Gadget_02_Debuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </predicate>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="Gadget_02_Debuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                <id href="/World/Quests/ArchipelagoGipatsShard/Quest4_7/CountId_1.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                <data href="Gadget_02_Debuff_Message.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

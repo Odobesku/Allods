@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>485820</resourceId>
+    </Header>
+    <Name href="BGCannonBuff.txt" />
+    <Description href="BGCannonBuff.Description.txt" />
+    <image href="/Interface/Icons/Spells/Mage/MageFireball.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <nameTemplate href="BGCannonBuff.txt" />
+    <descTemplate href="BGCannonBuff.Description.txt" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActionsExceptGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/QuestSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                <Item href="/Mechanics/Spells/Groups/VoteKick.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDistanceProbabilistic">
+            <tick>1000</tick>
+            <factor>1</factor>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="BGCannonBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <anyRank>false</anyRank>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDamageTrigger">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.offender.PredicateIsForthright" />
+                <Item type="gameMechanics.elements.predicates.offender.PredicateNot">
+                    <predicate type="gameMechanics.elements.predicates.offender.PredicateIsAE" />
+                </Item>
+            </predicates>
+            <impacts>
+                <casterToTarget>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="BGCannonBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        <anyRank>false</anyRank>
+                    </Item>
+                </casterToTarget>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactAvatarFinishUse" />
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffInterceptor">
+            <impactsOnAttach>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="BGCannonBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <anyRank>false</anyRank>
+                </Item>
+            </impactsOnAttach>
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                    </groups>
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.SetterSightRadius">
+            <maxValue>240</maxValue>
+        </Item>
+    </effects>
+    <isStackable>false</isStackable>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

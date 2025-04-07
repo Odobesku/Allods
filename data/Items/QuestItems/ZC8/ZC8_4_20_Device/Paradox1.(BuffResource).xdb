@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>474476</resourceId>
+    </Header>
+    <Name href="Paradox1.(BuffResource)_Name.txt" />
+    <Description href="Paradox1.(BuffResource)_Desc.txt" />
+    <image href="/Interface/Icons/Spells/Modifiers/FearUnknown.(UISingleTexture).xdb" />
+    <visScript href="/Spells/VisScripts/Other/Distortions_Reality.(BuffVisScripts).xdb" />
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.RandomImpact">
+                            <entries>
+                                <Item>
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="ParadoxDisorient.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item>
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Mechanics/Spells/CommonBuffs/Silence/Buff.xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item>
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="ParadoxSpeed01.xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                            <data href="ParadoxHeal.(ClientData).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactHeal">
+                                            <heal>10</heal>
+                                            <scalerCaster type="gameMechanics.elements.scalers.HealScaler" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                            <data href="ParadoxHeal.(ClientData).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item>
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="ParadoxDance.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                            <data href="/Spells/VisScripts/Bard/HitSonic.(ClientData).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </entries>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <radius>50</radius>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                                    </impacts>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsMob" />
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                            </Item>
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                <predicate type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                    <mobs>
+                                                        <Item href="/Characters/HumMobs/ZC8/ZC8_CrystalGuard.(MobWorld).xdb" />
+                                                    </mobs>
+                                                </predicate>
+                                            </Item>
+                                        </predicates>
+                                    </filter>
+                                    <targetsLimit>1</targetsLimit>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+            <tick>6000</tick>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Items/InteractiveObjects/ZC8/ZC8_ParadoxWall/ParadoxWall_State1.(BuffResource).xdb" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectZoneEnterLeaveChecker">
+            <impactsOnLeave>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Paradox1.(BuffResource).xdb" />
+                </Item>
+            </impactsOnLeave>
+            <activeZone href="/Maps/IllusionWorld/Zones/ZC8/ZC8.(ZoneResource).xdb" />
+        </Item>
+    </effects>
+    <duration>30000</duration>
+    <isStackable>false</isStackable>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>true</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

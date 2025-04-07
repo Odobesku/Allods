@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>474783</resourceId>
+    </Header>
+    <Name href="Open_barrier2.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="/Spells/VisScripts/Prototypes/Omni.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="Open_barrier2.(SpellSingleTarget).Name.txt" />
+    <prepareDuration>5000</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                <zone href="/Maps/UmoirIsland05/ScriptZones/Barrier2.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                <quest href="/World/Quests/UmoirIsland05/Quest_04/Quest_04.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                <status>Active</status>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                    <quest href="/World/Quests/UmoirIsland05/Quest_04/Quest_04.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                    <counterResource href="/World/Quests/UmoirIsland05/Quest_04/Counter3.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                    <value>1</value>
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                <spawn>
+                    <scriptID>barrier2</scriptID>
+                    <map href="/Maps/UmoirIsland05/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                </spawn>
+                <impacts>
+                    <Item type="gameMechanics.elements.device.DoorSwitch">
+                        <switchType>Open</switchType>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                <id href="/World/Quests/UmoirIsland05/Quest_04/Counter3.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactDestroyItem">
+                <item href="Amulet_stone.(ItemResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                <table href="/Maps/UmoirIsland05/SpawnTables/HiddenShadows.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

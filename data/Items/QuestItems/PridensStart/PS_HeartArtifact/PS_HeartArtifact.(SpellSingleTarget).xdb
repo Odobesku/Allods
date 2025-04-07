@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>475583</resourceId>
+    </Header>
+    <Name href="PS_HeartArtifact.(SpellSingleTarget).Name.txt" />
+    <Description href="PS_HeartArtifact.(SpellSingleTarget).Description.txt" />
+    <visualScripts href="PS_HeartArtifact.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>15</value>
+    </range>
+    <prepareDuration>1500</prepareDuration>
+    <isWorkOnDead>true</isWorkOnDead>
+    <iffPolicy>Everyone</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>1000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                <quest href="/World/Quests/PridensStart/Pride_7_4/Pride_7_4.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                <status>Started</status>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                <mobs>
+                    <Item href="/Creatures/SherKhan/Instances/PridensStart/PS_SherKhan.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    <Item href="/Creatures/Tabaki/Instances/PridensStart/PS_Tabaki.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                </mobs>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateIsDead" />
+        </targetConditions>
+        <conditions>
+            <Item type="gameMechanics.constructor.basicElements.BinaryPredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
+                        <onMaster type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                <quest href="/World/Quests/PridensStart/Pride_7_4/Pride_7_4.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                <counterResource href="/World/Quests/PridensStart/Pride_7_4/CountId_3.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                            </predicate>
+                        </onMaster>
+                        <onSlave type="gameMechanics.elements.predicates.PredicateMobWorld">
+                            <mobs>
+                                <Item href="/Creatures/SherKhan/Instances/PridensStart/PS_SherKhan.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                            </mobs>
+                        </onSlave>
+                    </Item>
+                    <Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
+                        <onMaster type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                <quest href="/World/Quests/PridensStart/Pride_7_4/Pride_7_4.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                <counterResource href="/World/Quests/PridensStart/Pride_7_4/CountId_4.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                            </predicate>
+                        </onMaster>
+                        <onSlave type="gameMechanics.elements.predicates.PredicateMobWorld">
+                            <mobs>
+                                <Item href="/Creatures/Tabaki/Instances/PridensStart/PS_Tabaki.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                            </mobs>
+                        </onSlave>
+                    </Item>
+                </predicates>
+            </Item>
+        </conditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                        <mobs>
+                            <Item href="/Creatures/SherKhan/Instances/PridensStart/PS_SherKhan.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                        </mobs>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                <id href="/World/Quests/PridensStart/Pride_7_4/CountId_3.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                <quest href="/World/Quests/PridensStart/Pride_7_4/Pride_7_4.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                                <status>Completed</status>
+                                            </Item>
+                                        </predicates>
+                                        <impactsIf>
+                                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                <buff href="/World/Quests/PridensStart/Pride_7_4/Pride_7_4_GhostPlane.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            </Item>
+                                            <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+                                                <destination type="gameMechanics.map.destination.DestinationModified">
+                                                    <destination type="gameMechanics.map.destination.RelativePos">
+                                                        <coord x="3" y="3" />
+                                                    </destination>
+                                                    <modifiers>
+                                                        <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                                            <verticalRange min="0" max="0" />
+                                                            <horizontalRange min="3" max="3" />
+                                                        </Item>
+                                                    </modifiers>
+                                                </destination>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                        <impacts>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_AssistsResolvent.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                        <delay>1000</delay>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                                <data href="/World/Quests/PridensStart/Pride_6_6/Pride_6_6_GhostAppear.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impacts>
+                                                <plane href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_Assists.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+                                                <assistantResource href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_Assist1.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                                                <mobResource href="/Creatures/Akella/Instances/PridensStart/PS_AkellaGhost.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                            </Item>
+                                            <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+                                                <destination type="gameMechanics.map.destination.DestinationModified">
+                                                    <destination type="gameMechanics.map.destination.RelativePos">
+                                                        <coord x="3" y="3" />
+                                                    </destination>
+                                                    <modifiers>
+                                                        <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                                            <verticalRange min="0" max="0" />
+                                                            <horizontalRange min="3" max="3" />
+                                                        </Item>
+                                                    </modifiers>
+                                                </destination>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                        <impacts>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_AssistsResolvent.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                        <delay>1000</delay>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                                <data href="/World/Quests/PridensStart/Pride_6_6/Pride_6_6_GhostAppear.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                        <delay>3000</delay>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                                <data href="/World/Quests/PridensStart/Pride_7_4/PS_HeartArtifact_BaluSay.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impacts>
+                                                <plane href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_Assists.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+                                                <assistantResource href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_Assist2.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                                                <mobResource href="/Creatures/Balu/Instances/PridensStart/PS_BaluGhost.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                            </Item>
+                                            <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+                                                <destination type="gameMechanics.map.destination.DestinationModified">
+                                                    <destination type="gameMechanics.map.destination.RelativePos">
+                                                        <coord x="3" y="3" />
+                                                    </destination>
+                                                    <modifiers>
+                                                        <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                                            <verticalRange min="0" max="0" />
+                                                            <horizontalRange min="3" max="3" />
+                                                        </Item>
+                                                    </modifiers>
+                                                </destination>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                        <impacts>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_AssistsResolvent.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                        <delay>1000</delay>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                                <data href="/World/Quests/PridensStart/Pride_6_6/Pride_6_6_GhostAppear.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impacts>
+                                                <plane href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_Assists.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+                                                <assistantResource href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_Assist3.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                                                <mobResource href="/Creatures/Bagira/Instances/PridensStart/PS_BagiraGhost.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                            </Item>
+                                            <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+                                                <destination type="gameMechanics.map.destination.DestinationModified">
+                                                    <destination type="gameMechanics.map.destination.RelativePos">
+                                                        <coord x="3" y="3" />
+                                                    </destination>
+                                                    <modifiers>
+                                                        <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                                            <verticalRange min="0" max="0" />
+                                                            <horizontalRange min="3" max="3" />
+                                                        </Item>
+                                                    </modifiers>
+                                                </destination>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                        <impacts>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_AssistsResolvent.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                        <delay>1000</delay>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                                <data href="/World/Quests/PridensStart/Pride_6_6/Pride_6_6_GhostAppear.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impacts>
+                                                <plane href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_Assists.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+                                                <assistantResource href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_Assist4.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                                                <mobResource href="/Creatures/Anakonda/Instances/PridensStart/PS_KaaGhost.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                        <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                        <data href="/World/Quests/PridensStart/Pride_7_4/PS_HeartArtifact_Completed.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                        </impactsIf>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsIf>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                        <mobs>
+                            <Item href="/Creatures/Tabaki/Instances/PridensStart/PS_Tabaki.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                        </mobs>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                <id href="/World/Quests/PridensStart/Pride_7_4/CountId_4.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                <quest href="/World/Quests/PridensStart/Pride_7_4/Pride_7_4.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                                <status>Completed</status>
+                                            </Item>
+                                        </predicates>
+                                        <impactsIf>
+                                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                <buff href="/World/Quests/PridensStart/Pride_7_4/Pride_7_4_GhostPlane.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            </Item>
+                                            <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+                                                <destination type="gameMechanics.map.destination.DestinationModified">
+                                                    <destination type="gameMechanics.map.destination.RelativePos">
+                                                        <coord x="3" y="3" />
+                                                    </destination>
+                                                    <modifiers>
+                                                        <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                                            <verticalRange min="0" max="0" />
+                                                            <horizontalRange min="3" max="3" />
+                                                        </Item>
+                                                    </modifiers>
+                                                </destination>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                        <impacts>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_AssistsResolvent.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                        <delay>1000</delay>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                                <data href="/World/Quests/PridensStart/Pride_6_6/Pride_6_6_GhostAppear.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impacts>
+                                                <plane href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_Assists.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+                                                <assistantResource href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_Assist1.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                                                <mobResource href="/Creatures/Akella/Instances/PridensStart/PS_AkellaGhost.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                            </Item>
+                                            <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+                                                <destination type="gameMechanics.map.destination.DestinationModified">
+                                                    <destination type="gameMechanics.map.destination.RelativePos">
+                                                        <coord x="3" y="3" />
+                                                    </destination>
+                                                    <modifiers>
+                                                        <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                                            <verticalRange min="0" max="0" />
+                                                            <horizontalRange min="3" max="3" />
+                                                        </Item>
+                                                    </modifiers>
+                                                </destination>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                        <impacts>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_AssistsResolvent.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                        <delay>1000</delay>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                                <data href="/World/Quests/PridensStart/Pride_6_6/Pride_6_6_GhostAppear.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                        <delay>3000</delay>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                                <data href="/World/Quests/PridensStart/Pride_7_4/PS_HeartArtifact_BaluSay.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impacts>
+                                                <plane href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_Assists.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+                                                <assistantResource href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_Assist2.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                                                <mobResource href="/Creatures/Balu/Instances/PridensStart/PS_BaluGhost.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                            </Item>
+                                            <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+                                                <destination type="gameMechanics.map.destination.DestinationModified">
+                                                    <destination type="gameMechanics.map.destination.RelativePos">
+                                                        <coord x="3" y="3" />
+                                                    </destination>
+                                                    <modifiers>
+                                                        <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                                            <verticalRange min="0" max="0" />
+                                                            <horizontalRange min="3" max="3" />
+                                                        </Item>
+                                                    </modifiers>
+                                                </destination>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                        <impacts>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_AssistsResolvent.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                        <delay>1000</delay>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                                <data href="/World/Quests/PridensStart/Pride_6_6/Pride_6_6_GhostAppear.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impacts>
+                                                <plane href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_Assists.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+                                                <assistantResource href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_Assist3.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                                                <mobResource href="/Creatures/Bagira/Instances/PridensStart/PS_BagiraGhost.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                            </Item>
+                                            <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+                                                <destination type="gameMechanics.map.destination.DestinationModified">
+                                                    <destination type="gameMechanics.map.destination.RelativePos">
+                                                        <coord x="3" y="3" />
+                                                    </destination>
+                                                    <modifiers>
+                                                        <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                                            <verticalRange min="0" max="0" />
+                                                            <horizontalRange min="3" max="3" />
+                                                        </Item>
+                                                    </modifiers>
+                                                </destination>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                        <impacts>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_AssistsResolvent.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                        <delay>1000</delay>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                                <data href="/World/Quests/PridensStart/Pride_6_6/Pride_6_6_GhostAppear.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impacts>
+                                                <plane href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_Assists.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+                                                <assistantResource href="/World/Quests/PridensStart/Pride_7_5/Pride_7_5_Assist4.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                                                <mobResource href="/Creatures/Anakonda/Instances/PridensStart/PS_KaaGhost.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                            </Item>
+                                        </impactsIf>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsIf>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>488258</resourceId>
+    </Header>
+    <Name href="05_Cyclops_Spell_03_disable_action.(SpellSingleTarget).Name.txt" />
+    <Description href="05_Cyclops_Spell_03_disable_action.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Spells/Modifiers/LimitedOpportunities.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Bosses/UmoirCyclop/Projectile_Clew.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <prepareDuration>800</prepareDuration>
+    <needLos>false</needLos>
+    <launchWhenReady>true</launchWhenReady>
+    <mechanics>
+        <cooldown>
+            <duration>7000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsMob" />
+            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                <mobs>
+                    <Item href="/Mechanics/RaidInstances/UmoirMound/05_Cyclops/05_Cyclops.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                </mobs>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+            <Item type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+                <groups>
+                    <Item href="/Mechanics/RaidInstances/UmoirMound/05_Cyclops/05_Cyclops_Approve.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                </groups>
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/RaidInstances/UmoirMound/05_Cyclops/Spell_00/Spell_03_Approve.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/RaidInstances/UmoirMound/05_Cyclops/Spell_03/Spell_Channelind.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                <buff href="05_Cyclops_Spell_03_disable_Boss.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                <range>
+                                    <min>2</min>
+                                    <max>3</max>
+                                </range>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/Mechanics/RaidInstances/UmoirMound/05_Cyclops/Spell_03/05_Cyclops_Spell_03_disable_Stun.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impactsIf>
+                        <impactsElse>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="05_Cyclops_Spell_03_disable_Boss.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impactsElse>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="05_Cyclops_Spell_03_disable_Boss.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsElse>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>40</speed>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

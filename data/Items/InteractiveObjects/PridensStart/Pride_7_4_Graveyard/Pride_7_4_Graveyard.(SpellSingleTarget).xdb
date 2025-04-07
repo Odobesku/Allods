@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>486443</resourceId>
+        <Prototype href="/Items/InteractiveObjects/Templates/Exploit.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+    </Header>
+    <visualScripts href="Pride_7_4_Graveyard.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>6</value>
+    </range>
+    <prepareDuration>3000</prepareDuration>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                <quest href="/World/Quests/PridensStart/Pride_7_4/Pride_7_4.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                <status>Started</status>
+            </Item>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="/World/Quests/PridensStart/Pride_7_4/Pride_7_4_GhostPlane.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="Pride_7_4_GraveyardCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                <id href="/World/Quests/PridensStart/Pride_7_4/CountId_2.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                <destination type="gameMechanics.map.destination.DestinationLocator">
+                    <locator>
+                        <scriptID>PS_SherKhan</scriptID>
+                        <map href="/Maps/PridensStart/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                    </locator>
+                </destination>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.AttachAbility">
+                        <ability href="/World/Quests/PridensStart/Pride_7_4/Pride_7_4_Disintegrate.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                        <delay>3000</delay>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                <data href="/World/Quests/PridensStart/Pride_7_4/Pride_7_4_SherKhan1.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="Pride_7_4_GraveyardCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                </impacts>
+                <object href="/Creatures/SherKhan/Instances/PridensStart/PS_SherKhan.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                <pool href="Pride_7_4_SherKhan.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                <isPersonalPool>true</isPersonalPool>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                <destination type="gameMechanics.map.destination.DestinationLocator">
+                    <locator>
+                        <scriptID>PS_Tabaki</scriptID>
+                        <map href="/Maps/PridensStart/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                    </locator>
+                </destination>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.AttachAbility">
+                        <ability href="/World/Quests/PridensStart/Pride_7_4/Pride_7_4_Disintegrate.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="Pride_7_4_GraveyardCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                        <delay>4000</delay>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                <data href="/World/Quests/PridensStart/Pride_7_4/Pride_7_4_Tabaki1.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                </impacts>
+                <object href="/Creatures/Tabaki/Instances/PridensStart/PS_Tabaki.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                <pool href="Pride_7_4_SherKhan.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

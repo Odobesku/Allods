@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>485825</resourceId>
+    </Header>
+    <contextActionInfo>
+        <contextName href="/Mechanics/Spells/Inst_DeadCity/Draconid_Mage/FireBall/Spell_Name.txt" />
+        <contextImage href="/Interface/Icons/Spells/Mage/MageFireball.(UISingleTexture).xdb" />
+    </contextActionInfo>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/QuestSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+        <Item href="/Mechanics/Spells/Groups/ActionBarChange.(ActionGroup).xdb" />
+    </groups>
+    <element>FIRE</element>
+    <Name href="BG_CannonDevice_Action01.txt" />
+    <Description href="BG_CannonDevice_Action01.Description.txt" />
+    <image href="/Interface/Icons/Spells/Mage/MageFireball.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Domination/CanonFire.(SpellVisScripts).xdb" />
+    <nameTemplate href="/Mechanics/Spells/Inst_DeadCity/Draconid_Mage/FireBall/Spell_Name.txt" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>200</value>
+    </range>
+    <needLos>false</needLos>
+    <targetType>STTPoint</targetType>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>4000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.world.device.PredicateOnUsedDevice">
+                <failCause>Cooldown</failCause>
+                <predicate type="gameMechanics.elements.predicates.PredicateSpellCooldownReady">
+                    <spell href="Shootl01_ShortRange.(SpellArea).xdb" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateCreature" />
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                <addresseeFinder type="gameMechanics.world.device.AddresseeFinderUsingDevice" />
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                        <spell href="Shootl01_ShortRange.(SpellArea).xdb" />
+                        <duration>4000</duration>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.DirectDamage">
+                <damage>1</damage>
+                <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                        <multiplier>0.5</multiplier>
+                    </mulCalcer>
+                </scalerTarget>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/Spells/CommonBuffs/KnockDown/Shootl01_ShortRange_Stun.(BuffResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    <Item type="gameMechanics.elements.predicates.PredicateMounted" />
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                        <impactsResource href="/Mechanics/Mounts/Prototypes/ExoAntiDismount.(ImpactListResource).xdb" />
+                    </Item>
+                </impactsIf>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="AntiHealDebuff.(BuffResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                <buff href="AntiHealDebuff_OutOfCombatTimer2.(BuffResource).xdb" />
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>30</speed>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+    <radius>22.5</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

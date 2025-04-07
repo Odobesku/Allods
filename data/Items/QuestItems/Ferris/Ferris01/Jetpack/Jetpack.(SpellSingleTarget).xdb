@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>474872</resourceId>
+    </Header>
+    <Name href="Jetpack.(SpellSingleTarget).Name.txt" />
+    <Description href="Jetpack.(SpellSingleTarget).Description.txt" />
+    <visualScripts href="/Spells/VisScripts/Common/Use.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <isExploit>true</isExploit>
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>5</value>
+    </range>
+    <prepareDuration>2000</prepareDuration>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <iffPolicy>Everyone</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                <quest href="/World/Quests/Ferris01/Ferris_Start_2/Ferris_Start_2.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                <status>Started</status>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                <id href="/World/Quests/Ferris01/Ferris_Start_2/Counter1.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="Jetpack_start.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                <delay>1300</delay>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                <data href="/World/Quests/Ferris01/Ferris_Start_2/JetpackStart.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                            </Item>
+                        </impacts>
+                        <spawnResource href="/Maps/Ferris_intro/SpawnTables/JumperZimina.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                <delay>3000</delay>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                <data href="/World/Quests/Ferris01/Ferris_Start_2/MrakJump.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                            </Item>
+                        </impacts>
+                        <spawnResource href="/Maps/Ferris_intro/SpawnTables/Jumpers.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactDismount" />
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.device.DeviceDie" />
+        </targetImpacts>
+    </mechanics>
+    <canStartNotBeeingInSpellbook>true</canStartNotBeeingInSpellbook>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

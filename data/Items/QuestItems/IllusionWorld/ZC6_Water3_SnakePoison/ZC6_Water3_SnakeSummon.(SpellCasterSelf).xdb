@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>473101</resourceId>
+    </Header>
+    <Name href="ZC6_Water3_SnakeSummon.txt" />
+    <Description href="ZC6_Water3_SnakeSummon.(SpellCasterSelf)_Desc.txt" />
+    <visualScripts href="/Spells/VisScripts/Common/Summon.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="ZC6_Water3_SnakeSummon.txt" />
+    <descTemplate href="ZC6_Water3_SnakeSummon.(SpellCasterSelf)_Desc.txt.template" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>30</value>
+    </range>
+    <prepareDuration>6000</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>180000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                <zone href="/Maps/IllusionWorld/ScriptZones/ZC6_SnakeSummon.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                    <quest href="/World/Quests/IllusionWorld/ZC6_Water3_1/ZC6_Water3_1.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                    <counterResource href="/Creatures/Snake/Cobra/Instances/IllusionWorld/ZC6_Water3_GiantSnake.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    <value>1</value>
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                    <base type="gameMechanics.map.destination.RelativePos" />
+                    <offset>5</offset>
+                    <turn>ToTarget</turn>
+                </destination>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/Mechanics/Spells/QuestSpells/CommonSummonPlane/CommonSummonPlaneBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+                <object href="/Creatures/Snake/Cobra/Instances/IllusionWorld/ZC6_Water3_GiantSnake.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
+                        <affectPets>false</affectPets>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                <id href="/World/Quests/IllusionWorld/ZC6_Water3_1/Counter1.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <iffPolicy>Friends</iffPolicy>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

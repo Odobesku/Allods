@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.projectile.ProjectileResource>
+    <Header>
+        <resourceId>475805</resourceId>
+    </Header>
+    <visObject href="/Spells/FX/Spells/Kania_PlagueCastle_ChalkRingAbility_loop.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+    <altitude>0</altitude>
+    <lifeLengthCap>20000</lifeLengthCap>
+    <effects>
+        <Item type="gameMechanics.elements.effects.TickableEntityAura">
+            <tick>1000</tick>
+            <affectGroup>Friends</affectGroup>
+            <radius>5</radius>
+            <impactsIn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="ChalkBuff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsIn>
+            <impactsOut>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="ChalkBuff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <anyRank>false</anyRank>
+                </Item>
+            </impactsOut>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.EntityImpactCreaturesAround">
+                    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+                    <radius>5</radius>
+                    <affectGroup>Friends</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="ChalkBuff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="ChalkBuff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>5000</tick>
+            <initialDelay>2000</initialDelay>
+        </Item>
+    </effects>
+</gameMechanics.world.projectile.ProjectileResource>

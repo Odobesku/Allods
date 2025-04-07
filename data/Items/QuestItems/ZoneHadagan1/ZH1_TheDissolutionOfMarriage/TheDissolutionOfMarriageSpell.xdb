@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>474209</resourceId>
+    </Header>
+    <Name href="TheDissolutionOfMarriageSpell.txt" />
+    <Description href="TheDissolutionOfMarriageSpell.Description.txt" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>30000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="/World/Quests/ZoneHadagan1/ZH1_TheDissolutionOfMarriage/ZH1_TheDissolutionOfMarriage.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Started</status>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="/World/Quests/ZoneLeague1/ZL1_TheDissolutionOfMarriage/ZL1_TheDissolutionOfMarriage.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Started</status>
+                    </Item>
+                </predicates>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="DivorceCaster.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="DivorceTarget.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+        </targetConditions>
+        <conditions>
+            <Item type="gameMechanics.elements.predicates.PredicateSameFamily" />
+        </conditions>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="DivorceCaster.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactsIf">
+                <predicate type="gameMechanics.elements.predicates.PredicateSameFamily" />
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="DivorceCaster.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </predicate>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ImpactStartQuiz">
+                                <question href="/World/Quests/ZoneHadagan1/ZH1_Wedding/DivorceActivate.(Question).xdb#xpointer(/gameMechanics.world.quiz.Question)" />
+                                <paramsCalcers>
+                                    <stringEntries>
+                                        <Item>
+                                            <name>caster</name>
+                                            <calcer type="gameMechanics.elements.calcers.CasterNameCalcer" />
+                                        </Item>
+                                    </stringEntries>
+                                </paramsCalcers>
+                                <participants type="gameMechanics.elements.addresseeFinders.AddressesCalcerSingle">
+                                    <calcer type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                </participants>
+                                <resultsHandler type="gameMechanics.elements.common.SingleResultHandler">
+                                    <impactsOnSuccess>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateGreaterLong">
+                                                    <lhs type="gameMechanics.elements.calcers.CalcerLongParam">
+                                                        <paramName>choice</paramName>
+                                                    </lhs>
+                                                    <rhs type="gameMechanics.elements.calcers.LongData">
+                                                        <value>0</value>
+                                                    </rhs>
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                            <buff href="DivorceCaster.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                            <id href="/World/Quests/ZoneLeague1/ZL1_TheDissolutionOfMarriage/CountId_1.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactDivorce" />
+                                                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                            <id href="/World/Quests/ZoneHadagan1/ZH1_TheDissolutionOfMarriage/CountId_1.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                    <buff href="DivorceTarget.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </Item>
+                                            </impactsIf>
+                                            <impactsElse>
+                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                    <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                    <data href="/World/Quests/ZoneHadagan1/ZH1_Wedding/NotDissolution.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                    <calcers>
+                                                        <stringEntries>
+                                                            <Item>
+                                                                <name>caster2</name>
+                                                                <calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
+                                                            </Item>
+                                                        </stringEntries>
+                                                    </calcers>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                            <buff href="DivorceCaster.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                    <buff href="DivorceTarget.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </Item>
+                                            </impactsElse>
+                                        </Item>
+                                    </impactsOnSuccess>
+                                </resultsHandler>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
+                                        <key href="/System/ContentKeys/MENA.(ContentKey).xdb#xpointer(/basement.contentkey.ContentKey)" />
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                        <data href="/Spells/ClientData/MarriageDivorceMENA.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                    </Item>
+                                </impactsIf>
+                                <impactsElse>
+                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                        <data href="/Spells/ClientData/MarriageDivorce.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                    </Item>
+                                </impactsElse>
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                <data href="DissolutionOfMarriageClientData.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

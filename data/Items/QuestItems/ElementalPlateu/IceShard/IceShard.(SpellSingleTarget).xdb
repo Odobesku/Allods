@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>474721</resourceId>
+    </Header>
+    <Name href="/Items/QuestItems/ElementalPlateu/IceShard/IceShard.(SpellSingleTarget).Name.txt" />
+    <Description href="/Items/QuestItems/ElementalPlateu/IceShard/IceShard.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Misc/Quest/IceElementalHeart.(UISingleTexture).xdb" />
+    <visualScripts href="/Items/QuestItems/ElementalPlateu/IceShard/IceShard.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>8</value>
+    </range>
+    <prepareDuration>3000</prepareDuration>
+    <isWorkOnDead>true</isWorkOnDead>
+    <iffPolicy>Everyone</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>2000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                <quest href="/World/Quests/ElementalPlateu/Ice_2/Ice_2.(QuestResource).xdb" />
+                <status>Started</status>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsDead" />
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateFaction">
+                    <faction href="/World/Factions/Deadman.(Faction).xdb" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                <mobs>
+                    <Item href="/Creatures/Folks/Instances/ElementalPlateu/FrozenFolkWar.(MobWorld).xdb" />
+                    <Item href="/Creatures/Folks/Instances/ElementalPlateu/FrozenFolkMage.(MobWorld).xdb" />
+                    <Item href="/Creatures/Folks/Instances/ElementalPlateu/FrozenFolkWarSilver.(MobWorld).xdb" />
+                </mobs>
+            </Item>
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                <id href="/World/Quests/ElementalPlateu/Ice_2/Counter_1.(QuestCountId).xdb" />
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                <data href="/World/Quests/ElementalPlateu/Ice_2/FrozenCorpse.(ClientData).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactSetFaction">
+                <faction href="/World/Factions/Deadman.(Faction).xdb" />
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

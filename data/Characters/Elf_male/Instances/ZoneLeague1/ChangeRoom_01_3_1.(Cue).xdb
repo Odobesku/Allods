@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.mob.interaction.Cue>
+    <Header>
+        <resourceId>65156</resourceId>
+    </Header>
+    <name href="ChangeRoom_01_3_1.(Cue).Name.txt" />
+    <text href="ChangeRoom_01_3_1.(Cue).Text.txt" />
+    <conditions>
+        <Item type="gameMechanics.elements.resources.ResourceAltCurrency">
+            <currency href="/Mechanics/AlternativeCurrencies/ChangeRoomTicket.xdb#xpointer(/gameMechanics.constructor.schemes.item.AlternativeCurrency)" />
+            <count>625</count>
+        </Item>
+    </conditions>
+    <impacts>
+        <Item type="gameMechanics.elements.impacts.ImpactStartQuiz">
+            <question href="ChangeRace.(Question).xdb#xpointer(/gameMechanics.world.quiz.Question)" />
+            <paramsCalcers>
+                <floatEntries>
+                    <Item>
+                        <name>AltCur</name>
+                        <calcer type="gameMechanics.elements.calcers.CalcerSum">
+                            <summands>
+                                <Item type="gameMechanics.elements.calcers.AlternativeCurrencyCalcer">
+                                    <currency href="/Mechanics/AlternativeCurrencies/ChangeRoomTicket.xdb#xpointer(/gameMechanics.constructor.schemes.item.AlternativeCurrency)" />
+                                </Item>
+                                <Item type="gameMechanics.elements.calcers.FloatData">
+                                    <value>-625</value>
+                                </Item>
+                            </summands>
+                        </calcer>
+                    </Item>
+                </floatEntries>
+            </paramsCalcers>
+            <participants type="gameMechanics.elements.addresseeFinders.AddressesFinderSelf" />
+            <resultsHandler type="gameMechanics.elements.common.SingleResultHandler">
+                <impactsOnSuccess>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateGreaterLong">
+                                <lhs type="gameMechanics.elements.calcers.CalcerLongParam">
+                                    <paramName>choice</paramName>
+                                </lhs>
+                                <rhs type="gameMechanics.elements.calcers.LongData">
+                                    <value>0</value>
+                                </rhs>
+                            </Item>
+                            <Item type="gameMechanics.elements.resources.ResourceAltCurrency">
+                                <currency href="/Mechanics/AlternativeCurrencies/ChangeRoomTicket.xdb#xpointer(/gameMechanics.constructor.schemes.item.AlternativeCurrency)" />
+                                <count>625</count>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="itemService.avatar.changeRace.ImpactChangeRace" />
+                        </impactsIf>
+                    </Item>
+                </impactsOnSuccess>
+            </resultsHandler>
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactStopTalk" />
+    </impacts>
+</gameMechanics.world.mob.interaction.Cue>

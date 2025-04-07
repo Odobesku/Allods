@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>475562</resourceId>
+    </Header>
+    <Name href="StunItemSpell.txt" />
+    <Description href="WolfHorn_SpellDesc.txt" />
+    <visualScripts href="/Spells/VisScripts/Items/HornBlow.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>30</value>
+    </range>
+    <prepareDuration>4000</prepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>true</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>120000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
+                    <assistantResource href="WolfHornSpell.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                <zone href="/Maps/Kania/Zones/ZoneLeague3/ZoneLeague3.xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+            </Item>
+        </casterConditions>
+        <targetConditions />
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactAvatarStuff">
+                <operation type="itemService.avatar.itemBag.IncrementItemCounter">
+                    <summand>-1</summand>
+                    <destroyItemOnCounterZeroed>true</destroyItemOnCounterZeroed>
+                </operation>
+                <addressee type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+            </Item>
+            <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+                <destination type="gameMechanics.map.destination.RelativePos">
+                    <yaw type="constructor.basicElements.AngleRadians" />
+                    <coord y="1" />
+                </destination>
+                <assistantResource href="WolfHornSpell.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                <mobResource href="/Creatures/Wolf/Instances/ZoneLeague3/Wolf15Miniboss_summoned.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+            </Item>
+        </casterImpacts>
+        <targetImpacts />
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>476356</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Events/EventSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="SpringSeeds.(SpellSingleTarget).Name.txt" />
+    <Description href="SpringSeeds.(SpellSingleTarget).Description.txt" />
+    <nameTemplate href="SpringSeeds.(SpellSingleTarget).Name.txt" />
+    <prepareDuration>3000</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>10000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateDeviceNear">
+                    <radius>7</radius>
+                    <devices>
+                        <Item href="Flowerbed.(ChestResource).xdb#xpointer(/gameMechanics.world.device.ChestResource)" />
+                    </devices>
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateIsRuleActive">
+                <rule href="/Mechanics/Rules/SpringEvent/Rule.xdb#xpointer(/gameMechanics.world.rules.RuleResource)" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.constructor.basicElements.PredicateOr">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateMobNear">
+                            <radius>20</radius>
+                            <mobs>
+                                <Item href="/Characters/Elf_female/Instances/ZoneLeague1/Florist.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                            </mobs>
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateMobNear">
+                            <radius>20</radius>
+                            <mobs>
+                                <Item href="/Characters/Hadagan_female/Instances/ZoneHadagan1/Florist.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                            </mobs>
+                        </Item>
+                    </predicates>
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                        <zone href="/Maps/Kania/Zones/ZoneLeague1/ZoneLeague1.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                        <zone href="/Maps/Hadagan/Zones/ZoneEmpire2/E2_Sector6.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                        <zone href="/Maps/Hadagan/Zones/ZoneEmpire2/E2_Sector1.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                        <zone href="/Maps/Hadagan/Zones/ZoneEmpire2/E2_Sector8.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                        <zone href="/Maps/Hadagan/Zones/ZoneEmpire2/E2_Sector4.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                    </Item>
+                </predicates>
+            </Item>
+        </casterConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceActiveItem" />
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="NoUse.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+                <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                    <item href="SpringCoupon.(ItemResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemResource)" />
+                </item>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                <id href="/World/Quests/ZoneLeague1/SpringEvent/FlowerBedCount.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateFaction">
+                        <faction href="/World/Factions/League.xdb#xpointer(/gameMechanics.world.creature.Faction)" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="SpringEventDisintegration.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impacts>
+                        <object href="Flowerbed.(ChestResource).xdb#xpointer(/gameMechanics.world.device.ChestResource)" />
+                        <pool href="SpringEventKania.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                    </Item>
+                </impacts>
+                <elseImpacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="SpringEventDisintegration.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impacts>
+                        <object href="Flowerbed.(ChestResource).xdb#xpointer(/gameMechanics.world.device.ChestResource)" />
+                        <pool href="SpringEventHadagan.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                    </Item>
+                </elseImpacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <iffPolicy>Friends</iffPolicy>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

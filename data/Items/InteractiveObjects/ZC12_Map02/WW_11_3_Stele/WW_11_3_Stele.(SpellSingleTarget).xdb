@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>490778</resourceId>
+        <Prototype href="/Items/InteractiveObjects/Templates/Exploit.xdb" />
+    </Header>
+    <isExploit>true</isExploit>
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>3</value>
+    </range>
+    <prepareDuration>3000</prepareDuration>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <iffPolicy>Everyone</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                <quest href="/World/Quests/ZC12_Map02/WW_11_3/WW_11_3.xdb" />
+                <status>Started</status>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                <id href="/World/Quests/ZC12_Map02/WW_11_3/CountId_1.xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                <mobs>
+                                    <Item href="/Characters/Hadagan_female/Instances/ZC12_Map02/ZC12_Alina_Prizoner.(MobWorld).xdb" />
+                                </mobs>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ImpactGoTo">
+                                <destination type="gameMechanics.map.destination.DestinationLocator">
+                                    <locator>
+                                        <scriptID>ZC12_Alina_Prizoner_1</scriptID>
+                                        <map href="/Maps/ZC12_Map02/MapResource.xdb" />
+                                    </locator>
+                                </destination>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                <delay>7500</delay>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                                </impacts>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                <delay>4000</delay>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                        <data href="/World/Quests/ArchipelagoContested4/Q_27e/Teleport.(ClientData).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                        <delay>2500</delay>
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                <data href="/World/Quests/ArchipelagoContested4/Q_27e/Invis.(ClientData).xdb" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                <delay>2000</delay>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                                                </impacts>
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="/World/Quests/ArchipelagoContested4/Q_26e/Q_26e_buff.(BuffResource).xdb" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impacts>
+                <spawnResource href="/Maps/ZC12_Map02/SpawnTables/ZC12_Map02/WW_11_3_Stele.(SpawnTable).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                <delay>1000</delay>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                <quest href="/World/Quests/ZC12_Map02/WW_11_3/WW_11_3.xdb" />
+                                <status>Completed</status>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                <buff href="/World/Quests/ZC12_Map02/WW_11_4/WW_11_4_NPC.(BuffResource).xdb" />
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.device.DeviceDie" />
+            <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                <visualState>2</visualState>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <canStartNotBeeingInSpellbook>true</canStartNotBeeingInSpellbook>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

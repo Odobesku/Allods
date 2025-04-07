@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>474756</resourceId>
+    </Header>
+    <Name href="Torch.(SpellArea).Name.txt" />
+    <visualScripts href="/Spells/VisScripts/Other/TorchThrow.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>30</value>
+    </range>
+    <prepareDuration>2000</prepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTPoint</targetType>
+    <isAggro>false</isAggro>
+    <isWorkOnDead>true</isWorkOnDead>
+    <iffPolicy>Everyone</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>5000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                <quest href="/World/Quests/ElementalPlateu/Water_1/Water_1.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                <status>Started</status>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                <zone href="/Maps/ElementalPlateu/ScriptZones/Phyro_Quest.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+            </Item>
+        </casterConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                        <mobs>
+                            <Item href="/Creatures/CritterKitten/Instances/ElementalPlateu/House.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                        </mobs>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                            <quest href="/World/Quests/ElementalPlateu/Water_1/Water_1.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                            <counterResource href="/World/Quests/ElementalPlateu/Water_1/Counter_1.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                            <value>1</value>
+                                        </predicate>
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                        <id href="/World/Quests/ElementalPlateu/Water_1/Counter_1.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="/Items/InteractiveObjects/ElementalPlateu/Flames/Flame1.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                        <delay>5000</delay>
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                <spawn>
+                                                    <scriptID>FolkHouse1</scriptID>
+                                                    <map href="/Maps/ElementalPlateu/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                </spawn>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                        <data href="/World/Quests/ElementalPlateu/Water_1/BurnedHouse.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </impactsIf>
+                                <impactsElse>
+                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                        <data href="/World/Quests/ElementalPlateu/Water_1/AlreadyBurned.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="/Items/InteractiveObjects/ElementalPlateu/Flames/Flame1.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                </impactsElse>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                <mobs>
+                                    <Item href="/Creatures/CritterKitten/Instances/ElementalPlateu/House2.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                </mobs>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                        <predicates>
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                    <quest href="/World/Quests/ElementalPlateu/Water_1/Water_1.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                                    <counterResource href="/World/Quests/ElementalPlateu/Water_1/Counter_2.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                                    <value>1</value>
+                                                </predicate>
+                                            </Item>
+                                        </predicates>
+                                        <impactsIf>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                <id href="/World/Quests/ElementalPlateu/Water_1/Counter_2.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                            </Item>
+                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                <buff href="/Items/InteractiveObjects/ElementalPlateu/Flames/Flame2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                <delay>5000</delay>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                        <spawn>
+                                                            <scriptID>FolkHouse2</scriptID>
+                                                            <map href="/Maps/ElementalPlateu/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                        </spawn>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                                <data href="/World/Quests/ElementalPlateu/Water_1/BurnedHouse.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                        </impactsIf>
+                                        <impactsElse>
+                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                <data href="/World/Quests/ElementalPlateu/Water_1/AlreadyBurned.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                            </Item>
+                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                <buff href="/Items/InteractiveObjects/ElementalPlateu/Flames/Flame2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            </Item>
+                                        </impactsElse>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impactsIf>
+                        <impactsElse>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                        <mobs>
+                                            <Item href="/Creatures/CritterKitten/Instances/ElementalPlateu/House3.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                        </mobs>
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                <predicates>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                            <quest href="/World/Quests/ElementalPlateu/Water_1/Water_1.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                                            <counterResource href="/World/Quests/ElementalPlateu/Water_1/Counter_3.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                                            <value>1</value>
+                                                        </predicate>
+                                                    </Item>
+                                                </predicates>
+                                                <impactsIf>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                        <id href="/World/Quests/ElementalPlateu/Water_1/Counter_3.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                        <buff href="/Items/InteractiveObjects/ElementalPlateu/Flames/Flame3.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                        <delay>5000</delay>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                                <spawn>
+                                                                    <scriptID>FolkHouse3</scriptID>
+                                                                    <map href="/Maps/ElementalPlateu/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                                </spawn>
+                                                                <impacts>
+                                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                                        <data href="/World/Quests/ElementalPlateu/Water_1/BurnedHouse.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                                    </Item>
+                                                                </impacts>
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impactsIf>
+                                                <impactsElse>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                        <data href="/World/Quests/ElementalPlateu/Water_1/AlreadyBurned.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                        <buff href="/Items/InteractiveObjects/ElementalPlateu/Flames/Flame3.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                    </Item>
+                                                </impactsElse>
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </impactsIf>
+                                <impactsElse>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                <mobs>
+                                                    <Item href="/Creatures/CritterKitten/Instances/ElementalPlateu/House4.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                    <Item href="/Creatures/CritterKitten/Instances/ElementalPlateu/House4.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                </mobs>
+                                            </Item>
+                                        </predicates>
+                                        <impactsIf>
+                                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                                    <quest href="/World/Quests/ElementalPlateu/Water_1/Water_1.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                                                    <counterResource href="/World/Quests/ElementalPlateu/Water_1/Counter_4.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                                                    <value>1</value>
+                                                                </predicate>
+                                                            </Item>
+                                                        </predicates>
+                                                        <impactsIf>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                                <id href="/World/Quests/ElementalPlateu/Water_1/Counter_4.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/Items/InteractiveObjects/ElementalPlateu/Flames/Flame4.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                                <delay>5000</delay>
+                                                                <impacts>
+                                                                    <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                                        <spawn>
+                                                                            <scriptID>FolkHouse4</scriptID>
+                                                                            <map href="/Maps/ElementalPlateu/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                                        </spawn>
+                                                                        <impacts>
+                                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                                                <data href="/World/Quests/ElementalPlateu/Water_1/BurnedHouse.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                                            </Item>
+                                                                        </impacts>
+                                                                    </Item>
+                                                                </impacts>
+                                                            </Item>
+                                                        </impactsIf>
+                                                        <impactsElse>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                                <data href="/World/Quests/ElementalPlateu/Water_1/AlreadyBurned.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/Items/InteractiveObjects/ElementalPlateu/Flames/Flame4.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impactsElse>
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                        </impactsIf>
+                                        <impactsElse>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                        <mobs>
+                                                            <Item href="/Creatures/CritterKitten/Instances/ElementalPlateu/House5.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                        </mobs>
+                                                    </Item>
+                                                </predicates>
+                                                <impactsIf>
+                                                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                                <predicates>
+                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                        <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                                            <quest href="/World/Quests/ElementalPlateu/Water_1/Water_1.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                                                            <counterResource href="/World/Quests/ElementalPlateu/Water_1/Counter_5.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                                                            <value>1</value>
+                                                                        </predicate>
+                                                                    </Item>
+                                                                </predicates>
+                                                                <impactsIf>
+                                                                    <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                                        <id href="/World/Quests/ElementalPlateu/Water_1/Counter_5.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                        <buff href="/Items/InteractiveObjects/ElementalPlateu/Flames/Flame5.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                                        <delay>5000</delay>
+                                                                        <impacts>
+                                                                            <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                                                <spawn>
+                                                                                    <scriptID>FolkHouse5</scriptID>
+                                                                                    <map href="/Maps/ElementalPlateu/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                                                </spawn>
+                                                                                <impacts>
+                                                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                                                        <data href="/World/Quests/ElementalPlateu/Water_1/BurnedHouse.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                                                    </Item>
+                                                                                </impacts>
+                                                                            </Item>
+                                                                        </impacts>
+                                                                    </Item>
+                                                                </impactsIf>
+                                                                <impactsElse>
+                                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                                        <data href="/World/Quests/ElementalPlateu/Water_1/AlreadyBurned.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                        <buff href="/Items/InteractiveObjects/ElementalPlateu/Flames/Flame5.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                    </Item>
+                                                                </impactsElse>
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impactsIf>
+                                            </Item>
+                                        </impactsElse>
+                                    </Item>
+                                </impactsElse>
+                            </Item>
+                        </impactsElse>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>20</speed>
+    <maxTargets>1</maxTargets>
+    <radius>10</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

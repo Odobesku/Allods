@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>474716</resourceId>
+    </Header>
+    <Name href="FireEssence.(SpellArea).Name.txt" />
+    <Description href="FireEssence.(SpellArea).Description.txt" />
+    <visualScripts href="FireEssence.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>30</value>
+    </range>
+    <prepareDuration>2000</prepareDuration>
+    <targetType>STTPoint</targetType>
+    <iffPolicy>Everyone</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>5000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                <zone href="/Maps/ElementalPlateu/Zones/ElementalPlateu/NorthIsle.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                <quest href="/World/Quests/ElementalPlateu/Ice_3/Ice_3.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                <status>Started</status>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                <projectileData>
+                    <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                        <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+                    </moveType>
+                    <resource href="/World/Quests/ElementalPlateu/Ice_3/WarmFlame.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                </projectileData>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateDevice">
+                        <deviceResources>
+                            <Item href="/Items/InteractiveObjects/ElementalPlateu/FrozenPalmSmall/FrozenPalmSmall1.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+                            <Item href="/Items/InteractiveObjects/ElementalPlateu/FrozenPalmSmall/FrozenPalmSmall0_5.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+                            <Item href="/Items/InteractiveObjects/ElementalPlateu/FrozenPalmSmall/FrozenPalmSmall1_5.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+                            <Item href="/Items/InteractiveObjects/ElementalPlateu/FrozenPalmSmall/FrozenFern_1.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+                            <Item href="/Items/InteractiveObjects/ElementalPlateu/FrozenPalmSmall/FrozenFern_07.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+                            <Item href="/Items/InteractiveObjects/ElementalPlateu/FrozenPalmSmall/FrozenFern_15.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+                            <Item href="/Items/InteractiveObjects/ElementalPlateu/FrozenPalmSmall/FrozenPalm01_1.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+                            <Item href="/Items/InteractiveObjects/ElementalPlateu/FrozenPalmSmall/FrozenPalm01_07.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+                            <Item href="/Items/InteractiveObjects/ElementalPlateu/FrozenPalmSmall/FrozenPalm01_13.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+                            <Item href="/Items/InteractiveObjects/ElementalPlateu/FrozenPalmSmall/FrozenFlower_1.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+                            <Item href="/Items/InteractiveObjects/ElementalPlateu/FrozenPalmSmall/FrozenFlower_15.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+                            <Item href="/Items/InteractiveObjects/ElementalPlateu/FrozenPalmSmall/FrozenFlower_2.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+                            <Item href="/Items/InteractiveObjects/ElementalPlateu/FrozenPalmSmall/FrozenPalm02_1.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+                            <Item href="/Items/InteractiveObjects/ElementalPlateu/FrozenPalmSmall/FrozenPalm02_07.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+                            <Item href="/Items/InteractiveObjects/ElementalPlateu/FrozenPalmSmall/FrozenPalm02_13.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+                            <Item href="/Items/InteractiveObjects/ElementalPlateu/FrozenPalmSmall/FrozenBigPalm05.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+                        </deviceResources>
+                    </Item>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="/World/Quests/ElementalPlateu/Ice_3/PalmMark.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </predicate>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                        <delay>1500</delay>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                                <visualState>2</visualState>
+                            </Item>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/World/Quests/ElementalPlateu/Ice_3/PalmMark.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                        <id href="/World/Quests/ElementalPlateu/Ice_3/Counter_1.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsIf>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>20</speed>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+    <radius>9</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

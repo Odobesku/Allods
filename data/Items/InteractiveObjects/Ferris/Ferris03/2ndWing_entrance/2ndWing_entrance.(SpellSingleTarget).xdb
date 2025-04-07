@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>489757</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/QuestSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <isExploit>true</isExploit>
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>5</value>
+    </range>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <iffPolicy>Everyone</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="/World/Quests/Ferris_indoor/Ferris_3_6_1/Ferris_3_6_1.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Completed</status>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="/World/Quests/Ferris_indoor/Ferris_3_6_1/Ferris_3_6_1.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Finished</status>
+                    </Item>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                <quest href="/World/Quests/Ferris_indoor/Ferris_3_6_1/Ferris_3_6_1.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                <status>Started</status>
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                <quest href="/World/Quests/Ferris_indoor/Ferris_3_6_1/Ferris_3_6_1.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                <counterResource href="/Creatures/Rat/Instances/Ferris/Ferris_3_6_1_Rat.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                            </Item>
+                        </predicates>
+                    </Item>
+                </predicates>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                    <quest href="/World/Quests/Ferris_indoor/Ferris_3_6_5/Ferris_3_6_5.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                    <status>Completed</status>
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                    <quest href="/World/Quests/Ferris_indoor/Ferris_3_6_5/Ferris_3_6_5.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                    <status>Finished</status>
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                <destination type="gameMechanics.map.destination.DestinationLocator">
+                    <locator>
+                        <scriptID>2stWing_start</scriptID>
+                        <map href="/Maps/Ferris_indoor/2ndWing_MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                    </locator>
+                </destination>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="/World/Quests/Ferris_indoor/Ferris_3_6_1/Ferris_3_6_1.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Started</status>
+                    </Item>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                            <quest href="/World/Quests/Ferris_indoor/Ferris_3_6_1/Ferris_3_6_1.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                            <counterResource href="/World/Quests/Ferris_indoor/Ferris_3_6_1/Counter2.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                        </predicate>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                        <id href="/World/Quests/Ferris_indoor/Ferris_3_6_1/Counter2.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                    </Item>
+                </impactsIf>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <canStartNotBeeingInSpellbook>true</canStartNotBeeingInSpellbook>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

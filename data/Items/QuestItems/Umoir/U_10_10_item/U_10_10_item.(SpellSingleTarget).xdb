@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>472559</resourceId>
+    </Header>
+    <Name href="U_10_10_item.(SpellSingleTarget).Name.txt" />
+    <Description href="U_10_10_item.(SpellSingleTarget).Description.txt" />
+    <mechanics>
+        <cooldown>
+            <duration>30000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.resources.ResourceItem">
+                <item href="U_10_10_item.(ItemResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemResource)" />
+                <number>10</number>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                <zone href="/Maps/Umoir/ScriptZones/U_religions_veronika.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateMobNear">
+                    <radius>40</radius>
+                    <mobs>
+                        <Item href="/Characters/Kania_male/Instances/Umoir/Umoir_Manta.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    </mobs>
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                <destination type="gameMechanics.map.destination.DestinationLocator">
+                    <locator>
+                        <scriptID>U_10_10_mob_start</scriptID>
+                        <map href="/Maps/Umoir/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                    </locator>
+                </destination>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/World/Quests/Umoir/U_10_10/U_10_10_mob_plane.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                        <delay>400000</delay>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="/World/Quests/Umoir/U_10_10/U_10_10_mob_buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impacts>
+                <object href="/Characters/Kania_male/Instances/Umoir/Umoir_Manta.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

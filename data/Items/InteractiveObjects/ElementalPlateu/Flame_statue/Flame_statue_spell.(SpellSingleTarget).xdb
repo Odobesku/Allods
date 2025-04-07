@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>488438</resourceId>
+        <Prototype href="/Items/InteractiveObjects/Templates/Exploit.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <image href="/Interface/Icons/Special/MapTracks/BannerAttention.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Items/InteractiveObjects/Templates/Gather.(ExploitVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <isExploit>true</isExploit>
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>10</value>
+    </range>
+    <prepareDuration>1500</prepareDuration>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <iffPolicy>Everyone</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                <quest href="/World/Quests/ElementalPlateu/Snow/Flame_Shards.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                <status>Started</status>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                        <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                            <value>0.6</value>
+                        </chanceCalcer>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+                                <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                                    <item href="/Items/QuestItems/ElementalPlateu/Fire_Dust/Fire_Dust.(ItemResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemResource)" />
+                                </item>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.device.DeviceDie" />
+            <Item type="gameMechanics.elements.device.DeviceOpenLootBag" />
+        </targetImpacts>
+    </mechanics>
+    <canStartNotBeeingInSpellbook>true</canStartNotBeeingInSpellbook>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

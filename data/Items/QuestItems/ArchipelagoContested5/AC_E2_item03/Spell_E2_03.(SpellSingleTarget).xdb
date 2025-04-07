@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>473755</resourceId>
+    </Header>
+    <Name href="Spell_E2_03.txt" />
+    <Description href="Spell_E2_03.Description.txt" />
+    <nameTemplate href="Spell_E2_03.txt" />
+    <descTemplate href="Spell_E2_03.Description.txt" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>20</value>
+    </range>
+    <prepareDuration>10</prepareDuration>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                <quest href="/World/Quests/ArchipelagoContested5/AC5_E2/AC5_E2.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                <status>Active</status>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                <mobs>
+                    <Item href="/Characters/Kania_male/Instances/ArchipelagoContested5/AC5_PiratGhost1.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    <Item href="/Characters/Kania_male/Instances/ArchipelagoContested5/AC5_PiratGhost2.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    <Item href="/Characters/Kania_male/Instances/ArchipelagoContested5/AC5_PiratGhost3.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                </mobs>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+                <level>0.25</level>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="Buff_03.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.constructor.basicElements.PredicateAnd">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="/Items/QuestItems/ArchipelagoContested5/AC5_E2_item01/Buff_01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="/Items/QuestItems/ArchipelagoContested5/AC_E2_item02/Buff_02.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </predicates>
+                </predicate>
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.predicates.PredicateMobWorld">
+                            <mobs>
+                                <Item href="/Characters/Kania_male/Instances/ArchipelagoContested5/AC5_PiratGhost1.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                            </mobs>
+                        </predicate>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="Buff_03.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                        <data href="/World/Quests/ArchipelagoContested5/AC5_E2/WrongTarget.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                    </Item>
+                </impactsElse>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

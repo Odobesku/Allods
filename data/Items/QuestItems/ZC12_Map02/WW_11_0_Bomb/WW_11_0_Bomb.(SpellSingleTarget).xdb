@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>476582</resourceId>
+    </Header>
+    <contextActionInfo>
+        <priority>1</priority>
+    </contextActionInfo>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/QuestSpells.xdb" />
+    </groups>
+    <Name href="WW_11_0_Bomb.(SpellSingleTarget).Name.txt" />
+    <Description href="WW_11_0_Bomb.(SpellSingleTarget).Description.txt" />
+    <visualScripts href="/World/Quests/ZC12_Map02/WW_11_0/WW_11_0_Bomb.(SpellVisScripts).xdb" />
+    <prepareDuration>700</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>5000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                <quest href="/World/Quests/ZC12_Map02/WW_11_0/WW_11_0.xdb" />
+                <status>Started</status>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                <quest href="/World/Quests/ZC12_Map02/WW_11_0/WW_11_0.xdb" />
+                <counterResource href="/World/Quests/ZC12_Map02/WW_11_0/CountId_6.xdb" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                    <quest href="/World/Quests/ZC12_Map02/WW_11_0/WW_11_0.xdb" />
+                    <counterResource href="/World/Quests/ZC12_Map02/WW_11_0/CountId_7.xdb" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="/World/Quests/ZC12_Map02/WW_11_0/WW_11_0_ThrowBomb.(BuffResource).xdb" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                <id href="/World/Quests/ZC12_Map02/WW_11_0/CountId_7.xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactFreezeQuestCounter">
+                <quest href="/World/Quests/ZC12_Map02/WW_11_0/WW_11_0.xdb" />
+                <counterResource href="WW_11_0_Bomb.(ItemResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                <buff href="/World/Quests/ZC12_Map02/WW_11_0/WW_11_0_ThrowBomb.(BuffResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactDestroyItem">
+                        <item href="WW_11_0_Bomb.(ItemResource).xdb" />
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/World/Quests/ZC12_Map02/WW_11_0/WW_11_0_FinalBuff.(BuffResource).xdb" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

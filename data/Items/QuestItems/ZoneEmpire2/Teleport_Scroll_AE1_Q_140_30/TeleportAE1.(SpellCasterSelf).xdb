@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>472905</resourceId>
+    </Header>
+    <Name href="1.txt" />
+    <Description href="2.txt" />
+    <nameTemplate href="1.txt" />
+    <descTemplate href="2.txt" />
+    <prepareDuration>3000</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                <quest href="/World/Quests/ZoneEmpire2/Quest_140_30/Quest_140_30.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                <status>Started</status>
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateHasItemsCount">
+                                <items>
+                                    <Item href="/Items/QuestItems/ZoneEmpire2/AdmiralHead_inBox/AdmiralHead_inBox.(ItemResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemResource)" />
+                                </items>
+                                <totalCount>1</totalCount>
+                            </Item>
+                        </predicates>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="/World/Quests/ZoneEmpire2/Quest_90_60/Quest_90_60.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Active</status>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="/World/Quests/ZoneHadagan1/Quest_Learn_Halo/Quest_Learn_Halo.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Active</status>
+                    </Item>
+                </predicates>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                <destination type="gameMechanics.map.destination.DestinationLocator">
+                    <locator>
+                        <scriptID>AE1_Port</scriptID>
+                        <map href="/Maps/Hadagan_AE1/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                    </locator>
+                </destination>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.predicates.PredicateUnlock">
+                            <unlock href="/Mechanics/Unlocks/Locations/Hadagan/TeleportMasterLocations/TeleportMaster_AE1.(UnlockResource).xdb#xpointer(/gameMechanics.constructor.schemes.unlock.UnlockResource)" />
+                        </predicate>
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactGrantUnlock">
+                        <unlock href="/Mechanics/Unlocks/Locations/Hadagan/TeleportMasterLocations/TeleportMaster_AE1.(UnlockResource).xdb#xpointer(/gameMechanics.constructor.schemes.unlock.UnlockResource)" />
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                <id href="/World/Quests/ZoneEmpire2/Quest_140_30/Counter1.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactDestroyItem">
+                        <item href="Teleport_Scroll_AE1_Q_140_30.(ItemResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemResource)" />
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

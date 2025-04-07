@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>474897</resourceId>
+    </Header>
+    <Name href="Tp2Galeon.(SpellSingleTarget).Name.txt" />
+    <Description href="Tp2Galeon.(SpellSingleTarget).Description.txt" />
+    <autoAppendToActionPanel>false</autoAppendToActionPanel>
+    <prepareDuration>5000</prepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <iffPolicy>Friends</iffPolicy>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>60000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="avatarPopulation.service.impl.matchMakingImpl.map.PredicateInstancedEventMember" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateInZone">
+                    <zone href="/Maps/Ferris_intro/Zones/Ferris_intro/Ferris_intro_galeon.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.constructor.basicElements.PredicateOr">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                            <quest href="/World/Quests/Ferris01/Ferris_1_4/Ferris_1_4.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                            <status>Completed</status>
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                            <quest href="/World/Quests/Ferris01/Ferris_1_4/Ferris_1_4.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                            <status>Finished</status>
+                        </Item>
+                    </predicates>
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                <destination type="gameMechanics.map.destination.DestinationLocator">
+                    <locator>
+                        <scriptID>Ferris_intro_start</scriptID>
+                        <map href="/Maps/Ferris_intro/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                    </locator>
+                </destination>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
