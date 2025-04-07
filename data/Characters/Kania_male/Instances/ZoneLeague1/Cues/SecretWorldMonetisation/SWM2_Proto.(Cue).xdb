@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.mob.interaction.Cue>
+    <Header>
+        <resourceId>76220</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <text href="SWM2_Proto.(Cue).Text.txt" />
+    <conditions>
+        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+            <predicate type="gameMechanics.elements.resources.ResourceItem">
+                <item hrefvar="itemReward" />
+            </predicate>
+        </Item>
+        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+            <predicate type="gameMechanics.elements.predicates.PredicateUnlock">
+                <unlock hrefvar="unlock" />
+            </predicate>
+        </Item>
+        <Item type="gameMechanics.elements.predicates.PredicateCreatureLevel">
+            <minLevel type="gameMechanics.formulas.IntConstantValue">
+                <value var="predicateLevel" />
+            </minLevel>
+        </Item>
+    </conditions>
+    <additionalConditions>
+        <Item type="gameMechanics.elements.resources.ResourceItem">
+            <item href="/ItemMall/Services/Quest/SecretWorldMiniUnlocker.(ItemResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemResource)" />
+            <number var="countMiniUnlocker" />
+        </Item>
+        <Item type="gameMechanics.elements.predicates.PredicateCanTakePack">
+            <toRemove>
+                <Item>
+                    <item href="/ItemMall/Services/Quest/SecretWorldMiniUnlocker.(ItemResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemResource)" />
+                    <stackCount var="countMiniUnlocker" />
+                </Item>
+            </toRemove>
+            <toAdd>
+                <Item>
+                    <item hrefvar="itemReward" />
+                </Item>
+            </toAdd>
+        </Item>
+    </additionalConditions>
+    <impacts>
+        <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+            <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                <item hrefvar="itemReward" />
+            </item>
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactDestroyItem">
+            <item href="/ItemMall/Services/Quest/SecretWorldMiniUnlocker.(ItemResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemResource)" />
+            <count var="countMiniUnlocker" />
+        </Item>
+    </impacts>
+</gameMechanics.world.mob.interaction.Cue>

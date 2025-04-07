@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>520217</resourceId>
+    </Header>
+    <Name href="MobSummonNormal4.(SpellSingleTarget).Name.txt" />
+    <Description href="MobSummonNormal4.(SpellSingleTarget).Description.txt" />
+    <visualScripts href="/Spells/VisScripts/Common/Summon.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <prepareDuration>3000</prepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>30000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.constructor.basicElements.PredicateOr">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                            <zone href="/Maps/HuntingGround4/Zones/HuntingGround4_Sandbox.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                            <zone href="/Maps/HuntingGround4/Zones/HuntingGround4_StartHub.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                            <zone href="/Maps/HuntingGround4/Zones/HuntingGround4_GreenHub04.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                            <zone href="/Maps/HuntingGround4/Zones/HuntingGround4_GreenHub03.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                            <zone href="/Maps/HuntingGround4/Zones/HuntingGround4_GreenHub02.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                            <zone href="/Maps/HuntingGround4/Zones/HuntingGround4_GreenHub01.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                        </Item>
+                    </predicates>
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                <zone href="/Maps/HuntingGround4/Zones/HuntingGround4/HuntingGround4.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateHasItemsCount">
+                        <items>
+                            <Item href="MobSummonNormal4.(ItemResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemResource)" />
+                        </items>
+                        <totalCount>10</totalCount>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+                        <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                            <item href="/Items/HuntingGround/MobSummonGood4.(ItemResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemResource)" />
+                        </item>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactDestroyItem">
+                        <item href="MobSummonNormal4.(ItemResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemResource)" />
+                        <count>10</count>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                        <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                            <value>1</value>
+                        </chanceCalcer>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.RandomImpact">
+                                        <entries>
+                                            <Item>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                        <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>4</offset>
+                                                        </destination>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.AttachAbility">
+                                                                <ability href="/Mechanics/HuntingGround2/Ghosting/HG2TemporaryMob.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/Mechanics/HuntingGround4/Ghosting/ExtendedLoot4.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                        <object href="/Characters/Kania_male/Instances/HuntingGround4/HG4_RichUmoir_Male.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                            <Item>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                        <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>4</offset>
+                                                        </destination>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.AttachAbility">
+                                                                <ability href="/Mechanics/HuntingGround2/Ghosting/HG2TemporaryMob.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/Mechanics/HuntingGround4/Ghosting/ExtendedLoot4.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                        <object href="/Characters/Kania_female/Instances/HuntingGround4/Friendly_HG4_Ghost_Woman.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                            <Item>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                        <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>4</offset>
+                                                        </destination>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.AttachAbility">
+                                                                <ability href="/Mechanics/HuntingGround2/Ghosting/HG2TemporaryMob.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/Mechanics/HuntingGround4/Ghosting/ExtendedLoot4.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                        <object href="/Characters/Kania_male/Instances/HuntingGround4/HG4_Umoir_Male.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                            <Item>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                        <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>4</offset>
+                                                        </destination>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.AttachAbility">
+                                                                <ability href="/Mechanics/HuntingGround2/Ghosting/HG2TemporaryMob.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/Mechanics/HuntingGround4/Ghosting/ExtendedLoot4.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                        <object href="/Characters/Kania_male/Instances/HuntingGround4/HG4_Priest.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                            <Item>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                        <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>4</offset>
+                                                        </destination>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.AttachAbility">
+                                                                <ability href="/Mechanics/HuntingGround2/Ghosting/HG2TemporaryMob.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/Mechanics/HuntingGround4/Ghosting/ExtendedLoot4.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                        <object href="/Creatures/Gargoyle/Instances/HuntingGround4/HG4_Gargoyle.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                            <Item>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                        <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>4</offset>
+                                                        </destination>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.AttachAbility">
+                                                                <ability href="/Mechanics/HuntingGround2/Ghosting/HG2TemporaryMob.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/Mechanics/HuntingGround4/Ghosting/ExtendedLoot4.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                        <object href="/Creatures/Minotaur/Instances/HuntingGround4/HG4_Minotaur.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                            <Item>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                        <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>4</offset>
+                                                        </destination>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.AttachAbility">
+                                                                <ability href="/Mechanics/HuntingGround2/Ghosting/HG2TemporaryMob.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/Mechanics/HuntingGround4/Ghosting/ExtendedLoot4.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                        <object href="/Creatures/Banshee/Instances/HuntingGround4/HG4_Nymph.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                            <Item>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                        <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>4</offset>
+                                                        </destination>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.AttachAbility">
+                                                                <ability href="/Mechanics/HuntingGround2/Ghosting/HG2TemporaryMob.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/Mechanics/HuntingGround4/Ghosting/ExtendedLoot4.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                        <object href="/Creatures/Werefox/Instances/HuntingGround4/HG4_Fox.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                            <Item>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                        <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>4</offset>
+                                                        </destination>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.AttachAbility">
+                                                                <ability href="/Mechanics/HuntingGround2/Ghosting/HG2TemporaryMob.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/Mechanics/HuntingGround4/Ghosting/ExtendedLoot4.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                        <object href="/Creatures/Banshee/Instances/HuntingGround4/HG4_Banshee.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                            <Item>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                        <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>4</offset>
+                                                        </destination>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.AttachAbility">
+                                                                <ability href="/Mechanics/HuntingGround2/Ghosting/HG2TemporaryMob.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/Mechanics/HuntingGround4/Ghosting/ExtendedLoot4.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                        <object href="/Creatures/Mushroom/Instances/HuntingGround4/HG4_Centipede..(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                        </entries>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactDestroyItem">
+                                <item href="MobSummonNormal4.(ItemResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemResource)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

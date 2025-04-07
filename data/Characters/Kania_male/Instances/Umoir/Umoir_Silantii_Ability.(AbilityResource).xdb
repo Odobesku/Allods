@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>77481</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.LifeGuard">
+            <level>0.09</level>
+        </Item>
+        <Item type="gameMechanics.elements.effects.HealthTrigger">
+            <healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
+                <multiplier>0.1</multiplier>
+            </healthOn>
+            <healthOff type="gameMechanics.elements.calcers.FullHealthCalcer">
+                <multiplier>0.1</multiplier>
+            </healthOff>
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>40000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactSetFaction">
+                            <faction href="/World/Factions/Wild.xdb#xpointer(/gameMechanics.world.creature.Faction)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <radius>30</radius>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                    <predicates>
+                                                        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                            <quest href="/World/Quests/Umoir/U_1_01/U_1_01.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                                            <status>Finished</status>
+                                                        </Item>
+                                                        <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                                            <predicates>
+                                                                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                                    <quest href="/World/Quests/Umoir/U_1_01/U_1_01.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                                                    <status>Active</status>
+                                                                </Item>
+                                                                <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                                    <quest href="/World/Quests/Umoir/U_1_01/U_1_01.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                                                    <counterResource href="/World/Quests/Umoir/U_1_01/CountId_4.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                                                    <value>1</value>
+                                                                </Item>
+                                                            </predicates>
+                                                        </Item>
+                                                    </predicates>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                    <buff href="/World/Quests/Umoir/U_1_01/U_1_01_plan_01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="/World/Quests/Umoir/U_1_01/U_1_01_plan.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                    <buff href="/World/Quests/Umoir/U_1_01/U_1_01_plan_01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </Item>
+                                            </impactsIf>
+                                        </Item>
+                                    </impacts>
+                                    <filter type="gameMechanics.world.creature.AvatarFilter" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="/Mechanics/Spells/QuestSpells/E2_Immortality/KnockDown.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>1000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactSetFaction">
+                            <faction href="/World/Factions/Umoir/Umoir_Smeyana.(Faction).xdb#xpointer(/gameMechanics.world.creature.Faction)" />
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactMobChat">
+                    <msg href="Umoir_mobChat.(TextMessage).xdb#xpointer(/gameMechanics.world.TextMessage)" />
+                    <defaultSpeaker href="Umoir_Silantii.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddPlane">
+            <plane href="/World/Quests/Umoir/U_1_01/U_1_01_plan_01.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

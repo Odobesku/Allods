@@ -1,0 +1,2739 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SlonRoot>
+	<Header>
+		<Variables>
+			<FXRay>/Spells/FX/Spells/Fatality/Fatality_Channel.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)</FXRay>
+			<RayLength>10</RayLength>
+			<LocatorOnCaster>Slot_BodyFX</LocatorOnCaster>
+			<LocatorOnTargets>Slot_BodyFX</LocatorOnTargets>
+		</Variables>
+	</Header>
+	<cameras>
+		<player href="Camera.(PlayerCameraSettings).xdb" />
+		<navigator href="NavigatorCamera.(ObjectCameraSettings).xdb" />
+		<shipZoom href="ShipZoom.(ObjectCameraSettings).xdb" />
+		<deviceZoom href="CannonCamera.(ObjectCameraSettings).xdb" />
+	</cameras>
+	<musicSettings href="/Client/MusicPlayerSettings.(MusicPlayerSettings).xdb" />
+	<avatarVisObj href="/Client/VisObjTypes/Avatar.(VisObjType).xdb" />
+	<creatureVisObj href="/Client/VisObjTypes/Creatures.(VisObjType).xdb" />
+	<deviceVisObj href="/Client/VisObjTypes/Devices.(VisObjType).xdb" />
+	<projectileVisObj href="/Client/VisObjTypes/Projectiles.(VisObjType).xdb" />
+	<visCharTemplates href="/Client/CharacterTable.xdb" />
+	<haloTable href="HaloTable.(HaloTable).xdb" />
+	<astralTransitionFog href="/Spells/FX/World/Astral_SkyTransition.(VisObjectTemplate).xdb" />
+	<astralTransitionFogStart href="/Spells/FX/World/Astral_SkyTransitionIn.(VisObjectTemplate).xdb" />
+	<astralTransitionFogEnd href="/Spells/FX/World/Astral_SkyTransitionOut.(VisObjectTemplate).xdb" />
+	<shadowTexture href="/Spells/FX/Textures/Shadow.(Texture).xdb" />
+	<visualSettings href="VisualSettings.(VisualSettings).xdb" />
+	<coldBreathFx href="/Spells/FX/Mobs/ColdBreath.(VisObjectTemplate).xdb" />
+	<constants href="/Client/Constants.(SlonConstants).xdb" />
+	<shipCollisionFX href="/Spells/FX/Ships/HitShipCollision.(VisObjectTemplate).xdb" />
+	<abordageBubbleTemplate href="/Spells/FX/World/Astral_ObjectShiningGlowTemp.(VisObjectTemplate).xdb" />
+	<portraitManagerLight>
+		<AmbientFactor>0.5</AmbientFactor>
+		<FogStart>80</FogStart>
+		<FogEnd>700</FogEnd>
+		<SunLightYaw>145</SunLightYaw>
+		<SunLightPitch>70</SunLightPitch>
+		<AmbientColor>5657187</AmbientColor>
+		<DiffuseColor>5320448</DiffuseColor>
+		<FogColor>4934492</FogColor>
+		<SpecularColor>656896</SpecularColor>
+		<ContourColor>2498842</ContourColor>
+		<SpecularWaterColor>0</SpecularWaterColor>
+		<WaterGradientStart>838860800</WaterGradientStart>
+		<WaterGradientEnd>-181781705</WaterGradientEnd>
+	</portraitManagerLight>
+	<spellResistFx href="/Spells/FX/Spells/SpellResist.(VisObjectTemplate).xdb" />
+	<blockParryFx href="/Spells/FX/Spells/ParryMelee.(VisObjectTemplate).xdb" />
+	<blockParryFxForestall>0</blockParryFxForestall>
+	<lootStartAction type="CreatureAnimationAction">
+		<mode>LOOP</mode>
+		<animations>
+			<Item>loot</Item>
+			<Item>lootLoop</Item>
+		</animations>
+	</lootStartAction>
+	<levelChangedScript href="/Spells/VisScripts/Commands/LevelUp.(CreatureVisActionResource).xdb" />
+	<fairyLevelChangedScript href="/Spells/VisScripts/Commands/LevelUp_Halo.(CreatureVisActionResource).xdb" />
+	<parrySounds href="/Client/ParrySounds.(SFXMaterialPairTable).xdb" />
+	<unarmedWeaponItemClass href="/Items/VisualItemsClasses/UnarmedWeapon.(VisualItemClass).xdb" />
+	<leftArmController href="/Characters/LeftShoulder.(AnimationController).xdb" />
+	<rightArmController href="/Characters/RightShoulder.(AnimationController).xdb" />
+	<propertiesOfCreatureAnimations href="/Client/CreatureAnimationProperties/Global.(PropertiesOfCreatureAnimations).xdb" />
+	<avatarVisualScript href="/Spells/VisScripts/Common/Avatar.(CreatureVisActionResource).xdb" />
+	<defaultGuildVisualSettings href="/Items/DefaultGuildSettings.(GuildVisualSettings).xdb" />
+	<soundRoot href="SoundRoot.(SoundRoot).xdb" />
+	<priorityOrders href="/Client/Priorieties/Root.(PriorityOrderRoot).xdb" />
+	<guildRoot href="GuildSettings.(GuildResourcesRoot).xdb" />
+	<textFiles href="TextFiles.(TextConstructorFiles).xdb" />
+	<waterFootstepMaterial href="/World/Generic/PhysicMaterials/Water.(PhysicMaterial).xdb" />
+	<wallFX href="/Spells/FX/World/UnderConstruction_Wall.(VisObjectTemplate).xdb" />
+	<wallCollision href="/Spells/FX/World/UnderConstruction_Wall.(Collision).xdb" />
+	<fatalityFlagName>Flag_Fatality</fatalityFlagName>
+	<fatalities>
+		<Item>
+			<type>BARD</type>
+			<offenderDeathScript type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>Flag_Fatality</flagName>
+				</playWhile>
+				<elements>
+					<Item type="CreatureAnimationAction">
+						<mode>CLAMP</mode>
+						<animations>
+							<Item>deathFatalityBard</Item>
+						</animations>
+						<channel>CHANNEL_DEATH</channel>
+						<channelOverrideMode>OVERRIDE_IGNORE</channelOverrideMode>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/FatalityBard.(VisObjectTemplate).xdb" />
+						<scale>1.3</scale>
+						<lifeTime>11.6</lifeTime>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/Fatality_AuraBard.(VisObjectTemplate).xdb" />
+						<offset z="0.3" />
+						<scale>3.12</scale>
+						<lifeTime>11.6</lifeTime>
+					</Item>
+					<Item type="VisActionList">
+						<elements>
+							<Item type="VisActionDelay">
+								<time>7500</time>
+							</Item>
+							<Item type="CreatureSetTransparencyAction">
+								<transparency>0</transparency>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="CreatureScaleAction">
+						<scale>1.3</scale>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/FatalityBack_Bard.(VisObjectTemplate).xdb" />
+						<offset z="1" />
+						<scale>0.5</scale>
+						<lifeTime>11</lifeTime>
+					</Item>
+				</elements>
+			</offenderDeathScript>
+			<fadeStartTime>8.1</fadeStartTime>
+			<fadeDuration>0.1</fadeDuration>
+			<casterFxScript type="VisActionList">
+				<play>Simultaneously</play>
+				<elements>
+					<Item type="CreatureEffectsAction">
+						<visualEffects>
+							<Item>
+								<effectFx href="/Spells/FX/Spells/Fatality/Fatality_Cast.(VisObjectTemplate).xdb" />
+								<locator>Slot_BodyFX</locator>
+							</Item>
+						</visualEffects>
+					</Item>
+					<Item type="CreatureChannelDirectAction">
+						<channelingFx hrefvar="FXRay" />
+						<fxLength var="RayLength" />
+						<startPoint type="VisPointLocator">
+							<shift y="-0.2" />
+							<locator var="LocatorOnCaster" />
+						</startPoint>
+						<endPoint type="VisPointLocator">
+							<shift y="-1" />
+							<locator var="LocatorOnTargets" />
+						</endPoint>
+						<fadeInTime>200</fadeInTime>
+						<fadeOutTime>100</fadeOutTime>
+						<offendTime type="EffectOffendConstDelay" />
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<playWhile type="PredicateCreatureFlagAction">
+							<flagName>FatalityWings</flagName>
+						</playWhile>
+						<preconditional>true</preconditional>
+						<elements>
+							<Item type="CreatureAnimationAction">
+								<animations>
+									<Item>levelUp</Item>
+								</animations>
+								<channel>CHANNEL_ATTACK</channel>
+								<channelOverrideScript />
+								<advanced>
+									<speed>0.6</speed>
+								</advanced>
+							</Item>
+							<Item type="CreatureEffectsAction">
+								<visualEffects>
+									<Item>
+										<effectFx href="/Spells/FX/Spells/Dragon_Wings_Wear_Fatality.(VisObjectTemplate).xdb" />
+										<effectAlias href="" />
+										<locator>Slot_FX</locator>
+										<member>Assaulter</member>
+										<locatorName>Slot_Back_Special</locatorName>
+										<offendTime />
+										<offset y="0.4" z="0.1" />
+									</Item>
+								</visualEffects>
+							</Item>
+						</elements>
+					</Item>
+				</elements>
+			</casterFxScript>
+			<sparkDelay>12</sparkDelay>
+		</Item>
+		<Item>
+			<type>DRUID</type>
+			<offenderDeathScript type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>Flag_Fatality</flagName>
+				</playWhile>
+				<elements>
+					<Item type="CreatureAnimationAction">
+						<mode>CLAMP</mode>
+						<animations>
+							<Item>deathFatalityDruid</Item>
+						</animations>
+						<channel>CHANNEL_DEATH</channel>
+						<channelOverrideMode>OVERRIDE_IGNORE</channelOverrideMode>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/FatalityDruid.(VisObjectTemplate).xdb" />
+						<scale>1.3</scale>
+						<lifeTime>10</lifeTime>
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<elements>
+							<Item type="ProceduralEffectVisAction">
+								<priority>1000</priority>
+								<proceduralEffect href="/Spells/FX/InterfaceFX/Empty.(ProceduralEffect).xdb" />
+							</Item>
+							<Item type="CreatureColorAction">
+								<visActionID>0</visActionID>
+								<priority>1000</priority>
+								<colorValue>-1</colorValue>
+								<timeOn>0.3</timeOn>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="VisActionList">
+						<elements>
+							<Item type="VisActionDelay">
+								<time>2100</time>
+							</Item>
+							<Item type="CreatureSetTransparencyAction">
+								<transparency>0</transparency>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/Fatality_AuraDruid.(VisObjectTemplate).xdb" />
+						<offset z="0.3" />
+						<scale>3.12</scale>
+						<lifeTime>10</lifeTime>
+					</Item>
+					<Item type="CreatureScaleAction">
+						<scale>1.3</scale>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/FatalityBack_Druid.(VisObjectTemplate).xdb" />
+						<offset z="1" />
+						<scale>0.5</scale>
+						<lifeTime>9.7</lifeTime>
+					</Item>
+				</elements>
+			</offenderDeathScript>
+			<fadeStartTime>2.7</fadeStartTime>
+			<fadeDuration>0.1</fadeDuration>
+			<casterFxScript type="VisActionList">
+				<play>Simultaneously</play>
+				<preconditional>false</preconditional>
+				<elements>
+					<Item type="CreatureEffectsAction">
+						<visualEffects>
+							<Item>
+								<effectFx href="/Spells/FX/Spells/Fatality/Fatality_Cast.(VisObjectTemplate).xdb" />
+								<locator>Slot_BodyFX</locator>
+							</Item>
+						</visualEffects>
+					</Item>
+					<Item type="CreatureChannelDirectAction">
+						<channelingFx hrefvar="FXRay" />
+						<fxLength var="RayLength" />
+						<startPoint type="VisPointLocator">
+							<shift y="-0.2" />
+							<locator var="LocatorOnCaster" />
+						</startPoint>
+						<endPoint type="VisPointLocator">
+							<shift y="-1" />
+							<locator var="LocatorOnTargets" />
+						</endPoint>
+						<fadeInTime>200</fadeInTime>
+						<fadeOutTime>100</fadeOutTime>
+						<offendTime type="EffectOffendConstDelay" />
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<playWhile type="PredicateCreatureFlagAction">
+							<flagName>FatalityWings</flagName>
+						</playWhile>
+						<preconditional>true</preconditional>
+						<elements>
+							<Item type="CreatureAnimationAction">
+								<animations>
+									<Item>levelUp</Item>
+								</animations>
+								<channel>CHANNEL_ATTACK</channel>
+								<channelOverrideScript />
+								<advanced>
+									<speed>0.6</speed>
+								</advanced>
+							</Item>
+							<Item type="CreatureEffectsAction">
+								<visualEffects>
+									<Item>
+										<effectFx href="/Spells/FX/Spells/Dragon_Wings_Wear_Fatality.(VisObjectTemplate).xdb" />
+										<effectAlias href="" />
+										<locator>Slot_FX</locator>
+										<member>Assaulter</member>
+										<locatorName>Slot_Back_Special</locatorName>
+										<offendTime />
+										<offset y="0.4" z="0.1" />
+									</Item>
+								</visualEffects>
+							</Item>
+						</elements>
+					</Item>
+				</elements>
+			</casterFxScript>
+		</Item>
+		<Item>
+			<type>MAGE</type>
+			<offenderDeathScript type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>Flag_Fatality</flagName>
+				</playWhile>
+				<elements>
+					<Item type="CreatureAnimationAction">
+						<mode>CLAMP</mode>
+						<animations>
+							<Item>deathFatalityMage</Item>
+						</animations>
+						<channel>CHANNEL_DEATH</channel>
+						<channelOverrideMode>OVERRIDE_IGNORE</channelOverrideMode>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/FatalityMage.(VisObjectTemplate).xdb" />
+						<scale>1.3</scale>
+						<lifeTime>7.6</lifeTime>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/FatalityMage_Camera.(VisObjectTemplate).xdb" />
+						<scale>1.3</scale>
+						<lifeTime>10</lifeTime>
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<elements>
+							<Item type="ProceduralEffectVisAction">
+								<priority>1000</priority>
+								<proceduralEffect href="/Spells/FX/InterfaceFX/Empty.(ProceduralEffect).xdb" />
+							</Item>
+							<Item type="CreatureColorAction">
+								<visActionID>0</visActionID>
+								<priority>1000</priority>
+								<colorValue>-1</colorValue>
+								<timeOn>0.3</timeOn>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="VisActionList">
+						<elements>
+							<Item type="VisActionDelay">
+								<time>7300</time>
+							</Item>
+							<Item type="CreatureSetTransparencyAction">
+								<transparency>0</transparency>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="VisActionList">
+						<elements>
+							<Item type="VisActionDelay">
+								<visActionID>FatalityMag_Ise234</visActionID>
+								<time>3100</time>
+							</Item>
+							<Item type="VisActionList">
+								<visActionID>FatalityMag_Ise234</visActionID>
+								<play>Simultaneously</play>
+								<elements>
+									<Item type="CreatureEffectsAction">
+										<visualEffects>
+											<Item>
+												<effectFx href="/Spells/FX/Mobs/FrozenStatue_01.(VisObjectTemplate).xdb" />
+												<fadeInTime>400</fadeInTime>
+												<locator>Slot_FX</locator>
+												<member>Caster</member>
+											</Item>
+											<Item>
+												<effectFx href="/Spells/FX/Mobs/FrozenStatue_02.(VisObjectTemplate).xdb" />
+												<scale>0.9</scale>
+												<fadeInTime>400</fadeInTime>
+												<locator>Slot_Hand_L</locator>
+												<member>Caster</member>
+											</Item>
+											<Item>
+												<effectFx href="/Spells/FX/Mobs/FrozenStatue_02.(VisObjectTemplate).xdb" />
+												<scale>0.9</scale>
+												<fadeInTime>400</fadeInTime>
+												<locator>Slot_Hand_R</locator>
+												<member>Caster</member>
+											</Item>
+											<Item>
+												<effectFx href="/Spells/FX/Mobs/FrozenStatue_02.(VisObjectTemplate).xdb" />
+												<scale>0.5</scale>
+												<fadeInTime>400</fadeInTime>
+												<locator>Slot_Mouth</locator>
+												<member>Caster</member>
+											</Item>
+											<Item>
+												<effectFx href="/Spells/FX/Mobs/FrozenStatue_02.(VisObjectTemplate).xdb" />
+												<fadeInTime>400</fadeInTime>
+												<locator>FROM_LOCATOR_NAME</locator>
+												<member>Caster</member>
+												<locatorName>RightArm</locatorName>
+											</Item>
+											<Item>
+												<effectFx href="/Spells/FX/Mobs/FrozenStatue_02.(VisObjectTemplate).xdb" />
+												<fadeInTime>400</fadeInTime>
+												<locator>FROM_LOCATOR_NAME</locator>
+												<member>Caster</member>
+												<locatorName>LeftArm</locatorName>
+											</Item>
+											<Item>
+												<effectFx href="/Spells/FX/Mobs/FrozenStatue_02.(VisObjectTemplate).xdb" />
+												<scale>0.5</scale>
+												<fadeInTime>400</fadeInTime>
+												<locator>FROM_LOCATOR_NAME</locator>
+												<member>Caster</member>
+												<locatorName>LeftForeArm</locatorName>
+											</Item>
+											<Item>
+												<effectFx href="/Spells/FX/Mobs/FrozenStatue_02.(VisObjectTemplate).xdb" />
+												<scale>0.5</scale>
+												<fadeInTime>400</fadeInTime>
+												<locator>FROM_LOCATOR_NAME</locator>
+												<member>Caster</member>
+												<locatorName>RightForeArm</locatorName>
+											</Item>
+											<Item>
+												<effectFx href="/Spells/FX/Mobs/FrozenStatue_02.(VisObjectTemplate).xdb" />
+												<scale>1.2</scale>
+												<fadeInTime>400</fadeInTime>
+												<locator>FROM_LOCATOR_NAME</locator>
+												<member>Caster</member>
+												<locatorName>LeftForeArmRoll</locatorName>
+											</Item>
+											<Item>
+												<effectFx href="/Spells/FX/Mobs/FrozenStatue_02.(VisObjectTemplate).xdb" />
+												<scale>1.2</scale>
+												<fadeInTime>400</fadeInTime>
+												<locator>FROM_LOCATOR_NAME</locator>
+												<member>Caster</member>
+												<locatorName>RightForeArmRoll</locatorName>
+											</Item>
+											<Item>
+												<effectFx href="/Spells/FX/Mobs/NihazLastStage_Glow.(VisObjectTemplate).xdb" />
+												<scale>0.1</scale>
+												<fadeInTime>400</fadeInTime>
+												<locator>Head</locator>
+												<member>Caster</member>
+											</Item>
+											<Item>
+												<effectFx href="/Spells/FX/Mobs/FrozenStatue_04.(VisObjectTemplate).xdb" />
+												<fadeInTime>400</fadeInTime>
+												<locator>Slot_FX</locator>
+												<member>Caster</member>
+												<locatorName>Slot_Global</locatorName>
+											</Item>
+											<Item>
+												<effectFx href="/Spells/FX/Mobs/NihazLastStage_Glow.(VisObjectTemplate).xdb" />
+												<scale>0.7</scale>
+												<fadeInTime>400</fadeInTime>
+												<locator>FROM_LOCATOR_NAME</locator>
+												<member>Caster</member>
+												<locatorName>Hips</locatorName>
+											</Item>
+											<Item>
+												<effectFx href="/Spells/FX/Mobs/NihazLastStage_Glow.(VisObjectTemplate).xdb" />
+												<scale>0.1</scale>
+												<fadeInTime>400</fadeInTime>
+												<locator>Head</locator>
+												<member>Caster</member>
+											</Item>
+											<Item>
+												<effectFx href="/Spells/FX/Mobs/NihazLastStage_Glow.(VisObjectTemplate).xdb" />
+												<scale>0.3</scale>
+												<fadeInTime>400</fadeInTime>
+												<locator>Slot_FX</locator>
+												<member>Caster</member>
+											</Item>
+										</visualEffects>
+									</Item>
+								</elements>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/Fatality_AuraMage.(VisObjectTemplate).xdb" />
+						<offset z="0.3" />
+						<scale>3.12</scale>
+						<lifeTime>8</lifeTime>
+					</Item>
+					<Item type="CreatureScaleAction">
+						<scale>1.3</scale>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/FatalityBack_Mage.(VisObjectTemplate).xdb" />
+						<offset z="1" />
+						<scale>0.5</scale>
+						<lifeTime>8</lifeTime>
+					</Item>
+				</elements>
+			</offenderDeathScript>
+			<fadeStartTime>7.9</fadeStartTime>
+			<fadeDuration>0.1</fadeDuration>
+			<casterFxScript type="VisActionList">
+				<play>Simultaneously</play>
+				<elements>
+					<Item type="CreatureEffectsAction">
+						<visualEffects>
+							<Item>
+								<effectFx href="/Spells/FX/Spells/Fatality/Fatality_Cast.(VisObjectTemplate).xdb" />
+								<locator>Slot_BodyFX</locator>
+							</Item>
+						</visualEffects>
+					</Item>
+					<Item type="CreatureChannelDirectAction">
+						<channelingFx hrefvar="FXRay" />
+						<fxLength var="RayLength" />
+						<startPoint type="VisPointLocator">
+							<shift y="-0.2" />
+							<locator var="LocatorOnCaster" />
+						</startPoint>
+						<endPoint type="VisPointLocator">
+							<shift y="-1" />
+							<locator var="LocatorOnTargets" />
+						</endPoint>
+						<fadeInTime>200</fadeInTime>
+						<fadeOutTime>100</fadeOutTime>
+						<offendTime type="EffectOffendConstDelay" />
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<playWhile type="PredicateCreatureFlagAction">
+							<flagName>FatalityWings</flagName>
+						</playWhile>
+						<preconditional>true</preconditional>
+						<elements>
+							<Item type="CreatureAnimationAction">
+								<animations>
+									<Item>levelUp</Item>
+								</animations>
+								<channel>CHANNEL_ATTACK</channel>
+								<channelOverrideScript />
+								<advanced>
+									<speed>0.6</speed>
+								</advanced>
+							</Item>
+							<Item type="CreatureEffectsAction">
+								<visualEffects>
+									<Item>
+										<effectFx href="/Spells/FX/Spells/Dragon_Wings_Wear_Fatality.(VisObjectTemplate).xdb" />
+										<effectAlias href="" />
+										<locator>Slot_FX</locator>
+										<member>Assaulter</member>
+										<locatorName>Slot_Back_Special</locatorName>
+										<offendTime />
+										<offset y="0.4" z="0.1" />
+									</Item>
+								</visualEffects>
+							</Item>
+						</elements>
+					</Item>
+				</elements>
+			</casterFxScript>
+		</Item>
+		<Item>
+			<type>NECROMANCER</type>
+			<offenderDeathScript type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>Flag_Fatality</flagName>
+				</playWhile>
+				<elements>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<playWhile type="PredicateCreatureVisCharacterAction">
+							<visCharList>
+								<Item href="/Characters/Kania_male/KaniaMale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Kania_female/KaniaFemale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Elf_male/ElfMale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Elf_female/ElfFemale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Orc_male/OrcMale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Orc_female/OrcFemale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Hadagan_male/HadaganMale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Hadagan_female/HadaganFemale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Undead_male/UndeadMale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Undead_female/UndeadFemale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Praiden_male/PraidenMale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Praiden_female/PraidenFemale.(VisCharacterTemplate).xdb" />
+							</visCharList>
+						</playWhile>
+						<preconditional>true</preconditional>
+						<elements>
+							<Item type="CreatureAnimationAction">
+								<mode>CLAMP</mode>
+								<animations>
+									<Item>deathFatalityNecr</Item>
+								</animations>
+								<channel>CHANNEL_DEATH</channel>
+								<channelOverrideMode>OVERRIDE_IGNORE</channelOverrideMode>
+							</Item>
+							<Item type="CreatureIndependentFxAction">
+								<visObject href="/Spells/FX/Spells/Fatality/FatalityNecr.(VisObjectTemplate).xdb" />
+								<scale>1.3</scale>
+								<lifeTime>10</lifeTime>
+							</Item>
+							<Item type="VisActionList">
+								<play>Simultaneously</play>
+								<elements>
+									<Item type="ProceduralEffectVisAction">
+										<priority>1000</priority>
+										<proceduralEffect href="/Spells/FX/InterfaceFX/Empty.(ProceduralEffect).xdb" />
+									</Item>
+									<Item type="CreatureColorAction">
+										<visActionID>0</visActionID>
+										<priority>1000</priority>
+										<colorValue>-1</colorValue>
+										<timeOn>0.3</timeOn>
+									</Item>
+								</elements>
+							</Item>
+							<Item type="VisActionList">
+								<elements>
+									<Item type="VisActionDelay">
+										<time>10000</time>
+									</Item>
+									<Item type="CreatureSetTransparencyAction">
+										<transparency>0</transparency>
+									</Item>
+								</elements>
+							</Item>
+							<Item type="CreatureIndependentFxAction">
+								<visObject href="/Spells/FX/Spells/Fatality/Fatality_AuraNecr.(VisObjectTemplate).xdb" />
+								<offset z="0.3" />
+								<scale>3.12</scale>
+								<lifeTime>10</lifeTime>
+							</Item>
+							<Item type="CreatureScaleAction">
+								<scale>1.3</scale>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<playWhile type="PredicateCreatureVisCharacterAction">
+							<visCharList>
+								<Item href="/Characters/Giberling_Group/GiberlingGroup.(VisCharacterTemplate).xdb" />
+							</visCharList>
+						</playWhile>
+						<preconditional>true</preconditional>
+						<elements>
+							<Item type="CreatureAnimationAction">
+								<mode>CLAMP</mode>
+								<animations>
+									<Item>deathFatalityNecr</Item>
+								</animations>
+								<channel>CHANNEL_DEATH</channel>
+								<channelOverrideMode>OVERRIDE_IGNORE</channelOverrideMode>
+							</Item>
+							<Item type="CreatureIndependentFxAction">
+								<visObject href="/Spells/FX/Spells/Fatality/FatalityNecr_Gibby.(VisObjectTemplate).xdb" />
+								<scale>1.3</scale>
+								<lifeTime>10</lifeTime>
+							</Item>
+							<Item type="CreatureChannelDirectAction">
+								<channelingFx hrefvar="FXRay" />
+								<fxLength var="RayLength" />
+								<startPoint type="VisPointLocator">
+									<shift y="-0.2" />
+									<locator var="LocatorOnCaster" />
+								</startPoint>
+								<endPoint type="VisPointLocator">
+									<shift y="-1" />
+									<locator var="LocatorOnTargets" />
+								</endPoint>
+								<fadeInTime>200</fadeInTime>
+								<fadeOutTime>100</fadeOutTime>
+								<offendTime type="EffectOffendConstDelay" />
+							</Item>
+							<Item type="VisActionList">
+								<play>Simultaneously</play>
+								<elements>
+									<Item type="ProceduralEffectVisAction">
+										<priority>1000</priority>
+										<proceduralEffect href="/Spells/FX/InterfaceFX/Empty.(ProceduralEffect).xdb" />
+									</Item>
+									<Item type="CreatureColorAction">
+										<visActionID>0</visActionID>
+										<priority>1000</priority>
+										<colorValue>-1</colorValue>
+										<timeOn>0.3</timeOn>
+									</Item>
+								</elements>
+							</Item>
+							<Item type="VisActionList">
+								<elements>
+									<Item type="VisActionDelay">
+										<time>9800</time>
+									</Item>
+									<Item type="CreatureSetTransparencyAction">
+										<transparency>0</transparency>
+									</Item>
+								</elements>
+							</Item>
+							<Item type="CreatureIndependentFxAction">
+								<visObject href="/Spells/FX/Spells/Fatality/Fatality_AuraNecr.(VisObjectTemplate).xdb" />
+								<offset z="0.3" />
+								<scale>3.12</scale>
+								<lifeTime>10</lifeTime>
+							</Item>
+							<Item type="CreatureScaleAction">
+								<scale>1.3</scale>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/FatalityBack_Necr.(VisObjectTemplate).xdb" />
+						<offset z="1" />
+						<scale>0.5</scale>
+						<lifeTime>10</lifeTime>
+					</Item>
+				</elements>
+			</offenderDeathScript>
+			<fadeStartTime>11.6</fadeStartTime>
+			<fadeDuration>0.1</fadeDuration>
+			<casterFxScript type="VisActionList">
+				<play>Simultaneously</play>
+				<elements>
+					<Item type="CreatureEffectsAction">
+						<visualEffects>
+							<Item>
+								<effectFx href="/Spells/FX/Spells/Fatality/Fatality_Cast.(VisObjectTemplate).xdb" />
+								<locator>Slot_BodyFX</locator>
+							</Item>
+						</visualEffects>
+					</Item>
+					<Item type="CreatureChannelDirectAction">
+						<channelingFx hrefvar="FXRay" />
+						<fxLength var="RayLength" />
+						<startPoint type="VisPointLocator">
+							<shift y="-0.2" />
+							<locator var="LocatorOnCaster" />
+						</startPoint>
+						<endPoint type="VisPointLocator">
+							<shift y="-1" />
+							<locator var="LocatorOnTargets" />
+						</endPoint>
+						<fadeInTime>200</fadeInTime>
+						<fadeOutTime>100</fadeOutTime>
+						<offendTime type="EffectOffendConstDelay" />
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<playWhile type="PredicateCreatureFlagAction">
+							<flagName>FatalityWings</flagName>
+						</playWhile>
+						<preconditional>true</preconditional>
+						<elements>
+							<Item type="CreatureAnimationAction">
+								<animations>
+									<Item>levelUp</Item>
+								</animations>
+								<channel>CHANNEL_ATTACK</channel>
+								<channelOverrideScript />
+								<advanced>
+									<speed>0.6</speed>
+								</advanced>
+							</Item>
+							<Item type="CreatureEffectsAction">
+								<visualEffects>
+									<Item>
+										<effectFx href="/Spells/FX/Spells/Dragon_Wings_Wear_Fatality.(VisObjectTemplate).xdb" />
+										<effectAlias href="" />
+										<locator>Slot_FX</locator>
+										<member>Assaulter</member>
+										<locatorName>Slot_Back_Special</locatorName>
+										<offendTime />
+										<offset y="0.4" z="0.1" />
+									</Item>
+								</visualEffects>
+							</Item>
+						</elements>
+					</Item>
+				</elements>
+			</casterFxScript>
+			<sparkDelay>11</sparkDelay>
+		</Item>
+		<Item>
+			<type>PALADIN</type>
+			<offenderDeathScript type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>Flag_Fatality</flagName>
+				</playWhile>
+				<elements>
+					<Item type="CreatureAnimationAction">
+						<mode>CLAMP</mode>
+						<animations>
+							<Item>deathFatalityPaladin</Item>
+						</animations>
+						<channel>CHANNEL_DEATH</channel>
+						<channelOverrideMode>OVERRIDE_IGNORE</channelOverrideMode>
+					</Item>
+					<Item type="VisActionList">
+						<elements>
+							<Item type="VisActionDelay">
+								<time>100</time>
+							</Item>
+							<Item type="CreatureIndependentFxAction">
+								<visObject href="/Spells/FX/Spells/Fatality/FatalityPaladin.(VisObjectTemplate).xdb" />
+								<scale>1.495</scale>
+								<lifeTime>11</lifeTime>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<elements>
+							<Item type="ProceduralEffectVisAction">
+								<priority>1000</priority>
+								<proceduralEffect href="/Spells/FX/InterfaceFX/Empty.(ProceduralEffect).xdb" />
+							</Item>
+							<Item type="CreatureColorAction">
+								<visActionID>0</visActionID>
+								<priority>1000</priority>
+								<colorValue>-1</colorValue>
+								<timeOn>0.3</timeOn>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="VisActionList">
+						<elements>
+							<Item type="VisActionDelay">
+								<time>3700</time>
+							</Item>
+							<Item type="CreatureSetTransparencyAction">
+								<transparency>0</transparency>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/Fatality_AuraPal.(VisObjectTemplate).xdb" />
+						<offset z="0.3" />
+						<scale>3.12</scale>
+						<lifeTime>11</lifeTime>
+					</Item>
+					<Item type="CreatureScaleAction">
+						<scale>1.3</scale>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/FatalityBack_Paladin.(VisObjectTemplate).xdb" />
+						<offset z="1" />
+						<scale>0.5</scale>
+						<lifeTime>11</lifeTime>
+					</Item>
+				</elements>
+			</offenderDeathScript>
+			<fadeStartTime>4.3</fadeStartTime>
+			<fadeDuration>0.1</fadeDuration>
+			<casterFxScript type="VisActionList">
+				<play>Simultaneously</play>
+				<elements>
+					<Item type="CreatureEffectsAction">
+						<visualEffects>
+							<Item>
+								<effectFx href="/Spells/FX/Spells/Fatality/Fatality_Cast.(VisObjectTemplate).xdb" />
+								<locator>Slot_BodyFX</locator>
+							</Item>
+						</visualEffects>
+					</Item>
+					<Item type="CreatureChannelDirectAction">
+						<channelingFx hrefvar="FXRay" />
+						<fxLength var="RayLength" />
+						<startPoint type="VisPointLocator">
+							<shift y="-0.2" />
+							<locator var="LocatorOnCaster" />
+						</startPoint>
+						<endPoint type="VisPointLocator">
+							<shift y="-1" />
+							<locator var="LocatorOnTargets" />
+						</endPoint>
+						<fadeInTime>200</fadeInTime>
+						<fadeOutTime>100</fadeOutTime>
+						<offendTime type="EffectOffendConstDelay" />
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<playWhile type="PredicateCreatureFlagAction">
+							<flagName>FatalityWings</flagName>
+						</playWhile>
+						<preconditional>true</preconditional>
+						<elements>
+							<Item type="CreatureAnimationAction">
+								<animations>
+									<Item>levelUp</Item>
+								</animations>
+								<channel>CHANNEL_ATTACK</channel>
+								<channelOverrideScript />
+								<advanced>
+									<speed>0.6</speed>
+								</advanced>
+							</Item>
+							<Item type="CreatureEffectsAction">
+								<visualEffects>
+									<Item>
+										<effectFx href="/Spells/FX/Spells/Dragon_Wings_Wear_Fatality.(VisObjectTemplate).xdb" />
+										<effectAlias href="" />
+										<locator>Slot_FX</locator>
+										<member>Assaulter</member>
+										<locatorName>Slot_Back_Special</locatorName>
+										<offendTime />
+										<offset y="0.4" z="0.1" />
+									</Item>
+								</visualEffects>
+							</Item>
+						</elements>
+					</Item>
+				</elements>
+			</casterFxScript>
+			<sparkDelay>12</sparkDelay>
+		</Item>
+		<Item>
+			<type>PRIEST</type>
+			<offenderDeathScript type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>Flag_Fatality</flagName>
+				</playWhile>
+				<elements>
+					<Item type="CreatureAnimationAction">
+						<mode>CLAMP</mode>
+						<animations>
+							<Item>deathFatalityPriest</Item>
+						</animations>
+						<channel>CHANNEL_DEATH</channel>
+						<channelOverrideMode>OVERRIDE_IGNORE</channelOverrideMode>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/Fatality_Priest_Basis.(VisObjectTemplate).xdb" />
+						<scale>1.3</scale>
+						<lifeTime>8.8</lifeTime>
+					</Item>
+					<Item type="VisActionList">
+						<elements>
+							<Item type="VisActionDelay">
+								<time>7600</time>
+							</Item>
+							<Item type="CreatureSetTransparencyAction">
+								<transparency>0</transparency>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/Fatality_Priest_Fire.(VisObjectTemplate).xdb" />
+						<offset z="4" />
+						<scale>1.3</scale>
+						<lifeTime>8.8</lifeTime>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/Fatality_AuraPriest.(VisObjectTemplate).xdb" />
+						<offset z="0.3" />
+						<scale>3.12</scale>
+						<lifeTime>8</lifeTime>
+					</Item>
+					<Item type="CreatureScaleAction">
+						<scale>1.3</scale>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/FatalityBack_Priest.(VisObjectTemplate).xdb" />
+						<offset z="1" />
+						<scale>0.5</scale>
+						<lifeTime>9.7</lifeTime>
+					</Item>
+				</elements>
+			</offenderDeathScript>
+			<fadeStartTime>8.2</fadeStartTime>
+			<fadeDuration>0.1</fadeDuration>
+			<casterFxScript type="VisActionList">
+				<play>Simultaneously</play>
+				<elements>
+					<Item type="CreatureEffectsAction">
+						<visualEffects>
+							<Item>
+								<effectFx href="/Spells/FX/Spells/Fatality/Fatality_Cast.(VisObjectTemplate).xdb" />
+								<locator>Slot_BodyFX</locator>
+							</Item>
+						</visualEffects>
+					</Item>
+					<Item type="CreatureChannelDirectAction">
+						<channelingFx hrefvar="FXRay" />
+						<fxLength var="RayLength" />
+						<startPoint type="VisPointLocator">
+							<shift y="-0.2" />
+							<locator var="LocatorOnCaster" />
+						</startPoint>
+						<endPoint type="VisPointLocator">
+							<shift y="-1" />
+							<locator var="LocatorOnTargets" />
+						</endPoint>
+						<fadeInTime>200</fadeInTime>
+						<fadeOutTime>100</fadeOutTime>
+						<offendTime type="EffectOffendConstDelay" />
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<playWhile type="PredicateCreatureFlagAction">
+							<flagName>FatalityWings</flagName>
+						</playWhile>
+						<preconditional>true</preconditional>
+						<elements>
+							<Item type="CreatureAnimationAction">
+								<animations>
+									<Item>levelUp</Item>
+								</animations>
+								<channel>CHANNEL_ATTACK</channel>
+								<channelOverrideScript />
+								<advanced>
+									<speed>0.6</speed>
+								</advanced>
+							</Item>
+							<Item type="CreatureEffectsAction">
+								<visualEffects>
+									<Item>
+										<effectFx href="/Spells/FX/Spells/Dragon_Wings_Wear_Fatality.(VisObjectTemplate).xdb" />
+										<effectAlias href="" />
+										<locator>Slot_FX</locator>
+										<member>Assaulter</member>
+										<locatorName>Slot_Back_Special</locatorName>
+										<offendTime />
+										<offset y="0.4" z="0.1" />
+									</Item>
+								</visualEffects>
+							</Item>
+						</elements>
+					</Item>
+				</elements>
+			</casterFxScript>
+			<sparkDelay>10.8</sparkDelay>
+		</Item>
+		<Item>
+			<type>PSIONIC</type>
+			<offenderDeathScript type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>Flag_Fatality</flagName>
+				</playWhile>
+				<elements>
+					<Item type="CreatureAnimationAction">
+						<mode>CLAMP</mode>
+						<animations>
+							<Item>deathFatalityPsionic</Item>
+						</animations>
+						<channel>CHANNEL_DEATH</channel>
+						<channelOverrideMode>OVERRIDE_IGNORE</channelOverrideMode>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/FatalityPsionic.(VisObjectTemplate).xdb" />
+						<scale>1.3</scale>
+						<lifeTime>12</lifeTime>
+					</Item>
+					<Item type="VisActionList">
+						<elements>
+							<Item type="VisActionDelay">
+								<time>8000</time>
+							</Item>
+							<Item type="CreatureSetTransparencyAction">
+								<transparency>0</transparency>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/Fatality_AuraPsionic.(VisObjectTemplate).xdb" />
+						<offset z="0.3" />
+						<scale>3.12</scale>
+						<lifeTime>10.6</lifeTime>
+					</Item>
+					<Item type="CreatureScaleAction">
+						<scale>1.3</scale>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/FatalityBack_Psionic.(VisObjectTemplate).xdb" />
+						<offset z="1" />
+						<scale>0.5</scale>
+						<lifeTime>10</lifeTime>
+					</Item>
+				</elements>
+			</offenderDeathScript>
+			<fadeStartTime>8.6</fadeStartTime>
+			<fadeDuration>0.3</fadeDuration>
+			<casterFxScript type="VisActionList">
+				<play>Simultaneously</play>
+				<elements>
+					<Item type="CreatureEffectsAction">
+						<visualEffects>
+							<Item>
+								<effectFx href="/Spells/FX/Spells/Fatality/Fatality_Cast.(VisObjectTemplate).xdb" />
+								<locator>Slot_BodyFX</locator>
+							</Item>
+						</visualEffects>
+					</Item>
+					<Item type="CreatureChannelDirectAction">
+						<channelingFx hrefvar="FXRay" />
+						<fxLength var="RayLength" />
+						<startPoint type="VisPointLocator">
+							<shift y="-0.2" />
+							<locator var="LocatorOnCaster" />
+						</startPoint>
+						<endPoint type="VisPointLocator">
+							<shift y="-1" />
+							<locator var="LocatorOnTargets" />
+						</endPoint>
+						<fadeInTime>200</fadeInTime>
+						<fadeOutTime>100</fadeOutTime>
+						<offendTime type="EffectOffendConstDelay" />
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<playWhile type="PredicateCreatureFlagAction">
+							<flagName>FatalityWings</flagName>
+						</playWhile>
+						<preconditional>true</preconditional>
+						<elements>
+							<Item type="CreatureAnimationAction">
+								<animations>
+									<Item>levelUp</Item>
+								</animations>
+								<channel>CHANNEL_ATTACK</channel>
+								<channelOverrideScript />
+								<advanced>
+									<speed>0.6</speed>
+								</advanced>
+							</Item>
+							<Item type="CreatureEffectsAction">
+								<visualEffects>
+									<Item>
+										<effectFx href="/Spells/FX/Spells/Dragon_Wings_Wear_Fatality.(VisObjectTemplate).xdb" />
+										<effectAlias href="" />
+										<locator>Slot_FX</locator>
+										<member>Assaulter</member>
+										<locatorName>Slot_Back_Special</locatorName>
+										<offendTime />
+										<offset y="0.4" z="0.1" />
+									</Item>
+								</visualEffects>
+							</Item>
+						</elements>
+					</Item>
+				</elements>
+			</casterFxScript>
+			<sparkDelay>13</sparkDelay>
+		</Item>
+		<Item>
+			<type>STALKER</type>
+			<offenderDeathScript type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>Flag_Fatality</flagName>
+				</playWhile>
+				<elements>
+					<Item type="CreatureAnimationAction">
+						<mode>CLAMP</mode>
+						<animations>
+							<Item>deathFatalityStalker</Item>
+						</animations>
+						<channel>CHANNEL_DEATH</channel>
+						<channelOverrideMode>OVERRIDE_IGNORE</channelOverrideMode>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/FatalityStalkerOrc.(VisObjectTemplate).xdb" />
+						<scale>1.3</scale>
+						<lifeTime>10.5</lifeTime>
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<elements>
+							<Item type="ProceduralEffectVisAction">
+								<priority>1000</priority>
+								<proceduralEffect href="/Spells/FX/InterfaceFX/Empty.(ProceduralEffect).xdb" />
+							</Item>
+							<Item type="CreatureColorAction">
+								<visActionID>0</visActionID>
+								<priority>1000</priority>
+								<colorValue>-1</colorValue>
+								<timeOn>0.3</timeOn>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/FatalityStalker_End.(VisObjectTemplate).xdb" />
+						<scale>1.3</scale>
+						<lifeTime>10.5</lifeTime>
+					</Item>
+					<Item type="VisActionList">
+						<elements>
+							<Item type="VisActionDelay">
+								<visActionID>Fatality_Aura06wec2345rfa</visActionID>
+								<time>1100</time>
+							</Item>
+							<Item type="CreatureIndependentFxAction">
+								<visActionID>Fatality_Aura06wec2345rfa</visActionID>
+								<visObject href="/Spells/FX/Spells/Fatality/Fatality_AuraStalk.(VisObjectTemplate).xdb" />
+								<offset z="0.3" />
+								<scale>3.12</scale>
+								<lifeTime>9</lifeTime>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="VisActionList">
+						<elements>
+							<Item type="VisActionDelay">
+								<time>6400</time>
+							</Item>
+							<Item type="CreatureSetTransparencyAction">
+								<transparency>0</transparency>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="CreatureScaleAction">
+						<scale>1.3</scale>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/FatalityBack_Stalker.(VisObjectTemplate).xdb" />
+						<offset z="1" />
+						<scale>0.5</scale>
+						<lifeTime>10.5</lifeTime>
+					</Item>
+				</elements>
+			</offenderDeathScript>
+			<fadeStartTime>7</fadeStartTime>
+			<fadeDuration>0.1</fadeDuration>
+			<casterFxScript type="VisActionList">
+				<play>Simultaneously</play>
+				<elements>
+					<Item type="CreatureEffectsAction">
+						<visualEffects>
+							<Item>
+								<effectFx href="/Spells/FX/Spells/Fatality/Fatality_Cast.(VisObjectTemplate).xdb" />
+								<locator>Slot_BodyFX</locator>
+							</Item>
+						</visualEffects>
+					</Item>
+					<Item type="CreatureChannelDirectAction">
+						<channelingFx hrefvar="FXRay" />
+						<fxLength var="RayLength" />
+						<startPoint type="VisPointLocator">
+							<shift y="-0.2" />
+							<locator var="LocatorOnCaster" />
+						</startPoint>
+						<endPoint type="VisPointLocator">
+							<shift y="-1" />
+							<locator var="LocatorOnTargets" />
+						</endPoint>
+						<fadeInTime>200</fadeInTime>
+						<fadeOutTime>100</fadeOutTime>
+						<offendTime type="EffectOffendConstDelay" />
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<playWhile type="PredicateCreatureFlagAction">
+							<flagName>FatalityWings</flagName>
+						</playWhile>
+						<preconditional>true</preconditional>
+						<elements>
+							<Item type="CreatureAnimationAction">
+								<animations>
+									<Item>levelUp</Item>
+								</animations>
+								<channel>CHANNEL_ATTACK</channel>
+								<channelOverrideScript />
+								<advanced>
+									<speed>0.6</speed>
+								</advanced>
+							</Item>
+							<Item type="CreatureEffectsAction">
+								<visualEffects>
+									<Item>
+										<effectFx href="/Spells/FX/Spells/Dragon_Wings_Wear_Fatality.(VisObjectTemplate).xdb" />
+										<effectAlias href="" />
+										<locator>Slot_FX</locator>
+										<member>Assaulter</member>
+										<locatorName>Slot_Back_Special</locatorName>
+										<offendTime />
+										<offset y="0.4" z="0.1" />
+									</Item>
+								</visualEffects>
+							</Item>
+						</elements>
+					</Item>
+				</elements>
+			</casterFxScript>
+			<sparkDelay>11</sparkDelay>
+		</Item>
+		<Item>
+			<type>WARRIOR</type>
+			<offenderDeathScript type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>Flag_Fatality</flagName>
+				</playWhile>
+				<elements>
+					<Item type="CreatureAnimationAction">
+						<mode>CLAMP</mode>
+						<animations>
+							<Item>deathFatalityWarrior</Item>
+						</animations>
+						<channel>CHANNEL_DEATH</channel>
+						<channelOverrideMode>OVERRIDE_IGNORE</channelOverrideMode>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/FatalityWarrior.(VisObjectTemplate).xdb" />
+						<scale>1.3</scale>
+						<lifeTime>11.9</lifeTime>
+					</Item>
+					<Item type="VisActionList">
+						<elements>
+							<Item type="ProceduralEffectVisAction">
+								<priority>1000</priority>
+								<proceduralEffect href="/Spells/FX/InterfaceFX/Empty.(ProceduralEffect).xdb" />
+							</Item>
+							<Item type="VisActionDelay">
+								<visActionID>Fatality_W12Fire</visActionID>
+								<time>4300</time>
+							</Item>
+							<Item type="ProceduralEffectVisAction">
+								<visActionID>Fatality_W12Fire</visActionID>
+								<timeOff>2</timeOff>
+								<timeOn>2</timeOn>
+								<priority>2000</priority>
+								<proceduralEffect href="/Spells/FX/InterfaceFX/FatalityWarrior.(ProceduralEffect).xdb" />
+							</Item>
+						</elements>
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<elements>
+							<Item type="CreatureColorAction">
+								<visActionID>0</visActionID>
+								<priority>1000</priority>
+								<colorValue>-12058624</colorValue>
+								<timeOn>6.7</timeOn>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="VisActionList">
+						<elements>
+							<Item type="VisActionDelay">
+								<time>7800</time>
+							</Item>
+							<Item type="CreatureSetTransparencyAction">
+								<transparency>0</transparency>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<playWhile type="PredicateCreatureVisCharacterAction">
+							<visCharList>
+								<Item href="/Characters/Giberling_Group/GiberlingGroup.(VisCharacterTemplate).xdb" />
+							</visCharList>
+						</playWhile>
+						<preconditional>true</preconditional>
+						<elements>
+							<Item type="CreatureIndependentFxAction">
+								<visObject href="/Spells/FX/Spells/Fatality/FatalityWarrior_Gibby.(VisObjectTemplate).xdb" />
+								<scale>1.3</scale>
+								<lifeTime>14</lifeTime>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<playWhile type="PredicateCreatureVisCharacterAction">
+							<visCharList>
+								<Item href="/Characters/Elf_female/ElfFemale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Elf_male/ElfMale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Hadagan_female/HadaganFemale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Hadagan_male/HadaganMale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Kania_female/KaniaFemale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Kania_male/KaniaMale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Orc_female/OrcFemale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Orc_male/OrcMale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Undead_female/UndeadFemale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Undead_male/UndeadMale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Praiden_male/PraidenMale.(VisCharacterTemplate).xdb" />
+								<Item href="/Characters/Praiden_female/PraidenFemale.(VisCharacterTemplate).xdb" />
+							</visCharList>
+						</playWhile>
+						<preconditional>true</preconditional>
+						<elements>
+							<Item type="CreatureIndependentFxAction">
+								<visObject href="/Spells/FX/Spells/Fatality/FatalityWarrior_Fire.(VisObjectTemplate).xdb" />
+								<scale>1.3</scale>
+								<lifeTime>14</lifeTime>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/Fatality_AuraWar.(VisObjectTemplate).xdb" />
+						<offset z="0.3" />
+						<scale>3.12</scale>
+						<lifeTime>11.5</lifeTime>
+					</Item>
+					<Item type="CreatureScaleAction">
+						<scale>1.3</scale>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/FatalityBack_Warrior.(VisObjectTemplate).xdb" />
+						<offset z="1" />
+						<scale>0.5</scale>
+						<lifeTime>11.9</lifeTime>
+					</Item>
+				</elements>
+			</offenderDeathScript>
+			<fadeStartTime>8.2</fadeStartTime>
+			<fadeDuration>0.1</fadeDuration>
+			<casterFxScript type="VisActionList">
+				<play>Simultaneously</play>
+				<elements>
+					<Item type="CreatureEffectsAction">
+						<visualEffects>
+							<Item>
+								<effectFx href="/Spells/FX/Spells/Fatality/Fatality_Cast.(VisObjectTemplate).xdb" />
+								<locator>Slot_BodyFX</locator>
+							</Item>
+						</visualEffects>
+					</Item>
+					<Item type="CreatureChannelDirectAction">
+						<channelingFx hrefvar="FXRay" />
+						<fxLength var="RayLength" />
+						<startPoint type="VisPointLocator">
+							<shift y="-0.2" />
+							<locator var="LocatorOnCaster" />
+						</startPoint>
+						<endPoint type="VisPointLocator">
+							<shift y="-1" />
+							<locator var="LocatorOnTargets" />
+						</endPoint>
+						<fadeInTime>200</fadeInTime>
+						<fadeOutTime>100</fadeOutTime>
+						<offendTime type="EffectOffendConstDelay" />
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<playWhile type="PredicateCreatureFlagAction">
+							<flagName>FatalityWings</flagName>
+						</playWhile>
+						<preconditional>true</preconditional>
+						<elements>
+							<Item type="CreatureAnimationAction">
+								<animations>
+									<Item>levelUp</Item>
+								</animations>
+								<channel>CHANNEL_ATTACK</channel>
+								<channelOverrideScript />
+								<advanced>
+									<speed>0.6</speed>
+								</advanced>
+							</Item>
+							<Item type="CreatureEffectsAction">
+								<visualEffects>
+									<Item>
+										<effectFx href="/Spells/FX/Spells/Dragon_Wings_Wear_Fatality.(VisObjectTemplate).xdb" />
+										<effectAlias href="" />
+										<locator>Slot_FX</locator>
+										<member>Assaulter</member>
+										<locatorName>Slot_Back_Special</locatorName>
+										<offendTime />
+										<offset y="0.4" z="0.1" />
+									</Item>
+								</visualEffects>
+							</Item>
+						</elements>
+					</Item>
+				</elements>
+			</casterFxScript>
+			<sparkDelay>13</sparkDelay>
+		</Item>
+		<Item>
+			<type>ENGINEER</type>
+			<offenderDeathScript type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>Flag_Fatality</flagName>
+				</playWhile>
+				<elements>
+					<Item type="CreatureAnimationAction">
+						<mode>CLAMP</mode>
+						<animations>
+							<Item>deathFatalityEngineer</Item>
+						</animations>
+						<channel>CHANNEL_DEATH</channel>
+						<channelOverrideMode>OVERRIDE_IGNORE</channelOverrideMode>
+						<channelOverrideScript />
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/FatalityEngeneer.(VisObjectTemplate).xdb" />
+						<lifeTime>11</lifeTime>
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<playWhile />
+						<elements>
+							<Item type="ProceduralEffectVisAction">
+								<priority>1000</priority>
+								<proceduralEffect href="/Spells/FX/InterfaceFX/Empty.(ProceduralEffect).xdb" />
+							</Item>
+							<Item type="CreatureColorAction">
+								<visActionID>0</visActionID>
+								<colorValue>-1</colorValue>
+								<timeOn>0.3</timeOn>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="VisActionList">
+						<playWhile />
+						<elements>
+							<Item type="CreatureColorAction">
+								<priority>1</priority>
+								<colorValue>-16777216</colorValue>
+								<timeOn>10</timeOn>
+							</Item>
+							<Item type="VisActionDelay">
+								<time>4820</time>
+							</Item>
+							<Item type="CreatureChangeVisItemsAction">
+								<visActionID />
+								<removeAllItems>true</removeAllItems>
+								<items>
+									<Item>
+										<slot>ARMOR</slot>
+										<newItem href="/Items/Costumes/VisItems/Set/Special/BoneSet.(VisualItem).xdb" />
+									</Item>
+									<Item>
+										<slot>HELM</slot>
+									</Item>
+								</items>
+							</Item>
+							<Item type="VisActionDelay">
+								<time>1000</time>
+							</Item>
+							<Item type="CreatureSetTransparencyAction">
+								<transparency>0</transparency>
+							</Item>
+						</elements>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/Fatality_AuraEngeneer.(VisObjectTemplate).xdb" />
+						<offset z="0.3" />
+						<scale>2.7</scale>
+						<lifeTime>10</lifeTime>
+					</Item>
+					<Item type="CreatureIndependentFxAction">
+						<visObject href="/Spells/FX/Spells/Fatality/Fatality_Engeneer_Back.(VisObjectTemplate).xdb" />
+						<offset z="1" />
+						<scale>0.5</scale>
+						<lifeTime>11</lifeTime>
+					</Item>
+				</elements>
+			</offenderDeathScript>
+			<casterFxScript type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile />
+				<elements>
+					<Item type="CreatureEffectsAction">
+						<visualEffects>
+							<Item>
+								<effectFx href="/Spells/FX/Spells/Fatality/Fatality_Cast.(VisObjectTemplate).xdb" />
+								<effectAlias href="" />
+								<locator>Slot_BodyFX</locator>
+								<offendTime />
+							</Item>
+						</visualEffects>
+					</Item>
+					<Item type="CreatureChannelDirectAction">
+						<channelingFx hrefvar="FXRay" />
+						<fxLength var="RayLength" />
+						<startPoint type="VisPointLocator">
+							<shift y="-0.2" />
+							<locator var="LocatorOnCaster" />
+						</startPoint>
+						<alternativeStartPoint />
+						<endPoint type="VisPointLocator">
+							<shift y="-1" />
+							<locator var="LocatorOnTargets" />
+						</endPoint>
+						<alternativeEndPoint />
+						<fadeInTime>200</fadeInTime>
+						<fadeOutTime>100</fadeOutTime>
+						<offendTime type="EffectOffendConstDelay" />
+						<secondaryTargetParams>
+							<channelingFx href="" />
+							<offendTime />
+						</secondaryTargetParams>
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<playWhile type="PredicateCreatureFlagAction">
+							<flagName>FatalityWings</flagName>
+							<checkIsSet>true</checkIsSet>
+						</playWhile>
+						<preconditional>true</preconditional>
+						<elements>
+							<Item type="CreatureAnimationAction">
+								<animations>
+									<Item>levelUp</Item>
+								</animations>
+								<channel>CHANNEL_ATTACK</channel>
+								<channelOverrideScript />
+								<advanced>
+									<speed>0.6</speed>
+								</advanced>
+							</Item>
+							<Item type="CreatureEffectsAction">
+								<visualEffects>
+									<Item>
+										<effectFx href="/Spells/FX/Spells/Dragon_Wings_Wear_Fatality.(VisObjectTemplate).xdb" />
+										<effectAlias href="" />
+										<locator>Slot_FX</locator>
+										<member>Assaulter</member>
+										<locatorName>Slot_Back_Special</locatorName>
+										<offendTime />
+										<offset y="0.4" z="0.1" />
+									</Item>
+								</visualEffects>
+							</Item>
+						</elements>
+					</Item>
+				</elements>
+			</casterFxScript>
+		</Item>
+	</fatalities>
+	<stubAnimations>
+		<Item>
+			<baseAnimation>death</baseAnimation>
+			<stubFor>
+				<Item>death01</Item>
+				<Item>death02</Item>
+				<Item>deathOverkill</Item>
+				<Item>deathOverkill01</Item>
+				<Item>deathOverkill02</Item>
+				<Item>deathSwim</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>dead</baseAnimation>
+			<stubFor>
+				<Item>dead01</Item>
+				<Item>dead02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>deadOverkill</baseAnimation>
+			<stubFor>
+				<Item>deadOverkill01</Item>
+				<Item>deadOverkill02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>attack</baseAnimation>
+			<stubFor>
+				<Item>attack01</Item>
+				<Item>attack02</Item>
+				<Item>attack03</Item>
+				<Item>attack1H</Item>
+				<Item>attack1H01</Item>
+				<Item>attack1H02</Item>
+				<Item>attack1HPierce</Item>
+				<Item>attack1HPierce01</Item>
+				<Item>attack1HPierce02</Item>
+				<Item>attack1HSpear</Item>
+				<Item>attack2H</Item>
+				<Item>attack2H01</Item>
+				<Item>attack2H02</Item>
+				<Item>attack2HL</Item>
+				<Item>attack2HL01</Item>
+				<Item>attack2HL02</Item>
+				<Item>attackBard</Item>
+				<Item>attackBard01</Item>
+				<Item>attackBard02</Item>
+				<Item>attackBow</Item>
+				<Item>attackBow01</Item>
+				<Item>attackBow02</Item>
+				<Item>attackBow03</Item>
+				<Item>attackCrossbow</Item>
+				<Item>attackCrossbow01</Item>
+				<Item>attackCrossbow02</Item>
+				<Item>attackOff</Item>
+				<Item>attackOff01</Item>
+				<Item>attackOff02</Item>
+				<Item>attackOffPierce</Item>
+				<Item>attackOffPierce01</Item>
+				<Item>attackOffPierce02</Item>
+				<Item>attackSwim</Item>
+				<Item>attackSwim01</Item>
+				<Item>attackSwim02</Item>
+				<Item>attackSwim03</Item>
+				<Item>attackTricky</Item>
+				<Item>attackTricky01</Item>
+				<Item>attackTricky02</Item>
+				<Item>attackUnarmed</Item>
+				<Item>attackUnarmed01</Item>
+				<Item>attackUnarmed02</Item>
+				<Item>attackWand</Item>
+				<Item>cheapShotBow</Item>
+				<Item>cheapShotBow01</Item>
+				<Item>cheapShotBow02</Item>
+				<Item>cheapShotBowStart</Item>
+				<Item>cheapShotBowStart01</Item>
+				<Item>cheapShotBowStart02</Item>
+				<Item>cheapShotCrossbow</Item>
+				<Item>cheapShotCrossbow01</Item>
+				<Item>cheapShotCrossbow02</Item>
+				<Item>cheapShotCrossbowStart</Item>
+				<Item>cheapShotCrossbowStart01</Item>
+				<Item>cheapShotCrossbowStart02</Item>
+				<Item>crusaderStrike</Item>
+				<Item>flurryOfBlows</Item>
+				<Item>flurryOfBlows01</Item>
+				<Item>flurryOfBlows02</Item>
+				<Item>getIt</Item>
+				<Item>getIt01</Item>
+				<Item>getIt02</Item>
+				<Item>groundStrike</Item>
+				<Item>groundStrike01</Item>
+				<Item>groundStrike02</Item>
+				<Item>headSlam</Item>
+				<Item>headSlam01</Item>
+				<Item>headSlam02</Item>
+				<Item>holyStrike</Item>
+				<Item>instantSpellCastDirected</Item>
+				<Item>instantSpellCastDirected01</Item>
+				<Item>instantSpellCastDirected02</Item>
+				<Item>instantSpellCastDirectedWand</Item>
+				<Item>instantSpellCastDirectedWand01</Item>
+				<Item>instantSpellCastDirectedWand02</Item>
+				<Item>instantSpellCastOmni</Item>
+				<Item>instantSpellCastOmni01</Item>
+				<Item>instantSpellCastOmni02</Item>
+				<Item>instantSpellCastOmniWand</Item>
+				<Item>instantSpellCastOmniWand01</Item>
+				<Item>instantSpellCastOmniWand02</Item>
+				<Item>jumpAttack</Item>
+				<Item>jumpAttack01</Item>
+				<Item>jumpAttack02</Item>
+				<Item>jumpAttackStart</Item>
+				<Item>jumpAttackStart01</Item>
+				<Item>jumpAttackStart02</Item>
+				<Item>kick</Item>
+				<Item>kickStrong</Item>
+				<Item>kickStrong01</Item>
+				<Item>kickStrong02</Item>
+				<Item>kickWeak</Item>
+				<Item>kickWeak01</Item>
+				<Item>kickWeak02</Item>
+				<Item>paladinAbility</Item>
+				<Item>paladinAbility01</Item>
+				<Item>paladinAbility02</Item>
+				<Item>roundStrike</Item>
+				<Item>roundStrike01</Item>
+				<Item>roundStrike02</Item>
+				<Item>specialAttack</Item>
+				<Item>specialAttack01</Item>
+				<Item>specialAttack02</Item>
+				<Item>specialAttack1H</Item>
+				<Item>specialAttack1HSpear</Item>
+				<Item>specialAttack2H</Item>
+				<Item>specialAttack2HL</Item>
+				<Item>specialAttackSwim</Item>
+				<Item>specialAttackSwim01</Item>
+				<Item>specialAttackSwim02</Item>
+				<Item>specialAttackUnarmed</Item>
+				<Item>specialCast</Item>
+				<Item>specialCast01</Item>
+				<Item>specialCast02</Item>
+				<Item>specialCastMount</Item>
+				<Item>specialCastMount01</Item>
+				<Item>specialCastMount02</Item>
+				<Item>specialCastSwim</Item>
+				<Item>specialCastSwim01</Item>
+				<Item>specialCastSwim02</Item>
+				<Item>spellCastDirected</Item>
+				<Item>spellCastDirected01</Item>
+				<Item>spellCastDirected02</Item>
+				<Item>spellCastDirectedBall</Item>
+				<Item>spellCastDirectedBall01</Item>
+				<Item>spellCastDirectedBall02</Item>
+				<Item>spellCastDirectedBard</Item>
+				<Item>spellCastDirectedMind</Item>
+				<Item>spellCastDirectedMind01</Item>
+				<Item>spellCastDirectedMind02</Item>
+				<Item>spellCastDirectedSwim</Item>
+				<Item>spellCastDirectedWand</Item>
+				<Item>spellCastDirectedWand01</Item>
+				<Item>spellCastDirectedWand02</Item>
+				<Item>spellCastGround</Item>
+				<Item>spellCastMind</Item>
+				<Item>spellCastOmni</Item>
+				<Item>spellCastOmni01</Item>
+				<Item>spellCastOmni02</Item>
+				<Item>spellCastOmniBard</Item>
+				<Item>spellCastOmniGround</Item>
+				<Item>spellCastOmniGround01</Item>
+				<Item>spellCastOmniGround02</Item>
+				<Item>spellCastOmniShield</Item>
+				<Item>spellCastOmniShield01</Item>
+				<Item>spellCastOmniShield02</Item>
+				<Item>spellCastOmniSwim</Item>
+				<Item>spellCastOmniWand</Item>
+				<Item>spellCastOmniWand01</Item>
+				<Item>spellCastOmniWand02</Item>
+				<Item>spellCastPotion</Item>
+				<Item>spellCastPotion01</Item>
+				<Item>spellCastPotion02</Item>
+				<Item>stunStrike</Item>
+				<Item>stunStrike01</Item>
+				<Item>stunStrike02</Item>
+				<Item>summonMount</Item>
+				<Item>summonMount01</Item>
+				<Item>summonMount02</Item>
+				<Item>sweepingSlam</Item>
+				<Item>throwSpear</Item>
+				<Item>throwSpear01</Item>
+				<Item>throwSpear02</Item>
+				<Item>throwWeapon</Item>
+				<Item>throwWeapon01</Item>
+				<Item>throwWeapon02</Item>
+				<Item>whirlwind</Item>
+				<Item>whirlwind01</Item>
+				<Item>whirlwind02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>emoteSpeech</baseAnimation>
+			<stubFor>
+				<Item>emoteApplaud</Item>
+				<Item>emoteApplaud01</Item>
+				<Item>emoteApplaud02</Item>
+				<Item>emoteBeg</Item>
+				<Item>emoteBeg01</Item>
+				<Item>emoteBeg02</Item>
+				<Item>emoteBoring</Item>
+				<Item>emoteBoring01</Item>
+				<Item>emoteBoring02</Item>
+				<Item>emoteBurn</Item>
+				<Item>emoteBurn01</Item>
+				<Item>emoteBurn02</Item>
+				<Item>emoteCallout</Item>
+				<Item>emoteCallout01</Item>
+				<Item>emoteCallout02</Item>
+				<Item>emoteCaressCat</Item>
+				<Item>emoteCaressCat01</Item>
+				<Item>emoteCaressCat02</Item>
+				<Item>emoteCheer</Item>
+				<Item>emoteCheer01</Item>
+				<Item>emoteCheer02</Item>
+				<Item>emoteCongratulate</Item>
+				<Item>emoteCry</Item>
+				<Item>emoteCry01</Item>
+				<Item>emoteCry02</Item>
+				<Item>emoteCurtsey</Item>
+				<Item>emoteCurtsey01</Item>
+				<Item>emoteCurtsey02</Item>
+				<Item>emoteDance</Item>
+				<Item>emoteDance01</Item>
+				<Item>emoteDance02</Item>
+				<Item>emoteDance03</Item>
+				<Item>emoteDance04</Item>
+				<Item>emoteDance05</Item>
+				<Item>emoteDance06</Item>
+				<Item>emoteDance07</Item>
+				<Item>emoteDance08</Item>
+				<Item>emoteDance09</Item>
+				<Item>emoteDance10</Item>
+				<Item>emoteDrink</Item>
+				<Item>emoteDrink01</Item>
+				<Item>emoteDrink02</Item>
+				<Item>emoteEat</Item>
+				<Item>emoteEat01</Item>
+				<Item>emoteEat02</Item>
+				<Item>emoteFacepalm</Item>
+				<Item>emoteFacepalm01</Item>
+				<Item>emoteFacepalm02</Item>
+				<Item>emoteFlirt</Item>
+				<Item>emoteFlirt01</Item>
+				<Item>emoteFlirt02</Item>
+				<Item>emoteGreat</Item>
+				<Item>emoteGreat01</Item>
+				<Item>emoteGreat02</Item>
+				<Item>emoteGreeting</Item>
+				<Item>emoteKiss</Item>
+				<Item>emoteKiss01</Item>
+				<Item>emoteKiss02</Item>
+				<Item>emoteKneel</Item>
+				<Item>emoteKneel01</Item>
+				<Item>emoteKneel02</Item>
+				<Item>emoteLaugh</Item>
+				<Item>emoteLaugh01</Item>
+				<Item>emoteLaugh02</Item>
+				<Item>emoteMuscle</Item>
+				<Item>emoteMuscle01</Item>
+				<Item>emoteMuscle02</Item>
+				<Item>emotePlayMusic</Item>
+				<Item>emotePlayMusic01</Item>
+				<Item>emotePlayMusic02</Item>
+				<Item>emotePoint</Item>
+				<Item>emotePoint01</Item>
+				<Item>emotePoint02</Item>
+				<Item>emotePoint03</Item>
+				<Item>emotePrayer</Item>
+				<Item>emotePreved</Item>
+				<Item>emotePreved01</Item>
+				<Item>emotePreved02</Item>
+				<Item>emoteProvoke</Item>
+				<Item>emoteProvoke01</Item>
+				<Item>emoteProvoke02</Item>
+				<Item>emoteRasp</Item>
+				<Item>emoteRasp01</Item>
+				<Item>emoteRasp02</Item>
+				<Item>emoteSalute</Item>
+				<Item>emoteSalute01</Item>
+				<Item>emoteSalute02</Item>
+				<Item>emoteSay</Item>
+				<Item>emoteSay01</Item>
+				<Item>emoteSay02</Item>
+				<Item>emoteSayNo</Item>
+				<Item>emoteSayNo01</Item>
+				<Item>emoteSayNo02</Item>
+				<Item>emoteSayYes</Item>
+				<Item>emoteSayYes01</Item>
+				<Item>emoteSayYes02</Item>
+				<Item>emoteShout</Item>
+				<Item>emoteShout01</Item>
+				<Item>emoteShout02</Item>
+				<Item>emoteShrug</Item>
+				<Item>emoteShrug01</Item>
+				<Item>emoteShrug02</Item>
+				<Item>emoteSneeze</Item>
+				<Item>emoteSneeze01</Item>
+				<Item>emoteSneeze02</Item>
+				<Item>emoteSpeech01</Item>
+				<Item>emoteSpeech02</Item>
+				<Item>emoteTalkExcited</Item>
+				<Item>emoteTalkExcited01</Item>
+				<Item>emoteTalkExcited02</Item>
+				<Item>emoteTriumph</Item>
+				<Item>emoteTriumph01</Item>
+				<Item>emoteTriumph02</Item>
+				<Item>emoteWavehand</Item>
+				<Item>emoteWavehand01</Item>
+				<Item>emoteWavehand02</Item>
+				<Item>emoteWavehandSilent</Item>
+				<Item>emoteWavehandSilent01</Item>
+				<Item>emoteWavehandSilent02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>jump</baseAnimation>
+			<stubFor>
+				<Item>fall</Item>
+				<Item>fly</Item>
+				<Item>fly01</Item>
+				<Item>fly02</Item>
+				<Item>flyRocket</Item>
+				<Item>flyRocket01</Item>
+				<Item>flyRocket02</Item>
+				<Item>flyRocketStart</Item>
+				<Item>flyRocketStart01</Item>
+				<Item>flyRocketStart02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>holdWeapon</baseAnimation>
+		</Item>
+		<Item>
+			<baseAnimation>idleMalfunction</baseAnimation>
+		</Item>
+		<Item>
+			<baseAnimation>idleSwim</baseAnimation>
+			<stubFor>
+				<Item>idleSwim01</Item>
+				<Item>idleSwim02</Item>
+				<Item>idleSwim03</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>jumpEnd</baseAnimation>
+		</Item>
+		<Item>
+			<baseAnimation>jumpLandRun</baseAnimation>
+		</Item>
+		<Item>
+			<baseAnimation>jumpStart</baseAnimation>
+		</Item>
+		<Item>
+			<baseAnimation>knockdownEnd</baseAnimation>
+			<stubFor>
+				<Item>knockdownEnd01</Item>
+				<Item>knockdownEnd02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>knockdownLoop</baseAnimation>
+			<stubFor>
+				<Item>knockdownLoop01</Item>
+				<Item>knockdownLoop02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>knockdownStart</baseAnimation>
+			<stubFor>
+				<Item>knockdownStart01</Item>
+				<Item>knockdownStart02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>levelUp</baseAnimation>
+			<stubFor>
+				<Item>levelUp01</Item>
+				<Item>levelUp02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>specialJump</baseAnimation>
+		</Item>
+		<Item>
+			<baseAnimation>mountBikeIdle</baseAnimation>
+			<stubFor>
+				<Item>mountBikeAFK</Item>
+				<Item>mountBikeAFK01</Item>
+				<Item>mountBikeAFK02</Item>
+				<Item>mountBikeEmoteAFK</Item>
+				<Item>mountBikeEmoteAFK01</Item>
+				<Item>mountBikeEmoteAFK02</Item>
+				<Item>mountBikeHit</Item>
+				<Item>mountBikeHit01</Item>
+				<Item>mountBikeHit02</Item>
+				<Item>mountBikeIdle01</Item>
+				<Item>mountBikeIdle02</Item>
+				<Item>mountBikeJump</Item>
+				<Item>mountBikeJump01</Item>
+				<Item>mountBikeJump02</Item>
+				<Item>mountBikeJumpEnd</Item>
+				<Item>mountBikeJumpEnd01</Item>
+				<Item>mountBikeJumpEnd02</Item>
+				<Item>mountBikeJumpLandRun</Item>
+				<Item>mountBikeJumpLandRun01</Item>
+				<Item>mountBikeJumpLandRun02</Item>
+				<Item>mountBikeJumpStart</Item>
+				<Item>mountBikeJumpStart01</Item>
+				<Item>mountBikeJumpStart02</Item>
+				<Item>mountBikeLevelUp</Item>
+				<Item>mountBikeLevelUp01</Item>
+				<Item>mountBikeLevelUp02</Item>
+				<Item>mountBikeRun</Item>
+				<Item>mountBikeRun01</Item>
+				<Item>mountBikeRun02</Item>
+				<Item>mountBikeShuffleLeft</Item>
+				<Item>mountBikeShuffleLeft01</Item>
+				<Item>mountBikeShuffleLeft02</Item>
+				<Item>mountBikeShuffleRight</Item>
+				<Item>mountBikeShuffleRight01</Item>
+				<Item>mountBikeShuffleRight02</Item>
+				<Item>mountBikeSit</Item>
+				<Item>mountBikeSit01</Item>
+				<Item>mountBikeSit02</Item>
+				<Item>mountBikeSpecialJump</Item>
+				<Item>mountBikeSpecialJump01</Item>
+				<Item>mountBikeSpecialJump02</Item>
+				<Item>mountBikeWalk</Item>
+				<Item>mountBikeWalk01</Item>
+				<Item>mountBikeWalk02</Item>
+				<Item>mountBikeWalkBackwards</Item>
+				<Item>mountBikeWalkBackwards01</Item>
+				<Item>mountBikeWalkBackwards02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>mountBikeSpecial</baseAnimation>
+			<stubFor>
+				<Item>mountBikeSpecial01</Item>
+				<Item>mountBikeSpecial02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>mountCarpetIdle</baseAnimation>
+			<stubFor>
+				<Item>mountCarpetEmoteAFK</Item>
+				<Item>mountCarpetEmoteAFK01</Item>
+				<Item>mountCarpetEmoteAFK02</Item>
+				<Item>mountCarpetHit</Item>
+				<Item>mountCarpetHit01</Item>
+				<Item>mountCarpetHit02</Item>
+				<Item>mountCarpetIdle01</Item>
+				<Item>mountCarpetIdle02</Item>
+				<Item>mountCarpetIdle03</Item>
+				<Item>mountCarpetIdle04</Item>
+				<Item>mountCarpetIdle05</Item>
+				<Item>mountCarpetIdle06</Item>
+				<Item>mountCarpetIdle07</Item>
+				<Item>mountCarpetIdle08</Item>
+				<Item>mountCarpetJump</Item>
+				<Item>mountCarpetJump01</Item>
+				<Item>mountCarpetJump02</Item>
+				<Item>mountCarpetJumpLandRun</Item>
+				<Item>mountCarpetJumpLandRun01</Item>
+				<Item>mountCarpetJumpLandRun02</Item>
+				<Item>mountCarpetJumpStart</Item>
+				<Item>mountCarpetJumpStart01</Item>
+				<Item>mountCarpetJumpStart02</Item>
+				<Item>mountCarpetKnockdown</Item>
+				<Item>mountCarpetKnockdown01</Item>
+				<Item>mountCarpetKnockdown02</Item>
+				<Item>mountCarpetLevelUp</Item>
+				<Item>mountCarpetLevelUp01</Item>
+				<Item>mountCarpetLevelUp02</Item>
+				<Item>mountCarpetRun</Item>
+				<Item>mountCarpetRun01</Item>
+				<Item>mountCarpetRun02</Item>
+				<Item>mountCarpetRunFast</Item>
+				<Item>mountCarpetRunFast01</Item>
+				<Item>mountCarpetRunFast02</Item>
+				<Item>mountCarpetShuffleLeft</Item>
+				<Item>mountCarpetShuffleLeft01</Item>
+				<Item>mountCarpetShuffleLeft02</Item>
+				<Item>mountCarpetShuffleRight</Item>
+				<Item>mountCarpetShuffleRight01</Item>
+				<Item>mountCarpetShuffleRight02</Item>
+				<Item>mountCarpetSit</Item>
+				<Item>mountCarpetSit01</Item>
+				<Item>mountCarpetSit02</Item>
+				<Item>mountCarpetSpecial</Item>
+				<Item>mountCarpetSpecial01</Item>
+				<Item>mountCarpetSpecial02</Item>
+				<Item>mountCarpetSpecial03</Item>
+				<Item>mountCarpetSpecial04</Item>
+				<Item>mountCarpetSpecial05</Item>
+				<Item>mountCarpetSpecialJump</Item>
+				<Item>mountCarpetSpecialJump01</Item>
+				<Item>mountCarpetSpecialJump02</Item>
+				<Item>mountCarpetWalk</Item>
+				<Item>mountCarpetWalk01</Item>
+				<Item>mountCarpetWalk02</Item>
+				<Item>mountCarpetWalkBackwards</Item>
+				<Item>mountCarpetWalkBackwards01</Item>
+				<Item>mountCarpetWalkBackwards02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>mountGoatlingIdle</baseAnimation>
+			<stubFor>
+				<Item>mountGoatlingEmoteAFK</Item>
+				<Item>mountGoatlingEmoteAFK01</Item>
+				<Item>mountGoatlingEmoteAFK02</Item>
+				<Item>mountGoatlingHit</Item>
+				<Item>mountGoatlingHit01</Item>
+				<Item>mountGoatlingHit02</Item>
+				<Item>mountGoatlingIdle01</Item>
+				<Item>mountGoatlingIdle02</Item>
+				<Item>mountGoatlingIdle03</Item>
+				<Item>mountGoatlingIdle04</Item>
+				<Item>mountGoatlingIdle05</Item>
+				<Item>mountGoatlingIdle06</Item>
+				<Item>mountGoatlingIdle07</Item>
+				<Item>mountGoatlingIdle08</Item>
+				<Item>mountGoatlingIdle09</Item>
+				<Item>mountGoatlingIdle10</Item>
+				<Item>mountGoatlingJump</Item>
+				<Item>mountGoatlingJump01</Item>
+				<Item>mountGoatlingJump02</Item>
+				<Item>mountGoatlingJumpLandRun</Item>
+				<Item>mountGoatlingJumpLandRun01</Item>
+				<Item>mountGoatlingJumpLandRun02</Item>
+				<Item>mountGoatlingJumpStart</Item>
+				<Item>mountGoatlingJumpStart01</Item>
+				<Item>mountGoatlingJumpStart02</Item>
+				<Item>mountGoatlingKnockdown</Item>
+				<Item>mountGoatlingKnockdown01</Item>
+				<Item>mountGoatlingKnockdown02</Item>
+				<Item>mountGoatlingLevelUp</Item>
+				<Item>mountGoatlingLevelUp01</Item>
+				<Item>mountGoatlingLevelUp02</Item>
+				<Item>mountGoatlingRun</Item>
+				<Item>mountGoatlingRun01</Item>
+				<Item>mountGoatlingRun02</Item>
+				<Item>mountGoatlingSit</Item>
+				<Item>mountGoatlingSit01</Item>
+				<Item>mountGoatlingSit02</Item>
+				<Item>mountGoatlingSpecialJump</Item>
+				<Item>mountGoatlingSpecialJump01</Item>
+				<Item>mountGoatlingSpecialJump02</Item>
+				<Item>mountGoatlingWalk</Item>
+				<Item>mountGoatlingWalk01</Item>
+				<Item>mountGoatlingWalk02</Item>
+				<Item>mountGoatlingWalkBackwards</Item>
+				<Item>mountGoatlingWalkBackwards01</Item>
+				<Item>mountGoatlingWalkBackwards02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>mountJetIdle</baseAnimation>
+			<stubFor>
+				<Item>mountJetEmoteAFK</Item>
+				<Item>mountJetEmoteAFK01</Item>
+				<Item>mountJetEmoteAFK02</Item>
+				<Item>mountJetHit</Item>
+				<Item>mountJetHit01</Item>
+				<Item>mountJetHit02</Item>
+				<Item>mountJetIdle01</Item>
+				<Item>mountJetIdle02</Item>
+				<Item>mountJetIdle03</Item>
+				<Item>mountJetIdle04</Item>
+				<Item>mountJetJump</Item>
+				<Item>mountJetJump01</Item>
+				<Item>mountJetJump02</Item>
+				<Item>mountJetJumpEnd</Item>
+				<Item>mountJetJumpEnd01</Item>
+				<Item>mountJetJumpEnd02</Item>
+				<Item>mountJetJumpLandRun</Item>
+				<Item>mountJetJumpLandRun01</Item>
+				<Item>mountJetJumpLandRun02</Item>
+				<Item>mountJetJumpStart</Item>
+				<Item>mountJetJumpStart01</Item>
+				<Item>mountJetJumpStart02</Item>
+				<Item>mountJetKnockdown</Item>
+				<Item>mountJetKnockdown01</Item>
+				<Item>mountJetKnockdown02</Item>
+				<Item>mountJetLevelUp</Item>
+				<Item>mountJetLevelUp01</Item>
+				<Item>mountJetLevelUp02</Item>
+				<Item>mountJetRun</Item>
+				<Item>mountJetRun01</Item>
+				<Item>mountJetRun02</Item>
+				<Item>mountJetSpecialJump</Item>
+				<Item>mountJetSpecialJump01</Item>
+				<Item>mountJetSpecialJump02</Item>
+				<Item>mountJetWalk</Item>
+				<Item>mountJetWalk01</Item>
+				<Item>mountJetWalk02</Item>
+				<Item>mountJetWalkBackwards</Item>
+				<Item>mountJetWalkBackwards01</Item>
+				<Item>mountJetWalkBackwards02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>mountRideIdle</baseAnimation>
+			<stubFor>
+				<Item>mountRideDance</Item>
+				<Item>mountRideDance01</Item>
+				<Item>mountRideDance02</Item>
+				<Item>mountRideEmoteAFK</Item>
+				<Item>mountRideEmoteAFK01</Item>
+				<Item>mountRideEmoteAFK02</Item>
+				<Item>mountRideHit</Item>
+				<Item>mountRideHit01</Item>
+				<Item>mountRideHit02</Item>
+				<Item>mountRideIdle01</Item>
+				<Item>mountRideIdle02</Item>
+				<Item>mountRideJump</Item>
+				<Item>mountRideJump01</Item>
+				<Item>mountRideJump02</Item>
+				<Item>mountRideJumpLandRun</Item>
+				<Item>mountRideJumpLandRun01</Item>
+				<Item>mountRideJumpLandRun02</Item>
+				<Item>mountRideJumpStart</Item>
+				<Item>mountRideJumpStart01</Item>
+				<Item>mountRideJumpStart02</Item>
+				<Item>mountRideKnockdown</Item>
+				<Item>mountRideLevelUp</Item>
+				<Item>mountRideLevelUp01</Item>
+				<Item>mountRideLevelUp02</Item>
+				<Item>mountRideRun</Item>
+				<Item>mountRideRun01</Item>
+				<Item>mountRideRun02</Item>
+				<Item>mountRideRunEnd</Item>
+				<Item>mountRideRunEnd01</Item>
+				<Item>mountRideRunEnd02</Item>
+				<Item>mountRideRunFast</Item>
+				<Item>mountRideRunFast01</Item>
+				<Item>mountRideRunFast02</Item>
+				<Item>mountRideRunStart</Item>
+				<Item>mountRideRunStart01</Item>
+				<Item>mountRideRunStart02</Item>
+				<Item>mountRideShuffleLeft</Item>
+				<Item>mountRideShuffleLeft01</Item>
+				<Item>mountRideShuffleLeft02</Item>
+				<Item>mountRideShuffleRight</Item>
+				<Item>mountRideShuffleRight01</Item>
+				<Item>mountRideShuffleRight02</Item>
+				<Item>mountRideSit</Item>
+				<Item>mountRideSit01</Item>
+				<Item>mountRideSit02</Item>
+				<Item>mountRideSpecialJump</Item>
+				<Item>mountRideSpecialJump01</Item>
+				<Item>mountRideSpecialJump02</Item>
+				<Item>mountRideWalk</Item>
+				<Item>mountRideWalk01</Item>
+				<Item>mountRideWalk02</Item>
+				<Item>mountRideWalkBackwards</Item>
+				<Item>mountRideWalkBackwards01</Item>
+				<Item>mountRideWalkBackwards02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>mountSitIdle</baseAnimation>
+			<stubFor>
+				<Item>mountSitEmoteAFK</Item>
+				<Item>mountSitEmoteAFK01</Item>
+				<Item>mountSitEmoteAFK02</Item>
+				<Item>mountSitHit</Item>
+				<Item>mountSitHit01</Item>
+				<Item>mountSitHit02</Item>
+				<Item>mountSitIdle01</Item>
+				<Item>mountSitIdle02</Item>
+				<Item>mountSitJump</Item>
+				<Item>mountSitJump01</Item>
+				<Item>mountSitJump02</Item>
+				<Item>mountSitJumpLandRun</Item>
+				<Item>mountSitJumpLandRun01</Item>
+				<Item>mountSitJumpLandRun02</Item>
+				<Item>mountSitJumpStart</Item>
+				<Item>mountSitJumpStart01</Item>
+				<Item>mountSitJumpStart02</Item>
+				<Item>mountSitKnockdown</Item>
+				<Item>mountSitLevelUp</Item>
+				<Item>mountSitLevelUp01</Item>
+				<Item>mountSitLevelUp02</Item>
+				<Item>mountSitRun</Item>
+				<Item>mountSitRun01</Item>
+				<Item>mountSitRun02</Item>
+				<Item>mountSitRunEnd</Item>
+				<Item>mountSitRunEnd01</Item>
+				<Item>mountSitRunEnd02</Item>
+				<Item>mountSitRunFast</Item>
+				<Item>mountSitRunFast01</Item>
+				<Item>mountSitRunFast02</Item>
+				<Item>mountSitRunStart</Item>
+				<Item>mountSitRunStart01</Item>
+				<Item>mountSitRunStart02</Item>
+				<Item>mountSitShuffleLeft</Item>
+				<Item>mountSitShuffleLeft01</Item>
+				<Item>mountSitShuffleLeft02</Item>
+				<Item>mountSitShuffleRight</Item>
+				<Item>mountSitShuffleRight01</Item>
+				<Item>mountSitShuffleRight02</Item>
+				<Item>mountSitSit</Item>
+				<Item>mountSitSit01</Item>
+				<Item>mountSitSit02</Item>
+				<Item>mountSitSpecialJump</Item>
+				<Item>mountSitSpecialJump01</Item>
+				<Item>mountSitSpecialJump02</Item>
+				<Item>mountSitWalk</Item>
+				<Item>mountSitWalk01</Item>
+				<Item>mountSitWalk02</Item>
+				<Item>mountSitWalkBackwards</Item>
+				<Item>mountSitWalkBackwards01</Item>
+				<Item>mountSitWalkBackwards02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>ready</baseAnimation>
+			<stubFor>
+				<Item>ready1H</Item>
+				<Item>ready1H01</Item>
+				<Item>ready1H02</Item>
+				<Item>ready1HSpear</Item>
+				<Item>ready2H</Item>
+				<Item>ready2H01</Item>
+				<Item>ready2H02</Item>
+				<Item>ready2HL</Item>
+				<Item>ready2HL01</Item>
+				<Item>ready2HL02</Item>
+				<Item>readyBow</Item>
+				<Item>readyBow01</Item>
+				<Item>readyBow02</Item>
+				<Item>readyBowSwim</Item>
+				<Item>readyCast</Item>
+				<Item>readyCast01</Item>
+				<Item>readyCast02</Item>
+				<Item>readyCastWand</Item>
+				<Item>readyCastWand01</Item>
+				<Item>readyCastWand02</Item>
+				<Item>readyCrossbow</Item>
+				<Item>readyCrossbowSwim</Item>
+				<Item>readySpell</Item>
+				<Item>readySpellCastMind</Item>
+				<Item>readySpellDirected</Item>
+				<Item>readySpellDirectedBall</Item>
+				<Item>readySpellDirectedBall01</Item>
+				<Item>readySpellDirectedBall02</Item>
+				<Item>readySpellDirectedBard</Item>
+				<Item>readySpellDirectedBody</Item>
+				<Item>readySpellDirectedBody01</Item>
+				<Item>readySpellDirectedBody02</Item>
+				<Item>readySpellDirectedBodyWand</Item>
+				<Item>readySpellDirectedBodyWand01</Item>
+				<Item>readySpellDirectedBodyWand02</Item>
+				<Item>readySpellDirectedHands</Item>
+				<Item>readySpellDirectedHands01</Item>
+				<Item>readySpellDirectedMind</Item>
+				<Item>readySpellDirectedMind01</Item>
+				<Item>readySpellDirectedMind02</Item>
+				<Item>readySpellDirectedWand</Item>
+				<Item>readySpellDirectedWand01</Item>
+				<Item>readySpellDirectedWand02</Item>
+				<Item>readySpellOmni</Item>
+				<Item>readySpellOmniBard</Item>
+				<Item>readySpellOmniBody</Item>
+				<Item>readySpellOmniBody01</Item>
+				<Item>readySpellOmniBody02</Item>
+				<Item>readySpellOmniGround</Item>
+				<Item>readySpellOmniGround01</Item>
+				<Item>readySpellOmniGround02</Item>
+				<Item>readySpellOmniHands</Item>
+				<Item>readySpellOmniHands01</Item>
+				<Item>readySpellOmniShield</Item>
+				<Item>readySpellOmniShield01</Item>
+				<Item>readySpellOmniShield02</Item>
+				<Item>readySpellOmniWand</Item>
+				<Item>readySpellOmniWand01</Item>
+				<Item>readySpellOmniWand02</Item>
+				<Item>readySpellPotion</Item>
+				<Item>readySpellPotion01</Item>
+				<Item>readySpellPotion02</Item>
+				<Item>readySpellSwim</Item>
+				<Item>readySwim</Item>
+				<Item>readyUnarmed</Item>
+				<Item>parry1H</Item>
+				<Item>parry2H</Item>
+				<Item>parry2HL</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>resurrection</baseAnimation>
+		</Item>
+		<Item>
+			<baseAnimation>slump</baseAnimation>
+		</Item>
+		<Item>
+			<baseAnimation>run</baseAnimation>
+			<stubFor>
+				<Item>run01</Item>
+				<Item>run02</Item>
+				<Item>run1H</Item>
+				<Item>run1H01</Item>
+				<Item>run1H02</Item>
+				<Item>run2H</Item>
+				<Item>run2HL</Item>
+				<Item>runBow</Item>
+				<Item>runCharge</Item>
+				<Item>runCharge01</Item>
+				<Item>runCharge02</Item>
+				<Item>runEnd</Item>
+				<Item>runFast</Item>
+				<Item>runSpellCharged</Item>
+				<Item>runSpellChargedWand</Item>
+				<Item>runStart</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>swim</baseAnimation>
+			<stubFor>
+				<Item>swim01</Item>
+				<Item>swim02</Item>
+				<Item>swim03</Item>
+				<Item>swimBackwards</Item>
+				<Item>swimLeft</Item>
+				<Item>swimRight</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>walk</baseAnimation>
+			<stubFor>
+				<Item>walk01</Item>
+				<Item>walk02</Item>
+				<Item>walk03</Item>
+				<Item>walkDrunken</Item>
+				<Item>walkDrunken01</Item>
+				<Item>walkDrunken02</Item>
+				<Item>walkForward</Item>
+				<Item>walkForward01</Item>
+				<Item>walkForward02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>walkBackwards</baseAnimation>
+			<stubFor>
+				<Item>walkBackwards01</Item>
+				<Item>walkBackwards02</Item>
+				<Item>walkBackwards03</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>mountBarrelIdle</baseAnimation>
+			<stubFor>
+				<Item>mountBarrelEmoteAFK</Item>
+				<Item>mountBarrelEmoteAFK01</Item>
+				<Item>mountBarrelEmoteAFK02</Item>
+				<Item>mountBarrelIdle01</Item>
+				<Item>mountBarrelIdle02</Item>
+				<Item>mountBarrelRun</Item>
+				<Item>mountBarrelRun01</Item>
+				<Item>mountBarrelRun02</Item>
+				<Item>mountBarrelSpellCastDirected</Item>
+				<Item>mountBarrelSpellCastDirected01</Item>
+				<Item>mountBarrelSpellCastDirected02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>mountBearIdle</baseAnimation>
+			<stubFor>
+				<Item>mountBearAttack</Item>
+				<Item>mountBearAttack01</Item>
+				<Item>mountBearAttack02</Item>
+				<Item>mountBearEmoteAFK</Item>
+				<Item>mountBearEmoteAFK01</Item>
+				<Item>mountBearEmoteAFK02</Item>
+				<Item>mountBearHitCritical</Item>
+				<Item>mountBearHitCritical01</Item>
+				<Item>mountBearHitCritical02</Item>
+				<Item>mountBearIdle01</Item>
+				<Item>mountBearIdle02</Item>
+				<Item>mountBearJumpEnd</Item>
+				<Item>mountBearJumpEnd01</Item>
+				<Item>mountBearJumpEnd02</Item>
+				<Item>mountBearRun</Item>
+				<Item>mountBearRun01</Item>
+				<Item>mountBearRun02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>idle</baseAnimation>
+			<stubFor>
+				<Item>chargenBard</Item>
+				<Item>chargenBardStart</Item>
+				<Item>chargenDruid</Item>
+				<Item>chargenDruid01</Item>
+				<Item>chargenDruid02</Item>
+				<Item>chargenDruidStart</Item>
+				<Item>chargenDruidStart01</Item>
+				<Item>chargenDruidStart02</Item>
+				<Item>chargenEngineer</Item>
+				<Item>chargenEngineerStart</Item>
+				<Item>chargenMage</Item>
+				<Item>chargenMageStart</Item>
+				<Item>chargenNecromancer</Item>
+				<Item>chargenNecromancerStart</Item>
+				<Item>chargenPaladin</Item>
+				<Item>chargenPaladinStart</Item>
+				<Item>chargenPriest</Item>
+				<Item>chargenPriestStart</Item>
+				<Item>chargenPsionic</Item>
+				<Item>chargenPsionic01</Item>
+				<Item>chargenPsionic02</Item>
+				<Item>chargenPsionicStart</Item>
+				<Item>chargenPsionicStart01</Item>
+				<Item>chargenPsionicStart02</Item>
+				<Item>chargenStalker</Item>
+				<Item>chargenStalker01</Item>
+				<Item>chargenStalker02</Item>
+				<Item>chargenStalkerStart</Item>
+				<Item>chargenStalkerStart01</Item>
+				<Item>chargenStalkerStart02</Item>
+				<Item>chargenWarrior</Item>
+				<Item>chargenWarrior01</Item>
+				<Item>chargenWarrior02</Item>
+				<Item>chargenWarriorStart</Item>
+				<Item>chargenWarriorStart01</Item>
+				<Item>chargenWarriorStart02</Item>
+				<Item>drinkIdle01</Item>
+				<Item>emoteHoldedEnd</Item>
+				<Item>emoteHoldedIdle</Item>
+				<Item>emoteHoldedStart</Item>
+				<Item>emoteHoldEnd</Item>
+				<Item>emoteHoldIdle</Item>
+				<Item>emoteHoldRun</Item>
+				<Item>emoteHoldStart</Item>
+				<Item>idle01</Item>
+				<Item>idle02</Item>
+				<Item>idle03</Item>
+				<Item>idle04</Item>
+				<Item>idle05</Item>
+				<Item>idle06</Item>
+				<Item>idle07</Item>
+				<Item>idle08</Item>
+				<Item>idle09</Item>
+				<Item>idle10</Item>
+				<Item>idle11</Item>
+				<Item>idle1H</Item>
+				<Item>idle1H01</Item>
+				<Item>idle1H02</Item>
+				<Item>idle2H</Item>
+				<Item>idle2HL</Item>
+				<Item>idleSneak</Item>
+				<Item>idleSpellCharged</Item>
+				<Item>idleSpellChargedWand</Item>
+				<Item>idleSwim</Item>
+				<Item>sitIdle</Item>
+				<Item>sitIdle01</Item>
+				<Item>sitIdle02</Item>
+				<Item>special01</Item>
+				<Item>special02</Item>
+				<Item>special03</Item>
+				<Item>special04</Item>
+				<Item>special05</Item>
+				<Item>special06</Item>
+				<Item>special07</Item>
+				<Item>special08</Item>
+				<Item>special09</Item>
+				<Item>specialIdle</Item>
+				<Item>specialIdle01</Item>
+				<Item>specialIdle02</Item>
+				<Item>specialIdle03</Item>
+				<Item>specialIdle04</Item>
+				<Item>specialIdle05</Item>
+				<Item>specialIdleEnd</Item>
+				<Item>specialIdleEnd01</Item>
+				<Item>specialIdleEnd02</Item>
+				<Item>specialIdleEnd03</Item>
+				<Item>specialIdleEnd04</Item>
+				<Item>specialIdleEnd05</Item>
+				<Item>specialIdleStart</Item>
+				<Item>specialIdleStart01</Item>
+				<Item>specialIdleStart02</Item>
+				<Item>specialIdleStart03</Item>
+				<Item>specialIdleStart04</Item>
+				<Item>specialIdleStart05</Item>
+				<Item>stun</Item>
+				<Item>useControlEnd</Item>
+				<Item>useControlEnd01</Item>
+				<Item>useControlEnd02</Item>
+				<Item>useControlIdle</Item>
+				<Item>useControlIdle01</Item>
+				<Item>useControlIdle02</Item>
+				<Item>useControlLoop</Item>
+				<Item>useControlLoop01</Item>
+				<Item>useControlLoop02</Item>
+				<Item>useControlShuffleLeft</Item>
+				<Item>useControlShuffleLeft01</Item>
+				<Item>useControlShuffleLeft02</Item>
+				<Item>useControlShuffleRight</Item>
+				<Item>useControlShuffleRight01</Item>
+				<Item>useControlShuffleRight02</Item>
+				<Item>useControlStart</Item>
+				<Item>useControlStart01</Item>
+				<Item>useControlStart02</Item>
+				<Item>useItemLoop</Item>
+				<Item>usePull</Item>
+				<Item>usePush</Item>
+				<Item>useSpecialLoop</Item>
+				<Item>useStandingEnd</Item>
+				<Item>useStandingLoop</Item>
+				<Item>useStandingStart</Item>
+				<Item>useVisor</Item>
+				<Item>useVisor01</Item>
+				<Item>useVisor02</Item>
+				<Item>loot</Item>
+				<Item>lootLoop</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>mountGuardIdle</baseAnimation>
+			<stubFor>
+				<Item>mountGuardJump</Item>
+				<Item>mountGuardJumpEnd</Item>
+				<Item>mountGuardJumpLandRun</Item>
+				<Item>mountGuardJumpStart</Item>
+				<Item>mountGuardRun</Item>
+				<Item>mountGuardSpecialCast</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>holdBow</baseAnimation>
+			<stubFor>
+				<Item>holdBow01</Item>
+				<Item>holdBow02</Item>
+			</stubFor>
+		</Item>
+		<Item>
+			<baseAnimation>holdCrossbow</baseAnimation>
+		</Item>
+		<Item>
+			<baseAnimation>sitKnees</baseAnimation>
+		</Item>
+		<Item>
+			<baseAnimation>mountBroomIdle</baseAnimation>
+			<stubFor>
+				<Item>mountBroomHit</Item>
+				<Item>mountBroomHit01</Item>
+				<Item>mountBroomHit02</Item>
+				<Item>mountBroomIdle01</Item>
+				<Item>mountBroomIdle02</Item>
+				<Item>mountBroomJump</Item>
+				<Item>mountBroomJump01</Item>
+				<Item>mountBroomJump02</Item>
+				<Item>mountBroomJumpEnd</Item>
+				<Item>mountBroomJumpEnd01</Item>
+				<Item>mountBroomJumpEnd02</Item>
+				<Item>mountBroomJumpStart</Item>
+				<Item>mountBroomJumpStart01</Item>
+				<Item>mountBroomJumpStart02</Item>
+				<Item>mountBroomLevelUp</Item>
+				<Item>mountBroomLevelUp01</Item>
+				<Item>mountBroomLevelUp02</Item>
+				<Item>mountBroomRun</Item>
+				<Item>mountBroomRun01</Item>
+				<Item>mountBroomRun02</Item>
+				<Item>mountBroomShuffleLeft</Item>
+				<Item>mountBroomShuffleLeft01</Item>
+				<Item>mountBroomShuffleLeft02</Item>
+				<Item>mountBroomShuffleRight</Item>
+				<Item>mountBroomShuffleRight01</Item>
+				<Item>mountBroomShuffleRight02</Item>
+				<Item>mountBroomSpecialJump</Item>
+				<Item>mountBroomSpecialJump01</Item>
+				<Item>mountBroomSpecialJump02</Item>
+				<Item>mountBroomWalk</Item>
+				<Item>mountBroomWalk01</Item>
+				<Item>mountBroomWalk02</Item>
+				<Item>mountBroomWalkBackwards</Item>
+				<Item>mountBroomWalkBackwards01</Item>
+				<Item>mountBroomWalkBackwards02</Item>
+			</stubFor>
+		</Item>
+	</stubAnimations>
+	<poweredLSWeaponsRoot href="/Client/GMUIHelper/PoweredLSWeaponsRoot.(PoweredLSWeaponsRoot).xdb" />
+	<mainAvatarHitCooldown>100</mainAvatarHitCooldown>
+	<enemyAvatarHitCooldown>100</enemyAvatarHitCooldown>
+	<mainAvatarCritCooldown>200</mainAvatarCritCooldown>
+	<enemyAvatarCritCooldown>200</enemyAvatarCritCooldown>
+	<hideHelmSpell href="/Mechanics/HideItem/HideHelm.(SpellSingleTarget).xdb" />
+	<hideCloakSpell href="/Mechanics/HideItem/HideCloak.(SpellSingleTarget).xdb" />
+</SlonRoot>

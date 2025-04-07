@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>141202</resourceId>
+    </Header>
+    <Name href="RollLoot.(SpellSingleTarget).Name.txt" />
+    <Description href="RollLoot.(SpellSingleTarget).Description.txt" />
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceActiveItem" />
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="WinSeria.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </predicate>
+                            </Item>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="LooseSeria.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </predicate>
+                            </Item>
+                        </predicates>
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.RandomImpact">
+                        <entries>
+                            <Item>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactDropLoot">
+                                        <rolls type="gameMechanics.elements.calcers.FloatData">
+                                            <value>1</value>
+                                        </rolls>
+                                        <lootTable href="LootTableWin.(LootTableResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.LootTableResource)" />
+                                        <worldNotification href="/Mechanics/GameRoot/WorldDropClientData.xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                        <worldNotificationWithGuild href="/Mechanics/GameRoot/WorldDropWithGuildClientData.xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.schemes.buff.StackBuffGeneric">
+                                        <buff href="WinSeria.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        <delta type="gameMechanics.elements.calcers.FloatData">
+                                            <value>1</value>
+                                        </delta>
+                                        <attachIfNotExist>true</attachIfNotExist>
+                                    </Item>
+                                </impacts>
+                                <chance>0.3</chance>
+                            </Item>
+                            <Item>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactDropLoot">
+                                        <rolls type="gameMechanics.elements.calcers.FloatData">
+                                            <value>1</value>
+                                        </rolls>
+                                        <lootTable href="LootTableLoose.(LootTableResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.LootTableResource)" />
+                                        <worldNotification href="/Mechanics/GameRoot/WorldDropClientData.xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                        <worldNotificationWithGuild href="/Mechanics/GameRoot/WorldDropWithGuildClientData.xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.schemes.buff.StackBuffGeneric">
+                                        <buff href="LooseSeria.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        <delta type="gameMechanics.elements.calcers.FloatData">
+                                            <value>1</value>
+                                        </delta>
+                                        <attachIfNotExist>true</attachIfNotExist>
+                                    </Item>
+                                </impacts>
+                                <chance>0.7</chance>
+                            </Item>
+                        </entries>
+                    </Item>
+                </impacts>
+                <elseImpacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                        <predicates>
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="WinSeria.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </predicates>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactDropLoot">
+                                <rolls type="gameMechanics.elements.calcers.FloatData">
+                                    <value>1</value>
+                                </rolls>
+                                <lootTable href="LootTableWin.(LootTableResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.LootTableResource)" />
+                                <worldNotification href="/Mechanics/GameRoot/WorldDropClientData.xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                <worldNotificationWithGuild href="/Mechanics/GameRoot/WorldDropWithGuildClientData.xdb#xpointer(/gameMechanics.world.ClientData)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                        <buff href="WinSeria.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        <range>
+                                            <max>20</max>
+                                        </range>
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.RandomImpact">
+                                        <entries>
+                                            <Item>
+                                                <impacts>
+                                                    <Item type="gameMechanics.constructor.schemes.buff.StackBuffGeneric">
+                                                        <buff href="WinSeria.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        <delta type="gameMechanics.elements.calcers.FloatData">
+                                                            <value>1</value>
+                                                        </delta>
+                                                        <attachIfNotExist>true</attachIfNotExist>
+                                                    </Item>
+                                                </impacts>
+                                                <chance>0.9</chance>
+                                            </Item>
+                                            <Item>
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                        <buff href="WinSeria.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                    </Item>
+                                                </impacts>
+                                                <chance>0.1</chance>
+                                            </Item>
+                                        </entries>
+                                    </Item>
+                                </impactsIf>
+                                <impactsElse>
+                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                        <buff href="WinSeria.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                </impactsElse>
+                            </Item>
+                        </impacts>
+                        <elseImpacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="LooseSeria.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                </predicates>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactDropLoot">
+                                        <rolls type="gameMechanics.elements.calcers.FloatData">
+                                            <value>1</value>
+                                        </rolls>
+                                        <lootTable href="LootTableLoose.(LootTableResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.LootTableResource)" />
+                                        <worldNotification href="/Mechanics/GameRoot/WorldDropClientData.xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                        <worldNotificationWithGuild href="/Mechanics/GameRoot/WorldDropWithGuildClientData.xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                                <buff href="LooseSeria.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                <range>
+                                                    <max>20</max>
+                                                </range>
+                                            </Item>
+                                        </predicates>
+                                        <impactsIf>
+                                            <Item type="gameMechanics.elements.impacts.RandomImpact">
+                                                <entries>
+                                                    <Item>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.StackBuffGeneric">
+                                                                <buff href="LooseSeria.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                <delta type="gameMechanics.elements.calcers.FloatData">
+                                                                    <value>1</value>
+                                                                </delta>
+                                                                <attachIfNotExist>true</attachIfNotExist>
+                                                            </Item>
+                                                        </impacts>
+                                                        <chance>0.9</chance>
+                                                    </Item>
+                                                    <Item>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                                <buff href="LooseSeria.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                        <chance>0.1</chance>
+                                                    </Item>
+                                                </entries>
+                                            </Item>
+                                        </impactsIf>
+                                        <impactsElse>
+                                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                <buff href="LooseSeria.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            </Item>
+                                        </impactsElse>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </elseImpacts>
+                    </Item>
+                </elseImpacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <iffPolicy>Friends</iffPolicy>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

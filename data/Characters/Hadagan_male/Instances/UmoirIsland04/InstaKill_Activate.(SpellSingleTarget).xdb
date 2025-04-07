@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>79929</resourceId>
+    </Header>
+    <Name href="InstaKill_Activate.(SpellSingleTarget).Name.txt" />
+    <Description href="InstaKill_Activate.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Spells/Psionic/PsionicPhantasmalKiller.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>60</value>
+    </range>
+    <needLos>false</needLos>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <isAggro>false</isAggro>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>90000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="AssistantKnockdown02.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+                <quality href="/Mechanics/MobQualities/Elite.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+                        <impacts>
+                            <Item type="gameMechanics.world.avatar.assistants.ImpactsToAssistant">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactAstralKickToPoint">
+                                        <time>2000</time>
+                                        <impactsOnLand>
+                                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactKill">
+                                                        <offend>true</offend>
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                        </impactsOnLand>
+                                        <destination type="gameMechanics.elements.calcers.DestinationCurrentTarget" />
+                                    </Item>
+                                </impacts>
+                                <assistantResource href="/Mechanics/Characters/Hadagan_male/UmoirIsland04/Miloslavin.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>126204</resourceId>
+    </Header>
+    <element>POISON</element>
+    <Name href="PoisonAOE.(SpellArea).Name.txt" />
+    <visualScripts href="/Spells/VisScripts/AstralIslands/UmoirIsland01/PoisonAOE.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="PoisonAOE.(SpellArea).Name.txt" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>50</value>
+    </range>
+    <prepareDuration>2000</prepareDuration>
+    <immutablePrepareDuration>true</immutablePrepareDuration>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>10000</duration>
+        </cooldown>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                <element>POISON</element>
+                <damage>30</damage>
+                <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/World/Quests/UmoirIsland01/UI01_04/BossFight/TreantPoison.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impacts>
+                        <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="/Creatures/TreantGhost/Instances/UmoirIsland01/UI01_TreantAdd.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                        </filter>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.EntityImpactEntitiesAround">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateRespawnableResource">
+                                <resources>
+                                    <Item href="/Characters/Kania_male/Instances/UmoirIsland01/HealPuddle.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                                </resources>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                <projectileData>
+                                    <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                    </moveType>
+                                    <resource href="/World/Quests/UmoirIsland01/UI01_04/BossFight/PoisonPuddle.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                                </projectileData>
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateRespawnableResource">
+                                <resources>
+                                    <Item href="/World/Quests/UmoirIsland01/UI01_04/BossFight/Apple.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                                </resources>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                <projectileData>
+                                    <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                    </moveType>
+                                    <resource href="/World/Quests/UmoirIsland01/UI01_04/BossFight/PoisonApple.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                                </projectileData>
+                                <pool href="SummonPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>30</speed>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+    <radius>80</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

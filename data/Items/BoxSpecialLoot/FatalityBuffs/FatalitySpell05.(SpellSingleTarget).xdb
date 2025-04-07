@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>493136</resourceId>
+    </Header>
+    <Name href="FatalitySpell05_Name.txt" />
+    <Description href="FatalitySpell05_Description.txt" />
+    <uiSpellBookPageType>SPELLBOOK_PAGE_OTHER</uiSpellBookPageType>
+    <prepareDuration>1000</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/Abilities/FatalityBuffs/Buff05Timer.(BuffResource).xdb" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceActiveItem" />
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/Abilities/FatalityBuffs/Buff05Timer.(BuffResource).xdb" />
+                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                    <mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+                </durationScaler>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+                <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                    <item href="FatalityBuffItem05.(ItemResource).xdb" />
+                </item>
+                <decayTime type="gameMechanics.elements.calcers.CalcerLongMulFloat">
+                    <calcerLong type="gameMechanics.elements.calcers.LongData">
+                        <value>1</value>
+                    </calcerLong>
+                    <calcerFloat type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+                </decayTime>
+                <binding>ForceBind</binding>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

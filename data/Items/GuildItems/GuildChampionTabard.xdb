@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.item.ItemResource>
+    <Header>
+        <resourceId>516029</resourceId>
+    </Header>
+    <image href="/Interface/Icons/Spells/Guild/ChampionTabard.(UISingleTexture).xdb" />
+    <source>Vendor</source>
+    <visualElement href="/Items/Costumes/VisItems/Set/Special/GuildSet02.(VisualItem).xdb" />
+    <slot>TABARD</slot>
+    <itemClass href="/Mechanics/ItemClasses/Other.xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectGuildLevelObserver">
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectPowerMultiplier">
+                    <multiplier type="gameMechanics.elements.calcers.CalcerSum">
+                        <summands>
+                            <Item type="gameMechanics.elements.calcers.FloatData">
+                                <value>1</value>
+                            </Item>
+                            <Item type="gameMechanics.elements.calcers.CalcerMul">
+                                <calcers>
+                                    <Item type="gameMechanics.elements.calcers.FloatData">
+                                        <value>0.0004</value>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.calcers.GuildLevelCalcer" />
+                                </calcers>
+                            </Item>
+                        </summands>
+                    </multiplier>
+                </Item>
+                <Item type="gameMechanics.elements.effects.MultiplyStat">
+                    <stat type="gameMechanics.elements.stat.StatStamina" />
+                    <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                            <calcers>
+                                <Item type="gameMechanics.elements.calcers.FloatData">
+                                    <value>0.0004</value>
+                                </Item>
+                                <Item type="gameMechanics.elements.calcers.GuildLevelCalcer" />
+                            </calcers>
+                        </mulCalcer>
+                        <additionalMultiplier>
+                            <scaler type="gameMechanics.elements.scalers.TrivialScaler" />
+                        </additionalMultiplier>
+                        <sum>1</sum>
+                    </scaler>
+                </Item>
+                <Item type="gameMechanics.elements.effects.BuffDurationModifier">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/BuffConsumables.xdb" />
+                    </groups>
+                    <multiplier type="gameMechanics.elements.calcers.CalcerSum">
+                        <summands>
+                            <Item type="gameMechanics.elements.calcers.FloatData">
+                                <value>1</value>
+                            </Item>
+                            <Item type="gameMechanics.elements.calcers.CalcerMul">
+                                <calcers>
+                                    <Item type="gameMechanics.elements.calcers.FloatData">
+                                        <value>0.1</value>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.calcers.CalcerFloor">
+                                        <source type="gameMechanics.elements.calcers.CalcerMul">
+                                            <calcers>
+                                                <Item type="gameMechanics.elements.calcers.FloatData">
+                                                    <value>0.2</value>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.calcers.CalcerSum">
+                                                    <summands>
+                                                        <Item type="gameMechanics.elements.calcers.FloatData">
+                                                            <value>1</value>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.calcers.GuildLevelCalcer" />
+                                                    </summands>
+                                                </Item>
+                                            </calcers>
+                                        </source>
+                                    </Item>
+                                </calcers>
+                            </Item>
+                        </summands>
+                    </multiplier>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectAuthorityGainedModifier">
+            <scaler type="gameMechanics.elements.scalers.LinearScaler">
+                <multiplier>2</multiplier>
+            </scaler>
+            <filter type="gameMechanics.world.avatar.development.DevelopmentFilterAny" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectTabardDressed">
+            <tabardType>Champion</tabardType>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectReputationModifier">
+            <calcer type="gameMechanics.elements.calcers.CalcerMul">
+                <calcers>
+                    <Item type="gameMechanics.elements.calcers.FloatData">
+                        <value>0.05</value>
+                    </Item>
+                    <Item type="gameMechanics.elements.calcers.CalcerFloor">
+                        <source type="gameMechanics.elements.calcers.CalcerMul">
+                            <calcers>
+                                <Item type="gameMechanics.elements.calcers.FloatData">
+                                    <value>0.2</value>
+                                </Item>
+                                <Item type="gameMechanics.elements.calcers.CalcerSum">
+                                    <summands>
+                                        <Item type="gameMechanics.elements.calcers.FloatData">
+                                            <value>2</value>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.calcers.GuildLevelCalcer" />
+                                    </summands>
+                                </Item>
+                            </calcers>
+                        </source>
+                    </Item>
+                </calcers>
+            </calcer>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateResourceReady">
+                            <resource href="GuildChampionTabard.xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsElse>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="TabardCooldownChampion.(BuffResource).xdb" />
+                            <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                <mulCalcer type="gameMechanics.elements.calcers.CalcerMillisTillDaily">
+                                    <daysOffset type="gameMechanics.elements.calcers.DaysTillResourceReadyCalcer">
+                                        <resource href="GuildChampionTabard.xdb" />
+                                    </daysOffset>
+                                </mulCalcer>
+                            </durationScaler>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="TabardCooldownChampion.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.constructor.basicElements.EffectList">
+            <effectsResource href="GuildSpellSeasonReward.(EffectListResource).xdb" />
+        </Item>
+    </effects>
+    <level>4</level>
+    <requiredLevel>4</requiredLevel>
+    <stackLimit>1</stackLimit>
+    <quality href="/Mechanics/ItemQualities/Rare.xdb" />
+    <prices type="gameMechanics.constructor.schemes.item.prices.UntradableItem" />
+    <binding>BindOnPickup</binding>
+    <name href="GuildChampionTabard.txt" />
+    <description href="GuildChampionTabard.Description.txt" />
+    <requiredReputation>Hostility</requiredReputation>
+    <category href="/Mechanics/ItemCategories/Misc/Other.xdb" />
+</gameMechanics.constructor.schemes.item.ItemResource>
