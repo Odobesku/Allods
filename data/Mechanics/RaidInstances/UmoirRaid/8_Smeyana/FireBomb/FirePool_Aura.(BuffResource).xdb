@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>225948</resourceId>
+    </Header>
+    <Name href="FirePool_Aura.(BuffResource).Name.txt" />
+    <Description href="FirePool_Aura.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Mage/Firewall.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/DotFire.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+            <scale>2</scale>
+            <locator>Slot_BodyFX</locator>
+        </Item>
+    </visualEffects>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+            </predicates>
+            <effectsIf>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                            <element>FIRE</element>
+                            <damage>5</damage>
+                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </effectsIf>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="FirePool_Aura.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </onLeave>
+        </Item>
+    </effects>
+    <duration>600000</duration>
+    <isHelpful>false</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/EvadeProtectedBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/RaidInstances/UmoirRaid/UmoirRaid.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

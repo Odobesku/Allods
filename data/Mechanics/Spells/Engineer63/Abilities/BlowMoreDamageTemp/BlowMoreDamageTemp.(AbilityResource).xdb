@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>215488</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="BlowMoreDamageTemp.(AbilityResource).Name.txt" />
+    <description href="BlowMoreDamageTemp.(AbilityResource).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value var="value" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>FormulaPercent</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Mage/Harmony.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.SpellsModifier">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                    <spells>
+                        <Item href="/Mechanics/Spells/Engineer63/Spells/Blow/Blow01.(SpellSingleTarget).xdb" />
+                    </spells>
+                </Item>
+            </predicates>
+            <modifiers>
+                <Item type="gameMechanics.elements.spell.SpellEnvelopeModifier">
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+                            <scaler type="gameMechanics.elements.scalers.MultLinearEffectScaler">
+                                <coeff var="value" />
+                                <calcer type="gameMechanics.elements.calcers.CalcerIf">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateGreater">
+                                        <lhs type="gameMechanics.elements.calcers.VariableValueCalcer">
+                                            <variable href="/Mechanics/Spells/Engineer63/Abilities/Reactor/Overheating.(VariableResource).xdb" />
+                                        </lhs>
+                                        <rhs type="gameMechanics.elements.calcers.FloatData">
+                                            <value>0</value>
+                                        </rhs>
+                                    </predicate>
+                                    <calcerIf type="gameMechanics.elements.calcers.VariableValueCalcer">
+                                        <variable href="/Mechanics/Spells/Engineer63/Abilities/Reactor/Overheating.(VariableResource).xdb" />
+                                    </calcerIf>
+                                    <calcerElse type="gameMechanics.elements.calcers.VariableValueCalcer">
+                                        <variable href="/Mechanics/Spells/Engineer63/Abilities/Reactor/Overheating.(VariableResource).xdb" />
+                                        <mul>-1</mul>
+                                    </calcerElse>
+                                </calcer>
+                            </scaler>
+                        </Item>
+                    </effects>
+                    <onBehalfOfHolder>true</onBehalfOfHolder>
+                </Item>
+            </modifiers>
+        </Item>
+    </effects>
+    <ranks>
+        <Item href="BlowMoreDamageTemp01.(AbilityResource).xdb" />
+        <Item href="BlowMoreDamageTemp02.(AbilityResource).xdb" />
+    </ranks>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

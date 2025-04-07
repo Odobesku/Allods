@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>188198</resourceId>
+    </Header>
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>50</value>
+    </range>
+    <prepareDuration>2000</prepareDuration>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>20000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="AfterChargeCleave.(BuffResource).xdb" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                    </Item>
+                </predicates>
+            </Item>
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="Charge.(BuffResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                <spell href="/Mechanics/Spells/AutoAttack/MeleeDamage.xdb" />
+                <duration>
+                    <second>3</second>
+                </duration>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="AfterChargeCleaveTarget.(BuffResource).xdb" />
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

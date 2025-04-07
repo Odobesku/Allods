@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>225156</resourceId>
+    </Header>
+    <Name href="Umoir_Reactor_Boss_explosion.(BuffResource).Name.txt" />
+    <Description href="Umoir_Reactor_Boss_explosion.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Mage/FireBolt.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="Umoir_Reactor_Boss_explosion.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                            <radius>60</radius>
+                            <affectGroup>Enemies</affectGroup>
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="ReactorBoss_Projectile_Decal.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impacts>
+                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="ReactorBoss_Projectile_Decal.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </predicate>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="ReactorBoss_Projectile_drags.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </predicate>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                </predicates>
+                            </filter>
+                            <targetsLimit>3</targetsLimit>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                    <projectileData>
+                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                            <spawnAt>Caster</spawnAt>
+                        </moveType>
+                        <resource href="ReactorBoss_Projectile_AstralKick.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                    </projectileData>
+                    <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                </Item>
+            </impactsOff>
+        </Item>
+    </effects>
+    <duration>5000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

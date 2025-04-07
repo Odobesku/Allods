@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>204675</resourceId>
+    </Header>
+    <contextActionInfo>
+        <priority>2</priority>
+        <contextName href="Spell_Name.txt" />
+        <contextDescription href="Spell_Desc.txt" />
+        <contextImage href="/Interface/Icons/Mounts/SpellsMounts/Blink01.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    </contextActionInfo>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/MountSpeedBoosts.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/MountTeleportationSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <element>LIGHTNING</element>
+    <Name href="Spell_Name.txt" />
+    <Description href="Spell_Desc.txt" />
+    <image href="/Interface/Icons/Mounts/SpellsMounts/Blink01.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Mount/BattleMountTurret_Blink.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <immutablePrepareDuration>true</immutablePrepareDuration>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>10000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMounted" />
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateInWater" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                <buff href="/Mechanics/Spells/Mounts/ElfWasp/Stealth/MoveWatcher.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactBlink">
+                        <maxDist>70</maxDist>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/Spells/Mounts/ElfWasp/Stealth/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="LandWatcher.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                </impactsIf>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/Spells/Mounts/ElfWasp/SubspaceEnergy/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

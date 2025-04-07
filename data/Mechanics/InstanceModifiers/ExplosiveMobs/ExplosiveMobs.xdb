@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.map.basicElements.MapModifierResource>
+    <Header>
+        <resourceId>252175</resourceId>
+    </Header>
+    <name href="ExplosiveMobs.txt" />
+    <description href="ExplosiveMobs.Description.txt" />
+    <image href="/Interface/Icons/Spells/Modifiers/FieryRevenge.(UISingleTexture).xdb" />
+    <mapEffects>
+        <Item type="gameMechanics.elements.effects.AddMapSpecificEffects">
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsMob" />
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                <ability href="/Mechanics/Abilities/Bosses/BossAddTechAbility/Ability01.xdb" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <effectsIf>
+                        <Item type="gameMechanics.elements.effects.HealthTrigger">
+                            <healthOn type="gameMechanics.constructor.basicElements.FloatZero" />
+                            <impactsOn>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                            <radius>20</radius>
+                                            <affectGroup>Enemies</affectGroup>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                                    <element>ASTRAL</element>
+                                                    <damage>0.75</damage>
+                                                    <impactsOnHitTarget>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="Explosion.xdb" />
+                                                        </Item>
+                                                    </impactsOnHitTarget>
+                                                    <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                                                        <scalers>
+                                                            <Item type="gameMechanics.elements.scalers.SpellPowerScaler" />
+                                                            <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                <mul>0.08</mul>
+                                                                <mulCalcer type="gameMechanics.elements.calcers.MobBaseHealthCalcer" />
+                                                            </Item>
+                                                        </scalers>
+                                                    </scaler>
+                                                </Item>
+                                            </impacts>
+                                            <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                                                <filters>
+                                                    <Item type="gameMechanics.world.creature.CreatureFilter" />
+                                                    <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                <predicate type="gameMechanics.elements.predicates.PredicateIsMob" />
+                                                            </Item>
+                                                        </predicates>
+                                                    </Item>
+                                                </filters>
+                                            </filter>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="/Spells/ClientData/HitAstralBig.(ClientData).xdb" />
+                                </Item>
+                            </impactsOn>
+                            <effects />
+                        </Item>
+                    </effectsIf>
+                </Item>
+            </effects>
+        </Item>
+    </mapEffects>
+    <exclusions>
+        <Item href="/Maps/AstralIsle08/MapResource.xdb" />
+    </exclusions>
+</gameMechanics.map.basicElements.MapModifierResource>

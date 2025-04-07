@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.map.scriptZone.ScriptZone>
+    <Header>
+        <resourceId>12459</resourceId>
+    </Header>
+    <filter type="gameMechanics.world.creature.AvatarFilter" />
+    <conditionsIn>
+        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+            <quest href="/World/Quests/UmoirIsland05/Quest_03/Quest_03.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+            <status>Active</status>
+        </Item>
+        <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+            <quest href="/World/Quests/UmoirIsland05/Quest_03/Quest_03.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+            <counterResource href="/World/Quests/UmoirIsland05/Quest_03/Counter6.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+            <value>10</value>
+        </Item>
+        <Item type="gameMechanics.elements.predicates.PredicateMobNear">
+            <radius>30</radius>
+            <mobs>
+                <Item href="/Characters/Hadagan_male/Instances/UmoirIsland05/Miner01.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                <Item href="/Characters/Hadagan_male/Instances/UmoirIsland05/Miner02.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+            </mobs>
+        </Item>
+    </conditionsIn>
+    <impactsIn>
+        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+            <delay>2500</delay>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>barrier_mine</scriptID>
+                        <map href="/Maps/UmoirIsland05/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.device.DoorSwitch">
+                            <switchType>Open</switchType>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/World/Quests/UmoirIsland05/Quest_03/Miner_act.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                            <delay>4000</delay>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ResetSpawnTable">
+                                    <table href="/Maps/UmoirIsland05/SpawnTables/Miners.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <spawnResource href="/Maps/UmoirIsland05/SpawnTables/Miners.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                            <radius>45</radius>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="/World/Quests/UmoirIsland05/Quest_03/We_shall_not_pass.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                </Item>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/World/Quests/UmoirIsland05/Quest_03/Disorient.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impacts>
+                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                        <mobs>
+                                            <Item href="/Characters/Hadagan_male/Instances/UmoirIsland05/Miner01.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                            <Item href="/Characters/Hadagan_male/Instances/UmoirIsland05/Miner02.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                        </mobs>
+                                    </Item>
+                                </predicates>
+                            </filter>
+                            <targetsLimit>3</targetsLimit>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                    <projectileData>
+                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                            <destination type="gameMechanics.map.destination.DestinationLocator">
+                                <locator>
+                                    <scriptID>mine_behind_barrier</scriptID>
+                                    <map href="/Maps/UmoirIsland05/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                </locator>
+                            </destination>
+                        </moveType>
+                        <resource href="/World/Quests/UmoirIsland05/Quest_03/Barrier_dust.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                    </projectileData>
+                </Item>
+            </impacts>
+        </Item>
+    </impactsIn>
+</gameMechanics.map.scriptZone.ScriptZone>

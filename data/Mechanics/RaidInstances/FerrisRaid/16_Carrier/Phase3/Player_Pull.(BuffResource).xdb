@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>220891</resourceId>
+    </Header>
+    <Name href="Player_Pull.(BuffResource).Name.txt" />
+    <Description href="Player_Pull.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Psionic/PsionicTelekineticThrow.(UISingleTexture).xdb" />
+    <visScript href="PullCleave.(BuffVisScripts).xdb" />
+    <interfaceHighPriority>true</interfaceHighPriority>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="Player_PullDisabler.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.RunImpactsInShape">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactAstralKickToPoint">
+                                    <time>1000</time>
+                                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                    <keepOnGround>false</keepOnGround>
+                                </Item>
+                            </impacts>
+                            <shape type="gameMechanics.constructor.schemes.spell.area.Cone">
+                                <angle type="constructor.basicElements.AngleDegrees">
+                                    <value>22.5</value>
+                                </angle>
+                            </shape>
+                            <affectGroup>Raid</affectGroup>
+                            <radius type="gameMechanics.elements.impacts.RunImpactsInShape$FixedRadius">
+                                <value>60</value>
+                            </radius>
+                            <affectMainTarget>false</affectMainTarget>
+                            <workOnDead>false</workOnDead>
+                            <shapeCenterPosition>Caster</shapeCenterPosition>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor">
+                        <radius>140</radius>
+                    </distributor>
+                    <data href="Architect_Pull.(ClientData).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>3000</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectDisableAct">
+                    <actions>
+                        <Item>Move</Item>
+                        <Item>Jump</Item>
+                        <Item>Rotate</Item>
+                    </actions>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <duration>3500</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

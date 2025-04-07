@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>222575</resourceId>
+    </Header>
+    <Name href="Prey.(BuffResource).Name.txt" />
+    <Description href="Prey.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Mounts/ChargeGastorniks.(UISingleTexture).xdb" />
+    <visScript href="Prey.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.Charge">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="ChargeResource.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="Prey02.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                            <mobs>
+                                <Item href="Meat.(MobWorld).xdb" />
+                            </mobs>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="Feasted.(BuffResource).xdb" />
+                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                        <multiplier>16000</multiplier>
+                                    </durationScaler>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="Fullness.(BuffResource).xdb" />
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/Spells/CommonBuffs/KnockDown/BufffKnockDownNoCC.xdb" />
+                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                <multiplier>2</multiplier>
+                            </durationScaler>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                                        </Item>
+                                    </predicates>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                    <buff href="GastornisP2.(BuffResource).xdb" />
+                                                </Item>
+                                            </predicates>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="Feasted.(BuffResource).xdb" />
+                                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                                <multiplier>8000</multiplier>
+                                                            </durationScaler>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                                                            <spell href="HungerHM.(SpellSingleTarget).xdb" />
+                                                            <duration>
+                                                                <second>20</second>
+                                                            </duration>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                            <elseImpacts>
+                                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="Feasted.(BuffResource).xdb" />
+                                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                                <multiplier>16000</multiplier>
+                                                            </durationScaler>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </elseImpacts>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.DirectDamage">
+                                            <damage>1</damage>
+                                            <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer" />
+                                            </scalerTarget>
+                                        </Item>
+                                    </impacts>
+                                    <elseImpacts>
+                                        <Item type="gameMechanics.elements.impacts.DirectDamage">
+                                            <damage>1</damage>
+                                            <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                <mul>0.9</mul>
+                                                <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer" />
+                                            </scalerTarget>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="Feasted.(BuffResource).xdb" />
+                                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                        <multiplier>16000</multiplier>
+                                                    </durationScaler>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </elseImpacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsElse>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.RunImpactsInShape">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                                                    <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                                                    <minDamage>25</minDamage>
+                                                    <maxDamage>30</maxDamage>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                                                    <time>300</time>
+                                                    <distance>1</distance>
+                                                </Item>
+                                            </impactsIf>
+                                        </Item>
+                                    </impacts>
+                                    <shape type="gameMechanics.constructor.schemes.spell.area.Cone">
+                                        <angle type="constructor.basicElements.AngleDegrees">
+                                            <value>180</value>
+                                        </angle>
+                                    </shape>
+                                    <affectGroup>Enemies</affectGroup>
+                                    <radius type="gameMechanics.elements.impacts.RunImpactsInShape$FixedRadius">
+                                        <value>8</value>
+                                    </radius>
+                                    <workOnDead>false</workOnDead>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <buff href="Prey.(BuffResource).xdb" />
+            <speedFactor>2</speedFactor>
+            <pathChecker type="space.pathfinding.pathChecker.PathDeviationLimited">
+                <angle>1.5708</angle>
+            </pathChecker>
+        </Item>
+    </effects>
+    <duration>10000</duration>
+    <isStackable>false</isStackable>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <isForthright>true</isForthright>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

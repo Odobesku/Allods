@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>230736</resourceId>
+    </Header>
+    <Name href="BuffChestOnShipCaptured.txt" />
+    <Description href="BuffChestOnShip.Description.txt" />
+    <image href="/Interface/Icons/Misc/Chests/ChestMeteorite.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <sysUIScriptName>AstralChest</sysUIScriptName>
+    <nameTemplate href="BuffChestOnShipCaptured.txt" />
+    <descTemplate href="BuffChestOnShip.Description.txt" />
+    <effects>
+        <Item type="gameMechanics.world.ship.elements.EffectBlockIslands" />
+        <Item type="gameMechanics.world.ship.elements.EffectBlockAstrolabe">
+            <reason href="AstrolabeBlockedClientData.xdb#xpointer(/gameMechanics.world.ClientData)" />
+        </Item>
+        <Item type="gameMechanics.world.ship.elements.EffectTracker">
+            <poi>
+                <scanerPoi href="ShipWithChest.(ScanerPOI).xdb#xpointer(/gameMechanics.world.bigAstral.ScanerPOI)" />
+                <global>true</global>
+            </poi>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectShipDieHardTrigger">
+            <toKillerImpacts>
+                <Item type="gameMechanics.elements.impacts.ImpactsIfGeneric">
+                    <predicate type="gameMechanics.constructor.basicElements.BinaryPredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateNotMaster" />
+                            <Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
+                                <onSlave type="gameMechanics.world.ship.elements.PredicateIsShip" />
+                            </Item>
+                        </predicates>
+                    </predicate>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.RepeatedImpactsGenericCountCaster">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                            <buff href="BuffChestOnShipCaptured.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            <range>
+                                                <max>4</max>
+                                            </range>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="BuffChestOnShipCaptured.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                <mulCalcer type="gameMechanics.elements.calcers.CalcerBuffDuration">
+                                                    <buff href="BuffChestOnShipCaptured.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                    <multiplier>2.08333e-006</multiplier>
+                                                </mulCalcer>
+                                                <additionalMultiplier>
+                                                    <scaler type="gameMechanics.elements.scalers.TrivialScaler" />
+                                                </additionalMultiplier>
+                                            </durationScaler>
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                            <impactsResource href="ChestRespawnInSector.(ImpactListGenericResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impacts>
+                            <count type="gameMechanics.elements.calcers.CalcerLongMulFloat">
+                                <calcerLong type="gameMechanics.elements.calcers.LongData">
+                                    <value>1</value>
+                                </calcerLong>
+                                <calcerFloat type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                    <buff href="BuffChestOnShipCaptured.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    <forAllRanks>true</forAllRanks>
+                                </calcerFloat>
+                            </count>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.RepeatedImpactsGeneric">
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                            <impactsResource href="ChestRespawnInSector.(ImpactListGenericResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                                        </Item>
+                                    </impacts>
+                                    <count type="gameMechanics.elements.calcers.CalcerLongMulFloat">
+                                        <calcerLong type="gameMechanics.elements.calcers.LongData">
+                                            <value>1</value>
+                                        </calcerLong>
+                                        <calcerFloat type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                            <buff href="BuffChestOnShip.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            <forAllRanks>true</forAllRanks>
+                                        </calcerFloat>
+                                    </count>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </toKillerImpacts>
+            <toVictimImpacts>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="BuffChestOnShipCaptured.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </toVictimImpacts>
+            <toVictimWoKillerImpacts>
+                <Item type="gameMechanics.elements.impacts.RepeatedImpactsGeneric">
+                    <impacts>
+                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                            <impactsResource href="ChestRespawnInSector.(ImpactListGenericResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                        </Item>
+                    </impacts>
+                    <count type="gameMechanics.elements.calcers.CalcerLongMulFloat">
+                        <calcerLong type="gameMechanics.elements.calcers.LongData">
+                            <value>1</value>
+                        </calcerLong>
+                        <calcerFloat type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                            <buff href="BuffChestOnShip.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <forAllRanks>true</forAllRanks>
+                        </calcerFloat>
+                    </count>
+                </Item>
+            </toVictimWoKillerImpacts>
+        </Item>
+        <Item type="gameMechanics.world.ship.elements.effects.EffectShipSpeedModifier">
+            <modifier>0.8</modifier>
+        </Item>
+        <Item type="gameMechanics.world.ship.elements.EffectShipDamageTrigger">
+            <impacts>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/Astral/TL_04/SectorTreasureHunting/Hublinks/HublinkLock.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.RepeatedImpactsGeneric">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressees">
+                            <addresseesFinder type="gameMechanics.elements.addresseeFinders.AddressesCalcerOnlineShipBounds" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIncrementBuffDuration">
+                                            <buff href="/Mechanics/Astral/TL_04/SectorTreasureHunting/Buffs/Instability.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            <anyRank>false</anyRank>
+                                            <delta type="gameMechanics.elements.calcers.CalcerMul">
+                                                <calcers>
+                                                    <Item type="gameMechanics.elements.calcers.FloatData">
+                                                        <value>-360000</value>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.calcers.CalcerMin">
+                                                        <calcers>
+                                                            <Item type="gameMechanics.elements.calcers.FloatData">
+                                                                <value>1</value>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.calcers.CalcerMul">
+                                                                <calcers>
+                                                                    <Item type="gameMechanics.elements.calcers.InverseCalcer">
+                                                                        <value type="gameMechanics.elements.calcers.FloatData">
+                                                                            <value>365000</value>
+                                                                        </value>
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.elements.calcers.CalcerBuffDuration">
+                                                                        <buff href="/Mechanics/Astral/TL_04/SectorTreasureHunting/Buffs/Instability.(BuffResource).xdb" />
+                                                                        <multiplier>1</multiplier>
+                                                                    </Item>
+                                                                </calcers>
+                                                            </Item>
+                                                        </calcers>
+                                                    </Item>
+                                                </calcers>
+                                            </delta>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateHasGuildProgress" />
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.ImpactAddGuildAuthority">
+                                                    <scaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                        <multiplier>15</multiplier>
+                                                    </scaler>
+                                                    <source>Impact</source>
+                                                </Item>
+                                            </impactsIf>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                            <id href="/World/Quests/AstralHangarLeague/TreasureHunting/StabilizeMatter.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                            <impactsResource href="DropShipLoot.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                        </Item>
+                    </impacts>
+                    <count type="gameMechanics.elements.calcers.CalcerLongMulFloat">
+                        <calcerLong type="gameMechanics.elements.calcers.LongData">
+                            <value>1</value>
+                        </calcerLong>
+                        <calcerFloat type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                            <buff href="BuffChestOnShipCaptured.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <forAllRanks>true</forAllRanks>
+                        </calcerFloat>
+                    </count>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectStackTrigger">
+            <count>6</count>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.StackBuff">
+                            <buff href="BuffChestOnShipCaptured.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <resetTimer>false</resetTimer>
+                            <delta type="gameMechanics.elements.calcers.FloatData">
+                                <value>-1</value>
+                            </delta>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                    <impactsResource href="ChestRespawnInSector.(ImpactListGenericResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSectorChangedTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="BuffChestOnShipCaptured.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.RepeatedImpactsGeneric">
+                    <impacts>
+                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                            <impactsResource href="ChestRespawnInSector.(ImpactListGenericResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                        </Item>
+                    </impacts>
+                    <count type="gameMechanics.elements.calcers.CalcerLongMulFloat">
+                        <calcerLong type="gameMechanics.elements.calcers.LongData">
+                            <value>1</value>
+                        </calcerLong>
+                        <calcerFloat type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                            <buff href="BuffChestOnShip.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <forAllRanks>true</forAllRanks>
+                        </calcerFloat>
+                    </count>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.world.ship.elements.EffectImpactsOnDeath">
+            <impactsOnKiller>
+                <Item type="gameMechanics.elements.impacts.ImpactsIfGeneric">
+                    <predicate type="gameMechanics.constructor.basicElements.BinaryPredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateNotMaster" />
+                            <Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
+                                <onSlave type="gameMechanics.world.ship.elements.PredicateIsShip" />
+                            </Item>
+                        </predicates>
+                    </predicate>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.RepeatedImpactsGenericCountCaster">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                            <buff href="BuffChestOnShipCaptured.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            <range>
+                                                <max>4</max>
+                                            </range>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="BuffChestOnShipCaptured.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                <mulCalcer type="gameMechanics.elements.calcers.CalcerBuffDuration">
+                                                    <buff href="BuffChestOnShipCaptured.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                    <multiplier>2.08333e-006</multiplier>
+                                                </mulCalcer>
+                                                <additionalMultiplier>
+                                                    <scaler type="gameMechanics.elements.scalers.TrivialScaler" />
+                                                </additionalMultiplier>
+                                            </durationScaler>
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                            <impactsResource href="ChestRespawnInSector.(ImpactListGenericResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impacts>
+                            <count type="gameMechanics.elements.calcers.CalcerLongMulFloat">
+                                <calcerLong type="gameMechanics.elements.calcers.LongData">
+                                    <value>1</value>
+                                </calcerLong>
+                                <calcerFloat type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                    <buff href="BuffChestOnShipCaptured.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    <forAllRanks>true</forAllRanks>
+                                </calcerFloat>
+                            </count>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.RepeatedImpactsGeneric">
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                            <impactsResource href="ChestRespawnInSector.(ImpactListGenericResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                                        </Item>
+                                    </impacts>
+                                    <count type="gameMechanics.elements.calcers.CalcerLongMulFloat">
+                                        <calcerLong type="gameMechanics.elements.calcers.LongData">
+                                            <value>1</value>
+                                        </calcerLong>
+                                        <calcerFloat type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                            <buff href="BuffChestOnShip.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            <forAllRanks>true</forAllRanks>
+                                        </calcerFloat>
+                                    </count>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsOnKiller>
+            <impactsOnVictimWoKiller>
+                <Item type="gameMechanics.elements.impacts.RepeatedImpactsGeneric">
+                    <impacts>
+                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                            <impactsResource href="ChestRespawnInSector.(ImpactListGenericResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                        </Item>
+                    </impacts>
+                    <count type="gameMechanics.elements.calcers.CalcerLongMulFloat">
+                        <calcerLong type="gameMechanics.elements.calcers.LongData">
+                            <value>1</value>
+                        </calcerLong>
+                        <calcerFloat type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                            <buff href="BuffChestOnShip.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <forAllRanks>true</forAllRanks>
+                        </calcerFloat>
+                    </count>
+                </Item>
+            </impactsOnVictimWoKiller>
+            <impactsOnVictim>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="BuffChestOnShipCaptured.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOnVictim>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectShipDespawnTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.RepeatedImpactsGeneric">
+                    <impacts>
+                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                            <impactsResource href="ChestRespawnInSector.(ImpactListGenericResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                        </Item>
+                    </impacts>
+                    <count type="gameMechanics.elements.calcers.CalcerLongMulFloat">
+                        <calcerLong type="gameMechanics.elements.calcers.LongData">
+                            <value>1</value>
+                        </calcerLong>
+                        <calcerFloat type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                            <buff href="BuffChestOnShip.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <forAllRanks>true</forAllRanks>
+                        </calcerFloat>
+                    </count>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.SendImpactsToAddressees">
+                    <addresseesFinder type="gameMechanics.elements.addresseeFinders.AddressesCalcerOnlineShipBounds" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                    <id href="/World/Quests/AstralHangarLeague/TreasureHunting/PickupMatter.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+    <duration>480000</duration>
+    <stackLimit>10</stackLimit>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

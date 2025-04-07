@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>222155</resourceId>
+    </Header>
+    <Name href="BombSpell.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="BombSpell.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>50</value>
+    </range>
+    <prepareDuration>700</prepareDuration>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>3000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                        </predicate>
+                    </Item>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                <ability href="/Mechanics/RaidInstances/FerrisRaid/9_RoboGuards/RoboGuards_HM_Abilities1.(AbilityResource).xdb" />
+                            </Item>
+                        </predicates>
+                    </Item>
+                </predicates>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                                </predicate>
+                            </Item>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/FerrisRaid/9_RoboGuards/RoboGuard2/DamageAura_noHM.(BuffResource).xdb" />
+                                </predicate>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                                <spell href="BombSpell.(SpellSingleTarget).xdb" />
+                                <duration>10000</duration>
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.RepeatedImpact">
+                                <impact type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                                    <selector type="gameMechanics.tools.SelectorRandomNotLess">
+                                        <minIndex>0</minIndex>
+                                    </selector>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                    <buff href="/Mechanics/RaidInstances/Tank.(BuffResource).xdb" />
+                                                </predicate>
+                                            </Item>
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                    <buff href="BombBuff_HM.(BuffResource).xdb" />
+                                                </predicate>
+                                            </Item>
+                                        </predicates>
+                                    </filter>
+                                    <impacts>
+                                        <Item>
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="BombBuff_HM.(BuffResource).xdb" />
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                    <data href="BombThrow.(ClientData).xdb" />
+                                                    <calcers>
+                                                        <addressEntries>
+                                                            <Item>
+                                                                <name>caster</name>
+                                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                                            </Item>
+                                                            <Item>
+                                                                <name>target</name>
+                                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                                            </Item>
+                                                        </addressEntries>
+                                                    </calcers>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </impact>
+                                <count type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                    <buff href="BombsCount.(BuffResource).xdb" />
+                                </count>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                <impacts>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="BombsCount.(BuffResource).xdb" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                                <selector type="gameMechanics.tools.SelectorRandomNotLess">
+                                    <minIndex>0</minIndex>
+                                </selector>
+                                <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/RaidInstances/Tank.(BuffResource).xdb" />
+                                            </predicate>
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/RaidInstances/FerrisRaid/9_RoboGuards/RoboGuard2/ChainBuff.(BuffResource).xdb" />
+                                            </predicate>
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="BombBuff_NoHM.(BuffResource).xdb" />
+                                            </predicate>
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/RaidInstances/FerrisRaid/9_RoboGuards/RoboGuard2/ChainBuff2.(BuffResource).xdb" />
+                                            </predicate>
+                                        </Item>
+                                    </predicates>
+                                </filter>
+                                <impacts>
+                                    <Item>
+                                        <impacts>
+                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                <buff href="BombBuff_NoHM.(BuffResource).xdb" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                <data href="BombThrow.(ClientData).xdb" />
+                                                <calcers>
+                                                    <addressEntries>
+                                                        <Item>
+                                                            <name>caster</name>
+                                                            <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                                        </Item>
+                                                        <Item>
+                                                            <name>target</name>
+                                                            <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                                        </Item>
+                                                    </addressEntries>
+                                                </calcers>
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

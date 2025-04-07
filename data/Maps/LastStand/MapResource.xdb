@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mapLoader.MapResource>
+    <Header>
+        <resourceId>41734</resourceId>
+    </Header>
+    <minimapLight>
+        <SunLightYaw>44.7619</SunLightYaw>
+        <SunLightPitch>123.81</SunLightPitch>
+    </minimapLight>
+    <internalName>LastStand</internalName>
+    <name href="LastStand.txt" />
+    <factionExits>
+        <Item>
+            <exit type="mapLoader.pointer.MapPointerPos">
+                <pointer>
+                    <scriptID>Portal_League1_Capital</scriptID>
+                    <map href="/Maps/Kania/MapResource.xdb" />
+                </pointer>
+            </exit>
+            <faction href="/World/Factions/League.xdb" />
+        </Item>
+        <Item>
+            <exit type="mapLoader.pointer.MapPointerPos">
+                <pointer>
+                    <scriptID>Capital_AE1_Teleport</scriptID>
+                    <map href="/Maps/Hadagan/MapResource.xdb" />
+                </pointer>
+            </exit>
+            <faction href="/World/Factions/Empire.xdb" />
+        </Item>
+    </factionExits>
+    <mapTemplate href="/System/MapTemplates/LSInstancedEvent.(MapTemplate).xdb" />
+    <parts>
+        <parts>
+            <Item type="gameMechanics.map.basicElements.MapSpecificEffects">
+                <effects>
+                    <Item type="gameMechanics.elements.effects.EffectAvatarRespawnStrategy">
+                        <respawnStrategy type="gameMechanics.battleground.BattlegroundRespawnStrategy">
+                            <buff href="/Mechanics/InstancedEventResource/MM_LastStand/LastStand_DeadBuff.(BuffResource).xdb" />
+                        </respawnStrategy>
+                    </Item>
+                    <Item type="gameMechanics.elements.effects.DisableSpellsPredicate">
+                        <predicate type="gameMechanics.elements.predicates.PredicateSpellInGroup">
+                            <group href="/Mechanics/Spells/Groups/Resurrection.(ActionGroup).xdb" />
+                        </predicate>
+                    </Item>
+                    <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                        </predicates>
+                        <effectsIf>
+                            <Item type="gameMechanics.elements.effects.DeathTrigger">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                        <predicates>
+                                            <Item type="gameMechanics.battleground.map.PredicateBattleMemberMark">
+                                                <mark href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_blue_mark.(BattlegroundPlayerSpawnPlace).xdb" />
+                                            </Item>
+                                        </predicates>
+                                        <impactsIf>
+                                            <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                                <impacts>
+                                                    <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                                                        <variable href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_Blue_dead.(MapVariableResource).xdb" />
+                                                        <summand>1</summand>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.map.variables.PredicateMapVariableEquals">
+                                                                <variableResource href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_Blue_dead.(MapVariableResource).xdb" />
+                                                                <expectedValue type="gameMechanics.map.variables.MapVariableValueCalcer">
+                                                                    <resource href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_Blue.(MapVariableResource).xdb" />
+                                                                </expectedValue>
+                                                            </Item>
+                                                        </predicates>
+                                                        <impactsIf>
+                                                            <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactUpdateEventAchievementGeneric">
+                                                                <achievement href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_noob.(BattleEventAchievementResource).xdb" />
+                                                                <summand type="gameMechanics.elements.calcers.FloatData">
+                                                                    <value>1</value>
+                                                                </summand>
+                                                                <mark href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_Red_mark.(BattlegroundPlayerSpawnPlace).xdb" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                                <predicates>
+                                                                    <Item type="avatarPopulation.service.impl.matchMakingImpl.map.PredicateInstancedEventRound">
+                                                                        <round>9</round>
+                                                                    </Item>
+                                                                </predicates>
+                                                                <impactsIf>
+                                                                    <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactUpdateEventAchievementGeneric">
+                                                                        <achievement href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_hai.(BattleEventAchievementResource).xdb" />
+                                                                        <summand type="gameMechanics.elements.calcers.FloatData">
+                                                                            <value>1</value>
+                                                                        </summand>
+                                                                        <mark href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_Red_mark.(BattlegroundPlayerSpawnPlace).xdb" />
+                                                                    </Item>
+                                                                    <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactFinishInstancedEventGeneric">
+                                                                        <winner href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_Red_mark.(BattlegroundPlayerSpawnPlace).xdb" />
+                                                                    </Item>
+                                                                </impactsIf>
+                                                                <impactsElse>
+                                                                    <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactFinishInstancedEventRoundGeneric" />
+                                                                </impactsElse>
+                                                            </Item>
+                                                        </impactsIf>
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                        </impactsIf>
+                                        <impactsElse>
+                                            <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                                <impacts>
+                                                    <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                                                        <variable href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_Red_dead.(MapVariableResource).xdb" />
+                                                        <summand>1</summand>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.map.variables.PredicateMapVariableEquals">
+                                                                <variableResource href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_Red_dead.(MapVariableResource).xdb" />
+                                                                <expectedValue type="gameMechanics.map.variables.MapVariableValueCalcer">
+                                                                    <resource href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_Red.(MapVariableResource).xdb" />
+                                                                </expectedValue>
+                                                            </Item>
+                                                        </predicates>
+                                                        <impactsIf>
+                                                            <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactUpdateEventAchievementGeneric">
+                                                                <achievement href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_hai.(BattleEventAchievementResource).xdb" />
+                                                                <summand type="gameMechanics.elements.calcers.FloatData">
+                                                                    <value>1</value>
+                                                                </summand>
+                                                                <mark href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_blue_mark.(BattlegroundPlayerSpawnPlace).xdb" />
+                                                            </Item>
+                                                            <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactFinishInstancedEventGeneric">
+                                                                <winner href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_blue_mark.(BattlegroundPlayerSpawnPlace).xdb" />
+                                                            </Item>
+                                                        </impactsIf>
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                        </impactsElse>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </effectsIf>
+                    </Item>
+                    <Item type="gameMechanics.elements.effects.DisableSpellsPredicate">
+                        <predicate type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                            <spells>
+                                <Item href="/Mechanics/Spells/Mounts/Battlethrone/PrismCharge/Spell01.xdb" />
+                            </spells>
+                        </predicate>
+                    </Item>
+                </effects>
+            </Item>
+            <Item type="gameMechanics.map.variables.MapVariablesHolderResource">
+                <variables>
+                    <Item href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_Blue.(MapVariableResource).xdb" />
+                    <Item href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_Red.(MapVariableResource).xdb" />
+                    <Item href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_Blue_dead.(MapVariableResource).xdb" />
+                    <Item href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_Red_dead.(MapVariableResource).xdb" />
+                    <Item href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_Flag_Blue.(MapVariableResource).xdb" />
+                    <Item href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_Flag_red.(MapVariableResource).xdb" />
+                    <Item href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand/MM_LastStand_Flag.(MapVariableResource).xdb" />
+                </variables>
+            </Item>
+            <Item type="gameMechanics.elements.bunchparts.VotingSpellsPartResource">
+                <spells>
+                    <Item href="/Mechanics/Spells/VoteKick/VoteForKick.(SpellSingleTarget).xdb" />
+                </spells>
+            </Item>
+        </parts>
+    </parts>
+</mapLoader.MapResource>

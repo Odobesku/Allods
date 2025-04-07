@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>225419</resourceId>
+    </Header>
+    <Name href="EarthFatality.(SpellCasterSelf).Name.txt" />
+    <visualScripts href="/Spells/VisScripts/Bosses/UmoirRaid/Guard_FatalityEarth.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="EarthFatality.(SpellCasterSelf).Name.txt" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>0</value>
+    </range>
+    <prepareDuration>7000</prepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>90000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="EarthActivation.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                        <radius>160</radius>
+                        <affectHolder>false</affectHolder>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/IceGuard/IceBall1.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                        <buff href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/IceGuard/IceBall1.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                </impactsIf>
+                                <impactsElse>
+                                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                        <element>PHYSICAL</element>
+                                        <damage>50</damage>
+                                        <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="EarthFatality.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                </impactsElse>
+                            </Item>
+                        </impacts>
+                        <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                            <filters>
+                                <Item type="gameMechanics.world.creature.AvatarFilter" />
+                                <Item type="gameMechanics.world.creature.AliveFilter" />
+                            </filters>
+                        </filter>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

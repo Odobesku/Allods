@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>193473</resourceId>
+    </Header>
+    <contextActionInfo>
+        <priority>1</priority>
+    </contextActionInfo>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/AstralIsle.(ActionGroup).xdb" />
+    </groups>
+    <element>FIRE</element>
+    <Name href="AI38_Turtle_SpellStopCharge.(SpellArea).Name.txt" />
+    <Description href="AI38_Turtle_SpellStopCharge.(SpellArea).Description.txt" />
+    <image href="/Interface/Icons/Special/Talents/Mage/LightningBonus.(UISingleTexture).xdb" />
+    <visualScripts href="AI38_Turtle_SpellStopCharge.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>50</value>
+    </range>
+    <targetType>STTPoint</targetType>
+    <iffPolicy>Everyone</iffPolicy>
+    <mechanics>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.StackBuff">
+                <buff href="AI38_Turtle_SpellStopCharge.(BuffResource).xdb" />
+                <delta type="gameMechanics.elements.calcers.FloatData">
+                    <value>-1</value>
+                </delta>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                        <mobs>
+                            <Item href="AI38_Boss02_Adds.(MobWorld).xdb" />
+                        </mobs>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                </impactsIf>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                            </Item>
+                        </predicates>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactsFromPhantom">
+                        <phantom href="AI38_Boss02.(MobWorld).xdb" />
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                <element>LIGHTNING</element>
+                                <damage>35</damage>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                <data href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/YakBoss/LightningSphere/LightningHit.(ClientData).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/Mechanics/Spells/AstarlIslands/CommonSpells/Stun_Shock.(BuffResource).xdb" />
+                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                    <multiplier>5</multiplier>
+                                </durationScaler>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsIf>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsMob" />
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactsFromPhantom">
+                        <phantom href="AI38_Boss02.(MobWorld).xdb" />
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                <element>LIGHTNING</element>
+                                <damage>50</damage>
+                            </Item>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/Mechanics/Spells/AstarlIslands/CommonSpells/Stun_Shock.(BuffResource).xdb" />
+                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                    <multiplier>10</multiplier>
+                                </durationScaler>
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                        <value>1</value>
+                    </Item>
+                </impactsIf>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>20</speed>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+    <radius>4</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

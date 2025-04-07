@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>220592</resourceId>
+    </Header>
+    <visScript href="Portal_Ending.(BuffVisScripts).xdb" />
+    <needVisualize>false</needVisualize>
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Rotate</Item>
+                <Item>Jump</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                        <locator>
+                            <scriptID>Cut_Scene_Boss</scriptID>
+                            <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                        </locator>
+                        <yaw type="constructor.basicElements.AngleDegrees">
+                            <value>1</value>
+                        </yaw>
+                    </destination>
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="Portal_Ending_BossDeath.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactTurnMob">
+                            <destination type="gameMechanics.map.destination.RelativePos">
+                                <yaw type="constructor.basicElements.AngleDegrees">
+                                    <value>1</value>
+                                </yaw>
+                            </destination>
+                        </Item>
+                    </impacts>
+                    <object href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Boss/Portal_Boss_CutScene.(MobWorld).xdb" />
+                    <pool href="CutScenePool.(SummonPool).xdb" />
+                    <isPersonalPool>true</isPersonalPool>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactClientData">
+                    <data href="/World/Quests/Ferris_indoor/Ferris_3_4_2/Portal_end_Sub1.(ClientData).xdb" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="Portal_Ending_CutScene_Part2.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>6000</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientData">
+                            <data href="/World/Quests/Ferris_indoor/Ferris_3_4_2/Portal_end_Sub2.(ClientData).xdb" />
+                        </Item>
+                    </impactsOn>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <duration>16000</duration>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/CutScene.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

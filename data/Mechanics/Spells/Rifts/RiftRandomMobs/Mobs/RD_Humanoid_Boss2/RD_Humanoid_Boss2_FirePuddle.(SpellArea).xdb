@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>208597</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/RiftBossSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/HumanoidSpells.(ActionGroup).xdb" />
+    </groups>
+    <Name href="RD_Humanoid_Boss2_FirePuddle.(SpellArea).Name.txt" />
+    <visualScripts href="RD_Humanoid_Boss2_FirePuddle.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <prepareDuration>2000</prepareDuration>
+    <targetType>STTPoint</targetType>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>25000</duration>
+        </cooldown>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                <projectileData>
+                    <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                        <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+                    </moveType>
+                    <resource href="RD_Humanoid_Boss2_FirePuddle.(ProjectileResource).xdb" />
+                </projectileData>
+                <pool href="/Mechanics/Spells/Rifts/Abilities/RD_BossSummonPool.(SummonPool).xdb" />
+                <isPersonalPool>true</isPersonalPool>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="/Mechanics/Spells/Rifts/Abilities/StopBuff.(BuffResource).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="RD_Humanoid_Boss2_IcePhase.(BuffResource).xdb" />
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                    <scalers>
+                        <Item type="gameMechanics.elements.scalers.WeaponScaler" />
+                        <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/PartiallyEscapableDamageBoss.(CalcerFloatResource).xdb" />
+                            </mulCalcer>
+                        </Item>
+                    </scalers>
+                </scaler>
+                <minDamage>1</minDamage>
+                <maxDamage>1</maxDamage>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <radius>6</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

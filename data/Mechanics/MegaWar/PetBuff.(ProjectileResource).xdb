@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.projectile.ProjectileResource>
+    <Header>
+        <resourceId>227513</resourceId>
+    </Header>
+    <persistentParts>
+        <Item type="gameMechanics.world.entity.EntityZoneTrackerResource">
+            <trackData href="/Interface/TrackData/MWPetBuff.(TrackDataResource).xdb" />
+        </Item>
+        <Item type="gameMechanics.world.visibility.VisibilityControllerResource" />
+    </persistentParts>
+    <name href="PetBuff.(ProjectileResource).Name.txt" />
+    <spawnLocation>
+        <position x="11077.333008" y="12004.800781" z="76.270203" />
+        <zone href="/Maps/ZoneContested5/Zones/ZoneContested5/ZoneContested5.(ZoneResource).xdb" />
+    </spawnLocation>
+    <visObject href="/Spells/FX/World/AC5_buf2.(VisObjectTemplate).xdb" />
+    <lifeLengthCap>0</lifeLengthCap>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ZoneDistributor">
+                        <zone type="gameMechanics.elements.calcers.ZoneDistributor$OwnZone" />
+                        <faction type="gameMechanics.elements.calcers.ZoneDistributor$AnyFaction" />
+                    </distributor>
+                    <data href="Assistants/MWPetBuffSpawned.(ClientData).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ZoneDistributor">
+                        <zone type="gameMechanics.elements.calcers.ZoneDistributor$OwnZone" />
+                        <faction type="gameMechanics.elements.calcers.ZoneDistributor$AnyFaction" />
+                    </distributor>
+                    <data href="Assistants/MWPetBuffSpawned01.(ClientData).xdb" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.TickableEntityAura">
+            <affectGroup>All</affectGroup>
+            <radius>1.5</radius>
+            <filter type="gameMechanics.world.creature.AvatarFilter" />
+            <impactsIn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                            <zone href="/Maps/ZoneContested5/Zones/ZoneContested5/ZC5_Mesto03.(ZoneResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="Assistants/PetsCounterBuff_ZC5.(BuffResource).xdb" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ReturningImpactsGeneric">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                <buff href="Assistants/PetsCounterBuff.(BuffResource).xdb" />
+                                <range>
+                                    <min>3</min>
+                                    <max>3</max>
+                                </range>
+                            </predicate>
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateInZone">
+                                <zone href="/Maps/ZoneContested5/Zones/ZoneContested5/ZC5_Mesto03.(ZoneResource).xdb" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ReturningImpactsGeneric">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateInZone">
+                                        <zone href="/Maps/ZoneContested5/Zones/ZoneContested5/ZC5_Mesto03.(ZoneResource).xdb" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="Assistants/PetsCounterBuff.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                                    <zone href="/Maps/ZoneContested5/Zones/ZoneContested5/ZC5_Mesto03.(ZoneResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="Assistants/PetsCounterBuff_ZC5.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsIn>
+        </Item>
+    </effects>
+</gameMechanics.world.projectile.ProjectileResource>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>241981</resourceId>
+    </Header>
+    <visualScripts href="/Items/InteractiveObjects/Templates/DefaultExploitVisScripts.(ExploitVisScripts).xdb" />
+    <isExploit>true</isExploit>
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>5</value>
+    </range>
+    <prepareDuration>2000</prepareDuration>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <iffPolicy>Everyone</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/Shroud.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/Escapes.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/SpeedBoosts.xdb" />
+                    </groups>
+                </predicate>
+            </Item>
+        </casterConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                        <predicates>
+                                            <Item type="gameMechanics.battleground.map.PredicateBattleMemberMark">
+                                                <mark href="/Maps/Domination04/Marks/RedMark.(BattlegroundPlayerSpawnPlace).xdb" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                        </predicates>
+                                        <impacts>
+                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                <buff href="Red_Flag.(BuffResource).xdb" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                <predicates>
+                                                    <Item type="gameMechanics.map.variables.PredicateMapVariableEquals">
+                                                        <variableResource href="/Mechanics/InstancedEventResource/MM_BG04/Left.(MapVariableResource).xdb" />
+                                                        <expectedValue type="gameMechanics.elements.calcers.FloatData">
+                                                            <value>1</value>
+                                                        </expectedValue>
+                                                    </Item>
+                                                </predicates>
+                                                <impactsIf>
+                                                    <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                                                        <table href="/Mechanics/InstancedEventResource/MM_BG04/Red_Point_0.(SpawnTable).xdb" />
+                                                    </Item>
+                                                </impactsIf>
+                                                <impactsElse>
+                                                    <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                                                        <table href="/Mechanics/InstancedEventResource/MM_BG04/Red_Point2_0.(SpawnTable).xdb" />
+                                                    </Item>
+                                                </impactsElse>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                <distributor type="gameMechanics.elements.calcers.ZoneDistributor">
+                                                    <zone type="gameMechanics.elements.calcers.ZoneDistributor$OwnZone" />
+                                                </distributor>
+                                                <data href="RedFlagCaptured.(ClientData).xdb" />
+                                            </Item>
+                                        </impacts>
+                                        <elseImpacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                                    <Item type="gameMechanics.battleground.map.PredicateBattleMemberMark">
+                                                        <mark href="/Maps/Domination04/Marks/BlueMark.(BattlegroundPlayerSpawnPlace).xdb" />
+                                                    </Item>
+                                                </predicates>
+                                                <impacts>
+                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                        <buff href="Blue_Flag.(BuffResource).xdb" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.map.variables.PredicateMapVariableEquals">
+                                                                <variableResource href="/Mechanics/InstancedEventResource/MM_BG04/Left.(MapVariableResource).xdb" />
+                                                                <expectedValue type="gameMechanics.elements.calcers.FloatData">
+                                                                    <value>1</value>
+                                                                </expectedValue>
+                                                            </Item>
+                                                        </predicates>
+                                                        <impactsIf>
+                                                            <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                                                                <table href="/Mechanics/InstancedEventResource/MM_BG04/Blue_Point_0.(SpawnTable).xdb" />
+                                                            </Item>
+                                                        </impactsIf>
+                                                        <impactsElse>
+                                                            <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                                                                <table href="/Mechanics/InstancedEventResource/MM_BG04/Blue_Point2_0.(SpawnTable).xdb" />
+                                                            </Item>
+                                                        </impactsElse>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                        <distributor type="gameMechanics.elements.calcers.ZoneDistributor">
+                                                            <zone type="gameMechanics.elements.calcers.ZoneDistributor$OwnZone" />
+                                                        </distributor>
+                                                        <data href="Blue_Flag_Stolen.(ClientData).xdb" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                        </elseImpacts>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsIf>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <canStartNotBeeingInSpellbook>true</canStartNotBeeingInSpellbook>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

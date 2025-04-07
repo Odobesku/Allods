@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>221802</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectsDeferred">
+                    <delay>4000</delay>
+                    <delayExtensionMax>6000</delayExtensionMax>
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="Cleave/CleaveRes.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                            <tick>20000</tick>
+                        </Item>
+                    </effects>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <effectsIf>
+                        <Item type="gameMechanics.elements.effects.TickableAura">
+                            <affectGroup>All</affectGroup>
+                            <radius>10</radius>
+                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                        <mobs>
+                                            <Item href="ColossusScout.(MobWorld).xdb" />
+                                        </mobs>
+                                    </Item>
+                                </predicates>
+                            </filter>
+                            <holderImpactsIn>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="UnityPower.(BuffResource).xdb" />
+                                </Item>
+                            </holderImpactsIn>
+                            <holderImpactsOut>
+                                <Item type="gameMechanics.elements.impacts.StackBuff">
+                                    <buff href="UnityPower.(BuffResource).xdb" />
+                                    <delta type="gameMechanics.elements.calcers.FloatData">
+                                        <value>-1</value>
+                                    </delta>
+                                </Item>
+                            </holderImpactsOut>
+                        </Item>
+                    </effectsIf>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectsDeferred">
+                    <delay>2000</delay>
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.Switch">
+                            <impactsOn>
+                                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactActivateAggro" />
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsOn>
+                        </Item>
+                    </effects>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectMobStatQuality">
+            <quality href="/Mechanics/RaidInstances/FerrisRaid/Other/Part4_Stats.(MobStatQuality).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/Wait.(BuffResource).xdb" />
+                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                        <multiplier>2</multiplier>
+                    </durationScaler>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>14_SoldierBoss</scriptID>
+                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectNoAggroChecks" />
+        <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.25</coeff>
+            </scaler>
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

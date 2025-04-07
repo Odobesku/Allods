@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>251833</resourceId>
+    </Header>
+    <Name href="Creeping_Death.(BuffResource).Name.txt" />
+    <Description href="Creeping_Death.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Necromancer/PetModeAggressive.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactKill" />
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DisableLocalEvade" />
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                            <radius>30</radius>
+                            <affectHolder>false</affectHolder>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="Creeping_Death.(ClientData).xdb" />
+                                    <calcers>
+                                        <addressEntries>
+                                            <Item>
+                                                <name>caster</name>
+                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                            </Item>
+                                            <Item>
+                                                <name>target</name>
+                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                            </Item>
+                                        </addressEntries>
+                                    </calcers>
+                                </Item>
+                            </impacts>
+                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                        <mobs>
+                                            <Item href="Creeping_Death.(MobWorld).xdb" />
+                                        </mobs>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                </predicates>
+                            </filter>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="/Mechanics/InstanceModifiers/Addon5/Creeping_Death/Creeping_Death_FX_Damage.(ClientData).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>4</radius>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                            <element>POISON</element>
+                            <damage>120</damage>
+                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                </predicates>
+                            </Item>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+                                    <groups>
+                                        <Item href="/Mechanics/InstanceModifiers/Addon5/Not_Astral_Modifiers.(ActionGroup).xdb" />
+                                    </groups>
+                                </predicate>
+                            </Item>
+                        </predicates>
+                    </filter>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>4</radius>
+                    <affectHolder>false</affectHolder>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                            <time>500</time>
+                            <distance>8</distance>
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                <mobs>
+                                    <Item href="Creeping_Death.(MobWorld).xdb" />
+                                </mobs>
+                            </Item>
+                        </predicates>
+                    </filter>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffInterceptor">
+            <durationScalerTarget type="gameMechanics.elements.scalers.LinearScaler">
+                <multiplier>0.5</multiplier>
+            </durationScalerTarget>
+            <predicates>
+                <Item type="gameMechanics.constructor.basicElements.PredicateGenericOr">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                            <groups>
+                                <Item href="/Mechanics/Spells/Groups/Knockdowns.xdb" />
+                            </groups>
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                            <groups>
+                                <Item href="/Mechanics/Spells/Groups/Stuns.xdb" />
+                            </groups>
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                            <groups>
+                                <Item href="/Mechanics/Spells/Groups/Fears.xdb" />
+                            </groups>
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                            <groups>
+                                <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb" />
+                            </groups>
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                            <groups>
+                                <Item href="/Mechanics/Spells/Groups/CrowdControlSpells.xdb" />
+                            </groups>
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                            <groups>
+                                <Item href="/Mechanics/Spells/Groups/Blinds.xdb" />
+                            </groups>
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                            <groups>
+                                <Item href="/Mechanics/Spells/Groups/Silence.xdb" />
+                            </groups>
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                            <groups>
+                                <Item href="/Mechanics/Spells/Groups/MovementImpairingSpells.xdb" />
+                            </groups>
+                        </Item>
+                    </predicates>
+                </Item>
+            </predicates>
+        </Item>
+    </effects>
+    <duration>30000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

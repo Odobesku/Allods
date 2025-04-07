@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>252019</resourceId>
+    </Header>
+    <Name href="Martyr.(BuffResource).Name.txt" />
+    <Description href="Martyr.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Misc/Itemmall/IMFatalityLotteryLife.(UISingleTexture).xdb" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/AI26_Target_Main01.(VisObjectTemplate).xdb" />
+            <locator>Slot_Global</locator>
+        </Item>
+    </visualEffects>
+    <visScript href="Martyr.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <affectGroup>Friends</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                        <mobs>
+                                            <Item href="Martyr.(MobWorld).xdb" />
+                                        </mobs>
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="Martyr_Life.(BuffResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                    </Item>
+                                </predicates>
+                            </Item>
+                        </predicates>
+                    </filter>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactForgetAbility">
+                    <ability href="Martyr_Death.(AbilityResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>2500</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="Martyr_Visual_Life.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <affectGroup>Friends</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="Martyr_Death.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                    </Item>
+                                </predicates>
+                            </Item>
+                        </predicates>
+                    </filter>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <duration>25000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/InstanceModifiers/Addon5/Not_Astral_Modifiers.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/EvadeProtectedBuffs.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

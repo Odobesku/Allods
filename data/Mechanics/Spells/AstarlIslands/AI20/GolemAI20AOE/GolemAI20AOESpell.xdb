@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>194528</resourceId>
+    </Header>
+    <element>LIGHTNING</element>
+    <Name href="SpellName.txt" />
+    <Description href="SpellDescription.txt" />
+    <visualScripts href="Discharge.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="SpellName.txt" />
+    <descTemplate href="SpellDescription.txt" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>10</value>
+    </range>
+    <prepareDuration>4000</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>20000</duration>
+        </cooldown>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                        <radius>10</radius>
+                        <affectGroup>Enemies</affectGroup>
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/Mechanics/Spells/CommonBuffs/Stun/BuffStun.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="GolemAI20AOEBuffDoT.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                <element>LIGHTNING</element>
+                                <damage>35</damage>
+                                <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                            </Item>
+                        </impacts>
+                        <filter type="gameMechanics.constructor.basicElements.FilterOr">
+                            <filters>
+                                <Item type="gameMechanics.world.creature.AvatarFilter" />
+                                <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </predicates>
+                                </Item>
+                            </filters>
+                        </filter>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <isAE>true</isAE>
+    <iffPolicy>Friends</iffPolicy>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

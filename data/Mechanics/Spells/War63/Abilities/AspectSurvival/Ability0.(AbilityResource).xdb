@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>216425</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="Ability0.(AbilityResource).Name.txt" />
+    <description href="Ability0.(AbilityResource).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value var="value" />
+        </Item>
+        <Item>
+            <name>var1</name>
+            <value var="cd_duration" />
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Warrior/WarriorDefender.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.BuffExtraEffects">
+            <buffs>
+                <Item href="/Mechanics/Spells/CommonBuffs/Aspects/Tank/Buff01.(BuffResource).xdb" />
+            </buffs>
+            <effects>
+                <Item type="gameMechanics.elements.effects.HealthTrigger">
+                    <healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
+                        <multiplier>0.3</multiplier>
+                    </healthOn>
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="Cooldown0.(BuffResource).xdb" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff hrefvar="buff" />
+                                    <impactsOnAttach>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="Cooldown0.(BuffResource).xdb" />
+                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                <multiplier var="cd_duration" />
+                                            </durationScaler>
+                                        </Item>
+                                    </impactsOnAttach>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsOn>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <ranks>
+        <Item href="Ability01.(AbilityResource).xdb" />
+        <Item href="Ability02.(AbilityResource).xdb" />
+        <Item href="Ability03.(AbilityResource).xdb" />
+    </ranks>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>219340</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <element>ACID</element>
+    <Name href="Spell_Name.txt" />
+    <Description href="Spell_Desc.txt" />
+    <descVars />
+    <image href="/Interface/Icons/Spells/Warrior/WarriorDefender.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Warrior/ProtectTheWeak.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="Spell_Name.txt.template" />
+    <descTemplate href="Spell_Desc.txt.template" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <level>8</level>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>180000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateShieldEquipped" />
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </targetConditions>
+        <conditions>
+            <Item type="gameMechanics.elements.predicates.PredicateNotMaster" />
+            <Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
+                <affectGroup>Raid</affectGroup>
+            </Item>
+        </conditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="ProtectorDieHardWatcher.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/Spells/WarriorV3/DieHard/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="ProtectorDieHardTriggered.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        <durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
+                            <buff href="/Mechanics/Spells/WarriorV3/DieHard/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <tickLength>1000</tickLength>
+                        </durationScaler>
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="RestrictiveBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactCaseGeneric">
+                <cases>
+                    <Item>
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                <ability href="/Mechanics/Spells/WarriorV3/DieHard/Ability03.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                <anyRank>false</anyRank>
+                            </Item>
+                        </predicates>
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="ProtectorHasDieHard03.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item>
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                <ability href="/Mechanics/Spells/WarriorV3/DieHard/Ability02.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                <anyRank>false</anyRank>
+                            </Item>
+                        </predicates>
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="ProtectorHasDieHard02.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item>
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                <ability href="/Mechanics/Spells/WarriorV3/DieHard/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                <anyRank>false</anyRank>
+                            </Item>
+                        </predicates>
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="ProtectorHasDieHard01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item>
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                        </predicates>
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="RestrictiveBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </cases>
+                <checkOnTarget>false</checkOnTarget>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

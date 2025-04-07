@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>232298</resourceId>
+        <isPrototype>true</isPrototype>
+        <Variables>
+            <LooterEnforcer />
+        </Variables>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/LooterSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <element>ASTRAL</element>
+    <uiSpellBookPageType>SPELLBOOK_PAGE_OTHER</uiSpellBookPageType>
+    <level>1</level>
+    <prepareDuration>0</prepareDuration>
+    <immutablePrepareDuration>false</immutablePrepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <replaceLowRanks>false</replaceLowRanks>
+    <isWorkOnDead>true</isWorkOnDead>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>false</ignoreGlobalCooldown>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>5000</duration>
+            <group href="/Mechanics/Spells/Groups/LooterSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/GameRoot/BagsOverflow/VeryHardOverflow/Buff01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/GameRoot/BagsOverflow/HardOverflow/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/GameRoot/BagsOverflow/NormalOverflow/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+                        <spell hrefvar="CurrentSpell" />
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+                        <spell hrefvar="CurrentSpell" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff hrefvar="LooterEnforcer" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff hrefvar="ReturnBuff" />
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellGroupDeactivate">
+                        <group href="/Mechanics/Spells/Groups/LooterSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                    </Item>
+                    <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                        <impactsResource href="LooterEnforcersOff.(ImpactList).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff hrefvar="LooterEnforcer" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                        <group href="/Mechanics/Spells/Groups/LootersReturningBuffs.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                    </Item>
+                </impactsElse>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <isAE>false</isAE>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>224251</resourceId>
+    </Header>
+    <name href="R7_CageSphere_ability.(AbilityResource).Name.txt" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactKill" />
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToBuffs">
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/Knockdowns.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/Fears.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/MovementImpairingSpells.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/CrowdControlSpells.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/Blinds.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/Stuns.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/Silence.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/Disarms.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs_IgnoreWill.(ActionGroup).xdb" />
+                    </groups>
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToSpellFromGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/CrowdControlSpells.xdb" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.TickableEntityAura">
+            <affectGroup>All</affectGroup>
+            <radius>7</radius>
+            <filter type="gameMechanics.world.creature.AvatarFilter" />
+            <impactsIn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="R7_Cage_Sphere.(BuffResource).xdb" />
+                </Item>
+            </impactsIn>
+            <impactsOut>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="R7_Cage_Sphere.(BuffResource).xdb" />
+                </Item>
+            </impactsOut>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="R7_CageSphere_10Seconds_Check.(BuffResource).xdb" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                    <projectileData>
+                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                        </moveType>
+                        <resource href="R7_Cage_Sphere.(ProjectileResource).xdb" />
+                    </projectileData>
+                    <pool href="R7_Invasion_Projectile.(SummonPool).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnCell">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="R7_Cage_Sphere.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="R7_Cage_Sphere.(BuffResource).xdb" />
+                        </Item>
+                    </predicates>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>10</radius>
+                    <affectGroup>All</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                            <element>SHADOW</element>
+                            <forceAE>true</forceAE>
+                            <damage>70</damage>
+                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.world.creature.AvatarFilter" />
+                    <perTargetScaling>Copy</perTargetScaling>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+            </impacts>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

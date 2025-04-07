@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>219912</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Food.xdb" />
+        <Item hrefvar="Group" />
+    </groups>
+    <Name href="ConsumableSpell.(SpellSingleTarget).Name.txt" />
+    <Description hrefvar="Description" />
+    <visualScripts hrefvar="VisScript" />
+    <prepareDuration>2500</prepareDuration>
+    <immutablePrepareDuration>true</immutablePrepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.elements.resources.ResourceActiveItem" />
+            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <predicate type="gameMechanics.constructor.basicElements.PredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Items/Food_v2/BGReward/FoodBuff.(BuffResource).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateEqualsLong">
+                                <lhs type="gameMechanics.elements.calcers.LongData">
+                                    <value>2</value>
+                                </lhs>
+                                <rhs type="gameMechanics.elements.calcers.LongData">
+                                    <value var="value" />
+                                </rhs>
+                            </Item>
+                        </predicates>
+                    </predicate>
+                </predicate>
+                <clientData href="CantEat.(ClientData).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <predicate type="gameMechanics.constructor.basicElements.PredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Items/Food_v2/BGReward/DrinkBuff.(BuffResource).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateEqualsLong">
+                                <lhs type="gameMechanics.elements.calcers.LongData">
+                                    <value>1</value>
+                                </lhs>
+                                <rhs type="gameMechanics.elements.calcers.LongData">
+                                    <value var="value" />
+                                </rhs>
+                            </Item>
+                        </predicates>
+                    </predicate>
+                </predicate>
+                <clientData href="CantDrink.(ClientData).xdb" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                <group hrefvar="GroupToDetach" />
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff hrefvar="ConsumableBuff" />
+                <stacks type="gameMechanics.elements.calcers.CalcerMin">
+                    <calcers>
+                        <Item type="gameMechanics.elements.calcers.CalcerSum">
+                            <summands>
+                                <Item type="gameMechanics.elements.calcers.FloatData">
+                                    <value>25</value>
+                                </Item>
+                                <Item type="gameMechanics.elements.calcers.FloatData">
+                                    <value var="AdditionalStacks" />
+                                </Item>
+                            </summands>
+                        </Item>
+                        <Item type="gameMechanics.elements.calcers.CalcerSum">
+                            <summands>
+                                <Item type="gameMechanics.elements.calcers.FloatData">
+                                    <value>25</value>
+                                </Item>
+                                <Item type="gameMechanics.elements.calcers.CalcerMul">
+                                    <calcers>
+                                        <Item type="gameMechanics.constructor.basicElements.ScalerCalcer">
+                                            <scaler type="gameMechanics.elements.scalers.LevelScaler" />
+                                            <value>1</value>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.calcers.FloatData">
+                                            <value>-2</value>
+                                        </Item>
+                                    </calcers>
+                                </Item>
+                                <Item type="gameMechanics.elements.calcers.CalcerMul">
+                                    <calcers>
+                                        <Item type="gameMechanics.elements.calcers.LongToFloatCalcer">
+                                            <calcer type="gameMechanics.elements.calcers.CalcerActiveItemLevel" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.calcers.FloatData">
+                                            <value>2</value>
+                                        </Item>
+                                    </calcers>
+                                </Item>
+                                <Item type="gameMechanics.elements.calcers.FloatData">
+                                    <value var="AdditionalStacks" />
+                                </Item>
+                            </summands>
+                        </Item>
+                    </calcers>
+                </stacks>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactConsumeResources">
+                <resources>
+                    <Item type="gameMechanics.elements.resources.ResourceActiveItem" />
+                </resources>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

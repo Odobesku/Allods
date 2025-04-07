@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>225960</resourceId>
+    </Header>
+    <Name href="Skrakan_ChainStarter.(BuffResource).Name.txt" />
+    <Description href="Skrakan_ChainStarter.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Misc/Buffs/LineUniversalGreen.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="/Spells/VisScripts/Bosses/Smeyana/ChineGreen.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.triggerLine.EffectTriggerLine">
+            <impactsIn type="gameMechanics.elements.effects.triggerLine.EffectTriggerLine$ImpactsPack">
+                <impactsFromCaster>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                <mobs>
+                                    <Item href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Sarn_AddSummoning/Nezeb_SummoningAdd.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                </mobs>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                        </impactsIf>
+                    </Item>
+                </impactsFromCaster>
+            </impactsIn>
+            <maxLength>85</maxLength>
+            <reconnect>true</reconnect>
+            <height>5</height>
+            <width>3</width>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectAddContextActions">
+            <actions>
+                <Item href="Skrakan_ChainsDetacher.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectInstantiating">
+            <effects>
+                <Item type="gameMechanics.elements.effects.TickableAura">
+                    <tick>1000</tick>
+                    <affectGroup>All</affectGroup>
+                    <radius>10</radius>
+                    <filter type="gameMechanics.world.creature.AvatarFilter" />
+                    <impactsIn>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="Skrakan_PlayerChains.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="Skrakan_ChainStarter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="Nezeb_ChainStarter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="Nezeb_PlayerChains.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </predicates>
+                                </Item>
+                            </predicates>
+                            <impactsElse>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="Skrakan_PlayerChains.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impactsIn>
+                    <impactsOut>
+                        <Item type="gameMechanics.elements.impacts.ImpactsIf">
+                            <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromAddressee">
+                                <buff href="Skrakan_PlayerChains.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                <from type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                            </predicate>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="Skrakan_PlayerChains.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsOut>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor">
+                                <radius>150</radius>
+                            </distributor>
+                            <data href="Skrakan_PlayerChains.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                            <calcers>
+                                <addressEntries>
+                                    <Item>
+                                        <name>caster</name>
+                                        <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                    </Item>
+                                    <Item>
+                                        <name>target</name>
+                                        <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                    </Item>
+                                </addressEntries>
+                            </calcers>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+        </Item>
+        <Item type="gameMechanics.elements.effects.PureDamageDoT">
+            <parameters>
+                <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                        <multiplier>0.1</multiplier>
+                    </mulCalcer>
+                </scalerTarget>
+                <damagePerTick>1</damagePerTick>
+            </parameters>
+            <scaler type="gameMechanics.elements.scalers.TrivialScaler" />
+        </Item>
+    </effects>
+    <isHelpful>false</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/RaidInstances/UmoirRaid/UmoirRaid.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

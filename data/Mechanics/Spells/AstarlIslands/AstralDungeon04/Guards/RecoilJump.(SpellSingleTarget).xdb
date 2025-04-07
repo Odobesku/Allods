@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>186484</resourceId>
+    </Header>
+    <Name href="RecoilJump.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="/Spells/VisScripts/Stalker/RecoilJump.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>50</value>
+    </range>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>12000</duration>
+        </cooldown>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateRemote">
+                        <range>10</range>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                        <selector type="gameMechanics.tools.SelectorRandomNotLess">
+                            <minIndex>0</minIndex>
+                        </selector>
+                        <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                        </Item>
+                                    </predicates>
+                                </Item>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="RapidFireTarget.(BuffResource).xdb" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                        </filter>
+                        <impacts>
+                            <Item>
+                                <impacts>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="RapidFireTarget.(BuffResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                        <impacts>
+                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                <buff href="RapidFireMobBuff.(BuffResource).xdb" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                                                <spell href="RangeShot.(SpellSingleTarget).xdb" />
+                                                <duration>
+                                                    <second>10</second>
+                                                </duration>
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ImpactAstralKickToPoint">
+                        <time>1000</time>
+                        <impactsOnLand>
+                            <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                                <selector type="gameMechanics.tools.SelectorRandomNotLess">
+                                    <minIndex>0</minIndex>
+                                </selector>
+                                <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                    <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                                </Item>
+                                            </predicates>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="RapidFireTarget.(BuffResource).xdb" />
+                                            </predicate>
+                                        </Item>
+                                    </predicates>
+                                </filter>
+                                <impacts>
+                                    <Item>
+                                        <impacts>
+                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                <buff href="RapidFireTarget.(BuffResource).xdb" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                <impacts>
+                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                        <buff href="RapidFireMobBuff.(BuffResource).xdb" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                                                        <spell href="RangeShot.(SpellSingleTarget).xdb" />
+                                                        <duration>
+                                                            <second>10</second>
+                                                        </duration>
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impactsOnLand>
+                        <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                            <offset>15</offset>
+                            <yaw type="constructor.basicElements.AngleRadians">
+                                <value>3.14</value>
+                            </yaw>
+                        </destination>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

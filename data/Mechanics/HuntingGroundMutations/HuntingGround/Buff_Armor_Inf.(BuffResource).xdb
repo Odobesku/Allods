@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>242823</resourceId>
+        <Prototype href="Buff_Armor.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="Buff_Armor_Temp.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Buff_Armor_Temp.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsMob" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Buff_Armor_Inf.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateFaction">
+                                            <faction href="/World/Factions/League.xdb#xpointer(/gameMechanics.world.creature.Faction)" />
+                                        </Item>
+                                        <Item type="gameMechanics.map.variables.PredicateMapVariableEquals">
+                                            <variableResource href="Buff_Armor.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                                            <expectedValue type="gameMechanics.elements.calcers.FloatData">
+                                                <value>1</value>
+                                            </expectedValue>
+                                        </Item>
+                                    </predicates>
+                                </Item>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateFaction">
+                                            <faction href="/World/Factions/Empire.xdb#xpointer(/gameMechanics.world.creature.Faction)" />
+                                        </Item>
+                                        <Item type="gameMechanics.map.variables.PredicateMapVariableEquals">
+                                            <variableResource href="Buff_Armor.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                                            <expectedValue type="gameMechanics.elements.calcers.FloatData">
+                                                <value>2</value>
+                                            </expectedValue>
+                                        </Item>
+                                    </predicates>
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </predicates>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Buff_Armor_Inf.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impacts>
+            <tick>3000</tick>
+            <initialDelay>3000</initialDelay>
+        </Item>
+    </effects>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

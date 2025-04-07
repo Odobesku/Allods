@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>226563</resourceId>
+    </Header>
+    <Name href="Eat_Them_Alive.(SpellArea).Name.txt" />
+    <visualScripts href="Eat_Them_Alive.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <prepareDuration>5000</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>10005000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="Food_Sequence.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                <buff href="Food_Sequence.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                <spell href="Killing_Jump_Sequence.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="Jumping_Sequence.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                <stacks type="gameMechanics.elements.calcers.FloatData">
+                    <value>5</value>
+                </stacks>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                        <delay>2000</delay>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                                <table href="/Maps/UmoirMound/SpawnTables/01_Frog_Mosquito.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                <data href="MosquitoWarning.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                        <mobs>
+                            <Item href="01_Frog_Mosquito.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                        </mobs>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactAstralKickToPoint">
+                        <time>1500</time>
+                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="Satiety.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                        <delay>1500</delay>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                        <destination type="gameMechanics.map.destination.DestinationLocator">
+                            <locator>
+                                <scriptID>frog_stomach</scriptID>
+                                <map href="/Maps/UmoirMound/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                            </locator>
+                        </destination>
+                        <object href="01_Frog_Mosquito.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                        <pool href="MasquitoPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                    </Item>
+                </impactsIf>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="Smells_Like_Mosquito_Spirit.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                        </predicates>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactAstralKickToPoint">
+                        <time>1500</time>
+                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                        <delay>1500</delay>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                <destination type="gameMechanics.map.destination.DestinationLocator">
+                                    <locator>
+                                        <scriptID>frog_stomach</scriptID>
+                                        <map href="/Maps/UmoirMound/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                    </locator>
+                                    <yaw type="constructor.basicElements.AngleDegrees">
+                                        <value>180</value>
+                                    </yaw>
+                                </destination>
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="Smells_Like_Mosquito_Spirit.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsIf>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>20</speed>
+    <radius>85</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

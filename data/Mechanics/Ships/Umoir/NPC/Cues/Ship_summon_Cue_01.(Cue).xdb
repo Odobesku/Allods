@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.mob.interaction.Cue>
+    <Header>
+        <resourceId>245492</resourceId>
+    </Header>
+    <name href="Ship_summon_Cue_01.(Cue).Name.txt" />
+    <text href="Ship_summon_Cue_01.(Cue).Text.txt" />
+    <conditions>
+        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+            <predicate type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.world.ship.elements.PredicateHasSummonedShip" />
+                    <Item type="gameMechanics.world.ship.elements.PredicateHasBoundShip" />
+                </predicates>
+            </predicate>
+        </Item>
+        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+            <predicate type="gameMechanics.elements.predicates.PredicateHasContentKey">
+                <key href="/System/ContentKeys/Umoir_Lagi.(ContentKey).xdb" />
+            </predicate>
+        </Item>
+    </conditions>
+    <impacts>
+        <Item type="itemService.elements.astral.ImpactSummonTempShip">
+            <shipResource href="/Mechanics/Ships/AstralShip/Umoir_AstralShipKania.(ShipResource).xdb" />
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                    <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderDeviceInSlot">
+                        <slot>Slot_Teleport_02</slot>
+                    </addresseeFinder>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                    <destination type="gameMechanics.map.destination.DestinationModified">
+                                        <destination type="gameMechanics.map.destination.RelativePos" />
+                                        <modifiers>
+                                            <Item type="gameMechanics.map.destination.modifier.ModifierShift">
+                                                <shift x="-5" y="4" z="0" />
+                                            </Item>
+                                        </modifiers>
+                                    </destination>
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Characters/Kania_male/Instances/Umoir/SmolovOnShip.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                    <object href="/Characters/Kania_male/Instances/Umoir/Umoir_Smolov.(MobWorld).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/Ships/AstralShip/Umoir_Ship_Reactor.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactStopTalk" />
+    </impacts>
+</gameMechanics.world.mob.interaction.Cue>

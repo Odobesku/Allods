@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>186402</resourceId>
+    </Header>
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.triggerLine.EffectTriggerLine">
+            <impactsIn>
+                <impactsFromCaster>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="FireElemChannelDebuff.(BuffResource).xdb" />
+                    </Item>
+                </impactsFromCaster>
+            </impactsIn>
+            <impactsOut>
+                <impactsFromCaster>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="FireElemChannelDebuff.(BuffResource).xdb" />
+                    </Item>
+                </impactsFromCaster>
+            </impactsOut>
+            <maxLength>85</maxLength>
+            <reconnect>true</reconnect>
+            <height>5</height>
+            <width>2</width>
+            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                        <predicates>
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                        </predicates>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                </predicates>
+            </filter>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                            <data href="FireElemChannel.(ClientData).xdb" />
+                            <calcers>
+                                <addressEntries>
+                                    <Item>
+                                        <name>caster</name>
+                                        <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                    </Item>
+                                    <Item>
+                                        <name>target</name>
+                                        <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                    </Item>
+                                </addressEntries>
+                            </calcers>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

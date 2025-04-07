@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.device.UsableDeviceResource>
+    <Header>
+        <resourceId>243886</resourceId>
+        <Prototype href="/Mechanics/ObjectTemplates/ShipDevice.(UsableDeviceResource).xdb#xpointer(/bunch.BunchResource)" />
+        <Variables>
+            <visObjCommon>/Ships/Components/ManaReactor_01/ManaReactor_01.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)</visObjCommon>
+            <collisionCommon>/Ships/Components/ManaReactor_01/ManaReactor_01.(Collision).xdb#xpointer(/Collision)</collisionCommon>
+            <visObjUncommon>/Ships/Components/ManaReactor_01A/ManaReactor_01A.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)</visObjUncommon>
+            <collisionUncommon>/Ships/Components/ManaReactor_01A/ManaReactor_01A.(Collision).xdb#xpointer(/Collision)</collisionUncommon>
+            <visObjRare>/Ships/Components/ManaReactor_01B/ManaReactor_01B.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)</visObjRare>
+            <collisionRare>/Ships/Components/ManaReactor_01B/ManaReactor_01B.(Collision).xdb#xpointer(/Collision)</collisionRare>
+            <visObjEpic>/Ships/Components/ManaReactor_01C/ManaReactor_01C.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)</visObjEpic>
+            <collisionEpic>/Ships/Components/ManaReactor_01C/ManaReactor_01C.(Collision).xdb#xpointer(/Collision)</collisionEpic>
+        </Variables>
+    </Header>
+    <parts>
+        <Item type="DeviceOfflineComponent">
+            <onlineScript type="DeviceAnimationAction">
+                <mode>LOOP</mode>
+                <channelId>1</channelId>
+                <animations>
+                    <Item>idle</Item>
+                </animations>
+            </onlineScript>
+            <offlineScript type="DeviceAnimationAction">
+                <mode>LOOP</mode>
+                <channelId>1</channelId>
+                <animations>
+                    <Item>idleOffline</Item>
+                </animations>
+            </offlineScript>
+            <malfunctionScript type="DeviceAnimationAction">
+                <mode>LOOP</mode>
+                <channelId>1</channelId>
+                <animations>
+                    <Item>idleMalfunction</Item>
+                </animations>
+            </malfunctionScript>
+            <overheatScript type="DeviceVisActionList">
+                <play>Simultaneously</play>
+                <elements>
+                    <Item type="DeviceAnimationAction">
+                        <mode>LOOP</mode>
+                        <channelId>1</channelId>
+                        <animations>
+                            <Item>idleMalfunction</Item>
+                        </animations>
+                    </Item>
+                    <Item type="Sound3DActionDevice">
+                        <sound>
+                            <project href="/SFX/Ships/Ships.(FMODProject).xdb#xpointer(/FMODProject)" />
+                            <name>Ships/Components/ShipDevices/Siren/overheatingAttantion</name>
+                        </sound>
+                    </Item>
+                </elements>
+            </overheatScript>
+        </Item>
+        <Item type="UsableDeviceClientPart">
+            <type>USDEV_REACTOR</type>
+        </Item>
+        <Item type="VisActionPart">
+            <visAction type="DeviceQualityVisAction">
+                <qualities>
+                    <Item>
+                        <action type="DeviceHealthVisAction">
+                            <actions>
+                                <Item>
+                                    <action type="DeviceVisActionChangeModel">
+                                        <visObj hrefvar="visObjCommon" />
+                                        <collision hrefvar="collisionCommon" />
+                                    </action>
+                                    <health>1</health>
+                                </Item>
+                            </actions>
+                        </action>
+                        <quality href="/Mechanics/ItemQualities/Common.xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemQuality)" />
+                    </Item>
+                    <Item>
+                        <action type="DeviceHealthVisAction">
+                            <actions>
+                                <Item>
+                                    <action type="DeviceVisActionChangeModel">
+                                        <visObj hrefvar="visObjUncommon" />
+                                        <collision hrefvar="collisionUncommon" />
+                                    </action>
+                                    <health>1</health>
+                                </Item>
+                            </actions>
+                        </action>
+                        <quality href="/Mechanics/ItemQualities/Uncommon.xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemQuality)" />
+                    </Item>
+                    <Item>
+                        <action type="DeviceHealthVisAction">
+                            <actions>
+                                <Item>
+                                    <action type="DeviceVisActionChangeModel">
+                                        <visObj hrefvar="visObjRare" />
+                                        <collision hrefvar="collisionRare" />
+                                    </action>
+                                    <health>1</health>
+                                </Item>
+                            </actions>
+                        </action>
+                        <quality href="/Mechanics/ItemQualities/Rare.xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemQuality)" />
+                    </Item>
+                    <Item>
+                        <action type="DeviceHealthVisAction">
+                            <actions>
+                                <Item>
+                                    <action type="DeviceVisActionChangeModel">
+                                        <visObj hrefvar="visObjEpic" />
+                                        <collision hrefvar="collisionEpic" />
+                                    </action>
+                                    <health>1</health>
+                                </Item>
+                            </actions>
+                        </action>
+                        <quality href="/Mechanics/ItemQualities/Epic.xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemQuality)" />
+                    </Item>
+                </qualities>
+            </visAction>
+        </Item>
+    </parts>
+    <persistentParts>
+        <Item type="gameMechanics.world.device.reactor.OnlineControllerPartResource" />
+        <Item type="gameMechanics.elements.bunchparts.BunchPartAttachEffects">
+            <effects>
+                <Item type="gameMechanics.world.ship.elements.ItemInstalledTrigger">
+                    <effects>
+                        <Item type="gameMechanics.world.device.parts.EffectsOnShipGeneric">
+                            <effects>
+                                <Item type="gameMechanics.world.device.reactor.EffectEnergyCapacitor">
+                                    <maxEnergy type="gameMechanics.elements.calcers.FloatToLongCalcer">
+                                        <calcer type="gameMechanics.elements.calcers.OnItemCalcer">
+                                            <calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerByName">
+                                                <name>maxEnergy</name>
+                                            </calcer>
+                                            <source type="gameMechanics.elements.item.ItemPart" />
+                                        </calcer>
+                                    </maxEnergy>
+                                </Item>
+                                <Item type="gameMechanics.world.device.reactor.EffectEnergyProducer">
+                                    <power type="gameMechanics.elements.calcers.OnItemCalcer">
+                                        <calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerByName">
+                                            <name>power</name>
+                                        </calcer>
+                                        <source type="gameMechanics.elements.item.ItemPart" />
+                                    </power>
+                                </Item>
+                            </effects>
+                        </Item>
+                    </effects>
+                </Item>
+                <Item type="gameMechanics.world.device.EffectSwitchInterceptor">
+                    <reasonsToIgnore>
+                        <Item>TR_ReactorsShutdown</Item>
+                        <Item>TR_Silence</Item>
+                        <Item>TR_TeleportToIsland</Item>
+                        <Item>TR_InHangar</Item>
+                    </reasonsToIgnore>
+                </Item>
+                <Item type="gameMechanics.world.device.parts.ImpactsOnUserGeneric">
+                    <userImpactsOnStartUse>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="../UsageBuff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </userImpactsOnStartUse>
+                    <userImpactsOnFinishUse>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="../UsageBuff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <anyRank>false</anyRank>
+                        </Item>
+                    </userImpactsOnFinishUse>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EntityImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsSwitchTarget">
+                            <cases>
+                                <Item>
+                                    <predicates>
+                                        <Item type="gameMechanics.world.device.PredicateDeviceOnline" />
+                                        <Item type="gameMechanics.elements.predicates.PredicateGreater">
+                                            <lhs type="gameMechanics.world.ship.elements.calcers.CalcerCurrentEnergy" />
+                                            <rhs type="gameMechanics.elements.calcers.CalcerMul">
+                                                <calcers>
+                                                    <Item type="gameMechanics.world.ship.elements.calcers.CalcerMaxEnergy" />
+                                                    <Item type="gameMechanics.elements.calcers.FloatData">
+                                                        <value>3</value>
+                                                    </Item>
+                                                </calcers>
+                                            </rhs>
+                                        </Item>
+                                    </predicates>
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="../Shutdown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                        <Item type="gameMechanics.world.ship.elements.ImpactNotifyMalfunction">
+                                            <type>CMT_ReactorShutdown</type>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item>
+                                    <predicates>
+                                        <Item type="gameMechanics.world.device.PredicateDeviceOnline" />
+                                        <Item type="gameMechanics.elements.predicates.PredicateGreater">
+                                            <lhs type="gameMechanics.world.ship.elements.calcers.CalcerCurrentEnergy" />
+                                            <rhs type="gameMechanics.world.ship.elements.calcers.CalcerMaxEnergy" />
+                                        </Item>
+                                    </predicates>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ProbabilisticImpactGeneric">
+                                            <chanceCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                                                <calcers>
+                                                    <Item type="gameMechanics.elements.calcers.OnItemCalcer">
+                                                        <calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerByName">
+                                                            <name>malfunctionMod</name>
+                                                        </calcer>
+                                                        <source type="gameMechanics.elements.item.ItemPart" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.calcers.LinearCalcer">
+                                                        <mul>1</mul>
+                                                        <mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                                                            <calcers>
+                                                                <Item type="gameMechanics.elements.calcers.InverseCalcer">
+                                                                    <value type="gameMechanics.world.ship.elements.calcers.CalcerMaxEnergy" />
+                                                                </Item>
+                                                                <Item type="gameMechanics.world.ship.elements.calcers.CalcerCurrentEnergy" />
+                                                            </calcers>
+                                                        </mulCalcer>
+                                                        <sum>-1</sum>
+                                                    </Item>
+                                                </calcers>
+                                            </chanceCalcer>
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="../Shutdown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </Item>
+                                                <Item type="gameMechanics.world.ship.elements.ImpactNotifyMalfunction">
+                                                    <type>CMT_ReactorShutdown</type>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ProbabilisticImpactGeneric">
+                                            <chanceCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                                                <calcers>
+                                                    <Item type="gameMechanics.elements.calcers.OnItemCalcer">
+                                                        <calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerByName">
+                                                            <name>burstMod</name>
+                                                        </calcer>
+                                                        <source type="gameMechanics.elements.item.ItemPart" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.calcers.LinearCalcer">
+                                                        <mul>1</mul>
+                                                        <mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                                                            <calcers>
+                                                                <Item type="gameMechanics.elements.calcers.InverseCalcer">
+                                                                    <value type="gameMechanics.world.ship.elements.calcers.CalcerMaxEnergy" />
+                                                                </Item>
+                                                                <Item type="gameMechanics.world.ship.elements.calcers.CalcerCurrentEnergy" />
+                                                            </calcers>
+                                                        </mulCalcer>
+                                                        <sum>-1</sum>
+                                                    </Item>
+                                                </calcers>
+                                            </chanceCalcer>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactStartSpellGeneric">
+                                                    <spell href="../ManaBurst.(SpellCasterSelf).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                                </Item>
+                                                <Item type="gameMechanics.world.ship.elements.ImpactNotifyMalfunction">
+                                                    <type>CMT_ManaBurst</type>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </cases>
+                        </Item>
+                    </impacts>
+                    <tick>1000</tick>
+                    <initialDelay>-1</initialDelay>
+                </Item>
+                <Item type="gameMechanics.elements.effects.TickableAura">
+                    <tick>1000</tick>
+                    <affectGroup>All</affectGroup>
+                    <radius>5</radius>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            <Item type="gameMechanics.world.ship.elements.PredicateStandingOnEnemyShip" />
+                        </predicates>
+                    </filter>
+                    <onBehalfOfHolder>true</onBehalfOfHolder>
+                    <impactsIn>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/Ships/Reactor/AnomalyBomb/MinedReactor.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </predicates>
+                            <elseImpacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/Ships/Reactor/AnomalyBomb/NearReactorMarkForClient.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </elseImpacts>
+                        </Item>
+                    </impactsIn>
+                    <impactsOut>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="../AnomalyBomb/NearReactorMarkForClient.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsOut>
+                </Item>
+            </effects>
+            <reattachOnTeleport>false</reattachOnTeleport>
+        </Item>
+    </persistentParts>
+    <collisionObject>true</collisionObject>
+    <exploitingText href="../ExploitText.txt" />
+    <deviceSpells>
+        <Item href="../ForceShutdown.(SpellCasterSelf).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        <Item href="../SelfDestruct.(SpellCasterSelf).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        <Item href="../RepairOn.(SpellCasterSelf).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        <Item href="../RepairOff.(SpellCasterSelf).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+    </deviceSpells>
+    <spell href="../Exploit.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+</gameMechanics.world.device.UsableDeviceResource>

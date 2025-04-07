@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>242389</resourceId>
+    </Header>
+    <Name href="Achievement_Bust_Buff.(BuffResource).Name.txt" />
+    <Description href="Achievement_Bust_Buff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Paladin/PaladinDetectUndead.chn.(UISingleTexture).xdb" />
+    <visScript href="/Spells/VisScripts/Warrior/BattleFrenzy.(BuffVisScripts).xdb" />
+    <nameTemplate href="" />
+    <descTemplate href="" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                        <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                            <zone href="Achievment_Zone.(ScriptZone).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+                                <groups>
+                                    <Item href="/Mechanics/Spells/Groups/Shroud.xdb" />
+                                </groups>
+                            </predicate>
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateMounted" />
+                                </Item>
+                                <Item type="gameMechanics.elements.predicates.PredicateMounted">
+                                    <specificGroup href="/Mechanics/Mounts/Groups/ExoMounts.(MountGroupResource).xdb" />
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactUpdateEventAchievement">
+                            <achievement href="MM_BG02.(InstancedEventAchievementResource).xdb" />
+                            <summand>4</summand>
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateInZone">
+                                <zone href="/Maps/Domination02/Zones/Domination02/Domination02.(ZoneResource).xdb" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Achievement_Bust_Buff.(BuffResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDamageTrigger">
+            <impacts>
+                <casterToTarget>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="Achievement_Bust_Buff.(BuffResource).xdb" />
+                    </Item>
+                </casterToTarget>
+            </impacts>
+        </Item>
+    </effects>
+    <isStackable>false</isStackable>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

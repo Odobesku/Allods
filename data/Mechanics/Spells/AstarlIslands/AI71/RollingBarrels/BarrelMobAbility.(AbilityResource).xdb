@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>188563</resourceId>
+    </Header>
+    <name href="BarrelMob.(MobWorld).Name.txt" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/Wait.(BuffResource).xdb" />
+                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                        <multiplier>1.5</multiplier>
+                    </durationScaler>
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>2000</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.TickableAura">
+                    <affectGroup>All</affectGroup>
+                    <radius>1.5</radius>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                        <mobs>
+                                            <Item href="BarrelDetonator.(MobWorld).xdb" />
+                                        </mobs>
+                                    </Item>
+                                </predicates>
+                            </Item>
+                        </predicates>
+                    </filter>
+                    <holderImpactsIn>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/Wait.(BuffResource).xdb" />
+                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                <multiplier>15</multiplier>
+                            </durationScaler>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="BarrelRoll.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                            <ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                            <projectileData>
+                                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
+                                                <resource href="BarrelExplosion.(ProjectileResource).xdb" />
+                                            </projectileData>
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                            <projectileData>
+                                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
+                                                <resource href="/Mechanics/Spells/AstarlIslands/AI71/BarrelDude/BarrelExplosion.(ProjectileResource).xdb" />
+                                            </projectileData>
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </holderImpactsIn>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddPlane">
+            <plane href="/Mechanics/Spells/AstarlIslands/AI71/Critters/CritterPlane.(Plane).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+        <Item type="gameMechanics.elements.effects.EffectNoAggroChecks" />
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

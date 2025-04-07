@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.map.PatchObjects>
+	<objects>
+		<Item type="gameMechanics.map.spawn.recaptureable.RecapturablePlace">
+			<scriptID>Point02</scriptID>
+			<place>
+				<coord x="162.312" y="88.3365" z="16.9076" />
+				<yaw>0.0259385</yaw>
+				<faction href="/Mechanics/MegaWar/Marks/Blue.(BattlegroundPlayerSpawnPlace).xdb" />
+			</place>
+			<device href="/Items/InteractiveObjects/MW_RaidIsle01/MWRaid_Point02.(SteleResource).xdb" />
+			<autoCapturePeriodSec>1800</autoCapturePeriodSec>
+			<steleImpactsOnOwnerChange>
+				<Item type="gameMechanics.constructor.basicElements.ImpactList">
+					<impactsResource href="/Items/InteractiveObjects/MW_RaidIsle01/RaidPointCapture_Impacts_01.(ImpactListResource).xdb" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateRecapturableOwner">
+							<owner href="/Mechanics/MegaWar/Marks/Red.(BattlegroundPlayerSpawnPlace).xdb" />
+						</Item>
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+											<predicates>
+												<Item type="gameMechanics.battleground.map.PredicateBattleMemberMark">
+													<mark href="/Mechanics/MegaWar/Marks/Blue.(BattlegroundPlayerSpawnPlace).xdb" />
+												</Item>
+											</predicates>
+											<impactsIf>
+												<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+													<buff href="/Mechanics/MWRaid/Buff_GoOut_Attention.(BuffResource).xdb" />
+												</Item>
+											</impactsIf>
+										</Item>
+									</impacts>
+								</Item>
+							</impacts>
+						</Item>
+					</impactsIf>
+				</Item>
+			</steleImpactsOnOwnerChange>
+			<impactsOnStateChanged>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateRecapturableState">
+							<state>Captured</state>
+						</Item>
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.elements.impacts.ImpactScriptZoneSetDisabled">
+							<zone href="/Items/InteractiveObjects/MW_RaidIsle01/CheckZone_2.(ScriptZone).xdb" />
+						</Item>
+					</impactsIf>
+				</Item>
+				<Item type="gameMechanics.constructor.basicElements.ImpactList">
+					<impactsResource href="/Items/InteractiveObjects/MW_RaidIsle01/MWRaid_Point02.(ImpactListResource).xdb" />
+				</Item>
+			</impactsOnStateChanged>
+			<stopAssaultPredicates>
+				<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+					<predicates>
+						<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+							<predicate type="gameMechanics.elements.predicates.PredicateGreater">
+								<lhs type="gameMechanics.elements.calcers.CheckPointAttackersCalcer" />
+								<rhs type="gameMechanics.elements.calcers.CheckPointDefendersCalcer" />
+							</predicate>
+						</Item>
+						<Item type="gameMechanics.elements.predicates.PredicateRecapturableOwner">
+							<owner href="/Mechanics/MegaWar/Marks/Red.(BattlegroundPlayerSpawnPlace).xdb" />
+						</Item>
+					</predicates>
+				</Item>
+			</stopAssaultPredicates>
+			<speedScaler type="gameMechanics.elements.scalers.LinearScaler">
+				<multiplier>1.5</multiplier>
+			</speedScaler>
+			<defendCalcer type="gameMechanics.constructor.basicElements.FloatZero" />
+			<attackCalcer type="gameMechanics.constructor.basicElements.FloatZero" />
+			<achievementResource href="/Mechanics/InstancedEventResource/MWRaid_01/MegaWarRaid_01.(BattleEventAchievementResource).xdb" />
+			<achievementCount type="gameMechanics.elements.calcers.LongData">
+				<value>2</value>
+			</achievementCount>
+			<periodicUpdateTick>1000</periodicUpdateTick>
+		</Item>
+		<Item type="gameMechanics.map.spawn.SingleSpawnResource">
+			<scanRadius>0</scanRadius>
+			<place type="gameMechanics.map.spawn.SpawnPlacePoint">
+				<tuner href="" />
+				<center x="162.312" y="88.3365" z="16.9076" />
+				<yaw>0</yaw>
+				<pitch>0</pitch>
+				<roll>0</roll>
+			</place>
+			<spawnTime type="gameMechanics.elements.spawn.TimeOnce" />
+			<object href="/Mechanics/MegaWar/MWRaidRespawn.(ProjectileResource).xdb" />
+		</Item>
+		<Item type="gameMechanics.map.Locator">
+			<scriptID>Resp_2</scriptID>
+			<scanRadius>0</scanRadius>
+			<position x="162.178" y="87.8805" z="16.9051" />
+			<yaw>0</yaw>
+		</Item>
+		<Item type="gameMechanics.map.scriptZone.ScriptZoneElement">
+			<scanRadius>0</scanRadius>
+			<center x="111.838" y="161.836" z="29.9056" />
+			<yaw>0</yaw>
+			<shape type="space.scaner.resources.Box">
+				<lengthWidthRatio>1</lengthWidthRatio>
+				<halfHeight>16</halfHeight>
+			</shape>
+			<radius>2.1215</radius>
+			<zone href="/Maps/MW_RaidIsle01/ScriptZones/Teleport_Zone.(ScriptZone).xdb" />
+		</Item>
+		<Item type="gameMechanics.map.scriptZone.ScriptZoneElement">
+			<scanRadius>0</scanRadius>
+			<center x="208.848" y="16.8556" z="28.9189" />
+			<yaw>0</yaw>
+			<shape type="space.scaner.resources.Cylinder">
+				<halfHeight>1.6</halfHeight>
+			</shape>
+			<radius>0.718865</radius>
+			<zone href="/Maps/MW_RaidIsle01/ScriptZones/Teleport_Zone.(ScriptZone).xdb" />
+		</Item>
+		<Item type="gameMechanics.map.scriptZone.ScriptZoneElement">
+			<scanRadius>0</scanRadius>
+			<center x="211.598" y="15.3549" z="28.7539" />
+			<yaw>0</yaw>
+			<shape type="space.scaner.resources.Box">
+				<lengthWidthRatio>1</lengthWidthRatio>
+				<halfHeight>16</halfHeight>
+			</shape>
+			<radius>2.12576</radius>
+			<zone href="/Maps/MW_RaidIsle01/ScriptZones/Teleport_Zone.(ScriptZone).xdb" />
+		</Item>
+		<Item type="gameMechanics.map.scriptZone.ScriptZoneElement">
+			<scanRadius>0</scanRadius>
+			<center x="112.732" y="160.688" z="29.9036" />
+			<yaw>0</yaw>
+			<shape type="space.scaner.resources.Box">
+				<lengthWidthRatio>1</lengthWidthRatio>
+				<halfHeight>16</halfHeight>
+			</shape>
+			<radius>2.16929</radius>
+			<zone href="/Maps/MW_RaidIsle01/ScriptZones/Teleport_Zone.(ScriptZone).xdb" />
+		</Item>
+		<Item type="gameMechanics.map.scriptZone.ScriptZoneElement">
+			<scanRadius>0</scanRadius>
+			<center x="211.138" y="15.9922" z="29.1562" />
+			<yaw>0</yaw>
+			<shape type="space.scaner.resources.Cylinder">
+				<halfHeight>16</halfHeight>
+			</shape>
+			<radius>2.23936</radius>
+			<zone href="/Maps/MW_RaidIsle01/ScriptZones/Teleport_Zone.(ScriptZone).xdb" />
+		</Item>
+		<Item type="gameMechanics.map.scriptZone.ScriptZoneElement">
+			<scanRadius>0</scanRadius>
+			<center x="112.278" y="161.257" z="30.2685" />
+			<yaw>0</yaw>
+			<shape type="space.scaner.resources.Cylinder">
+				<halfHeight>16</halfHeight>
+			</shape>
+			<radius>2.23936</radius>
+			<zone href="/Maps/MW_RaidIsle01/ScriptZones/Teleport_Zone.(ScriptZone).xdb" />
+		</Item>
+		<Item type="gameMechanics.map.scriptZone.ScriptZoneElement">
+			<scanRadius>0</scanRadius>
+			<center x="211.07" y="13.5534" z="28.901" />
+			<yaw>0</yaw>
+			<shape type="space.scaner.resources.Cylinder">
+				<halfHeight>1.6</halfHeight>
+			</shape>
+			<radius>0.718865</radius>
+			<zone href="/Maps/MW_RaidIsle01/ScriptZones/Teleport_Zone.(ScriptZone).xdb" />
+		</Item>
+		<Item type="gameMechanics.map.scriptZone.ScriptZoneElement">
+			<scanRadius>0</scanRadius>
+			<center x="213.407" y="15.0536" z="28.9133" />
+			<yaw>0</yaw>
+			<shape type="space.scaner.resources.Cylinder">
+				<halfHeight>1.6</halfHeight>
+			</shape>
+			<radius>0.718865</radius>
+			<zone href="/Maps/MW_RaidIsle01/ScriptZones/Teleport_Zone.(ScriptZone).xdb" />
+		</Item>
+		<Item type="gameMechanics.map.scriptZone.ScriptZoneElement">
+			<scanRadius>0</scanRadius>
+			<center x="211.367" y="18.4706" z="28.9315" />
+			<yaw>0</yaw>
+			<shape type="space.scaner.resources.Cylinder">
+				<halfHeight>1.6</halfHeight>
+			</shape>
+			<radius>0.718865</radius>
+			<zone href="/Maps/MW_RaidIsle01/ScriptZones/Teleport_Zone.(ScriptZone).xdb" />
+		</Item>
+		<Item type="gameMechanics.map.scriptZone.ScriptZoneElement">
+			<scanRadius>0</scanRadius>
+			<center x="114.535" y="160.556" z="29.9189" />
+			<yaw>0</yaw>
+			<shape type="space.scaner.resources.Cylinder">
+				<halfHeight>1.6</halfHeight>
+			</shape>
+			<radius>0.69528</radius>
+			<zone href="/Maps/MW_RaidIsle01/ScriptZones/Teleport_Zone.(ScriptZone).xdb" />
+		</Item>
+		<Item type="gameMechanics.map.scriptZone.ScriptZoneElement">
+			<scanRadius>0</scanRadius>
+			<center x="112.303" y="163.642" z="29.9268" />
+			<yaw>0</yaw>
+			<shape type="space.scaner.resources.Cylinder">
+				<halfHeight>1.6</halfHeight>
+			</shape>
+			<radius>0.69528</radius>
+			<zone href="/Maps/MW_RaidIsle01/ScriptZones/Teleport_Zone.(ScriptZone).xdb" />
+		</Item>
+		<Item type="gameMechanics.map.scriptZone.ScriptZoneElement">
+			<scanRadius>0</scanRadius>
+			<center x="109.949" y="162.066" z="29.9323" />
+			<yaw>0</yaw>
+			<shape type="space.scaner.resources.Cylinder">
+				<halfHeight>1.6</halfHeight>
+			</shape>
+			<radius>0.69528</radius>
+			<zone href="/Maps/MW_RaidIsle01/ScriptZones/Teleport_Zone.(ScriptZone).xdb" />
+		</Item>
+		<Item type="gameMechanics.map.scriptZone.ScriptZoneElement">
+			<scanRadius>0</scanRadius>
+			<center x="112.124" y="158.746" z="29.9283" />
+			<yaw>0</yaw>
+			<shape type="space.scaner.resources.Cylinder">
+				<halfHeight>1.6</halfHeight>
+			</shape>
+			<radius>0.69528</radius>
+			<zone href="/Maps/MW_RaidIsle01/ScriptZones/Teleport_Zone.(ScriptZone).xdb" />
+		</Item>
+	</objects>
+</gameMechanics.map.PatchObjects>

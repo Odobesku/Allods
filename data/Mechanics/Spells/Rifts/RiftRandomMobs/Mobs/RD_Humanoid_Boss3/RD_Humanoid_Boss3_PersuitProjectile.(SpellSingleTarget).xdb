@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>208665</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/HumanoidSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/RiftDDSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/RiftRangedSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/RiftEliteSpells.(ActionGroup).xdb" />
+    </groups>
+    <element>FIRE</element>
+    <Name href="RD_Humanoid_Boss3_PersuitProjectile.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="RD_Humanoid_Boss3_PersuitProjectile.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <minRange type="gameMechanics.elements.calcers.FloatData">
+        <value>12</value>
+    </minRange>
+    <prepareDuration>1000</prepareDuration>
+    <needLos>false</needLos>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>12000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactSpellGroupCooldown">
+                <group href="/Mechanics/Spells/Rifts/RiftSpellGroups/RiftAutoattack.(ActionGroup).xdb" />
+                <duration>1500</duration>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                <projectileData>
+                    <moveType type="gameMechanics.world.projectile.MoveTypePursuitSpellTarget">
+                        <from type="gameMechanics.map.destination.DestinationModified">
+                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                            <modifiers>
+                                <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                    <verticalRange min="1" max="1" />
+                                    <horizontalRange min="0" max="1" />
+                                </Item>
+                            </modifiers>
+                        </from>
+                    </moveType>
+                    <resource href="/Mechanics/Spells/Rifts/RiftRandomSpells/RD_SingleProjectile_Fire1.(ProjectileResource).xdb" />
+                </projectileData>
+                <pool href="/Mechanics/Spells/Rifts/RiftDungeon1/Mobs/Boss03/DemonBoss03_summons.(SummonPool).xdb" />
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <isAE>true</isAE>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

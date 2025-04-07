@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>187591</resourceId>
+    </Header>
+    <Name href="Vampire_RandomAE.(BuffResource).Name.txt" />
+    <Description href="Vampire_RandomAE.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Misc/Itemmall/Bat.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                            <radius>6</radius>
+                            <affectGroup>Enemies</affectGroup>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="Vampire_RandomAE.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                    <calcers>
+                                        <addressEntries>
+                                            <Item>
+                                                <name>caster</name>
+                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                            </Item>
+                                            <Item>
+                                                <name>target</name>
+                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                            </Item>
+                                        </addressEntries>
+                                    </calcers>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                    <element>SHADOW</element>
+                                    <damage>40</damage>
+                                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                </Item>
+                            </impacts>
+                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            </Item>
+                                        </predicates>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                </predicates>
+                            </filter>
+                            <perTargetScaling>Divide</perTargetScaling>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+        </Item>
+    </effects>
+    <duration>11000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>221420</resourceId>
+    </Header>
+    <Name href="LightningPursuitTarget.(BuffResource).Name.txt" />
+    <Description href="LightningPursuitTarget.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Modifiers/Fireball.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="ElectroToElectro.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="LightningPursuitTarget.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="LightningSphereVisual.(BuffResource).xdb" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>2500</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectInstantiating">
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.TickableAura">
+                            <tick>1000</tick>
+                            <affectGroup>All</affectGroup>
+                            <radius>2.5</radius>
+                            <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                                <filters>
+                                    <Item type="gameMechanics.constructor.basicElements.FilterOr">
+                                        <filters>
+                                            <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                        <mobs>
+                                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/Firebird/Firebird.(MobWorld).xdb" />
+                                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/Thunderbird/Thunderbird.(MobWorld).xdb" />
+                                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/ShadowBird/ShadowBird.(MobWorld).xdb" />
+                                                        </mobs>
+                                                    </Item>
+                                                </predicates>
+                                            </Item>
+                                            <Item type="gameMechanics.constructor.basicElements.FilterAnd">
+                                                <filters>
+                                                    <Item type="gameMechanics.world.creature.AvatarFilter" />
+                                                    <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                                <buff href="LightningPursuitTarget.(BuffResource).xdb" />
+                                                            </Item>
+                                                        </predicates>
+                                                    </Item>
+                                                </filters>
+                                            </Item>
+                                        </filters>
+                                    </Item>
+                                    <Item type="gameMechanics.world.creature.AliveFilter" />
+                                </filters>
+                            </filter>
+                            <impactsIn>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                            <mobs>
+                                                <Item href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/Firebird/Firebird.(MobWorld).xdb" />
+                                                <Item href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/ShadowBird/ShadowBird.(MobWorld).xdb" />
+                                            </mobs>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                                            </impacts>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                            <data href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/PursuitingSphere/HitLightningBigR5.(ClientData).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/HMCopiesDebuff.(BuffResource).xdb" />
+                                            <stacks type="gameMechanics.elements.calcers.FloatData">
+                                                <value>50</value>
+                                            </stacks>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                            <buff href="LightningPursuitTarget.(BuffResource).xdb" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                            <data href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/PursuitingSphere/HitLightningBigR5.(ClientData).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                                            </impacts>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                            <element>LIGHTNING</element>
+                                            <damage>100</damage>
+                                            <impactsOnHitTarget>
+                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                    <buff href="LightningPursuitTarget.(BuffResource).xdb" />
+                                                </Item>
+                                            </impactsOnHitTarget>
+                                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impactsIn>
+                        </Item>
+                    </effects>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <duration>20000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

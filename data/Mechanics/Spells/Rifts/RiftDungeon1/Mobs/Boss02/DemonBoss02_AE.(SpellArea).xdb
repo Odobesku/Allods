@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>208280</resourceId>
+    </Header>
+    <Name href="/Mechanics/Spells/Rifts/RiftDungeon1/Mobs/Boss02/DemonBoss02_AE.(SpellArea).Name.txt" />
+    <visualScripts href="/Mechanics/Spells/Rifts/RiftDungeon1/Mobs/Boss02/DemonBoss02_AE.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <prepareDuration>3000</prepareDuration>
+    <targetType>STTPoint</targetType>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>6000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/Spells/Rifts/RiftDungeon1/Mobs/Boss02/DemonBoss02_Vanish.(BuffResource).xdb" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                <element>ASTRAL</element>
+                <damage>1</damage>
+                <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                    <scalers>
+                        <Item type="gameMechanics.elements.scalers.MagicScaler" />
+                        <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/EscapableDamageBoss.(CalcerFloatResource).xdb" />
+                            </mulCalcer>
+                        </Item>
+                    </scalers>
+                </scaler>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                    <value>0.4</value>
+                </chanceCalcer>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                        <spell href="/Mechanics/Spells/Rifts/RiftDungeon1/Mobs/Boss02/DemonBoss02_AE.(SpellArea).xdb" />
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>20</speed>
+    <radius>6</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

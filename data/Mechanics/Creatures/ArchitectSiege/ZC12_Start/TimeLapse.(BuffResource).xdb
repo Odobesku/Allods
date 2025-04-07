@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>245924</resourceId>
+    </Header>
+    <needVisualize>false</needVisualize>
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <effects>
+        <Item type="gameMechanics.elements.abilities.TimeLapse">
+            <numberOfTicks>5</numberOfTicks>
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.PredicateBuffHarmful" />
+                <Item type="gameMechanics.constructor.basicElements.PredicateGenericNot">
+                    <predicate type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                        <groups>
+                            <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+                        </groups>
+                    </predicate>
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.abilities.ImpactTimeLapse" />
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="TimeLapse.(ClientData).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/World/Quests/Inst_ZoneContested12_Start/WW_Prologue_6/TimeEffect.(BuffResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                    <mobs>
+                        <Item href="/Creatures/ArchitectSiege/Instances/ZC12/WW_Prologue_6_ArchitectSiege_boss.(MobWorld).xdb" />
+                    </mobs>
+                </Item>
+            </predicates>
+            <effectsIf>
+                <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                            <data href="TimeLapseArchitectFinish.(ClientData).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </effectsIf>
+            <effectsElse>
+                <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    </predicates>
+                    <effectsIf>
+                        <Item type="gameMechanics.elements.effects.EffectsIfCaster">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="/Creatures/Tripod/Instances/ZC12_Map02/Archont.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                            <effectsIf>
+                                <Item type="gameMechanics.elements.effects.EffectAddContextActionsGeneric">
+                                    <actions>
+                                        <Item href="/Mechanics/Creatures/ArchitectSiege/ZC12_Map02/KrigContextAction.(SpellSingleTarget).xdb" />
+                                    </actions>
+                                </Item>
+                                <Item type="gameMechanics.elements.effects.Switch">
+                                    <impactsOn>
+                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+                                                    <spawn>
+                                                        <scriptID>Unn_10_9</scriptID>
+                                                        <map href="/Maps/ZC12_Map02/MapResource.xdb" />
+                                                    </spawn>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                            <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                            <data href="/Mechanics/Creatures/ArchitectSiege/ZC12_Map02/UnnAdvice2.(ClientData).xdb" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                                            <spell href="/Mechanics/Creatures/ArchitectSiege/ZC12_Map02/KrigContextAction.(SpellSingleTarget).xdb" />
+                                        </Item>
+                                    </impactsOn>
+                                </Item>
+                                <Item type="gameMechanics.elements.effects.BuffInterceptor">
+                                    <impactsOnAttach>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="TimeLapse.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                    <buff href="TimeLapse.(BuffResource).xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impactsOnAttach>
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.schemes.buff.PredicateBuffEquals">
+                                            <buff href="/Mechanics/Creatures/ArchitectSiege/ZC12_Map02/KrigBombProtection.(BuffResource).xdb" />
+                                        </Item>
+                                    </predicates>
+                                </Item>
+                            </effectsIf>
+                        </Item>
+                    </effectsIf>
+                </Item>
+            </effectsElse>
+        </Item>
+    </effects>
+    <duration>10000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

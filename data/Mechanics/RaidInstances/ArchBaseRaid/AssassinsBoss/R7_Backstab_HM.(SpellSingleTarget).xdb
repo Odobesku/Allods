@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>224642</resourceId>
+    </Header>
+    <Name href="R7_Backstab_HM.(SpellSingleTarget).Name.txt" />
+    <prepareDuration>1000</prepareDuration>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>15000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="R7_Cleave.(BuffResource).xdb" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="R7_BackStab_Vis.(BuffResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                <delay>1000</delay>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                        <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                            <base type="gameMechanics.elements.calcers.DestinationSpellTargetThrust">
+                                <maxDist>1</maxDist>
+                            </base>
+                            <offset>0</offset>
+                            <yaw type="constructor.basicElements.AngleRadians" />
+                            <turn>ToTarget</turn>
+                        </destination>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                <delay>3000</delay>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                <destination type="gameMechanics.map.destination.DestinationLocator">
+                                    <locator>
+                                        <scriptID>AssassinsBoss_Spawn</scriptID>
+                                        <map href="/Maps/ArchBase_Raid/MapResource.xdb" />
+                                    </locator>
+                                </destination>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="R7_RayAttack.(BuffResource).xdb" />
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="R7_Backstab_HM.(BuffResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                <delay>2000</delay>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                        <minDamage>120</minDamage>
+                        <maxDamage>140</maxDamage>
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

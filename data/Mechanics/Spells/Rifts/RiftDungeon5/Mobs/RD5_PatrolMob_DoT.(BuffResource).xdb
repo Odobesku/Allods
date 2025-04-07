@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>208986</resourceId>
+    </Header>
+    <Name href="RD5_PatrolMob_DoT.(BuffResource).Name.txt" />
+    <Description href="RD5_PatrolMob_DoT.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/NatureDoT.(UISingleTexture).xdb" />
+    <visualEffects />
+    <visualPostEffects />
+    <visualEffectsIncCount />
+    <visualEffectsDecCount />
+    <visScript href="/Spells/BuffVisScripts/DoTPoison.(BuffVisScripts).xdb" />
+    <uiComponents />
+    <descVars />
+    <gainSpells />
+    <effects>
+        <Item type="gameMechanics.elements.effects.MagicDoT">
+            <parameters>
+                <damagePerTick>1</damagePerTick>
+                <impactsPerTick />
+            </parameters>
+            <element>POISON</element>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.MagicScaler" />
+                    <Item type="gameMechanics.elements.scalers.ScalerIf">
+                        <condition type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+                            <quality href="/Mechanics/MobQualities/Elite.xdb" />
+                        </condition>
+                        <scalerIf type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/DoTCommon.(CalcerFloatResource).xdb" />
+                            </mulCalcer>
+                        </scalerIf>
+                        <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                            <condition type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+                                <quality href="/Mechanics/MobQualities/Boss.xdb" />
+                            </condition>
+                            <scalerIf type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                    <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/DoTElite.(CalcerFloatResource).xdb" />
+                                </mulCalcer>
+                            </scalerIf>
+                            <scalerElse type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                    <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/DoTBoss.(CalcerFloatResource).xdb" />
+                                </mulCalcer>
+                            </scalerElse>
+                        </scalerElse>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.1</coeff>
+            </effectScaler>
+        </Item>
+    </effects>
+    <duration>10000</duration>
+    <stackLimit>1</stackLimit>
+    <isHelpful>false</isHelpful>
+    <ranks />
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/DamageOverTime.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/Poisons.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

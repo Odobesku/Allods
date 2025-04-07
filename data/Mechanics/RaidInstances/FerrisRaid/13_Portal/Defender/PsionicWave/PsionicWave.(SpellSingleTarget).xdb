@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>222272</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/FerrisRaid_Portal.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/ActionBarChange.(ActionGroup).xdb" />
+    </groups>
+    <Name href="PsionicWave.(SpellSingleTarget).Name.txt" />
+    <Description href="PsionicWave.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Special/Alchemy/Stun.(UISingleTexture).xdb" />
+    <sysName>FR14_DefSpell04</sysName>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>15000</duration>
+        </cooldown>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                <affectGroup>Enemies</affectGroup>
+                <affectHolder>false</affectHolder>
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="PsionicStun.(BuffResource).xdb" />
+                    </Item>
+                </impacts>
+                <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                            <mobs>
+                                <Item href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Adds/SpyDrone/ArchSpyDrone.(MobWorld).xdb" />
+                                <Item href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Adds/SuicidalArchitect/SuicidalArchitect.(MobWorld).xdb" />
+                                <Item href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Adds/CannonArchitect/CannonArchitect.(MobWorld).xdb" />
+                                <Item href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Adds/ArchitectDestroyer/ArchitectDestroyer.(MobWorld).xdb" />
+                            </mobs>
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                    </predicates>
+                </filter>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateMobNear">
+                        <radius>8</radius>
+                        <mobs>
+                            <Item href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Allies/DiArder.(MobWorld).xdb" />
+                        </mobs>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
+                        <device>
+                            <scriptID>13_Wave</scriptID>
+                            <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                        </device>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateMobNear">
+                                <radius>8</radius>
+                                <mobs>
+                                    <Item href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Allies/Rysina.(MobWorld).xdb" />
+                                </mobs>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
+                                <device>
+                                    <scriptID>13_WaveLeft</scriptID>
+                                    <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                </device>
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

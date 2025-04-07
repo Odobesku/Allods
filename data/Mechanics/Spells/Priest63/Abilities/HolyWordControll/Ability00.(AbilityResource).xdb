@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>207449</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="Ability00.(AbilityResource).Name.txt" />
+    <description href="Ability00.(AbilityResource).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value var="value" />
+        </Item>
+        <Item>
+            <name>factor</name>
+            <value var="factor" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>FormulaPercentAbsMinus1</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Paladin/PaladinShield.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectMarkedImpacts">
+            <mark href="/Mechanics/Spells/Priest63/Spells/HolyWord/HolyWordSwitchOff.(MarkResource).xdb" />
+            <instantiateOnUse>false</instantiateOnUse>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactClientData">
+                    <data href="AE_CD.(ClientData).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                            <radius>5</radius>
+                            <affectGroup>Enemies</affectGroup>
+                            <affectHolder>false</affectHolder>
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/SilenceDisarm/SilenceDisarm.(BuffResource).xdb" />
+                                    <durationScaler type="gameMechanics.elements.scalers.ScalerIf">
+                                        <condition type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/Spells/CommonBuffs/Aspects/Support/Buff03.(BuffResource).xdb" />
+                                            <anyRank>false</anyRank>
+                                        </condition>
+                                        <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                                            <multiplier>4</multiplier>
+                                        </scalerIf>
+                                        <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                            <condition type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/Spells/CommonBuffs/Aspects/Support/Buff02.(BuffResource).xdb" />
+                                                <anyRank>false</anyRank>
+                                            </condition>
+                                            <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                                                <multiplier>3</multiplier>
+                                            </scalerIf>
+                                            <scalerElse type="gameMechanics.elements.scalers.LinearScaler">
+                                                <multiplier>2</multiplier>
+                                            </scalerElse>
+                                        </scalerElse>
+                                    </durationScaler>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffExtraEffects">
+            <buffs>
+                <Item href="/Mechanics/Spells/CommonBuffs/Aspects/Support/Buff01.(BuffResource).xdb" />
+            </buffs>
+            <effects>
+                <Item type="gameMechanics.elements.effects.SpellCooldownMultiplier">
+                    <spell href="/Mechanics/Spells/Priest63/Spells/Barrier/Spell02.(SpellSingleTarget).xdb" />
+                    <factor var="factor" />
+                </Item>
+                <Item type="gameMechanics.elements.effects.SpellCooldownMultiplier">
+                    <spell href="/Mechanics/Spells/Priest63/Spells/HolyWord/Spell01.(SpellSingleTarget).xdb" />
+                    <factor var="factor" />
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <ranks>
+        <Item href="Ability01.(AbilityResource).xdb" />
+        <Item href="Ability02.(AbilityResource).xdb" />
+    </ranks>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

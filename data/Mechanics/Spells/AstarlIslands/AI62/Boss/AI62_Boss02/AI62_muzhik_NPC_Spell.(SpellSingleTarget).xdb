@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>191807</resourceId>
+    </Header>
+    <Name href="AI62_muzhik_NPC_Spell.(SpellSingleTarget).Name.txt" />
+    <Description href="AI62_muzhik_NPC_Spell.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Equipment/Ranged/WandCrude.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Maps/Umoir/ScriptZones/U_1_03.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <prepareDuration>100</prepareDuration>
+    <mechanics>
+        <cooldown>
+            <duration>5000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsMob" />
+            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                <mobs>
+                    <Item href="AI62_muzhik_NPC.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    <Item href="AI62_muzhik_Boss.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    <Item href="/Mechanics/Spells/AstarlIslands/AI62/Boss/AI62_Boss04/AI62_FirTree_NPC.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                </mobs>
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                        <mobs>
+                            <Item href="AI62_muzhik_NPC.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                        </mobs>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactMobMorph">
+                        <newMobWorld href="AI62_muzhik_Boss.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                        <data href="/Mechanics/Spells/AstarlIslands/AI62/Boss/AI62_Transform.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                <mobs>
+                                    <Item href="AI62_muzhik_Boss.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                </mobs>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="Spell/Buff_01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                <buff href="Spell/Spell_03.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                <data href="/Mechanics/Spells/AstarlIslands/AI62/Boss/AI62_Transform.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                            </Item>
+                        </impactsIf>
+                        <impactsElse>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                        <mobs>
+                                            <Item href="/Mechanics/Spells/AstarlIslands/AI62/Boss/AI62_Boss04/AI62_FirTree_NPC.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                        </mobs>
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                                <buff href="AI62_FirTree.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                <range>
+                                                    <min>5</min>
+                                                    <max>5</max>
+                                                </range>
+                                            </Item>
+                                        </predicates>
+                                        <impactsIf>
+                                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                <buff href="AI62_FirTree.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactMobMorph">
+                                                <newMobWorld href="/Mechanics/Spells/AstarlIslands/AI62/Boss/AI62_Boss04/AI62_FirTree.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                        <buff href="AI62_muzhik_NPC_Spell.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                                <delay>1000</delay>
+                                                                <impacts>
+                                                                    <Item type="gameMechanics.elements.impacts.ImpactGoTo">
+                                                                        <destination type="gameMechanics.map.destination.DestinationLocator">
+                                                                            <locator>
+                                                                                <scriptID>AI62_M_4</scriptID>
+                                                                                <map href="/Maps/AstralIsle62/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                                            </locator>
+                                                                        </destination>
+                                                                        <runningMode>true</runningMode>
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                                        <delay>1000</delay>
+                                                                        <impacts>
+                                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                                <buff href="AI62_muzhik_AntiTalk.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                            </Item>
+                                                                        </impacts>
+                                                                    </Item>
+                                                                </impacts>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                                <data href="/Mechanics/Spells/AstarlIslands/AI62/Boss/AI62_Boss04/AI62_muzhik_Cue_03_02_Chat.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactMobChat">
+                                                        <msg href="/Mechanics/Spells/AstarlIslands/AI62/Boss/AI62_Boss04/AI62_muzhik_Cue_03_02_Chat.(TextMessage).xdb#xpointer(/gameMechanics.world.TextMessage)" />
+                                                        <defaultSpeaker href="AI62_muzhik.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                    </Item>
+                                                </impacts>
+                                                <spawnResource href="/Maps/AstralIsle62/SpawnTables/AI62_muzhik_NPC.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                <data href="/Mechanics/Spells/AstarlIslands/AI62/Boss/AI62_Transform.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                            </Item>
+                                        </impactsIf>
+                                        <impactsElse>
+                                            <Item type="gameMechanics.elements.impacts.ImpactMobChat">
+                                                <msg href="/Mechanics/Spells/AstarlIslands/AI62/Boss/AI62_Boss04/Replika.(TextMessage).xdb#xpointer(/gameMechanics.world.TextMessage)" />
+                                                <defaultSpeaker href="AI62_muzhik.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                        <data href="/Mechanics/Spells/AstarlIslands/AI62/Boss/AI62_Boss04/Replika.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                    </Item>
+                                                </impacts>
+                                                <spawnResource href="/Maps/AstralIsle62/SpawnTables/AI62_muzhik_NPC.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                                            </Item>
+                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                <buff href="AI62_FirTree.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                                                        <spell href="AI62_muzhik_NPC_Spell.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                <data href="/Mechanics/Spells/AstarlIslands/AI62/Boss/AI62_Transform.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                            </Item>
+                                        </impactsElse>
+                                    </Item>
+                                </impactsIf>
+                            </Item>
+                        </impactsElse>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

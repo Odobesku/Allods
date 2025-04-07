@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>214280</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/InsuranceHealTrigger.xdb" />
+        <Item href="/Mechanics/Spells/Groups/HealingSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/DruidHoTs.(ActionGroup).xdb" />
+    </groups>
+    <element>HOLY</element>
+    <Name href="Spell0.(SpellSingleTarget).Name.txt" />
+    <Description href="Spell0.(SpellSingleTarget).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value>1</value>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                        <formula>HealScaler</formula>
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                            <externalCalcer hrefvar="externalCalcer" />
+                        </mulCalcer>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Druid/DruidNaturalRegeneration.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Druid/Heal.(SpellVisScripts).xdb" />
+    <prepareDuration>4000</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <ranks>
+        <Item href="Spell01.(SpellSingleTarget).xdb" />
+        <Item href="Spell02.(SpellSingleTarget).xdb" />
+        <Item href="Spell03.(SpellSingleTarget).xdb" />
+    </ranks>
+    <modifiers>
+        <Item type="gameMechanics.elements.spell.SpellEnvelopeModifier">
+            <effects>
+                <Item type="gameMechanics.elements.effects.OutgoingHealModifier">
+                    <scaler type="gameMechanics.elements.scalers.MultLinearEffectScaler">
+                        <coeff>1</coeff>
+                        <calcer type="gameMechanics.constructor.basicElements.ScalerCalcer">
+                            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                <mul>0.0015</mul>
+                                <mulCalcer type="gameMechanics.elements.calcers.CalcerStatValue">
+                                    <stat type="gameMechanics.elements.stat.SpecialStat">
+                                        <stat href="/Mechanics/SpecialStats/CritPower.(SpecialStatResource).xdb" />
+                                    </stat>
+                                    <valueType>ShortTerm</valueType>
+                                </mulCalcer>
+                            </scaler>
+                            <value>1</value>
+                        </calcer>
+                    </scaler>
+                </Item>
+            </effects>
+            <onBehalfOfHolder>true</onBehalfOfHolder>
+        </Item>
+    </modifiers>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>12000</duration>
+        </cooldown>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceMana">
+                <mana>23.72</mana>
+                <manaType>
+                    <Item>Mana</Item>
+                </manaType>
+            </Item>
+        </casterResources>
+        <channelingMechanics>
+            <channelingBuff hrefvar="channelingBuff" />
+        </channelingMechanics>
+        <casterChannelingEffects>
+            <Item type="gameMechanics.elements.effects.Switch">
+                <impactsOn>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="/Mechanics/Spells/Druid70/Abilities/CastOnMove/Buff.(BuffResource).xdb" />
+                        <impactsOnAttach />
+                        <impactsOnFail />
+                    </Item>
+                </impactsOn>
+                <impactsOff>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="/Mechanics/Spells/Druid70/Abilities/CastOnMove/Buff.(BuffResource).xdb" />
+                        <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="HoT01.(BuffResource).xdb" />
+                    </Item>
+                </impactsOff>
+            </Item>
+        </casterChannelingEffects>
+    </mechanics>
+    <isAE>false</isAE>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

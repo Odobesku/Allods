@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>222532</resourceId>
+    </Header>
+    <Name href="HealChampion.(SpellArea).Name.txt" />
+    <Description href="HealChampion.(SpellArea).Description.txt" />
+    <image href="/Interface/Icons/Spells/Engineer/DoubleHeal.(UISingleTexture).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>85</value>
+    </range>
+    <needLos>false</needLos>
+    <targetType>STTPoint</targetType>
+    <iffPolicy>Everyone</iffPolicy>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>0</duration>
+        </cooldown>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                        <mobs>
+                            <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChampionMelee/ChampionMelee.(MobWorld).xdb" />
+                            <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChampionRange/ChampionRange.(MobWorld).xdb" />
+                            <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChampionShaman/ChampionShaman.(MobWorld).xdb" />
+                        </mobs>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+                                <level>1</level>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                        <data href="/Spells/ClientData/SnowFolk_Healing.(ClientData).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.DirectHeal">
+                                        <heal>1</heal>
+                                        <threatMultiplier>0</threatMultiplier>
+                                        <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                            <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                                <multiplier>0.25</multiplier>
+                                            </mulCalcer>
+                                        </scalerTarget>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                                        <spell href="HealChampion.(SpellArea).xdb" />
+                                        <duration>3000</duration>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impactsIf>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <radius>4</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>203864</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <image href="/Interface/Icons/Spells/Psionic/PsionicTelekineticThrow.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="/Spells/BuffVisScripts/Stun.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectSpeedSetter">
+            <speed>0.013</speed>
+            <isExternal>true</isExternal>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectForcePull">
+            <syncPeriod>400</syncPeriod>
+            <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+            <impactsOnArrived>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="Buff_02_01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                    <mark href="/Mechanics/Spells/Marks/PsionicAstralInjury.xdb#xpointer(/gameMechanics.constructor.basicElements.MarkResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsIf">
+                    <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromMaster">
+                        <buff href="/Mechanics/Spells/PsionicNew/CrudeContact/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </predicate>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                    <ability href="/Mechanics/Spells/PsionicNew/Abilities/StunNoCC/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                </Item>
+                            </predicates>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.CasterProbabilisticImpact">
+                                    <chanceCalcer type="gameMechanics.elements.calcers.AbilityRankCalcer">
+                                        <ability href="/Mechanics/Spells/PsionicNew/Abilities/StunNoCC/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                        <mul>0.334</mul>
+                                    </chanceCalcer>
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Mechanics/Spells/CommonBuffs/KnockDown/BufffKnockDownNoCC.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impacts>
+                                    <impactsOnFail>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Mechanics/Spells/CommonBuffs/KnockDown/BuffKnockDown.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impactsOnFail>
+                                </Item>
+                            </impacts>
+                            <elseImpacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/Spells/CommonBuffs/KnockDown/BuffKnockDown.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </elseImpacts>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/Spells/CommonBuffs/KnockDown/BuffKnockDown.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsOnArrived>
+        </Item>
+    </effects>
+    <duration>3000</duration>
+    <isStackable>false</isStackable>
+    <stackLimit>1</stackLimit>
+    <isGradual>false</isGradual>
+    <isHelpful>false</isHelpful>
+    <isDetachableOnWill>false</isDetachableOnWill>
+    <isMultiple>false</isMultiple>
+    <ranks>
+        <Item href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+        <Item href="Buff02.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+        <Item href="Buff03.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+    </ranks>
+    <canBeSaved>false</canBeSaved>
+    <isClientReplicated>false</isClientReplicated>
+    <isAE>true</isAE>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs_IgnoreWill.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

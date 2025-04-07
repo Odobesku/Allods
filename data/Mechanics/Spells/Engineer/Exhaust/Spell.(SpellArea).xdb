@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>219394</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/EngineerArtillerySpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DragonRelic5.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <element>ASTRAL</element>
+    <Name href="Spell.(SpellArea).Name.txt" />
+    <Description href="Spell.(SpellArea).Description.txt" />
+    <descVars>
+        <Item>
+            <name>dmg</name>
+            <value var="damage" />
+            <text href="" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>MagicScaler</formula>
+            </scaler>
+        </Item>
+        <Item>
+            <name>dist</name>
+            <value var="distance" />
+            <text href="" />
+        </Item>
+        <Item>
+            <name>dotdmg</name>
+            <value>0.3</value>
+            <text href="" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>MagicScaler</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Engineer/Exhaust.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Engineer/Exhaust.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>10</value>
+    </range>
+    <targetType>STTSelf</targetType>
+    <ranks>
+        <Item href="Spell01.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+        <Item href="Spell02.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+        <Item href="Spell03.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+    </ranks>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>30000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
+                        <resource href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                        <minValue>50</minValue>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateVariableLessThan">
+                        <resource href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                        <value>-50</value>
+                    </Item>
+                </predicates>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                <impactsResource href="/Mechanics/Spells/Engineer/EngineerDismount.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                        <variable href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/Spells/Engineer/ArtilleryForm/Buff01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
+                                <resource href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                                <minValue>50</minValue>
+                            </Item>
+                        </predicates>
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/Mechanics/Spells/CommonBuffs/Stun/BuffStun.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                                        <calcers>
+                                            <Item type="gameMechanics.elements.calcers.InverseCalcer">
+                                                <value type="gameMechanics.elements.calcers.FloatData">
+                                                    <value>50</value>
+                                                </value>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.calcers.VariableValueCalcer">
+                                                <variable href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.calcers.AbilityRankCalcer">
+                                                <ability href="/Mechanics/Spells/Engineer/Abilities/ExhaustUpg/Ability01.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                <mul>0.16667</mul>
+                                                <sum>1</sum>
+                                            </Item>
+                                        </calcers>
+                                    </mulCalcer>
+                                </durationScaler>
+                            </Item>
+                        </impacts>
+                        <elseImpacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="Kick.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                <impactsOnAttach>
+                                    <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                                        <time>1500</time>
+                                        <impactsOnLand>
+                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                <buff href="ColdSlow.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                    <mul>1.25</mul>
+                                                    <mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                                                        <calcers>
+                                                            <Item type="gameMechanics.elements.calcers.InverseCalcer">
+                                                                <value type="gameMechanics.elements.calcers.FloatData">
+                                                                    <value>-50</value>
+                                                                </value>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.calcers.VariableValueCalcer">
+                                                                <variable href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.calcers.AbilityRankCalcer">
+                                                                <ability href="/Mechanics/Spells/Engineer/Abilities/ExhaustUpg/Ability01.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                                <mul>0.16667</mul>
+                                                                <sum>1</sum>
+                                                            </Item>
+                                                        </calcers>
+                                                    </mulCalcer>
+                                                </durationScaler>
+                                            </Item>
+                                        </impactsOnLand>
+                                        <distance var="distance" />
+                                    </Item>
+                                </impactsOnAttach>
+                            </Item>
+                        </elseImpacts>
+                    </Item>
+                </impacts>
+                <elseImpacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
+                                <resource href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                                <minValue>50</minValue>
+                            </Item>
+                        </predicates>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                <element>ASTRAL</element>
+                                <damage var="damage" />
+                                <impactsOnHitTarget>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="FireDot.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        <stacks type="gameMechanics.elements.calcers.CalcerMul">
+                                            <calcers>
+                                                <Item type="gameMechanics.elements.calcers.InverseCalcer">
+                                                    <value type="gameMechanics.elements.calcers.FloatData">
+                                                        <value>20</value>
+                                                    </value>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.calcers.VariableValueCalcer">
+                                                    <variable href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                                                </Item>
+                                            </calcers>
+                                        </stacks>
+                                    </Item>
+                                </impactsOnHitTarget>
+                                <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                                    <scalers>
+                                        <Item type="gameMechanics.elements.scalers.MagicScaler" />
+                                        <Item type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                            <ability href="/Mechanics/Spells/Engineer/Abilities/ExhaustUpg/Ability01.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                            <mul>0.334</mul>
+                                        </Item>
+                                    </scalers>
+                                </scaler>
+                            </Item>
+                        </impacts>
+                        <elseImpacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="ColdSlow.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                                        <calcers>
+                                            <Item type="gameMechanics.elements.calcers.InverseCalcer">
+                                                <value type="gameMechanics.elements.calcers.FloatData">
+                                                    <value>-50</value>
+                                                </value>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.calcers.VariableValueCalcer">
+                                                <variable href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.calcers.AbilityRankCalcer">
+                                                <ability href="/Mechanics/Spells/Engineer/Abilities/ExhaustUpg/Ability01.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                <mul>0.16667</mul>
+                                                <sum>1</sum>
+                                            </Item>
+                                        </calcers>
+                                    </mulCalcer>
+                                </durationScaler>
+                            </Item>
+                        </elseImpacts>
+                    </Item>
+                </elseImpacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+    <radius>10</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

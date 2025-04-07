@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<itemService.elements.ScheduledActions>
+    <Header>
+        <resourceId>227528</resourceId>
+    </Header>
+    <runManually>true</runManually>
+    <timeTable href="MWRewards.(TimeTable).xdb" />
+    <impacts>
+        <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateJoinGuildTimeAgo">
+                            <time>
+                                <ms>1</ms>
+                            </time>
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateHasGuildTabardRight">
+                                            <tabardType>Champion</tabardType>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.predicates.PredicateResourceReady">
+                                            <resource href="/Items/GuildItems/GuildChampionTabard.xdb" />
+                                        </Item>
+                                    </predicates>
+                                </Item>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateHasGuildTabardRight">
+                                            <tabardType>Common</tabardType>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.predicates.PredicateResourceReady">
+                                            <resource href="/Items/GuildItems/GuildTabard.xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.predicates.PredicateResourceReady">
+                                            <resource href="/Items/GuildItems/GuildChampionTabard.xdb" />
+                                        </Item>
+                                    </predicates>
+                                </Item>
+                            </predicates>
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateResourceReady">
+                            <resource href="/World/Quests/AI_Qzone/WeeklyRewards/WeeklyRewards.xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateCreatureLevel">
+                            <minLevel type="gameMechanics.formulas.IntConstantValue">
+                                <value>60</value>
+                            </minLevel>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactGiveItemsCount">
+                            <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                                <item href="/Items/MegaWars/WeeklyReward.(ItemResource).xdb" />
+                            </item>
+                            <count type="gameMechanics.elements.calcers.LongData">
+                                <value>1</value>
+                            </count>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+                            <currency href="/Mechanics/AlternativeCurrencies/RealgarRate.(AlternativeCurrency).xdb" />
+                            <sumCalcer type="gameMechanics.elements.calcers.AlternativeCurrencyCalcer">
+                                <currency href="/Mechanics/AlternativeCurrencies/RealgarRate.(AlternativeCurrency).xdb" />
+                            </sumCalcer>
+                            <multiplier>-1</multiplier>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impacts>
+        </Item>
+    </impacts>
+</itemService.elements.ScheduledActions>

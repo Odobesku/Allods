@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>225124</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="Visual.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="CombatAnimation.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+                    <spawn>
+                        <scriptID>Ritual</scriptID>
+                        <map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="RitualVisual.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/RaidInstances/UmoirRaid/7_SealBreakerBoss/Ritualist/RitualistStart.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </onEnter>
+            <onLeave>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="Visual.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ResetSpawnTable">
+                            <table href="/Mechanics/RaidInstances/UmoirRaid/7_SealBreakerBoss/Sealbreaker.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                    <variable href="/Mechanics/RaidInstances/UmoirRaid/7_SealBreakerBoss/Ritualist/RitualPhase.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <summand>-1</summand>
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.LifeGuard">
+            <level>0.0099</level>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectInstantiating">
+            <effects>
+                <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+                    <conditionalImpacts>
+                        <Item>
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/RaidInstances/UmoirRaid/7_SealBreakerBoss/Dragons/Outbreak/OutbreakSelfBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impacts>
+                            <conditions>
+                                <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                                    <spells>
+                                        <Item href="/Mechanics/RaidInstances/UmoirRaid/7_SealBreakerBoss/Dragons/Outbreak/Outbreak.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+                                    </spells>
+                                </Item>
+                            </conditions>
+                        </Item>
+                    </conditionalImpacts>
+                    <stages>
+                        <Item>Start</Item>
+                    </stages>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOnStrike">
+            <impacts>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="BossTank.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="BossTank.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>0.4</coeff>
+            </scaler>
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

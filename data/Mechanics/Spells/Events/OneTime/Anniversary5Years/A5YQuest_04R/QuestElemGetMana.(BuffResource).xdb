@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>209803</resourceId>
+    </Header>
+    <Name href="QuestElemGetMana.(BuffResource).Name.txt" />
+    <Description href="QuestElemGetMana.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Equipment/Ships/HighEnergyConsume.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="ElemFire.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="SteleRay_Fire.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </predicates>
+                                </Item>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="ElemIce.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="SteleRay_Ice.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </predicates>
+                                </Item>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="ElemLightning.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="SteleRay_Lightning.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </predicates>
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                    <id href="/World/Quests/LoreEvents/Anniversary5Years/Anniversary5Years_04R_L_qc5.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                    <id href="/World/Quests/LoreEvents/Anniversary5Years/Anniversary5Years_04R_E_qc5.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                    <quest href="/World/Quests/LoreEvents/Anniversary5Years/Anniversary5Years_04R_L.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                                    <counterResource href="/World/Quests/LoreEvents/Anniversary5Years/Anniversary5Years_04R_L_qc5.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                                    <value>99</value>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                    <quest href="/World/Quests/LoreEvents/Anniversary5Years/Anniversary5Years_04R_E.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                                    <counterResource href="/World/Quests/LoreEvents/Anniversary5Years/Anniversary5Years_04R_E_qc5.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                                    <value>99</value>
+                                                </Item>
+                                            </predicates>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                                            </impacts>
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                            <data href="NotGetMana.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impacts>
+            <tick>500</tick>
+            <initialDelay>500</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactChannelingStop" />
+                    </impacts>
+                </Item>
+            </impactsOff>
+        </Item>
+    </effects>
+    <isHelpful>false</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/EvadeProtectedBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

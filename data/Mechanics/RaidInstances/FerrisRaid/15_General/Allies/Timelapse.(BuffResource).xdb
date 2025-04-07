@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>222859</resourceId>
+    </Header>
+    <Name href="Timelapse.(BuffResource).Name.txt" />
+    <Description href="Timelapse.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Psionic/PsionicTimeLapse.(UISingleTexture).xdb" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Mobs/General_Timelapse_Main.(VisObjectTemplate).xdb" />
+            <locator>Slot_Global</locator>
+        </Item>
+    </visualEffects>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                    <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                        <base type="gameMechanics.map.destination.SelfPosDestination" />
+                        <offset>3</offset>
+                    </destination>
+                    <finishImpacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                            <group href="/Mechanics/Spells/Groups/Events/EventBuffs.(ActionGroup).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/Mechanics/RaidInstances/FerrisRaid/15_General/Boss/Portals/InsidePortal.(BuffResource).xdb" />
+                        </Item>
+                    </finishImpacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                    <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                        <base type="gameMechanics.map.destination.SelfPosDestination" />
+                        <offset>3</offset>
+                    </destination>
+                    <finishImpacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactRevive" />
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactBaseHealth">
+                                    <healthMultiplier>0.25</healthMultiplier>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactBaseMana">
+                                    <manaMultiplier>0.25</manaMultiplier>
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                            <group href="/Mechanics/Spells/Groups/Events/EventBuffs.(ActionGroup).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Timelapse.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/Mechanics/RaidInstances/FerrisRaid/15_General/Boss/Portals/InsidePortal.(BuffResource).xdb" />
+                        </Item>
+                    </finishImpacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Hover" />
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>0.5</coeff>
+            </effectScaler>
+        </Item>
+    </effects>
+    <duration>7000</duration>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>215617</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="FallingDevices.(AbilityResource).Name.txt" />
+    <description href="FallingDevices.(AbilityResource).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value>1</value>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                            <externalCalcer hrefvar="externalCalcer" />
+                        </mulCalcer>
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                        <formula>WeaponScaler</formula>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Equipment/Ships/CannonGeneralShot_01.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.BuffDurationModifier">
+            <buffs>
+                <Item href="/Mechanics/Spells/Engineer63/Spells/HealStation/HealStation01.(BuffResource).xdb" />
+                <Item href="/Mechanics/Spells/Engineer63/Spells/FireTurret/FireTurretStuff01.(BuffResource).xdb" />
+                <Item href="/Mechanics/Spells/Engineer63/Spells/Turret/TurretStuff01.(BuffResource).xdb" />
+                <Item href="/Mechanics/Spells/Engineer63/Spells/Beacon/BeaconStuff.(BuffResource).xdb" />
+            </buffs>
+            <summand type="gameMechanics.elements.calcers.FloatData">
+                <value>2000</value>
+            </summand>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectMarkedImpacts">
+            <mark href="DeviceFall.(MarkResource).xdb" />
+            <impacts>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/Spells/Engineer63/Spells/Titan/TitanInvisPlane.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateFaction">
+                            <faction href="/World/Factions/League.xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                            <projectileData>
+                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
+                                <resource hrefvar="resource" />
+                            </projectileData>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                            <projectileData>
+                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
+                                <resource hrefvar="resourceEmpire" />
+                            </projectileData>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffExtraEffects">
+            <buffs>
+                <Item href="/Mechanics/Spells/Engineer63/Spells/Titan/TitanInvisPlane.(BuffResource).xdb" />
+            </buffs>
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="/Mechanics/Spells/Engineer63/Spells/Beacon/BeaconStuff.(BuffResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <effectsIf>
+                        <Item type="gameMechanics.elements.effects.Switch">
+                            <impactsOff>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                                                            <addresseeFinder type="gameMechanics.elements.abilities.FinderPsionicContactAddress">
+                                                                <contactType>Normal</contactType>
+                                                            </addresseeFinder>
+                                                            <impacts>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff href="/Mechanics/Spells/Engineer63/Spells/Beacon/Teleporting.(BuffResource).xdb" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impactsOff>
+                        </Item>
+                    </effectsIf>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <ranks>
+        <Item href="FallingDevices01.(AbilityResource).xdb" />
+        <Item href="FallingDevices02.(AbilityResource).xdb" />
+        <Item href="FallingDevices03.(AbilityResource).xdb" />
+    </ranks>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

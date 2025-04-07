@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>226023</resourceId>
+    </Header>
+    <Name href="LifeSpan.(BuffResource).Name.txt" />
+    <Description href="LifeSpan.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Paladin/PaladinHealingAura.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/FireBomb/FirePool_Aura.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.StackBuff">
+                                    <buff href="LifeSpan.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    <delta type="gameMechanics.elements.calcers.FloatData">
+                                        <value>1</value>
+                                    </delta>
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.StackBuff">
+                                    <buff href="LifeSpan.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    <delta type="gameMechanics.elements.calcers.FloatData">
+                                        <value>-1</value>
+                                    </delta>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="SunDetacher.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactMobMorph">
+                            <newMobWorld href="DarkSun.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactHealAll" />
+                    </impactsIf>
+                </Item>
+            </impactsOff>
+        </Item>
+    </effects>
+    <stackLimit>20</stackLimit>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

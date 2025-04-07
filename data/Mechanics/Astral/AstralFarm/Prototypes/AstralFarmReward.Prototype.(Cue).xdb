@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.mob.interaction.Cue>
+    <Header>
+        <resourceId>236743</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="AstralFarmReward.Prototype.(Cue).Name.txt" />
+    <text href="AstralFarmReward.Prototype.(Cue).Text.txt" />
+    <data>
+        <Item type="CueDataItem">
+            <alias>reward</alias>
+            <item hrefvar="Reward" />
+        </Item>
+    </data>
+    <conditions>
+        <Item type="gameMechanics.elements.resources.ResourceBuff">
+            <buff hrefvar="Rewardbuff" />
+        </Item>
+    </conditions>
+    <impacts>
+        <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateGreater">
+                    <lhs type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                        <buff hrefvar="Rewardbuff" />
+                        <forAllRanks>true</forAllRanks>
+                    </lhs>
+                    <rhs type="gameMechanics.elements.calcers.FloatData">
+                        <value>9</value>
+                    </rhs>
+                </Item>
+            </predicates>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                    <id href="/World/Quests/AstralHangar/AstralFarm/AstralFarm.(QuestCountId).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactGiveItemsCount">
+            <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                <item hrefvar="Reward" />
+            </item>
+            <count type="gameMechanics.elements.calcers.FloatToLongCalcer">
+                <calcer type="gameMechanics.elements.calcers.CalcerMul">
+                    <calcers>
+                        <Item type="gameMechanics.elements.calcers.FloatData">
+                            <value>1.4451</value>
+                        </Item>
+                        <Item type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                            <buff hrefvar="Rewardbuff" />
+                        </Item>
+                        <Item type="gameMechanics.elements.calcers.CalcerExp">
+                            <base>2.71828</base>
+                            <powCalc type="gameMechanics.elements.calcers.CalcerExp">
+                                <base>1.02</base>
+                                <powCalc type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                    <buff hrefvar="Rewardbuff" />
+                                </powCalc>
+                            </powCalc>
+                        </Item>
+                    </calcers>
+                </calcer>
+            </count>
+        </Item>
+        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff hrefvar="Rewardbuff" />
+                </Item>
+            </impacts>
+        </Item>
+    </impacts>
+</gameMechanics.world.mob.interaction.Cue>

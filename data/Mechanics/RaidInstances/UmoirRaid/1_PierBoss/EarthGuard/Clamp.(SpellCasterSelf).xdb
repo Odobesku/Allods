@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>225423</resourceId>
+    </Header>
+    <Name href="Clamp.(SpellCasterSelf).Name.txt" />
+    <visualScripts href="Clamp.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="Clamp.(SpellCasterSelf).Name.txt" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>0</value>
+    </range>
+    <prepareDuration>3000</prepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>25000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="EarthActivation.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                        <radius>160</radius>
+                        <affectGroup>Enemies</affectGroup>
+                        <affectHolder>false</affectHolder>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                <element>SHADOW</element>
+                                <damage>2</damage>
+                                <impactsOnHitTarget>
+                                    <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                        <impactsResource href="Clamp.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                                    </Item>
+                                </impactsOnHitTarget>
+                                <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                            </Item>
+                        </impacts>
+                        <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                            <filters>
+                                <Item type="gameMechanics.world.creature.AvatarFilter" />
+                                <Item type="gameMechanics.world.creature.AliveFilter" />
+                            </filters>
+                        </filter>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                <radius>160</radius>
+                <affectHolder>false</affectHolder>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                        <projectileData>
+                            <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                <destination type="gameMechanics.map.destination.DestinationModified">
+                                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                    <modifiers>
+                                        <Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
+                                    </modifiers>
+                                </destination>
+                            </moveType>
+                            <resource href="Spike.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                        </projectileData>
+                    </Item>
+                </impacts>
+                <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                    <filters>
+                        <Item type="gameMechanics.world.creature.AvatarFilter" />
+                        <Item type="gameMechanics.world.creature.AliveFilter" />
+                    </filters>
+                </filter>
+                <targetsLimit>3</targetsLimit>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                <data href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/Voice/Voice7.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>226031</resourceId>
+    </Header>
+    <Name href="MoonFall.(BuffResource).Name.txt" />
+    <Description href="MoonFall.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Misc/Buffs/MoonRay.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <interfaceHighPriority>true</interfaceHighPriority>
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                            <radius>4</radius>
+                            <affectGroup>Friends</affectGroup>
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="MoonTarget.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="MoonFall.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.PureDamage">
+                                    <damage>1</damage>
+                                    <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                        <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                            <multiplier>0.15</multiplier>
+                                        </mulCalcer>
+                                    </scalerTarget>
+                                </Item>
+                            </impacts>
+                            <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                                <filters>
+                                    <Item type="gameMechanics.world.creature.AvatarFilter" />
+                                    <Item type="gameMechanics.world.creature.AliveFilter" />
+                                </filters>
+                            </filter>
+                            <targetsLimit>1</targetsLimit>
+                            <autotarget type="gameMechanics.constructor.schemes.spell.multiTarget.PriorityAutotarget">
+                                <priorityPredicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="MoonTarget.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </predicate>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                </priorityPredicates>
+                                <autotarget type="gameMechanics.constructor.schemes.spell.multiTarget.RandomAutotarget">
+                                    <group>Friends</group>
+                                    <radius>5</radius>
+                                </autotarget>
+                            </autotarget>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>500</tick>
+        </Item>
+    </effects>
+    <duration>5500</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/RaidInstances/UmoirRaid/UmoirRaid.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

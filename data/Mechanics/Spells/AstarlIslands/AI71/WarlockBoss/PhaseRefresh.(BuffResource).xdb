@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>188339</resourceId>
+    </Header>
+    <Name href="PhaseRefresh.(BuffResource).Name.txt" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                            <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+                                <range min="0" max="1" />
+                                <withinRange>false</withinRange>
+                                <minCandidatesCount>2</minCandidatesCount>
+                                <targetCount>2</targetCount>
+                            </selector>
+                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                        </predicates>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                </predicates>
+                            </filter>
+                            <impacts>
+                                <Item>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                            <projectileData>
+                                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                    <destination type="gameMechanics.map.destination.DestinationModified">
+                                                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                        <modifiers>
+                                                            <Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
+                                                        </modifiers>
+                                                    </destination>
+                                                </moveType>
+                                                <resource href="PlaugePuddle.(ProjectileResource).xdb" />
+                                            </projectileData>
+                                            <pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                                    <ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
+                                                </Item>
+                                            </predicates>
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="/Mechanics/Spells/AstarlIslands/AI71/Common/PlagueCarrier/PlagueDOT.(BuffResource).xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                            <impactsNotSelected>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/Spells/AstarlIslands/AI71/Common/PlagueCarrier/PlagueDOT.(BuffResource).xdb" />
+                                </Item>
+                            </impactsNotSelected>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>10000</tick>
+            <initialDelay>4000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                            <ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                            <selector type="gameMechanics.tools.SelectorRandomNotLess">
+                                <minIndex>1</minIndex>
+                            </selector>
+                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/Spells/AstarlIslands/AI71/GhoulBombAdd/ChaseTargetBuff.(BuffResource).xdb" />
+                                        </predicate>
+                                    </Item>
+                                </predicates>
+                            </filter>
+                            <impacts>
+                                <Item>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                    <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                                        <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                        <offset>12</offset>
+                                                    </destination>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="/Mechanics/Spells/AstarlIslands/AI71/GhoulBombAdd/ChaserBuff.(BuffResource).xdb" />
+                                                        </Item>
+                                                    </impacts>
+                                                    <object href="/Mechanics/Spells/AstarlIslands/AI71/GhoulBombAdd/GhoulBombAdd.(MobWorld).xdb" />
+                                                    <pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                    <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                                        <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                        <offset>12</offset>
+                                                    </destination>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="/Mechanics/Spells/AstarlIslands/AI71/GhoulBombAdd/ChaserBuff.(BuffResource).xdb" />
+                                                        </Item>
+                                                    </impacts>
+                                                    <object href="/Mechanics/Spells/AstarlIslands/AI71/GhoulBombAdd/GhoulBombAdd.(MobWorld).xdb" />
+                                                    <pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+            <tick>20000</tick>
+            <initialDelay>3000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>30000</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="CrowPhase.(BuffResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHealthHigher">
+                            <level>0.75</level>
+                        </Item>
+                    </predicates>
+                    <effectsIf>
+                        <Item type="gameMechanics.elements.effects.LayeredHealthTriggerGeneric">
+                            <layers>
+                                <Item>
+                                    <percent>0.75</percent>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="CrowPhase.(BuffResource).xdb" />
+                                                </Item>
+                                            </impactsIf>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </layers>
+                        </Item>
+                    </effectsIf>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHealthHigher">
+                            <level>0.5</level>
+                        </Item>
+                    </predicates>
+                    <effectsIf>
+                        <Item type="gameMechanics.elements.effects.LayeredHealthTriggerGeneric">
+                            <layers>
+                                <Item>
+                                    <percent>0.5</percent>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="CrowPhase.(BuffResource).xdb" />
+                                                </Item>
+                                            </impactsIf>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </layers>
+                        </Item>
+                    </effectsIf>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHealthHigher">
+                            <level>0.25</level>
+                        </Item>
+                    </predicates>
+                    <effectsIf>
+                        <Item type="gameMechanics.elements.effects.LayeredHealthTriggerGeneric">
+                            <layers>
+                                <Item>
+                                    <percent>0.25</percent>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="CrowPhase.(BuffResource).xdb" />
+                                                </Item>
+                                            </impactsIf>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </layers>
+                        </Item>
+                    </effectsIf>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <duration>45000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <isClientReplicated>false</isClientReplicated>
+</gameMechanics.constructor.schemes.buff.BuffResource>

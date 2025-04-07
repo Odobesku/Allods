@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>190096</resourceId>
+    </Header>
+    <Name href="AI64_WoodCutter01_Whirlwind.(BuffResource).Name.txt" />
+    <Description href="AI64_WoodCutter01_Whirlwind.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Warrior/WarriorWhirlwind.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="/Mechanics/Spells/AstarlIslands/AI41/IronManBoss/Whirlwind.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>7</radius>
+                    <affectGroup>Enemies</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                            <impactsOnHitTarget>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="AI64_WoodCutter_rend.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impactsOnHitTarget>
+                            <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                            <minDamage>35</minDamage>
+                            <maxDamage>35</maxDamage>
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                </predicates>
+                            </Item>
+                        </predicates>
+                    </filter>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+            <initialDelay>1500</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                    <spell href="AI64_WoodCutter01_Charge.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DamageZeroSuppressor" />
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+                            <level>0.35</level>
+                        </Item>
+                    </predicates>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                    <projectileData>
+                                        <moveType type="gameMechanics.world.projectile.MoveTypeDestination">
+                                            <receiver>Caster</receiver>
+                                            <to type="gameMechanics.map.destination.DestinationModified">
+                                                <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                <modifiers>
+                                                    <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                                        <verticalRange min="0" max="0" />
+                                                        <horizontalRange min="30" max="35" />
+                                                    </Item>
+                                                </modifiers>
+                                            </to>
+                                        </moveType>
+                                        <resource href="/Mechanics/Spells/AstarlIslands/AI41/IronManBoss/AI41_Whirlwind_Projectile.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                                    </projectileData>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <isStackable>false</isStackable>
+    <isHelpful>true</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <isAE>true</isAE>
+</gameMechanics.constructor.schemes.buff.BuffResource>

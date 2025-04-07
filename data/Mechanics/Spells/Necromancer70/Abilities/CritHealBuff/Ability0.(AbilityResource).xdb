@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>198643</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="Ability0.(AbilityResource).Name.txt" />
+    <description href="Ability0.(AbilityResource).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value>1</value>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                            <externalCalcer hrefvar="externalCalcer" />
+                        </mulCalcer>
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                        <formula>FormulaPercent</formula>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+        <Item>
+            <name>time</name>
+            <value var="time" />
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Misc/Mobparts/HeartAnimal.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectOnHealDoneTrigger">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.offender.PredicateIsCrit" />
+                <Item type="gameMechanics.elements.predicates.offender.PredicateNot">
+                    <predicate type="gameMechanics.elements.predicates.offender.PredicateOr">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.offender.PredicateProducer">
+                                <producers>
+                                    <Item href="/Mechanics/Spells/Necromancer70/Spells/BloodShare/Spell03.(SpellSingleTarget).xdb" />
+                                </producers>
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.offender.PredicateProducer">
+                                <producers>
+                                    <Item href="/Mechanics/Spells/Necromancer70/Spells/Flow/Buff003.xdb" />
+                                </producers>
+                            </Item>
+                        </predicates>
+                    </predicate>
+                </Item>
+            </predicates>
+            <impactsOnHealDone>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff hrefvar="buff" />
+                </Item>
+            </impactsOnHealDone>
+            <impactsToVictim>
+                <Item type="gameMechanics.constructor.basicElements.ImpactNull" />
+            </impactsToVictim>
+        </Item>
+        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+            <conditionalImpacts>
+                <Item>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="Buff001.xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <conditions>
+                        <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                            <spells>
+                                <Item href="/Mechanics/Spells/Necromancer70/Spells/Flow/Spell03.(SpellSingleTarget).xdb" />
+                                <Item href="/Mechanics/Spells/Necromancer70/Spells/BloodShare/Spell03.(SpellSingleTarget).xdb" />
+                            </spells>
+                        </Item>
+                    </conditions>
+                </Item>
+            </conditionalImpacts>
+            <stages>
+                <Item>Launch</Item>
+            </stages>
+        </Item>
+    </effects>
+    <ranks>
+        <Item href="Ability001.xdb" />
+        <Item href="Ability002.xdb" />
+        <Item href="Ability003.xdb" />
+    </ranks>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>236791</resourceId>
+        <Prototype href="/Mechanics/Astral/AstralFarm/Prototypes/AstralFarmReward.Prototype.(BuffResource).xdb" />
+        <Variables>
+            <Rewardbuff>AstralFarmReward.(BuffResource).xdb</Rewardbuff>
+            <Reward>AstralFarmReward.(ItemResource).xdb</Reward>
+        </Variables>
+    </Header>
+    <Name href="AstralFarmReward.(BuffResource).Name.txt" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateExternal">
+                            <predicateResource href="/Mechanics/ServerUnlock/6_3_CrosserverEuroCheck_1.(PredicateResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.constructor.basicElements.PredicateExternal">
+                                <predicateResource href="/Mechanics/ServerUnlock/6_3_CrosserverEuroCheck_2.(PredicateResource).xdb" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactGiveItemsCount">
+                            <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                                <item href="/Mechanics/ServerUnlock/Items/ServerUnlock.UnCommon.(ItemResource).xdb" />
+                            </item>
+                            <count type="gameMechanics.elements.calcers.FloatToLongCalcer">
+                                <calcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                    <buff href="AstralFarmReward.(BuffResource).xdb" />
+                                </calcer>
+                            </count>
+                        </Item>
+                    </impacts>
+                    <elseImpacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateExternal">
+                                    <predicateResource href="/Mechanics/ServerUnlock/6_3_CrosserverEuroCheck_2.(PredicateResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.constructor.basicElements.PredicateExternal">
+                                        <predicateResource href="/Mechanics/ServerUnlock/6_3_CrosserverEuroCheck_3.(PredicateResource).xdb" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactGiveItemsCount">
+                                    <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                                        <item href="/Mechanics/ServerUnlock/Items/ServerUnlock.Rare.(ItemResource).xdb" />
+                                    </item>
+                                    <count type="gameMechanics.elements.calcers.FloatToLongCalcer">
+                                        <calcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                            <buff href="AstralFarmReward.(BuffResource).xdb" />
+                                        </calcer>
+                                    </count>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </elseImpacts>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.buff.BuffResource>

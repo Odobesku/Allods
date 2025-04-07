@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>218862</resourceId>
+    </Header>
+    <contextActionInfo>
+        <priority>104</priority>
+    </contextActionInfo>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Magics.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <element>ASTRAL</element>
+    <Name href="Spell.(SpellSingleTarget).Name.txt" />
+    <Description href="Spell.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Spells/Bard/Virtue.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <level>12</level>
+    <prepareDuration>4000</prepareDuration>
+    <isAggro>false</isAggro>
+    <modifiers>
+        <Item type="gameMechanics.elements.spell.RaiseRepelType" />
+    </modifiers>
+    <iffPolicy>Friends</iffPolicy>
+    <launchWhenReady>true</launchWhenReady>
+    <mechanics>
+        <cooldown>
+            <duration>60000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </predicates>
+            </Item>
+        </targetConditions>
+        <conditions>
+            <Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
+                <affectGroup>Raid</affectGroup>
+            </Item>
+        </conditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                        <mark href="/Mechanics/Spells/CommonSpells/DoubleHP/AttachingDoubleHP.(MarkResource).xdb#xpointer(/gameMechanics.constructor.basicElements.MarkResource)" />
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                <buff href="/Mechanics/Spells/CommonSpells/DoubleHP/Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/Spells/CommonSpells/DoubleHP/Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </predicates>
+                        <impactsElse>
+                            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                        <radius>50</radius>
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                <impacts>
+                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                        <buff href="/Mechanics/Spells/CommonSpells/DoubleHP/Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                        </impacts>
+                                        <targetsLimit>1</targetsLimit>
+                                        <autotarget type="gameMechanics.constructor.schemes.spell.multiTarget.FilteringAutotarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                    <predicates>
+                                                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                            <mobs>
+                                                                <Item href="/Mechanics/MercUpgrade/Archer.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                            </mobs>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                            <mobs>
+                                                                <Item href="/Characters/HumMobs/Mercenaries/Archer/Archer.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                            </mobs>
+                                                        </Item>
+                                                    </predicates>
+                                                </Item>
+                                            </predicates>
+                                            <autotarget type="gameMechanics.constructor.schemes.spell.multiTarget.ClosestAutotarget">
+                                                <group>Group</group>
+                                            </autotarget>
+                                        </autotarget>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impactsElse>
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

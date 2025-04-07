@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.map.zone.ZoneResource>
+    <Header>
+        <resourceId>35923</resourceId>
+    </Header>
+    <name href="ZC12_Zone_05_01.(ZoneResource).Name.txt" />
+    <color>0xffffcb97</color>
+    <parentZone href="ZC12_Map02/ZC12_Map02.(ZoneResource).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                    <quest href="/World/Quests/ZC12/WW_9_10/WW_9_10.xdb" />
+                    <status>Started</status>
+                </Item>
+            </predicates>
+            <effectsIf>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                        <quest href="/World/Quests/ZC12/WW_9_10/WW_9_10.xdb" />
+                                        <counterResource href="/World/Quests/ZC12/WW_9_10/Counter1.(QuestCountId).xdb" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                    <id href="/World/Quests/ZC12/WW_9_10/Counter1.(QuestCountId).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                <quest href="/World/Quests/ZC12/WW_9_10/WW_9_10.xdb" />
+                                                <counterResource href="/World/Quests/ZC12/WW_9_10/Counter2.(QuestCountId).xdb" />
+                                            </predicate>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/World/Quests/ZC12/WW_9_10/DialogVis.(BuffResource).xdb" />
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                    <quest href="/World/Quests/ZC12/WW_9_10/WW_9_10.xdb" />
+                                                    <counterResource href="/World/Quests/ZC12/WW_9_10/Counter4.(QuestCountId).xdb" />
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="/World/Quests/ZC12/WW_9_10/Rubilo_defeated_vis.(BuffResource).xdb" />
+                                                </Item>
+                                            </impactsIf>
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsOn>
+                    <impactsOff>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/World/Quests/ZC12/WW_9_10/DialogVis.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                                    <zone href="ZC12_Map02/ZC12_Map02.(ZoneResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                                    <pool href="/World/Quests/ZC12/WW_9_10/Rubilo.(SummonPool).xdb" />
+                                    <isPersonalPool>true</isPersonalPool>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/World/Quests/ZC12/WW_1_5/Sniper_vis.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/World/Quests/ZC12/WW_9_10/Rubilo_defeated_vis.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                    <quest href="/World/Quests/ZC12/WW_9_10/WW_9_10.xdb" />
+                                    <status>Completed</status>
+                                </Item>
+                            </predicates>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                    <id href="/World/Quests/ZC12/WW_9_10/Counter1.(QuestCountId).xdb" />
+                                    <value>-1</value>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impactsOff>
+                </Item>
+            </effectsIf>
+        </Item>
+    </effects>
+</gameMechanics.map.zone.ZoneResource>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>193388</resourceId>
+    </Header>
+    <element>ACID</element>
+    <Name href="AI38_Turtle_SummonTurtle.(SpellArea).Name.txt" />
+    <visualScripts href="AI38_Turtle_SummonTurtle.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>50</value>
+    </range>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>16000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/Spells/AstarlIslands/CommonSpells/SpellCD.(BuffResource).xdb" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                <projectileData>
+                    <moveType type="gameMechanics.world.projectile.MoveTypeDestination">
+                        <to type="gameMechanics.elements.calcers.DestinationSpellTargetThrust">
+                            <maxDist>40</maxDist>
+                        </to>
+                    </moveType>
+                    <resource href="AI38_Turtle_SummonTurtle.(ProjectileResource).xdb" />
+                </projectileData>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                <delay>1000</delay>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                        <radius>4</radius>
+                        <affectGroup>Enemies</affectGroup>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                                <time>300</time>
+                                <distance>3</distance>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                <delay>1500</delay>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                        <spell href="AI38_Turtle_Charge.(SpellSingleTarget).xdb" />
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                <affectGroup>Friends</affectGroup>
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="/Mechanics/Spells/AstarlIslands/CommonSpells/SpellCD.(BuffResource).xdb" />
+                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                            <multiplier>3</multiplier>
+                        </durationScaler>
+                    </Item>
+                </impacts>
+                <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                            <mobs>
+                                <Item href="/Creatures/DemonScout/Instances/AstralIsle38/SmalDemon.(MobWorld).xdb" />
+                            </mobs>
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                    </predicates>
+                </filter>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <speed>1</speed>
+    <radius>0</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>192015</resourceId>
+    </Header>
+    <element>LIGHTNING</element>
+    <Name href="SpellName.txt" />
+    <image href="/Interface/Icons/Spells/Mage/MageFireball.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="Anaphem.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>50</value>
+    </range>
+    <prepareDuration>2500</prepareDuration>
+    <needLos>false</needLos>
+    <isAggro>false</isAggro>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>360000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+                <level>0.42</level>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="Anaphem.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </predicate>
+                    </Item>
+                </predicates>
+            </Item>
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                        <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                        <data href="/Mechanics/Spells/AstarlIslands/AI26/Curse.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="Anaphem.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                <spell href="/Mechanics/Spells/AstarlIslands/AI26/AI26_MageAOE/Spell01.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+                <duration>2000</duration>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                <spell href="/Mechanics/Spells/AstarlIslands/AI26/VoidDemons/VoidCall.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                <duration>6000</duration>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>25</speed>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

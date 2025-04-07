@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>219593</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="Buff.(BuffResource).Name.txt" />
+    <Description href="Buff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Engineer/EngineerDrone.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="/Spells/VisScripts/Engineer/Buff_Drones.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+            <conditionalImpacts>
+                <Item>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Buff01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                    <conditions>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateGenericOr">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateSpellInGroup">
+                                    <group href="/Mechanics/Spells/Groups/TeleportationSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                                </Item>
+                                <Item type="gameMechanics.elements.predicates.PredicateSpellInGroup">
+                                    <group href="/Mechanics/Spells/Groups/MountTeleportationSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </conditions>
+                </Item>
+            </conditionalImpacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.NotStackableEffects">
+            <effects>
+                <Item type="gameMechanics.elements.effects.MagicDoT">
+                    <parameters>
+                        <tickLength>3000</tickLength>
+                        <damagePerTick var="damagePerTick" />
+                        <affectOnStartTick>true</affectOnStartTick>
+                        <impactsPerTick>
+                            <Item type="gameMechanics.elements.impacts.StackBuff">
+                                <buff hrefvar="buff" />
+                                <resetTimer>false</resetTimer>
+                                <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                <anyRank>false</anyRank>
+                                <delta type="gameMechanics.elements.calcers.FloatData">
+                                    <value>-30</value>
+                                </delta>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                                <ability href="/Mechanics/Spells/Engineer/Abilities/ArtilleryFormUpg/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                            </Item>
+                                        </predicates>
+                                        <impactsIf>
+                                            <Item type="gameMechanics.elements.impacts.ImpactModifySpellCooldown">
+                                                <spell href="/Mechanics/Spells/Engineer/BeamCannon/Spell01.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                                <factor type="gameMechanics.elements.scalers.LinearScaler">
+                                                    <multiplier>1</multiplier>
+                                                </factor>
+                                                <sum type="gameMechanics.elements.calcers.FloatToLongCalcer">
+                                                    <calcer type="gameMechanics.elements.calcers.AbilityRankCalcer">
+                                                        <ability href="/Mechanics/Spells/Engineer/Abilities/ArtilleryFormUpg/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                        <mul>-1700</mul>
+                                                    </calcer>
+                                                </sum>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactModifySpellGroupCooldown">
+                                                <group href="/Mechanics/Spells/Groups/EngineerFlamethrowerSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                                                <factor>1</factor>
+                                                <factorMul type="gameMechanics.elements.calcers.FloatData">
+                                                    <value>1</value>
+                                                </factorMul>
+                                                <sum type="gameMechanics.elements.calcers.FloatToLongCalcer">
+                                                    <calcer type="gameMechanics.elements.calcers.AbilityRankCalcer">
+                                                        <ability href="/Mechanics/Spells/Engineer/Abilities/ArtilleryFormUpg/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                        <mul>-1200</mul>
+                                                    </calcer>
+                                                </sum>
+                                                <forAllSpells>true</forAllSpells>
+                                            </Item>
+                                        </impactsIf>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impactsPerTick>
+                    </parameters>
+                    <element>LIGHTNING</element>
+                    <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                        <scalers>
+                            <Item type="gameMechanics.elements.scalers.MagicScaler" />
+                            <Item type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                <ability href="/Mechanics/Spells/Engineer/Abilities/MechDamageUpg/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                <mul>0.07</mul>
+                            </Item>
+                            <Item type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                <ability href="/Mechanics/Spells/Engineer/Abilities/ExtraMechDmg/Ability01.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                <mul>0.04</mul>
+                            </Item>
+                        </scalers>
+                    </scaler>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectMoveTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Buff01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <distDelta>3</distDelta>
+        </Item>
+    </effects>
+    <isStackable>false</isStackable>
+    <stackLimit>1000</stackLimit>
+    <isHelpful>false</isHelpful>
+    <isMultiple>true</isMultiple>
+    <ranks>
+        <Item href="Buff01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+        <Item href="Buff02.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+        <Item href="Buff03.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+    </ranks>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Poisons.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

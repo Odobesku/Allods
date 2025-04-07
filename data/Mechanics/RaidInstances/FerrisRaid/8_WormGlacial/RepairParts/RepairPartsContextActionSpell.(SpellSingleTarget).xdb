@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>221693</resourceId>
+    </Header>
+    <Name href="RepairPartsContextActionSpell.(SpellSingleTarget).Name.txt" />
+    <Description href="RepairPartsContextActionSpell.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Misc/Quest/RepairKit.(UISingleTexture).xdb" />
+    <visualScripts href="RepairPartsContextActionSpell.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>5</value>
+    </range>
+    <prepareDuration>1000</prepareDuration>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                <mobs>
+                    <Item href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/AllyTurret/AllyTurret.(MobWorld).xdb" />
+                </mobs>
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+                        <level>1</level>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                <buff href="RepairPartsContextActionBuff.(BuffResource).xdb" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.DirectHeal">
+                        <heal>1</heal>
+                        <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                <multiplier>0.5</multiplier>
+                            </mulCalcer>
+                        </scalerTarget>
+                    </Item>
+                </impactsIf>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

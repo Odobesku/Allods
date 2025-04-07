@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>220817</resourceId>
+    </Header>
+    <Name href="RiderStackableDebuff.(BuffResource).Name.txt" />
+    <Description href="RiderStackableDebuff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Druid/DruidCallLightningUpgrade.(UISingleTexture).xdb" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Mobs/Yak_RiderStackableDebuff.(VisObjectTemplate).xdb" />
+            <locator>Slot_TopFX</locator>
+        </Item>
+    </visualEffects>
+    <effects>
+        <Item type="gameMechanics.elements.effects.NotStackableEffects">
+            <effects>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                    <buff href="RiderStackableDebuff.(BuffResource).xdb" />
+                                    <range>
+                                        <max>30</max>
+                                    </range>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.DirectDamage">
+                                    <damage>1</damage>
+                                    <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                        <mulCalcer type="gameMechanics.elements.calcers.CalcerSum">
+                                            <summands>
+                                                <Item type="gameMechanics.elements.calcers.CalcerMul">
+                                                    <calcers>
+                                                        <Item type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                                            <buff href="RiderStackableDebuff.(BuffResource).xdb" />
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                                            <multiplier>0.005</multiplier>
+                                                        </Item>
+                                                    </calcers>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                                    <multiplier>0.01</multiplier>
+                                                </Item>
+                                            </summands>
+                                        </mulCalcer>
+                                    </scalerTarget>
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.DirectDamage">
+                                    <damage>1</damage>
+                                    <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                        <mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                                            <calcers>
+                                                <Item type="gameMechanics.elements.calcers.CalcerSum">
+                                                    <summands>
+                                                        <Item type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                                            <buff href="RiderStackableDebuff.(BuffResource).xdb" />
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.calcers.FloatData">
+                                                            <value>-26</value>
+                                                        </Item>
+                                                    </summands>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                                    <multiplier>0.04</multiplier>
+                                                </Item>
+                                            </calcers>
+                                        </mulCalcer>
+                                    </scalerTarget>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impacts>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <stackLimit>100</stackLimit>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

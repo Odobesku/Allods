@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>189212</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+            </predicates>
+            <effectsIf>
+                <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+                            <groups>
+                                <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                                <Item href="/Mechanics/Spells/Groups/CrowdControlSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                                <Item href="/Mechanics/Spells/Groups/Fears.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                                <Item href="/Mechanics/Spells/Groups/Knockdowns.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                                <Item href="/Mechanics/Spells/Groups/Stuns.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                            </groups>
+                        </Item>
+                    </predicates>
+                    <effectsElse>
+                        <Item type="gameMechanics.elements.effects.TickableAura">
+                            <affectGroup>Friends</affectGroup>
+                            <radius>15</radius>
+                            <filter type="gameMechanics.world.creature.MobFilter" />
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="/Characters/Kania_male/Instances/AstralIsle21/DruidMele.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                            <impactsIn>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="StaticBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impactsIn>
+                            <impactsOut>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="StaticBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                </Item>
+                            </impactsOut>
+                        </Item>
+                    </effectsElse>
+                </Item>
+            </effectsIf>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>25</radius>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="StaticBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                <mobs>
+                                    <Item href="/Characters/Kania_male/Instances/AstralIsle21/DruidMele.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                </mobs>
+                            </Item>
+                        </predicates>
+                    </filter>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

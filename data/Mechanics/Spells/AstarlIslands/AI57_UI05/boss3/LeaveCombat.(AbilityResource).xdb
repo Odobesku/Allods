@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>189307</resourceId>
+    </Header>
+    <name href="LeaveCombat.(AbilityResource).Name.txt" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                    <projectileData>
+                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                            <destination type="gameMechanics.map.destination.RelativePos" />
+                        </moveType>
+                        <resource href="RingDamageLast1.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                    </projectileData>
+                    <pool href="FinalRings.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="AuraControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
+                                                    <affectPets>false</affectPets>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                            <predicates>
+                                                                <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                                                    <predicates>
+                                                                        <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                                                                            <zone href="/Maps/AstralIsle57_UI05/Zones/AI57_UI05.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                                                                        </Item>
+                                                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                            <predicate type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                                                                <zone href="/Maps/AstralIsle57_UI05/ScriptZones/Bossfight3.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                                                                            </predicate>
+                                                                        </Item>
+                                                                    </predicates>
+                                                                </Item>
+                                                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                            </predicates>
+                                                            <impactsIf>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                                                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                                                                        <locator>
+                                                                            <scriptID>poloz</scriptID>
+                                                                            <map href="/Maps/AstralIsle57_UI05/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                                        </locator>
+                                                                    </destination>
+                                                                </Item>
+                                                            </impactsIf>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onEnter>
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="FinalRings.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="FireRingsNotFinal.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                    <variable href="/Mechanics/Spells/AstarlIslands/AI57_UI05/zone/PolozDead.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <summand>1</summand>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

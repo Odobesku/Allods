@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>186335</resourceId>
+    </Header>
+    <Name href="HookBuff.(BuffResource).Name.txt" />
+    <Description href="HookBuff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Mounts/SpellsMounts/BattleMountZemHook.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="/Spells/BuffVisScripts/DoTPoison.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <nameTemplate href="HookBuff.(BuffResource)_Name.txt.template" />
+    <descTemplate href="HookBuff.(BuffResource)_Desc.txt.template" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/TeleportationSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/SpeedBoosts.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/MountSpeedBoosts.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+        <Item type="gameMechanics.elements.effects.MagicDoT">
+            <parameters>
+                <tickLength>1000</tickLength>
+                <damagePerTick>7</damagePerTick>
+            </parameters>
+            <element>ACID</element>
+            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToBuffs">
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/MovementImpairingSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                    </groups>
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToSpellFromGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/MovementImpairingSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectPull">
+            <puller type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+            <speedFactor type="gameMechanics.elements.calcers.FloatData">
+                <value>5</value>
+            </speedFactor>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/MountTeleportationSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="HookBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </onLeave>
+        </Item>
+    </effects>
+    <duration>15000</duration>
+    <isHelpful>false</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MovementImpairingSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

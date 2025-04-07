@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>221666</resourceId>
+    </Header>
+    <Name href="DynamiteCrateContextActionBuff.(BuffResource).Name.txt" />
+    <Description href="DynamiteCrateContextActionBuff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Misc/Quest/BlockOfDynamite.(UISingleTexture).xdb" />
+    <visScript href="DynamiteCrateContextActionBuff.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDamageTrigger">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.offender.PredicateNot">
+                    <predicate type="gameMechanics.elements.predicates.offender.PredicateIsAE" />
+                </Item>
+            </predicates>
+            <impacts>
+                <casterToTarget>
+                    <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                        <element>FIRE</element>
+                                        <damage>30</damage>
+                                        <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impacts>
+                        <spawnResource href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/WormBoss.(SpawnTable).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="DynamiteCrateContextActionBuff.(BuffResource).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                        <data href="DynamiteBlast.(ClientData).xdb" />
+                    </Item>
+                </casterToTarget>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.5</coeff>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Influence</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/WormGlacialBoss/WormBossPlane.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.TickableAura">
+            <affectGroup>All</affectGroup>
+            <radius>6.25</radius>
+            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                        <mobs>
+                            <Item href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/WormHole/WormHole.(MobWorld).xdb" />
+                        </mobs>
+                    </Item>
+                </predicates>
+            </filter>
+            <impactsIn>
+                <Item type="gameMechanics.elements.impacts.DirectDamage">
+                    <damage>1</damage>
+                    <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                            <multiplier>0.201</multiplier>
+                        </mulCalcer>
+                    </scalerTarget>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                            <projectileData>
+                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                </moveType>
+                                <resource href="/Mechanics/RaidInstances/FireExplosion.(ProjectileResource).xdb" />
+                            </projectileData>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsIn>
+            <holderImpactsIn>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="DynamiteCrateContextActionBuff.(BuffResource).xdb" />
+                </Item>
+            </holderImpactsIn>
+        </Item>
+    </effects>
+    <duration>600000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>204180</resourceId>
+    </Header>
+    <image href="/Interface/Icons/Spells/WornHands.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImmunityToBuffs">
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/Transformation.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                    </groups>
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectBearer" />
+        <Item type="gameMechanics.elements.effects.DamageThreshold">
+            <healthScalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mul>0.5</mul>
+                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                    <externalCalcer href="/Mechanics/GameRoot/Mount/MountHealthCalcer.(CalcerFloatResource).xdb#xpointer(/constructor.elements.CalcerFloatResource)" />
+                </mulCalcer>
+            </healthScalerTarget>
+            <outOfCombatPolicy>Nothing</outOfCombatPolicy>
+            <ownerDamageFactor type="gameMechanics.elements.calcers.FloatData">
+                <value>1</value>
+            </ownerDamageFactor>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateOnAddressee">
+                            <addresseeFinder type="gameMechanics.world.avatar.bearing.AddresseeFinderBurden" />
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateTrue" />
+                            </predicates>
+                            <assertOnCantFind>false</assertOnCantFind>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                            <addresseeFinder type="gameMechanics.world.avatar.bearing.AddresseeFinderBurden" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                    <data href="/Mechanics/Spells/Mounts/AirMoto/Repair/NeedRepair.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+            <resource href="/Mechanics/GameRoot/Mount/MountDamageThreshold.xdb#xpointer(/gameMechanics.elements.effects.DamageThresholdResource)" />
+            <damageType>Damage</damageType>
+            <priority>HarmfulLimitedDamageAbsorber</priority>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateOnAddressee">
+                            <addresseeFinder type="gameMechanics.world.avatar.bearing.AddresseeFinderBurden" />
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateTrue" />
+                            </predicates>
+                            <assertOnCantFind>false</assertOnCantFind>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                            <addresseeFinder type="gameMechanics.world.avatar.bearing.AddresseeFinderBurden" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="Burden_Passenger.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOff>
+        </Item>
+    </effects>
+    <isStackable>false</isStackable>
+    <isHelpful>true</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MountedBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/BearingBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>201633</resourceId>
+    </Header>
+    <contextActionInfo>
+        <priority>500</priority>
+        <contextName href="GoalkeeperSpell_SummonObstacle_Name.txt" />
+        <contextDescription href="GoalkeeperSpell_SummonObstacle_Desc.txt" />
+        <contextImage href="/Interface/Icons/Context/Create_An_Obstacle.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    </contextActionInfo>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/FootballSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="GoalkeeperSpell_SummonObstacle_Name.txt" />
+    <image href="/Interface/Icons/Context/Create_An_Obstacle.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <sysName>Agob_6</sysName>
+    <nameTemplate href="GoalkeeperSpell_SummonObstacle_Name.txt" />
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>2000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.constructor.basicElements.PredicateOr">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="FootballGameplayV2/TooCloseToParry.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                            <zone href="/Maps/2ndCircle_Goblinoball_New/ScriptZones/ArchipelagoGoblinoball/Goblinoball/FootBall_goalmouth_Red.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                            <zone href="/Maps/2ndCircle_Goblinoball_New/ScriptZones/ArchipelagoGoblinoball/Goblinoball/FootBall_goalmouth.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateMobNear">
+                            <radius>4</radius>
+                            <mobs>
+                                <Item href="/Creatures/Slime/Instances/ArchipelagoEmpire2/SlimeBall.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                            </mobs>
+                        </Item>
+                    </predicates>
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+                        <spell href="GoalkeeperSpell_SummonObstacle.(SpellCasterSelf).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="GoalkeeperBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+                        <spell href="GoalkeeperSpell_SummonObstacle.(SpellCasterSelf).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="GoalkeeperBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsElse>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="Sprint.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="Sprint.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsIf>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

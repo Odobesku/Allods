@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.mob.interaction.Cue>
+    <Header>
+        <resourceId>226215</resourceId>
+    </Header>
+    <name href="KtulhuToLanding.(Cue).Name.txt" />
+    <text href="KtulhuToLanding.(Cue).Text.txt" />
+    <conditions>
+        <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+            <predicates>
+                <Item type="gameMechanics.map.variables.PredicateMapVariableGreater">
+                    <variableResource href="/Mechanics/RaidInstances/UmoirRaid/2_KtulhuBoss/KtulhuBoss.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <minValue type="gameMechanics.elements.calcers.FloatData">
+                        <value>0</value>
+                    </minValue>
+                </Item>
+                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <predicate type="gameMechanics.map.variables.PredicateMapVariableGreater">
+                        <variableResource href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/LandingBoss.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                        <minValue type="gameMechanics.elements.calcers.FloatData">
+                            <value>0</value>
+                        </minValue>
+                    </predicate>
+                </Item>
+                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+                </Item>
+            </predicates>
+        </Item>
+    </conditions>
+    <impacts>
+        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+            <predicates>
+                <Item type="gameMechanics.map.variables.PredicateMapVariableLess">
+                    <variableResource href="/Mechanics/RaidInstances/UmoirRaid/3_LandingBoss/Scene/LandingScene.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <maxValue type="gameMechanics.elements.calcers.FloatData">
+                        <value>1</value>
+                    </maxValue>
+                </Item>
+            </predicates>
+            <impactsIf>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>22000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                            <table href="/Mechanics/RaidInstances/UmoirRaid/3_LandingBoss/Smeyana_LandingBoss.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                    <variable href="/Mechanics/RaidInstances/UmoirRaid/3_LandingBoss/Scene/LandingScene.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <summand>1</summand>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                            <destination type="gameMechanics.map.destination.DestinationModified">
+                                                <destination type="gameMechanics.map.destination.DestinationLocator">
+                                                    <locator>
+                                                        <scriptID>3L1</scriptID>
+                                                        <map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                    </locator>
+                                                </destination>
+                                                <modifiers>
+                                                    <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                                        <verticalRange min="0" max="0" />
+                                                        <horizontalRange min="1" max="5" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                                        <verticalRange min="0" max="0" />
+                                                        <horizontalRange min="1" max="4" />
+                                                    </Item>
+                                                </modifiers>
+                                            </destination>
+                                            <finishImpacts>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="/Mechanics/RaidInstances/UmoirRaid/3_LandingBoss/Scene/Camera.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </Item>
+                                            </finishImpacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                    <spawnResource href="/Mechanics/RaidInstances/UmoirRaid/2_KtulhuBoss/Scene/SceneDeath.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                </Item>
+            </impactsIf>
+            <impactsElse>
+                <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                    <table href="/Mechanics/RaidInstances/UmoirRaid/3_LandingBoss/Smeyana_LandingBoss.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                                    <destination type="gameMechanics.map.destination.DestinationModified">
+                                                        <destination type="gameMechanics.map.destination.DestinationLocator">
+                                                            <locator>
+                                                                <scriptID>3L1</scriptID>
+                                                                <map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                            </locator>
+                                                        </destination>
+                                                        <modifiers>
+                                                            <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                                                <verticalRange min="0" max="0" />
+                                                                <horizontalRange min="1" max="5" />
+                                                            </Item>
+                                                        </modifiers>
+                                                    </destination>
+                                                    <finishImpacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                            <delay>3000</delay>
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                    <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                                    <data href="/Mechanics/RaidInstances/UmoirRaid/3_LandingBoss/Voice/Voice1.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </finishImpacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsElse>
+        </Item>
+    </impacts>
+</gameMechanics.world.mob.interaction.Cue>

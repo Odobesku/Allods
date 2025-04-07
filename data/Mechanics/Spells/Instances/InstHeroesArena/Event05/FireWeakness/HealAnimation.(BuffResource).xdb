@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>195721</resourceId>
+    </Header>
+    <Name href="CanHeal.(BuffResource).Name.txt" />
+    <Description href="CanHeal.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Engineer/DoubleHeal.(UISingleTexture).xdb" />
+    <visScript href="CastAnimation.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="FireWeakness.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="StackCount.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactHeal">
+                            <heal>20</heal>
+                            <scalerCaster type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                                <scalers>
+                                    <Item type="gameMechanics.elements.scalers.HealScaler" />
+                                    <Item type="gameMechanics.elements.scalers.SumBuffsStackScaler">
+                                        <buffs>
+                                            <Item href="StackCount.(BuffResource).xdb" />
+                                        </buffs>
+                                    </Item>
+                                </scalers>
+                            </scalerCaster>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Rotate</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllSpells" />
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+        </Item>
+    </effects>
+    <duration>3000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>209799</resourceId>
+    </Header>
+    <interruptsActionGroups>
+        <Item href="/Mechanics/Spells/Groups/ActionBarChange.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </interruptsActionGroups>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/ActionBarChange.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="QuestElemTurret.(SpellSingleTarget).Name.txt" />
+    <Description href="QuestElemTurret.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Misc/Itemmall/Canon02.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Mage/ShockingGrasp.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <sysName>B2</sysName>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>20000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMobNear">
+                <radius>50</radius>
+                <mobs>
+                    <Item href="Elemental.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                </mobs>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                        <zone href="/Maps/Kania/Zones/ZoneLeague2/BonePlain.xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactSummonTurret">
+                        <destination type="gameMechanics.map.destination.DestinationLocator">
+                            <locator>
+                                <scriptID>A5Y_PointTurret</scriptID>
+                                <map href="/Maps/Kania/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                            </locator>
+                        </destination>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactCopyIFF" />
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="TurretLifeTime.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="MainElemGivePlane.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impacts>
+                        <resource href="LvL2Turret.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                                <zone href="/Maps/Hadagan/Zones/ZoneEmpire3/ZoneEmpire3.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ImpactSummonTurret">
+                                <destination type="gameMechanics.map.destination.DestinationLocator">
+                                    <locator>
+                                        <scriptID>A5Y_PointTurret_E</scriptID>
+                                        <map href="/Maps/Hadagan/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                    </locator>
+                                </destination>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactCopyIFF" />
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="TurretLifeTime.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="MainElemGivePlane.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                </impacts>
+                                <resource href="LvL2Turret.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

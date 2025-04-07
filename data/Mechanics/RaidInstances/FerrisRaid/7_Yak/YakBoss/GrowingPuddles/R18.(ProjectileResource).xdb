@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.projectile.ProjectileResource>
+    <Header>
+        <resourceId>220796</resourceId>
+    </Header>
+    <visObject href="/Spells/FX/Spells/AOEAura_Electric_R18.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+    <lifeLengthCap>10500</lifeLengthCap>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>10000</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                            <projectileData>
+                                <moveType type="gameMechanics.world.projectile.MoveTypeDisorient">
+                                    <radius>15</radius>
+                                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                </moveType>
+                                <resource href="R20.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                            </projectileData>
+                            <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                        </Item>
+                    </impactsOn>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.EntityImpactCreaturesAround">
+                    <shape type="gameMechanics.constructor.schemes.spell.area.CylinderWithHeight">
+                        <topPlane>12</topPlane>
+                        <bottomPlane>-6</bottomPlane>
+                    </shape>
+                    <radius>18</radius>
+                    <affectGroup>Enemies</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.resources.ResourceAnyBuff">
+                                        <buffs>
+                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/YakMount/MountRider_A.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/YakMount/MountRider_B.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/YakMount/MountRider_C.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            <Item href="HitCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </buffs>
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/YakBoss/LightningSphere/LightningHit.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                    <element>LIGHTNING</element>
+                                    <damage>8</damage>
+                                    <impactsOnHitTarget>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="HitCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impactsOnHitTarget>
+                                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                        <filters>
+                            <Item type="gameMechanics.world.creature.AliveFilter" />
+                            <Item type="gameMechanics.world.creature.AvatarFilter" />
+                        </filters>
+                    </filter>
+                </Item>
+            </impacts>
+            <tick>500</tick>
+            <initialDelay>2000</initialDelay>
+        </Item>
+    </effects>
+</gameMechanics.world.projectile.ProjectileResource>

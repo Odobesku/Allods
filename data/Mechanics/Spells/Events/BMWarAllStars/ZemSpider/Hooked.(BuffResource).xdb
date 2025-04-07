@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>210669</resourceId>
+    </Header>
+    <Name href="Hooked.(BuffResource).Name.txt" />
+    <Description href="Hooked.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Mounts/SpellsMounts/BattleMountZemHook.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <nameTemplate href="Hooked.(BuffResource)_Name.txt.template" />
+    <descTemplate href="Hooked.(BuffResource)_Desc.txt.template" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.PhysicalDoT">
+            <parameters>
+                <scalerTarget type="gameMechanics.elements.scalers.ScalerIf">
+                    <condition type="gameMechanics.constructor.basicElements.PredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            <Item type="gameMechanics.elements.predicates.PredicateMounted" />
+                        </predicates>
+                    </condition>
+                    <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                        <multiplier>2</multiplier>
+                    </scalerIf>
+                    <scalerElse type="gameMechanics.elements.scalers.LinearScaler">
+                        <multiplier>1</multiplier>
+                    </scalerElse>
+                </scalerTarget>
+                <scaleOnTick>true</scaleOnTick>
+                <tickLength>1000</tickLength>
+                <damagePerTick>1</damagePerTick>
+            </parameters>
+            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mul>0.1</mul>
+                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                    <externalCalcer href="/Mechanics/GameRoot/Mount/MountBaseDamageCalcer.(CalcerFloatResource).xdb#xpointer(/constructor.elements.CalcerFloatResource)" />
+                </mulCalcer>
+                <additionalMultiplier>
+                    <scaler type="gameMechanics.elements.scalers.TrivialScaler" />
+                </additionalMultiplier>
+            </scaler>
+            <considerOutgoingModifiers>false</considerOutgoingModifiers>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectPull">
+            <puller type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+            <speedFactor type="gameMechanics.elements.calcers.CalcerSum">
+                <summands>
+                    <Item type="gameMechanics.elements.calcers.FloatData">
+                        <value>1</value>
+                    </Item>
+                    <Item type="gameMechanics.elements.calcers.MountSpeedCalcer" />
+                </summands>
+            </speedFactor>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="PreventInvis.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="PreventInvis.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactChannelingStop" />
+                    </impacts>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/TeleportationSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/SpeedBoosts.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/MountSpeedBoosts.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/MountTeleportationSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        </Item>
+    </effects>
+    <isHelpful>false</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

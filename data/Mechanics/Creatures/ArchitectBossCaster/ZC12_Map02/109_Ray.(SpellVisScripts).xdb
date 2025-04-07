@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<actionBarStart type="VisActionList">
+		<elements>
+			<Item type="CreatureEffectsAction">
+				<visualEffects>
+					<Item>
+						<effectFx href="/Spells/FX/Mobs/Lighting_Generator_Ready.(VisObjectTemplate).xdb" />
+						<scale>1.25</scale>
+						<fadeInTime>750</fadeInTime>
+						<fadeOutTime>250</fadeOutTime>
+						<locator>Slot_Global</locator>
+						<offset z="0.33" />
+					</Item>
+					<Item>
+						<delay>500</delay>
+						<effectFx href="/Spells/FX/Mobs/PortalBoss_ActiveImpulseBlue.(VisObjectTemplate).xdb" />
+						<scale>1.25</scale>
+						<fadeInTime>1250</fadeInTime>
+						<fadeOutTime>250</fadeOutTime>
+						<locator>Slot_FX</locator>
+						<offset y="-0.5" z="0.25" />
+					</Item>
+				</visualEffects>
+			</Item>
+			<Item type="Sound3DAction">
+				<sound>
+					<project href="/SFX/Spells/Sounds.(FMODProject).xdb" />
+					<name>spells/FX/Spells/ArchitectSiege/Pulling</name>
+				</sound>
+			</Item>
+		</elements>
+	</actionBarStart>
+	<wholeCasting type="VisActionList">
+		<visActionID>1251gdfdhhyi8i</visActionID>
+		<elements>
+			<Item type="CreatureAnimationAction">
+				<mode>LOOP</mode>
+				<animations>
+					<Item>readySpell</Item>
+				</animations>
+			</Item>
+		</elements>
+	</wholeCasting>
+	<launch type="VisActionList">
+		<play>Simultaneously</play>
+		<playWhile type="VisActionDelay">
+			<time>500</time>
+		</playWhile>
+		<elements>
+			<Item type="VisActionList">
+				<play>Simultaneously</play>
+				<elements>
+					<Item type="VisActionDelay">
+						<time>250</time>
+					</Item>
+					<Item type="VisActionStopAction">
+						<stoppedActionID>1251gdfdhhyi8i</stoppedActionID>
+					</Item>
+					<Item type="CreatureAnimationAction">
+						<animations>
+							<Item>idle</Item>
+						</animations>
+					</Item>
+				</elements>
+			</Item>
+			<Item type="VisActionList">
+				<play>Simultaneously</play>
+				<elements>
+					<Item type="CreatureEffectsOnTarget">
+						<visualEffects>
+							<Item>
+								<delay>250</delay>
+								<effectFx href="/Spells/FX/Mobs/MountTank_Channel_Hit.(VisObjectTemplate).xdb" />
+								<scale>1.2</scale>
+								<fadeInTime>250</fadeInTime>
+								<fadeOutTime>250</fadeOutTime>
+								<locator>Slot_FX</locator>
+								<offendTime type="EffectOffendConstDelay" />
+							</Item>
+						</visualEffects>
+					</Item>
+					<Item type="VisActionList">
+						<elements>
+							<Item type="CreatureChannelDirectAction">
+								<channelingFx href="/Spells/FX/Mobs/TripodPortal_DesintegrationRay.(VisObjectTemplate).xdb" />
+								<fxLength>20</fxLength>
+								<startPoint type="VisPointLocator">
+									<shift y="-0.5" z="0.25" />
+									<locator>Slot_FX</locator>
+								</startPoint>
+								<endPoint type="VisPointLocator">
+									<locator>Slot_FX</locator>
+								</endPoint>
+								<multyTargetMode>Umbrella</multyTargetMode>
+							</Item>
+							<Item type="Sound3DAction">
+								<sound>
+									<project href="/SFX/Spells/Sounds.(FMODProject).xdb" />
+									<name>spells/FX/Spells/ArchitectSiege/AirStrike_ChannelRed</name>
+								</sound>
+							</Item>
+						</elements>
+					</Item>
+				</elements>
+			</Item>
+		</elements>
+	</launch>
+</SpellVisScripts>

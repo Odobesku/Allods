@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>212694</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="ElemPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+            </onLeave>
+            <effects>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <radius>65</radius>
+                                    <affectGroup>Enemies</affectGroup>
+                                    <affectHolder>false</affectHolder>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                            <projectileData>
+                                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                </moveType>
+                                                <resource href="WaterSplash.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                                            </projectileData>
+                                        </Item>
+                                    </impacts>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                                        <filters>
+                                            <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                                </predicates>
+                                            </Item>
+                                            <Item type="gameMechanics.world.creature.AvatarFilter" />
+                                        </filters>
+                                    </filter>
+                                    <targetsLimit>1</targetsLimit>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <tick>5000</tick>
+                    <initialDelay>3000</initialDelay>
+                </Item>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="ElemCheck.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                            <radius>45</radius>
+                                            <affectGroup>Enemies</affectGroup>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                    <destination type="gameMechanics.map.destination.DestinationModified">
+                                                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                        <modifiers>
+                                                            <Item type="gameMechanics.map.destination.modifier.ModifierSelectReachable">
+                                                                <alternatives>
+                                                                    <Item type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
+                                                                        <radius type="gameMechanics.elements.calcers.FloatData">
+                                                                            <value>7</value>
+                                                                        </radius>
+                                                                    </Item>
+                                                                </alternatives>
+                                                            </Item>
+                                                        </modifiers>
+                                                    </destination>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                                                        <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                                            <value>1000000000</value>
+                                                        </Item>
+                                                    </impacts>
+                                                    <object href="/Creatures/WaterElemental/Instances/HuntingGround4/BossAddWaterElem.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                    <pool href="ElemPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                                                </Item>
+                                            </impacts>
+                                            <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                                                <filters>
+                                                    <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                                        </predicates>
+                                                    </Item>
+                                                    <Item type="gameMechanics.world.creature.AvatarFilter" />
+                                                </filters>
+                                            </filter>
+                                            <targetsLimit>1</targetsLimit>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.StackBuff">
+                                    <buff href="ElemCheck.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    <delta type="gameMechanics.elements.calcers.FloatData">
+                                        <value>3</value>
+                                    </delta>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                    <tick>50000</tick>
+                    <initialDelay>20000</initialDelay>
+                </Item>
+                <Item type="gameMechanics.elements.effects.HealthTrigger">
+                    <healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
+                        <multiplier>0.25</multiplier>
+                    </healthOn>
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.SpellCooldownMultiplier">
+                            <spell href="WhirlwindSpring.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                            <factor>0.25</factor>
+                        </Item>
+                    </effects>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

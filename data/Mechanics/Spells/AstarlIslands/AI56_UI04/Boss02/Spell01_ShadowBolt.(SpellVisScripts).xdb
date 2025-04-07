@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<actionBarStart type="VisActionList">
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="CreatureRunVisActionResource">
+				<resource href="/Spells/VisScripts/Prototypes2/PreCastAnimationDirect.(CreatureVisActionResource).xdb#xpointer(/CreatureVisActionResource)" />
+			</Item>
+		</elements>
+	</actionBarStart>
+	<wholeCasting type="VisActionList">
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="CreatureEffectsAction">
+				<visualEffects>
+					<Item>
+						<effectFx href="/Spells/FX/Spells/ReadySpellDirectDisease.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+						<locator>Slot_Hand_L</locator>
+					</Item>
+					<Item>
+						<effectFx href="/Spells/FX/Spells/ReadySpellDirectDisease.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+						<locator>Slot_Hand_R</locator>
+					</Item>
+				</visualEffects>
+			</Item>
+			<Item type="CreatureRunVisActionResource">
+				<resource href="/Spells/VisScripts/Prototypes2/PreCastFX.(CreatureVisActionResource).xdb#xpointer(/CreatureVisActionResource)" />
+			</Item>
+		</elements>
+	</wholeCasting>
+	<launch type="VisActionList">
+		<playWhile type="CreatureAnimationAction">
+			<animations>
+				<Item>specialCast</Item>
+			</animations>
+			<advanced>
+				<backgroundAfterFirstKey>true</backgroundAfterFirstKey>
+			</advanced>
+		</playWhile>
+		<elements>
+			<Item type="CreatureVisActionStartThrow" />
+			<Item type="CreatureProjectileAction">
+				<projectileFx href="/Spells/FX/Spells/AstralComet2_ProjectileRoot2.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+				<explosionFx href="/Spells/FX/Spells/HitShadow.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+				<isMultyProjectile>true</isMultyProjectile>
+				<pointOnCaster type="VisPointLocator">
+					<locator>Slot_FX</locator>
+				</pointOnCaster>
+				<pointOnTarget type="VisPointLocator">
+					<locator>Slot_FX</locator>
+				</pointOnTarget>
+				<offendTime type="EffectOffendConstDelay" />
+			</Item>
+		</elements>
+	</launch>
+	<playOnTargets>
+		<specialAction type="CreatureRunVisActionResource">
+			<resource href="/Spells/VisScripts/HitPostFxOnTarget/HitDiseaseShader.(CreatureVisActionResource).xdb#xpointer(/CreatureVisActionResource)" />
+		</specialAction>
+	</playOnTargets>
+</SpellVisScripts>

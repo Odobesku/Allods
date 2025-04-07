@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>239470</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="Flowers.(SpellSingleTarget).Name.txt" />
+    <Description href="Flowers.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Misc/Event/GeorgeRibbon.(UISingleTexture).xdb" />
+    <visualScripts href="Salute.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>30</value>
+    </range>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <isAggro>false</isAggro>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateOnAddressee">
+                <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff hrefvar="buff" />
+                    </Item>
+                </predicates>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+            <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                <characterClass hrefvar="characterClass" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateIsRuleActive">
+                <rule href="/Mechanics/EventsAndActions/May2015/MayMini.(RuleResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="CD.(BuffResource).xdb" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateCreatureLevel">
+                <minLevel type="gameMechanics.formulas.MaxLevelConstant" />
+            </Item>
+        </targetConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff hrefvar="buff" />
+                <consumeStacks>1</consumeStacks>
+            </Item>
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                <id href="MayDaily.(QuestCountId).xdb" />
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="CD.(BuffResource).xdb" />
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

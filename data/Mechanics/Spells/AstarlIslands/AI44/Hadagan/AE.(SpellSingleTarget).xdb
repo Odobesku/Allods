@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>184670</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Magics.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="AE.(SpellSingleTarget)_Name.txt" />
+    <Description href="AE.(SpellSingleTarget)_Desc.txt" />
+    <image href="/Interface/Icons/Spells/Mage/MageFireball.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Mage/Fireball.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="AE.(SpellSingleTarget)_Name.txt.template" />
+    <descTemplate href="AE.(SpellSingleTarget)_Desc.txt.template" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>75</value>
+    </range>
+    <prepareDuration>3000</prepareDuration>
+    <element>FIRE</element>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <isAE>true</isAE>
+    <mechanics>
+        <cooldown>
+            <stage>Start</stage>
+            <duration>22000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </predicates>
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                <projectileData>
+                    <moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
+                    <resource href="AE.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                </projectileData>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                        <radius>8</radius>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                <element>FIRE</element>
+                                <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                <damage>15.985</damage>
+                            </Item>
+                        </impacts>
+                        <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </predicates>
+                                </Item>
+                            </predicates>
+                        </filter>
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>25</speed>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

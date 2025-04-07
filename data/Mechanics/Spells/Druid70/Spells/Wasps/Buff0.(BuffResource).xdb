@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>214258</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="Spell0.(SpellSingleTarget).Name.txt" />
+    <Description href="Buff0.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Druid/DruidWaspSwarm.(UISingleTexture).xdb" />
+    <visScript href="/Spells/VisScripts/Druid/WaspSwarm.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectIfOverTime">
+            <impactsIf>
+                <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                            <element>POISON</element>
+                            <damage>1</damage>
+                            <impactsOnHitTarget>
+                                <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                                    <mark href="/Mechanics/Spells/Druid70/Abilities/PoisonTornado/PoisonWatcher.(MarkResource).xdb" />
+                                </Item>
+                            </impactsOnHitTarget>
+                            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                    <externalCalcer hrefvar="externalCalcer" />
+                                </mulCalcer>
+                                <additionalMultiplier>
+                                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                </additionalMultiplier>
+                            </scaler>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsIf>
+            <runImpactsOnEachTick>true</runImpactsOnEachTick>
+            <affectOnStartTick>true</affectOnStartTick>
+            <tick type="gameMechanics.elements.calcers.LinearCalcer">
+                <mul>1</mul>
+                <mulCalcer type="gameMechanics.elements.calcers.AbilityRankCalcer">
+                    <ability href="/Mechanics/Spells/Druid70/Abilities/WaspsUp/Ability01.(AbilityResource).xdb" />
+                    <mul>-500</mul>
+                </mulCalcer>
+                <sum>2000</sum>
+            </tick>
+        </Item>
+    </effects>
+    <duration>8000</duration>
+    <isStackable>false</isStackable>
+    <isHelpful>false</isHelpful>
+    <isMultiple>true</isMultiple>
+    <ranks>
+        <Item href="Buff01.(BuffResource).xdb" />
+        <Item href="Buff02.(BuffResource).xdb" />
+        <Item href="Buff03.(BuffResource).xdb" />
+    </ranks>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Magics.xdb" />
+        <Item href="/Mechanics/Spells/Groups/DruidPoison.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/DamageOverTime.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>244059</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="Buff_Name.txt" />
+    <Description href="Buff_Desc.txt" />
+    <image href="/Interface/Icons/Misc/Junk/WoodenCrate.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript hrefvar="chestVisScript" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.BuffInterceptor">
+            <impactsOnAttach>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff hrefvar="buff" />
+                    <anyRank>false</anyRank>
+                </Item>
+            </impactsOnAttach>
+            <predicates>
+                <Item type="gameMechanics.constructor.basicElements.PredicateGenericOr">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                            <groups>
+                                <Item href="/Mechanics/Spells/Groups/Invisibility.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                            </groups>
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                            <groups>
+                                <Item href="/Mechanics/Spells/Groups/Shroud.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                            </groups>
+                        </Item>
+                    </predicates>
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.world.ship.elements.EffectBoundShipChangeHandler">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff hrefvar="buff" />
+                    <anyRank>false</anyRank>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.5</coeff>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.world.ship.elements.ImpactDropLootChest"></Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectTransportChangeHandler">
+            <impactsEnter>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                            <predicates>
+                                <Item type="gameMechanics.world.ship.elements.PredicateStandingOnBoundShip" />
+                                <Item type="gameMechanics.world.ship.elements.PredicateHasStolenLoot" />
+                            </predicates>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.world.ship.elements.ImpactDropLootChest"></Item>
+                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                            <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderTransport" />
+                            <impacts>
+                                <Item type="gameMechanics.constructor.basicElements.ImpactNull" />
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsEnter>
+            <impactsExit>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.world.ship.elements.PredicateHasOwnLoot" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.world.ship.elements.ImpactDropLootChest"></Item>
+                    </impactsIf>
+                </Item>
+            </impactsExit>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToSpellFromGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/SpeedBoosts.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                <Item href="/Mechanics/Spells/Groups/TeleportationSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/TeleportationSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToBuffs">
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/SpeedBoosts.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                    </groups>
+                </Item>
+            </predicates>
+        </Item>
+    </effects>
+    <duration>0</duration>
+    <isStackable>false</isStackable>
+    <stackLimit>1</stackLimit>
+    <isGradual>false</isGradual>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <isMultiple>false</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <isClientReplicated>true</isClientReplicated>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/AstralChestCarrying.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

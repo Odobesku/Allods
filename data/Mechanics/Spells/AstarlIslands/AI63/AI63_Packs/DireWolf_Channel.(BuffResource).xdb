@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>187582</resourceId>
+    </Header>
+    <Name href="DireWolf_Channel.(BuffResource).Name.txt" />
+    <Description href="DireWolf_Channel.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Misc/Itemmall/BlackWolf.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="DireWolf_Channel_stun01.xdb#xpointer(/BuffVisScripts)" />
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+            </actions>
+            <rooted>true</rooted>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="DireWolf_Channel.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="DireWolf_Channel_count.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.MagicDoT">
+            <parameters>
+                <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                    <mulCalcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                        <buff href="DireWolf_Channel_count.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </mulCalcer>
+                    <sum>1</sum>
+                </scalerTarget>
+                <scaleOnTick>true</scaleOnTick>
+                <damagePerTick>10</damagePerTick>
+                <affectOnStartTick>true</affectOnStartTick>
+                <impactsPerTick>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="DireWolf_Channel_count.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsPerTick>
+            </parameters>
+            <element>SHADOW</element>
+            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+        </Item>
+    </effects>
+    <isHelpful>false</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

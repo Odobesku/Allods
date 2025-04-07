@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>218896</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MeleeAttacks.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/MercenarySpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="Spell_Name.txt" />
+    <image href="/Interface/Icons/Spells/Warrior/WarriorWhirlwind.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <nameTemplate href="Spell_Name.txt.template" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <needLos>false</needLos>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>15000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateCreature" />
+            <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+        </targetConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceMana">
+                <mana>100</mana>
+                <manaType>
+                    <Item>Energy</Item>
+                </manaType>
+            </Item>
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                <impactsOnHitTarget>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                        <data href="/Spells/ClientData/HitMeleeSwordHard.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="Slow.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsOnHitTarget>
+                <minDamage>37</minDamage>
+                <maxDamage>37</maxDamage>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+    <radius>8</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

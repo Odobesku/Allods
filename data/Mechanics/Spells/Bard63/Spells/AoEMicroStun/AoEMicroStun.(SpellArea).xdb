@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>215432</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/InsuranceTrigger.xdb" />
+        <Item href="/Mechanics/Spells/Groups/AmmoSpells.(ActionGroup).xdb" />
+    </groups>
+    <Name href="AoEMicroStun.(SpellArea).Name.txt" />
+    <Description href="AoEMicroStun.(SpellArea).Description.txt" />
+    <descVars>
+        <Item>
+            <name>time</name>
+            <value>1</value>
+            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
+                    <mul>0.5</mul>
+                    <mulCalcer type="gameMechanics.elements.calcers.CalcerMax">
+                        <calcers>
+                            <Item type="gameMechanics.elements.calcers.FloatData">
+                                <value>0</value>
+                            </Item>
+                            <Item type="gameMechanics.elements.calcers.ItemQualityCalcer">
+                                <dressSlot>AMMO</dressSlot>
+                            </Item>
+                        </calcers>
+                    </mulCalcer>
+                    <sum var="time" />
+                </mulCalcer>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Bard/Entree.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Bard/AoEMicroStun.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <prepareDuration>2000</prepareDuration>
+    <targetType>STTPoint</targetType>
+    <ranks>
+        <Item href="AoEMicroStun01.(SpellArea).xdb" />
+        <Item href="AoEMicroStun02.(SpellArea).xdb" />
+        <Item href="AoEMicroStun03.(SpellArea).xdb" />
+    </ranks>
+    <iffPolicy>Enemies</iffPolicy>
+    <launchWhenReady>true</launchWhenReady>
+    <mechanics>
+        <cooldown>
+            <duration>1</duration>
+            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mul>-20000</mul>
+                <mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
+                    <dressSlot>AMMO</dressSlot>
+                </mulCalcer>
+                <sum>300000</sum>
+            </scaler>
+        </cooldown>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceIf">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateEquipped">
+                        <dressType>AMMO</dressType>
+                        <itemClass href="/Mechanics/ItemClasses/Other_InfiniteTeardrop.(ItemClass).xdb" />
+                    </Item>
+                </predicates>
+                <resourceIf type="gameMechanics.elements.resources.ResourceVariable">
+                    <hideText>true</hideText>
+                    <variable href="/Mechanics/Spells/Bard63/Abilities/DriveResource/Drive.(VariableResource).xdb" />
+                    <sub>0</sub>
+                </resourceIf>
+                <resourceElse type="gameMechanics.elements.resources.ResourceDressItem">
+                    <slot>AMMO</slot>
+                    <count>5</count>
+                </resourceElse>
+            </Item>
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+                <finishImpacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="AoEStunBuffAttacher.(BuffResource).xdb" />
+                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
+                                <mul>0.5</mul>
+                                <mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
+                                    <dressSlot>AMMO</dressSlot>
+                                </mulCalcer>
+                                <sum var="time" />
+                            </mulCalcer>
+                        </durationScaler>
+                    </Item>
+                </finishImpacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                <data href="TeleportVisual.(ClientData).xdb" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <speed>25</speed>
+    <radius>15</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

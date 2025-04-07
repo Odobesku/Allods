@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>225084</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/Spells/TepPyramidBosses/Spy.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </onEnter>
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ResetSpawnTable">
+                            <table href="/Mechanics/RaidInstances/UmoirRaid/7_SealBreakerBoss/Sealbreaker.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                        </Item>
+                        <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                            <variable href="RitualPhase.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                            <summand>-1</summand>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                            <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                                    </impacts>
+                                    <spawnResource href="/Mechanics/RaidInstances/UmoirRaid/7_SealBreakerBoss/RitualPhase.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>RDoor1</scriptID>
+                        <map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                            <visualState>1</visualState>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>RDoor2</scriptID>
+                        <map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                            <visualState>1</visualState>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="/Mechanics/Spells/TepPyramidBosses/Spy.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/UmoirRaid/Voice/VoiceNotice.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </predicates>
+                            <elseImpacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/RaidInstances/UmoirRaid/Voice/VoiceNotice.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                        <multiplier>7</multiplier>
+                                    </durationScaler>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                                            <value>1</value>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                    <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                    <data href="/Mechanics/RaidInstances/UmoirRaid/Voice/TD6.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </elseImpacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/RaidInstances/UmoirRaid/Disabler.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="StartPhase.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.HealthTrigger">
+            <healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
+                <multiplier>0.01</multiplier>
+            </healthOn>
+            <impactsOn>
+                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                    <impactsResource href="/Mechanics/RaidInstances/UmoirRaid/7_SealBreakerBoss/Win.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.LifeGuard">
+            <level>0.0099</level>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+            </actions>
+            <rooted>true</rooted>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectMobStatQuality">
+            <quality href="/Mechanics/RaidInstances/UmoirRaid/7_SealBreakerBoss/SealBreaker.(MobStatQuality).xdb#xpointer(/gameMechanics.world.mob.MobStatQuality)" />
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>243356</resourceId>
+        <isPrototype>true</isPrototype>
+        <Variables>
+            <duration>45000</duration>
+        </Variables>
+    </Header>
+    <image href="/Interface/Icons/Equipment/Mace/MaceNewbie.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectAddContextActions">
+            <actions>
+                <Item hrefvar="spell" />
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="GoblinCarrierBuff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="GoblinCarrierBuff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <anyRank>false</anyRank>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectTransportChangeHandler">
+            <impactsExit>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff hrefvar="buff" />
+                    <anyRank>false</anyRank>
+                </Item>
+            </impactsExit>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>0.35</coeff>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EventTrigger">
+            <conditionalEvents>
+                <Item>
+                    <obj>gameMechanics.elements.events.EventSpellStarted</obj>
+                    <predicate type="gameMechanics.elements.predicates.PredicateStartedSpellNotInGroup">
+                        <group href="/Mechanics/Ships/Astrolabe/AstrolabeSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                    </predicate>
+                </Item>
+            </conditionalEvents>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactSendGeneralError">
+                    <cause>InterruptedByOffence</cause>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff hrefvar="buff" />
+                    <anyRank>false</anyRank>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <duration var="duration" />
+    <isStackable>false</isStackable>
+    <stackLimit>1</stackLimit>
+    <isGradual>false</isGradual>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <isMultiple>false</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <isClientReplicated>true</isClientReplicated>
+    <groups>
+        <Item href="Buff_Good_Group.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

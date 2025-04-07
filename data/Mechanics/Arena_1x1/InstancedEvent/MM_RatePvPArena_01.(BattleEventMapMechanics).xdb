@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.battleground.BattleEventMapMechanics>
+    <Header>
+        <resourceId>253373</resourceId>
+    </Header>
+    <score href="Bet.(BattleEventAchievementResource).xdb" />
+    <mechanicsType>BATTLEGROUND</mechanicsType>
+    <map href="/Maps/PvPArena01/MapResource.xdb" />
+    <waitBuff href="/Mechanics/InstancedEventResource/RatePvPArena/Arena_wait.(BuffResource).xdb" />
+    <impactsOnInit></impactsOnInit>
+    <impactsOnStart>
+        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+            <spawn>
+                <scriptID>Blue_Door_01</scriptID>
+                <map href="/Maps/PvPArena01/MapResource.xdb" />
+            </spawn>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+            <spawn>
+                <scriptID>Red_Door_01</scriptID>
+                <map href="/Maps/PvPArena01/MapResource.xdb" />
+            </spawn>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+            <impacts>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/InstancedEventResource/RatePvPArena/StopMount.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+    </impactsOnStart>
+    <impactsOnFinish>
+        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+                            <groups>
+                                <Item href="/Mechanics/Spells/Groups/SpectatorSpells.(ActionGroup).xdb" />
+                            </groups>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                    <delay>20000</delay>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                            <destination type="gameMechanics.map.destination.DestinationLocator">
+                                                <locator>
+                                                    <scriptID>Tournament_Start</scriptID>
+                                                    <map href="/Maps/PvP_Tournament/MapResource.xdb" />
+                                                </locator>
+                                            </destination>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="DisableSpell.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+    </impactsOnFinish>
+    <startAnnounce href="/Mechanics/InstancedEventResource/MM_BG01/StartAnnounce.(ClientData).xdb" />
+    <impactsOnAvatars>
+        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+            <predicates>
+                <Item type="gameMechanics.constructor.basicElements.PredicateTrue" />
+            </predicates>
+            <impactsIf>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/InstancedEventResource/CommonMechanics/GoodPVP.(BuffResource).xdb" />
+                </Item>
+            </impactsIf>
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+            <predicates>
+                <Item type="gameMechanics.battleground.map.PredicateBattleMemberMark">
+                    <mark href="/Maps/PvPArena01/Marks/Blue.(BattlegroundPlayerSpawnPlace).xdb" />
+                </Item>
+            </predicates>
+            <impactsIf>
+                <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                    <variable href="/Mechanics/InstancedEventResource/RatePvPArena/Blue_live.(MapVariableResource).xdb" />
+                    <summand>1</summand>
+                </Item>
+            </impactsIf>
+            <impactsElse>
+                <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                    <variable href="/Mechanics/InstancedEventResource/RatePvPArena/Red_Live.(MapVariableResource).xdb" />
+                    <summand>1</summand>
+                </Item>
+            </impactsElse>
+        </Item>
+        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+            <buff href="/Mechanics/InstancedEventResource/RatePvPArena/Arena_Revive.(BuffResource).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+            <group href="/Mechanics/Spells/Groups/PvPRemoveBuff.(ActionGroup).xdb" />
+        </Item>
+    </impactsOnAvatars>
+    <assignWinnerOnDraw>false</assignWinnerOnDraw>
+    <impactsOnEarlyExit>
+        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+            <buff href="/Mechanics/InstancedEventResource/CommonMechanics/GoodPVP.(BuffResource).xdb" />
+        </Item>
+        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+            <buff href="/Mechanics/InstancedEventResource/MM_BG01/LeaverDebuff.(BuffResource).xdb" />
+            <durationScaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.TargetBuffStackCountScaler">
+                        <buff href="/Mechanics/InstancedEventResource/MM_BG01/LeaverDebuffCounter.(BuffResource).xdb" />
+                        <anyRank>true</anyRank>
+                        <onlyFromMaster>true</onlyFromMaster>
+                        <mul>5</mul>
+                        <sum>1</sum>
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.LinearScaler">
+                        <multiplier>0.5</multiplier>
+                    </Item>
+                </scalers>
+            </durationScaler>
+        </Item>
+    </impactsOnEarlyExit>
+    <impactsOnWinners>
+        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+            <buff href="/Mechanics/InstancedEventResource/CommonMechanics/GoodPVP.(BuffResource).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+            <buff href="DisableSpell.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            <casterAddresseeFinder />
+            <anyRank>true</anyRank>
+            <allowOverrideCaster>false</allowOverrideCaster>
+        </Item>
+    </impactsOnWinners>
+    <impactsOnLosers>
+        <Item type="gameMechanics.elements.impacts.ImpactLogAvatarStats">
+            <resource href="/Mechanics/Arena_1x1/Rules/MM_Arena1x1_Event.(RuleResource).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+            <buff href="/Mechanics/InstancedEventResource/CommonMechanics/GoodPVP.(BuffResource).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+            <buff href="DisableSpell.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            <casterAddresseeFinder />
+            <anyRank>true</anyRank>
+            <allowOverrideCaster>false</allowOverrideCaster>
+        </Item>
+    </impactsOnLosers>
+    <kickOnFinishDelay>60000</kickOnFinishDelay>
+    <entrances>
+        <Item>
+            <mark href="/Maps/PvPArena01/Marks/Blue.(BattlegroundPlayerSpawnPlace).xdb" />
+            <entrances>
+                <Item type="mapLoader.pointer.MapPointerPos">
+                    <pointer>
+                        <scriptID>Blue_Rate</scriptID>
+                        <map href="/Maps/PvPArena01/MapResource.xdb" />
+                    </pointer>
+                </Item>
+            </entrances>
+        </Item>
+        <Item>
+            <mark href="/Maps/PvPArena01/Marks/Red.(BattlegroundPlayerSpawnPlace).xdb" />
+            <entrances>
+                <Item type="mapLoader.pointer.MapPointerPos">
+                    <pointer>
+                        <scriptID>Red_Rate</scriptID>
+                        <map href="/Maps/PvPArena01/MapResource.xdb" />
+                    </pointer>
+                </Item>
+            </entrances>
+        </Item>
+    </entrances>
+    <prepareTime>
+        <second>30</second>
+    </prepareTime>
+    <duration>
+        <minute>10</minute>
+    </duration>
+    <achievements>
+        <Item>
+            <showInTable>true</showInTable>
+            <resource href="/Mechanics/InstancedEventResource/Achievements/Kills.(BattleEventAchievementResource).xdb" />
+        </Item>
+        <Item>
+            <showInTable>true</showInTable>
+            <resource href="/Mechanics/InstancedEventResource/Achievements/Deaths.(BattleEventAchievementResource).xdb" />
+        </Item>
+        <Item>
+            <showInTable>true</showInTable>
+            <resource href="/Mechanics/InstancedEventResource/Achievements/TotalDamageDone.(BattleEventAchievementResource).xdb" />
+        </Item>
+        <Item>
+            <showInTable>true</showInTable>
+            <resource href="/Mechanics/InstancedEventResource/Achievements/TotalHealDone.(BattleEventAchievementResource).xdb" />
+        </Item>
+        <Item>
+            <showInTable>true</showInTable>
+            <resource href="/Mechanics/InstancedEventResource/Achievements/RatingScoreChange.(BattleEventAchievementResource).xdb" />
+        </Item>
+    </achievements>
+</gameMechanics.battleground.BattleEventMapMechanics>

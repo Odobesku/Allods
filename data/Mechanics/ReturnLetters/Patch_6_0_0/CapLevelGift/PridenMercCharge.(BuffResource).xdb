@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>249096</resourceId>
+    </Header>
+    <image href="/Interface/Icons/Spells/Warrior/WarriorCharge.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="/Spells/VisScripts/Warrior/Charge.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Charge">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ScaledPhysicalWeaponDamage">
+                    <impactsOnHitTarget>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/Spells/CommonBuffs/KnockDown/BuffKnockDown.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsOnHitTarget>
+                    <avgDamage>5</avgDamage>
+                </Item>
+            </impacts>
+            <buff href="PridenMercCharge.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            <speedFactor>3</speedFactor>
+            <predicate type="gameMechanics.elements.predicates.PredicateReachTarget" />
+            <pathChecker type="space.pathfinding.pathChecker.PathDeviationLimited">
+                <angle>0.5236</angle>
+            </pathChecker>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToSpellFromGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/MovementImpairingSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToBuffs">
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/MovementImpairingSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                    </groups>
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffInterceptor">
+            <impactsOnAttach>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="PridenMercCharge.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <anyRank>false</anyRank>
+                </Item>
+            </impactsOnAttach>
+            <predicates>
+                <Item type="gameMechanics.constructor.basicElements.PredicateGenericNot">
+                    <predicate type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                        <groups>
+                            <Item href="/Mechanics/Spells/Groups/Silence.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                        </groups>
+                    </predicate>
+                </Item>
+                <Item type="gameMechanics.constructor.basicElements.PredicateGenericOr">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                            <groups>
+                                <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                            </groups>
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                            <groups>
+                                <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs_IgnoreWill.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                            </groups>
+                        </Item>
+                    </predicates>
+                </Item>
+            </predicates>
+        </Item>
+    </effects>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

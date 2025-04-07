@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>218837</resourceId>
+    </Header>
+    <Name href="Buff_Name.txt" />
+    <Description href="Buff_Desc.txt" />
+    <image href="/Interface/Icons/Spells/Stalker/ShotCheapUpgrade.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="/Spells/VisScripts/Warrior/Taunt.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectVariable">
+            <resource href="/Mechanics/Variables/StalkerTaunt.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+            <impactsOnMin>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOnMin>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectStackChangeTrigger">
+            <impactsOnIncrease>
+                <Item type="gameMechanics.elements.impacts.ImpactIncrementBuffDuration">
+                    <buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <delta type="gameMechanics.elements.calcers.FloatData">
+                        <value>2500</value>
+                    </delta>
+                </Item>
+            </impactsOnIncrease>
+            <impactsOnDecrease>
+                <Item type="gameMechanics.constructor.basicElements.ImpactNull" />
+            </impactsOnDecrease>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AbonentLostWatcher">
+            <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDamageTrigger">
+            <eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.offender.PredicateOffenderIsOwner" />
+            </predicates>
+            <impacts>
+                <casterToTarget>
+                    <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                        <variable href="/Mechanics/Variables/StalkerTaunt.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                        <summand>-1</summand>
+                    </Item>
+                </casterToTarget>
+            </impacts>
+            <scaleImpactsByDamage>true</scaleImpactsByDamage>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AbonentLostWatcher">
+            <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="Buff_02_01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Buff_02_01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.NotStackableEffects">
+            <effects>
+                <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+                    <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                        <coeff>-0.5</coeff>
+                    </scaler>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <duration>5000</duration>
+    <isStackable>true</isStackable>
+    <stackLimit>3</stackLimit>
+    <isGradual>false</isGradual>
+    <isHelpful>false</isHelpful>
+    <isDetachableOnWill>false</isDetachableOnWill>
+    <isMultiple>false</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <isClientReplicated>true</isClientReplicated>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Taunt.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

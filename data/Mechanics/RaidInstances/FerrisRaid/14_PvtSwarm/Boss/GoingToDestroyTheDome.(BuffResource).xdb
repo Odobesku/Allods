@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>221771</resourceId>
+    </Header>
+    <Name href="GoingToDestroyTheDome.(BuffResource).Name.txt" />
+    <Description href="GoingToDestroyTheDome.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Modifiers/AngerAstral.(UISingleTexture).xdb" />
+    <visScript href="DestroyingDome.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Rotate</Item>
+                <Item>Move</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DisableLocalEvade" />
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                            <data href="DomeToBeDestroyed.(ClientData).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="ChargeTheAvatar/ChargedAvatar_Instable.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="ChargeTheAvatar/ChargedAvatar_Stable.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="ChargeTheDrone/DiArderCorruption.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="DomeDestruction.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="/Mechanics/RaidInstances/FerrisRaid/14_PvtSwarm/Drone/Drone.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>500</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactCaseGeneric">
+                            <cases>
+                                <Item>
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                            <buff href="DomesDestroyed.(BuffResource).xdb" />
+                                            <range>
+                                                <min>1</min>
+                                                <max>1</max>
+                                            </range>
+                                        </Item>
+                                    </predicates>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
+                                            <device>
+                                                <scriptID>Dome_1_Damaged</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </device>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                            <spawn>
+                                                <scriptID>Dome_1</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </spawn>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                                    <projectileData>
+                                                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                        </moveType>
+                                                        <resource href="/Mechanics/RaidInstances/FerrisRaid/14_PvtSwarm/DefensiveDome/DomeBreaks_SM.(ProjectileResource).xdb" />
+                                                    </projectileData>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                            <spawn>
+                                                <scriptID>14_DiArder</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </spawn>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                                            <data href="/Mechanics/RaidInstances/FerrisRaid/Voice/14_PvtSwarm/40_DiAr_Dome1.(ClientData).xdb" />
+                                                                        </Item>
+                                                                    </impacts>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="/Mechanics/RaidInstances/FerrisRaid/Voice/VoiceCooldown.(BuffResource).xdb" />
+                                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                                <multiplier>10000</multiplier>
+                                                            </durationScaler>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item>
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                            <buff href="DomesDestroyed.(BuffResource).xdb" />
+                                            <range>
+                                                <min>2</min>
+                                                <max>2</max>
+                                            </range>
+                                        </Item>
+                                    </predicates>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
+                                            <device>
+                                                <scriptID>Dome_2_Damaged</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </device>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                            <spawn>
+                                                <scriptID>Dome_2</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </spawn>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                                    <projectileData>
+                                                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                        </moveType>
+                                                        <resource href="/Mechanics/RaidInstances/FerrisRaid/14_PvtSwarm/DefensiveDome/DomeBreaks_SM.(ProjectileResource).xdb" />
+                                                    </projectileData>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                            <spawn>
+                                                <scriptID>14_DiArder</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </spawn>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                                            <data href="/Mechanics/RaidInstances/FerrisRaid/Voice/14_PvtSwarm/41_DiAr_Dome2.(ClientData).xdb" />
+                                                                        </Item>
+                                                                    </impacts>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="/Mechanics/RaidInstances/FerrisRaid/Voice/VoiceCooldown.(BuffResource).xdb" />
+                                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                                <multiplier>10000</multiplier>
+                                                            </durationScaler>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item>
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                            <buff href="DomesDestroyed.(BuffResource).xdb" />
+                                            <range>
+                                                <min>3</min>
+                                                <max>3</max>
+                                            </range>
+                                        </Item>
+                                    </predicates>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
+                                            <device>
+                                                <scriptID>Dome_3_Damaged</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </device>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                            <spawn>
+                                                <scriptID>Dome_3</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </spawn>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                                    <projectileData>
+                                                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                        </moveType>
+                                                        <resource href="/Mechanics/RaidInstances/FerrisRaid/14_PvtSwarm/DefensiveDome/DomeBreaks_SM.(ProjectileResource).xdb" />
+                                                    </projectileData>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                            <spawn>
+                                                <scriptID>14_DiArder</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </spawn>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                                            <data href="/Mechanics/RaidInstances/FerrisRaid/Voice/14_PvtSwarm/42_DiAr_Dome3.(ClientData).xdb" />
+                                                                        </Item>
+                                                                    </impacts>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="/Mechanics/RaidInstances/FerrisRaid/Voice/VoiceCooldown.(BuffResource).xdb" />
+                                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                                <multiplier>10000</multiplier>
+                                                            </durationScaler>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </cases>
+                        </Item>
+                    </impactsOn>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>7000</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactCaseGeneric">
+                            <cases>
+                                <Item>
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                            <buff href="DomesDestroyed.(BuffResource).xdb" />
+                                            <range>
+                                                <min>1</min>
+                                                <max>1</max>
+                                            </range>
+                                        </Item>
+                                    </predicates>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                            <spawn>
+                                                <scriptID>Dome_1</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </spawn>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                                    <projectileData>
+                                                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                        </moveType>
+                                                        <resource href="/Mechanics/RaidInstances/FerrisRaid/14_PvtSwarm/DefensiveDome/DomeBreaks.(ProjectileResource).xdb" />
+                                                    </projectileData>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item>
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                            <buff href="DomesDestroyed.(BuffResource).xdb" />
+                                            <range>
+                                                <min>2</min>
+                                                <max>2</max>
+                                            </range>
+                                        </Item>
+                                    </predicates>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                            <spawn>
+                                                <scriptID>Dome_2</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </spawn>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                                    <projectileData>
+                                                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                        </moveType>
+                                                        <resource href="/Mechanics/RaidInstances/FerrisRaid/14_PvtSwarm/DefensiveDome/DomeBreaks.(ProjectileResource).xdb" />
+                                                    </projectileData>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                    <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                                    <data href="/Mechanics/RaidInstances/FerrisRaid/Voice/14_PvtSwarm/10_DomeDestroyed2.(ClientData).xdb" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="/Mechanics/RaidInstances/FerrisRaid/Voice/VoiceCooldown.(BuffResource).xdb" />
+                                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                        <multiplier>10000</multiplier>
+                                                    </durationScaler>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item>
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                            <buff href="DomesDestroyed.(BuffResource).xdb" />
+                                            <range>
+                                                <min>3</min>
+                                                <max>3</max>
+                                            </range>
+                                        </Item>
+                                    </predicates>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                            <spawn>
+                                                <scriptID>Dome_3</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </spawn>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                                    <projectileData>
+                                                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                        </moveType>
+                                                        <resource href="/Mechanics/RaidInstances/FerrisRaid/14_PvtSwarm/DefensiveDome/DomeBreaks.(ProjectileResource).xdb" />
+                                                    </projectileData>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                    <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                                    <data href="/Mechanics/RaidInstances/FerrisRaid/Voice/14_PvtSwarm/11_DomeDestroyed3.(ClientData).xdb" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="/Mechanics/RaidInstances/FerrisRaid/Voice/VoiceCooldown.(BuffResource).xdb" />
+                                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                        <multiplier>10000</multiplier>
+                                                    </durationScaler>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </cases>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                            <spell href="Impulse/Impulse.(SpellSingleTarget).xdb" />
+                            <duration>
+                                <second>10</second>
+                            </duration>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                            <spell href="SplittingStrike/SplittingStrike.(SpellArea).xdb" />
+                            <duration>
+                                <second>5</second>
+                            </duration>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="DomeDestruction.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsOn>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DamageZeroSuppressor" />
+    </effects>
+    <duration>8000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

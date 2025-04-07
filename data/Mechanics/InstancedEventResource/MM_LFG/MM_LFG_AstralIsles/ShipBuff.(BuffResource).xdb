@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>241438</resourceId>
+    </Header>
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectMarkedImpacts">
+            <mark href="/Mechanics/Ships/Hangar/ExitHangar.(MarkResource).xdb" />
+            <exclusivity>FirstLevel</exclusivity>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactStartQuiz">
+                    <question href="/Mechanics/Ships/Rudder/LeaveIslandQuiz.(Question).xdb" />
+                    <participants type="gameMechanics.elements.addresseeFinders.AddressesCalcerShipBounds">
+                        <shipFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                    </participants>
+                    <resultsHandler type="gameMechanics.elements.common.SameResultsHandler">
+                        <impactsOnSuccess>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                                <predicates>
+                                    <Item type="gameMechanics.map.instance.astralIsland.PredicateOnAstralIsland" />
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                                    <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                                        <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderMapHead" />
+                                        <impacts>
+                                            <Item type="gameMechanics.map.instance.astralIsland.ImpactSetTimeToCollapse">
+                                                <calcer type="gameMechanics.elements.calcers.FloatData">
+                                                    <value>0</value>
+                                                </calcer>
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </impactsIf>
+                            </Item>
+                        </impactsOnSuccess>
+                        <impactsOnFail>
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.ShipDistributor" />
+                                <data href="/Mechanics/GameRoot/LFG/VoteResult.(ClientData).xdb" />
+                            </Item>
+                        </impactsOnFail>
+                        <calcers>
+                            <longEntries>
+                                <Item>
+                                    <name>choice</name>
+                                    <calcer type="gameMechanics.elements.calcers.LongData">
+                                        <value>1</value>
+                                    </calcer>
+                                </Item>
+                            </longEntries>
+                        </calcers>
+                    </resultsHandler>
+                    <uniqueCasterQuestion>true</uniqueCasterQuestion>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <isClientReplicated>false</isClientReplicated>
+</gameMechanics.constructor.schemes.buff.BuffResource>

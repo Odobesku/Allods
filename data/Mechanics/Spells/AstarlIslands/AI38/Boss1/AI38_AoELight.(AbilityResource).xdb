@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>193604</resourceId>
+    </Header>
+    <name href="AI38_AoELight.(AbilityResource).Name.txt" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="SummonPool.(SummonPool).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+            </onLeave>
+            <effects>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="AI38_TankDamage.(BuffResource).xdb" />
+                                            </predicate>
+                                        </Item>
+                                    </predicates>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                                    <element>LIGHTNING</element>
+                                                    <damage>65</damage>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ImpactClientData">
+                                                    <data href="AI38_AoELight.(ClientData).xdb" />
+                                                </Item>
+                                            </impacts>
+                                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                                <predicates>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                                <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                                            </Item>
+                                                        </predicates>
+                                                    </Item>
+                                                </predicates>
+                                            </filter>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <tick>15000</tick>
+                    <initialDelay>10000</initialDelay>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="AI38_BossAdd01.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                    <spawnResource href="/Maps/AstralIsle38/SpawnTables/AI38_Boss01.(SpawnTable).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>241033</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/FireSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroupElement)" />
+        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/Magics.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <element>FIRE</element>
+    <Name href="Spell05.(SpellArea).Name.txt" />
+    <image href="/Interface/Icons/Spells/Mage/MageFireball.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Mage/FireballUpgrade.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="Spell05.(SpellArea).NameTemplate.txt" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>60</value>
+    </range>
+    <prepareDuration>2000</prepareDuration>
+    <immutablePrepareDuration>true</immutablePrepareDuration>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>10000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="Buff02.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.PureDamage">
+                <damage>1</damage>
+                <scaler type="gameMechanics.elements.scalers.TrivialScaler" />
+                <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                        <multiplier>0.5</multiplier>
+                    </mulCalcer>
+                </scalerTarget>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>25</speed>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+    <radius>6</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

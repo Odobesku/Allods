@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>214292</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
+    </groups>
+    <element>ASTRAL</element>
+    <Name href="Spell0.(SpellSingleTarget).Name.txt" />
+    <Description href="Spell0.(SpellSingleTarget).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value>25</value>
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>WeaponScalerSpeed</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Druid/DruidCallOfTheWild.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Druid/CallOfTheWild.(SpellVisScripts).xdb" />
+    <prepareDuration>0</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <isWorkOnDead>true</isWorkOnDead>
+    <ranks>
+        <Item href="Spell01.(SpellSingleTarget).xdb" />
+        <Item href="Spell02.(SpellSingleTarget).xdb" />
+        <Item href="Spell03.(SpellSingleTarget).xdb" />
+    </ranks>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration var="cd_duration" />
+        </cooldown>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceMana">
+                <mana>132</mana>
+            </Item>
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+                        <spell href="Spell01.(SpellSingleTarget).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.world.pet.PredicateHasPet" />
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+                        <spell href="Spell01.(SpellSingleTarget).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="Buff.(BuffResource).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.world.pet.ImpactDismissPet" />
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+                        <spell href="Spell01.(SpellSingleTarget).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellActivate">
+                        <effects>
+                            <Item type="gameMechanics.elements.effects.Switch">
+                                <impactsOn>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="Buff.(BuffResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="/Mechanics/Spells/Druid70/Spells/SummonPet/DeathSafe.(BuffResource).xdb" />
+                                    </Item>
+                                </impactsOn>
+                                <impactsOff>
+                                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+                                        <spell href="Spell01.(SpellSingleTarget).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                        <buff href="/Mechanics/Spells/Druid70/Spells/SummonPet/AggroBuff.(BuffResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                        <buff href="/Mechanics/Spells/Druid70/Spells/SummonPet/Buff.(BuffResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                        </predicates>
+                                        <impactsIf>
+                                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                <buff href="/Mechanics/Spells/Druid70/Spells/SummonPet/DeathSafe.(BuffResource).xdb" />
+                                            </Item>
+                                        </impactsIf>
+                                    </Item>
+                                </impactsOff>
+                            </Item>
+                        </effects>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

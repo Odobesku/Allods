@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>225106</resourceId>
+    </Header>
+    <Name href="Flare.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="Flare.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <prepareDuration>4000</prepareDuration>
+    <needLos>false</needLos>
+    <isAggro>false</isAggro>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>30000</duration>
+        </cooldown>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/RaidInstances/UmoirRaid/Voice/VoiceNotice.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </predicates>
+                <elseImpacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="/Mechanics/RaidInstances/UmoirRaid/Voice/VoiceNotice.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                            <multiplier>6</multiplier>
+                        </durationScaler>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                        <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                        <data href="/Mechanics/RaidInstances/UmoirRaid/Voice/TD9.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </elseImpacts>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                <radius>8</radius>
+                <affectGroup>Enemies</affectGroup>
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="FlareStun.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impacts>
+                <filter type="gameMechanics.world.creature.AvatarFilter" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                <data href="FlareStrike.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                <projectileData>
+                    <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                        <destination type="gameMechanics.map.destination.DestinationModified">
+                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                            <modifiers>
+                                <Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
+                            </modifiers>
+                        </destination>
+                    </moveType>
+                    <resource href="FlarePool.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                </projectileData>
+                <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

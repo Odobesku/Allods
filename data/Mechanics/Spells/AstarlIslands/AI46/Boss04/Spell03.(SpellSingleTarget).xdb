@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>185418</resourceId>
+    </Header>
+    <Name href="Spell03.(SpellSingleTarget).Name.txt" />
+    <Description href="Spell03.(SpellSingleTarget).Description.txt" />
+    <nameTemplate href="Spell03.(SpellSingleTarget).Name.txt" />
+    <descTemplate href="Spell03.(SpellSingleTarget).Description.txt" />
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>10000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+                                <level>1</level>
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateHealthHigher">
+                                <level>0.61</level>
+                            </Item>
+                        </predicates>
+                    </Item>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+                                <level>0.3</level>
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateHealthHigher">
+                                <level>0.1</level>
+                            </Item>
+                        </predicates>
+                    </Item>
+                </predicates>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="FazeFree.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/Spells/AstarlIslands/CommonSpells/ClobalCDBoss.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </predicates>
+            </Item>
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/Spells/AstarlIslands/CommonSpells/ClobalCDBoss.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                    <multiplier>3</multiplier>
+                </durationScaler>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                <projectileData>
+                    <moveType type="gameMechanics.world.projectile.MoveTypeDestination">
+                        <receiver>Caster</receiver>
+                        <to type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+                    </moveType>
+                    <resource href="Spell03.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                </projectileData>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

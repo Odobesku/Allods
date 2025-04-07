@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>188001</resourceId>
+    </Header>
+    <Name href="SummonDancer.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="SummonDancer.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <prepareDuration>4000</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>10000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="MegaAoe.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.RepeatedImpact">
+                <impact type="gameMechanics.elements.impacts.ImpactSummon">
+                    <destination type="gameMechanics.map.destination.DestinationModified">
+                        <destination type="gameMechanics.map.destination.RelativePos" />
+                        <modifiers>
+                            <Item type="gameMechanics.map.destination.modifier.ModifierTrail">
+                                <modifier type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                    <verticalRange min="0" max="0" />
+                                    <horizontalRange min="10" max="30" />
+                                </modifier>
+                            </Item>
+                        </modifiers>
+                    </destination>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactCopyAggroList" />
+                    </impacts>
+                    <object href="DancerAdd.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    <pool href="DancerAdd.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                </impact>
+                <count type="gameMechanics.elements.calcers.FloatData">
+                    <value>5</value>
+                </count>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                <delay>1000</delay>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="MegaAoe.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>190302</resourceId>
+    </Header>
+    <element>FIRE</element>
+    <Name href="Fire.(SpellArea)_Name.txt" />
+    <visualScripts href="AoEFire.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="Fire.(SpellArea)_Name.txt.template" />
+    <prepareDuration>7000</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>5000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="FireAOE.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateCreature" />
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </predicates>
+            </Item>
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                <buff href="FireAOE.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                <element>FIRE</element>
+                <damage>30</damage>
+                <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="Fire.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                <buff href="Frost.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>25</speed>
+    <shapeCenterPosition>Caster</shapeCenterPosition>
+    <radius>120</radius>
+    <needLosToTarget>true</needLosToTarget>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

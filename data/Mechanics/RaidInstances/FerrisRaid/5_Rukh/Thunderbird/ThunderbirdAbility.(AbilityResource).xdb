@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>221375</resourceId>
+    </Header>
+    <visualScript type="VisActionList">
+        <play>Simultaneously</play>
+        <elements>
+            <Item type="CreatureEffectsAction">
+                <visualEffects>
+                    <Item>
+                        <effectFx href="/Spells/FX/Spells/Rukh_ThunderBird_Body_FX_01.(VisObjectTemplate).xdb" />
+                        <effectAlias href="" />
+                        <scale>2</scale>
+                        <locator>Slot_BodyFX</locator>
+                        <offendTime />
+                        <offset y="0.25" z="-0.166" />
+                    </Item>
+                    <Item>
+                        <effectFx href="/Spells/FX/World/GlowStatic_Blue_06.(VisObjectTemplate).xdb" />
+                        <effectAlias href="" />
+                        <scale>7.5</scale>
+                        <locator>Slot_BodyFX</locator>
+                        <offendTime />
+                    </Item>
+                </visualEffects>
+            </Item>
+            <Item type="CreatureColorAction">
+                <colorValue>-10434305</colorValue>
+            </Item>
+        </elements>
+    </visualScript>
+    <effects>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="IonizedAir.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="IonizedAir_ChainLightnings.(BuffResource).xdb" />
+                </Item>
+            </onEnter>
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <effectsIf>
+                        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                    <projectileData>
+                                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                        </moveType>
+                                        <resource href="ElectroFieldHM.(ProjectileResource).xdb" />
+                                    </projectileData>
+                                    <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb" />
+                                </Item>
+                            </impacts>
+                            <tick>20000</tick>
+                            <initialDelay>10000</initialDelay>
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                                    <selector type="gameMechanics.tools.SelectorRandomNotLess">
+                                        <minIndex>1</minIndex>
+                                    </selector>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                                        <filters>
+                                            <Item type="gameMechanics.world.creature.AvatarFilter" />
+                                            <Item type="gameMechanics.world.creature.AliveFilter" />
+                                            <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                                <predicates>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.resources.ResourceAnyBuff">
+                                                            <buffs>
+                                                                <Item href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/ElementalSphere/FirePursuitTarget.(BuffResource).xdb" />
+                                                                <Item href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/ElementalSphere/LightningPursuitTarget.(BuffResource).xdb" />
+                                                                <Item href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/ElementalSphere/ShadowPursuitTarget.(BuffResource).xdb" />
+                                                            </buffs>
+                                                        </predicate>
+                                                    </Item>
+                                                </predicates>
+                                            </Item>
+                                        </filters>
+                                    </filter>
+                                    <impacts>
+                                        <Item>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                            <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                                                <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                                <offset>8</offset>
+                                                            </destination>
+                                                            <impacts>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/ElementalSphere/LightningSphere.(BuffResource).xdb" />
+                                                                </Item>
+                                                            </impacts>
+                                                            <traceDown>true</traceDown>
+                                                            <object href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/ElementalSphere/ElementalSphere.(MobWorld).xdb" />
+                                                            <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                            <tick>20000</tick>
+                            <initialDelay>20000</initialDelay>
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+                            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                                <coeff>-0.5</coeff>
+                            </scaler>
+                            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+                        </Item>
+                    </effectsIf>
+                    <effectsElse>
+                        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                    <projectileData>
+                                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                        </moveType>
+                                        <resource href="ElectroField.(ProjectileResource).xdb" />
+                                    </projectileData>
+                                    <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb" />
+                                </Item>
+                            </impacts>
+                            <tick>20000</tick>
+                            <initialDelay>10000</initialDelay>
+                        </Item>
+                    </effectsElse>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>5_Rukh</scriptID>
+                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/ThunderbirdResource.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.StackBuff">
+                            <buff href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/ElementalDefence.(BuffResource).xdb" />
+                            <delta type="gameMechanics.elements.calcers.FloatData">
+                                <value>-1</value>
+                            </delta>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.StackBuff">
+                            <buff href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/ElementalDefenceHM.(BuffResource).xdb" />
+                            <delta type="gameMechanics.elements.calcers.FloatData">
+                                <value>-1</value>
+                            </delta>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/ElementalSphere/ElementalSphere.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/ElementalSphere/LightningSphere.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Enlarge">
+            <factor>0.75</factor>
+        </Item>
+        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+            <conditionalImpacts>
+                <Item>
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/Wait.(BuffResource).xdb" />
+                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                <multiplier>4</multiplier>
+                            </durationScaler>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                            <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                            <mobs>
+                                                <Item href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/Firebird/Firebird.(MobWorld).xdb" />
+                                            </mobs>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                                            <spell href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/Firebird/FireCleave/FireCleave.(SpellSingleTarget).xdb" />
+                                            <duration>
+                                                <second>10</second>
+                                            </duration>
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                            <mobs>
+                                                <Item href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/ShadowBird/ShadowBird.(MobWorld).xdb" />
+                                            </mobs>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                                            <spell href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/ShadowBird/ShadowCleave/ShadowCleave.(SpellSingleTarget).xdb" />
+                                            <duration>
+                                                <second>10</second>
+                                            </duration>
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <conditions>
+                        <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                            <spells>
+                                <Item href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/Firebird/FireCleave/FireCleave.(SpellSingleTarget).xdb" />
+                                <Item href="ElectroCleave/ElectroCleave.(SpellSingleTarget).xdb" />
+                                <Item href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/ShadowBird/ShadowCleave/ShadowCleave.(SpellSingleTarget).xdb" />
+                            </spells>
+                        </Item>
+                    </conditions>
+                </Item>
+            </conditionalImpacts>
+            <stages>
+                <Item>Start</Item>
+            </stages>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectMobStatQuality">
+            <quality href="/Mechanics/RaidInstances/FerrisRaid/Other/Part2_Stats.(MobStatQuality).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                                    <value>10</value>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                    <spawn>
+                                        <scriptID>5_Rukh</scriptID>
+                                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                    </spawn>
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/ElementalDefenceHM.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsOn>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.5</coeff>
+            </scaler>
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

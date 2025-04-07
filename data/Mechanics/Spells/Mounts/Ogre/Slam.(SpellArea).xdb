@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>204733</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/CrowdControlSpells.xdb" />
+    </groups>
+    <Name href="Slam.(SpellArea).Name.txt" />
+    <Description href="Slam.(SpellArea).Description.txt" />
+    <image href="/Interface/Icons/Equipment/Boots/PlateOrcWarriorBoots.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Creatures/OgreMountSlam.(SpellVisScripts).xdb" />
+    <prepareDuration>700</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>180000</duration>
+            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mul>-0.0667</mul>
+                <mulCalcer type="gameMechanics.elements.calcers.CalcerMountFromGroupMaxLevel">
+                    <group href="/Mechanics/Mounts/Groups/Ogres12.(MountGroupResource).xdb" />
+                </mulCalcer>
+                <sum>1</sum>
+            </scaler>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMountFromGroupFeeded">
+                <group href="/Mechanics/Mounts/Groups/Ogres12.(MountGroupResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateMounted">
+                <specificGroup href="/Mechanics/Mounts/Groups/Ogres12.(MountGroupResource).xdb" />
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/Mounts/Prototypes/AntiNormalMountCC.(BuffResource).xdb" />
+                </predicate>
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="OgreSlam.(BuffResource).xdb" />
+                <impactsOnAttach>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="/Mechanics/Mounts/Prototypes/AntiNormalMountCC.(BuffResource).xdb" />
+                    </Item>
+                </impactsOnAttach>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <radius>10</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

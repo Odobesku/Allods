@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>199685</resourceId>
+        <isPrototype>true</isPrototype>
+        <Variables>
+            <damage />
+            <value />
+        </Variables>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/DragonRelic5.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/MeleeAttacks.xdb" />
+    </groups>
+    <element>PHYSICAL</element>
+    <image href="/Interface/Icons/Spells/Druid/DruidPetGetItUpgrade.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Druid/PetGetItUpgrade.(SpellVisScripts).xdb" />
+    <nameTemplate href="Spell_Name.txt.template" />
+    <descTemplate href="Spell_Desc.txt.template" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <level>1</level>
+    <prepareDuration>0</prepareDuration>
+    <immutablePrepareDuration>false</immutablePrepareDuration>
+    <needLos>true</needLos>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <isAggro>true</isAggro>
+    <replaceLowRanks>true</replaceLowRanks>
+    <isWorkOnDead>false</isWorkOnDead>
+    <ranks>
+        <Item href="/Mechanics/Spells/DruidV2/PetGetItUpgrade/Spell01.xdb" />
+        <Item href="/Mechanics/Spells/DruidV2/PetGetItUpgrade/Spell02.xdb" />
+        <Item href="/Mechanics/Spells/DruidV2/PetGetItUpgrade/Spell03.xdb" />
+    </ranks>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>true</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>false</ignoreGlobalCooldown>
+    <launchWhenReady>false</launchWhenReady>
+    <needInFront>true</needInFront>
+    <mechanics>
+        <cooldown>
+            <stage>Launch</stage>
+            <duration>-1</duration>
+        </cooldown>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceMana">
+                <hideText>false</hideText>
+                <mana>5</mana>
+                <scaleByWeaponSpeed>false</scaleByWeaponSpeed>
+                <source>Mainhand</source>
+            </Item>
+        </casterResources>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactsIf">
+                <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromAddressee">
+                    <hideText>false</hideText>
+                    <buff href="/Mechanics/Spells/DruidV2/BuffAfterKnockDown/Buff01.xdb" />
+                    <from type="gameMechanics.elements.addresseeFinders.AddresseeFinderCasterMaster" />
+                    <anyRank>true</anyRank>
+                </predicate>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                        <scaleByDamageImpactsOnHit>false</scaleByDamageImpactsOnHit>
+                        <threatMultiplier>0.5</threatMultiplier>
+                        <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                            <scalers>
+                                <Item type="gameMechanics.elements.scalers.WeaponScaler" />
+                                <Item type="gameMechanics.elements.scalers.LinearScaler">
+                                    <multiplier>1.8333</multiplier>
+                                </Item>
+                            </scalers>
+                        </scaler>
+                        <minDamage var="damage" />
+                        <maxDamage var="damage" />
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="/Mechanics/Spells/DruidV2/OpenWounds/Buff01.xdb" />
+                        <allowOverrideCaster>false</allowOverrideCaster>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="/Mechanics/Spells/DruidV2/BuffAfterKnockDown/Buff01.xdb" />
+                        <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCasterMaster" />
+                        <anyRank>false</anyRank>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                        <scaleByDamageImpactsOnHit>false</scaleByDamageImpactsOnHit>
+                        <threatMultiplier>0.5</threatMultiplier>
+                        <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                        <minDamage var="damage" />
+                        <maxDamage var="damage" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                        <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                            <value var="value" />
+                        </chanceCalcer>
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/Mechanics/Spells/DruidV2/OpenWounds/Buff01.xdb" />
+                                <allowOverrideCaster>false</allowOverrideCaster>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>0</speed>
+    <isAE>false</isAE>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

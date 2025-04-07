@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>242473</resourceId>
+    </Header>
+    <Name href="WipeKeysWarning.(BuffResource).Name.txt" />
+    <Description href="WipeKeysWarning.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Misc/Keys/IconAstralKey.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+                    <currency href="WipeKeysWarning.(AlternativeCurrency).xdb" />
+                    <sumCalcer type="gameMechanics.elements.calcers.FloatData">
+                        <value>1</value>
+                    </sumCalcer>
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+                    <currency href="WipeKeysWarning.(AlternativeCurrency).xdb" />
+                    <sumCalcer type="gameMechanics.elements.calcers.FloatData">
+                        <value>1</value>
+                    </sumCalcer>
+                    <multiplier>-1</multiplier>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AltCurrencyTrigger">
+            <currency href="/Mechanics/AlternativeCurrencies/AstralTicket.(AlternativeCurrency).xdb" />
+            <condition type="constructor.elements.LongLessOrEquals">
+                <value>14</value>
+            </condition>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="WipeKeysWarning.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.world.ship.elements.EffectMapChanged">
+            <executeOnAttach>true</executeOnAttach>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.map.instance.astralIsland.PredicateOnAstralIsland" />
+                    </predicates>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="WipeKeysWarning.(BuffResource).xdb" />
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb" />
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

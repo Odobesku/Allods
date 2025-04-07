@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>198654</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="Ability0.(AbilityResource).Name.txt" />
+    <description href="Ability0.(AbilityResource).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value var="coeff" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>FormulaPercent</formula>
+            </scaler>
+        </Item>
+        <Item>
+            <name>heal</name>
+            <value var="heal" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>FormulaPercent</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Misc/Itemmall/IMFatalityLotteryLife.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.BuffExtraEffects">
+            <buffs>
+                <Item href="/Mechanics/Spells/CommonBuffs/Aspects/Heal/Buff01.(BuffResource).xdb" />
+            </buffs>
+            <effects>
+                <Item type="gameMechanics.elements.effects.BuffExtraEffects">
+                    <buffs>
+                        <Item href="/Mechanics/Spells/Necromancer70/Abilities/ChannelWatcher/HealingChannel.(BuffResource).xdb" />
+                    </buffs>
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
+                            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                                <coeff var="coeff" />
+                            </scaler>
+                        </Item>
+                    </effects>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectMarkedImpacts">
+                    <mark href="Aoe.(MarkResource).xdb" />
+                    <instantiateOnUse>false</instantiateOnUse>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ScaledImpacts">
+                                            <scalerTarget type="gameMechanics.elements.scalers.TargetBuffStackCountScaler">
+                                                <buff href="/Mechanics/Spells/Necromancer70/Spells/Flow/Mult.(BuffResource).xdb" />
+                                                <anyRank>true</anyRank>
+                                                <onlyFromMaster>true</onlyFromMaster>
+                                                <mul>0.5</mul>
+                                                <sum>0.5</sum>
+                                            </scalerTarget>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                                    <radius>30</radius>
+                                                    <affectGroup>Group</affectGroup>
+                                                    <affectHolder>false</affectHolder>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactsUnderEnvelope">
+                                                            <spell href="/Mechanics/Spells/Necromancer70/Spells/Flow/Spell01.(SpellSingleTarget).xdb" />
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactHeal">
+                                                                    <heal var="heal" />
+                                                                    <scalerCaster type="gameMechanics.elements.scalers.ScalerIf">
+                                                                        <condition type="gameMechanics.elements.predicates.PredicateHasSpell">
+                                                                            <spell href="/Mechanics/Spells/Necromancer70/Spells/Flow/Spell03.(SpellSingleTarget).xdb" />
+                                                                        </condition>
+                                                                        <scalerIf type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                            <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                                                <externalCalcer href="/Mechanics/Spells/Necromancer70/Spells/Flow/Calcer3.(CalcerFloatResource).xdb" />
+                                                                            </mulCalcer>
+                                                                            <additionalMultiplier>
+                                                                                <scaler type="gameMechanics.elements.scalers.HealScaler" />
+                                                                            </additionalMultiplier>
+                                                                        </scalerIf>
+                                                                        <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                                                            <condition type="gameMechanics.elements.predicates.PredicateHasSpell">
+                                                                                <spell href="/Mechanics/Spells/Necromancer70/Spells/Flow/Spell02.(SpellSingleTarget).xdb" />
+                                                                            </condition>
+                                                                            <scalerIf type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                                                    <externalCalcer href="/Mechanics/Spells/Necromancer70/Spells/Flow/Calcer2.(CalcerFloatResource).xdb" />
+                                                                                </mulCalcer>
+                                                                                <additionalMultiplier>
+                                                                                    <scaler type="gameMechanics.elements.scalers.HealScaler" />
+                                                                                </additionalMultiplier>
+                                                                            </scalerIf>
+                                                                            <scalerElse type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                                                    <externalCalcer href="/Mechanics/Spells/Necromancer70/Spells/Flow/Calcer1.(CalcerFloatResource).xdb" />
+                                                                                </mulCalcer>
+                                                                                <additionalMultiplier>
+                                                                                    <scaler type="gameMechanics.elements.scalers.HealScaler" />
+                                                                                </additionalMultiplier>
+                                                                            </scalerElse>
+                                                                        </scalerElse>
+                                                                    </scalerCaster>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                    <targetsLimit>2</targetsLimit>
+                                                    <sorting type="gameMechanics.elements.targetSelector.sorts.SortByHealthInjury" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectMarkedImpacts">
+                    <mark href="AoeSmall.(MarkResource).xdb" />
+                    <instantiateOnUse>false</instantiateOnUse>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                            <radius>30</radius>
+                                            <affectGroup>Group</affectGroup>
+                                            <affectHolder>false</affectHolder>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsUnderEnvelope">
+                                                    <spell href="/Mechanics/Spells/Necromancer70/Spells/Restoration/Spell01.(SpellSingleTarget).xdb" />
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactHeal">
+                                                            <heal var="heal" />
+                                                            <scalerCaster type="gameMechanics.elements.scalers.ScalerIf">
+                                                                <condition type="gameMechanics.elements.predicates.PredicateHasSpell">
+                                                                    <spell href="/Mechanics/Spells/Necromancer70/Spells/Restoration/Spell03.(SpellSingleTarget).xdb" />
+                                                                </condition>
+                                                                <scalerIf type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                    <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                                        <externalCalcer href="/Mechanics/Spells/Necromancer70/Spells/Restoration/Calcer3.(CalcerFloatResource).xdb" />
+                                                                    </mulCalcer>
+                                                                    <additionalMultiplier>
+                                                                        <scaler type="gameMechanics.elements.scalers.HealScaler" />
+                                                                    </additionalMultiplier>
+                                                                </scalerIf>
+                                                                <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                                                    <condition type="gameMechanics.elements.predicates.PredicateHasSpell">
+                                                                        <spell href="/Mechanics/Spells/Necromancer70/Spells/Restoration/Spell02.(SpellSingleTarget).xdb" />
+                                                                    </condition>
+                                                                    <scalerIf type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                                            <externalCalcer href="/Mechanics/Spells/Necromancer70/Spells/Restoration/Calcer2.(CalcerFloatResource).xdb" />
+                                                                        </mulCalcer>
+                                                                        <additionalMultiplier>
+                                                                            <scaler type="gameMechanics.elements.scalers.HealScaler" />
+                                                                        </additionalMultiplier>
+                                                                    </scalerIf>
+                                                                    <scalerElse type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                                            <externalCalcer href="/Mechanics/Spells/Necromancer70/Spells/Restoration/Calcer1.(CalcerFloatResource).xdb" />
+                                                                        </mulCalcer>
+                                                                        <additionalMultiplier>
+                                                                            <scaler type="gameMechanics.elements.scalers.HealScaler" />
+                                                                        </additionalMultiplier>
+                                                                    </scalerElse>
+                                                                </scalerElse>
+                                                            </scalerCaster>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                            <targetsLimit>2</targetsLimit>
+                                            <sorting type="gameMechanics.elements.targetSelector.sorts.SortByHealthInjury" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <ranks>
+        <Item href="Ability001.xdb" />
+        <Item href="Ability002.xdb" />
+        <Item href="Ability003.xdb" />
+    </ranks>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

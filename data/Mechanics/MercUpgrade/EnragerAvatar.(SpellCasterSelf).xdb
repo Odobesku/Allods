@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>238704</resourceId>
+    </Header>
+    <Name href="EnragerAvatar.(SpellCasterSelf).Name.txt" />
+    <Description href="EnragerAvatar.(SpellCasterSelf).Description.txt" />
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateAssistantInhabits">
+                        <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Archer/Archer.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                        <ignoreOwner>true</ignoreOwner>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateAssistantInhabits">
+                        <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Berserker/Berserker.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                        <ignoreOwner>true</ignoreOwner>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateAssistantInhabits">
+                        <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Healer/Healer.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                        <ignoreOwner>true</ignoreOwner>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateAssistantInhabits">
+                        <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Tank/Tank.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                        <ignoreOwner>true</ignoreOwner>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateAssistantInhabits">
+                        <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Witcher/Witcher.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                        <ignoreOwner>true</ignoreOwner>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateAssistantInhabits">
+                        <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Wizard/Wizard.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                        <ignoreOwner>true</ignoreOwner>
+                    </Item>
+                </predicates>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                <predicate type="gameMechanics.elements.predicates.PredicateGreater">
+                    <lhs type="gameMechanics.elements.calcers.CalcerMin">
+                        <calcers>
+                            <Item type="gameMechanics.elements.calcers.FloatData">
+                                <value>3</value>
+                            </Item>
+                            <Item type="gameMechanics.map.variables.MapVariableValueCalcer">
+                                <resource href="mwAvatarCounter.(MapVariableResource).xdb" />
+                            </Item>
+                        </calcers>
+                    </lhs>
+                    <rhs type="gameMechanics.elements.calcers.CalcerSum">
+                        <summands>
+                            <Item type="gameMechanics.map.variables.MapVariableValueCalcer">
+                                <resource href="mwMercUpgraded.(MapVariableResource).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.map.variables.MapVariableValueCalcer">
+                                <resource href="mwMercCanBeUpgraded.(MapVariableResource).xdb" />
+                            </Item>
+                        </summands>
+                    </rhs>
+                </predicate>
+                <clientData href="MercCantUpgrade.(ClientData).xdb" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.map.instance.astralIsland.PredicateOnAstralIsland" />
+                    <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                        <zone href="/Maps/ProceduralDungeon01/Zones/GameHolder.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                    </Item>
+                </predicates>
+            </Item>
+        </casterConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceActiveItem" />
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                <variable href="mwMercCanBeUpgraded.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                <summand>1</summand>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

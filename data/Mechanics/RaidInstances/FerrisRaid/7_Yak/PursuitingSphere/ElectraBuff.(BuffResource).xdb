@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>220838</resourceId>
+    </Header>
+    <Name href="ElectraBuff.(BuffResource).Name.txt" />
+    <Description href="ElectraBuff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Modifiers/Fireball.(UISingleTexture).xdb" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Mobs/DC_1BossMindflayer_LightningDec_part.(VisObjectTemplate).xdb" />
+            <lockScale>true</lockScale>
+            <locator>Slot_Global</locator>
+        </Item>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/AOEAura_Electric_R5.(VisObjectTemplate).xdb" />
+            <lockScale>true</lockScale>
+            <locator>Slot_Global</locator>
+        </Item>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/ElectricInstability.(VisObjectTemplate).xdb" />
+            <lockScale>true</lockScale>
+            <scale>0.75</scale>
+            <locator>Slot_Global</locator>
+            <offset z="-0.25" />
+        </Item>
+    </visualEffects>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDamageTrigger">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.offender.PredicateIsForthright" />
+                <Item type="gameMechanics.elements.predicates.offender.PredicateNot">
+                    <predicate type="gameMechanics.elements.predicates.offender.PredicateIsAE" />
+                </Item>
+            </predicates>
+            <impacts>
+                <targetToOffender>
+                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="GotKickedBuff.(BuffResource).xdb" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </targetToOffender>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DisableLocalEvade" />
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactActivateAggro" />
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <effects>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <radius>5</radius>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                    <predicate type="gameMechanics.elements.resources.ResourceAnyBuff">
+                                                        <buffs>
+                                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/YakMount/MountRider_A.(BuffResource).xdb" />
+                                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/YakMount/MountRider_B.(BuffResource).xdb" />
+                                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/YakMount/MountRider_C.(BuffResource).xdb" />
+                                                        </buffs>
+                                                    </predicate>
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                    <data href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/YakBoss/LightningSphere/LightningHit.(ClientData).xdb" />
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                                    <element>LIGHTNING</element>
+                                                    <damage>6</damage>
+                                                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                                </Item>
+                                            </impactsIf>
+                                        </Item>
+                                    </impacts>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                                        <filters>
+                                            <Item type="gameMechanics.world.creature.AliveFilter" />
+                                            <Item type="gameMechanics.world.creature.CreatureFilter" />
+                                        </filters>
+                                    </filter>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <tick>400</tick>
+                    <initialDelay>400</initialDelay>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToSpellFromGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/CrowdControlSpells.xdb" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToBuffs">
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/Knockdowns.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/Fears.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/MovementImpairingSpells.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/CrowdControlSpells.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/Blinds.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/Stuns.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/Silence.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/Disarms.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs_IgnoreWill.(ActionGroup).xdb" />
+                    </groups>
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectNoAggroChecks" />
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Rotate</Item>
+            </actions>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/EvadeProtectedBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

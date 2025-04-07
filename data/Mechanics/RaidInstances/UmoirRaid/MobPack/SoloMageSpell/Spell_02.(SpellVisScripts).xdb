@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<Header>
+		<Variables>
+			<PreCastFX>/Spells/VisScripts/Prototypes2/PreCastFX.(CreatureVisActionResource).xdb#xpointer(/CreatureVisActionResource)</PreCastFX>
+			<FXPocket />
+			<FxOnHands>/Spells/FX/Spells/PocketSpellDisease01.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)</FxOnHands>
+			<HitPostFxOnTarget />
+		</Variables>
+	</Header>
+	<Description href="/Spells/VisScripts/Prototypes2/Projectile.txt" />
+	<actionBarStart type="VisActionList">
+		<playWhile type="CreatureEffectsAction">
+			<visualEffects>
+				<Item>
+					<effectFx href="/Spells/FX/Spells/ReadySpellDirect03DownAstral.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+					<scale>2</scale>
+				</Item>
+				<Item>
+					<effectFx href="/Spells/FX/Spells/PocketSpellDisease01.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+					<locator>Slot_Hand_L</locator>
+				</Item>
+				<Item>
+					<effectFx href="/Spells/FX/Spells/PocketSpellDisease01.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+					<locator>Slot_Hand_R</locator>
+				</Item>
+			</visualEffects>
+		</playWhile>
+		<elements>
+			<Item type="CreatureAnimationAction">
+				<mode>LOOP</mode>
+				<animations>
+					<Item>readySpellDirectedHands</Item>
+				</animations>
+				<channel>CHANNEL_KNOCKDOWN</channel>
+			</Item>
+		</elements>
+	</actionBarStart>
+	<wholeCasting type="VisActionList">
+		<visActionID />
+		<play>Simultaneously</play>
+		<playWhile />
+		<elements>
+			<Item type="CreatureEffectsAction">
+				<visActionID />
+				<visualEffects>
+					<Item>
+						<delay>0</delay>
+						<effectFx hrefvar="FxOnHands" />
+						<effectAlias href="" />
+						<effectAnimations>
+							<mode>DIE</mode>
+						</effectAnimations>
+						<fixPoint>false</fixPoint>
+						<scale>1</scale>
+						<fadeInTime>0</fadeInTime>
+						<fadeOutTime>0</fadeOutTime>
+						<locator>Slot_Hand_L</locator>
+						<member>Default_Member</member>
+						<locatorName />
+						<offendTime />
+					</Item>
+					<Item>
+						<delay>0</delay>
+						<effectFx hrefvar="FxOnHands" />
+						<effectAlias href="" />
+						<effectAnimations>
+							<mode>DIE</mode>
+						</effectAnimations>
+						<fixPoint>false</fixPoint>
+						<scale>1</scale>
+						<fadeInTime>0</fadeInTime>
+						<fadeOutTime>0</fadeOutTime>
+						<locator>Slot_Hand_R</locator>
+						<member>Default_Member</member>
+						<locatorName />
+						<offendTime />
+					</Item>
+				</visualEffects>
+			</Item>
+			<Item type="CreatureRunVisActionResource">
+				<resource hrefvar="PreCastFX" />
+			</Item>
+		</elements>
+	</wholeCasting>
+	<actionBarComplite type="VisActionList">
+		<elements>
+			<Item type="CreatureAnimationAction">
+				<animations>
+					<Item>spellCastDirected</Item>
+				</animations>
+				<channel>CHANNEL_KNOCKDOWN</channel>
+			</Item>
+		</elements>
+	</actionBarComplite>
+	<precastType>PRECAST_DEFAULT</precastType>
+	<launch type="CreatureProjectileAction">
+		<projectileFx href="/Spells/FX/Spells/AstralToxin.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+		<explosionFx href="/Spells/FX/Spells/HitManaBurn.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+		<pointOnCaster type="VisPointLocator">
+			<locator>Slot_Hand_L</locator>
+		</pointOnCaster>
+		<pointOnTarget type="VisPointLocator">
+			<locator>Slot_BodyFX</locator>
+		</pointOnTarget>
+	</launch>
+	<charged type="CreatureChargedSpellAction">
+		<visActionID />
+		<effectFx hrefvar="FXPocket" />
+		<fadeInTime>0</fadeInTime>
+		<fadeOutTime>0</fadeOutTime>
+	</charged>
+	<playOnTargets>
+		<skipHitAnimations>false</skipHitAnimations>
+		<skipBloodFx>false</skipBloodFx>
+		<specialAction type="CreatureRunVisActionResource">
+			<visActionID />
+			<alias href="" />
+			<resource hrefvar="HitPostFxOnTarget" />
+		</specialAction>
+	</playOnTargets>
+</SpellVisScripts>

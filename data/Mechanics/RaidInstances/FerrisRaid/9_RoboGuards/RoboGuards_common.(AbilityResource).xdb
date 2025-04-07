@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>222002</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>2000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="RoboGuard1/RoboGuard1.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="ClientData_voice/RoboGuards_EnterCombat.(ClientData).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>RoboGuards_combat_door</scriptID>
+                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.device.DoorSwitch">
+                            <switchType>Close</switchType>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="RoboGuard1/RoboGuard1.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="Abilities_cooldown.(BuffResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                        <ability href="RoboGuards_HM_common.(AbilityResource).xdb" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.AttachAbility">
+                                    <ability href="RoboGuards_HM_common.(AbilityResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                        <ability href="RoboGuards_SpawnBoss.(AbilityResource).xdb" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.AttachAbility">
+                                    <ability href="RoboGuards_SpawnBoss.(AbilityResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="RoboGuard1/RoboGuard1.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                        <ability href="RoboGuard1/RoboGuard1_Abilities1.(AbilityResource).xdb" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.AttachAbility">
+                                    <ability href="RoboGuard1/RoboGuard1_Abilities1.(AbilityResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="RoboGuard1/RoboGuard1.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                        <ability href="RoboGuard1/RoboGuard1_NoHM_death.(AbilityResource).xdb" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.AttachAbility">
+                                    <ability href="RoboGuard1/RoboGuard1_NoHM_death.(AbilityResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsElse>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                            <value>1</value>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="9_Roboguards_Room.(BuffResource).xdb" />
+                                        </Item>
+                                    </predicates>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                            <destination type="gameMechanics.map.destination.DestinationLocatorSpread">
+                                                <locator>
+                                                    <scriptID>FR_9_PS</scriptID>
+                                                    <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                                </locator>
+                                                <horizontalSpread>5</horizontalSpread>
+                                            </destination>
+                                            <finishImpacts>
+                                                <Item type="gameMechanics.elements.abilities.ImpactClearTimeLapseHistory" />
+                                            </finishImpacts>
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onEnter>
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>RoboGuards_combat_door</scriptID>
+                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.device.DoorSwitch">
+                            <switchType>Open</switchType>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                            <ability href="RoboGuards_HM_Abilities2.(AbilityResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactForgetAbility">
+                            <ability href="RoboGuards_HM_Abilities2.(AbilityResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                            <ability href="RoboGuards_HM_Abilities1.(AbilityResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactForgetAbility">
+                            <ability href="RoboGuards_HM_Abilities1.(AbilityResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                            <ability href="RoboGuards_HM_Abilities2.(AbilityResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactForgetAbility">
+                            <ability href="RoboGuards_HM_Abilities2.(AbilityResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Abilities_cooldown.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                            <ability href="RoboGuards_SpawnBoss.(AbilityResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactForgetAbility">
+                            <ability href="RoboGuards_SpawnBoss.(AbilityResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                            <ability href="RoboGuards_HM_common.(AbilityResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactForgetAbility">
+                            <ability href="RoboGuards_HM_common.(AbilityResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                                    <group href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                    <variable href="RoboGuards.(MapVariableResource).xdb" />
+                    <summand>1</summand>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Influence</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="RoboBoss/PortalDispell_Permission.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Influence</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="RoboBoss/PortalDispell_Permission.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Visibility</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="RoboBoss/PortalDispell_Permission.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Visibility</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="RoboBoss/PortalDispell_Permission.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="RoboBoss/PortalDispell_Permission.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="RoboBoss/PortalDispell_Permission.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Influence</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="RoboBoss/PortalShield.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Influence</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="RoboBoss/PortalShield.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Visibility</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="RoboBoss/PortalShield.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Visibility</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="RoboBoss/PortalShield.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="RoboBoss/PortalShield.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="RoboBoss/PortalShield.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.TickableAura">
+            <affectGroup>Friends</affectGroup>
+            <radius>15</radius>
+            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                        <mobs>
+                            <Item href="RoboGuard1/RoboGuard1.(MobWorld).xdb" />
+                            <Item href="RoboGuard2/RoboGuard2.(MobWorld).xdb" />
+                        </mobs>
+                    </Item>
+                </predicates>
+            </filter>
+            <predicates>
+                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="RoboGuards_disabled.(BuffResource).xdb" />
+                    </predicate>
+                </Item>
+                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="RoboBoss/RoboGuards_EnrageAura.(BuffResource).xdb" />
+                    </predicate>
+                </Item>
+            </predicates>
+            <impactsIn>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="Roboguards_Synergy.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsIn>
+            <impactsOut>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Roboguards_Synergy.(BuffResource).xdb" />
+                </Item>
+            </impactsOut>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

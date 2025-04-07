@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>209519</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Events/EventSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="HotCoalSelf.(SpellCasterSelf).Name.txt" />
+    <Description href="HotCoalSelf.(SpellCasterSelf).Description.txt" />
+    <image href="/Interface/Icons/Misc/Quest/HotEmber.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="BSLoreCoal.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <prepareDuration>1000</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <mechanics>
+        <cooldown>
+            <duration>10000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="HotCoalSelf.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="LoreBSElemental.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateIsRuleActive">
+                    <rule href="/Mechanics/Rules/NoFunItems.(RuleResource).xdb#xpointer(/gameMechanics.world.rules.RuleResource)" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceActiveItem" />
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                    <value>0.5</value>
+                </chanceCalcer>
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="HotCoalSelf.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impacts>
+                <impactsLose>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="LoreBSElemental.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsLose>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <iffPolicy>Friends</iffPolicy>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

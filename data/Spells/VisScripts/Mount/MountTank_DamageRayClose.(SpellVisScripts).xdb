@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<actionBarStart type="VisActionList">
+		<playWhile />
+		<elements>
+			<Item type="CreatureSetFlagAction">
+				<flagName>Flag_MountNeeded</flagName>
+				<timeOut>0.5</timeOut>
+			</Item>
+			<Item type="VisActionList">
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>Flag_Emote</flagName>
+				</playWhile>
+				<elements>
+					<Item type="VisActionDelay">
+						<time>500</time>
+					</Item>
+				</elements>
+			</Item>
+			<Item type="VisActionList">
+				<playWhile />
+				<elements>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<playWhile />
+						<elements>
+							<Item type="CreatureAnimationAction">
+								<mode>LOOP</mode>
+								<animations>
+									<Item>channelCastDirected</Item>
+								</animations>
+								<channelOverrideScript />
+								<advanced>
+									<backgroundAfterFirstKey>true</backgroundAfterFirstKey>
+									<stopIfMoved>true</stopIfMoved>
+									<eventPlaybackEnd>true</eventPlaybackEnd>
+									<waitRealEvent>WAIT_FROMFIRSTKEY</waitRealEvent>
+								</advanced>
+							</Item>
+							<Item type="VisActionList">
+								<play>Simultaneously</play>
+								<playWhile type="VisActionDelay">
+									<time>3000</time>
+								</playWhile>
+								<elements>
+									<Item type="CreatureChannelDirectAction">
+										<channelingFx href="/Spells/FX/Mobs/MountTank_Channel.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+										<fxLength>20</fxLength>
+										<startPoint type="VisPointLocator">
+											<locator>FROM_LOCATOR_NAME</locator>
+											<member>Mount</member>
+											<locatorName>Crystal</locatorName>
+										</startPoint>
+										<endPoint type="VisPointLocator">
+											<locator>Slot_FX</locator>
+											<member>Assaulter</member>
+										</endPoint>
+										<offendTime type="EffectOffendConstDelay">
+											<delay>300</delay>
+										</offendTime>
+										<multyTargetMode>Umbrella</multyTargetMode>
+										<secondaryTargetParams>
+											<channelingFx href="" />
+											<fxLength>20</fxLength>
+											<offendTime type="EffectOffendConstDelay" />
+										</secondaryTargetParams>
+									</Item>
+									<Item type="CreatureEffectsOnTarget">
+										<visualEffects>
+											<Item>
+												<effectFx href="/Spells/FX/Mobs/MountTank_Channel_Hit.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+												<scale>1.2</scale>
+												<locator>Slot_FX</locator>
+											</Item>
+										</visualEffects>
+									</Item>
+								</elements>
+							</Item>
+						</elements>
+					</Item>
+				</elements>
+			</Item>
+			<Item type="Sound3DAction">
+				<sound>
+					<project href="/SFX/Spells/Sounds.(FMODProject).xdb#xpointer(/FMODProject)" />
+					<name>spells/Engineer/Engineer_RailGun</name>
+				</sound>
+			</Item>
+		</elements>
+	</actionBarStart>
+	<launch />
+</SpellVisScripts>

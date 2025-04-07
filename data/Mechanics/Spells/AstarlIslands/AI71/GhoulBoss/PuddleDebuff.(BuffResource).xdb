@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>188437</resourceId>
+    </Header>
+    <Name href="PuddleDebuff.(BuffResource).Name.txt" />
+    <Description href="PuddleDebuff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Druid/DruidEnervatingConcoction.(UISingleTexture).xdb" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/OpTarget_Skull_Poison.(VisObjectTemplate).xdb" />
+            <lockScale>true</lockScale>
+            <scale>0.5</scale>
+            <locator>Slot_Global</locator>
+            <offset z="2.5" />
+        </Item>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/NecromancerCorrosiveAcidAbility.(VisObjectTemplate).xdb" />
+            <locator>Slot_Global</locator>
+        </Item>
+    </visualEffects>
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                            <ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                            <projectileData>
+                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
+                                <lifeLengthCapScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                    <multiplier>4</multiplier>
+                                </lifeLengthCapScaler>
+                                <resource href="PoisonPuddle.(ProjectileResource).xdb" />
+                            </projectileData>
+                            <pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
+                        </Item>
+                    </impacts>
+                    <elseImpacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                            <projectileData>
+                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
+                                <resource href="PoisonPuddle.(ProjectileResource).xdb" />
+                            </projectileData>
+                            <pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
+                        </Item>
+                    </elseImpacts>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+            <initialDelay>1000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="PuddleDebuffImmunity_Temporary.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <duration>6000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

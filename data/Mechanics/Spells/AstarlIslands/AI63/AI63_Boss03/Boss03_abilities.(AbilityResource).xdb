@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>187722</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>AI63_Boss03_FireWall</scriptID>
+                        <map href="/Maps/AstralIsle63/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.device.DoorSwitch">
+                            <switchType>Close</switchType>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onEnter>
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="Boss03_AddBuffer.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="/Mechanics/Spells/AstarlIslands/AI63/AI63_Packs/Boss03_UndAdd.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>AI63_Boss03_FireWall</scriptID>
+                        <map href="/Maps/AstralIsle63/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.device.DoorSwitch">
+                            <switchType>Open</switchType>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                    <table href="/Maps/AstralIsle63/SpawnTables/Boss03_portal.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                </Item>
+                <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                    <variable href="/Maps/AstralIsle63/AI63_Boss03_dead.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <summand>0</summand>
+                    <calcerSummand type="gameMechanics.elements.calcers.FloatData">
+                        <value>1</value>
+                    </calcerSummand>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="/Mechanics/Spells/AstarlIslands/AI63/AI63_Common/AI63_Boss03_death.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.map.variables.PredicateMapVariableEquals">
+                                    <variableResource href="/Maps/AstralIsle63/AI63_Boss01_dead.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                                    <expectedValue type="gameMechanics.elements.calcers.FloatData">
+                                        <value>1</value>
+                                    </expectedValue>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.map.variables.PredicateMapVariableEquals">
+                                            <variableResource href="/Maps/AstralIsle63/AI63_Boss02_dead.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                                            <expectedValue type="gameMechanics.elements.calcers.FloatData">
+                                                <value>1</value>
+                                            </expectedValue>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsOnZoneAvatarsGeneric">
+                                            <zone href="/Maps/AstralIsle63/Zones/AstralIsle63/AstralIsle63.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                                            <onlyOnTargetMapHead>true</onlyOnTargetMapHead>
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="/Mechanics/Spells/AstarlIslands/AI63/AI63_Common/AI63_evidence3.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.MultiplyStat">
+            <stat type="gameMechanics.elements.stat.StatStamina" />
+            <multiplier>0.75</multiplier>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>188127</resourceId>
+    </Header>
+    <Name href="ChargeBuff1.(BuffResource).Name.txt" />
+    <image href="/Interface/Icons/Spells/Warrior/WarriorCharge.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="/Spells/VisScripts/Warrior/Charge.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <needVisualize>false</needVisualize>
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <nameTemplate href="ChargeBuff1.(BuffResource).Name.txt" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.Charge">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                    <time>1000</time>
+                    <impactsOnLand>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="ChargeBuff02.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                            <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                            <minDamage>25</minDamage>
+                            <maxDamage>25</maxDamage>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="AoeSlow.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                            </impacts>
+                        </Item>
+                    </impactsOnLand>
+                    <distance>5</distance>
+                </Item>
+            </impacts>
+            <buff href="ChargeBuff1.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            <speedFactor>1.5</speedFactor>
+            <pathChecker type="space.pathfinding.pathChecker.PathDeviationLimited">
+                <angle>0.5236</angle>
+            </pathChecker>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.DisableLocalEvade" />
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                    <spell href="AoeSlow.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                    <duration>13000</duration>
+                    <scaler type="gameMechanics.elements.scalers.LinearScaler">
+                        <multiplier>1</multiplier>
+                    </scaler>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                    <spell href="Charge.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                    <duration>13000</duration>
+                    <scaler type="gameMechanics.elements.scalers.LinearScaler">
+                        <multiplier>1</multiplier>
+                    </scaler>
+                </Item>
+            </impactsOff>
+        </Item>
+    </effects>
+    <duration>10000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <isAE>true</isAE>
+</gameMechanics.constructor.schemes.buff.BuffResource>

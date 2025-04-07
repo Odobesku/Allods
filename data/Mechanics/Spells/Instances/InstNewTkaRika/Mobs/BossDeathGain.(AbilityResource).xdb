@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>195311</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ResetSpawnTable">
+                    <table href="/Maps/Inst_TkaRika/SpawnTables/Inst_TkaRika/WarmProjectileTable.(SpawnTable).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="/Spells/ClientData/FadeOutScreen.(ClientData).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="/Mechanics/Spells/Instances/InstNewTkaRika/IcePuddle.(SummonPool).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>5000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+            </impacts>
+            <impactsToKiller>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                            <id href="/World/Quests/Inst_TkaRika/QuestEvent03/CountId_1.xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/World/Quests/Inst_TkaRika/QuestEvent03/PhaseBuff.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/Mechanics/Spells/Instances/InstNewTkaRika/Buffs/EventIce/DeadlyIce.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/Mechanics/Spells/Instances/InstNewTkaRika/Buffs/EventIce/Slide.(BuffResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactsToMaster">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                            <id href="/World/Quests/Inst_TkaRika/QuestEvent03/CountId_1.xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="/World/Quests/Inst_TkaRika/QuestEvent03/PhaseBuff.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="/Mechanics/Spells/Instances/InstNewTkaRika/Buffs/EventIce/DeadlyIce.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="/Mechanics/Spells/Instances/InstNewTkaRika/Buffs/EventIce/Slide.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsToKiller>
+        </Item>
+        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+            <conditionalImpacts>
+                <Item>
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/Spells/Instances/InstNewTkaRika/Buffs/EventIce/DontMoveCleave.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                    <conditions>
+                        <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                            <spells>
+                                <Item href="/Mechanics/Spells/Instances/InstNewTkaRika/Spells/EventIce/IcePuddle.(SpellArea).xdb" />
+                            </spells>
+                        </Item>
+                    </conditions>
+                </Item>
+            </conditionalImpacts>
+            <stages>
+                <Item>Start</Item>
+            </stages>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>225049</resourceId>
+    </Header>
+    <Name href="FireStorm.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="FireStorm.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>0</value>
+    </range>
+    <prepareDuration>3000</prepareDuration>
+    <needLos>false</needLos>
+    <isAggro>false</isAggro>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>30000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="FirePower.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                <selector type="gameMechanics.tools.SelectorShuffle" />
+                <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                    <filters>
+                        <Item type="gameMechanics.world.creature.AvatarFilter" />
+                        <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/RaidInstances/UmoirRaid/7_SealBreakerBoss/CombatState/BossTank.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </filters>
+                </filter>
+                <impacts>
+                    <Item>
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="FireStorm.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+                <spawn>
+                    <scriptID>Ritual</scriptID>
+                    <map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                </spawn>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/RaidInstances/UmoirRaid/7_SealBreakerBoss/Dragons/RitualistNoPower.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </predicates>
+                        <impactsElse>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="RitualistShadowSpell.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impactsElse>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/RaidInstances/UmoirRaid/Disabler.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

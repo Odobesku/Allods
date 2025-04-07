@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>243868</resourceId>
+    </Header>
+    <Name href="MinedReactor.txt" />
+    <Description href="MinedReactor.Description.txt" />
+    <image href="/Interface/Icons/Misc/Quest/DetailAstralVehicle.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualEffects />
+    <effects>
+        <Item type="gameMechanics.elements.effects.Aura">
+            <radius>5</radius>
+            <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+            <impactsIn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                            <predicates>
+                                <Item type="gameMechanics.world.ship.elements.PredicateStandingOnBoundShip" />
+                                <Item type="gameMechanics.world.ship.elements.PredicateStandingOnFriendlyShip" />
+                            </predicates>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="DemineBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsIn>
+            <impactsOut>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                            <predicates>
+                                <Item type="gameMechanics.world.ship.elements.PredicateStandingOnBoundShip" />
+                                <Item type="gameMechanics.world.ship.elements.PredicateStandingOnFriendlyShip" />
+                            </predicates>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="DemineBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOut>
+            <filter type="gameMechanics.world.creature.AvatarFilter" />
+            <affectSelf>false</affectSelf>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                    <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderDeviceLinkedTo" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="DisabledReactor.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.PureDamage">
+                                    <damage>1</damage>
+                                    <scaler type="gameMechanics.elements.scalers.TrivialScaler" />
+                                    <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                        <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer" />
+                                        <additionalMultiplier>
+                                            <scaler type="gameMechanics.elements.scalers.TrivialScaler" />
+                                        </additionalMultiplier>
+                                        <sum>1</sum>
+                                    </scalerTarget>
+                                    <offends>true</offends>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="DisabledReactor.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="DisabledReactor.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactClientData">
+                    <data href="MinedReactor.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                    <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderDeviceLinkedTo" />
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="ReplicatedBombBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactClientData">
+                    <data href="MinedReactorStop.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="ReplicatedBombBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EntityImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                    <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderDeviceLinkedTo" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.ShipDistributor">
+                                <affectAllPassengers>true</affectAllPassengers>
+                            </distributor>
+                            <data href="MinedReactorCountdown.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                            <calcers>
+                                <floatEntries>
+                                    <Item>
+                                        <name>timeLeft</name>
+                                        <calcer type="gameMechanics.elements.calcers.CalcerFloor">
+                                            <source type="gameMechanics.elements.calcers.CalcerBuffDuration">
+                                                <buff href="ReplicatedBombBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                <multiplier>0.001</multiplier>
+                                            </source>
+                                        </calcer>
+                                    </Item>
+                                </floatEntries>
+                            </calcers>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+        </Item>
+    </effects>
+    <duration>60000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

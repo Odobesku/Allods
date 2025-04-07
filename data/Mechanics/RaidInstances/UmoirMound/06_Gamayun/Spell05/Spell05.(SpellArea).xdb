@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>227161</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/AcidSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="Spell05.(SpellArea).Name.txt" />
+    <visualScripts href="AcidBomb.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <immutablePrepareDuration>true</immutablePrepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTPoint</targetType>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>12000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceAnyBuff">
+                    <buffs>
+                        <Item href="MarkedAvatar.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        <Item href="ContextActionBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </buffs>
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="CastSpellOnce.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                        <spell href="/Mechanics/RaidInstances/UmoirMound/06_Gamayun/Spell02/Spell02.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+                        <duration>8000</duration>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                        <spell href="Spell05.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+                        <duration>24000</duration>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="CastSpellOnce.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="CastSpellOnce.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsElse>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                <spell href="/Mechanics/RaidInstances/UmoirMound/06_Gamayun/Spell01/Spell01.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+                <duration>2000</duration>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                        <destination type="gameMechanics.map.destination.DestinationModified">
+                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                            <modifiers>
+                                <Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
+                            </modifiers>
+                        </destination>
+                        <object href="AcidBombDecal_Warning.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                        <pool href="/Mechanics/RaidInstances/UmoirMound/06_Gamayun/Spell01/Puddles.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                        <destination type="gameMechanics.map.destination.DestinationModified">
+                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                            <modifiers>
+                                <Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
+                            </modifiers>
+                        </destination>
+                        <object href="AcidBombProjectile.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                        <pool href="/Mechanics/RaidInstances/UmoirMound/06_Gamayun/Spell01/Puddles.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="MarkedAvatar.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>20</speed>
+    <maxTargets>2</maxTargets>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+    <radius>85</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

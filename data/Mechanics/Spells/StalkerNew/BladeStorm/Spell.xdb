@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>218789</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/WeaponAttacks.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/Escapes.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DragonRelic5.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <element>PHYSICAL</element>
+    <image href="/Interface/Icons/Spells/Stalker/WhirlwindBlades.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <nameTemplate href="Spell_Name.txt.template" />
+    <descTemplate href="Spell_Desc.txt.template" />
+    <level>1</level>
+    <prepareDuration var="prepareDuration" />
+    <immutablePrepareDuration>true</immutablePrepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>true</isAggro>
+    <replaceLowRanks>true</replaceLowRanks>
+    <isWorkOnDead>false</isWorkOnDead>
+    <ranks>
+        <Item href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        <Item href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        <Item href="Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+    </ranks>
+    <modifiers>
+        <Item type="gameMechanics.elements.spell.RaiseRepelType">
+            <repelType>IGNORE</repelType>
+        </Item>
+    </modifiers>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>true</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>false</ignoreGlobalCooldown>
+    <launchWhenReady>false</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <stage>Launch</stage>
+            <duration>90000</duration>
+            <group href="" />
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateUsesWeapon">
+                <hideText>false</hideText>
+            </Item>
+        </casterConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceIf">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateEquipped">
+                        <dressType>AMMO</dressType>
+                        <itemClass href="/Mechanics/ItemClasses/Other_InfiniteTeardrop.(ItemClass).xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemClass)" />
+                    </Item>
+                </predicates>
+                <resourceIf type="gameMechanics.elements.resources.ResourceBaseMana">
+                    <baseMana>0</baseMana>
+                </resourceIf>
+                <resourceElse type="gameMechanics.elements.resources.ResourceDressItem">
+                    <slot>AMMO</slot>
+                    <count>4</count>
+                </resourceElse>
+            </Item>
+        </casterResources>
+        <channelingMechanics>
+            <channelingBuff hrefvar="buff" />
+            <finishImpacts>
+                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/Mechanics/Spells/StalkerNew/Modes/InvisCount.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/Mechanics/Spells/StalkerNew/OutOfSight/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </finishImpacts>
+            <isForthright>true</isForthright>
+        </channelingMechanics>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.basicElements.ImpactNull">
+                <value var="value" />
+            </Item>
+        </casterImpacts>
+        <linkedAbility href="Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+    </mechanics>
+    <speed>0</speed>
+    <isAE>false</isAE>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

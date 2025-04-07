@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>221955</resourceId>
+    </Header>
+    <Name href="ColdChannel.(BuffResource).Name.txt" />
+    <image href="/Interface/Icons/Spells/Mage/MageIceInstability.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.RunImpactsInShape">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </predicates>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                    <mobs>
+                                                        <Item href="HadCloneBoss.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                    </mobs>
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                                    <radius>120</radius>
+                                                    <affectGroup>Enemies</affectGroup>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                                            <element>COLD</element>
+                                                            <damage>15</damage>
+                                                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                            <data href="CometAOE.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                        </Item>
+                                                    </impacts>
+                                                    <filter type="gameMechanics.world.creature.AvatarFilter" />
+                                                </Item>
+                                            </impactsIf>
+                                            <impactsElse>
+                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                    <predicates>
+                                                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                    </predicates>
+                                                    <impactsIf>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="ColdDmgScaler.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            <stacks type="gameMechanics.elements.calcers.FloatData">
+                                                                <value>1</value>
+                                                            </stacks>
+                                                        </Item>
+                                                    </impactsIf>
+                                                </Item>
+                                            </impactsElse>
+                                        </Item>
+                                    </impacts>
+                                    <elseImpacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                    <mobs>
+                                                        <Item href="HadCloneBoss.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                    </mobs>
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="AttackBonus.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                    <stacks type="gameMechanics.elements.calcers.FloatData">
+                                                        <value>1</value>
+                                                    </stacks>
+                                                </Item>
+                                            </impactsIf>
+                                            <impactsElse>
+                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                    <predicates>
+                                                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                    </predicates>
+                                                    <impactsIf>
+                                                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                                            <element>COLD</element>
+                                                            <damage>25</damage>
+                                                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                            <data href="ColdHit.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                        </Item>
+                                                    </impactsIf>
+                                                </Item>
+                                            </impactsElse>
+                                        </Item>
+                                    </elseImpacts>
+                                </Item>
+                            </impacts>
+                            <shape type="gameMechanics.constructor.schemes.spell.area.Rectangle">
+                                <aspectRatio>100</aspectRatio>
+                            </shape>
+                            <affectGroup>All</affectGroup>
+                            <radius type="gameMechanics.elements.impacts.RunImpactsInShape$FixedRadius">
+                                <value>120</value>
+                            </radius>
+                            <targetsNum>1</targetsNum>
+                            <affectMainTarget>false</affectMainTarget>
+                            <workOnDead>false</workOnDead>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <initialDelay>2000</initialDelay>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<wholeCasting type="VisActionList">
+		<elements>
+			<Item type="CreatureAnimationAction">
+				<mode>LOOP</mode>
+				<animations>
+					<Item>ready</Item>
+				</animations>
+			</Item>
+			<Item type="CreatureEffectsAction">
+				<visActionID>FireS</visActionID>
+				<visualEffects>
+					<Item>
+						<effectFx href="/Spells/FX/Mobs/ReadySpell_FireArrow.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+						<scale>1.45</scale>
+						<fadeInTime>0</fadeInTime>
+						<fadeOutTime>200</fadeOutTime>
+						<locator>FROM_LOCATOR_NAME</locator>
+						<locatorName>Slot_Special02</locatorName>
+					</Item>
+				</visualEffects>
+			</Item>
+		</elements>
+	</wholeCasting>
+	<launch type="VisActionList">
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="VisActionList">
+				<elements>
+					<Item type="VisActionDelay">
+						<time>500</time>
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<elements>
+							<Item type="VisActionStopAction">
+								<stoppedActionID>FireS</stoppedActionID>
+							</Item>
+							<Item type="CreatureProjectileAction">
+								<projectileFx href="/Spells/FX/Spells/MageFireArrowAbility.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+								<explosionFx href="/Spells/FX/Spells/HitFire.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+								<pointOnCaster type="VisPointLocator">
+									<locator>FROM_LOCATOR_NAME</locator>
+									<locatorName>Slot_Special02</locatorName>
+								</pointOnCaster>
+								<pointOnTarget type="VisPointLocator">
+									<locator>Slot_BodyFX</locator>
+								</pointOnTarget>
+							</Item>
+						</elements>
+					</Item>
+				</elements>
+			</Item>
+			<Item type="CreatureAnimationAction">
+				<animations>
+					<Item>attack</Item>
+				</animations>
+				<channel>CHANNEL_KNOCKDOWN</channel>
+			</Item>
+		</elements>
+	</launch>
+</SpellVisScripts>

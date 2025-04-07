@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>221924</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Enlarge">
+            <factor>1.1</factor>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                </Item>
+            </predicates>
+            <effectsIf>
+                <Item type="gameMechanics.elements.effects.TickableAura">
+                    <affectGroup>All</affectGroup>
+                    <radius>10</radius>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                <mobs>
+                                    <Item href="/Mechanics/RaidInstances/FerrisRaid/Other/Critters/Drone.(MobWorld).xdb" />
+                                    <Item href="Drone.(MobWorld).xdb" />
+                                </mobs>
+                            </Item>
+                        </predicates>
+                    </filter>
+                    <holderImpactsIn>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="DroneUnity.(BuffResource).xdb" />
+                        </Item>
+                    </holderImpactsIn>
+                    <holderImpactsOut>
+                        <Item type="gameMechanics.elements.impacts.StackBuff">
+                            <buff href="DroneUnity.(BuffResource).xdb" />
+                            <delta type="gameMechanics.elements.calcers.FloatData">
+                                <value>-1</value>
+                            </delta>
+                        </Item>
+                    </holderImpactsOut>
+                </Item>
+            </effectsIf>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>2000</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="Drone.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                                            <value>1</value>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsOn>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/Wait.(BuffResource).xdb" />
+                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                        <multiplier>2</multiplier>
+                    </durationScaler>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>14_SoldierBoss</scriptID>
+                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectMobStatQuality">
+            <quality href="/Mechanics/RaidInstances/FerrisRaid/Other/Part4_Stats.(MobStatQuality).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectNoAggroChecks" />
+        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+            <conditionalImpacts>
+                <Item>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="StaticStrike.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsElse>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="StaticStrike.(BuffResource).xdb" />
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impacts>
+                    <conditions>
+                        <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                            <spells>
+                                <Item href="SingleShot.(SpellSingleTarget).xdb" />
+                            </spells>
+                        </Item>
+                    </conditions>
+                </Item>
+            </conditionalImpacts>
+            <stages>
+                <Item>Launch</Item>
+            </stages>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

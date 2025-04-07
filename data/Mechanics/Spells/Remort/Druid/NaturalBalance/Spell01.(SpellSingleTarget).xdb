@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>218125</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemortSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/HealingSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/InsuranceHealTrigger.xdb" />
+    </groups>
+    <Name href="Spell01.(SpellSingleTarget).Name.txt" />
+    <Description href="Spell01.(SpellSingleTarget).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value>32</value>
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>HealScaler</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Priest/PriestCureWounds.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Druid/RemortDruid_Heal.(SpellVisScripts).xdb" />
+    <sysName>CategoryRemort</sysName>
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>1000</duration>
+            <scaler type="gameMechanics.elements.scalers.ScalerExternal">
+                <scalerResource href="NaturalBalance.(ScalerResource).xdb" />
+            </scaler>
+        </cooldown>
+        <targetImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="Buff00.(BuffResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                <radius>40</radius>
+                <affectGroup>Group</affectGroup>
+                <affectHolder>false</affectHolder>
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="Buff00.(BuffResource).xdb" />
+                    </Item>
+                </impacts>
+                <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                    <filters>
+                        <Item type="gameMechanics.world.creature.AliveFilter" />
+                        <Item type="gameMechanics.world.creature.AvatarFilter" />
+                    </filters>
+                </filter>
+                <targetsLimit>2</targetsLimit>
+                <sorting type="gameMechanics.elements.targetSelector.sorts.SortByHealthInjury" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                <impactsResource href="/Mechanics/Spells/Remort/RemortSpellsCD.(ImpactListResource).xdb" />
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.projectile.ProjectileResource>
+    <Header>
+        <resourceId>191554</resourceId>
+    </Header>
+    <name href="AI60_StormAoE.(ProjectileResource).Name.txt" />
+    <visObject href="AI60_StormAoE.(VisObjectTemplate).xdb" />
+    <altitude>0.4</altitude>
+    <speed>0.002</speed>
+    <lifeLengthCap>40000</lifeLengthCap>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EntityImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.EntityImpactCreaturesAround">
+                    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+                    <radius>3</radius>
+                    <affectGroup>Enemies</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                            <element>LIGHTNING</element>
+                            <damage>75</damage>
+                            <impactsOnHitTarget>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/Spells/CommonBuffs/Stun/BuffStun.xdb" />
+                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                        <multiplier>0.5</multiplier>
+                                    </durationScaler>
+                                </Item>
+                            </impactsOnHitTarget>
+                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                            <data href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/YakBoss/LightningSphere/LightningHit.(ClientData).xdb" />
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                    </Item>
+                                </predicates>
+                            </Item>
+                        </predicates>
+                    </filter>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+            <initialDelay>4000</initialDelay>
+        </Item>
+    </effects>
+</gameMechanics.world.projectile.ProjectileResource>

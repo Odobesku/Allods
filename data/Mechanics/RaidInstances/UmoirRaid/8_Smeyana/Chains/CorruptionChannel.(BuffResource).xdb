@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>225985</resourceId>
+    </Header>
+    <Name href="CorruptionChannel.(BuffResource).Name.txt" />
+    <Description href="CorruptionChannel.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/CapturePoint.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/CursedAura_small.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+            <lockScale>true</lockScale>
+        </Item>
+    </visualEffects>
+    <interfaceHighPriority>true</interfaceHighPriority>
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                            <buff href="CorruptionChannel.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <range>
+                                <max>10</max>
+                            </range>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.StackBuff">
+                            <buff href="CorruptionChannel.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <delta type="gameMechanics.elements.calcers.FloatData">
+                                <value>1</value>
+                            </delta>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                            <projectileData>
+                                <moveType type="gameMechanics.world.projectile.MoveTypeDestination">
+                                    <from type="gameMechanics.map.destination.SelfPosDestination" />
+                                    <to type="gameMechanics.map.destination.SelfPosDestination" />
+                                </moveType>
+                                <resource href="Corruption.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                            </projectileData>
+                            <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+            <tick>500</tick>
+            <initialDelay>3000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Jump</Item>
+                <Item>Rotate</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateRespawnableResource">
+                                    <resources>
+                                        <Item href="Corruption.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                                    </resources>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOff>
+        </Item>
+    </effects>
+    <duration>20000</duration>
+    <stackLimit>11</stackLimit>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/RaidInstances/UmoirRaid/UmoirRaid.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

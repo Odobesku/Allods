@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>185671</resourceId>
+    </Header>
+    <Name href="AI45_SnowBuff.(BuffResource).Name.txt" />
+    <Description href="AI45_SnowBuff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Mage/MageIceInstability.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/MageIceTombAbility.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+        </Item>
+    </visualEffects>
+    <visScript href="/Spells/VisScripts/Mage/IceTomb.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <nameTemplate href="AI45_SnowBuff.(BuffResource)_Name.txt.template" />
+    <descTemplate href="AI45_SnowBuff.(BuffResource)_Desc.txt.template" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.DisableLocalEvade" />
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActionsExceptGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/HoldBreakers.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EventTrigger">
+            <eventClasses>
+                <Item>gameMechanics.elements.events.EventDamageReceived</Item>
+                <Item>gameMechanics.elements.events.EventMagicDamageReceived</Item>
+                <Item>gameMechanics.elements.events.EventPhysicalDamageReceived</Item>
+            </eventClasses>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="AI45_SnowBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectUnworthyOfAttention" />
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Rotate</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="AI45_SnowBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    <anyRank>false</anyRank>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onLeave>
+        </Item>
+    </effects>
+    <duration>20000</duration>
+    <isStackable>false</isStackable>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>true</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Magics.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DRMesmerize.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<Header>
+		<isPrototype>true</isPrototype>
+		<Variables>
+			<EnchantedArrow />
+			<Animation>enchantArrow</Animation>
+			<NotEnchantedArrow>/Spells/VisScripts/RangedAttack/Arrows/SimpleArrow.(VisProjectile).xdb#xpointer(/VisProjectile)</NotEnchantedArrow>
+			<TimeForEnchanting>500</TimeForEnchanting>
+		</Variables>
+	</Header>
+	<actionBarStart type="VisActionList">
+		<elements>
+			<Item type="VisActionDelay">
+				<time>150</time>
+			</Item>
+			<Item type="CreatureAnimationAction">
+				<animations>
+					<Item var="Animation" />
+				</animations>
+				<channelOverrideScript />
+				<advanced>
+					<animationKeysAction>
+						<Item>
+							<action type="VisActionList">
+								<playWhile />
+								<elements>
+									<Item type="CreatureTakeArrowAction">
+										<visActionID>TakeNotEnchantedArrow</visActionID>
+										<arrow hrefvar="NotEnchantedArrow" />
+										<forceTakeInHand>true</forceTakeInHand>
+									</Item>
+									<Item type="VisActionDelay">
+										<time var="TimeForEnchanting" />
+									</Item>
+									<Item type="VisActionList">
+										<play>Simultaneously</play>
+										<playWhile />
+										<elements>
+											<Item type="VisActionStopAction">
+												<stoppedActionID>TakeNotEnchantedArrow</stoppedActionID>
+											</Item>
+											<Item type="CreatureTakeArrowAction">
+												<visActionID>TakeEnchantedArrow</visActionID>
+												<arrow hrefvar="EnchantedArrow" />
+												<forceTakeInHand>true</forceTakeInHand>
+											</Item>
+											<Item type="Sound3DAction">
+												<sound>
+													<project href="/SFX/Spells/Sounds.(FMODProject).xdb#xpointer(/FMODProject)" />
+													<name>spells/Stalker/StalkerMagicArrows/StalkerEnchantFireArrow</name>
+												</sound>
+												<alias href="" />
+											</Item>
+										</elements>
+									</Item>
+								</elements>
+							</action>
+						</Item>
+						<Item>
+							<action type="VisActionStopAction">
+								<stoppedActionID>TakeEnchantedArrow</stoppedActionID>
+							</action>
+						</Item>
+					</animationKeysAction>
+					<waitRealEvent>WAIT_FROMFIRSTKEY</waitRealEvent>
+				</advanced>
+			</Item>
+		</elements>
+	</actionBarStart>
+</SpellVisScripts>

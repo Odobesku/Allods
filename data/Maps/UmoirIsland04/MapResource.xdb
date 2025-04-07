@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mapLoader.MapResource>
+    <Header>
+        <resourceId>38198</resourceId>
+    </Header>
+    <minimapLight>
+        <SunLightYaw>45</SunLightYaw>
+        <SunLightPitch>45</SunLightPitch>
+    </minimapLight>
+    <name href="Name.txt" />
+    <exit type="mapLoader.pointer.MapPointer">
+        <scriptID>U_V_gorod</scriptID>
+        <map href="/Maps/Umoir/City_MapResource.xdb" />
+    </exit>
+    <mapTemplate href="/System/MapTemplates/PersonalInstance_InstReset.(MapTemplate).xdb" />
+    <globalObjects>
+        <Item href="GlobalObjects/Tours/TourIN.(Tour).xdb" />
+        <Item href="GlobalObjects/Tours/TourOUT.(Tour).xdb" />
+    </globalObjects>
+    <parts>
+        <parts>
+            <Item type="gameMechanics.map.basicElements.MapSpecificEffects">
+                <effects>
+                    <Item type="gameMechanics.elements.effects.EffectsDeferred">
+                        <delay>500</delay>
+                        <effects>
+                            <Item type="gameMechanics.elements.effects.Switch">
+                                <impactsOn>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                        </predicates>
+                                        <impactsIf>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                <predicates>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                                <quest href="/World/Quests/UmoirIsland04/UI04_Q00/UI04_Q00.(QuestResource).xdb" />
+                                                                <status>NotInQuestBook</status>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                                <quest href="/World/Quests/UmoirIsland04/UI04_Q00/UI04_Q00.(QuestResource).xdb" />
+                                                                <status>Active</status>
+                                                            </Item>
+                                                        </predicates>
+                                                    </Item>
+                                                </predicates>
+                                                <impactsIf>
+                                                    <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                                                        <table href="SpawnTables/MiloslavinNPC.(SpawnTable).xdb" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                        <spawn>
+                                                            <scriptID>PortGate</scriptID>
+                                                            <map href="MapResource.xdb" />
+                                                        </spawn>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.device.DoorSwitch">
+                                                                <switchType>Close</switchType>
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impactsIf>
+                                                <impactsElse>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                        <spawn>
+                                                            <scriptID>PortGate</scriptID>
+                                                            <map href="MapResource.xdb" />
+                                                        </spawn>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.device.DoorSwitch">
+                                                                <switchType>Open</switchType>
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impactsElse>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                        <quest href="/World/Quests/UmoirIsland04/UI04_Q00/UI04_Q00.(QuestResource).xdb" />
+                                                        <status>Finished</status>
+                                                    </Item>
+                                                </predicates>
+                                                <impactsIf>
+                                                    <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+                                                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                                <impacts>
+                                                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                                        <predicates>
+                                                                            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                                                <quest href="/World/Quests/UmoirIsland04/UI04_Q04/UI04_Q04.(QuestResource).xdb" />
+                                                                                <status>Finished</status>
+                                                                            </Item>
+                                                                        </predicates>
+                                                                        <impactsIf>
+                                                                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                                                <delay>2000</delay>
+                                                                                <impacts>
+                                                                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                                                        <impacts>
+                                                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                                                                <data href="/World/Quests/UmoirIsland04/UI04_Q04/MiloslavinTalkFinish.(ClientData).xdb" />
+                                                                                            </Item>
+                                                                                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                                                                <delay>3000</delay>
+                                                                                                <impacts>
+                                                                                                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                                                                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                                                                        <object href="/Items/InteractiveObjects/UmoirIsland04/TeleportFinish.(SteleResource).xdb" />
+                                                                                                    </Item>
+                                                                                                </impacts>
+                                                                                            </Item>
+                                                                                        </impacts>
+                                                                                    </Item>
+                                                                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                                                        <delay>5000</delay>
+                                                                                        <impacts>
+                                                                                            <Item type="gameMechanics.world.avatar.assistants.ImpactDismissAssistant">
+                                                                                                <assistantResource href="/Mechanics/Characters/Hadagan_male/UmoirIsland04/Miloslavin.(AssistantResource).xdb" />
+                                                                                            </Item>
+                                                                                        </impacts>
+                                                                                    </Item>
+                                                                                </impacts>
+                                                                            </Item>
+                                                                        </impactsIf>
+                                                                    </Item>
+                                                                </impacts>
+                                                            </Item>
+                                                        </impacts>
+                                                        <assistantResource href="/Mechanics/Characters/Hadagan_male/UmoirIsland04/Miloslavin.(AssistantResource).xdb" />
+                                                        <mobResource href="/Characters/Hadagan_male/Instances/UmoirIsland04/Miloslavin.(MobWorld).xdb" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                                                        </impacts>
+                                                        <spawnResource href="SpawnTables/MiloslavinNPC.(SpawnTable).xdb" />
+                                                    </Item>
+                                                </impactsIf>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                <predicates>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                                                <predicates>
+                                                                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                                        <quest href="/World/Quests/UmoirIsland04/UI04_Q01_1/UI04_Q01_1.(QuestResource).xdb" />
+                                                                        <status>Active</status>
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                                        <quest href="/World/Quests/UmoirIsland04/UI04_Q01_1/UI04_Q01_1.(QuestResource).xdb" />
+                                                                        <counterResource href="/Items/InteractiveObjects/UmoirIsland04/ShurikHouseDoor.(SteleResource).xdb" />
+                                                                        <value>1</value>
+                                                                    </Item>
+                                                                </predicates>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                                <quest href="/World/Quests/UmoirIsland04/UI04_Q01_1/UI04_Q01_1.(QuestResource).xdb" />
+                                                                <status>Finished</status>
+                                                            </Item>
+                                                        </predicates>
+                                                    </Item>
+                                                </predicates>
+                                                <impactsIf>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                        <spawn>
+                                                            <scriptID>ShurikHouseDoor</scriptID>
+                                                            <map href="MapResource.xdb" />
+                                                        </spawn>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                                                                <visualState>2</visualState>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                                                <impacts>
+                                                                    <Item type="gameMechanics.elements.device.DeviceDie" />
+                                                                </impacts>
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impactsIf>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                <predicates>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                                <quest href="/World/Quests/UmoirIsland04/UI04_Q01_1/UI04_Q01_1.(QuestResource).xdb" />
+                                                                <status>NotInQuestBook</status>
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                                                <predicates>
+                                                                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                                        <quest href="/World/Quests/UmoirIsland04/UI04_Q01_1/UI04_Q01_1.(QuestResource).xdb" />
+                                                                        <status>Active</status>
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                        <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                                            <quest href="/World/Quests/UmoirIsland04/UI04_Q01_1/UI04_Q01_1.(QuestResource).xdb" />
+                                                                            <counterResource href="/World/Quests/UmoirIsland04/UI04_Q01_1/CountID01.(QuestCountId).xdb" />
+                                                                            <value>1</value>
+                                                                        </predicate>
+                                                                    </Item>
+                                                                </predicates>
+                                                            </Item>
+                                                        </predicates>
+                                                    </Item>
+                                                </predicates>
+                                                <impactsIf>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                                                        <impacts>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/Mechanics/Characters/Hadagan_male/UmoirIsland04/Shurik_Sleep.(BuffResource).xdb" />
+                                                            </Item>
+                                                        </impacts>
+                                                        <spawnResource href="SpawnTables/ShurikHouse.(SpawnTable).xdb" />
+                                                    </Item>
+                                                </impactsIf>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                        <quest href="/World/Quests/UmoirIsland04/UI04_Q04/UI04_Q04.(QuestResource).xdb" />
+                                                        <status>Active</status>
+                                                    </Item>
+                                                </predicates>
+                                                <impactsIf>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                                <quest href="/World/Quests/UmoirIsland04/UI04_Q04/UI04_Q04.(QuestResource).xdb" />
+                                                                <counterResource href="/World/Quests/UmoirIsland04/UI04_Q04/CountID02.(QuestCountId).xdb" />
+                                                                <value>1</value>
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                                    <quest href="/World/Quests/UmoirIsland04/UI04_Q04/UI04_Q04.(QuestResource).xdb" />
+                                                                    <counterResource href="/World/Quests/UmoirIsland04/UI04_Q04/CountID04.(QuestCountId).xdb" />
+                                                                    <value>1</value>
+                                                                </predicate>
+                                                            </Item>
+                                                        </predicates>
+                                                        <impactsIf>
+                                                            <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                                                                <variable href="CallForHelp.(MapVariableResource).xdb" />
+                                                                <summand>1</summand>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                                <predicates>
+                                                                    <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                                        <quest href="/World/Quests/UmoirIsland04/UI04_Q04/UI04_Q04.(QuestResource).xdb" />
+                                                                        <counterResource href="/World/Quests/UmoirIsland04/UI04_Q04/CountID05.(QuestCountId).xdb" />
+                                                                        <value>1</value>
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                        <predicate type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                                            <quest href="/World/Quests/UmoirIsland04/UI04_Q04/UI04_Q04.(QuestResource).xdb" />
+                                                                            <status>Completed</status>
+                                                                        </predicate>
+                                                                    </Item>
+                                                                </predicates>
+                                                                <impactsIf>
+                                                                    <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+                                                                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                                        <taggingType>Override</taggingType>
+                                                                        <assistantResource href="/Mechanics/Characters/Elf_male/UmoirIsland04/Nayan.(AssistantResource).xdb" />
+                                                                        <mobResource href="/Characters/Elf_male/Instances/UmoirIsland04/Nayan.(MobWorld).xdb" />
+                                                                    </Item>
+                                                                </impactsIf>
+                                                                <impactsElse>
+                                                                    <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                                                                        <table href="SpawnTables/NayanInPrison.(SpawnTable).xdb" />
+                                                                    </Item>
+                                                                </impactsElse>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                                <predicates>
+                                                                    <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                                        <quest href="/World/Quests/UmoirIsland04/UI04_Q04/UI04_Q04.(QuestResource).xdb" />
+                                                                        <counterResource href="/World/Quests/UmoirIsland04/UI04_Q04/CountID06.(QuestCountId).xdb" />
+                                                                        <value>1</value>
+                                                                    </Item>
+                                                                </predicates>
+                                                                <impactsIf>
+                                                                    <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+                                                                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                                        <assistantResource href="/Characters/Hadagan_male/Instances/UmoirIsland04/Shurik.(AssistantResource).xdb" />
+                                                                        <mobResource href="/Characters/Hadagan_male/Instances/UmoirIsland04/Shurik_Assistant.(MobWorld).xdb" />
+                                                                    </Item>
+                                                                </impactsIf>
+                                                                <impactsElse>
+                                                                    <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                                                                        <table href="SpawnTables/ShurikInPrison.(SpawnTable).xdb" />
+                                                                    </Item>
+                                                                </impactsElse>
+                                                            </Item>
+                                                        </impactsIf>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                                <quest href="/World/Quests/UmoirIsland04/UI04_Q04/UI04_Q04.(QuestResource).xdb" />
+                                                                <counterResource href="/World/Quests/UmoirIsland04/UI04_Q04/CountID04.(QuestCountId).xdb" />
+                                                                <value>1</value>
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                                    <quest href="/World/Quests/UmoirIsland04/UI04_Q04/UI04_Q04.(QuestResource).xdb" />
+                                                                    <counterResource href="/World/Quests/UmoirIsland04/UI04_Q04/CountID07.(QuestCountId).xdb" />
+                                                                    <value>1</value>
+                                                                </predicate>
+                                                            </Item>
+                                                        </predicates>
+                                                        <impactsIf>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                                <destination type="gameMechanics.map.destination.DestinationLocator">
+                                                                    <locator>
+                                                                        <scriptID>tm_guard_goto01</scriptID>
+                                                                        <map href="MapResource.xdb" />
+                                                                    </locator>
+                                                                    <yaw type="constructor.basicElements.AngleDegrees">
+                                                                        <value>90</value>
+                                                                    </yaw>
+                                                                </destination>
+                                                                <object href="/Characters/Elf_male/Instances/UmoirIsland04/NayanNPC.(MobWorld).xdb" />
+                                                                <pool href="/World/Quests/UmoirIsland04/UI04_Q04/Nayan.(SummonPool).xdb" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                                <destination type="gameMechanics.map.destination.DestinationLocator">
+                                                                    <locator>
+                                                                        <scriptID>ui04_tm_portal</scriptID>
+                                                                        <map href="MapResource.xdb" />
+                                                                    </locator>
+                                                                    <yaw type="constructor.basicElements.AngleDegrees">
+                                                                        <value>115</value>
+                                                                    </yaw>
+                                                                </destination>
+                                                                <object href="/Characters/Hadagan_male/Instances/UmoirIsland04/Shurik.(MobWorld).xdb" />
+                                                                <pool href="/World/Quests/UmoirIsland04/UI04_Q04/Shurik.(SummonPool).xdb" />
+                                                            </Item>
+                                                        </impactsIf>
+                                                    </Item>
+                                                </impactsIf>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                        <quest href="/World/Quests/UmoirIsland04/UI04_Q03/UI04_Q03_01.(QuestResource).xdb" />
+                                                        <status>Active</status>
+                                                    </Item>
+                                                </predicates>
+                                                <impactsIf>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                                <quest href="/World/Quests/UmoirIsland04/UI04_Q03/UI04_Q03_01.(QuestResource).xdb" />
+                                                                <counterResource href="/Items/InteractiveObjects/UmoirIsland04/NayanTower/BookshelfDoor.(SteleResource).xdb" />
+                                                                <value>1</value>
+                                                            </Item>
+                                                        </predicates>
+                                                        <impactsIf>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                                <spawn>
+                                                                    <scriptID>BookshelfDoor</scriptID>
+                                                                    <map href="MapResource.xdb" />
+                                                                </spawn>
+                                                                <impacts>
+                                                                    <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                                                                </impacts>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                                                                <table href="SpawnTables/NT_PortalToDungeon.(SpawnTable).xdb" />
+                                                            </Item>
+                                                        </impactsIf>
+                                                    </Item>
+                                                </impactsIf>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                <predicates>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                            <quest href="/World/Quests/UmoirIsland04/UI04_Q03/UI04_Q03_03.(QuestResource).xdb" />
+                                                            <status>Finished</status>
+                                                        </predicate>
+                                                    </Item>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                                <quest href="/World/Quests/UmoirIsland04/UI04_Q03/UI04_Q03.(QuestResource).xdb" />
+                                                                <status>Finished</status>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                                <quest href="/World/Quests/UmoirIsland04/UI04_Q03/UI04_Q03.(QuestResource).xdb" />
+                                                                <status>Completed</status>
+                                                            </Item>
+                                                        </predicates>
+                                                    </Item>
+                                                </predicates>
+                                                <impactsIf>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                                        <destination type="gameMechanics.map.destination.DestinationLocator">
+                                                            <locator>
+                                                                <scriptID>ui04_tower_office</scriptID>
+                                                                <map href="MapResource.xdb" />
+                                                            </locator>
+                                                        </destination>
+                                                    </Item>
+                                                </impactsIf>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                        <quest href="/World/Quests/Umoir/U_isle_03/U_isle_03.xdb" />
+                                                        <status>NotInQuestBook</status>
+                                                    </Item>
+                                                </predicates>
+                                                <impactsIf>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                                <predicates>
+                                                                    <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                                                                        <zone href="Zones/UmoirIsland04.(ZoneResource).xdb" />
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                                                                        <zone href="Zones/UI04_NayanTower.(ZoneResource).xdb" />
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                                                                        <zone href="Zones/UI04_Dungeon.(ZoneResource).xdb" />
+                                                                    </Item>
+                                                                </predicates>
+                                                            </Item>
+                                                        </predicates>
+                                                        <impactsIf>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/World/Quests/Umoir/U_isle_03/IsleKick_03.(BuffResource).xdb" />
+                                                            </Item>
+                                                        </impactsIf>
+                                                    </Item>
+                                                </impactsIf>
+                                                <impactsElse>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                        <id href="/World/Quests/Umoir/U_isle_03/Count00.(QuestCountId).xdb" />
+                                                    </Item>
+                                                </impactsElse>
+                                            </Item>
+                                        </impactsIf>
+                                    </Item>
+                                </impactsOn>
+                                <impactsOff>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                        </predicates>
+                                        <impactsIf>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                        <quest href="/World/Quests/Umoir/U_isle_03/U_isle_03.xdb" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                                            <quest href="/World/Quests/UmoirIsland04/UI04_Q04/UI04_Q04.(QuestResource).xdb" />
+                                                            <status>Finished</status>
+                                                        </predicate>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                        <quest href="/World/Quests/Umoir/U_isle_03/U_isle_03.xdb" />
+                                                        <counterResource href="/World/Quests/Umoir/U_isle_03/Count00.(QuestCountId).xdb" />
+                                                        <value>1</value>
+                                                    </Item>
+                                                </predicates>
+                                                <impactsIf>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                        <id href="/World/Quests/Umoir/U_isle_03/Count00.(QuestCountId).xdb" />
+                                                        <value>-1</value>
+                                                    </Item>
+                                                </impactsIf>
+                                            </Item>
+                                            <Item type="gameMechanics.world.avatar.assistants.ImpactDismissAssistant">
+                                                <assistantResource href="/Mechanics/Characters/Hadagan_male/UmoirIsland04/Miloslavin.(AssistantResource).xdb" />
+                                            </Item>
+                                            <Item type="gameMechanics.world.avatar.assistants.ImpactDismissAssistant">
+                                                <assistantResource href="/Mechanics/Characters/Elf_male/UmoirIsland04/Nayan.(AssistantResource).xdb" />
+                                            </Item>
+                                            <Item type="gameMechanics.world.avatar.assistants.ImpactDismissAssistant">
+                                                <assistantResource href="/Characters/Hadagan_male/Instances/UmoirIsland04/Shurik.(AssistantResource).xdb" />
+                                            </Item>
+                                        </impactsIf>
+                                    </Item>
+                                </impactsOff>
+                            </Item>
+                        </effects>
+                    </Item>
+                </effects>
+            </Item>
+            <Item type="gameMechanics.map.variables.MapVariablesHolderResource">
+                <variables>
+                    <Item href="CallForHelp.(MapVariableResource).xdb" />
+                </variables>
+            </Item>
+        </parts>
+    </parts>
+    <cellParts>
+        <parts>
+            <Item type="gameMechanics.world.bigAstral.EntranceTourPart">
+                <tour href="GlobalObjects/Tours/TourIN.(Tour).xdb" />
+            </Item>
+            <Item type="gameMechanics.world.bigAstral.ExitTourPart">
+                <tour href="GlobalObjects/Tours/TourOUT.(Tour).xdb" />
+            </Item>
+        </parts>
+    </cellParts>
+    <deathHeightThreshhold>-200</deathHeightThreshhold>
+</mapLoader.MapResource>

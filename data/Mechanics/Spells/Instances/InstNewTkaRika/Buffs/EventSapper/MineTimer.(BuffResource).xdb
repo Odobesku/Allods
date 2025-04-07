@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>195202</resourceId>
+    </Header>
+    <Name href="MineTimer.(BuffResource).Name.txt" />
+    <Description href="MineTimer.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Psionic/PsionicTimeLapse.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="MineDetectorAura.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectAddContextActions">
+            <actions>
+                <Item href="/Mechanics/Spells/Instances/InstNewTkaRika/Spells/EventSapper/CheckArea.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="/World/Quests/Inst_TkaRika/QuestEvent03/PhaseBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <anyRank>false</anyRank>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="MinePlane.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <anyRank>false</anyRank>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="MineTimer.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <anyRank>false</anyRank>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                            <delay>1000</delay>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <spawnResource href="/Maps/Inst_TkaRika/SpawnTables/Inst_TkaRika/EventSapper_Accelerator.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactStopSpawn">
+                    <table href="/Maps/Inst_TkaRika/SpawnTables/Inst_TkaRika/EventSapper_Accelerator.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="/Mechanics/Spells/Instances/InstNewTkaRika/EventSapper_SummonPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="MinePlane_FailCase.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>1000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                    <delay>500</delay>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                    <projectileData>
+                                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
+                                        <resource href="/Mechanics/Spells/Instances/InstNewTkaRika/Projectiles/EventSapper_MineExplosion.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                                    </projectileData>
+                                </Item>
+                            </impacts>
+                            <spawnResource href="/Maps/Inst_TkaRika/SpawnTables/Inst_TkaRika/EventSapper_Mines.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                            <delay>1000</delay>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="/Mechanics/Spells/Instances/InstNewTkaRika/ClientData/EventSapper_Failed.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                    <quest href="/World/Quests/Inst_TkaRika/QuestEvent03/QuestEvent03.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                                    <counterResource href="/World/Quests/Inst_TkaRika/QuestEvent03/CountId_1.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                                    <value>1</value>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                    <quest href="/World/Quests/Inst_TkaRika/QuestEvent03_1/QuestEvent03_1.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                                    <counterResource href="/World/Quests/Inst_TkaRika/QuestEvent03/CountId_1.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                                    <value>1</value>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                    <quest href="/World/Quests/Inst_TkaRika/QuestEventDaily/QuestEventDaily.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                                                    <counterResource href="/World/Quests/Inst_TkaRika/QuestEvent03/CountId_1.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                                    <value>1</value>
+                                                </Item>
+                                            </predicates>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                            <id href="/World/Quests/Inst_TkaRika/QuestEvent03/CountId_1.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                            <value>-1</value>
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="/Spells/ClientData/FadeOutScreen.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectZoneEnterLeaveChecker">
+            <impactsOnLeave>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="MineTimer.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOnLeave>
+            <activeZone href="/Maps/Inst_TkaRika/Zones/Inst_TkaRika/TkaRika.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+        </Item>
+        <Item type="gameMechanics.world.ship.elements.EffectMapChanged">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="MineTimer.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <duration>60000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/EvadeProtectedBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/QuestSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

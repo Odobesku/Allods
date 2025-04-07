@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>224506</resourceId>
+    </Header>
+    <element>LIGHTNING</element>
+    <visualScripts href="R7_InfPsyker_Blink_Add.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>50</value>
+    </range>
+    <mechanics>
+        <cooldown>
+            <duration>20000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateHasPath">
+                <destination type="gameMechanics.elements.calcers.DestinationSpellTargetThrust">
+                    <maxDist>1</maxDist>
+                </destination>
+                <maxLength>65</maxLength>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                        <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                            <base type="gameMechanics.elements.calcers.DestinationSpellTargetThrust">
+                                <maxDist>1</maxDist>
+                            </base>
+                            <offset>0</offset>
+                            <yaw type="constructor.basicElements.AngleRadians" />
+                            <turn>ToTarget</turn>
+                        </destination>
+                        <finishImpacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="R7_InfPsyker_Add_Blink.(BuffResource).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                <delay>5000</delay>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                        <radius>9</radius>
+                                        <affectGroup>All</affectGroup>
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                                <element>LIGHTNING</element>
+                                                <damage>20</damage>
+                                            </Item>
+                                        </impacts>
+                                        <filter type="gameMechanics.world.creature.AvatarFilter" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                        <projectileData>
+                                            <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                            </moveType>
+                                            <resource href="R7_Destroer_Cast.(ProjectileResource).xdb" />
+                                        </projectileData>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                <projectileData>
+                                    <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                    </moveType>
+                                    <resource href="R7_Destroer_Precast.(ProjectileResource).xdb" />
+                                </projectileData>
+                            </Item>
+                        </finishImpacts>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

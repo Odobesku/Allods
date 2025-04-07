@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>204612</resourceId>
+    </Header>
+    <contextActionInfo>
+        <priority>100495</priority>
+        <contextName href="Spell01.(SpellArea).ContextName.txt" />
+        <contextDescription href="Spell01.(SpellArea).ContextDescription.txt" />
+        <contextImage href="/Interface/Icons/Equipment/Ships/EngineBigTypeIcon.(UISingleTexture).xdb" />
+    </contextActionInfo>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/MountSpeedBoosts.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="Spell01.(SpellCasterSelf).Name.txt" />
+    <Description href="Spell01.(SpellCasterSelf).Description.txt" />
+    <image href="/Interface/Icons/Equipment/Ships/EngineBigTypeIcon.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Mount/BattleMountTitan_Jump.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="Spell01.(SpellCasterSelf).NameTemplate.txt" />
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <replaceLowRanks>false</replaceLowRanks>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>40000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMountFromGroupFeeded">
+                <group href="/Mechanics/Mounts/Groups/Titan5Grade.(MountGroupResource).xdb#xpointer(/gameMechanics.constructor.schemes.mount.MountGroupResource)" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactAvatarJump">
+                <destination type="gameMechanics.map.destination.RelativeTrailPos">
+                    <center type="gameMechanics.map.destination.RelativeRotatePos">
+                        <base type="gameMechanics.map.destination.RelativePos">
+                            <yaw type="constructor.basicElements.AngleRadians" />
+                            <faceSourcePos>false</faceSourcePos>
+                        </base>
+                        <offset>30</offset>
+                        <yaw type="constructor.basicElements.AngleRadians" />
+                    </center>
+                </destination>
+                <speed>25</speed>
+                <impactsOnLand>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                        <data href="TitanLand.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                    </Item>
+                </impactsOnLand>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <iffPolicy>Friends</iffPolicy>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

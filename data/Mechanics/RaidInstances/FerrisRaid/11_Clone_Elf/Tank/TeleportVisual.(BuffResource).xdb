@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>222812</resourceId>
+    </Header>
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/MageTeleportAbility.(VisObjectTemplate).xdb" />
+        </Item>
+    </visualEffects>
+    <visualPostEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/TeleportUp.(VisObjectTemplate).xdb" />
+        </Item>
+    </visualPostEffects>
+    <needVisualize>false</needVisualize>
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                    <spell href="Rocket.(SpellSingleTarget).xdb" />
+                    <duration>
+                        <second>16</second>
+                    </duration>
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DisableLocalEvade" />
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Rotate</Item>
+                <Item>Jump</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActionsExceptGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/KnockdownBreakers.xdb" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                        <locator>
+                            <scriptID>ElfClone_FinalFaze</scriptID>
+                            <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                        </locator>
+                    </destination>
+                    <finishImpacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                            <spell href="PrepareRay.(SpellSingleTarget).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                            <spell href="Rocket.(SpellSingleTarget).xdb" />
+                            <duration>
+                                <second>16</second>
+                            </duration>
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="PrepareRay.(BuffResource).xdb" />
+                        </Item>
+                    </finishImpacts>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <duration>5000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

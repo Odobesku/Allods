@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>252048</resourceId>
+    </Header>
+    <Name href="Storm.(BuffResource).Name.txt" />
+    <Description href="Storm.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Mage/MageLightningArrow.(UISingleTexture).xdb" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Mobs/MountMammothTkarika_Head_Lightning.(VisObjectTemplate).xdb" />
+            <scale>2</scale>
+            <locator>Slot_TopFX</locator>
+        </Item>
+    </visualEffects>
+    <visualPostEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/DruidCallLightning.(VisObjectTemplate).xdb" />
+            <scale>2</scale>
+            <locator>Slot_Global</locator>
+        </Item>
+        <Item>
+            <delay>200</delay>
+            <effectFx href="/Spells/FX/Spells/HitLightning.(VisObjectTemplate).xdb" />
+            <scale>4</scale>
+            <locator>Slot_Global</locator>
+        </Item>
+    </visualPostEffects>
+    <visScript href="Storm.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>4</radius>
+                    <affectGroup>Enemies</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                        </Item>
+                                    </predicates>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/InstanceModifiers/Addon5/Storm/Storm_PplCheck.(BuffResource).xdb" />
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                            <element>LIGHTNING</element>
+                                            <damage>50</damage>
+                                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                            <element>LIGHTNING</element>
+                                            <damage>50</damage>
+                                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="Storm_Dot.(BuffResource).xdb" />
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                    <perTargetScaling>Divide</perTargetScaling>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Storm.(BuffResource).xdb" />
+                </Item>
+            </onLeave>
+        </Item>
+    </effects>
+    <duration>6000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>true</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/InstanceModifiers/Addon5/Astral_Modifiers.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

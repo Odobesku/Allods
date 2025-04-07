@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>218067</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="ChainFrost.(BuffResource).Name.txt" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectJumpOnDetach">
+            <jumps type="gameMechanics.elements.calcers.LongData">
+                <value var="jumps" />
+            </jumps>
+            <buff hrefvar="buff" />
+            <autotarget type="gameMechanics.constructor.schemes.spell.multiTarget.ClosestAutotarget">
+                <group>Enemies</group>
+                <conditions>
+                    <Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
+                        <onSlave type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="NoFrost.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </predicate>
+                        </onSlave>
+                    </Item>
+                </conditions>
+            </autotarget>
+            <onBehalfOfCaster>true</onBehalfOfCaster>
+            <radius>7</radius>
+            <inCasterRange>false</inCasterRange>
+            <renewingEffects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            </predicates>
+                            <elseImpacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="ChainFrost.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                    <calcers>
+                                        <addressEntries>
+                                            <Item>
+                                                <name>target</name>
+                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                            </Item>
+                                            <Item>
+                                                <name>caster</name>
+                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                            </Item>
+                                        </addressEntries>
+                                    </calcers>
+                                </Item>
+                            </elseImpacts>
+                        </Item>
+                    </impactsOn>
+                </Item>
+            </renewingEffects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                    <element>COLD</element>
+                    <damage var="damage" />
+                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/Spells/CommonBuffs/Stun/BuffStun.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                        <multiplier>2</multiplier>
+                    </durationScaler>
+                </Item>
+            </impactsOff>
+        </Item>
+    </effects>
+    <duration>1000</duration>
+    <stackLimit var="stackLimit" />
+    <isHelpful>false</isHelpful>
+    <isMultiple>true</isMultiple>
+    <ranks>
+        <Item href="ChainFrost01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+        <Item href="ChainFrost02.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+        <Item href="ChainFrost03.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+    </ranks>
+    <canBeSaved>false</canBeSaved>
+    <isClientReplicated>false</isClientReplicated>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Magics.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

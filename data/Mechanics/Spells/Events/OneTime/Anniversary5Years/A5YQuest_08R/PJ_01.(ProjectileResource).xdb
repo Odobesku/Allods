@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.projectile.ProjectileResource>
+    <Header>
+        <resourceId>209908</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="PJ_01.(ProjectileResource).Name.txt" />
+    <visObject href="PJ_01.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+    <speed>0.003</speed>
+    <lifeLengthCap>12000</lifeLengthCap>
+    <impactsOnDeath>
+        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+            <projectileData>
+                <moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
+                <resource href="PJ_02.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+            </projectileData>
+            <pool href="SP.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+        </Item>
+    </impactsOnDeath>
+    <impactsToTarget>
+        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                    <mobs>
+                        <Item href="/World/Quests/LoreEvents/Anniversary5Years/Stage_08/AnniversaryThief_08Boss.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    </mobs>
+                </Item>
+            </predicates>
+            <impactsIf>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="CD1.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.PureDamage">
+                            <damage>1</damage>
+                            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                <mul>0.04</mul>
+                                <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer" />
+                            </scaler>
+                            <offends>true</offends>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsIf>
+            <impactsElse>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                            <data href="CD1.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="Buff_02.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                            <time>1000</time>
+                            <distance>6</distance>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                    <element>POISON</element>
+                                    <damage>2</damage>
+                                    <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                        <mul>0.3</mul>
+                                        <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer" />
+                                    </scaler>
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                            <impactsResource href="/Mechanics/Mounts/Prototypes/ExoAntiDismount.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsElse>
+        </Item>
+    </impactsToTarget>
+</gameMechanics.world.projectile.ProjectileResource>

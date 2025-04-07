@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>214276</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/InsuranceTrigger.xdb" />
+        <Item href="/Mechanics/Spells/Groups/MagicAttacks.xdb" />
+    </groups>
+    <element>POISON</element>
+    <Name href="Spell0.(SpellSingleTarget).Name.txt" />
+    <Description href="Spell0.(SpellSingleTarget).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value var="Poison_Damage" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>MagicScaler</formula>
+            </scaler>
+        </Item>
+        <Item>
+            <name>var1</name>
+            <value var="Lightning_Damage" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>MagicScaler</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Misc/Buffs/LineUniversalGreen.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Druid/RageOfNature.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <prepareDuration>2500</prepareDuration>
+    <ranks>
+        <Item href="Spell01.(SpellSingleTarget).xdb" />
+        <Item href="Spell02.(SpellSingleTarget).xdb" />
+        <Item href="Spell03.(SpellSingleTarget).xdb" />
+    </ranks>
+    <modifiers>
+        <Item type="gameMechanics.elements.spell.SpellEnvelopeModifier">
+            <effects>
+                <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+                    <scaler type="gameMechanics.elements.scalers.MultLinearEffectScaler">
+                        <coeff>1</coeff>
+                        <calcer type="gameMechanics.constructor.basicElements.ScalerCalcer">
+                            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                <mul>0.002</mul>
+                                <mulCalcer type="gameMechanics.elements.calcers.CalcerStatValue">
+                                    <stat type="gameMechanics.elements.stat.SpecialStat">
+                                        <stat href="/Mechanics/SpecialStats/CritPower.(SpecialStatResource).xdb" />
+                                    </stat>
+                                    <valueType>ShortTerm</valueType>
+                                </mulCalcer>
+                                <sum>0.5</sum>
+                            </scaler>
+                            <value>1</value>
+                        </calcer>
+                    </scaler>
+                </Item>
+            </effects>
+            <onBehalfOfHolder>true</onBehalfOfHolder>
+        </Item>
+    </modifiers>
+    <iffPolicy>Enemies</iffPolicy>
+    <launchWhenReady>true</launchWhenReady>
+    <mechanics>
+        <cooldown>
+            <stage>Start</stage>
+            <duration>1000</duration>
+        </cooldown>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceMana">
+                <mana>31.1504</mana>
+                <scaleByWeaponSpeed>true</scaleByWeaponSpeed>
+                <manaType>
+                    <Item>Mana</Item>
+                </manaType>
+            </Item>
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.StackBuff">
+                        <buff href="/Mechanics/Spells/Druid70/Abilities/ElementRage/Buff.(BuffResource).xdb" />
+                        <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                        <delta type="gameMechanics.elements.calcers.FloatData">
+                            <value>-1</value>
+                        </delta>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                        <element>POISON</element>
+                        <damage var="Poison_Damage" />
+                        <impactsOnHitTarget>
+                            <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                                <mark href="/Mechanics/Spells/Druid70/Abilities/PoisonTornado/PoisonWatcher.(MarkResource).xdb" />
+                            </Item>
+                        </impactsOnHitTarget>
+                        <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                        <element>LIGHTNING</element>
+                        <damage var="Lightning_Damage" />
+                        <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Weakness/Weakness.(BuffResource).xdb" />
+                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                    <multiplier>2</multiplier>
+                </durationScaler>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

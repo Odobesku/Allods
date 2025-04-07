@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>200801</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.SummandStat">
+            <stat type="gameMechanics.elements.stat.InnateStat">
+                <stat var="stat" />
+            </stat>
+            <value>5</value>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.ScalerIf">
+                        <condition type="gameMechanics.elements.predicates.PredicateCreatureLevel">
+                            <hideText>true</hideText>
+                            <minLevel type="gameMechanics.formulas.IntConstantValue">
+                                <value var="value1" />
+                            </minLevel>
+                        </condition>
+                        <scalerIf type="gameMechanics.elements.scalers.ScalerIf">
+                            <condition type="gameMechanics.elements.predicates.PredicateCreatureLevel">
+                                <hideText>true</hideText>
+                                <minLevel type="gameMechanics.formulas.IntConstantValue">
+                                    <value var="value2" />
+                                </minLevel>
+                            </condition>
+                            <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                                <multiplier>0</multiplier>
+                            </scalerIf>
+                            <scalerElse type="gameMechanics.elements.scalers.LinearScaler">
+                                <multiplier>0.5</multiplier>
+                            </scalerElse>
+                        </scalerIf>
+                        <scalerElse type="gameMechanics.elements.scalers.LinearScaler">
+                            <multiplier>1</multiplier>
+                        </scalerElse>
+                    </Item>
+                    <scaler type="gameMechanics.elements.scalers.LinearScaler">
+                        <multiplier>10</multiplier>
+                    </scaler>
+                </scalers>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateCreatureLevel">
+                            <hideText>true</hideText>
+                            <minLevel type="gameMechanics.formulas.IntConstantValue">
+                                <value var="value2" />
+                            </minLevel>
+                        </Item>
+                    </predicates>
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="ToHighLvl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                                    <group href="Stats.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+    <duration>1800000</duration>
+    <isStackable>false</isStackable>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/BuffConsumables.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="Stats.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <canBeSaved>true</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

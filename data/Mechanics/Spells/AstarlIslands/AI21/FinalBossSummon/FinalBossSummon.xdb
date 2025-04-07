@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>189162</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
+    </groups>
+    <Name href="FinalBossSummon.Name.txt" />
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>30000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                    <buff href="WebSpidersCount.(BuffResource).xdb" />
+                    <range>
+                        <min>2</min>
+                        <max>2</max>
+                    </range>
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="WebSpidersCount.(BuffResource).xdb" />
+                        </predicate>
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="WebSpidersCount.(BuffResource).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                        <destination type="gameMechanics.map.destination.DestinationLocator">
+                            <locator>
+                                <scriptID>f_loc1</scriptID>
+                                <map href="/Maps/EpicIsle5/MapResource.xdb" />
+                            </locator>
+                        </destination>
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="Buff_RunInCirles.(BuffResource).xdb" />
+                            </Item>
+                        </impacts>
+                        <object href="/Creatures/BlackWidow/Instances/AstralIsle21/FInalBossAddSummon.(MobWorld).xdb" />
+                        <pool href="FinalBossSummon.(SummonPool).xdb" />
+                    </Item>
+                </impacts>
+                <elseImpacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                        <predicates>
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="WebSpidersCount.(BuffResource).xdb" />
+                            </Item>
+                        </predicates>
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="WebSpidersCount.(BuffResource).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                <destination type="gameMechanics.map.destination.DestinationLocator">
+                                    <locator>
+                                        <scriptID>f_sloc1</scriptID>
+                                        <map href="/Maps/EpicIsle5/MapResource.xdb" />
+                                    </locator>
+                                </destination>
+                                <impacts>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="Buff_RunIn7Shape.(BuffResource).xdb" />
+                                    </Item>
+                                </impacts>
+                                <object href="/Creatures/BlackWidow/Instances/AstralIsle21/FInalBossAddSummon.(MobWorld).xdb" />
+                                <pool href="FinalBossSummon.(SummonPool).xdb" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </elseImpacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

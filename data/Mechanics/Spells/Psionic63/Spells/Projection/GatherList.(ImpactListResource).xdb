@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.basicElements.ImpactListResource>
+    <Header>
+        <resourceId>220185</resourceId>
+    </Header>
+    <impacts>
+        <Item type="gameMechanics.elements.impacts.RunImpactsInShape">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                            <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderMaster" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsIf">
+                                            <predicate type="gameMechanics.elements.predicates.PredicateAffectGroup">
+                                                <affectGroup>Enemies</affectGroup>
+                                            </predicate>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                                    <element>ASTRAL</element>
+                                                    <forceAE>true</forceAE>
+                                                    <damage>1</damage>
+                                                    <impactsOnHitTarget>
+                                                        <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                                                            <mark href="GatherDamage.(MarkResource).xdb" />
+                                                        </Item>
+                                                    </impactsOnHitTarget>
+                                                    <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                                                        <scalers>
+                                                            <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                                    <externalCalcer href="GatherDamage.(CalcerFloatResource).xdb" />
+                                                                </mulCalcer>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.scalers.MagicScaler" />
+                                                        </scalers>
+                                                    </scaler>
+                                                </Item>
+                                            </impactsIf>
+                                            <impactsElse>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsIf">
+                                                    <predicate type="gameMechanics.elements.predicates.PredicateAffectGroup">
+                                                        <affectGroup>Friends</affectGroup>
+                                                    </predicate>
+                                                    <impactsIf>
+                                                        <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                                                            <mark href="GatherFriends.(MarkResource).xdb" />
+                                                        </Item>
+                                                    </impactsIf>
+                                                </Item>
+                                            </impactsElse>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <shape type="gameMechanics.constructor.schemes.spell.area.RectangularRay">
+                <width>6</width>
+            </shape>
+            <affectGroup>All</affectGroup>
+            <radius type="gameMechanics.elements.impacts.RunImpactsInShape$DistanceCalcer" />
+            <workOnDead>false</workOnDead>
+            <shapeCenterPosition>Caster</shapeCenterPosition>
+            <shapeOrientation type="gameMechanics.elements.common.ShapeOrientationYawAndPitch" />
+        </Item>
+    </impacts>
+</gameMechanics.constructor.basicElements.ImpactListResource>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>185786</resourceId>
+    </Header>
+    <Name href="BossYeti_addSummon.(SpellSingleTarget).Name.txt" />
+    <image href="/Interface/Icons/Misc/Quest/LeatherGhostWolf.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="BossYeti_Roar.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="BossYeti_addSummon.(SpellSingleTarget).Name.txt" />
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>30000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="BossYeti_1stage.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="UI06_BossYeti_canSummon.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.RepeatedImpact">
+                <impact type="gameMechanics.elements.impacts.ImpactSummon">
+                    <destination type="gameMechanics.map.destination.RelativePos" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactCopyAggroList" />
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="UI06_BossYeti_canSummon.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <object href="BossYeti_add.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    <pool href="BossYeti_adds.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                </impact>
+                <count type="gameMechanics.elements.calcers.FloatData">
+                    <value>5</value>
+                </count>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

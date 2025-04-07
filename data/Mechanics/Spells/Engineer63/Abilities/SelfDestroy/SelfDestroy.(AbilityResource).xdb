@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>215636</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="SelfDestroy.(AbilityResource).Name.txt" />
+    <description href="SelfDestroy.(AbilityResource).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value var="damage" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>WeaponScaler</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Mage/FireBolt.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.BuffExtraEffects">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
+            </groups>
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOff>
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/Spells/Engineer63/Spells/Titan/TitanInvisPlane.(BuffResource).xdb" />
+                                            </predicate>
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="DoNotExplode.(BuffResource).xdb" />
+                                            </predicate>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                            <radius>15</radius>
+                                            <affectGroup>Enemies</affectGroup>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                                            <element>ACID</element>
+                                                            <damage var="damage" />
+                                                        </Item>
+                                                    </impacts>
+                                                    <groupRepeaters>true</groupRepeaters>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                            <projectileData>
+                                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
+                                                <resource href="Explosion.(ProjectileResource).xdb" />
+                                            </projectileData>
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsOff>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectMarkedImpacts">
+            <mark href="DoNotExplode.(MarkResource).xdb" />
+            <impacts>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="DoNotExplode.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <ranks>
+        <Item href="SelfDestroy01.(AbilityResource).xdb" />
+        <Item href="SelfDestroy02.(AbilityResource).xdb" />
+        <Item href="SelfDestroy03.(AbilityResource).xdb" />
+    </ranks>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

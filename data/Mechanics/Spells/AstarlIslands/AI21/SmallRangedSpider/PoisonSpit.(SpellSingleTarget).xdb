@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>189058</resourceId>
+    </Header>
+    <Name href="PoisonSpit.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="PoisonSpitAOE.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <prepareDuration>1000</prepareDuration>
+    <mechanics>
+        <cooldown>
+            <duration>1000</duration>
+        </cooldown>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="PuddleSummonCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </predicates>
+                <impactsElse>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="PuddleSummonCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                            <multiplier>4</multiplier>
+                        </durationScaler>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                        <affectGroup>Friends</affectGroup>
+                        <affectHolder>false</affectHolder>
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="PuddleSummonCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impacts>
+                        <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="/Creatures/BlackWidow/Instances/AstralIsle21/AstralSpiderSmallRanged.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                    </mobs>
+                                </Item>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="PuddleSummonCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                        </filter>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="PuddleSummonCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </predicates>
+                <elseImpacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                        <predicates>
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/Spells/AstarlIslands/AI21/DruidAllyAmplify/SpiderRangedAmp.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </predicates>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                <projectileData>
+                                    <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                        <directed>false</directed>
+                                    </moveType>
+                                    <resource href="PoisonPuddle_Strong.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                                </projectileData>
+                                <pool href="PuddlePool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                            </Item>
+                        </impacts>
+                        <elseImpacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                <projectileData>
+                                    <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                        <directed>false</directed>
+                                    </moveType>
+                                    <resource href="PoisonPuddle.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                                </projectileData>
+                                <pool href="PuddlePool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                            </Item>
+                        </elseImpacts>
+                    </Item>
+                </elseImpacts>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="FXCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="FXCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                        <element>POISON</element>
+                        <damage>25</damage>
+                        <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                        <delay>600</delay>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                <data href="/Spells/ClientData/HitPoisonAOE_R5.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                        <radius>5</radius>
+                        <affectGroup>Enemies</affectGroup>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                <element>POISON</element>
+                                <damage>25</damage>
+                                <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                            </Item>
+                        </impacts>
+                        <filter type="gameMechanics.world.creature.AvatarFilter" />
+                    </Item>
+                </impactsElse>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>25</speed>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

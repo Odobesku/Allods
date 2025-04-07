@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>251774</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Teleporters.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/TeleportationSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="Return.txt" />
+    <Description href="Return.Description.txt" />
+    <image href="/Interface/Icons/Misc/Unlocks/UnlockPortal.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Common/Teleportation.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="Return.txt" />
+    <descTemplate href="Return.Description.txt" />
+    <prepareDuration>15000</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+            </Item>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="/Mechanics/BestFriends/Buffs/AfterTeleportBuff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
+                <key href="/System/ContentKeys/BestFriends.(ContentKey).xdb#xpointer(/basement.contentkey.ContentKey)" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactReturnFromBestFriend">
+                <impactsOnSucces>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="/Mechanics/BestFriends/Buffs/AfterTeleportBuff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsOnSucces>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <params>
+        <params>
+            <Item>
+                <name>friendIndex</name>
+                <type>Int</type>
+            </Item>
+        </params>
+    </params>
+    <canStartNotBeeingInSpellbook>true</canStartNotBeeingInSpellbook>
+    <iffPolicy>Friends</iffPolicy>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

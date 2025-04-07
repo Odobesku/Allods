@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>251376</resourceId>
+    </Header>
+    <Name href="FatalityAura.(SpellCasterSelf).Name.txt" />
+    <Description href="FatalityAura.(SpellCasterSelf).Description.txt" />
+    <image href="/Interface/Icons/Misc/Unlocks/Fatality.(UISingleTexture).xdb" />
+    <visualScripts href="FatalityAura.(SpellVisScripts).xdb" />
+    <uiSpellBookPageType>SPELLBOOK_PAGE_OTHER</uiSpellBookPageType>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <isWorkOnDead>true</isWorkOnDead>
+    <iffPolicy>Friends</iffPolicy>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>10000</duration>
+            <group href="/Mechanics/Spells/Groups/Aura.xdb" />
+        </cooldown>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+                        <spell href="FatalityAura.(SpellCasterSelf).xdb" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+                        <spell href="FatalityAura.(SpellCasterSelf).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                        <group href="ClassFatality.(ActionGroup).xdb" />
+                        <checkCaster>true</checkCaster>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+                                <spell href="FatalityWings.(SpellSingleTarget).xdb" />
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+                                <spell href="FatalityWings.(SpellSingleTarget).xdb" />
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impacts>
+                <elseImpacts>
+                    <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                        <impactsResource href="TurnFatalityOn.(ImpactListResource).xdb" />
+                    </Item>
+                </elseImpacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

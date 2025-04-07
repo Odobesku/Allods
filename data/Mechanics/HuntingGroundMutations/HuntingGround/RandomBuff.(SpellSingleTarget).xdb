@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>242827</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="RandomBuff.(SpellSingleTarget).Name.txt" />
+    <Description href="RandomBuff.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Misc/Buffs/MoonRay.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>10</value>
+    </range>
+    <prepareDuration>1000</prepareDuration>
+    <iffPolicy>Everyone</iffPolicy>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.constructor.basicElements.PredicateAnd">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateFaction">
+                            <faction href="/World/Factions/League.xdb#xpointer(/gameMechanics.world.creature.Faction)" />
+                        </Item>
+                        <Item type="gameMechanics.map.variables.PredicateMapVariableEquals">
+                            <variableResource hrefvar="variable" />
+                            <expectedValue type="gameMechanics.elements.calcers.FloatData">
+                                <value>1</value>
+                            </expectedValue>
+                        </Item>
+                    </predicates>
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.constructor.basicElements.PredicateAnd">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateFaction">
+                            <faction href="/World/Factions/Empire.xdb#xpointer(/gameMechanics.world.creature.Faction)" />
+                        </Item>
+                        <Item type="gameMechanics.map.variables.PredicateMapVariableEquals">
+                            <variableResource hrefvar="variable" />
+                            <expectedValue type="gameMechanics.elements.calcers.FloatData">
+                                <value>2</value>
+                            </expectedValue>
+                        </Item>
+                    </predicates>
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateFaction">
+                        <faction href="/World/Factions/League.xdb#xpointer(/gameMechanics.world.creature.Faction)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                        <impactsResource hrefvar="League" />
+                    </Item>
+                    <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                        <variable hrefvar="variable" />
+                        <reset>true</reset>
+                        <summand>1</summand>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateFaction">
+                        <faction href="/World/Factions/Empire.xdb#xpointer(/gameMechanics.world.creature.Faction)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                        <impactsResource hrefvar="Empire" />
+                    </Item>
+                    <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                        <variable hrefvar="variable" />
+                        <reset>true</reset>
+                        <summand>2</summand>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                            <quest href="/World/Quests/HuntingGround7/Daily/HG7_PowerPlace_Quest.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                            <counterResource href="/World/Quests/HuntingGround7/Daily/HG7_PowerPlace_Quest.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                        </predicate>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="/World/Quests/HuntingGround7/Daily/HG7_PowerPlace_Quest.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Started</status>
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                        <id href="/World/Quests/HuntingGround7/Daily/HG7_PowerPlace_Quest.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateFaction">
+                        <faction href="/World/Factions/League.xdb#xpointer(/gameMechanics.world.creature.Faction)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                        <visualState>1</visualState>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateFaction">
+                                <faction href="/World/Factions/Empire.xdb#xpointer(/gameMechanics.world.creature.Faction)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                        </predicates>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                                <visualState>2</visualState>
+                            </Item>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="Mark_Empire.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                <buff href="Mark_League.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                <buff href="Mark_Neutral.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impacts>
+                        <elseImpacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                                <visualState>0</visualState>
+                            </Item>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="Mark_Neutral.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                <buff href="Mark_League.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                <buff href="Mark_Empire.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </elseImpacts>
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="Mark_League.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="Mark_Neutral.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="Mark_Empire.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

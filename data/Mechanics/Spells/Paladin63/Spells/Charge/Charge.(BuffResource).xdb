@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>206696</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="Charge.(BuffResource).Name.txt" />
+    <Description href="Charge.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Paladin/PaladinBladeJustice.(UISingleTexture).xdb" />
+    <visScript href="/Spells/VisScripts/Paladin/BladeOfJustice.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.Charge">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ScaledPhysicalWeaponDamage">
+                            <impactsOnHitCaster>
+                                <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                                    <mark href="ChargedSelfMark.(MarkResource).xdb" />
+                                </Item>
+                            </impactsOnHitCaster>
+                            <impactsOnHitTarget>
+                                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                                            <mark href="ChargeMelee.(MarkResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsOnHitTarget>
+                            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                                <scalers>
+                                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                            <externalCalcer hrefvar="externalCalcer" />
+                                        </mulCalcer>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.scalers.WeaponScaler" />
+                                    <Item type="gameMechanics.elements.scalers.LinearScaler">
+                                        <multiplier>1.66667</multiplier>
+                                    </Item>
+                                </scalers>
+                            </scaler>
+                            <avgDamage>1</avgDamage>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <buff hrefvar="buff" />
+            <speedFactor>3</speedFactor>
+            <predicate type="gameMechanics.elements.predicates.PredicateReachTarget" />
+            <pathChecker type="space.pathfinding.pathChecker.PathDeviationLimited">
+                <angle>0.5236</angle>
+            </pathChecker>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToSpellFromGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/MovementImpairingSpells.xdb" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffInterceptor">
+            <impactsOnAttach>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff hrefvar="buff" />
+                    <anyRank>false</anyRank>
+                </Item>
+            </impactsOnAttach>
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs_IgnoreWill.(ActionGroup).xdb" />
+                    </groups>
+                </Item>
+                <Item type="gameMechanics.constructor.basicElements.PredicateGenericNot">
+                    <predicate type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                        <groups>
+                            <Item href="/Mechanics/Spells/Groups/Silence.xdb" />
+                        </groups>
+                    </predicate>
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DisableSpellsPredicate">
+            <predicate type="gameMechanics.constructor.basicElements.PredicateGenericNot">
+                <predicate type="gameMechanics.constructor.basicElements.PredicateGenericOr">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateSpellInGroup">
+                            <group href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                            <spells>
+                                <Item href="Charge01.(SpellSingleTarget).xdb" />
+                            </spells>
+                        </Item>
+                    </predicates>
+                </predicate>
+            </predicate>
+        </Item>
+    </effects>
+    <duration>7000</duration>
+    <isHelpful>true</isHelpful>
+    <ranks>
+        <Item href="Charge01.(BuffResource).xdb" />
+        <Item href="Charge02.(BuffResource).xdb" />
+        <Item href="Charge03.(BuffResource).xdb" />
+    </ranks>
+    <canBeSaved>false</canBeSaved>
+    <isForthright>true</isForthright>
+</gameMechanics.constructor.schemes.buff.BuffResource>

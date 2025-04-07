@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>245571</resourceId>
+    </Header>
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateHealthHigher">
+                                    <level>0.5</level>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="SavantChannel.(BuffResource).xdb" />
+                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                        <multiplier>6</multiplier>
+                                    </durationScaler>
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateHealthHigher">
+                                            <level>0.25</level>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="SavantChannel.(BuffResource).xdb" />
+                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                <multiplier>5</multiplier>
+                                            </durationScaler>
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="SavantChannel.(BuffResource).xdb" />
+                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                <multiplier>4</multiplier>
+                                            </durationScaler>
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impactsOn>
+                    <impactsOff>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="SavantChannel.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="SavantTargetTransform.(BuffResource).xdb" />
+                        </Item>
+                    </impactsOff>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.25</coeff>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffInterceptor">
+            <impactsOnAttach>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="SavantChannel1.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                            <spell href="109_SavantChannel.(SpellSingleTarget).xdb" />
+                            <duration>
+                                <minute>10</minute>
+                            </duration>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactResetActiveAction" />
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="SavantEnrage.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                            <spell href="109_SavantTargetPhase.(SpellSingleTarget).xdb" />
+                            <duration>
+                                <second>10</second>
+                                <ms>500</ms>
+                            </duration>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOnAttach>
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.PredicateBuffEquals">
+                    <buff href="/Mechanics/Creatures/ArchitectSiege/ZC12_Map02/KrigBombProtection.(BuffResource).xdb" />
+                </Item>
+            </predicates>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

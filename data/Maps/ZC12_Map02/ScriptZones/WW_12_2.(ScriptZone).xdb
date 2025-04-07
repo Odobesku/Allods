@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.map.scriptZone.ScriptZone>
+    <Header>
+        <resourceId>35713</resourceId>
+    </Header>
+    <filter type="gameMechanics.world.creature.AvatarFilter" />
+    <conditionsOut>
+        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+            <quest href="/World/Quests/ZC12_Map02/WW_12_2/WW_12_2.xdb" />
+            <status>Active</status>
+        </Item>
+    </conditionsOut>
+    <impactsOut>
+        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                    <quest href="/World/Quests/ZC12_Map02/WW_12_2/WW_12_2.xdb" />
+                    <status>Active</status>
+                </Item>
+                <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                    <quest href="/World/Quests/ZC12_Map02/WW_12_2/WW_12_2.xdb" />
+                    <counterResource href="/World/Quests/ZC12_Map02/WW_12_2/CountId_1.xdb" />
+                    <value>1</value>
+                </Item>
+                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                        <quest href="/World/Quests/ZC12_Map02/WW_12_2/WW_12_2.xdb" />
+                        <counterResource href="/World/Quests/ZC12_Map02/WW_12_2/CountId_2.xdb" />
+                        <value>1</value>
+                    </predicate>
+                </Item>
+            </predicates>
+            <impactsIf>
+                <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                    <id href="/World/Quests/ZC12_Map02/WW_12_2/CountId_2.xdb" />
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/World/Quests/ZC12_Map02/WW_12_2/WW_12_2_Door.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="/World/Quests/ZC12_Map02/WW_12_2/WW_12_2_bomb.(SummonPool).xdb" />
+                    <isPersonalPool>true</isPersonalPool>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientData">
+                            <data href="/World/Quests/ZC12_Map02/WW_12_2/WW_12_2_bomb.(ClientData).xdb" />
+                            <locators>
+                                <Item>
+                                    <scriptID>WW_12_2_bomb</scriptID>
+                                    <map href="/Maps/ZC12_Map02/MapResource.xdb" />
+                                </Item>
+                            </locators>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                            <delay>1000</delay>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>3000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.world.avatar.assistants.ImpactsToAssistant">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="/World/Quests/ZC12_Map02/WW_12_2/WW_12_2_02.(ClientData).xdb" />
+                                </Item>
+                            </impacts>
+                            <assistantResource href="/World/Quests/ZC12_Map02/WW_12_1/WW_12_1_eskort.(AssistantResource).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsIf>
+        </Item>
+    </impactsOut>
+    <considerAsWhole>true</considerAsWhole>
+</gameMechanics.map.scriptZone.ScriptZone>

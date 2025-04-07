@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>216549</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="Relentless.(AbilityResource).Name.txt" />
+    <description href="Relentless.(AbilityResource).Description.txt" />
+    <descVars>
+        <Item>
+            <name>dur</name>
+            <value var="dur" />
+        </Item>
+        <Item>
+            <name>cd</name>
+            <value var="cd" />
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Stalker/Rush.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.BuffInterceptor">
+            <impactsOnAttach>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="CD.(BuffResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.MassBuffDetacher">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                                            <groups>
+                                                <Item href="/Mechanics/Spells/Groups/MovementImpairingSpells.xdb" />
+                                            </groups>
+                                        </Item>
+                                    </predicates>
+                                    <impactsOnHolder>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="Relentless.(BuffResource).xdb" />
+                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                <multiplier var="dur" />
+                                            </durationScaler>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="CD.(BuffResource).xdb" />
+                                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                        <multiplier var="cd" />
+                                                    </durationScaler>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impactsOnHolder>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsOnAttach>
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/MovementImpairingSpells.xdb" />
+                    </groups>
+                </Item>
+            </predicates>
+        </Item>
+    </effects>
+    <ranks>
+        <Item href="Relentless01.(AbilityResource).xdb" />
+        <Item href="Relentless02.(AbilityResource).xdb" />
+    </ranks>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

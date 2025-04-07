@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>222724</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+    </groups>
+    <Name href="HeedJump.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="/Mechanics/RaidInstances/FerrisRaid/6_TigerRat/JumpSeries/TurnToTarget.(SpellVisScripts).xdb" />
+    <prepareDuration>500</prepareDuration>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>250000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="/Mechanics/RaidInstances/FerrisRaid/6_TigerRat/JumpSeries/JumpTarget.(BuffResource).xdb" />
+            </Item>
+        </targetConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="HeedJumpResource.(BuffResource).xdb" />
+                <consumeStacks>1</consumeStacks>
+            </Item>
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactAstralKickToPoint">
+                <time>1000</time>
+                <impactsOnLand>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                        <data href="/Spells/ClientData/HowlingStrike.(ClientData).xdb" />
+                    </Item>
+                </impactsOnLand>
+                <turnToDestination>true</turnToDestination>
+                <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                <spell href="AfterHeedLaceration.(SpellSingleTarget).xdb" />
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="JumpTargetSlowdown.(BuffResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                    <scalers>
+                        <Item type="gameMechanics.elements.scalers.WeaponScaler" />
+                        <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mul>0.5</mul>
+                            <mulCalcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                <buff href="HeedStrength.(BuffResource).xdb" />
+                            </mulCalcer>
+                            <sum>1</sum>
+                        </Item>
+                    </scalers>
+                </scaler>
+                <minDamage>8</minDamage>
+                <maxDamage>8</maxDamage>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

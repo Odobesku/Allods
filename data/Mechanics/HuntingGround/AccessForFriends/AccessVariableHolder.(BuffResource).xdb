@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>250473</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <image href="/Interface/Icons/Misc/Event/HoldingStone.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectVariable">
+            <resource hrefvar="variableAccessCounter" />
+            <impactsOnChange>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateVariableLessThan">
+                            <resource hrefvar="variableAccessCounter" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressees">
+                            <addresseesFinder type="gameMechanics.elements.addresseeFinders.AddresseesCalcerGroupMembers" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.constructor.basicElements.PredicateExternal">
+                                                    <predicateResource href="ZoneClosed.(PredicateResource).xdb#xpointer(/gameMechanics.constructor.basicElements.PredicateResource)" />
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                    <predicates>
+                                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                            <buff href="GoAwayFromHG.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </Item>
+                                                    </predicates>
+                                                    <impactsElse>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="GoAwayFromHG.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </Item>
+                                                    </impactsElse>
+                                                </Item>
+                                            </impactsIf>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
+                            <resource hrefvar="variableAccessCounter" />
+                            <minValue>3</minValue>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressees">
+                            <addresseesFinder type="gameMechanics.elements.addresseeFinders.AddresseesCalcerGroupMembers" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                                                    <zone hrefvar="zone" />
+                                                </Item>
+                                                <Item type="gameMechanics.elements.predicates.PredicateUnlock">
+                                                    <unlock hrefvar="unlock" />
+                                                </Item>
+                                            </predicates>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff hrefvar="buffAccessGranted" />
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff hrefvar="buffAccessGranted" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.StackBuff">
+                                            <buff hrefvar="buffAccessGranted" />
+                                            <resetTimer>false</resetTimer>
+                                            <delta type="gameMechanics.elements.calcers.CalcerDiff">
+                                                <minuend type="gameMechanics.elements.calcers.FloatData">
+                                                    <value>2</value>
+                                                </minuend>
+                                                <subtrahend type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                                    <buff hrefvar="buffAccessGranted" />
+                                                </subtrahend>
+                                            </delta>
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
+                                    <resource hrefvar="variableAccessCounter" />
+                                    <minValue>1</minValue>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.SendImpactsToAddressees">
+                                    <addresseesFinder type="gameMechanics.elements.addresseeFinders.AddresseesCalcerGroupMembers" />
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                    <predicates>
+                                                        <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                                                            <zone hrefvar="zone" />
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.predicates.PredicateUnlock">
+                                                            <unlock hrefvar="unlock" />
+                                                        </Item>
+                                                    </predicates>
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                    <buff hrefvar="buffAccessGranted" />
+                                                </Item>
+                                            </impactsIf>
+                                            <impactsElse>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff hrefvar="buffAccessGranted" />
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.StackBuff">
+                                                    <buff hrefvar="buffAccessGranted" />
+                                                    <resetTimer>false</resetTimer>
+                                                    <delta type="gameMechanics.elements.calcers.CalcerDiff">
+                                                        <minuend type="gameMechanics.elements.calcers.FloatData">
+                                                            <value>1</value>
+                                                        </minuend>
+                                                        <subtrahend type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                                            <buff hrefvar="buffAccessGranted" />
+                                                        </subtrahend>
+                                                    </delta>
+                                                </Item>
+                                            </impactsElse>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.SendImpactsToAddressees">
+                                    <addresseesFinder type="gameMechanics.elements.addresseeFinders.AddresseesCalcerGroupMembers" />
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff hrefvar="buffAccessGranted" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsOnChange>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectOnUnionMemberTrigger">
+            <impactsOnJoin>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                            <zone hrefvar="zone" />
+                        </Item>
+                    </predicates>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateUnlock">
+                                    <unlock hrefvar="unlock" />
+                                </Item>
+                            </predicates>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
+                                                    <resource hrefvar="variableAccessCounter" />
+                                                    <minValue>3</minValue>
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff hrefvar="buffAccessGranted" />
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.StackBuff">
+                                                            <buff hrefvar="buffAccessGranted" />
+                                                            <resetTimer>false</resetTimer>
+                                                            <delta type="gameMechanics.elements.calcers.CalcerDiff">
+                                                                <minuend type="gameMechanics.elements.calcers.FloatData">
+                                                                    <value>2</value>
+                                                                </minuend>
+                                                                <subtrahend type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                                                    <buff hrefvar="buffAccessGranted" />
+                                                                </subtrahend>
+                                                            </delta>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impactsIf>
+                                            <impactsElse>
+                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                    <predicates>
+                                                        <Item type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
+                                                            <resource hrefvar="variableAccessCounter" />
+                                                            <minValue>1</minValue>
+                                                        </Item>
+                                                    </predicates>
+                                                    <impactsIf>
+                                                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff hrefvar="buffAccessGranted" />
+                                                                </Item>
+                                                                <Item type="gameMechanics.elements.impacts.StackBuff">
+                                                                    <buff hrefvar="buffAccessGranted" />
+                                                                    <resetTimer>false</resetTimer>
+                                                                    <delta type="gameMechanics.elements.calcers.CalcerDiff">
+                                                                        <minuend type="gameMechanics.elements.calcers.FloatData">
+                                                                            <value>1</value>
+                                                                        </minuend>
+                                                                        <subtrahend type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                                                            <buff hrefvar="buffAccessGranted" />
+                                                                        </subtrahend>
+                                                                    </delta>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impactsIf>
+                                                </Item>
+                                            </impactsElse>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsOnJoin>
+            <impactsOnLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                            <zone hrefvar="zone" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateUnlock">
+                                    <unlock hrefvar="unlock" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                                            <variable hrefvar="variableAccessCounter" />
+                                            <summand>-1</summand>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                                            <variable hrefvar="variableAccessCounter" />
+                                            <summand>2</summand>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="GoAwayFromHG.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </predicates>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="GoAwayFromHG.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff hrefvar="buffAccessGranted" />
+                </Item>
+            </impactsOnLeave>
+        </Item>
+    </effects>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

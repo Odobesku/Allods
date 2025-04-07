@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>196802</resourceId>
+    </Header>
+    <name href="MaterielAbility.(AbilityResource).Name.txt" />
+    <description href="MaterielAbility.(AbilityResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Stalker/Equipment.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectVariable">
+            <resource href="MaterielResource.(VariableResource).xdb" />
+            <impactsOnChange>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                </Item>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateVariableEquals">
+                                        <resource href="MaterielResource.(VariableResource).xdb" />
+                                        <value>10</value>
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                            <variable href="MaterielResource.(VariableResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                    <impactsElse />
+                </Item>
+            </impactsOnChange>
+            <impactsOnDec>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiatingScalable">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                                    <mark href="MaterielSpent.(MarkResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOnDec>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                    <variable href="MaterielResource.(VariableResource).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="HiddenCmbStateReset.(BuffResource).xdb" />
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EventTrigger">
+            <eventClasses>
+                <Item>gameMechanics.elements.events.EventRevive</Item>
+            </eventClasses>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                    <variable href="MaterielResource.(VariableResource).xdb" />
+                </Item>
+            </impacts>
+            <eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

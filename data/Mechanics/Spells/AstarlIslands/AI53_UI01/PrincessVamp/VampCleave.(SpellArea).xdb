@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>185133</resourceId>
+    </Header>
+    <Name href="VampCleave.(SpellArea).Name.txt" />
+    <visualScripts href="VampCleave.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="VampCleave.(SpellArea).Name.txt" />
+    <prepareDuration>1000</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>5000</duration>
+        </cooldown>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </predicates>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                        <element>SHADOW</element>
+                        <damage>30</damage>
+                        <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                    </Item>
+                </impactsIf>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                        <mobs>
+                            <Item href="BossAdd.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                        </mobs>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="PrincesInnerRage.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                        </impacts>
+                    </Item>
+                </impactsIf>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Cone">
+        <angle type="constructor.basicElements.AngleDegrees">
+            <value>35</value>
+        </angle>
+    </shape>
+    <shapeCenterPosition>Caster</shapeCenterPosition>
+    <radius>5</radius>
+    <needLosToTarget>true</needLosToTarget>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

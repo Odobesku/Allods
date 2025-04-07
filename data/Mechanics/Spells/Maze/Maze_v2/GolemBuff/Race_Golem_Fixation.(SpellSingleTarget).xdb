@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>197922</resourceId>
+    </Header>
+    <contextActionInfo>
+        <priority>2</priority>
+        <contextName href="Race_Golem_Fixation.(SpellSingleTarget).ContextName.txt" />
+        <contextDescription href="Race_Golem_Fixation.(SpellSingleTarget).ContextDescription.txt" />
+        <contextImage href="/Interface/Icons/Mounts/SpellsMounts/BattleMountZemFixation.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    </contextActionInfo>
+    <groups>
+        <Item href="Race_Golem.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/ActionBarChange.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="Race_Golem_Fixation.(SpellSingleTarget).Name.txt" />
+    <Description href="Race_Golem_Fixation.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Mounts/SpellsMounts/BattleMountZemFixation.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <launchWhenReady>true</launchWhenReady>
+    <mechanics>
+        <cooldown>
+            <duration>40000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Items/InteractiveObjects/Maze_KHD/Maze_v2/Chest_Orange/First_Place_Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Items/InteractiveObjects/Maze_KHD/Maze_v2/Chest_Orange/Second_Place_Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Items/InteractiveObjects/Maze_KHD/Maze_v2/Chest_Orange/Third_Place_Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateCreature" />
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/Spells/Mounts/ZemSpider/FixatingJump/JumpVisual.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactAvatarJump">
+                <destination type="gameMechanics.map.destination.DestinationModified">
+                    <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+                    <modifiers>
+                        <Item type="gameMechanics.map.destination.modifier.ModifierRelativePolar">
+                            <radius type="gameMechanics.elements.calcers.FloatData">
+                                <value>2</value>
+                            </radius>
+                            <angle type="constructor.basicElements.AngleRadians" />
+                        </Item>
+                        <Item type="gameMechanics.map.destination.modifier.ModifierIfCheckPath">
+                            <pathChecker type="space.pathfinding.pathChecker.PathDeviationLimited">
+                                <angle>1.5708</angle>
+                            </pathChecker>
+                            <modifierElse type="gameMechanics.map.destination.modifier.ModifierTrailFrom" />
+                        </Item>
+                    </modifiers>
+                </destination>
+                <speed>30</speed>
+                <impactsOnLand>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="/Mechanics/Spells/Mounts/ZemSpider/FixatingJump/JumpVisual.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsOnLand>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="Race_Golem_Fixation.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

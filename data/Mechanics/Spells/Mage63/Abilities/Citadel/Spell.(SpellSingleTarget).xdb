@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>207692</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+    </groups>
+    <element>COLD</element>
+    <Name href="Spell.(SpellSingleTarget).Name.txt" />
+    <Description href="Spell.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Spells/Mage/MageCitadel.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Mage/Citadel.(SpellVisScripts).xdb" />
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <iffPolicy>Friends</iffPolicy>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <stage>Land</stage>
+            <duration>10000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="/Mechanics/Spells/CommonBuffs/Aspects/CC/Buff03.(BuffResource).xdb" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+                        <spell href="Spell.(SpellSingleTarget).xdb" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="Stacking.(BuffResource).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="Buff.(BuffResource).xdb" />
+                    </Item>
+                </impacts>
+                <elseImpacts>
+                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellActivate">
+                        <spell href="Spell.(SpellSingleTarget).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="Stacking.(BuffResource).xdb" />
+                    </Item>
+                </elseImpacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

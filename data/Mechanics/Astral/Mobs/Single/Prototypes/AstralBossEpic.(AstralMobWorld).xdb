@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.astralMob.AstralMobWorld>
+    <Header>
+        <resourceId>233212</resourceId>
+        <isPrototype>true</isPrototype>
+        <Prototype href="/Mechanics/ObjectTemplates/AstralMob.(AstralMobWorld).xdb#xpointer(/gameMechanics.world.astralMob.AstralMobWorld)" />
+    </Header>
+    <persistentParts>
+        <Item type="gameMechanics.elements.bunchparts.BunchPartAttachEffects">
+            <effects>
+                <Item type="gameMechanics.world.ship.elements.EffectImpactsOnDeath">
+                    <impactsOnKiller>
+                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                            <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderShip" />
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/Rules/Astral/EpicBoss/BuffChestOnShip.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsOnKiller>
+                    <impactsOnVictimWoKiller>
+                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                            <impactsResource href="/Mechanics/Rules/Astral/EpicBoss/ChestRespawnInSector.(ImpactListGenericResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                        </Item>
+                    </impactsOnVictimWoKiller>
+                    <impactsOnVictim>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.AstralSectorDistributor">
+                                <sector type="gameMechanics.world.bigAstral.elements.CurrentSectorSelector" />
+                                <faction type="gameMechanics.elements.calcers.ZoneDistributor$AnyFaction" />
+                            </distributor>
+                            <data href="/Mechanics/Rules/Astral/EpicBoss/DemonDeadWormholesClose.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                            <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderRule">
+                                <rule href="/Mechanics/Rules/Astral/EpicBoss/Wormholes.(RuleResource).xdb#xpointer(/gameMechanics.world.rules.RuleResource)" />
+                            </addresseeFinder>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                    <delay>300000</delay>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactSetRulesState">
+                                            <rules>
+                                                <Item href="/Mechanics/Rules/Astral/EpicBoss/Wormholes.(RuleResource).xdb#xpointer(/gameMechanics.world.rules.RuleResource)" />
+                                            </rules>
+                                            <ruleState>Disabled</ruleState>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsOnVictim>
+                </Item>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="BossVisorImmunity.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsOn>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.world.cellReplication.MapWideReplicated" />
+        <Item type="gameMechanics.world.device.cannon.SubsystemPartResource">
+            <subsystemSettings href="/Mechanics/Astral/Mobs/HeadShots/Head100.(SubsystemSettings).xdb#xpointer(/gameMechanics.world.device.cannon.SubsystemSettings)" />
+        </Item>
+        <Item type="gameMechanics.world.astralMob.LogKillersPartResource" />
+    </persistentParts>
+    <name href="AstralBossEpic.(AstralMobWorld).Name.txt" />
+    <corpulence>160</corpulence>
+    <image href="/Interface/Ingame/ContextAstralMap/AstralHubMark/Monster06.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <roamingData href="/Mechanics/Astral/Mobs/EmptyRoamingArea.(RoamingData).xdb#xpointer(/gameMechanics.world.mob.RoamingData)" />
+    <stats>
+        <speed>20</speed>
+        <hp type="gameMechanics.elements.calcers.CalcerMul">
+            <calcers>
+                <Item type="gameMechanics.elements.calcers.AstralMobStrengthModCalcer" />
+                <Item type="gameMechanics.elements.calcers.FloatData">
+                    <value>600000</value>
+                </Item>
+                <Item type="gameMechanics.elements.calcers.AstralTLCalcer">
+                    <value type="gameMechanics.elements.calcers.FloatData">
+                        <value>1.33</value>
+                    </value>
+                </Item>
+            </calcers>
+        </hp>
+        <aggroRange>1000</aggroRange>
+        <hitChance>0.75</hitChance>
+        <insight type="gameMechanics.elements.calcers.CalcerMul">
+            <calcers>
+                <Item type="gameMechanics.elements.calcers.AstralMobStrengthModCalcer" />
+                <Item type="gameMechanics.elements.calcers.FloatData">
+                    <value>40</value>
+                </Item>
+            </calcers>
+        </insight>
+    </stats>
+    <faction href="/World/Factions/Wild.xdb#xpointer(/gameMechanics.world.creature.Faction)" />
+    <abilityKit href="/Mechanics/Creatures/Astral/AstralEpicBoss.(MobAbilityKit).xdb#xpointer(/gameMechanics.world.mob.MobAbilityKit)" />
+    <quality href="/Mechanics/MobQualities/AstralMob.(MobQuality).xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
+</gameMechanics.world.astralMob.AstralMobWorld>

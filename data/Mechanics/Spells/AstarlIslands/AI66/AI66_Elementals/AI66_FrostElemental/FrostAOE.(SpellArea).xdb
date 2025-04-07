@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>187409</resourceId>
+    </Header>
+    <Name href="FrostAOE.(SpellArea).Name.txt" />
+    <visualScripts href="FrostAOE.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <prepareDuration>3500</prepareDuration>
+    <immutablePrepareDuration>true</immutablePrepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTPoint</targetType>
+    <modifiers>
+        <Item type="gameMechanics.elements.spell.RaiseRepelType" />
+    </modifiers>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>10000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateMobWorld">
+                    <mobs>
+                        <Item href="AI66_FrostElemental.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    </mobs>
+                </predicate>
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                        <element>PHYSICAL</element>
+                        <threatMultiplier>0</threatMultiplier>
+                        <damage>20</damage>
+                        <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                    </Item>
+                </impactsIf>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="FrostPrison.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <shapeCenterPosition>Caster</shapeCenterPosition>
+    <radius>6</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

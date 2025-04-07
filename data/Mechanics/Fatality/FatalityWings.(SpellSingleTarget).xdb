@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>251391</resourceId>
+    </Header>
+    <Name href="FatalityWings.(SpellSingleTarget).Name.txt" />
+    <Description href="FatalityWings.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Misc/Itemmall/WingsDO.(UISingleTexture).xdb" />
+    <visualScripts href="FatalityAura.(SpellVisScripts).xdb" />
+    <uiSpellBookPageType>SPELLBOOK_PAGE_OTHER</uiSpellBookPageType>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <isWorkOnDead>true</isWorkOnDead>
+    <iffPolicy>Friends</iffPolicy>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>10000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                <predicate type="gameMechanics.elements.predicates.PredicateUnlock">
+                    <unlock href="/Mechanics/Unlocks/FatalityBuffs/FatalityBuff04.xdb" />
+                </predicate>
+                <clientData href="FatalityAuraNeed.(ClientData).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                <predicate type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+                    <spell href="FatalityAura.(SpellCasterSelf).xdb" />
+                </predicate>
+                <clientData href="FatalityAuraNeedActivated.(ClientData).xdb" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+                        <spell href="FatalityWings.(SpellSingleTarget).xdb" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+                        <spell href="FatalityWings.(SpellSingleTarget).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="FatalityWingsBuff.(BuffResource).xdb" />
+                    </Item>
+                </impacts>
+                <elseImpacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="FatalityWingsBuff.(BuffResource).xdb" />
+                    </Item>
+                </elseImpacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>215130</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="SupportAcousticBarrierWillpower.(AbilityResource).Name.txt" />
+    <description href="SupportAcousticBarrierWillpower.(AbilityResource).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var3</name>
+            <value var="value" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>FormulaPercent</formula>
+            </scaler>
+        </Item>
+        <Item>
+            <name>dur</name>
+            <value var="dur" />
+        </Item>
+        <Item>
+            <name>cd</name>
+            <value var="cd" />
+        </Item>
+        <Item>
+            <name>var0</name>
+            <value var="basebonus" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>FormulaPercent</formula>
+            </scaler>
+        </Item>
+        <Item>
+            <name>var1</name>
+            <value var="critpowbonus" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>FormulaPercent</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Bard/AcousticBarrier.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectInstantiating">
+            <effects>
+                <Item type="gameMechanics.elements.effects.BuffExtraEffects">
+                    <buffs>
+                        <Item href="/Mechanics/Spells/CommonBuffs/Aspects/Support/Buff01.(BuffResource).xdb" />
+                    </buffs>
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.BuffExtraEffects">
+                            <buffs>
+                                <Item href="/Mechanics/Spells/Bard63/Spells/AcousticBarrier/AcousticBarrier01.(BuffResource).xdb" />
+                                <Item href="/Mechanics/Spells/Bard63/Spells/DefensiveBarrier/DefensiveBarrier01.(BuffResource).xdb" />
+                            </buffs>
+                            <effects>
+                                <Item type="gameMechanics.elements.effects.Switch">
+                                    <impactsOn>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
+                                                    <radius>40</radius>
+                                                    <affectPets>true</affectPets>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                                            <predicates>
+                                                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                                    <buff href="/Mechanics/Spells/Bard63/Abilities/CommonBuffProxy/WilProxy.(BuffResource).xdb" />
+                                                                </Item>
+                                                            </predicates>
+                                                            <impacts>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/WillPower/WillPower.(BuffResource).xdb" />
+                                                                    <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                        <mul var="value" />
+                                                                        <mulCalcer type="gameMechanics.elements.calcers.SpellRankCalcer">
+                                                                            <spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/WillPower/WillPower1.(SpellSingleTarget).xdb" />
+                                                                            <mul>0.67</mul>
+                                                                        </mulCalcer>
+                                                                    </durationScaler>
+                                                                </Item>
+                                                            </impacts>
+                                                            <elseImpacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                                                    <predicates>
+                                                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                                            <buff href="/Mechanics/Spells/Bard63/Abilities/CommonBuffProxy/BloodLustProxy.(BuffResource).xdb" />
+                                                                        </Item>
+                                                                    </predicates>
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Bloodlust/Bloodlust.(BuffResource).xdb" />
+                                                                            <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                                <mul var="value" />
+                                                                                <mulCalcer type="gameMechanics.elements.calcers.SpellRankCalcer">
+                                                                                    <spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Bloodlust/Bloodlust1.(SpellSingleTarget).xdb" />
+                                                                                    <mul>0.67</mul>
+                                                                                </mulCalcer>
+                                                                            </durationScaler>
+                                                                        </Item>
+                                                                    </impacts>
+                                                                </Item>
+                                                            </elseImpacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impactsOn>
+                                    <impactsOff>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                    <buff href="CD.(BuffResource).xdb" />
+                                                </Item>
+                                            </predicates>
+                                            <impactsElse>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="Freedom.(BuffResource).xdb" />
+                                                    <impactsOnAttach>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="CD.(BuffResource).xdb" />
+                                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                                <multiplier var="cd" />
+                                                            </durationScaler>
+                                                        </Item>
+                                                    </impactsOnAttach>
+                                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                        <multiplier var="dur" />
+                                                    </durationScaler>
+                                                </Item>
+                                            </impactsElse>
+                                        </Item>
+                                    </impactsOff>
+                                </Item>
+                            </effects>
+                        </Item>
+                    </effects>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AbilityUnlockerEffect">
+            <abilities>
+                <Item href="/Mechanics/Spells/Bard63/Abilities/CommonBuffProxy/DefenseSupportProxyAbility.(AbilityResource).xdb" />
+            </abilities>
+        </Item>
+    </effects>
+    <ranks>
+        <Item href="SupportAcousticBarrierWillpower01.(AbilityResource).xdb" />
+        <Item href="SupportAcousticBarrierWillpower02.(AbilityResource).xdb" />
+        <Item href="SupportAcousticBarrierWillpower03.(AbilityResource).xdb" />
+    </ranks>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

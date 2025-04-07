@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>193591</resourceId>
+    </Header>
+    <visualScript type="VisActionList">
+        <play>Simultaneously</play>
+        <elements>
+            <Item type="CreatureColorAction">
+                <colorValue>2028545804</colorValue>
+                <timeOff>2</timeOff>
+                <ignoreDisable>true</ignoreDisable>
+            </Item>
+            <Item type="CreatureEffectsAction">
+                <visualEffects>
+                    <Item>
+                        <effectFx href="/Spells/FX/Spells/WarriorInnerRageAbility.(VisObjectTemplate).xdb" />
+                        <scale>2</scale>
+                        <ignoreParentRotation>true</ignoreParentRotation>
+                    </Item>
+                </visualEffects>
+            </Item>
+        </elements>
+    </visualScript>
+    <effects>
+        <Item type="gameMechanics.elements.effects.DamageZeroSuppressor" />
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="DontMove.(BuffResource).xdb" />
+                </Item>
+            </onEnter>
+            <effects>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfCasterGeneric">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="AI38_SpeedDown.(BuffResource).xdb" />
+                                            </predicate>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="AI38_SpeedUP.(BuffResource).xdb" />
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <tick>5000</tick>
+                    <initialDelay>5000</initialDelay>
+                </Item>
+                <Item type="gameMechanics.elements.effects.Enlarge">
+                    <factor>1.25</factor>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToBuffs">
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/DRMesmerize.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/Taunt.xdb" />
+                    </groups>
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch" />
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

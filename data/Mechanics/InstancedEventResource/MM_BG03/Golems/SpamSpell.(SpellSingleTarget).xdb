@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>242275</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/ActionBarChange.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="BG3_GolemSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="SpamSpell.(SpellSingleTarget).Name.txt" />
+    <Description href="SpamSpell.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Mounts/SpellsMounts/FireBeam.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Creatures/GolemJunes/LaserArc.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>20</value>
+    </range>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>1000</duration>
+        </cooldown>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateManaCaster">
+                        <manaType>Mana</manaType>
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                        <element>ASTRAL</element>
+                        <damage>35</damage>
+                        <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                    </Item>
+                </impacts>
+                <elseImpacts>
+                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                        <element>ASTRAL</element>
+                        <damage>35</damage>
+                        <scaler type="gameMechanics.elements.scalers.SlotScaler">
+                            <slot>MAINHAND</slot>
+                        </scaler>
+                    </Item>
+                </elseImpacts>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="DecreasedResists.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

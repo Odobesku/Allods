@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>243857</resourceId>
+    </Header>
+    <Name href="Buff_Name.txt" />
+    <Description href="Buff_Desc.txt" />
+    <image href="/Interface/Icons/Spells/Mage/MageFireInstability.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                    <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderTransport" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.ShipDistributor" />
+                            <data href="MinedReactorCountdown.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                            <calcers>
+                                <floatEntries>
+                                    <Item>
+                                        <name>timeLeft</name>
+                                        <calcer type="gameMechanics.elements.calcers.CalcerBuffDuration">
+                                            <buff href="ReplicatedBombBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            <multiplier>0.001</multiplier>
+                                        </calcer>
+                                    </Item>
+                                </floatEntries>
+                            </calcers>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+            <initialDelay>1000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.world.ship.elements.EffectBoundShipChangeHandler">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactResetActiveAction" />
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDamageTrigger">
+            <eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+            <impacts>
+                <casterToTarget>
+                    <Item type="gameMechanics.elements.impacts.ImpactResetActiveAction" />
+                </casterToTarget>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                    <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderTransport" />
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="ReplicatedBombBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                    <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderTransport" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="ReplicatedBombBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.world.ship.elements.EffectMapChanged">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.world.ship.elements.PredicateInAstralHub" />
+                        </Item>
+                    </predicates>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactResetActiveAction" />
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <duration>0</duration>
+    <isStackable>false</isStackable>
+    <stackLimit>1</stackLimit>
+    <isGradual>false</isGradual>
+    <isHelpful>false</isHelpful>
+    <isDetachableOnWill>false</isDetachableOnWill>
+    <isMultiple>true</isMultiple>
+    <isClientReplicated>false</isClientReplicated>
+    <canBeSaved>true</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

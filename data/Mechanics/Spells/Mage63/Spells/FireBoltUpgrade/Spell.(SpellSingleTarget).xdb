@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>207988</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/MagicAttacks.xdb" />
+        <Item href="/Mechanics/Spells/Groups/FireSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/InsuranceTrigger.xdb" />
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/MageFireSpeedcast.(ActionGroup).xdb" />
+    </groups>
+    <element>FIRE</element>
+    <Name href="Spell.(SpellSingleTarget).Name.txt" />
+    <Description href="Spell.(SpellSingleTarget).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value var="damage" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>MagicScaler</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Mage/FireBoltUpgrade.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Mage/ControlFire.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <prepareDuration>2500</prepareDuration>
+    <ranks>
+        <Item href="Spell01.(SpellSingleTarget).xdb" />
+        <Item href="Spell02.(SpellSingleTarget).xdb" />
+        <Item href="Spell03.(SpellSingleTarget).xdb" />
+    </ranks>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>3000</duration>
+        </cooldown>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceVariable">
+                <variable href="/Mechanics/Spells/Mage63/Abilities/ElementalPower/FireVar.(VariableResource).xdb" />
+                <sub>2</sub>
+            </Item>
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                <spell href="/Mechanics/Spells/Mage63/Spells/FireBolt/Spell01.(SpellSingleTarget).xdb" />
+                <duration>3000</duration>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                        <element>FIRE</element>
+                        <damage var="damage" />
+                        <impactsOnHitTarget>
+                            <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                                <mark href="/Mechanics/Spells/Mage63/Abilities/FireBoltVulnerability/Mark.(MarkResource).xdb" />
+                            </Item>
+                        </impactsOnHitTarget>
+                        <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>25</speed>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

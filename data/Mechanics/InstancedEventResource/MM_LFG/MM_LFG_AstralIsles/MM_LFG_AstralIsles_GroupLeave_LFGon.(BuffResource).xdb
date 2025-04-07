@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>241442</resourceId>
+    </Header>
+    <Name href="MM_LFG_AstralIsles_GroupLeave_LFGon.(BuffResource).Name.txt" />
+    <Description href="MM_LFG_AstralIsles_GroupLeave_LFGon.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Special/Emotions/Help2.(UISingleTexture).xdb" />
+    <interfaceHighPriority>true</interfaceHighPriority>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.map.variables.PredicateMapVariableEquals">
+                                <variableResource href="BossKilled.(MapVariableResource).xdb" />
+                                <expectedValue type="gameMechanics.constructor.basicElements.FloatZero" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                            <data href="MM_LFG_AstralIsles_GroupLeave_LFGon.(ClientData).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>2000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateGroupSizeGE">
+                                    <size>6</size>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                    <data href="MM_LFG_AstralIsles_GroupLeave_LFG_success.(ClientData).xdb" />
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.predicates.PredicateGroupSizeGE">
+                                                <size>3</size>
+                                            </predicate>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.predicates.PredicateInGroup" />
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                            <data href="MM_LFG_AstralIsles_GroupLeave_StopLFG.(ClientData).xdb" />
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOff>
+        </Item>
+    </effects>
+    <duration>0</duration>
+    <isHelpful>false</isHelpful>
+    <decayPolicy>Standard</decayPolicy>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

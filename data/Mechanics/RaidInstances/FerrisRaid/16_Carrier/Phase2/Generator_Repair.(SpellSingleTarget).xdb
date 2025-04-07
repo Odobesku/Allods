@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>221056</resourceId>
+    </Header>
+    <Name href="Generator_Repair.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="Generator_Repair_VisScr.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>0</value>
+    </range>
+    <prepareDuration>6000</prepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Friends</iffPolicy>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <stage>Start</stage>
+            <duration>20000</duration>
+        </cooldown>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                <radius>140</radius>
+                <affectGroup>Friends</affectGroup>
+                <affectHolder>false</affectHolder>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.DirectHeal">
+                        <heal>1</heal>
+                        <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                <multiplier>0.25</multiplier>
+                            </mulCalcer>
+                        </scalerTarget>
+                    </Item>
+                </impacts>
+                <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                            <mobs>
+                                <Item href="EggPlant.(MobWorld).xdb" />
+                            </mobs>
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/RaidInstances/FerrisRaid/16_Carrier/NoTargeting.(BuffResource).xdb" />
+                            </predicate>
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateHealthHigher">
+                            <level>0.01</level>
+                        </Item>
+                    </predicates>
+                </filter>
+                <targetsLimit>1</targetsLimit>
+                <sorting type="gameMechanics.elements.targetSelector.sorts.SortByHealthInjury" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

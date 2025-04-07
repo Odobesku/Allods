@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>189222</resourceId>
+    </Header>
+    <visualScripts href="/Spells/VisScripts/Druid/LightningStrike.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>15</value>
+    </range>
+    <prepareDuration>3000</prepareDuration>
+    <needLos>false</needLos>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>5000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/Spells/AstarlIslands/AI21/DruidBossSpiderAdd/DruidEnrage.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/Spells/AstarlIslands/AI21/DruidBossSpiderAdd/DruidAnxiety.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </predicates>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/Spells/AstarlIslands/AI21/DruidBossSpiderAdd/DruidEnrage.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                        <spell href="DruidBossChainLightning.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                    </Item>
+                </impactsIf>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                <data href="/Mechanics/Spells/AstarlIslands/AI21/DruidChainLightning/ChainLightning_Long.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                <calcers>
+                    <addressEntries>
+                        <Item>
+                            <name>caster</name>
+                            <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                        </Item>
+                        <Item>
+                            <name>target</name>
+                            <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                        </Item>
+                    </addressEntries>
+                </calcers>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/Spells/AstarlIslands/AI21/DruidChainLightning/JumpCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                <stacks type="gameMechanics.elements.calcers.FloatData">
+                    <value>5</value>
+                </stacks>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/Spells/AstarlIslands/AI21/DruidChainLightning/LightningBuffBoss.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

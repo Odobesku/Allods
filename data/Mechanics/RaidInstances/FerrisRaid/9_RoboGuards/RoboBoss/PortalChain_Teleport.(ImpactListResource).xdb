@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.basicElements.ImpactListResource>
+    <Header>
+        <resourceId>222127</resourceId>
+    </Header>
+    <impacts>
+        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateAggrolistCanSelect">
+                    <selector type="gameMechanics.tools.SelectorRandomNotLess">
+                        <minIndex>0</minIndex>
+                    </selector>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="PortalKiller_Permission.(BuffResource).xdb" />
+                                </predicate>
+                            </Item>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="PortalShield_Permission.(BuffResource).xdb" />
+                                </predicate>
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/Tank.(BuffResource).xdb" />
+                                </predicate>
+                            </Item>
+                        </predicates>
+                    </filter>
+                </Item>
+            </predicates>
+            <impactsIf>
+                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                    <selector type="gameMechanics.tools.SelectorRandomNotLess">
+                        <minIndex>0</minIndex>
+                    </selector>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="PortalKiller_Permission.(BuffResource).xdb" />
+                                </predicate>
+                            </Item>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="PortalShield_Permission.(BuffResource).xdb" />
+                                </predicate>
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/Tank.(BuffResource).xdb" />
+                                </predicate>
+                            </Item>
+                        </predicates>
+                    </filter>
+                    <impacts>
+                        <Item>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="TeleportStart.(ClientData).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="PortalDispell_Permission.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                                        <locator>
+                                            <scriptID>FR_9_PS</scriptID>
+                                            <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                        </locator>
+                                    </destination>
+                                    <finishImpacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                            <data href="TeleportEnd.(ClientData).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                            <destination type="gameMechanics.map.destination.DestinationLocator">
+                                                                <locator>
+                                                                    <scriptID>FR_9_PS</scriptID>
+                                                                    <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                                                </locator>
+                                                            </destination>
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="RoboBoss_Chain.(BuffResource).xdb" />
+                                                                        </Item>
+                                                                    </impacts>
+                                                                </Item>
+                                                            </impacts>
+                                                            <plane href="PortalDispell_Permission.(Plane).xdb" />
+                                                            <object href="RoboBoss_Chain.(MobWorld).xdb" />
+                                                            <pool href="PortalSpecial.(SummonPool).xdb" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </finishImpacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsIf>
+            <impactsElse>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="PortalSpecial_Green.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="PortalSpecial_Blue.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="PortalSpecial_Yellow.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="PortalSpecial_Red.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                                    <pool href="PortalSpecial.(SummonPool).xdb" />
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsElse>
+        </Item>
+    </impacts>
+</gameMechanics.constructor.basicElements.ImpactListResource>

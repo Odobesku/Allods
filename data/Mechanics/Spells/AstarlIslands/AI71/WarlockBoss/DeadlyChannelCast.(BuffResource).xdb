@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>188345</resourceId>
+    </Header>
+    <Name href="DeadlyChannelCast.(BuffResource).Name.txt" />
+    <Description href="DeadlyChannelCast.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Equipment/Ships/LightGun.(UISingleTexture).xdb" />
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                    <selector type="gameMechanics.tools.SelectorShuffle" />
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                        </predicates>
+                    </filter>
+                    <impacts>
+                        <Item>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                    <element>DISEASE</element>
+                                    <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                        <mulCalcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                            <buff href="AvatarLinkVisual.(BuffResource).xdb" />
+                                        </mulCalcer>
+                                        <sum>1</sum>
+                                    </scalerTarget>
+                                    <damage>30</damage>
+                                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.StackBuff">
+                    <buff href="DeadlyChannelCast.(BuffResource).xdb" />
+                    <resetTimer>false</resetTimer>
+                    <delta type="gameMechanics.elements.calcers.FloatData">
+                        <value>-1</value>
+                    </delta>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+            <initialDelay>500</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="/Mechanics/Spells/AstarlIslands/AI71/Infected/ChewClientdata.(ClientData).xdb" />
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/Spells/AstarlIslands/AI71/Common/RestrictRotationAndMovement.(BuffResource).xdb" />
+                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                        <multiplier>2</multiplier>
+                    </durationScaler>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactChannelingStop" />
+                <Item type="gameMechanics.elements.impacts.ImpactResetActiveAction" />
+                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                    <selector type="gameMechanics.tools.SelectorShuffle" />
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                        </predicates>
+                    </filter>
+                    <impacts>
+                        <Item>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="DeadlyChannelTargetBuff.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOff>
+        </Item>
+    </effects>
+    <duration>10000</duration>
+    <stackLimit>4</stackLimit>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

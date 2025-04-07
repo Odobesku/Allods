@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>222183</resourceId>
+    </Header>
+    <Name href="DamageAura_HM.(BuffResource).Name.txt" />
+    <Description href="DamageAura_HM.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Mounts/SpellsMounts/ElectrostaticChargeTank.(UISingleTexture).xdb" />
+    <visScript href="DamageAura.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="/Mechanics/RaidInstances/FerrisRaid/9_RoboGuards/RoboGuard1/RoboGuard1_HM_Phase1_Ray.(ClientData).xdb" />
+                    <calcers>
+                        <addressEntries>
+                            <Item>
+                                <name>caster</name>
+                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                            </Item>
+                            <Item>
+                                <name>target</name>
+                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                            </Item>
+                        </addressEntries>
+                    </calcers>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+        </Item>
+        <Item type="gameMechanics.elements.effects.TickableAura">
+            <affectGroup>All</affectGroup>
+            <radius>10</radius>
+            <filter type="gameMechanics.world.creature.AvatarFilter" />
+            <predicates>
+                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/RaidInstances/FerrisRaid/9_RoboGuards/RoboBoss/PortalDispell_Permission.(BuffResource).xdb" />
+                    </predicate>
+                </Item>
+                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/RaidInstances/FerrisRaid/9_RoboGuards/RoboBoss/PortalKiller_Permission.(BuffResource).xdb" />
+                    </predicate>
+                </Item>
+                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/RaidInstances/FerrisRaid/9_RoboGuards/RoboBoss/PortalShield_Permission.(BuffResource).xdb" />
+                    </predicate>
+                </Item>
+            </predicates>
+            <impactsIn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="DamageAura_HM_damage.(BuffResource).xdb" />
+                </Item>
+            </impactsIn>
+            <impactsOut>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="DamageAura_HM_damage.(BuffResource).xdb" />
+                </Item>
+            </impactsOut>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

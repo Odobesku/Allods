@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<Header>
+		<Prototype href="/Spells/VisScripts/Prototypes/RangedAttack.(SpellVisScripts).xdb" />
+		<Variables>
+			<FxOnHands />
+			<LocatorNameOnArrow>Slot_FX</LocatorNameOnArrow>
+			<FxProjectile>/Spells/FX/Spells/ArrowHeartseeking.(VisObjectTemplate).xdb</FxProjectile>
+		</Variables>
+	</Header>
+	<actionBarStart type="VisActionList">
+		<elements>
+			<Item skiped="" />
+			<Item type="CreatureEffectsAction">
+				<visualEffects>
+					<Item>
+						<delay>200</delay>
+					</Item>
+				</visualEffects>
+			</Item>
+		</elements>
+	</actionBarStart>
+	<launch type="VisActionList">
+		<elements>
+			<Item skiped="" />
+			<Item type="CreatureItemAnimationAction">
+				<itemsSlot>RANGED</itemsSlot>
+			</Item>
+			<Item skiped="" />
+			<Item type="CreatureThrowArrowAction">
+				<arrowInTargetTime>0</arrowInTargetTime>
+			</Item>
+			<Item skiped="" />
+			<Item type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>BonusDmgAll</flagName>
+				</playWhile>
+				<preconditional>true</preconditional>
+				<elements>
+					<Item type="CreatureThrowArrowAction">
+						<arrow href="" />
+						<enchantedArrowIndex>1</enchantedArrowIndex>
+						<arrowInTargetTime>0</arrowInTargetTime>
+						<theGe>8</theGe>
+						<additionalEffectFx href="/Spells/FX/Spells/War63_BuffRage_Hand.(VisObjectTemplate).xdb" />
+						<effectBone var="LocatorNameOnArrow" />
+						<offendTime type="EffectOffendConstDelay" />
+					</Item>
+				</elements>
+			</Item>
+		</elements>
+	</launch>
+	<playOnTargets>
+		<specialAction type="VisActionList">
+			<elements>
+				<Item type="Sound3DAction">
+					<sound>
+						<project href="/SFX/Spells/Sounds.(FMODProject).xdb" />
+						<name>spells/Stalker/StalkerArrowHit</name>
+					</sound>
+					<alias href="" />
+				</Item>
+				<Item type="CreatureEffectsAction">
+					<visualEffects>
+						<Item>
+							<effectFx href="/Spells/FX/Spells/Stalker70_LegShot.(VisObjectTemplate).xdb" />
+							<scale>1.5</scale>
+							<locator>Global</locator>
+							<offset z="0" />
+							<rotation x="0" y="0" z="0" />
+						</Item>
+					</visualEffects>
+				</Item>
+			</elements>
+		</specialAction>
+	</playOnTargets>
+</SpellVisScripts>

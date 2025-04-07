@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>224605</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactMapVariableClearSave" />
+                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactMapVariableAddSave" />
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onEnter>
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactMapVariableClearSave" />
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DisableLocalEvade" />
+        <Item type="gameMechanics.elements.effects.EffectDisableAbility">
+            <ability href="/Mechanics/Abilities/Bosses/ActivityTracker/Ability01.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Jump</Item>
+            </actions>
+            <rooted>true</rooted>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                    <variable href="/Mechanics/RaidInstances/ArchBaseRaid/Other/R7_AssassinsBoss_Kill.(MapVariableResource).xdb" />
+                    <summand>1</summand>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                            <mobs>
+                                <Item href="AssassinsBoss_HM.(MobWorld).xdb" />
+                            </mobs>
+                        </Item>
+                    </predicates>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
+                            <impacts>
+                                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                    <impactsResource href="/Mechanics/RaidInstances/RewardChestKill.(ImpactListResource).xdb" />
+                                </Item>
+                            </impacts>
+                            <device>
+                                <scriptID>Assassins_Chest_HM</scriptID>
+                                <map href="/Maps/ArchBase_Raid/MapResource.xdb" />
+                            </device>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                            <mobs>
+                                <Item href="AssassinsBoss.(MobWorld).xdb" />
+                            </mobs>
+                        </Item>
+                    </predicates>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
+                            <impacts>
+                                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                    <impactsResource href="/Mechanics/RaidInstances/RewardChestKill.(ImpactListResource).xdb" />
+                                </Item>
+                            </impacts>
+                            <device>
+                                <scriptID>Assassins_Chest_Normal</scriptID>
+                                <map href="/Maps/ArchBase_Raid/MapResource.xdb" />
+                            </device>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                    <table href="/Mechanics/RaidInstances/ArchBaseRaid/Other/R7_2th_Veronica_Cutscene.(SpawnTable).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="R7_Assassins_Pool.(SummonPool).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>100</radius>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                <mobs>
+                                    <Item href="R7_CageMob.(MobWorld).xdb" />
+                                    <Item href="R7_CageMob_HM.(MobWorld).xdb" />
+                                </mobs>
+                            </Item>
+                        </predicates>
+                    </filter>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnCell">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                            <group href="/Mechanics/RaidInstances/ArchBaseRaid/SiegeBoss/R7_ArchBase_Raid.(ActionGroup).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/RaidInstances/ArchBaseRaid/SiegeBoss/R7_2th_Cinematic_dead.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    </predicates>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="/Maps/ElementalPlateu/Mechanics/R7_Cleave.(SummonPool).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>3000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                            <pool href="/Maps/ElementalPlateu/Mechanics/R7_Cleave.(SummonPool).xdb" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnCell">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                            <group href="/Mechanics/RaidInstances/ArchBaseRaid/SiegeBoss/R7_ArchBase_Raid.(ActionGroup).xdb" />
+                        </Item>
+                    </impacts>
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    </predicates>
+                </Item>
+                <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                    <variable href="/Mechanics/RaidInstances/ArchBaseRaid/Other/R7_FlyFight.(MapVariableResource).xdb" />
+                    <summand>0</summand>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="/Maps/ElementalPlateu/Mechanics/R7_Cleave.(SummonPool).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>3000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                            <pool href="/Maps/ElementalPlateu/Mechanics/R7_Cleave.(SummonPool).xdb" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnCell">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                            <group href="/Mechanics/RaidInstances/ArchBaseRaid/SiegeBoss/R7_ArchBase_Raid.(ActionGroup).xdb" />
+                        </Item>
+                    </impacts>
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    </predicates>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="R7_Assassins_Pool.(SummonPool).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+            </onLeave>
+        </Item>
+    </effects>
+    <level>55</level>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

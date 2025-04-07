@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.projectile.ProjectileResource>
+    <Header>
+        <resourceId>248999</resourceId>
+    </Header>
+    <name href="Sparks_Bomb_Attention_Projectile.(ProjectileResource).Name.txt" />
+    <visObject href="/Spells/FX/Spells/Bard_Shadow_Projectile.(VisObjectTemplate).xdb" />
+    <lifeLengthCap>8000</lifeLengthCap>
+    <impactsOnStart>
+        <Item type="gameMechanics.elements.impacts.EntityImpactCreaturesAround">
+            <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+            <radius>10</radius>
+            <affectGroup>Enemies</affectGroup>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                    <element>ACID</element>
+                    <damage>35</damage>
+                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                </Item>
+            </impacts>
+            <filter type="gameMechanics.constructor.basicElements.FilterOr">
+                <filters>
+                    <Item type="gameMechanics.world.creature.AvatarFilter">
+                        <withPet>true</withPet>
+                    </Item>
+                </filters>
+            </filter>
+        </Item>
+    </impactsOnStart>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Aura">
+            <radius>10</radius>
+            <impactsIn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="Sparks_AttentionBuff.(BuffResource).xdb" />
+                </Item>
+            </impactsIn>
+            <impactsOut>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Sparks_AttentionBuff.(BuffResource).xdb" />
+                </Item>
+            </impactsOut>
+            <checkAffectGroupAgainst>Caster</checkAffectGroupAgainst>
+            <filter type="gameMechanics.constructor.basicElements.FilterOr">
+                <filters>
+                    <Item type="gameMechanics.world.creature.AvatarFilter" />
+                </filters>
+            </filter>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>7000</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                            <projectileData>
+                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
+                                <resource href="Sparks_Bomb_Projectile.(ProjectileResource).xdb" />
+                            </projectileData>
+                        </Item>
+                    </impactsOn>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+</gameMechanics.world.projectile.ProjectileResource>

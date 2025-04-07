@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>224844</resourceId>
+    </Header>
+    <name href="Ability_01.(AbilityResource).Name.txt" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="/Mechanics/RaidInstances/UmoirRaid/MobPack/ScientistSpell/Pool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>UR_Mob_Solo_Door2</scriptID>
+                        <map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>UR_Mob_Solo_Door</scriptID>
+                        <map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.device.DoorSwitch">
+                            <switchType>Open</switchType>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                    <impactsResource href="/Mechanics/RaidInstances/UmoirRaid/MobPack/ScientistSpell/IL_Start1.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                </Item>
+                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                    <impactsResource href="/Mechanics/RaidInstances/UmoirRaid/MobPack/ScientistSpell/IL_Start2.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="StartCD.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
+                    <impacts>
+                        <Item type="gameMechanics.elements.device.DoorSwitch">
+                            <switchType>Close</switchType>
+                        </Item>
+                    </impacts>
+                    <device>
+                        <scriptID>UR_Mob_Solo_Door2</scriptID>
+                        <map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                    </device>
+                </Item>
+            </onEnter>
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="/Mechanics/RaidInstances/UmoirRaid/MobPack/ScientistSpell/Pool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>UR_Mob_Solo_Door2</scriptID>
+                        <map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                    <spell href="Spell_01.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                    <duration>18000000</duration>
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDeferredEffects">
+            <delay type="gameMechanics.elements.calcers.LongData">
+                <value>2000</value>
+            </delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                            <spawn>
+                                <scriptID>UR_Mob_Solo_Door</scriptID>
+                                <map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                            </spawn>
+                            <impacts>
+                                <Item type="gameMechanics.elements.device.DoorSwitch">
+                                    <switchType>Close</switchType>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsOn>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

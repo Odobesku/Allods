@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>223342</resourceId>
+    </Header>
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.TickableEntityAura">
+            <affectGroup>All</affectGroup>
+            <radius>10</radius>
+            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                        <mobs>
+                            <Item href="Gifter_Melee.(MobWorld).xdb" />
+                            <Item href="Gifter_Range.(MobWorld).xdb" />
+                            <Item href="Gifter_Shaman.(MobWorld).xdb" />
+                        </mobs>
+                    </Item>
+                </predicates>
+            </filter>
+            <impactsIn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="TrapImmunity.(BuffResource).xdb" />
+                </Item>
+            </impactsIn>
+            <holderImpactsIn>
+                <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                    <visualState>3</visualState>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="TrapPreparation.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>2500</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+            </holderImpactsIn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateRespawnableResource">
+                                    <resources>
+                                        <Item href="MeleeTrap.(SteleResource).xdb" />
+                                    </resources>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="MeleeTrap.(BuffResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateRespawnableResource">
+                                            <resources>
+                                                <Item href="RangeTrap.(SteleResource).xdb" />
+                                            </resources>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="RangeTrap.(BuffResource).xdb" />
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="ShamanTrap.(BuffResource).xdb" />
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                            <visualState>2</visualState>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <duration>3000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

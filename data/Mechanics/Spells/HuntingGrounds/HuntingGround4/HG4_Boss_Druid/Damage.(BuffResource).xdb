@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>212997</resourceId>
+    </Header>
+    <Name href="Damage.(BuffResource).Name.txt" />
+    <Description href="Damage.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Modifiers/AstralRage.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="Damage.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Jump</Item>
+                <Item>Rotate</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectStackTrigger">
+            <count>50</count>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Damage.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <affectGroup>Enemies</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                            <element>ASTRAL</element>
+                            <damage>500</damage>
+                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                </predicates>
+                            </Item>
+                        </predicates>
+                    </filter>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="PetPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="/Mechanics/Spells/HuntingGrounds/HuntingGround4/HG4_Boss_ZombieKing/EpicAoE.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactForgetAbility">
+                    <ability href="/Mechanics/Abilities/Bosses/ActivityTracker/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.AttachAbility">
+                            <ability href="/Mechanics/Abilities/Bosses/ActivityTracker/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                    <spell href="BearForm.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                    <duration>15000</duration>
+                    <scaler type="gameMechanics.elements.scalers.TrivialScaler" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                    <spell href="SummonPet.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                    <duration>20000</duration>
+                    <scaler type="gameMechanics.elements.scalers.TrivialScaler" />
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ScaledImpacts">
+                    <scalerCaster type="gameMechanics.elements.scalers.TrivialScaler" />
+                    <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mul>0.5</mul>
+                        <mulCalcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                            <buff href="Damage.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </mulCalcer>
+                        <sum>1</sum>
+                    </scalerTarget>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                            <affectGroup>Enemies</affectGroup>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                    <element>ASTRAL</element>
+                                    <damage>10</damage>
+                                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                </Item>
+                            </impacts>
+                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            </Item>
+                                        </predicates>
+                                    </Item>
+                                </predicates>
+                            </filter>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="/Mechanics/Spells/HuntingGrounds/HuntingGround4/HG4_Boss_ZombieKing/EpicAoE.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.5</coeff>
+            </scaler>
+        </Item>
+    </effects>
+    <duration>3000</duration>
+    <stackLimit>50</stackLimit>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

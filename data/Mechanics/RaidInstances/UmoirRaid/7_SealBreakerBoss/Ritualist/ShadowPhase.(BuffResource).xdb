@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>225087</resourceId>
+    </Header>
+    <Name href="ShadowPhase.(BuffResource).Name.txt" />
+    <Description href="ShadowPhase.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Misc/Buffs/BuffURDragonBlue.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/CursedAura_small.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+            <lockScale>true</lockScale>
+        </Item>
+    </visualEffects>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableAction">
+            <action href="SpamBolt/DefaultBolt.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAction">
+            <action href="SpamBolt/FireBolt.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAction">
+            <action href="Flare/Flare.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="FirePhase.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                            <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+                                <range min="0" max="1" />
+                                <withinRange>false</withinRange>
+                                <minCandidatesCount>1</minCandidatesCount>
+                                <targetCount>1</targetCount>
+                            </selector>
+                            <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                                <filters>
+                                    <Item type="gameMechanics.world.creature.AvatarFilter" />
+                                    <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                    <buff href="/Mechanics/RaidInstances/UmoirRaid/7_SealBreakerBoss/CombatState/BossTank.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </predicate>
+                                            </Item>
+                                        </predicates>
+                                    </Item>
+                                </filters>
+                            </filter>
+                            <impacts>
+                                <Item>
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="ShadowCurse_Phase2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/UmoirRaid/Voice/VoiceNotice.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </predicates>
+                            <elseImpacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/RaidInstances/UmoirRaid/Voice/VoiceNotice.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                        <multiplier>7</multiplier>
+                                    </durationScaler>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                    <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                    <data href="/Mechanics/RaidInstances/UmoirRaid/Voice/TD11.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </elseImpacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>20000</tick>
+            <initialDelay>3000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="ShadowPower.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                    <calcers>
+                        <addressEntries>
+                            <Item>
+                                <name>caster</name>
+                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                            </Item>
+                            <Item>
+                                <name>target</name>
+                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                            </Item>
+                        </addressEntries>
+                    </calcers>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/UmoirRaid/Voice/VoiceNotice.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </predicates>
+                            <elseImpacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/RaidInstances/UmoirRaid/Voice/VoiceNotice.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                        <multiplier>5</multiplier>
+                                    </durationScaler>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                    <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                    <data href="/Mechanics/RaidInstances/UmoirRaid/Voice/TD8.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </elseImpacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+    <duration>60000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

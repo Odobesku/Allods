@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>206833</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/AmmoSpells.(ActionGroup).xdb" />
+    </groups>
+    <element>HOLY</element>
+    <Name href="Prison.(SpellSingleTarget).Name.txt" />
+    <Description href="Prison.(SpellSingleTarget).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var1</name>
+            <value>1</value>
+            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mul>0.75</mul>
+                <mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
+                    <dressSlot>AMMO</dressSlot>
+                </mulCalcer>
+                <sum>4</sum>
+            </scaler>
+        </Item>
+        <Item>
+            <name>var0</name>
+            <value>1</value>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                            <externalCalcer hrefvar="externalCalcer" />
+                        </mulCalcer>
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                        <formula>MagicScaler</formula>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Paladin/Prison.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Paladin/Prison.(SpellVisScripts).xdb" />
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <ranks>
+        <Item href="Prison01.(SpellSingleTarget).xdb" />
+        <Item href="Prison02.(SpellSingleTarget).xdb" />
+        <Item href="Prison03.(SpellSingleTarget).xdb" />
+    </ranks>
+    <iffPolicy>Friends</iffPolicy>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration var="duration" />
+        </cooldown>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceIf">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateEquipped">
+                        <dressType>AMMO</dressType>
+                        <itemClass href="/Mechanics/ItemClasses/Other_InfiniteTeardrop.(ItemClass).xdb" />
+                    </Item>
+                </predicates>
+                <resourceIf type="gameMechanics.elements.resources.ResourceVariable">
+                    <hideText>true</hideText>
+                    <variable href="/Mechanics/Spells/Paladin63/Abilities/Canons/LightCanon.(VariableResource).xdb" />
+                    <sub>0</sub>
+                </resourceIf>
+                <resourceElse type="gameMechanics.elements.resources.ResourceDressItem">
+                    <slot>AMMO</slot>
+                    <count>3</count>
+                </resourceElse>
+            </Item>
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                <projectileData>
+                    <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                        <destination type="gameMechanics.map.destination.DestinationModified">
+                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                            <modifiers>
+                                <Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
+                            </modifiers>
+                        </destination>
+                    </moveType>
+                    <lifeLengthCapScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mul>1</mul>
+                        <mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
+                            <dressSlot>AMMO</dressSlot>
+                        </mulCalcer>
+                        <sum>4</sum>
+                    </lifeLengthCapScaler>
+                    <resource hrefvar="resource" />
+                </projectileData>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

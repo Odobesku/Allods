@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.map.scriptZone.ScriptZone>
+    <Header>
+        <resourceId>55729</resourceId>
+    </Header>
+    <filter type="gameMechanics.world.creature.AvatarFilter" />
+    <conditionsIn>
+        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                    <quest href="/World/Quests/UmoirIsland06/UI06_Quest2/UI06_Quest2.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                    <status>Finished</status>
+                </Item>
+                <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                    <quest href="/World/Quests/UmoirIsland06/UI06_Quest2/UI06_Quest2.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                    <counterResource href="/World/Quests/UmoirIsland06/UI06_Quest2/CountId_2.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                    <value>8</value>
+                </Item>
+            </predicates>
+        </Item>
+    </conditionsIn>
+    <impactsIn>
+        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+            <spawn>
+                <scriptID>UI06_Statue</scriptID>
+                <map href="/Maps/UmoirIsland06/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+            </spawn>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                    <visualState>3</visualState>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+            <table href="/Maps/UmoirIsland06/SpawnTables/UmoirIsland06/UI06_Genlun.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                    <quest href="/World/Quests/UmoirIsland06/UI06_Quest2/UI06_Quest2.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                    <quest href="/World/Quests/UmoirIsland06/UI06_Quest2/UI06_Quest2.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                    <counterResource href="/World/Quests/UmoirIsland06/UI06_Quest2/CountId_3.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                    <value>1</value>
+                </Item>
+            </predicates>
+            <impactsIf>
+                <Item type="gameMechanics.world.avatar.assistants.ImpactDismissAssistant">
+                    <assistantResource href="/Characters/Kania_female/Instances/UmoirIsland06/UI06_CompanionQuest.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                    <table href="/Maps/UmoirIsland06/SpawnTables/UmoirIsland06/UI06_Quest2_Inquisitor.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                </Item>
+            </impactsIf>
+            <impactsElse>
+                <Item type="gameMechanics.elements.impacts.EntitytFindSpawnTable">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                    <spawnResource href="/Maps/UmoirIsland06/SpawnTables/UmoirIsland06/UI06_Quest2_Inquisitor.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                </Item>
+            </impactsElse>
+        </Item>
+    </impactsIn>
+    <impactsOut>
+        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/World/Quests/UmoirIsland06/UI06_Quest2/UI06_Quest2_ConstructionBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </predicates>
+            <impactsIf>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="/World/Quests/UmoirIsland06/UI06_Quest2/UI06_Quest2_ConstructionBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsIf>
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                    <quest href="/World/Quests/UmoirIsland06/UI06_Quest2/UI06_Quest2.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                    <status>Finished</status>
+                </Item>
+            </predicates>
+            <impactsIf>
+                <Item type="gameMechanics.elements.impacts.ResetSpawnTable">
+                    <table href="/Maps/UmoirIsland06/SpawnTables/UmoirIsland06/UI06_Quest2_Casters.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ResetSpawnTable">
+                    <table href="/Maps/UmoirIsland06/SpawnTables/UmoirIsland06/UI06_Builders.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                </Item>
+            </impactsIf>
+        </Item>
+    </impactsOut>
+</gameMechanics.map.scriptZone.ScriptZone>

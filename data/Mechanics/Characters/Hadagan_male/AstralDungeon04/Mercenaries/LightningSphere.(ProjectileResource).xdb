@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.projectile.ProjectileResource>
+    <Header>
+        <resourceId>240154</resourceId>
+    </Header>
+    <name href="LightningSphere.(ProjectileResource).Name.txt" />
+    <visObject href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/YakBoss/LightningSphere/LightningSphere.(VisObjectTemplate).xdb" />
+    <altitude>2.2</altitude>
+    <speed>0.004</speed>
+    <lifeLengthCap>15000</lifeLengthCap>
+    <corpseDuration>1000</corpseDuration>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>2500</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.TickableAura">
+                    <affectGroup>Enemies</affectGroup>
+                    <radius>1.85</radius>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                    </Item>
+                                </predicates>
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                        </predicates>
+                    </filter>
+                    <impactsIn>
+                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                            <element>LIGHTNING</element>
+                            <damage>70</damage>
+                            <impactsOnHitTarget>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/Spells/CommonBuffs/Stun/BuffStun.xdb" />
+                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                        <multiplier>0.5</multiplier>
+                                    </durationScaler>
+                                </Item>
+                            </impactsOnHitTarget>
+                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                            <data href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/YakBoss/LightningSphere/LightningHit.(ClientData).xdb" />
+                        </Item>
+                    </impactsIn>
+                    <holderImpactsIn>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </holderImpactsIn>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+</gameMechanics.world.projectile.ProjectileResource>

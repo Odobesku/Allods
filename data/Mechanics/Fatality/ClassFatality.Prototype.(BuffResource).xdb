@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>251387</resourceId>
+        <isPrototype>true</isPrototype>
+        <Variables>
+            <Buff_Name />
+            <Buff_Descr />
+            <Buff_VisScript />
+        </Variables>
+    </Header>
+    <Name hrefvar="Buff_Name" />
+    <Description hrefvar="Buff_Descr" />
+    <image href="/Interface/Icons/Misc/Unlocks/Fatality.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript hrefvar="Buff_VisScript" />
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass hrefvar="characterClass" />
+                </Item>
+            </predicates>
+            <effectsIf>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                            <impactsResource href="ActivateFatalityOrElse.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                        </Item>
+                    </impactsOn>
+                </Item>
+                <Item type="gameMechanics.elements.effects.ForgetSpellTrigger">
+                    <spell href="FatalityAura.(SpellCasterSelf).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                    <impacts>
+                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                            <impactsResource href="ActivateFatalityOrElse.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </effectsIf>
+            <effectsElse>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+                                    <spell href="FatalityAura.(SpellCasterSelf).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                                    <group href="ClassFatality.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                                    <checkCaster>true</checkCaster>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                            <impactsResource href="TurnFatalityOn.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsOn>
+                    <rerunOnLoad>true</rerunOnLoad>
+                </Item>
+            </effectsElse>
+            <recheckOnLoad>true</recheckOnLoad>
+        </Item>
+    </effects>
+    <isStackable>false</isStackable>
+    <isHelpful>true</isHelpful>
+    <groups>
+        <Item href="ClassFatality.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <canBeSaved>true</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>209864</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="QuestHorse.(BuffResource).Name.txt" />
+    <Description href="QuestHorse.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Mounts/MountJubilee2011_01.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="QuestHorse.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.DamageThreshold">
+            <healthCalcer type="gameMechanics.elements.calcers.FloatData">
+                <value>10</value>
+            </healthCalcer>
+            <outOfCombatPolicy>Nothing</outOfCombatPolicy>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactDismount" />
+            </impacts>
+            <resource href="/Mechanics/GameRoot/Mount/MountDamageThreshold.xdb#xpointer(/gameMechanics.elements.effects.DamageThresholdResource)" />
+            <damageType>ToMount</damageType>
+            <affectsAdditionalHealth>false</affectsAdditionalHealth>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectGiveSpell">
+            <spell href="SpeedUp.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectGiveSpell">
+            <spell href="DetachWeakness.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectGiveSpell">
+            <spell href="CheckPoint.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectGiveSpell">
+            <spell href="KillThief.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableSpellsExceptGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/ActionBarChange.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActionsExceptGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/ActionBarChange.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                            <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                                <value>0.5</value>
+                            </chanceCalcer>
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="NeedSpeedUp.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impacts>
+                            <impactsLose>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="Weakness.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impactsLose>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>3000</tick>
+            <initialDelay>4000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactDismount" />
+                <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                    <id href="/World/Quests/LoreEvents/Anniversary5Years/Anniversary5Years_01R_E_qc1.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                    <id href="/World/Quests/LoreEvents/Anniversary5Years/Anniversary5Years_01R_L_qc1.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                            <quest href="/World/Quests/LoreEvents/Anniversary5Years/Anniversary5Years_01R_E.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                            <status>Started</status>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactModifyQuestTimer">
+                            <quest href="/World/Quests/LoreEvents/Anniversary5Years/Anniversary5Years_01R_E.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                            <newTimer>
+                                <duration>48000</duration>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                        <buff hrefvar="selfBuff" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                        <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                        <data href="TimerOff.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                    </Item>
+                                </impacts>
+                            </newTimer>
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                            <quest href="/World/Quests/LoreEvents/Anniversary5Years/Anniversary5Years_01R_L.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                            <status>Started</status>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactModifyQuestTimer">
+                            <quest href="/World/Quests/LoreEvents/Anniversary5Years/Anniversary5Years_01R_L.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                            <newTimer>
+                                <duration>44000</duration>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                        <buff hrefvar="selfBuff" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                        <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                        <data href="TimerOff.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                    </Item>
+                                </impacts>
+                            </newTimer>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                    <impactsResource href="Detacher.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="SpeedUp.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="/World/Quests/Tropical_Atoll/ChargeTrace/ChargeSlow.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                    <impactsResource href="QuestClear.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                            <quest href="/World/Quests/LoreEvents/Anniversary5Years/Anniversary5Years_01R_E.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                            <status>Started</status>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactModifyQuestTimer">
+                            <quest href="/World/Quests/LoreEvents/Anniversary5Years/Anniversary5Years_01R_E.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                            <newTimer>
+                                <duration>1000</duration>
+                                <impacts>
+                                    <Item type="gameMechanics.constructor.basicElements.ImpactNull" />
+                                </impacts>
+                            </newTimer>
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                            <quest href="/World/Quests/LoreEvents/Anniversary5Years/Anniversary5Years_01R_L.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                            <status>Started</status>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactModifyQuestTimer">
+                            <quest href="/World/Quests/LoreEvents/Anniversary5Years/Anniversary5Years_01R_L.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                            <newTimer>
+                                <duration>1000</duration>
+                                <impacts>
+                                    <Item type="gameMechanics.constructor.basicElements.ImpactNull" />
+                                </impacts>
+                            </newTimer>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.5</coeff>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                            <destination type="gameMechanics.map.destination.DestinationModified">
+                                <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                <modifiers>
+                                    <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                        <verticalRange min="0" max="1" />
+                                        <horizontalRange min="20" max="35" />
+                                    </Item>
+                                </modifiers>
+                            </destination>
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="QuestWerefoxAggro.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                    <value>1</value>
+                                </Item>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="QuestWerefoxAura.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/Spells/CommonSpells/TeleportToResurrecter/WerefoxPlane.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impacts>
+                            <object href="/Mechanics/Spells/Events/OneTime/Anniversary5Years/NPC/QuestWerefox.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                            <level type="gameMechanics.elements.calcers.LongData">
+                                <value>20</value>
+                            </level>
+                            <pool href="/Mechanics/Spells/Events/OneTime/Anniversary5Years/NPC/QuestWerefox.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                            <isPersonalPool>true</isPersonalPool>
+                            <planeSyncStrategy>Sync</planeSyncStrategy>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                            <data href="WerefoxWarning.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>20000</tick>
+            <initialDelay>15000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="/Mechanics/Spells/Events/OneTime/Anniversary5Years/NPC/QuestWerefox.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                    <isPersonalPool>true</isPersonalPool>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Visibility</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="QuestWerefoxPlane.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+                <personalPlane>true</personalPlane>
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Influence</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="QuestWerefoxPlane.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+                <personalPlane>true</personalPlane>
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="QuestWerefoxPlane.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+                <personalPlane>true</personalPlane>
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Visibility</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="QuestWerefoxPlane.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+                <personalPlane>true</personalPlane>
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Influence</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="QuestWerefoxPlane.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+                <personalPlane>true</personalPlane>
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="QuestWerefoxPlane.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+                <personalPlane>true</personalPlane>
+            </visibilityRule>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/StopSing.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/Events/EventBuffs.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

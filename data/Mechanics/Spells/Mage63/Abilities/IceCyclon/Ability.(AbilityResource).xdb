@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>207665</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="Ability.(AbilityResource).Name.txt" />
+    <description href="Ability.(AbilityResource).Description.txt" />
+    <descVars>
+        <Item>
+            <name>perc</name>
+            <value>1</value>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                            <externalCalcer hrefvar="externalCalcer" />
+                        </mulCalcer>
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                        <formula>FormulaPercent</formula>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+        <Item>
+            <name>var0</name>
+            <value var="multiplier" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>FormulaSeconds</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Misc/Event/TrinketIceSculpture.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+            <conditionalImpacts>
+                <Item>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="CD.(BuffResource).xdb" />
+                                    </predicate>
+                                </Item>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/Spells/Mage63/Abilities/Cyclon/Buff01.(BuffResource).xdb" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                                    <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                                        <value>0.40</value>
+                                    </chanceCalcer>
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff hrefvar="buff" />
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="CD.(BuffResource).xdb" />
+                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                <multiplier var="multiplier" />
+                                            </durationScaler>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                    <conditions>
+                        <Item type="gameMechanics.elements.predicates.PredicateSpellInGroup">
+                            <group href="/Mechanics/Spells/Groups/MagicAttacks.xdb" />
+                        </Item>
+                    </conditions>
+                </Item>
+            </conditionalImpacts>
+            <stages>
+                <Item>Launch</Item>
+            </stages>
+        </Item>
+    </effects>
+    <ranks>
+        <Item href="Ability01.(AbilityResource).xdb" />
+        <Item href="Ability02.(AbilityResource).xdb" />
+        <Item href="Ability03.(AbilityResource).xdb" />
+        <Item href="Ability04.(AbilityResource).xdb" />
+        <Item href="Ability05.(AbilityResource).xdb" />
+    </ranks>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

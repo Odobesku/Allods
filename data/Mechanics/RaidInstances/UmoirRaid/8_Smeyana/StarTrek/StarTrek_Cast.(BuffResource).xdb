@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>225918</resourceId>
+    </Header>
+    <Name href="StarTrek_Cast.(BuffResource).Name.txt" />
+    <image href="/Interface/Icons/Equipment/Trinket/AstralBomb_01.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="StarTrek_cast.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <needVisualize>false</needVisualize>
+    <interfaceHighPriority>true</interfaceHighPriority>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                                            <group href="/Mechanics/RaidInstances/UmoirRaid/UmoirRaid.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                            <delay>500</delay>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                                    <element>SHADOW</element>
+                                                    <damage>30</damage>
+                                                    <impactsOnHitCaster>
+                                                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                                    <buff href="Smeyana_StarBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impactsOnHitCaster>
+                                                    <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                                                        <scalers>
+                                                            <Item type="gameMechanics.elements.scalers.MagicScaler" />
+                                                            <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                <mulCalcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                                                    <buff href="Smeyana_StarBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </mulCalcer>
+                                                                <sum>1</sum>
+                                                            </Item>
+                                                        </scalers>
+                                                    </scaler>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                    <spawnResource href="StarTrek.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Smeyana_Boss/StarPhase_End.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Rotate</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllSpells" />
+    </effects>
+    <duration>5000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

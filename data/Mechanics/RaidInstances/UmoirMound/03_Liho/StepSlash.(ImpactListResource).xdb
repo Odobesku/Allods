@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.basicElements.ImpactListResource>
+    <Header>
+        <resourceId>227072</resourceId>
+    </Header>
+    <impacts>
+        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.StackBuff">
+                            <buff href="OmnislashDot.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <delta type="gameMechanics.elements.calcers.FloatData">
+                                <value>-1</value>
+                            </delta>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                    <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                        <base type="gameMechanics.elements.calcers.DestinationBehind">
+                                            <comfortRange>3</comfortRange>
+                                            <maxSteps>3</maxSteps>
+                                        </base>
+                                        <offset>0</offset>
+                                        <yaw type="constructor.basicElements.AngleRadians" />
+                                        <turn>ToTarget</turn>
+                                    </destination>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactsFromPhantom">
+                                    <phantom href="LihoBoss.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="NextStepOmni.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="LihoToDust.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsFromPhantom">
+                            <phantom href="LihoBoss.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                    <element>SHADOW</element>
+                                    <damage>27</damage>
+                                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <impactsOnNoTargets>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="OmniInvis.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+                                    <level>0.5</level>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="Trap_02_Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                                    <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                                        <base type="gameMechanics.elements.calcers.DestinationBehind">
+                                                            <comfortRange>1</comfortRange>
+                                                            <maxSteps>1</maxSteps>
+                                                        </base>
+                                                        <offset>0</offset>
+                                                        <yaw type="constructor.basicElements.AngleRadians" />
+                                                        <turn>ToTarget</turn>
+                                                    </destination>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="UrnImmunity.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impacts>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                                        <filters>
+                                            <Item type="gameMechanics.world.creature.AvatarFilter" />
+                                            <Item type="gameMechanics.world.creature.AliveFilter" />
+                                            <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                        <buff href="03_Liho_Arena.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                    </Item>
+                                                </predicates>
+                                            </Item>
+                                        </filters>
+                                    </filter>
+                                    <targetsLimit>1</targetsLimit>
+                                    <autotarget type="gameMechanics.constructor.schemes.spell.multiTarget.RandomAutotarget">
+                                        <group>Enemies</group>
+                                        <radius>85</radius>
+                                    </autotarget>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsOnNoTargets>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                <buff href="OmnislashDot.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                <range>
+                                    <min>1</min>
+                                    <max>5</max>
+                                </range>
+                            </Item>
+                        </predicates>
+                    </filter>
+                    <targetsLimit>1</targetsLimit>
+                    <autotarget type="gameMechanics.constructor.schemes.spell.multiTarget.RandomAutotarget">
+                        <group>Enemies</group>
+                        <radius>85</radius>
+                    </autotarget>
+                </Item>
+            </impacts>
+        </Item>
+    </impacts>
+</gameMechanics.constructor.basicElements.ImpactListResource>

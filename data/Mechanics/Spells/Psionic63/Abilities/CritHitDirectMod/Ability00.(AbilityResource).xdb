@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>220227</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="Ability00.(AbilityResource).Name.txt" />
+    <description href="Ability00.(AbilityResource).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value var="stress" />
+            <scaler type="gameMechanics.elements.scalers.LinearScaler">
+                <multiplier>-1</multiplier>
+            </scaler>
+        </Item>
+        <Item>
+            <name>var1</name>
+            <value>1</value>
+            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mulCalcer type="gameMechanics.elements.calcers.LongToFloatCalcer">
+                    <calcer type="gameMechanics.elements.calcers.LongData">
+                        <value var="cooldown" />
+                    </calcer>
+                </mulCalcer>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/PhysDmg.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectOnDamageDoneTrigger">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.offender.PredicateAnd">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.offender.PredicateIsCrit" />
+                        <Item type="gameMechanics.elements.predicates.offender.PredicateIsForthright" />
+                        <Item type="gameMechanics.elements.predicates.offender.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.offender.PredicateActionGroup">
+                                <groups>
+                                    <Item href="/Mechanics/Spells/Groups/DamageOverTime.(ActionGroup).xdb" />
+                                </groups>
+                            </predicate>
+                        </Item>
+                    </predicates>
+                </Item>
+            </predicates>
+            <impactsOnDamageDone>
+                <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                                    <variable href="/Mechanics/Spells/Psionic63/Abilities/StressResource/StressResource.(VariableResource).xdb" />
+                                    <summand var="stress" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactModifySpellCooldown">
+                                    <spell href="/Mechanics/Spells/Psionic63/Spells/Projection/Spell01.(SpellSingleTarget).xdb" />
+                                    <factor type="gameMechanics.elements.scalers.LinearScaler">
+                                        <multiplier>1</multiplier>
+                                    </factor>
+                                    <sum type="gameMechanics.elements.calcers.CalcerLongMul">
+                                        <calcers>
+                                            <Item type="gameMechanics.elements.calcers.LongData">
+                                                <value>-1000</value>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.calcers.LongData">
+                                                <value var="cooldown" />
+                                            </Item>
+                                        </calcers>
+                                    </sum>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactModifySpellCooldown">
+                                    <spell href="/Mechanics/Spells/Psionic63/Spells/PhantasmalKiller/Spell01.(SpellSingleTarget).xdb" />
+                                    <factor type="gameMechanics.elements.scalers.LinearScaler">
+                                        <multiplier>1</multiplier>
+                                    </factor>
+                                    <sum type="gameMechanics.elements.calcers.CalcerLongMul">
+                                        <calcers>
+                                            <Item type="gameMechanics.elements.calcers.LongData">
+                                                <value>-1000</value>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.calcers.LongData">
+                                                <value var="cooldown" />
+                                            </Item>
+                                        </calcers>
+                                    </sum>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOnDamageDone>
+            <impactsToVictim>
+                <Item type="gameMechanics.constructor.basicElements.ImpactNull" />
+            </impactsToVictim>
+        </Item>
+    </effects>
+    <ranks>
+        <Item href="Ability01.(AbilityResource).xdb" />
+        <Item href="Ability02.(AbilityResource).xdb" />
+        <Item href="Ability03.(AbilityResource).xdb" />
+    </ranks>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

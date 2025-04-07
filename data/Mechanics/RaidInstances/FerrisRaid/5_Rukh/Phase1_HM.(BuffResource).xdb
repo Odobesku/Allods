@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>221320</resourceId>
+    </Header>
+    <image href="/Interface/Ingame/Lottery/Textures/Numerals/Num1.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                    <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+                        <range min="0" max="1" />
+                        <withinRange>false</withinRange>
+                        <minCandidatesCount>3</minCandidatesCount>
+                        <targetCount>3</targetCount>
+                    </selector>
+                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                        <filters>
+                            <Item type="gameMechanics.world.creature.AvatarFilter" />
+                            <Item type="gameMechanics.world.creature.AliveFilter" />
+                            <Item type="gameMechanics.constructor.basicElements.FilterNot">
+                                <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.resources.ResourceAnyBuff">
+                                            <buffs>
+                                                <Item href="HM/FearImmunity.(BuffResource).xdb" />
+                                                <Item href="HitAndEat/ChannelBuff.(BuffResource).xdb" />
+                                                <Item href="FeedTheChicks/TargetBuff.(BuffResource).xdb" />
+                                                <Item href="FeedTheChicks/Knockdown.(BuffResource).xdb" />
+                                                <Item href="HMThrow/ToNest1.(BuffResource).xdb" />
+                                                <Item href="HMThrow/ToNest2.(BuffResource).xdb" />
+                                                <Item href="HMThrow/ToNest3.(BuffResource).xdb" />
+                                                <Item href="HMThrow/ThrowTarget.(BuffResource).xdb" />
+                                                <Item href="HMThrow/SavedBuff.(BuffResource).xdb" />
+                                            </buffs>
+                                        </Item>
+                                    </predicates>
+                                </filter>
+                            </Item>
+                        </filters>
+                    </filter>
+                    <impacts>
+                        <Item>
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="HM/FearImmunity.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="HM/FearWarning.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>10000</tick>
+            <initialDelay>7500</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                    <spell href="NestChannel/ChannelSpell.(SpellSingleTarget).xdb" />
+                </Item>
+            </impacts>
+            <tick>40000</tick>
+            <initialDelay>10000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                    <spell href="HMThrow/HMThrow.(SpellSingleTarget).xdb" />
+                </Item>
+            </impacts>
+            <tick>40000</tick>
+            <initialDelay>30000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.LayeredHealthTriggerGeneric">
+            <layers>
+                <Item>
+                    <percent>0.05</percent>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Phase1_HM.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="Phase2_HM.(BuffResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </layers>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <isClientReplicated>false</isClientReplicated>
+    <groups>
+        <Item href="/Mechanics/RaidInstances/Phase1.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

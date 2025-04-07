@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>220877</resourceId>
+    </Header>
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="LazorChannel.(ClientData).xdb" />
+                    <calcers>
+                        <addressEntries>
+                            <Item>
+                                <name>caster</name>
+                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                            </Item>
+                            <Item>
+                                <name>target</name>
+                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                            </Item>
+                        </addressEntries>
+                    </calcers>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <effects>
+                <Item type="gameMechanics.elements.effects.triggerLine.EffectTriggerLine">
+                    <impactsIn>
+                        <impactsFromCaster>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="Lazor_CD.(BuffResource).xdb" />
+                            </Item>
+                        </impactsFromCaster>
+                    </impactsIn>
+                    <maxLength>85</maxLength>
+                    <reconnect>true</reconnect>
+                    <height>10</height>
+                    <width>1</width>
+                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                        <filters>
+                            <Item type="gameMechanics.world.creature.AvatarFilter" />
+                            <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="Lazor_CD.(BuffResource).xdb" />
+                                        </predicate>
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="EggCarrier_Jump.(BuffResource).xdb" />
+                                        </predicate>
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/RaidInstances/FerrisRaid/16_Carrier/Phase2/Phase2_EndCutscene.(BuffResource).xdb" />
+                                        </predicate>
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="Lazor_Immun.(BuffResource).xdb" />
+                                        </predicate>
+                                    </Item>
+                                </predicates>
+                            </Item>
+                        </filters>
+                    </filter>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

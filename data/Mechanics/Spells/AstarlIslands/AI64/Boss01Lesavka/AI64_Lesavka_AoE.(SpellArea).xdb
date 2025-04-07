@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>190158</resourceId>
+    </Header>
+    <Name href="AI64_Lesavka_AoE.(SpellArea).Name.txt" />
+    <visualScripts href="AI64_Lesavka_AoE01.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>85</value>
+    </range>
+    <prepareDuration>1900</prepareDuration>
+    <immutablePrepareDuration>true</immutablePrepareDuration>
+    <targetType>STTPoint</targetType>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                    </Item>
+                </predicates>
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                <element>LIGHTNING</element>
+                <threatMultiplier>0</threatMultiplier>
+                <damage>75</damage>
+                <impactsOnHitTarget>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/Spells/CommonBuffs/KnockDown/BuffKnockDown.xdb" />
+                                </predicate>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/Mechanics/Spells/CommonBuffs/KnockDown/BuffKnockDown.xdb" />
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impactsOnHitTarget>
+                <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>25</speed>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+    <radius>6</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

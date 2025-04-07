@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>209092</resourceId>
+    </Header>
+    <Name href="RD_Whirlwind_HumanoidDamage.(BuffResource).Name.txt" />
+    <Description href="RD_Whirlwind_HumanoidDamage.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Warrior/WarriorWhirlwind.(UISingleTexture).xdb" />
+    <visualEffects />
+    <visualPostEffects />
+    <visualEffectsIncCount />
+    <visualEffectsDecCount />
+    <visScript href="/Spells/BuffVisScripts/DotBloodHard.(BuffVisScripts).xdb" />
+    <uiComponents />
+    <descVars />
+    <gainSpells />
+    <effects>
+        <Item type="gameMechanics.elements.effects.PhysicalDoT">
+            <parameters>
+                <scalerTarget type="gameMechanics.elements.scalers.ScalerBuff">
+                    <buff href="RD_Whirlwind_Stacks.(BuffResource).xdb" />
+                    <summand>1</summand>
+                </scalerTarget>
+                <scaleOnTick>true</scaleOnTick>
+                <tickLength>1000</tickLength>
+                <damagePerTick>1</damagePerTick>
+                <impactsPerTick>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="RD_Whirlwind_Stacks.(BuffResource).xdb" />
+                    </Item>
+                </impactsPerTick>
+            </parameters>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.WeaponScaler" />
+                    <Item type="gameMechanics.elements.scalers.ScalerIf">
+                        <condition type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+                            <quality href="/Mechanics/MobQualities/Elite.xdb" />
+                        </condition>
+                        <scalerIf type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/IncreasingDamageCommon.(CalcerFloatResource).xdb" />
+                            </mulCalcer>
+                        </scalerIf>
+                        <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                            <condition type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+                                <quality href="/Mechanics/MobQualities/Boss.xdb" />
+                            </condition>
+                            <scalerIf type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                    <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/IncreasingDamageElite.(CalcerFloatResource).xdb" />
+                                </mulCalcer>
+                            </scalerIf>
+                            <scalerElse type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                    <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/IncreasingDamageBoss.(CalcerFloatResource).xdb" />
+                                </mulCalcer>
+                            </scalerElse>
+                        </scalerElse>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="RD_Whirlwind_HumanoidDamage.(BuffResource).xdb" />
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="RD_Whirlwind_Stacks.(BuffResource).xdb" />
+                </Item>
+            </impactsOff>
+        </Item>
+    </effects>
+    <isHelpful>false</isHelpful>
+    <ranks />
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

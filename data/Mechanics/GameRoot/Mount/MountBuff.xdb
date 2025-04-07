@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>238876</resourceId>
+    </Header>
+    <Name href="/Mechanics/GameRoot/Mount/MountBuff_Name.txt" />
+    <Description href="/Mechanics/GameRoot/Mount/MountBuff_Desc.txt" />
+    <image href="/Interface/Icons/Mounts/Saddle.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectMountSpeedSetter" />
+        <Item type="gameMechanics.elements.effects.EffectMountSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.MultLinearEffectScaler">
+                <coeff>1</coeff>
+                <calcer type="gameMechanics.elements.calcers.MountSpeedCalcer" />
+            </effectScaler>
+            <defaultSpeedModifier>true</defaultSpeedModifier>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DamageThreshold">
+            <healthScalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                    <externalCalcer href="/Mechanics/GameRoot/Mount/MountHealthCalcer.(CalcerFloatResource).xdb" />
+                </mulCalcer>
+            </healthScalerTarget>
+            <regenCalcer type="gameMechanics.elements.calcers.FloatData">
+                <value>1</value>
+            </regenCalcer>
+            <regenScalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mulCalcer type="gameMechanics.elements.calcers.MountRegenCalcer" />
+            </regenScalerTarget>
+            <outOfCombatPolicy>Nothing</outOfCombatPolicy>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactDismount" />
+            </impacts>
+            <resource href="/Mechanics/GameRoot/Mount/MountDamageThreshold.xdb" />
+            <damageType>ToMount</damageType>
+            <affectsAdditionalHealth>false</affectsAdditionalHealth>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffInterceptor">
+            <impactsOnAttach>
+                <Item type="gameMechanics.elements.impacts.ImpactDismount" />
+            </impactsOnAttach>
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/Dismount.xdb" />
+                    </groups>
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectInterceptActionExceptGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb" />
+            </groups>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateMounted">
+                                <specificGroup href="/Mechanics/Mounts/Groups/ExoMounts.(MountGroupResource).xdb" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactDismount" />
+                    </impactsIf>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                    <group href="/Mechanics/Spells/Groups/Dismount.xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                    <mark href="/Mechanics/Mercenaries/MercsOnMounts.(MarkResource).xdb" />
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactDismount" />
+                <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                    <mark href="/Mechanics/Mercenaries/MercDismount.(MarkResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                    <impactsResource href="/Mechanics/Spells/Mounts/Exo/ExoAutoCaster.(ImpactListResource).xdb" />
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectStatSetter">
+            <stat type="gameMechanics.elements.stat.StatResistance">
+                <element>EPHYSICAL</element>
+            </stat>
+            <valueCalcer type="gameMechanics.elements.calcers.ArmorBSVCalcer" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectStatSetter">
+            <stat type="gameMechanics.elements.stat.StatResistance">
+                <element>EDIVINE</element>
+            </stat>
+            <valueCalcer type="gameMechanics.elements.calcers.ArmorBSVCalcer" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectStatSetter">
+            <stat type="gameMechanics.elements.stat.StatResistance">
+                <element>EELEMENTAL</element>
+            </stat>
+            <valueCalcer type="gameMechanics.elements.calcers.ArmorBSVCalcer" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectStatSetter">
+            <stat type="gameMechanics.elements.stat.StatResistance">
+                <element>ENATURE</element>
+            </stat>
+            <valueCalcer type="gameMechanics.elements.calcers.ArmorBSVCalcer" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                    <ability href="/Mechanics/Spells/Mounts/AllMounts/MountedRegeneration/Ability01.xdb" />
+                </Item>
+            </predicates>
+            <effectsIf>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.DirectHeal">
+                            <heal>1</heal>
+                            <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                <mul>0.02</mul>
+                                <mulCalcer type="gameMechanics.elements.calcers.FullHealthBSVCalcer">
+                                    <level type="gameMechanics.elements.calcers.CalcerLevel" />
+                                </mulCalcer>
+                            </scalerTarget>
+                        </Item>
+                    </impacts>
+                    <initialDelay>-1</initialDelay>
+                </Item>
+            </effectsIf>
+        </Item>
+    </effects>
+    <isStackable>false</isStackable>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/StopSing.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

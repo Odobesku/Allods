@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>188257</resourceId>
+    </Header>
+    <Name href="PhaseRefresh.(BuffResource).Name.txt" />
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                            <ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+                                    <level>0.75</level>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="CleansingFire.(BuffResource).xdb" />
+                                    <stacks type="gameMechanics.elements.calcers.FloatData">
+                                        <value>2</value>
+                                    </stacks>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+                                    <level>0.5</level>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="CleansingFire.(BuffResource).xdb" />
+                                    <stacks type="gameMechanics.elements.calcers.FloatData">
+                                        <value>2</value>
+                                    </stacks>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+                                    <level>0.25</level>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="CleansingFire.(BuffResource).xdb" />
+                                    <stacks type="gameMechanics.elements.calcers.FloatData">
+                                        <value>4</value>
+                                    </stacks>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+                                    <level>0.5</level>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="CleansingFire.(BuffResource).xdb" />
+                                    <stacks type="gameMechanics.elements.calcers.FloatData">
+                                        <value>3</value>
+                                    </stacks>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsElse>
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="CleansingFire.(BuffResource).xdb" />
+                    <stacks type="gameMechanics.elements.calcers.FloatData">
+                        <value>3</value>
+                    </stacks>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                            <affectGroup>Enemies</affectGroup>
+                            <affectHolder>false</affectHolder>
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="DelayedFirePuddle.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                </predicates>
+                            </filter>
+                            <targetsLimit>1</targetsLimit>
+                            <sorting type="gameMechanics.elements.targetSelector.sorts.SortByDistance" />
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/Wait.(BuffResource).xdb" />
+                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                        <multiplier>1</multiplier>
+                    </durationScaler>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                    <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+                        <range min="0" max="1" />
+                        <withinRange>false</withinRange>
+                        <minCandidatesCount>3</minCandidatesCount>
+                        <targetCount>3</targetCount>
+                    </selector>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                </predicates>
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                        </predicates>
+                    </filter>
+                    <impacts>
+                        <Item>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="FireRay.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>12000</tick>
+            <initialDelay>4000</initialDelay>
+        </Item>
+    </effects>
+    <duration>24000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

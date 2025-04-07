@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>186532</resourceId>
+    </Header>
+    <Name href="CreepingDemonBuff.(BuffResource).Name.txt" />
+    <Description href="CreepingDemonBuff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Necromancer/SummonZombie.(UISingleTexture).xdb" />
+    <visualEffects>
+        <Item>
+            <delay>2000</delay>
+            <effectFx href="/Spells/FX/Spells/UndeadMutant_PoolDown.(VisObjectTemplate).xdb" />
+            <lockScale>true</lockScale>
+            <scale>4</scale>
+            <locator>Slot_Global</locator>
+        </Item>
+    </visualEffects>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>3000</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <radius>5</radius>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                            <element>ACID</element>
+                                            <damage>20</damage>
+                                            <impactsOnHitTarget>
+                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                    <data href="/Spells/ClientData/HitPoison.(ClientData).xdb" />
+                                                </Item>
+                                            </impactsOnHitTarget>
+                                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                        </Item>
+                                    </impacts>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                </predicates>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                        </predicates>
+                                    </filter>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <tick>1000</tick>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="CreepingDemonBuff.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.65</coeff>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactKill" />
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.TickableAura">
+            <affectGroup>All</affectGroup>
+            <radius>6</radius>
+            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                        <mobs>
+                            <Item href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss02/Demon.(MobWorld).xdb" />
+                        </mobs>
+                    </Item>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="MasterDead.(BuffResource).xdb" />
+                        </predicate>
+                    </Item>
+                </predicates>
+            </filter>
+            <impactsIn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                            <mobs>
+                                <Item href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss02/Demon.(MobWorld).xdb" />
+                            </mobs>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="DemonAOEReaction.(BuffResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsIn>
+            <impactsOut>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="DemonAOEReaction.(BuffResource).xdb" />
+                </Item>
+            </impactsOut>
+        </Item>
+    </effects>
+    <duration>30000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb" />
+        <Item href="/Mechanics/Spells/Groups/EvadeProtectedBuffs.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

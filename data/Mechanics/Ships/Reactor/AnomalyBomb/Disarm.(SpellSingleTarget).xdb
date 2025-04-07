@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>243876</resourceId>
+    </Header>
+    <Name href="Disarm.txt" />
+    <Description href="Disarm.Description.txt" />
+    <image href="/Interface/Icons/Special/Talents/Mage/LightningCDProc.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Common/Use.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>10</value>
+    </range>
+    <prepareDuration>10000</prepareDuration>
+    <immutablePrepareDuration>true</immutablePrepareDuration>
+    <modifiers>
+        <Item type="gameMechanics.elements.spell.RaiseRepelType">
+            <repelType>FAIL</repelType>
+        </Item>
+        <Item type="gameMechanics.elements.spell.RepelOnNuisance" />
+    </modifiers>
+    <iffPolicy>Everyone</iffPolicy>
+    <mechanics>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                <buff href="MinedReactor.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderDeviceLinkedTo" />
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.ShipDistributor">
+                            <affectAllPassengers>true</affectAllPassengers>
+                        </distributor>
+                        <data href="BombDisarmed.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="DisabledReactor.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

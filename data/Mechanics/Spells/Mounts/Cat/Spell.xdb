@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>204644</resourceId>
+        <isPrototype>true</isPrototype>
+        <Variables>
+            <grade>/Mechanics/Mounts/Groups/Cat6Grade.xdb#xpointer(/gameMechanics.constructor.schemes.mount.MountGroupResource)</grade>
+        </Variables>
+    </Header>
+    <contextActionInfo>
+        <priority>1</priority>
+        <contextName href="Spell_Name.txt" />
+        <contextDescription href="Spell_Desc.txt" />
+        <contextImage href="/Interface/Icons/Mounts/SpellsMounts/PatTheCat.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    </contextActionInfo>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/CrowdControlSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <element>PHYSICAL</element>
+    <Name href="Spell_Name.txt" />
+    <Description href="Spell_Desc.txt" />
+    <image href="/Interface/Icons/Mounts/SpellsMounts/PatTheCat.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Mount/CatChannel.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="Spell_Name.txt.template" />
+    <descTemplate href="Spell_Desc.txt.template" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>20</value>
+    </range>
+    <level>1</level>
+    <prepareDuration>6000</prepareDuration>
+    <immutablePrepareDuration>false</immutablePrepareDuration>
+    <needLos>true</needLos>
+    <targetType>STTCurrentTarget</targetType>
+    <isAggro>true</isAggro>
+    <replaceLowRanks>true</replaceLowRanks>
+    <isWorkOnDead>false</isWorkOnDead>
+    <ranks>
+        <Item href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        <Item href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+    </ranks>
+    <modifiers>
+        <Item type="gameMechanics.elements.spell.RaiseRepelType">
+            <repelType>IGNORE</repelType>
+        </Item>
+    </modifiers>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>true</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>false</ignoreGlobalCooldown>
+    <launchWhenReady>false</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <stage>Launch</stage>
+            <duration>1000</duration>
+            <group href="" />
+            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mul>12</mul>
+                <mulCalcer type="gameMechanics.elements.calcers.CalcerDiff">
+                    <minuend type="gameMechanics.elements.calcers.FloatData">
+                        <value>10</value>
+                    </minuend>
+                    <subtrahend type="gameMechanics.elements.calcers.CalcerMountFromGroupMaxLevel">
+                        <group hrefvar="grade" />
+                    </subtrahend>
+                </mulCalcer>
+                <sum>180</sum>
+            </scaler>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateMountFromGroupFeeded">
+                        <group hrefvar="grade" />
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateMountFromGroupFeeded">
+                        <hideText>true</hideText>
+                        <group href="/Mechanics/Mounts/Groups/Cat2Grade.xdb#xpointer(/gameMechanics.constructor.schemes.mount.MountGroupResource)" />
+                    </Item>
+                </predicates>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateMounted" />
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/Mounts/Prototypes/AntiNormalMountCC.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </targetConditions>
+        <channelingMechanics>
+            <channelingBuff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            <isForthright>false</isForthright>
+        </channelingMechanics>
+    </mechanics>
+    <speed>0</speed>
+    <isAE>false</isAE>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

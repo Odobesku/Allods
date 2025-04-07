@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>220814</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="MountRiderProto.(BuffResource).Name.txt" />
+    <Description href="MountRiderProto.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Mounts/YakMountIco.(UISingleTexture).xdb" />
+    <visScript href="YakBossCorrupted.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectAddContextActions">
+            <actions>
+                <Item href="Dismount.(SpellSingleTarget).xdb" />
+                <Item href="Acceleration/Acceleration.(SpellSingleTarget).xdb" />
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActionsExceptGroup">
+            <groups>
+                <Item href="/Mechanics/RaidInstances/Phase.(ActionGroup).xdb" />
+                <Item href="/Mechanics/Spells/Groups/AlchemyPots.(ActionGroup).xdb" />
+                <Item href="/Mechanics/Spells/Groups/FairySpells.xdb" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactGoTo">
+                    <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                        <base type="gameMechanics.map.destination.SelfPosDestination" />
+                        <offset>20</offset>
+                        <yaw type="constructor.basicElements.AngleDegrees" />
+                    </destination>
+                    <runningMode>true</runningMode>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectMoveTrigger">
+            <yawDelta>1</yawDelta>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactGoTo">
+                    <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                        <base type="gameMechanics.map.destination.SelfPosDestination" />
+                        <offset>20</offset>
+                        <yaw type="constructor.basicElements.AngleDegrees" />
+                    </destination>
+                    <runningMode>true</runningMode>
+                </Item>
+            </impacts>
+            <moveTypes>
+                <Item>Step</Item>
+            </moveTypes>
+            <distDelta>0</distDelta>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Jump</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="RiderStackableDebuff.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="MountSpeedStackable.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="Acceleration/AccelerationBuff.(BuffResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsElse>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="TempSpeedUp.(BuffResource).xdb" />
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impacts>
+            <tick>1500</tick>
+            <initialDelay>100</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.RunImpactsInShape">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/EnergySource/EnergySource.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="EnergyAbsorber.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                            <spawn>
+                                                <scriptID>7_Yak</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </spawn>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                                            <element>LIGHTNING</element>
+                                                            <damage>15</damage>
+                                                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                                    <time>1000</time>
+                                    <distance>12</distance>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                    <shape type="gameMechanics.constructor.schemes.spell.area.RectangularRay">
+                        <width>2.5</width>
+                    </shape>
+                    <affectGroup>All</affectGroup>
+                    <radius type="gameMechanics.elements.impacts.RunImpactsInShape$FixedRadius">
+                        <value>5</value>
+                    </radius>
+                    <affectMainTarget>false</affectMainTarget>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>1</radius>
+                    <affectHolder>false</affectHolder>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/EnergySource/EnergySource.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="EnergyAbsorber.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                            <spawn>
+                                                <scriptID>7_Yak</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </spawn>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                                            <element>LIGHTNING</element>
+                                                            <damage>15</damage>
+                                                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                                    <time>1000</time>
+                                    <distance>12</distance>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                        <filters>
+                            <Item type="gameMechanics.world.creature.CreatureFilter" />
+                            <Item type="gameMechanics.world.creature.AliveFilter" />
+                        </filters>
+                    </filter>
+                </Item>
+            </impacts>
+            <tick>400</tick>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.RunImpactsInShape">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/EnergySource/EnergySource.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="EnergyAbsorber.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                            <spawn>
+                                                <scriptID>7_Yak</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </spawn>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                                            <element>LIGHTNING</element>
+                                                            <damage>15</damage>
+                                                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                                    <time>1000</time>
+                                    <distance>12</distance>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                    <shape type="gameMechanics.constructor.schemes.spell.area.RectangularRay">
+                        <width>2.5</width>
+                    </shape>
+                    <affectGroup>All</affectGroup>
+                    <radius type="gameMechanics.elements.impacts.RunImpactsInShape$FixedRadius">
+                        <value>5</value>
+                    </radius>
+                    <affectMainTarget>false</affectMainTarget>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>1</radius>
+                    <affectHolder>false</affectHolder>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/EnergySource/EnergySource.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="EnergyAbsorber.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                            <spawn>
+                                                <scriptID>7_Yak</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </spawn>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                                            <element>LIGHTNING</element>
+                                                            <damage>15</damage>
+                                                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                                    <time>1000</time>
+                                    <distance>12</distance>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                        <filters>
+                            <Item type="gameMechanics.world.creature.CreatureFilter" />
+                            <Item type="gameMechanics.world.creature.AliveFilter" />
+                        </filters>
+                    </filter>
+                </Item>
+            </impacts>
+            <tick>400</tick>
+            <initialDelay>200</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectUnworthyOfAttention" />
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="MountSpeedStackable.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="TempSpeedUp.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Acceleration/AccelerationBuff.(BuffResource).xdb" />
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/PursuitingSphere/PursuitingSpherePlane.(Plane).xdb" />
+                <action>DENY</action>
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/EnergySource/EnergySourcePlane.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Influence</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/EnergySource/EnergySourcePlane.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+    </effects>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

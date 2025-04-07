@@ -1,0 +1,856 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>201391</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/FairySpells.xdb" />
+    </groups>
+    <element>ASTRAL</element>
+    <descVars>
+        <Item>
+            <name>necr1</name>
+            <text href="Spell.Text.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Necromancer.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>middle_spell</name>
+            <value>1</value>
+            <scaler type="gameMechanics.elements.scalers.ScalerIf">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Necromancer.xdb" />
+                </condition>
+                <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                    <multiplier var="summand_necro_blood" />
+                </scalerIf>
+                <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                    <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                        <characterClass href="/Mechanics/Classes/Psionic.xdb" />
+                    </condition>
+                    <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                        <multiplier var="summand_psi_stress" />
+                    </scalerIf>
+                    <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                        <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                            <characterClass href="/Mechanics/Classes/Bard.xdb" />
+                        </condition>
+                        <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                            <multiplier var="summand_bard_drive" />
+                        </scalerIf>
+                        <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                            <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                                <characterClass href="/Mechanics/Classes/Druid.xdb" />
+                            </condition>
+                            <scalerIf type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                                <scalers>
+                                    <Item type="gameMechanics.elements.scalers.LinearScaler">
+                                        <multiplier var="druid_mana_factor" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.scalers.LinearScaler">
+                                        <multiplier>100</multiplier>
+                                    </Item>
+                                </scalers>
+                            </scalerIf>
+                            <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                                    <characterClass href="/Mechanics/Classes/Engineer.xdb" />
+                                </condition>
+                                <scalerIf type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                                    <scalers>
+                                        <Item type="gameMechanics.elements.scalers.LinearScaler">
+                                            <multiplier>-100</multiplier>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                            <mulCalcer type="gameMechanics.elements.calcers.FloatData">
+                                                <value var="engineer_cd_factor" />
+                                            </mulCalcer>
+                                            <sum>-1</sum>
+                                        </Item>
+                                    </scalers>
+                                </scalerIf>
+                                <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                    <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                                        <characterClass href="/Mechanics/Classes/Mage.xdb" />
+                                    </condition>
+                                    <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                                        <multiplier var="summand_mage_elem" />
+                                    </scalerIf>
+                                    <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                        <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                                            <characterClass href="/Mechanics/Classes/Paladin.xdb" />
+                                        </condition>
+                                        <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                                            <multiplier var="summand_paladin_canon" />
+                                        </scalerIf>
+                                        <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                            <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                                                <characterClass href="/Mechanics/Classes/Priest.xdb" />
+                                            </condition>
+                                            <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                                                <multiplier var="summand_priest_zeal" />
+                                            </scalerIf>
+                                            <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                                                    <characterClass href="/Mechanics/Classes/Stalker.xdb" />
+                                                </condition>
+                                                <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                                                    <multiplier var="summand_stalk_materiel" />
+                                                </scalerIf>
+                                                <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                                    <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                                                        <characterClass href="/Mechanics/Classes/Warrior.xdb" />
+                                                    </condition>
+                                                    <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                                                        <multiplier var="summand_warrior_int" />
+                                                    </scalerIf>
+                                                    <scalerElse type="gameMechanics.elements.scalers.TrivialScaler" />
+                                                </scalerElse>
+                                            </scalerElse>
+                                        </scalerElse>
+                                    </scalerElse>
+                                </scalerElse>
+                            </scalerElse>
+                        </scalerElse>
+                    </scalerElse>
+                </scalerElse>
+            </scaler>
+        </Item>
+        <Item>
+            <name>necr2</name>
+            <text href="Spell.Text02.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Necromancer.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>psi1</name>
+            <text href="Spell.Text04.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Psionic.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>psi2</name>
+            <text href="Spell.Text05.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Psionic.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>bar1</name>
+            <text href="Spell.Text06.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Bard.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>bar2</name>
+            <text href="Spell.Text07.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Bard.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>dru1</name>
+            <text href="Spell.Text08.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Druid.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>dru2</name>
+            <text href="Spell.Text09.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Druid.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>eng1</name>
+            <text href="Spell.Text10.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Engineer.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>eng2</name>
+            <text href="Spell.Text11.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Engineer.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>mag1</name>
+            <text href="Spell.Text12.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Mage.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>mag2</name>
+            <text href="Spell.Text13.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Mage.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>pal1</name>
+            <text href="Spell.Text14.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Paladin.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>pal2</name>
+            <text href="Spell.Text15.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Paladin.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>pri1</name>
+            <text href="Spell.Text16.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Priest.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>pri2</name>
+            <text href="Spell.Text17.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Priest.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>sta1</name>
+            <text href="Spell.Text18.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Stalker.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>sta2</name>
+            <text href="Spell.Text19.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Stalker.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>war1</name>
+            <text href="Spell.Text20.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Warrior.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>war2</name>
+            <text href="Spell.Text21.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Warrior.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>middle_buff</name>
+            <value>1</value>
+            <scaler type="gameMechanics.elements.scalers.ScalerIf">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Necromancer.xdb" />
+                </condition>
+                <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                    <multiplier>1</multiplier>
+                </scalerIf>
+                <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                    <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                        <characterClass href="/Mechanics/Classes/Psionic.xdb" />
+                    </condition>
+                    <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                        <multiplier>7</multiplier>
+                    </scalerIf>
+                    <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                        <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                            <characterClass href="/Mechanics/Classes/Bard.xdb" />
+                        </condition>
+                        <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                            <multiplier>2</multiplier>
+                        </scalerIf>
+                        <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                            <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                                <characterClass href="/Mechanics/Classes/Druid.xdb" />
+                            </condition>
+                            <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                                <multiplier>3</multiplier>
+                            </scalerIf>
+                            <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                                    <characterClass href="/Mechanics/Classes/Engineer.xdb" />
+                                </condition>
+                                <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                                    <multiplier>150</multiplier>
+                                </scalerIf>
+                                <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                    <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                                        <characterClass href="/Mechanics/Classes/Mage.xdb" />
+                                    </condition>
+                                    <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                                        <multiplier>1</multiplier>
+                                    </scalerIf>
+                                    <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                        <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                                            <characterClass href="/Mechanics/Classes/Paladin.xdb" />
+                                        </condition>
+                                        <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                                            <multiplier>1</multiplier>
+                                        </scalerIf>
+                                        <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                            <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                                                <characterClass href="/Mechanics/Classes/Priest.xdb" />
+                                            </condition>
+                                            <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                                                <multiplier>1</multiplier>
+                                            </scalerIf>
+                                            <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                                                    <characterClass href="/Mechanics/Classes/Stalker.xdb" />
+                                                </condition>
+                                                <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                                                    <multiplier>1</multiplier>
+                                                </scalerIf>
+                                                <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                                    <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                                                        <characterClass href="/Mechanics/Classes/Warrior.xdb" />
+                                                    </condition>
+                                                    <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                                                        <multiplier>7</multiplier>
+                                                    </scalerIf>
+                                                    <scalerElse type="gameMechanics.elements.scalers.TrivialScaler" />
+                                                </scalerElse>
+                                            </scalerElse>
+                                        </scalerElse>
+                                    </scalerElse>
+                                </scalerElse>
+                            </scalerElse>
+                        </scalerElse>
+                    </scalerElse>
+                </scalerElse>
+            </scaler>
+        </Item>
+        <Item>
+            <name>necr1b</name>
+            <text href="Spell.Text22.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Necromancer.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>necr2b</name>
+            <text href="Spell.Text23.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Necromancer.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>psi1b</name>
+            <text href="Spell.Text24.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Psionic.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>psi2b</name>
+            <text href="Spell.Text25.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Psionic.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>bar1b</name>
+            <text href="Spell.Text26.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Bard.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>bar2b</name>
+            <text href="Spell.Text27.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Bard.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>dru1b</name>
+            <text href="Spell.Text28.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Druid.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>dru2b</name>
+            <text href="Spell.Text29.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Druid.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>eng1b</name>
+            <text href="Spell.Text30.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Engineer.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>eng2b</name>
+            <text href="Spell.Text31.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Engineer.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>mag1b</name>
+            <text href="Spell.Text32.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Mage.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>mag2b</name>
+            <text href="Spell.Text33.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Mage.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>pal1b</name>
+            <text href="Spell.Text34.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Paladin.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>pal2b</name>
+            <text href="Spell.Text35.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Paladin.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>pri1b</name>
+            <text href="Spell.Text36.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Priest.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>pri2b</name>
+            <text href="Spell.Text37.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Priest.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>sta1b</name>
+            <text href="Spell.Text38.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Stalker.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>sta2b</name>
+            <text href="Spell.Text39.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Stalker.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>war1b</name>
+            <text href="Spell.Text40.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Warrior.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+        <Item>
+            <name>war2b</name>
+            <text href="Spell.Text41.txt" />
+            <scaler type="gameMechanics.elements.scalers.IfTextModifier">
+                <condition type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                    <characterClass href="/Mechanics/Classes/Warrior.xdb" />
+                </condition>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Halo/StrengthOfMind.(UISingleTexture).xdb" />
+    <level>1</level>
+    <prepareDuration>0</prepareDuration>
+    <immutablePrepareDuration>false</immutablePrepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <replaceLowRanks>true</replaceLowRanks>
+    <isWorkOnDead>false</isWorkOnDead>
+    <ranks>
+        <Item href="Spell01.xdb" />
+        <Item href="Spell02.xdb" />
+        <Item href="Spell03.(SpellSingleTarget).xdb" />
+    </ranks>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+    <launchWhenReady>false</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <stage>Launch</stage>
+            <duration>300000</duration>
+            <group href="" />
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsFairyActive" />
+            <Item type="gameMechanics.elements.predicates.PredicateFairyRankGreater">
+                <rank>2</rank>
+            </Item>
+        </casterConditions>
+        <casterResources>
+            <!-- <Item type="gameMechanics.elements.resources.ResourceAltCurrency"> -->
+            <!-- <currency href="/Mechanics/AlternativeCurrencies/Myrrh.xdb" /> -->
+            <!-- <count>0</count> -->
+            <!-- <countCalcer type="gameMechanics.elements.calcers.CalcerMul"> -->
+            <!-- <calcers> -->
+            <!-- <Item type="gameMechanics.elements.calcers.CalcerIf"> -->
+            <!-- <predicate type="gameMechanics.elements.predicates.PredicateUnlock"> -->
+            <!-- <unlock href="/Mechanics/Unlocks/VeteranRewards/VeteranRankMaster.xdb" /> -->
+            <!-- </predicate> -->
+            <!-- <calcerIf type="gameMechanics.elements.calcers.FloatData"> -->
+            <!-- <value>0.7</value> -->
+            <!-- </calcerIf> -->
+            <!-- <calcerElse type="gameMechanics.elements.calcers.FloatData"> -->
+            <!-- <value>1</value> -->
+            <!-- </calcerElse> -->
+            <!-- </Item> -->
+            <!-- <Item type="gameMechanics.elements.calcers.CalcerIf"> -->
+            <!-- <predicate type="gameMechanics.constructor.basicElements.PredicateAnd"> -->
+            <!-- <predicates> -->
+            <!-- <Item type="gameMechanics.elements.predicates.PredicateHasContentKey"> -->
+            <!-- <key href="/System/ContentKeys/WeakFactionMyrrhBonus.(ContentKey).xdb" /> -->
+            <!-- </Item> -->
+            <!-- <Item type="gameMechanics.constructor.basicElements.PredicateOr"> -->
+            <!-- <predicates> -->
+            <!-- <Item type="gameMechanics.elements.predicates.PredicateWeakFaction" /> -->
+            <!-- <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange"> -->
+            <!-- <buff href="/Mechanics/Spells/ItemSpells/ChangeFaction/BuffWeakFaction.(BuffResource).xdb" /> -->
+            <!-- <range> -->
+            <!-- <min>1</min> -->
+            <!-- <max>1</max> -->
+            <!-- </range> -->
+            <!-- </Item> -->
+            <!-- </predicates> -->
+            <!-- </Item> -->
+            <!-- </predicates> -->
+            <!-- </predicate> -->
+            <!-- <calcerIf type="gameMechanics.elements.calcers.FairySpellCostCalcer"> -->
+            <!-- <mul>0.5</mul> -->
+            <!-- </calcerIf> -->
+            <!-- <calcerElse type="gameMechanics.elements.calcers.FairySpellCostCalcer"> -->
+            <!-- <mul>5</mul> -->
+            <!-- </calcerElse> -->
+            <!-- </Item> -->
+            <!-- </calcers> -->
+            <!-- </countCalcer> -->
+            <!-- </Item> -->
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                <data href="/Spells/ClientData/FairyStrengthOfMind.(ClientData).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactAddFairyExperience">
+                <experience var="experience" />
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/Fairies/AbilityUseBuff.xdb" />
+            </Item>
+            <!-- <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround"> -->
+            <!-- <affectGroup>Group</affectGroup> -->
+            <!-- <affectHolder>false</affectHolder> -->
+            <!-- <impacts> -->
+            <!-- <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency"> -->
+            <!-- <currency href="/Mechanics/AlternativeCurrencies/Myrrh.xdb" /> -->
+            <!-- <sumCalcer type="gameMechanics.elements.calcers.CalcerIf"> -->
+            <!-- <predicate type="gameMechanics.constructor.basicElements.PredicateAnd"> -->
+            <!-- <predicates> -->
+            <!-- <Item type="gameMechanics.elements.predicates.PredicateHasContentKey"> -->
+            <!-- <key href="/System/ContentKeys/WeakFactionMyrrhBonus.(ContentKey).xdb" /> -->
+            <!-- </Item> -->
+            <!-- <Item type="gameMechanics.constructor.basicElements.PredicateOr"> -->
+            <!-- <predicates> -->
+            <!-- <Item type="gameMechanics.elements.predicates.PredicateWeakFaction" /> -->
+            <!-- <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange"> -->
+            <!-- <buff href="/Mechanics/Spells/ItemSpells/ChangeFaction/BuffWeakFaction.(BuffResource).xdb" /> -->
+            <!-- <range> -->
+            <!-- <min>1</min> -->
+            <!-- <max>1</max> -->
+            <!-- </range> -->
+            <!-- </Item> -->
+            <!-- </predicates> -->
+            <!-- </Item> -->
+            <!-- </predicates> -->
+            <!-- </predicate> -->
+            <!-- <calcerIf type="gameMechanics.constructor.basicElements.FloatZero" /> -->
+            <!-- <calcerElse type="gameMechanics.elements.calcers.FairySpellCostCalcer"> -->
+            <!-- <mul var="mul" /> -->
+            <!-- </calcerElse> -->
+            <!-- </sumCalcer> -->
+            <!-- </Item> -->
+            <!-- </impacts> -->
+            <!-- <filter type="gameMechanics.world.creature.AvatarFilter" /> -->
+            <!-- </Item> -->
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateHasSpell">
+                        <spell href="Spell03.(SpellSingleTarget).xdb" />
+                        <anyRank>false</anyRank>
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="Buff.(BuffResource).xdb" />
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                        <characterClass href="/Mechanics/Classes/Psionic.xdb" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                        <variable href="/Mechanics/Spells/Psionic63/Abilities/StressResource/StressResource.(VariableResource).xdb" />
+                        <summand var="summand_psi_stress" />
+                        <scaler type="gameMechanics.elements.scalers.LinearScaler">
+                            <multiplier>-1</multiplier>
+                        </scaler>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                        <characterClass href="/Mechanics/Classes/Stalker.xdb" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                        <variable href="/Mechanics/Spells/Stalker63/Abilities/MaterielResource/MaterielResource.(VariableResource).xdb" />
+                        <summand var="summand_stalk_materiel" />
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                        <characterClass href="/Mechanics/Classes/Warrior.xdb" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactAddCombatAdvantage">
+                        <value var="summand_warrior" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.IncrementMana">
+                        <manaType>Energy</manaType>
+                        <amount var="summand_warrior_int" />
+                        <threatMultiplier>0</threatMultiplier>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                        <characterClass href="/Mechanics/Classes/Bard.xdb" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                        <variable href="/Mechanics/Spells/Bard63/Abilities/DriveResource/Drive.(VariableResource).xdb" />
+                        <summand var="summand_bard_drive" />
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                        <characterClass href="/Mechanics/Classes/Priest.xdb" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                        <variable href="/Mechanics/Spells/Priest63/Abilities/Zeal/Zeal.(VariableResource).xdb" />
+                        <summand var="summand_priest_zeal" />
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                        <characterClass href="/Mechanics/Classes/Engineer.xdb" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactModifySpellGroupCooldown">
+                        <group href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+                        <factor var="engineer_cd_factor" />
+                        <forAllSpells>true</forAllSpells>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactModifySpellGroupCooldown">
+                        <group href="/Mechanics/Spells/Groups/RaceClassSpells.xdb" />
+                        <factor var="engineer_cd_factor" />
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                        <characterClass href="/Mechanics/Classes/Mage.xdb" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                        <variable href="/Mechanics/Spells/Mage63/Abilities/ElementalPower/FireVar.(VariableResource).xdb" />
+                        <summand var="summand_mage_elem" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                        <variable href="/Mechanics/Spells/Mage63/Abilities/ElementalPower/IceVar.(VariableResource).xdb" />
+                        <summand var="summand_mage_elem" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                        <variable href="/Mechanics/Spells/Mage63/Abilities/ElementalPower/LightningVar.(VariableResource).xdb" />
+                        <summand var="summand_mage_elem" />
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                        <characterClass href="/Mechanics/Classes/Paladin.xdb" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                        <variable href="/Mechanics/Spells/Paladin63/Abilities/Canons/LightCanon.(VariableResource).xdb" />
+                        <summand var="summand_paladin_canon" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                        <variable href="/Mechanics/Spells/Paladin63/Abilities/Canons/PurityCanon.(VariableResource).xdb" />
+                        <summand var="summand_paladin_canon" />
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                        <characterClass href="/Mechanics/Classes/Necromancer.xdb" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                        <variable href="/Mechanics/Spells/Necromancer70/Abilities/BloodDrops/BloodPool.(VariableResource).xdb" />
+                        <summand var="summand_necro_blood" />
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+                        <characterClass href="/Mechanics/Classes/Druid.xdb" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.IncrementManaBase">
+                        <manaType>Mana</manaType>
+                        <factor var="druid_mana_factor" />
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <speed>0</speed>
+    <isAE>false</isAE>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>212816</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="Stelle_Summon_Boss4.(SpellSingleTarget).Name.txt" />
+    <Description href="Stelle_Summon_Boss4.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Misc/Quest/StonePast.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Items/InteractiveObjects/Templates/UseItemLoop.(ExploitVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <isExploit>true</isExploit>
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>6</value>
+    </range>
+    <prepareDuration>3000</prepareDuration>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <iffPolicy>Everyone</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="/World/Quests/HuntingGround1/Daily/HG1_Daily_Boss.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Started</status>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="/World/Quests/HuntingGround2/Daily/HG2_Daily_Boss.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Started</status>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="/World/Quests/HuntingGround3/Daily/HG3_Daily_Boss.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Started</status>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="/World/Quests/HuntingGround4/Daily/HG4_Daily_Boss.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Started</status>
+                    </Item>
+                </predicates>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                        <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                            <offset>10</offset>
+                        </destination>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                        <id href="/World/Quests/HuntingGround1/Daily/Count_1.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor">
+                                    <radius>25</radius>
+                                </distributor>
+                                <data href="/World/Quests/ElementalPlateu/Stone_2/Stone_2_Miniboss.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                            </Item>
+                        </impacts>
+                        <object href="DailyBoss_4.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <canStartNotBeeingInSpellbook>true</canStartNotBeeingInSpellbook>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

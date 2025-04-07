@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<actionBarStart type="VisActionList">
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="CreatureAnimationAction">
+				<mode>LOOP</mode>
+				<use>USE_CURRENT_RANGED_LOADHOLD</use>
+				<advanced>
+					<backgroundAfterFirstKey>false</backgroundAfterFirstKey>
+					<animationKeysAction>
+						<Item>
+							<action type="CreatureTakeArrowAction">
+								<enchantedArrowIndex>1</enchantedArrowIndex>
+							</action>
+						</Item>
+						<Item>
+							<action type="VisActionList">
+								<play>Simultaneously</play>
+								<elements>
+									<Item type="CreatureItemAnimationAction">
+										<itemsSlot>RANGED</itemsSlot>
+										<mode>CLAMP</mode>
+										<animation>special</animation>
+									</Item>
+									<Item type="CreatureTakeBowStringAction">
+										<visActionID>AttachString</visActionID>
+										<itemsSlot>RANGED</itemsSlot>
+										<itemLocatorName>Slot_String</itemLocatorName>
+										<creatureLocator>Slot_Hand_R</creatureLocator>
+										<member>Assaulter</member>
+									</Item>
+									<Item type="Sound3DAction">
+										<sound>
+											<project href="/SFX/Spells/Sounds.(FMODProject).xdb" />
+											<name>spells/Stalker/StalkerArrowPull</name>
+										</sound>
+									</Item>
+								</elements>
+							</action>
+						</Item>
+					</animationKeysAction>
+					<turnToTarget>BEFORE_ANIMATIONEND</turnToTarget>
+					<waitRealEvent>WAIT_FROMFIRSTKEY</waitRealEvent>
+				</advanced>
+			</Item>
+			<Item type="CreatureEffectsAction">
+				<visActionID>BlinkArrowPrecast</visActionID>
+				<visualEffects>
+					<Item>
+						<effectFx href="/Spells/FX/Spells/Stalker70_BlinkArrow_Precast.(VisObjectTemplate).xdb" />
+						<locator>Slot_Hand_L</locator>
+					</Item>
+				</visualEffects>
+			</Item>
+			<Item type="Sound3DAction">
+				<sound>
+					<project href="/SFX/Spells/Sounds.(FMODProject).xdb" />
+					<name>spells/Stalker70/BlinkArrow_Precast</name>
+				</sound>
+				<forcedSoundStop>true</forcedSoundStop>
+			</Item>
+		</elements>
+	</actionBarStart>
+	<launch type="VisActionList">
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="VisActionStopAction">
+				<stoppedActionID>AttachString</stoppedActionID>
+			</Item>
+			<Item type="CreatureItemAnimationAction">
+				<itemsSlot>RANGED</itemsSlot>
+				<animation>attack</animation>
+			</Item>
+			<Item type="CreatureAnimationAction">
+				<use>USE_CURRENT_RANGED_ATTACK</use>
+				<channel>CHANNEL_ATTACK</channel>
+				<channelOverrideScript />
+				<advanced>
+					<backgroundAfterFirstKey>true</backgroundAfterFirstKey>
+					<changeChannelAfterFirstKey>CHANGE</changeChannelAfterFirstKey>
+					<channelAfterFirstKey>CHANNEL_ATTACK</channelAfterFirstKey>
+					<offendType>ONEOFFEND_ONETARGET</offendType>
+					<turnToTarget>BEFORE_ANIMATIONEND</turnToTarget>
+				</advanced>
+			</Item>
+			<Item type="CreatureThrowArrowAction">
+				<arrow href="" />
+				<enchantedArrowIndex>1</enchantedArrowIndex>
+				<arrowInTargetTime>15000</arrowInTargetTime>
+				<theGe>8</theGe>
+				<additionalEffectFx href="/Spells/FX/Spells/ArrowTeleport.(VisObjectTemplate).xdb" />
+				<effectBone>Slot_FX</effectBone>
+				<offendTime type="EffectOffendConstDelay" />
+			</Item>
+			<Item type="Sound3DAction">
+				<sound>
+					<project href="/SFX/Spells/Sounds.(FMODProject).xdb" />
+					<name>spells/Stalker/StalkerArrowShot</name>
+				</sound>
+				<alias href="" />
+			</Item>
+		</elements>
+	</launch>
+	<playOnTargets>
+		<specialAction type="VisActionList">
+			<playWhile />
+			<elements>
+				<Item type="VisActionDelay">
+					<time>100</time>
+				</Item>
+				<Item type="Sound3DAction">
+					<sound>
+						<project href="/SFX/Spells/Sounds.(FMODProject).xdb" />
+						<name>spells/Stalker/StalkerArrowHit</name>
+					</sound>
+					<alias href="" />
+				</Item>
+				<Item type="CreatureEffectsAction">
+					<visualEffects>
+						<Item>
+							<effectFx href="/Spells/FX/Spells/PsionicTimeLapseAbility_Start.(VisObjectTemplate).xdb" />
+							<effectAlias href="" />
+							<scale>1.5</scale>
+							<locator>Slot_FX</locator>
+							<offendTime />
+						</Item>
+					</visualEffects>
+				</Item>
+			</elements>
+		</specialAction>
+	</playOnTargets>
+</SpellVisScripts>

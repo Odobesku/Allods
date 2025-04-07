@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>226429</resourceId>
+    </Header>
+    <Name href="Projectile.(SpellSingleTarget).Name.txt" />
+    <image href="/Interface/Icons/Spells/Engineer/EngineerAstralShot.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="DemonAstralFlurry.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>85</value>
+    </range>
+    <minRange type="gameMechanics.elements.calcers.FloatData">
+        <value>5</value>
+    </minRange>
+    <prepareDuration>6000</prepareDuration>
+    <needLos>false</needLos>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>28000</duration>
+        </cooldown>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceAnyBuff">
+                        <buffs>
+                            <Item href="UM_Cape_Item.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <Item href="UM_Cape_Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <Item href="UM_Scroll_Item.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </buffs>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                        <projectileData>
+                            <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                            </moveType>
+                            <resource href="DemonPuddle.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                        </projectileData>
+                        <pool href="PuddlesPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                        <data href="ClientData/Visual_DemonProjectilesDeflected.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="AstralFlurryHit.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                        <data href="ClientData/Visual_DemonProjectilesHit.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                    </Item>
+                </impactsElse>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>40</speed>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>221534</resourceId>
+    </Header>
+    <image href="/Interface/Icons/Spells/Necromancer/SummonSkeleton.chn.(UISingleTexture).xdb" />
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+            </predicates>
+            <effectsIf>
+                <Item type="gameMechanics.elements.effects.DeathTrigger">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="AvatarAlive.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.StackBuff">
+                                    <buff href="AvatarAlive.(BuffResource).xdb" />
+                                    <delta type="gameMechanics.elements.calcers.FloatData">
+                                        <value>-1</value>
+                                    </delta>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="Phase2/CorruptChargeResource.(BuffResource).xdb" />
+                                            <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                            <spawnResource href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/WormBoss.(SpawnTable).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </effectsIf>
+            <effectsElse>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="AvatarAlive.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsOn>
+                    <impactsOff>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllAggro" />
+                            </impactsIf>
+                        </Item>
+                    </impactsOff>
+                </Item>
+            </effectsElse>
+        </Item>
+    </effects>
+    <stackLimit>60</stackLimit>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb" />
+        <Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

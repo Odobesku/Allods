@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<actionBarStart type="VisActionList">
+		<visActionID>Volley</visActionID>
+		<play>Simultaneously</play>
+		<playWhile />
+		<elements>
+			<Item type="CreatureItemAnimationAction">
+				<itemsSlot>RANGED</itemsSlot>
+				<mode>LOOP</mode>
+				<animation>attack</animation>
+			</Item>
+			<Item type="CreatureAnimationAction">
+				<mode>LOOP</mode>
+				<use>USE_CURRENT_RANGED_RAPIDFIRE</use>
+				<channel>CHANNEL_ABILITY</channel>
+				<channelOverrideScript />
+				<advanced>
+					<animationKeysAction>
+						<Item>
+							<action type="CreatureTakeArrowAction">
+								<visActionID>TakeArrow</visActionID>
+								<arrow href="" />
+							</action>
+						</Item>
+						<Item>
+							<action type="VisActionList">
+								<play>Simultaneously</play>
+								<playWhile />
+								<elements>
+									<Item type="CreatureItemAnimationAction">
+										<itemsSlot>RANGED</itemsSlot>
+										<mode>CLAMP</mode>
+										<animation>special</animation>
+									</Item>
+									<Item type="CreatureTakeBowStringAction">
+										<visActionID>AttachString</visActionID>
+										<itemsSlot>RANGED</itemsSlot>
+										<itemLocatorName>Slot_String</itemLocatorName>
+										<creatureLocator>Slot_Hand_R</creatureLocator>
+										<member>Assaulter</member>
+									</Item>
+									<Item type="Sound3DAction">
+										<sound>
+											<project href="/SFX/Spells/Sounds.(FMODProject).xdb" />
+											<name>spells/Stalker/StalkerArrowPull</name>
+										</sound>
+										<alias href="" />
+									</Item>
+								</elements>
+							</action>
+						</Item>
+						<Item>
+							<action type="VisActionList">
+								<playWhile />
+								<elements>
+									<Item type="VisActionList">
+										<play>Simultaneously</play>
+										<playWhile />
+										<elements>
+											<Item type="VisActionStopAction">
+												<stoppedActionID>AttachString</stoppedActionID>
+											</Item>
+											<Item type="VisActionStopAction">
+												<stoppedActionID>TakeArrow</stoppedActionID>
+											</Item>
+											<Item type="CreatureItemAnimationAction">
+												<itemsSlot>RANGED</itemsSlot>
+												<animation>attack</animation>
+											</Item>
+											<Item type="CreatureThrowArrowAction">
+												<arrow href="" />
+												<theGe>10</theGe>
+												<additionalEffectFx href="" />
+												<effectBone>Slot_FX</effectBone>
+												<offendTime type="EffectOffendConstDelay" />
+												<fixedThrowDuration>500</fixedThrowDuration>
+											</Item>
+											<Item type="Sound3DAction">
+												<sound>
+													<project href="/SFX/Spells/Sounds.(FMODProject).xdb" />
+													<name>spells/Stalker/StalkerArrowShot</name>
+												</sound>
+												<alias href="" />
+											</Item>
+										</elements>
+									</Item>
+								</elements>
+							</action>
+						</Item>
+					</animationKeysAction>
+					<turnToTarget>BEFORE_ANIMATIONEND</turnToTarget>
+				</advanced>
+			</Item>
+			<Item type="Sound3DAction">
+				<sound>
+					<project href="/SFX/Spells/Sounds.(FMODProject).xdb" />
+					<name>spells/Stalker/StalkerArrowShot</name>
+				</sound>
+				<alias href="" />
+			</Item>
+		</elements>
+	</actionBarStart>
+	<actionBarComplite />
+	<actionBarCancel type="VisActionStopAction">
+		<stoppedActionID>Volley</stoppedActionID>
+	</actionBarCancel>
+</SpellVisScripts>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<avatarPopulation.service.impl.lookingForGroupImpl.scheme.LFGDestination>
+    <Header>
+        <resourceId>238909</resourceId>
+    </Header>
+    <name href="HeroesArenaLeague.(LFGDestination).Name.txt" />
+    <description href="HeroesArenaLeague.(LFGDestination).Description.txt" />
+    <category href="HeroesArena.(LFGDestinationCategory).xdb" />
+    <maxMembers>6</maxMembers>
+    <reward>
+        <unlocks>
+            <Item href="/Mechanics/Unlocks/Quest/HeroesArena_TitleUnlock/HeroesArena_Title01Unlock.(UnlockResource).xdb" />
+        </unlocks>
+        <mandatoryItems>
+            <Item>
+                <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                    <item href="/Mechanics/Rules/HeroesArena_Season5/Reward_Season_5.(ItemResource).xdb" />
+                </item>
+                <number>1</number>
+            </Item>
+            <Item>
+                <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                    <item href="/Items/QuestItems/HeroesArena/Rewards/Items/Halo/Season05Halo.(ItemResource).xdb" />
+                </item>
+                <number>1</number>
+            </Item>
+        </mandatoryItems>
+    </reward>
+    <action type="avatarPopulation.service.impl.lookingForGroupImpl.strategies.EnterDungeonAction">
+        <destinationMap href="/Maps/Inst_HeroesArena/MapResource.xdb" />
+        <destinationTag href="HeroesArena.(IdentifiableTagResource).xdb" />
+        <tier>1</tier>
+    </action>
+    <faction href="/World/Factions/League.xdb" />
+    <predicates>
+        <Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
+            <key href="/System/ContentKeys/HeroesArena.Season5.(ContentKey).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.predicates.PredicateCreatureLevel">
+            <minLevel type="gameMechanics.formulas.MaxLevelConstant" />
+        </Item>
+        <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+            <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/GameRoot/MatchMakingQueue.(BuffResource).xdb" />
+                </predicate>
+            </predicate>
+            <clientData href="/Mechanics/GameRoot/ClientData/LFGQueue.(ClientData).xdb" />
+        </Item>
+    </predicates>
+    <additionalPredicates>
+        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+            <predicate type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.world.ship.elements.PredicateInAstralHub" />
+                    <Item type="gameMechanics.map.instance.astralIsland.PredicateOnAstralIsland" />
+                    <Item type="avatarPopulation.service.impl.matchMakingImpl.map.PredicateInstancedEventMember" />
+                    <Item type="gameMechanics.elements.predicates.PredicateInRaid" />
+                    <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                        <zone href="/Maps/Inst_HeroesArena/Zones/HeroesArena/HeroesArena.(ZoneResource).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                </predicates>
+            </predicate>
+        </Item>
+        <Item type="gameMechanics.elements.predicates.PredicateGroupHasNoOfflineMembers" />
+    </additionalPredicates>
+    <departPredicates>
+        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+    </departPredicates>
+    <maxVisitsPerWeek>3</maxVisitsPerWeek>
+</avatarPopulation.service.impl.lookingForGroupImpl.scheme.LFGDestination>

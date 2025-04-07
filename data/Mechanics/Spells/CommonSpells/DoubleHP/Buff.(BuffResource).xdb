@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>200184</resourceId>
+    </Header>
+    <Name href="Buff.(BuffResource).Name.txt" />
+    <Description href="Buff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Modifiers/ThePowerAstral.(UISingleTexture).xdb" />
+    <nameTemplate href="Buff.(BuffResource).NameTemplate.txt" />
+    <descTemplate href="Buff.(BuffResource).DescTemplate.txt" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.Enlarge">
+            <factor>1.02</factor>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectIncreaseHealth">
+            <bonusHealthPercent>0.15</bonusHealthPercent>
+            <increaseHealth>false</increaseHealth>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AbonentLostWatcher">
+            <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Buff.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectIfOverTime">
+            <binaryPredicates>
+                <Item type="gameMechanics.elements.predicates.PredicateOnSameMap" />
+                <Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
+                    <affectGroup>Group</affectGroup>
+                </Item>
+            </binaryPredicates>
+            <impactsElse>
+                <Item type="gameMechanics.elements.impacts.ImpactSetStackCount">
+                    <buff href="Buff.(BuffResource).xdb" />
+                    <stackCount>1</stackCount>
+                </Item>
+            </impactsElse>
+            <tick type="gameMechanics.elements.calcers.FloatData">
+                <value>10000</value>
+            </tick>
+        </Item>
+        <Item type="gameMechanics.elements.effects.GroupAura">
+            <radius>100</radius>
+            <predicates>
+                <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </predicates>
+                </Item>
+            </predicates>
+            <impactsIn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="Buff.(BuffResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Buff.(BuffResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsIn>
+            <holderImpactsIn>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.StackBuff">
+                            <buff href="Buff.(BuffResource).xdb" />
+                            <resetTimer>false</resetTimer>
+                            <delta type="gameMechanics.elements.calcers.FloatData">
+                                <value>1</value>
+                            </delta>
+                        </Item>
+                    </impacts>
+                </Item>
+            </holderImpactsIn>
+            <holderImpactsOut>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.StackBuff">
+                            <buff href="Buff.(BuffResource).xdb" />
+                            <resetTimer>false</resetTimer>
+                            <delta type="gameMechanics.elements.calcers.FloatData">
+                                <value>-1</value>
+                            </delta>
+                        </Item>
+                    </impacts>
+                </Item>
+            </holderImpactsOut>
+        </Item>
+    </effects>
+    <duration>3600000</duration>
+    <stackLimit>6</stackLimit>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/PvPRemoveBuff.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

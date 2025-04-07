@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>243943</resourceId>
+    </Header>
+    <Name href="BuffUpName.txt" />
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellGroupDeactivate">
+                    <group href="VerticalSpeedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellActivate">
+                    <spell href="SpeedVUp.(SpellCasterSelf).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellGroupDeactivate">
+                    <group href="VerticalSpeedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellActivate">
+                    <spell href="SpeedVIdle.(SpellCasterSelf).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                    <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderTransport" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateGreater">
+                                    <lhs type="gameMechanics.world.ship.elements.calcers.CalcerMaxEnergy" />
+                                    <rhs type="gameMechanics.world.ship.elements.calcers.CalcerCurrentEnergy" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="Overheat.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                                <Item type="gameMechanics.world.ship.elements.ImpactSetImpulse">
+                                    <energyMod type="gameMechanics.elements.calcers.CalcerMax">
+                                        <calcers>
+                                            <Item type="gameMechanics.elements.calcers.FloatData">
+                                                <value>1</value>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.calcers.CalcerMul">
+                                                <calcers>
+                                                    <Item type="gameMechanics.elements.calcers.CalcerSum">
+                                                        <summands>
+                                                            <Item type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                                                <buff href="Overheat.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.calcers.FloatData">
+                                                                <value>-4</value>
+                                                            </Item>
+                                                        </summands>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.calcers.FloatData">
+                                                        <value>1.07</value>
+                                                    </Item>
+                                                </calcers>
+                                            </Item>
+                                        </calcers>
+                                    </energyMod>
+                                    <heightMod type="gameMechanics.elements.calcers.FloatData">
+                                        <value>1</value>
+                                    </heightMod>
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="BuffUp.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ShipDistributor" />
+                                    <data href="Overheat.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+            <factor type="gameMechanics.elements.calcers.CalcerMul">
+                <calcers>
+                    <Item type="gameMechanics.elements.calcers.CalcerVertialEngineDuration" />
+                    <Item type="gameMechanics.elements.calcers.FloatData">
+                        <value>0.001</value>
+                    </Item>
+                </calcers>
+            </factor>
+        </Item>
+        <Item type="gameMechanics.world.ship.elements.DeviceOnlineTrigger">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="BuffUp.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOff>
+        </Item>
+    </effects>
+    <stackLimit>1</stackLimit>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>false</isDetachableOnWill>
+    <canBeSaved>false</canBeSaved>
+    <isClientReplicated>true</isClientReplicated>
+</gameMechanics.constructor.schemes.buff.BuffResource>

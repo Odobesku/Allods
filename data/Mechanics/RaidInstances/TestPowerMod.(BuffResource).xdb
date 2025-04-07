@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>220450</resourceId>
+    </Header>
+    <image href="/Interface/Icons/Misc/Quest/SwordWildOrc.(UISingleTexture).xdb" />
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="TestPowerMod.(BuffResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectInstantiating">
+            <effects>
+                <Item type="gameMechanics.map.variables.MapVariableTrigger">
+                    <variableResource href="PowerMod.(MapVariableResource).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateCreature">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.predicates.PredicateIsPet" />
+                                        </Item>
+                                    </predicates>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="TestPowerModStacks.(BuffResource).xdb" />
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateEqualsLong">
+                                                    <lhs type="gameMechanics.elements.calcers.FloatToLongCalcer">
+                                                        <calcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                                            <buff href="TestPowerModStacks.(BuffResource).xdb" />
+                                                        </calcer>
+                                                    </lhs>
+                                                    <rhs type="gameMechanics.elements.calcers.FloatToLongCalcer">
+                                                        <calcer type="gameMechanics.map.variables.MapVariableValueCalcer">
+                                                            <resource href="PowerMod.(MapVariableResource).xdb" />
+                                                        </calcer>
+                                                    </rhs>
+                                                </Item>
+                                            </predicates>
+                                            <impactsElse>
+                                                <Item type="gameMechanics.elements.impacts.StackBuff">
+                                                    <buff href="TestPowerModStacks.(BuffResource).xdb" />
+                                                    <delta type="gameMechanics.elements.calcers.CalcerDiff">
+                                                        <minuend type="gameMechanics.map.variables.MapVariableValueCalcer">
+                                                            <resource href="PowerMod.(MapVariableResource).xdb" />
+                                                        </minuend>
+                                                        <subtrahend type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                                            <buff href="TestPowerModStacks.(BuffResource).xdb" />
+                                                        </subtrahend>
+                                                    </delta>
+                                                </Item>
+                                            </impactsElse>
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="TestPowerModStacks.(BuffResource).xdb" />
+                                            <stacks type="gameMechanics.map.variables.MapVariableValueCalcer">
+                                                <resource href="PowerMod.(MapVariableResource).xdb" />
+                                            </stacks>
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                    <triggerOnAppear>false</triggerOnAppear>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/EvadeProtectedBuffs.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

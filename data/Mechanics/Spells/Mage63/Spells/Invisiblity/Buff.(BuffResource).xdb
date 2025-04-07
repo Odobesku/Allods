@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>208017</resourceId>
+    </Header>
+    <Name href="Buff.(BuffResource).Name.txt" />
+    <Description href="Buff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Mage/MageInvisibility.(UISingleTexture).xdb" />
+    <visScript href="/Spells/BuffVisScripts/Invisibility.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.AddPlane">
+            <plane href="/Mechanics/Planes/Invisibility.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+            <conditionalImpacts>
+                <Item>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Buff.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                    <conditions>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateGenericNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                                <spells>
+                                    <Item href="/Mechanics/Spells/Mage63/Spells/Blink/Spell01.(SpellSingleTarget).xdb" />
+                                </spells>
+                            </predicate>
+                        </Item>
+                    </conditions>
+                </Item>
+            </conditionalImpacts>
+            <stages>
+                <Item>Start</Item>
+                <Item>Launch</Item>
+            </stages>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EventTrigger">
+            <eventClasses>
+                <Item>gameMechanics.elements.events.EventMountStarted</Item>
+            </eventClasses>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Buff.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectUnworthyOfAttention" />
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>0.25</coeff>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectDamageTrigger">
+                    <eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.offender.PredicateIsForthright" />
+                    </predicates>
+                    <impacts>
+                        <casterToTarget>
+                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                <buff href="Buff.(BuffResource).xdb" />
+                            </Item>
+                        </casterToTarget>
+                    </impacts>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <duration>4000</duration>
+    <isStackable>false</isStackable>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <canBeSaved>true</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/AstralSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/Magics.xdb" />
+        <Item href="/Mechanics/Spells/Groups/Invisibility.xdb" />
+        <Item href="/Mechanics/Spells/Groups/Shroud.xdb" />
+        <Item href="/Mechanics/Spells/Groups/ClassChangeBuffs.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

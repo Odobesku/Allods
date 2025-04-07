@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<actionBarStart type="VisActionList">
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="CreatureAnimationAction">
+				<mode>LOOP</mode>
+				<animations>
+					<Item>ready</Item>
+				</animations>
+			</Item>
+			<Item type="CreatureEffectsAction">
+				<visualEffects>
+					<Item>
+						<effectFx href="/Spells/FX/Spells/ReadySpellDirectHoly.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+						<lockScale>true</lockScale>
+						<scale>3</scale>
+						<locator>FROM_LOCATOR_NAME</locator>
+						<locatorName>Finger_02_L</locatorName>
+					</Item>
+				</visualEffects>
+			</Item>
+		</elements>
+	</actionBarStart>
+	<launch type="VisActionList">
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="CreatureAnimationAction">
+				<animations>
+					<Item>spellCastDirected</Item>
+				</animations>
+				<channel>CHANNEL_KNOCKDOWN</channel>
+			</Item>
+			<Item type="VisActionList">
+				<elements>
+					<Item type="VisActionDelay">
+						<time>300</time>
+					</Item>
+					<Item type="VisActionList">
+						<play>Simultaneously</play>
+						<elements>
+							<Item type="CreatureEffectsAction">
+								<visualEffects>
+									<Item>
+										<delay>100</delay>
+										<effectFx href="/Spells/FX/Spells/ReadySpellDirectHolyWand_Cast.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+										<lockScale>true</lockScale>
+										<scale>3</scale>
+										<locator>FROM_LOCATOR_NAME</locator>
+										<locatorName>Finger_02_L</locatorName>
+									</Item>
+								</visualEffects>
+							</Item>
+							<Item type="VisActionList">
+								<elements>
+									<Item type="CreatureVisActionStartThrow" />
+									<Item type="CreatureProjectileAction">
+										<projectileFx href="/Spells/FX/Spells/PriestHolyOrb_Projectile.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+										<theGe>6</theGe>
+										<pointOnCaster type="VisPointLocator">
+											<locator>FROM_LOCATOR_NAME</locator>
+											<locatorName>Finger_02_L</locatorName>
+										</pointOnCaster>
+										<pointOnTarget type="VisPointLocator">
+											<locator>Slot_BodyFX</locator>
+										</pointOnTarget>
+									</Item>
+								</elements>
+							</Item>
+						</elements>
+					</Item>
+				</elements>
+			</Item>
+		</elements>
+	</launch>
+	<playOnTargets>
+		<specialAction type="CreatureEffectsAction">
+			<visualEffects>
+				<Item>
+					<effectFx href="/Spells/FX/Spells/HitHoly.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+					<locator>Slot_BodyFX</locator>
+				</Item>
+			</visualEffects>
+		</specialAction>
+	</playOnTargets>
+</SpellVisScripts>

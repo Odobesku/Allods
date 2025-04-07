@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>212754</resourceId>
+    </Header>
+    <Name href="SummonAdd.(SpellSingleTarget).Name.txt" />
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>17000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+                <level>0.5</level>
+            </Item>
+        </casterConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                <destination type="gameMechanics.map.destination.RelativePos" />
+                <impactsFromTarget>
+                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                        <radius>10</radius>
+                        <affectGroup>Enemies</affectGroup>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                                </impacts>
+                            </Item>
+                        </impacts>
+                        <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </predicates>
+                                </Item>
+                            </predicates>
+                        </filter>
+                        <targetsLimit>1</targetsLimit>
+                    </Item>
+                </impactsFromTarget>
+                <object href="Add.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                <pool href="AddPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

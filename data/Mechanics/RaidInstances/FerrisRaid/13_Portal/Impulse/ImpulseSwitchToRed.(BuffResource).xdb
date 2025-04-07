@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>222395</resourceId>
+    </Header>
+    <Name href="ImpulseSwitchToRed.(BuffResource).Name.txt" />
+    <Description href="ImpulseSwitchToRed.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Equipment/Ships/RestoreShield.(UISingleTexture).xdb" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Mobs/PortalBoss_ImpulseSwitchToRed.(VisObjectTemplate).xdb" />
+            <effectAlias href="" />
+            <scale>0.7</scale>
+            <fadeInTime>300</fadeInTime>
+            <fadeOutTime>300</fadeOutTime>
+            <locator>Slot_TopFX</locator>
+            <offendTime />
+            <offset z="1.3" />
+        </Item>
+    </visualEffects>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.RepeatedImpactsGeneric">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.StackBuff">
+                            <buff href="ActiveImpulseBlue.(BuffResource).xdb" />
+                            <delta type="gameMechanics.elements.calcers.FloatData">
+                                <value>-1</value>
+                            </delta>
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="ActiveImpulseRed.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                    <count type="gameMechanics.elements.calcers.FloatToLongCalcer">
+                        <calcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                            <buff href="ActiveImpulseBlue.(BuffResource).xdb" />
+                        </calcer>
+                    </count>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="ImpulseBlue.(BuffResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="ImpulseRed.(BuffResource).xdb" />
+                            <impactsOnAttach>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="ImpulseBlue.(BuffResource).xdb" />
+                                </Item>
+                            </impactsOnAttach>
+                            <durationScalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                <mulCalcer type="gameMechanics.elements.calcers.CalcerBuffDuration">
+                                    <buff href="ImpulseBlue.(BuffResource).xdb" />
+                                    <multiplier>1</multiplier>
+                                </mulCalcer>
+                            </durationScalerTarget>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <duration>4000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/Events/EventBuffs.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

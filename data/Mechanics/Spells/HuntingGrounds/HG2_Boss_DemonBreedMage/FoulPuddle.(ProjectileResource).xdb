@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.projectile.ProjectileResource>
+    <Header>
+        <resourceId>212402</resourceId>
+    </Header>
+    <name href="FoulPuddle.(ProjectileResource).Name.txt" />
+    <visObject href="/Spells/FX/Mobs/GC_DemonWorm_InfernalMight_BluePuddle_Part.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+    <altitude>0</altitude>
+    <lifeLengthCap>20000</lifeLengthCap>
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.EntityImpactCreaturesAround">
+                    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+                    <radius>5</radius>
+                    <affectGroup>Friends</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.PureHeal">
+                            <heal>1</heal>
+                            <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                    <multiplier>0.0333333</multiplier>
+                                </mulCalcer>
+                            </scalerTarget>
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="Healing.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                <mobs>
+                                    <Item href="/Creatures/DemonBreedMage/Instances/HuntingGround2/HG2_Yellow_Boss_2.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                </mobs>
+                            </Item>
+                        </predicates>
+                    </filter>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.EntityImpactCreaturesAround">
+                    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+                    <radius>5</radius>
+                    <affectGroup>Enemies</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                            <element>ASTRAL</element>
+                            <damage>15</damage>
+                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="Damage.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterOr">
+                        <filters>
+                            <Item type="gameMechanics.world.creature.AvatarFilter">
+                                <withPet>true</withPet>
+                            </Item>
+                        </filters>
+                    </filter>
+                </Item>
+            </impacts>
+            <initialDelay>2000</initialDelay>
+        </Item>
+    </effects>
+</gameMechanics.world.projectile.ProjectileResource>

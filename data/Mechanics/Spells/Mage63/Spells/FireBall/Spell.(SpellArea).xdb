@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>207981</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/FireSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/MagicAttacks.xdb" />
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/InsuranceTrigger.xdb" />
+        <Item href="/Mechanics/Spells/Groups/MageFireballSpeedcast.(ActionGroup).xdb" />
+    </groups>
+    <element>FIRE</element>
+    <Name href="Spell.(SpellArea).Name.txt" />
+    <Description href="Spell.(SpellArea).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value var="damage" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>MagicScaler</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Mage/MageFireball.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Mage/Fireball.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <prepareDuration>3500</prepareDuration>
+    <targetType>STTPoint</targetType>
+    <ranks>
+        <Item href="Spell01.(SpellArea).xdb" />
+        <Item href="Spell02.(SpellArea).xdb" />
+        <Item href="Spell03.(SpellArea).xdb" />
+    </ranks>
+    <iffPolicy>Enemies</iffPolicy>
+    <launchWhenReady>true</launchWhenReady>
+    <mechanics>
+        <cooldown>
+            <duration>1500</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateCreature" />
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                        </predicates>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                                <variable href="/Mechanics/Spells/Mage63/Abilities/ElementalPower/FireVar.(VariableResource).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                                <mark href="/Mechanics/Spells/Mage63/Abilities/FireballAddPower/Mark.(MarkResource).xdb" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+                <groupRepeaters>true</groupRepeaters>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                        <element>FIRE</element>
+                        <damage var="damage" />
+                        <impactsOnHitTarget>
+                            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                                        <mark href="/Mechanics/Spells/Mage63/Abilities/FireBallCowardice/Mark.(MarkResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                        <data href="/Spells/ClientData/HitFire.(ClientData).xdb" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impactsOnHitTarget>
+                        <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                    </Item>
+                </impacts>
+                <groupRepeaters>true</groupRepeaters>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>25</speed>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+    <radius>15</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

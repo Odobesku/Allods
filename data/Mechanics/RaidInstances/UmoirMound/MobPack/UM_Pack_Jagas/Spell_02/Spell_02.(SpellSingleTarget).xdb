@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>227348</resourceId>
+    </Header>
+    <Name href="Spell_02.(SpellSingleTarget).Name.txt" />
+    <image href="/Interface/Icons/Spells/Paladin/PaladinHolyStrike.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Warrior/PowerAttack.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <prepareDuration>1000</prepareDuration>
+    <needLos>false</needLos>
+    <isAggro>false</isAggro>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>12000</duration>
+        </cooldown>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceMana">
+                <mana>30</mana>
+            </Item>
+        </casterResources>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                <impactsOnHitTarget>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/RaidInstances/UmoirMound/MobPack/UM_Pack_Jagas/Spell_01/Spell_01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="Spell_02.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                <buff href="/Mechanics/RaidInstances/UmoirMound/MobPack/UM_Pack_Jagas/Spell_01/Spell_01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                <anyRank>false</anyRank>
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impactsOnHitTarget>
+                <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                    <mul>5.5</mul>
+                    <mulCalcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                        <buff href="/Mechanics/RaidInstances/UmoirMound/MobPack/UM_Pack_Jagas/Spell_01/Spell_01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </mulCalcer>
+                    <sum>2.2</sum>
+                </scalerTarget>
+                <minDamage>10</minDamage>
+                <maxDamage>10</maxDamage>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

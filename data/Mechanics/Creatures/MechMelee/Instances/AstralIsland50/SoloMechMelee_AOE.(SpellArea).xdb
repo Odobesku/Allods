@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>245657</resourceId>
+    </Header>
+    <Name href="SoloMechMelee_AOE.(SpellArea).Name.txt" />
+    <image href="/Interface/Icons/Spells/Psionic/PsionicMindBlast.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="SoloMechMelee_AOE.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <prepareDuration>2000</prepareDuration>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>10000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="CooldownBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateCreature" />
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                        <radius>10</radius>
+                        <affectGroup>Enemies</affectGroup>
+                        <conditions>
+                            <Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
+                                <onSlave type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+                                        <groups>
+                                            <Item href="/Mechanics/Spells/Groups/Escapes.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                                        </groups>
+                                    </predicate>
+                                </onSlave>
+                            </Item>
+                        </conditions>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                                <time>1000</time>
+                                <impactsOnLand>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="KnockDown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                            <multiplier>0.5</multiplier>
+                                        </durationScaler>
+                                    </Item>
+                                </impactsOnLand>
+                                <distance>5</distance>
+                            </Item>
+                        </impacts>
+                        <filter type="gameMechanics.world.creature.CreatureFilter" />
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                <scalerTarget type="gameMechanics.elements.scalers.TrivialScaler" />
+                <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                <minDamage>13</minDamage>
+                <maxDamage>13</maxDamage>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <shapeCenterPosition>Caster</shapeCenterPosition>
+    <radius>20</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

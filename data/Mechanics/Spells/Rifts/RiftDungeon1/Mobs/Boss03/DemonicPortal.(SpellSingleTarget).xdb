@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>208307</resourceId>
+    </Header>
+    <isExploit>true</isExploit>
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>5</value>
+    </range>
+    <prepareDuration>1000</prepareDuration>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <iffPolicy>Everyone</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.map.variables.PredicateMapVariableEquals">
+                <variableResource href="/Maps/RiftDungeon1/MapVariables/Boss02Dead.(MapVariableResource).xdb" />
+                <expectedValue type="gameMechanics.elements.calcers.FloatData">
+                    <value>1</value>
+                </expectedValue>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                <destination type="gameMechanics.map.destination.DestinationLocator">
+                    <locator>
+                        <scriptID>RD1_Bridge</scriptID>
+                        <map href="/Maps/RiftDungeon1/MapResource.xdb" />
+                    </locator>
+                </destination>
+            </Item>
+            <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                <variable href="/Maps/RiftDungeon1/MapVariables/PortalUsed.(MapVariableResource).xdb" />
+                <summand>0</summand>
+                <calcerSummand type="gameMechanics.elements.calcers.FloatData">
+                    <value>1</value>
+                </calcerSummand>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                <impacts>
+                    <Item type="gameMechanics.elements.scenarios.ImpactEmitScenarioEvent">
+                        <eventId>DemonicPortal_activated</eventId>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <canStartNotBeeingInSpellbook>true</canStartNotBeeingInSpellbook>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

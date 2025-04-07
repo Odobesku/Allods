@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.projectile.ProjectileResource>
+    <Header>
+        <resourceId>207216</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="Projectile00.(ProjectileResource).Name.txt" />
+    <visObject href="/Spells/FX/Spells/Aoe_PriestHealing_Ability.(VisObjectTemplate).xdb" />
+    <altitude>0</altitude>
+    <lifeLengthCap>10000</lifeLengthCap>
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>10</radius>
+                    <affectGroup>Group</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactHeal">
+                                    <heal>1</heal>
+                                    <scalerCaster type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                                        <scalers>
+                                            <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                    <externalCalcer hrefvar="externalCalcer" />
+                                                </mulCalcer>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.scalers.HealScaler" />
+                                        </scalers>
+                                    </scalerCaster>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                                    <mark href="CircleOfLiteTick01.xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterOr">
+                        <filters>
+                            <Item type="gameMechanics.constructor.basicElements.FilterAnd">
+                                <filters>
+                                    <Item type="gameMechanics.world.creature.AvatarFilter" />
+                                    <Item type="gameMechanics.world.creature.AliveFilter" />
+                                </filters>
+                            </Item>
+                            <Item type="gameMechanics.constructor.basicElements.FilterAnd">
+                                <filters>
+                                    <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                            </Item>
+                                        </predicates>
+                                    </Item>
+                                    <Item type="gameMechanics.world.creature.AliveFilter" />
+                                </filters>
+                            </Item>
+                        </filters>
+                    </filter>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+</gameMechanics.world.projectile.ProjectileResource>

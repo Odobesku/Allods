@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>207232</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+        <Item href="/Mechanics/Spells/Groups/MeleeAttacks.xdb" />
+        <Item href="/Mechanics/Spells/Groups/InsuranceTrigger.xdb" />
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+    </groups>
+    <Name href="Spell00.(SpellSingleTarget).Name.txt" />
+    <Description href="Spell00.(SpellSingleTarget).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value var="value" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>WeaponScaler</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Priest/FuriousStrike.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Paladin/BlindingStrike.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <ranks>
+        <Item href="Spell01.(SpellSingleTarget).xdb" />
+        <Item href="Spell02.(SpellSingleTarget).xdb" />
+        <Item href="Spell03.(SpellSingleTarget).xdb" />
+    </ranks>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>12000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateUsesWeapon" />
+        </casterConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceVariable">
+                <ability href="/Mechanics/Spells/Priest63/Abilities/Zeal/GiveZealVariable.(AbilityResource).xdb" />
+                <variable href="/Mechanics/Spells/Priest63/Abilities/Zeal/Zeal.(VariableResource).xdb" />
+                <sub>1</sub>
+            </Item>
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                <mark href="FuriousStrike.(MarkResource).xdb" />
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ScaledPhysicalWeaponDamage">
+                        <scaleByDamageImpactsOnHit>true</scaleByDamageImpactsOnHit>
+                        <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                            <scalers>
+                                <Item type="gameMechanics.elements.scalers.PowerDPSScaler" />
+                                <Item type="gameMechanics.elements.scalers.WeaponDpsScaler" />
+                            </scalers>
+                        </scaler>
+                        <avgDamage var="value" />
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

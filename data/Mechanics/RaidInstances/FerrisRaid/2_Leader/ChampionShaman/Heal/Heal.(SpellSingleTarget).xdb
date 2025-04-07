@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>222498</resourceId>
+    </Header>
+    <Name href="Heal.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="/Spells/VisScripts/Priest/CureWound.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>50</value>
+    </range>
+    <prepareDuration>4000</prepareDuration>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/Horn/MoveChampion/AggroRage.(BuffResource).xdb" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+                <level>1</level>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.DirectHeal">
+                <heal>1</heal>
+                <threatMultiplier>0</threatMultiplier>
+                <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                        <multiplier>0.05</multiplier>
+                    </mulCalcer>
+                </scalerTarget>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

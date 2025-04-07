@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<Header>
+		<Variables>
+			<Arrow>/Spells/VisScripts/RangedAttack/Arrows/NairaArrow.(VisProjectile).xdb#xpointer(/VisProjectile)</Arrow>
+		</Variables>
+	</Header>
+	<actionBarStart type="VisActionList">
+		<play>Simultaneously</play>
+		<playWhile />
+		<elements>
+			<Item type="CreatureAnimationAction">
+				<mode>LOOP</mode>
+				<use>USE_ANIMATIONS</use>
+				<animations>
+					<Item>loadBow</Item>
+				</animations>
+				<channelOverrideScript />
+				<advanced>
+					<animationKeysAction>
+						<Item>
+							<action type="CreatureTakeArrowAction">
+								<arrow hrefvar="Arrow" />
+							</action>
+						</Item>
+						<Item>
+							<action type="VisActionList">
+								<play>Simultaneously</play>
+								<playWhile />
+								<elements>
+									<Item type="CreatureItemAnimationAction">
+										<itemsSlot>RANGED</itemsSlot>
+										<mode>CLAMP</mode>
+										<animation>special</animation>
+									</Item>
+									<Item type="CreatureTakeBowStringAction">
+										<visActionID>AttachString</visActionID>
+										<itemsSlot>RANGED</itemsSlot>
+										<itemLocatorName>Slot_String</itemLocatorName>
+										<creatureLocator>Slot_Hand_R</creatureLocator>
+									</Item>
+								</elements>
+							</action>
+						</Item>
+					</animationKeysAction>
+				</advanced>
+			</Item>
+		</elements>
+	</actionBarStart>
+	<launch type="VisActionList">
+		<play>Simultaneously</play>
+		<playWhile />
+		<elements>
+			<Item type="VisActionStopAction">
+				<stoppedActionID>AttachString</stoppedActionID>
+			</Item>
+			<Item type="CreatureItemAnimationAction">
+				<itemsSlot>RANGED</itemsSlot>
+				<animation>attack</animation>
+			</Item>
+			<Item type="CreatureAnimationAction">
+				<use>USE_ANIMATIONS</use>
+				<animations>
+					<Item>attackBow</Item>
+				</animations>
+				<channelOverrideScript />
+			</Item>
+			<Item type="CreatureThrowArrowAction">
+				<arrow hrefvar="Arrow" />
+				<arrowInTargetTime>10000</arrowInTargetTime>
+				<theGe>8</theGe>
+				<additionalEffectFx href="" />
+				<effectBone>Slot_FX</effectBone>
+				<offendTime type="EffectOffendConstDelay" />
+			</Item>
+			<Item type="Sound3DAction">
+				<sound>
+					<project href="/SFX/Spells/Sounds.(FMODProject).xdb#xpointer(/FMODProject)" />
+					<name>spells/FX/Spells/NairaFX/spamShot</name>
+				</sound>
+			</Item>
+		</elements>
+	</launch>
+</SpellVisScripts>

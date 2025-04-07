@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>218550</resourceId>
+    </Header>
+    <Name href="Buff01_Name.txt" />
+    <Description href="Buff01_Desc.txt" />
+    <image href="/Interface/Icons/Spells/Stalker/StalkerCamouflage.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="/Spells/BuffVisScripts/Camouflage.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.ExponentialEffectScaler">
+                <base>0.8</base>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddPlane">
+            <plane href="/Mechanics/Planes/Invisibility.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectUnworthyOfAttention" />
+        <Item type="gameMechanics.elements.effects.SpellExtraImpacts">
+            <targetImpacts>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="Backstub.(BuffResource).xdb" />
+                    <stacks type="gameMechanics.elements.calcers.FloatData">
+                        <value>3</value>
+                    </stacks>
+                </Item>
+            </targetImpacts>
+            <destination type="gameMechanics.elements.effects.SpellExtraImpacts$DestinationGroups">
+                <groups>
+                    <Item href="/Mechanics/Spells/Groups/MeleeAttacks.xdb" />
+                </groups>
+            </destination>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAction">
+            <action href="Spell01.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                    <spell href="Spell01.xdb" />
+                    <duration>10000</duration>
+                    <scaler type="gameMechanics.elements.scalers.AbilityRankScaler">
+                        <ability href="/Mechanics/Spells/StalkerNew/Talents/StealthImproved/Ability01.xdb" />
+                        <mul>-0.16666</mul>
+                    </scaler>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+            <conditionalImpacts>
+                <Item>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Buff01.xdb" />
+                        </Item>
+                    </impacts>
+                    <conditions>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateGenericNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateSpellInGroup">
+                                <group href="/Mechanics/Spells/Groups/NotAffectStealth.xdb" />
+                            </predicate>
+                        </Item>
+                    </conditions>
+                </Item>
+            </conditionalImpacts>
+            <stages>
+                <Item>Launch</Item>
+            </stages>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EventTrigger">
+            <eventClasses>
+                <Item>gameMechanics.elements.events.EventMountStarted</Item>
+            </eventClasses>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Buff01.xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDamageTrigger">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.offender.PredicateIsForthright" />
+                <Item type="gameMechanics.elements.predicates.offender.PredicateNot">
+                    <predicate type="gameMechanics.elements.predicates.offender.PredicateIsAE" />
+                </Item>
+            </predicates>
+            <impacts>
+                <casterToTarget>
+                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                        <delay>800</delay>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                <buff href="Buff01.xdb" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </casterToTarget>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDamageTrigger">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.offender.PredicateIsForthright" />
+                <Item type="gameMechanics.elements.predicates.offender.PredicateIsAE" />
+            </predicates>
+            <impacts>
+                <casterToTarget>
+                    <Item type="gameMechanics.elements.impacts.ImpactIncrementBuffDuration">
+                        <buff href="Buff01.xdb" />
+                        <delta type="gameMechanics.elements.calcers.FloatData">
+                            <value>-3000</value>
+                        </delta>
+                    </Item>
+                </casterToTarget>
+            </impacts>
+        </Item>
+    </effects>
+    <duration>10000</duration>
+    <isStackable>false</isStackable>
+    <stackLimit>1</stackLimit>
+    <isGradual>false</isGradual>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <isMultiple>false</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <isClientReplicated>true</isClientReplicated>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Invisibility.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/Shroud.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/Escapes.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

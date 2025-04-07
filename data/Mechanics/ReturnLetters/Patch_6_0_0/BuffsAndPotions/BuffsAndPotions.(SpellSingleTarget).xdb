@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>249109</resourceId>
+    </Header>
+    <Name href="BuffsAndPotions.(SpellSingleTarget).Name.txt" />
+    <Description href="BuffsAndPotions.(SpellSingleTarget).Description.txt" />
+    <visualScripts href="/Spells/VisScripts/Common/Use.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <prepareDuration>1500</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>1</duration>
+            <scaler type="gameMechanics.elements.scalers.ScalerIf">
+                <condition type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                    <buff href="DailyUseCountChecker.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <range>
+                        <max>2</max>
+                    </range>
+                </condition>
+                <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                    <multiplier>900000</multiplier>
+                </scalerIf>
+                <scalerElse type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                    <mulCalcer type="gameMechanics.elements.calcers.TimeTableCalcerFloat">
+                        <timeTable href="DailyUseCountChecker.(TimeTable).xdb#xpointer(/timetables.TimeTable)" />
+                    </mulCalcer>
+                </scalerElse>
+            </scaler>
+        </cooldown>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceActiveItemCounter" />
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+                <item type="gameMechanics.constructor.schemes.item.BoundItemProvider">
+                    <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                        <item href="/Items/CraftingObjects/AlchemyV2/Potions/Plain7.(ItemResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemResource)" />
+                    </item>
+                </item>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+                <item type="gameMechanics.constructor.schemes.item.BoundItemProvider">
+                    <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                        <item href="/Items/Food_v2/Ferris/DrinkSpell_Will_UnCommon.(ItemResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemResource)" />
+                    </item>
+                </item>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+                <item type="gameMechanics.constructor.schemes.item.BoundItemProvider">
+                    <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                        <item href="/Items/Food_v2/Ferris/FoodSpell_Vitality_UnCommon.(ItemResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemResource)" />
+                    </item>
+                </item>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="DailyUseCountChecker.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                <impactsOnAttach>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="AntiMobDamageBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        <durationScaler type="gameMechanics.elements.scalers.ScalerIf">
+                            <condition type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                <buff href="DailyUseCountChecker.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                <range>
+                                    <max>2</max>
+                                </range>
+                            </condition>
+                            <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                                <multiplier>1</multiplier>
+                            </scalerIf>
+                            <scalerElse type="gameMechanics.elements.scalers.LinearScaler">
+                                <multiplier>4</multiplier>
+                            </scalerElse>
+                        </durationScaler>
+                    </Item>
+                </impactsOnAttach>
+                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                    <mulCalcer type="gameMechanics.elements.calcers.TimeTableCalcerFloat">
+                        <timeTable href="DailyUseCountChecker.(TimeTable).xdb#xpointer(/timetables.TimeTable)" />
+                    </mulCalcer>
+                </durationScaler>
+                <stacks type="gameMechanics.elements.calcers.FloatData">
+                    <value>1</value>
+                </stacks>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

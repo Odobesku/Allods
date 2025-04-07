@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>7156</resourceId>
+    </Header>
+    <Name href="Entrance_Blocker_Prepare.(BuffResource).Name.txt" />
+    <Description href="Entrance_Blocker_Prepare.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Psionic/PsionicTimeLapse.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>120000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="Entrance_Blocker.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="Entrance_Blocker_2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.StackBuff">
+                    <buff href="Entrance_Blocker_Prepare.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <resetTimer>false</resetTimer>
+                    <delta type="gameMechanics.elements.calcers.FloatData">
+                        <value>-1</value>
+                    </delta>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectZoneEnterLeaveChecker">
+            <impactsOnEnter>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="Death_Punishment_Slow.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Death_Punishment_Slow.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOnEnter>
+            <impactsOnLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="Death_Punishment_Slow.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOnLeave>
+            <activeZone href="ZoneContested5.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+        </Item>
+        <!-- <Item type="gameMechanics.elements.effects.EffectHandleLeaveMission"> -->
+        <!-- <impacts> -->
+        <!-- <Item type="gameMechanics.elements.impacts.StackBuff"> -->
+        <!-- <buff href="Entrance_Blocker_Prepare.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" /> -->
+        <!-- <resetTimer>false</resetTimer> -->
+        <!-- <delta type="gameMechanics.elements.calcers.FloatData"> -->
+        <!-- <value>-5</value> -->
+        <!-- </delta> -->
+        <!-- </Item> -->
+        <!-- </impacts> -->
+        <!-- </Item> -->
+    </effects>
+    <duration>7200000</duration>
+    <stackLimit>35</stackLimit>
+    <isHelpful>false</isHelpful>
+    <decayPolicy>OfflineDecay</decayPolicy>
+    <canBeSaved>true</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

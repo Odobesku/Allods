@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>199014</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="Spell0_Name.txt" />
+    <Description href="Buff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Necromancer/GenemodifiedPlague.(UISingleTexture).xdb" />
+    <visScript href="/Spells/VisScripts/Necromancer/Cure.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.constructor.basicElements.CountingEffectOverTime">
+            <effect type="gameMechanics.elements.effects.ImpactsOverTime">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
+                                <resource href="/Mechanics/Spells/Necromancer70/Abilities/BloodDrops/BloodPool.(VariableResource).xdb" />
+                            </Item>
+                        </predicates>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
+                                        <radius>30</radius>
+                                        <affectPets>true</affectPets>
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactHeal">
+                                                        <heal>1</heal>
+                                                        <scalerCaster type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                            <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                                <externalCalcer hrefvar="externalCalcer" />
+                                                            </mulCalcer>
+                                                            <additionalMultiplier>
+                                                                <scaler type="gameMechanics.elements.scalers.HealScaler" />
+                                                            </additionalMultiplier>
+                                                        </scalerCaster>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.DoubleAttackIsolator">
+                                                        <impacts>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="CureVis.(BuffResource).xdb" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impacts>
+                                                <groupRepeaters>true</groupRepeaters>
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.DoubleAttackIsolator">
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactConsumeResources">
+                                                        <resources>
+                                                            <Item type="gameMechanics.elements.resources.ResourceVariable">
+                                                                <ability href="/Mechanics/Spells/Necromancer70/Abilities/BloodDrops/Ability0.(AbilityResource).xdb" />
+                                                                <variable href="/Mechanics/Spells/Necromancer70/Abilities/BloodDrops/BloodPool.(VariableResource).xdb" />
+                                                                <sub>1</sub>
+                                                            </Item>
+                                                        </resources>
+                                                        <impactsOnCheckFailed>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactResetActiveAction" />
+                                                        </impactsOnCheckFailed>
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impacts>
+                        <elseImpacts>
+                            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                        <buff href="Buff01.xdb" />
+                                        <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactResetActiveAction" />
+                                        </impacts>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </elseImpacts>
+                    </Item>
+                </impacts>
+                <tick>1000</tick>
+                <initialDelay>-1</initialDelay>
+            </effect>
+            <ticksCount>4</ticksCount>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <isMultiple>true</isMultiple>
+    <ranks>
+        <Item href="Buff01.xdb" />
+        <Item href="Buff02.xdb" />
+        <Item href="Buff03.xdb" />
+    </ranks>
+    <canBeSaved>false</canBeSaved>
+    <isAE>true</isAE>
+</gameMechanics.constructor.schemes.buff.BuffResource>

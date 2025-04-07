@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<Header>
+		<Prototype href="/Spells/VisScripts/Prototypes/MobProjectile.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+		<Variables>
+			<PreCastAnimation>invalid</PreCastAnimation>
+			<FXProjectile>/Spells/FX/Spells/MageLightningBallsAbility.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)</FXProjectile>
+			<LocatorNameOnTargets />
+			<FXOnTargets />
+			<AnimationPreCastMode>LOOP</AnimationPreCastMode>
+			<CastAnimation>spellCastDirected</CastAnimation>
+			<FixPointTarget>true</FixPointTarget>
+			<FXOnCaster />
+			<LocatorOnTargets>Slot_FX</LocatorOnTargets>
+			<LocatorNameOnCaster />
+			<FXProjectileHit>/Spells/FX/Spells/HitManaball.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)</FXProjectileHit>
+			<ProjectileLocatorOnTarget>Slot_Global</ProjectileLocatorOnTarget>
+			<FixPointCaster>false</FixPointCaster>
+			<Ge>3</Ge>
+			<FxOnHands />
+			<HitPostFXOnTargets />
+			<LocatorOnCaster>Slot_Mouth</LocatorOnCaster>
+		</Variables>
+	</Header>
+	<launch type="VisActionList">
+		<elements>
+			<Item type="VisActionList">
+				<play>Simultaneously</play>
+				<elements>
+					<Item type="CreatureAnimationAction">
+						<animations>
+							<Item var="CastAnimation" />
+						</animations>
+						<channelOverrideScript />
+						<advanced>
+							<backgroundAfterFirstKey>true</backgroundAfterFirstKey>
+							<eventPlaybackEnd>true</eventPlaybackEnd>
+							<waitRealEvent>WAIT_FROMFIRSTKEY</waitRealEvent>
+						</advanced>
+					</Item>
+					<Item type="CreatureEffectsAction">
+						<visualEffects>
+							<Item>
+								<effectFx href="/Spells/FX/Mobs/GorinichSmall_Corrupted_SpellCastDirected_FX.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+								<scale>1.5</scale>
+							</Item>
+							<Item>
+								<effectFx href="/Spells/FX/Mobs/GorinichSmall_Corrupted_SpellCastDirected_FX_Flame.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+								<scale>1.5</scale>
+							</Item>
+						</visualEffects>
+					</Item>
+				</elements>
+			</Item>
+			<Item type="VisActionList">
+				<elements>
+					<Item skiped="" />
+					<Item type="VisActionList">
+						<elements>
+							<Item type="VisActionDelay">
+								<time>300</time>
+							</Item>
+							<Item type="CreatureVisActionStartThrow" />
+							<Item type="CreatureProjectileAction">
+								<projectileFx hrefvar="FXProjectile" />
+								<explosionFx hrefvar="FXProjectileHit" />
+								<theGe var="Ge" />
+								<pointOnCaster type="VisPointLocator">
+									<locator var="LocatorOnCaster" />
+								</pointOnCaster>
+								<pointOnTarget type="VisPointLocator">
+									<locator var="ProjectileLocatorOnTarget" />
+								</pointOnTarget>
+								<offendTime />
+							</Item>
+						</elements>
+					</Item>
+				</elements>
+			</Item>
+		</elements>
+	</launch>
+</SpellVisScripts>

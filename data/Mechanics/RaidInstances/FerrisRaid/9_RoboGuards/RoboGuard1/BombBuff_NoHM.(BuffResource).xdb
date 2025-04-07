@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>222148</resourceId>
+    </Header>
+    <Name href="BombBuff_NoHM.(BuffResource).Name.txt" />
+    <Description href="BombBuff_NoHM.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Equipment/Trinket/AstralBomb_01.(UISingleTexture).xdb" />
+    <visScript href="BombBuff_visual.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="BombBuff_Explosion.(ClientData).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>3</radius>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                    <element>LIGHTNING</element>
+                                    <damage>20</damage>
+                                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="RoboGuard1.(MobWorld).xdb" />
+                                        <Item href="/Mechanics/RaidInstances/FerrisRaid/9_RoboGuards/RoboGuard2/RoboGuard2.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/RaidInstances/FerrisRaid/9_RoboGuards/RoboGuard_noHM_Defence.(BuffResource).xdb" />
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.StackBuff">
+                                            <buff href="/Mechanics/RaidInstances/FerrisRaid/9_RoboGuards/RoboGuard_noHM_Defence.(BuffResource).xdb" />
+                                            <delta type="gameMechanics.elements.calcers.FloatData">
+                                                <value>-1</value>
+                                            </delta>
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="ReduceDefence.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                            <data href="ReduceDefence.(ClientData).xdb" />
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                        <mobs>
+                                            <Item href="RoboGuard1.(MobWorld).xdb" />
+                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/9_RoboGuards/RoboGuard2/RoboGuard2.(MobWorld).xdb" />
+                                        </mobs>
+                                    </Item>
+                                </predicates>
+                            </Item>
+                        </predicates>
+                    </filter>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <duration>5000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

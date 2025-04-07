@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.map.scriptZone.ScriptZone>
+    <Header>
+        <resourceId>35691</resourceId>
+    </Header>
+    <filter type="gameMechanics.world.creature.AvatarFilter" />
+    <conditionsIn>
+        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+            <quest href="/World/Quests/ZC12_Map02/WW_11_6/WW_11_6.xdb" />
+            <status>Active</status>
+        </Item>
+        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+            <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                <quest href="/World/Quests/ZC12_Map02/WW_11_6/WW_11_6.xdb" />
+                <counterResource href="/World/Quests/ZC12_Map02/WW_11_6/CountId_2.xdb" />
+                <value>1</value>
+            </predicate>
+        </Item>
+        <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+            <quest href="/World/Quests/ZC12_Map02/WW_11_6/WW_11_6.xdb" />
+            <counterResource href="/World/Quests/ZC12_Map02/WW_11_6/CountId_1.xdb" />
+            <value>1</value>
+        </Item>
+    </conditionsIn>
+    <conditionsOut>
+        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+            <quest href="/World/Quests/ZC12_Map02/WW_11_6/WW_11_6.xdb" />
+            <status>Active</status>
+        </Item>
+    </conditionsOut>
+    <impactsIn>
+        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+            <id href="/World/Quests/ZC12_Map02/WW_11_6/CountId_2.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+            <pool href="/World/Quests/ZC12_Map02/WW_11_6/WW_11_6.(SummonPool).xdb" />
+            <isPersonalPool>true</isPersonalPool>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                            <mobs>
+                                <Item href="/Characters/Kania_male/Instances/ZC12_Map02/ZC12_Terkin_WW_11.(MobWorld).xdb" />
+                            </mobs>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.GoThroughPath">
+                            <runningMode>true</runningMode>
+                            <path>
+                                <Item>
+                                    <scriptID>ZC12_Terkin_01</scriptID>
+                                    <map href="/Maps/ZC12_Map02/MapResource.xdb" />
+                                </Item>
+                                <Item>
+                                    <scriptID>ZC12_Terkin_02</scriptID>
+                                    <map href="/Maps/ZC12_Map02/MapResource.xdb" />
+                                </Item>
+                            </path>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                            <delay>1000</delay>
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/World/Quests/ZC12_Map02/WW_11_6/WW_11_6_Terkin_Path.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                    <data href="/World/Quests/ZC12_Map02/WW_11_6/ZC12_Terkin_replika.(ClientData).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+            <buff href="/Items/InteractiveObjects/ZC12_Map02/WW_11_6_Door/WW_11_6_dome_on.(BuffResource).xdb" />
+        </Item>
+    </impactsIn>
+    <impactsOut>
+        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                    <quest href="/World/Quests/ZC12_Map02/WW_11_6/WW_11_6.xdb" />
+                    <status>Active</status>
+                </Item>
+                <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                    <quest href="/World/Quests/ZC12_Map02/WW_11_6/WW_11_6.xdb" />
+                    <counterResource href="/World/Quests/ZC12_Map02/WW_11_6/CountId_2.xdb" />
+                    <value>1</value>
+                </Item>
+                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                        <quest href="/World/Quests/ZC12_Map02/WW_11_6/WW_11_6.xdb" />
+                        <counterResource href="/World/Quests/ZC12_Map02/WW_11_6/CountId_3.(QuestCountId).xdb" />
+                        <value>1</value>
+                    </predicate>
+                </Item>
+            </predicates>
+            <impactsIf>
+                <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+                    <quest href="/World/Quests/ZC12_Map02/WW_11_6/WW_11_6.xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="/World/Quests/ZC12_Map02/WW_11_6/WW_11_6.(SummonPool).xdb" />
+                    <isPersonalPool>true</isPersonalPool>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+            </impactsIf>
+            <impactsElse>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                            <quest href="/World/Quests/ZC12_Map02/WW_11_6/WW_11_6.xdb" />
+                            <status>Active</status>
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                            <quest href="/World/Quests/ZC12_Map02/WW_11_6/WW_11_6.xdb" />
+                            <counterResource href="/World/Quests/ZC12_Map02/WW_11_6/CountId_3.(QuestCountId).xdb" />
+                            <value>1</value>
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                <quest href="/World/Quests/ZC12_Map02/WW_11_6/WW_11_6.xdb" />
+                                <counterResource href="/World/Quests/ZC12_Map02/WW_11_6/CountId_4.(QuestCountId).xdb" />
+                                <value>1</value>
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                            <id href="/World/Quests/ZC12_Map02/WW_11_6/CountId_4.(QuestCountId).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/World/Quests/ZC12_Map02/WW_11_6/WW_11_6_Bomb.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                            <delay>500</delay>
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Items/InteractiveObjects/ZC12_Map02/WW_11_6_Door/WW_11_6_dome_off.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Items/InteractiveObjects/ZC12_Map02/WW_11_6_Door/WW_11_6_dome_explosion.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsElse>
+        </Item>
+    </impactsOut>
+    <considerAsWhole>true</considerAsWhole>
+</gameMechanics.map.scriptZone.ScriptZone>

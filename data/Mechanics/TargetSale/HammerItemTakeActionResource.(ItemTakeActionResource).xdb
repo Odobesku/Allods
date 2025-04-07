@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<itemService.avatar.itemBag.ItemTakeActionResource>
+    <Header>
+        <resourceId>262030</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <actions>
+        <Item type="itemService.elements.components.ItemTakeActionImpacts">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateGreater">
+                            <lhs type="gameMechanics.elements.calcers.FloatData">
+                                <value var="donat" />
+                            </lhs>
+                            <rhs type="gameMechanics.elements.calcers.FloatData">
+                                <value>0</value>
+                            </rhs>
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsRuleActive">
+                            <rule href="HammerRuleActivate.(RuleResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+                            <currency href="MetaUpgraderCounter.(AlternativeCurrency).xdb" />
+                            <sumCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                                <calcers>
+                                    <Item type="gameMechanics.elements.calcers.AlternativeCurrencyCalcer">
+                                        <currency href="MetaUpgraderCounter.(AlternativeCurrency).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.calcers.FloatData">
+                                        <value>-1</value>
+                                    </Item>
+                                </calcers>
+                            </sumCalcer>
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="UniversalUpgraderBuff.(BuffResource).xdb" />
+                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                <multiplier>4</multiplier>
+                            </durationScaler>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsRuleActive">
+                                    <rule href="HammerRuleActivate.(RuleResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.resources.ResourceAltCurrency">
+                                    <currency href="MetaUpgraderCounter.(AlternativeCurrency).xdb" />
+                                    <countCalcer type="gameMechanics.elements.calcers.FloatData">
+                                        <value>100</value>
+                                    </countCalcer>
+                                </Item>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="UniversalUpgraderBuff.(BuffResource).xdb" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="itemService.elements.targetSales.ImpactAddTargetSale">
+                                    <targetSaleResource href="TargetSaleResources/HammerTarget.(TargetSaleResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+                                    <currency href="MetaUpgraderCounter.(AlternativeCurrency).xdb" />
+                                    <sumCalcer type="gameMechanics.elements.calcers.FloatData">
+                                        <value>1</value>
+                                    </sumCalcer>
+                                </Item>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="UniversalUpgraderBuff.(BuffResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateIsRuleActive">
+                                            <rule href="HammerRuleActivate.(RuleResource).xdb" />
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+                                            <currency href="MetaUpgraderCounter.(AlternativeCurrency).xdb" />
+                                            <sumCalcer type="gameMechanics.elements.calcers.FloatData">
+                                                <value>1</value>
+                                            </sumCalcer>
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impacts>
+        </Item>
+    </actions>
+</itemService.avatar.itemBag.ItemTakeActionResource>

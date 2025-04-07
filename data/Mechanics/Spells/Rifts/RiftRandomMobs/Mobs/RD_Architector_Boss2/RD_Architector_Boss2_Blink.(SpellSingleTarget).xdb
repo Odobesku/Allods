@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>208640</resourceId>
+    </Header>
+    <Name href="RD_Architector_Boss2_Blink.(SpellSingleTarget).Name.txt" />
+    <prepareDuration>1000</prepareDuration>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>12000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                        <data href="/Mechanics/Spells/Rifts/Abilities/RD_Blink_Start.(ClientData).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                        <destination type="gameMechanics.map.destination.DestinationModified">
+                            <destination type="gameMechanics.elements.calcers.DestinationSpellTargetThrust">
+                                <maxDist>4</maxDist>
+                            </destination>
+                            <modifiers>
+                                <Item type="gameMechanics.map.destination.modifier.ModifierTrail">
+                                    <modifier type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                        <horizontalRange min="0" max="3" />
+                                    </modifier>
+                                </Item>
+                            </modifiers>
+                        </destination>
+                        <finishImpacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                <data href="/Mechanics/Spells/Rifts/Abilities/RD_Blink_End.(ClientData).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.RemoveMeFromAvatarTarget" />
+                            <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                                <spell href="RD_Architector_Boss2_AEBlink.(SpellArea).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/Mechanics/Spells/Rifts/Abilities/RD_DisableExceptSpecial.(BuffResource).xdb" />
+                            </Item>
+                        </finishImpacts>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

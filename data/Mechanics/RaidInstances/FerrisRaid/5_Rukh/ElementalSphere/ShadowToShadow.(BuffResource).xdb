@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>221430</resourceId>
+    </Header>
+    <image href="/Interface/Icons/Misc/Junk/Offhand_Orb_D_03Purple.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/ShadowBird/ShadowBird.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="PursuitTarget.(BuffResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                    <spawnResource href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/HMCopies.(SpawnTable).xdb" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>2</coeff>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectInstantiating">
+            <effects>
+                <Item type="gameMechanics.elements.effects.TickableAura">
+                    <tick>1000</tick>
+                    <affectGroup>All</affectGroup>
+                    <radius>2.5</radius>
+                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                        <filters>
+                            <Item type="gameMechanics.world.creature.AliveFilter" />
+                            <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                        <mobs>
+                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/ShadowBird/ShadowBird.(MobWorld).xdb" />
+                                        </mobs>
+                                    </Item>
+                                </predicates>
+                            </Item>
+                        </filters>
+                    </filter>
+                    <impactsIn>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/Thunderbird/ShadowPowerHM.(BuffResource).xdb" />
+                            <stacks type="gameMechanics.elements.calcers.FloatData">
+                                <value>10</value>
+                            </stacks>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                            <data href="HitShadBall.(ClientData).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="PursuitTarget.(BuffResource).xdb" />
+                        </Item>
+                    </impactsIn>
+                    <holderImpactsIn>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </holderImpactsIn>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

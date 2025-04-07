@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<actionBarStart type="VisActionList">
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="CreatureRunVisActionResource">
+				<resource href="/Spells/VisScripts/Prototypes/PreCastAnimationOmniWand.(CreatureVisActionResource).xdb" />
+			</Item>
+			<Item type="CreatureRunVisActionResource">
+				<resource href="/Spells/VisScripts/Prototypes/PreCastFXNatureWand.(CreatureVisActionResource).xdb" />
+			</Item>
+		</elements>
+	</actionBarStart>
+	<launch type="VisActionList">
+		<play>Simultaneously</play>
+		<playWhile type="VisActionDelay">
+			<time>2000</time>
+		</playWhile>
+		<elements>
+			<Item type="VisActionList">
+				<elements>
+					<Item type="CreatureAnimationAction">
+						<animations>
+							<Item>spellCastOmniWand</Item>
+						</animations>
+						<channel>CHANNEL_ABILITY</channel>
+						<advanced>
+							<backgroundAfterFirstKey>true</backgroundAfterFirstKey>
+							<changeChannelAfterFirstKey>CHANGE</changeChannelAfterFirstKey>
+							<eventPlaybackEnd>true</eventPlaybackEnd>
+							<waitRealEvent>WAIT_FROMFIRSTKEY</waitRealEvent>
+						</advanced>
+					</Item>
+					<Item type="CreatureEffectsAction">
+						<visualEffects>
+							<Item>
+								<effectFx href="/Spells/FX/Spells/Druid70_SharpLeaves_Cleave.(VisObjectTemplate).xdb" />
+								<fixPoint>true</fixPoint>
+								<offendTime type="EffectOffendConstDelay" />
+							</Item>
+							<Item>
+								<effectFx href="/Spells/FX/Spells/ReadySpellDirectNatureWand_Cast.(VisObjectTemplate).xdb" />
+								<fixPoint>true</fixPoint>
+								<locator>Wand_Slot_FX</locator>
+							</Item>
+						</visualEffects>
+					</Item>
+				</elements>
+			</Item>
+		</elements>
+	</launch>
+	<charged type="CreatureChargedSpellAction" />
+	<playOnTargets>
+		<specialAction />
+	</playOnTargets>
+</SpellVisScripts>

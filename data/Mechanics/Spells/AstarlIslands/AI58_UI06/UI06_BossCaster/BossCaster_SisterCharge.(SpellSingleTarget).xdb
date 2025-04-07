@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>185825</resourceId>
+    </Header>
+    <Name href="BossCaster_SisterCharge.(SpellSingleTarget).Name.txt" />
+    <image href="/Interface/Icons/Spells/Warrior/WarriorCharge.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="BossCaster_SisterCharge.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="BossCaster_SisterCharge.(SpellSingleTarget).Name.txt" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>60</value>
+    </range>
+    <prepareDuration>2000</prepareDuration>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>35000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/Spells/AstarlIslands/AI58_UI06/UI06_BossWarrior/BossWarrior_brotherEnrage.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                <mobs>
+                                    <Item href="UI06_BossCaster.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                </mobs>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                <data href="BossCaster_SisterCharge.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impacts>
+                <spawnResource href="/Maps/AstralIsle58_UI06/SpawnTables/AI58_Boss1_boss.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                <selector type="gameMechanics.tools.SelectorParticular">
+                    <index>0</index>
+                </selector>
+                <impacts>
+                    <Item>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactRemoveAggro" />
+                                </impacts>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="BossCaster_SisterCharge.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

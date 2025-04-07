@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.device.UsableDeviceResource>
+    <Header>
+        <resourceId>243196</resourceId>
+        <isPrototype>true</isPrototype>
+        <Prototype href="/Mechanics/ObjectTemplates/ShipDevice.(UsableDeviceResource).xdb#xpointer(/bunch.BunchResource)" />
+        <Variables>
+            <visObjCommon>/Ships/Components/InternalShield_01/InternalShield_01.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)</visObjCommon>
+            <collisionCommon>/Ships/Components/InternalShield_01/InternalShield_01.(Collision).xdb#xpointer(/Collision)</collisionCommon>
+            <visObjUncommon>/Ships/Components/InternalShield_01A/InternalShield_01A.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)</visObjUncommon>
+            <collisionUncommon>/Ships/Components/InternalShield_01A/InternalShield_01A.(Collision).xdb#xpointer(/Collision)</collisionUncommon>
+            <visObjRare>/Ships/Components/InternalShield_01B/InternalShield_01B.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)</visObjRare>
+            <collisionRare>/Ships/Components/InternalShield_01B/InternalShield_01B.(Collision).xdb#xpointer(/Collision)</collisionRare>
+            <visObjEpic>/Ships/Components/InternalShield_01C/InternalShield_01C.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)</visObjEpic>
+            <collisionEpic>/Ships/Components/InternalShield_01C/InternalShield_01C.(Collision).xdb#xpointer(/Collision)</collisionEpic>
+        </Variables>
+    </Header>
+    <parts>
+        <Item type="DeathHandler">
+            <useParentState>true</useParentState>
+            <deathScript type="DeviceVisActionList">
+                <play>InSequence</play>
+                <elements>
+                    <Item type="DeviceColorAction">
+                        <colorValue>-1</colorValue>
+                    </Item>
+                    <Item type="DeviceVisActionChangeModel">
+                        <priority>5</priority>
+                    </Item>
+                </elements>
+            </deathScript>
+        </Item>
+        <Item type="DeviceOfflineComponent">
+            <onlineScript type="DeviceAnimationAction">
+                <mode>LOOP</mode>
+                <animations>
+                    <Item>idle</Item>
+                </animations>
+            </onlineScript>
+            <offlineScript type="DeviceAnimationAction">
+                <mode>LOOP</mode>
+                <animations>
+                    <Item>idleOffline</Item>
+                </animations>
+            </offlineScript>
+            <malfunctionScript type="DeviceAnimationAction">
+                <mode>LOOP</mode>
+                <animations>
+                    <Item>idleMalfunction</Item>
+                </animations>
+            </malfunctionScript>
+        </Item>
+        <Item type="UsableDeviceClientPart">
+            <type>USDEV_SHIELD</type>
+        </Item>
+        <Item type="VisActionPart">
+            <visAction type="DeviceQualityVisAction">
+                <qualities>
+                    <Item>
+                        <action type="DeviceHealthVisAction">
+                            <actions>
+                                <Item>
+                                    <action type="DeviceVisActionChangeModel">
+                                        <visObj hrefvar="visObjCommon" />
+                                        <collision hrefvar="collisionCommon" />
+                                    </action>
+                                    <health>1</health>
+                                </Item>
+                            </actions>
+                        </action>
+                        <quality href="/Mechanics/ItemQualities/Common.xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemQuality)" />
+                    </Item>
+                    <Item>
+                        <action type="DeviceHealthVisAction">
+                            <actions>
+                                <Item>
+                                    <action type="DeviceVisActionChangeModel">
+                                        <visObj hrefvar="visObjUncommon" />
+                                        <collision hrefvar="collisionUncommon" />
+                                    </action>
+                                    <health>1</health>
+                                </Item>
+                            </actions>
+                        </action>
+                        <quality href="/Mechanics/ItemQualities/Uncommon.xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemQuality)" />
+                    </Item>
+                    <Item>
+                        <action type="DeviceHealthVisAction">
+                            <actions>
+                                <Item>
+                                    <action type="DeviceVisActionChangeModel">
+                                        <visObj hrefvar="visObjRare" />
+                                        <collision hrefvar="collisionRare" />
+                                    </action>
+                                    <health>1</health>
+                                </Item>
+                            </actions>
+                        </action>
+                        <quality href="/Mechanics/ItemQualities/Rare.xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemQuality)" />
+                    </Item>
+                    <Item>
+                        <action type="DeviceHealthVisAction">
+                            <actions>
+                                <Item>
+                                    <action type="DeviceVisActionChangeModel">
+                                        <visObj hrefvar="visObjEpic" />
+                                        <collision hrefvar="collisionEpic" />
+                                    </action>
+                                    <health>1</health>
+                                </Item>
+                            </actions>
+                        </action>
+                        <quality href="/Mechanics/ItemQualities/Epic.xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemQuality)" />
+                    </Item>
+                </qualities>
+            </visAction>
+        </Item>
+    </parts>
+    <persistentParts>
+        <Item type="gameMechanics.map.spawn.collision.ShipDeviceCollisionPart">
+            <object hrefvar="object" />
+            <useDelayedCollision>true</useDelayedCollision>
+        </Item>
+        <Item type="gameMechanics.elements.bunchparts.BunchPartAttachEffects">
+            <effects>
+                <Item type="gameMechanics.world.device.EffectGroupCooldownMultiplierDevice">
+                    <group href="ShieldSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                    <factor type="gameMechanics.elements.calcers.FloatData">
+                        <value var="factor" />
+                    </factor>
+                </Item>
+                <Item type="gameMechanics.world.device.parts.ImpactsOnUserGeneric">
+                    <userImpactsOnStartUse>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="UsageBuff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </userImpactsOnStartUse>
+                    <userImpactsOnFinishUse>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="UsageBuff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <anyRank>false</anyRank>
+                        </Item>
+                    </userImpactsOnFinishUse>
+                </Item>
+                <Item type="gameMechanics.world.device.shield.EffectShieldPart">
+                    <maxStrength type="gameMechanics.elements.calcers.FloatData">
+                        <value var="maxStrength" />
+                    </maxStrength>
+                    <fullRegenTime type="gameMechanics.elements.calcers.FloatData">
+                        <value var="fullRegenTime" />
+                    </fullRegenTime>
+                    <regenCost type="gameMechanics.elements.calcers.FloatData">
+                        <value var="regenCost" />
+                    </regenCost>
+                </Item>
+            </effects>
+            <reattachOnTeleport>false</reattachOnTeleport>
+        </Item>
+    </persistentParts>
+    <exploitingText href="/Mechanics/Ships/ShipDeviceExploitText.txt" />
+    <deviceSpells>
+        <Item href="ActionRegenerateShield.(SpellCasterSelf).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+    </deviceSpells>
+    <spell href="/Mechanics/Ships/ShipDeviceExploit.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+</gameMechanics.world.device.UsableDeviceResource>

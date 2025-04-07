@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>208096</resourceId>
+    </Header>
+    <Name href="RD3_Boss03_AE.(BuffResource).Name.txt" />
+    <image href="/Interface/Icons/Equipment/Ships/HighEnergyConsume.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.EntityImpactCreaturesAround">
+                    <radius>6</radius>
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="RD3_Boss03_AE_slow.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.world.creature.AvatarFilter" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.TickableEntityAura">
+            <affectGroup>Enemies</affectGroup>
+            <radius>6</radius>
+            <filter type="gameMechanics.world.creature.AvatarFilter" />
+            <impactsOut>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="RD3_Boss03_AE_slow.(BuffResource).xdb" />
+                </Item>
+            </impactsOut>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>60</radius>
+                    <affectGroup>Enemies</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAstralKickToPoint">
+                            <time>1000</time>
+                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.world.creature.AvatarFilter" />
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>6</radius>
+                    <affectGroup>Enemies</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                            <element>LIGHTNING</element>
+                            <damage>1</damage>
+                            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                                <scalers>
+                                    <Item type="gameMechanics.elements.scalers.MagicScaler" />
+                                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                            <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/EscapableDamageBoss.(CalcerFloatResource).xdb" />
+                                        </mulCalcer>
+                                    </Item>
+                                </scalers>
+                            </scaler>
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.world.creature.AvatarFilter" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="RD3_Boss03_AE.(ClientData).xdb" />
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/Spells/Rifts/Abilities/StopBuff.(BuffResource).xdb" />
+                </Item>
+            </impactsOff>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

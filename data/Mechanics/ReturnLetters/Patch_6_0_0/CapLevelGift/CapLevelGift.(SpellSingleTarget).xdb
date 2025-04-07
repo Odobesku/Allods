@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>249080</resourceId>
+    </Header>
+    <Name href="CapLevelGift.(SpellSingleTarget).Name.txt" />
+    <Description href="CapLevelGift.(SpellSingleTarget).Description.txt" />
+    <visualScripts href="/Spells/VisScripts/Common/Use.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <prepareDuration>1000</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateCreatureLevel">
+                <minLevel type="gameMechanics.formulas.IntConstantValue">
+                    <value>65</value>
+                </minLevel>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateInGroup" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+            </Item>
+        </casterConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceActiveItem" />
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
+                        <key href="/System/ContentKeys/ItemmallService.(ContentKey).xdb#xpointer(/basement.contentkey.ContentKey)" />
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+                        <item type="gameMechanics.constructor.schemes.item.BoundItemProvider">
+                            <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                                <item href="/ItemMall/Scrolls/Rituals/IMHalo1Week.(ItemResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemResource)" />
+                            </item>
+                        </item>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+                        <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                            <item href="/Items/IMCurrencies/Myrrh1000/Myrrh1000.xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemResource)" />
+                        </item>
+                        <binding>ForceBind</binding>
+                        <count>30</count>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

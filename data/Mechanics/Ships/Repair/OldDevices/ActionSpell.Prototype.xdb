@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>243379</resourceId>
+        <isPrototype>true</isPrototype>
+        <Variables>
+            <buff />
+        </Variables>
+    </Header>
+    <image href="/Interface/Icons/Equipment/Ships/RepairGoblinsBigTypeIcon.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <prepareDuration>0</prepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <mechanics>
+        <cooldown>
+            <duration>30000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.world.device.cannon.DeviceHasUser" />
+            <Item type="gameMechanics.elements.predicates.PredicateOnAddressee">
+                <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderDeviceUser" />
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="../GoblinCarrierBuff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </predicate>
+                    </Item>
+                </predicates>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderDeviceUser" />
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff hrefvar="buff" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="Level_Marker.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        <stacks type="gameMechanics.elements.calcers.OnItemCalcer">
+                            <calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerLevel" />
+                            <source type="gameMechanics.elements.item.ItemPart" />
+                        </stacks>
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="Quality_Marker.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        <stacks type="gameMechanics.elements.calcers.OnItemCalcer">
+                            <calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerQuality" />
+                            <source type="gameMechanics.elements.item.ItemPart" />
+                        </stacks>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="../BuffStunRepair30.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="../BuffStunRepair.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <speed>0</speed>
+    <iffPolicy>Friends</iffPolicy>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

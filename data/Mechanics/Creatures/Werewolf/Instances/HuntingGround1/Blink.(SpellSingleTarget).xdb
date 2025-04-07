@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>247633</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MeleeAttacks.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/SpeedBoosts.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="Blink.(SpellSingleTarget).Name.txt" />
+    <image href="/Interface/Icons/Spells/Stalker/FearOfDeath.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Stalker/ShadowStep.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="Blink.(SpellSingleTarget).NameTemplate.txt" />
+    <descTemplate href="Blink.(SpellSingleTarget).DescTemplate.txt" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>50</value>
+    </range>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <launchWhenReady>true</launchWhenReady>
+    <mechanics>
+        <cooldown>
+            <duration>2000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateCanMove" />
+            <Item type="gameMechanics.elements.predicates.PredicateHasPath">
+                <destination type="gameMechanics.elements.calcers.DestinationSpellTargetThrust">
+                    <maxDist>1</maxDist>
+                </destination>
+                <maxLength>65</maxLength>
+            </Item>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="Invis.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="Bleed.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                        <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                            <base type="gameMechanics.elements.calcers.DestinationSpellTargetThrust">
+                                <maxDist>1</maxDist>
+                            </base>
+                            <offset>0</offset>
+                            <yaw type="constructor.basicElements.AngleRadians" />
+                            <turn>ToTarget</turn>
+                        </destination>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                <buff href="Invis.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                <minDamage>20</minDamage>
+                <maxDamage>20</maxDamage>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="Bleed.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

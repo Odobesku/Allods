@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>221829</resourceId>
+    </Header>
+    <image href="/Interface/Icons/Spells/Psionic/PsionicTimeLapse.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="Combination/CombinationCount.(BuffResource).xdb" />
+                    <impactsOnAttach>
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                    <impactsResource href="Combination/GetCombinationNumber1.(ImpactListResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsOnAttach>
+                    <stacks type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                        <buff href="Combination/Difficulty.(BuffResource).xdb" />
+                    </stacks>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/FerrisRaid_Hacking.(ActionGroup).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="Hacker_A.(BuffResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactEntitiesAround">
+                            <radius>20</radius>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateDevice">
+                                            <deviceResources>
+                                                <Item href="HackIndicator_A.(SteleResource).xdb" />
+                                            </deviceResources>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                                            <visualState>5</visualState>
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactEntitiesAround">
+                            <radius>20</radius>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateDevice">
+                                            <deviceResources>
+                                                <Item href="HackIndicator_B.(SteleResource).xdb" />
+                                            </deviceResources>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                                            <visualState>5</visualState>
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsElse>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                    <group href="/Mechanics/Spells/Groups/FerrisRaid_Hacking.(ActionGroup).xdb" />
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+    <duration>1000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <isClientReplicated>false</isClientReplicated>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

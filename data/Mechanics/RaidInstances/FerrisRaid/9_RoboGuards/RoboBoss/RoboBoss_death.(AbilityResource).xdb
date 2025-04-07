@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>222118</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                    <spawnResource href="/Maps/FerrisRaid/SpawnTables/9_RoboGuards.(SpawnTable).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="PortalKiller_pool.(SummonPool).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="PortalShield_collision.(SummonPool).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="PortalSpecial.(SummonPool).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                    <variable href="/Mechanics/RaidInstances/FerrisRaid/9_RoboGuards/RoboGuards.(MapVariableResource).xdb" />
+                    <summand>1</summand>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="/Mechanics/RaidInstances/FerrisRaid/9_RoboGuards/ClientData_voice/RoboBoss_death.(ClientData).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                        <locator>
+                            <scriptID>FR_9_ChestLoc</scriptID>
+                            <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                        </locator>
+                    </destination>
+                    <object href="/Mechanics/RaidInstances/FerrisRaid/Other/Loot/9_Chest_HM.(ChestResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                                            <quest href="/World/Quests/FerrisRaid/FR_Q09/Quest09.(QuestResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                                                <quest href="/World/Quests/FerrisRaid/FR_Q09/Quest09.(QuestResource).xdb" />
+                                                <counterResource href="/World/Quests/FerrisRaid/FR_Q09/Count00.(QuestCountId).xdb" />
+                                                <value>1</value>
+                                            </predicate>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactFreezeQuestCounter">
+                                            <quest href="/World/Quests/FerrisRaid/FR_Q09/Quest09.(QuestResource).xdb" />
+                                            <counterResource href="/World/Quests/FerrisRaid/FR_Q09/Count00.(QuestCountId).xdb" />
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                                    <group href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
+                    <device>
+                        <scriptID>LeverRobo</scriptID>
+                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                    </device>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>RoboGuards_combat_door</scriptID>
+                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.device.DoorSwitch">
+                            <switchType>Close</switchType>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onEnter>
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>RoboGuards_combat_door</scriptID>
+                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.device.DoorSwitch">
+                            <switchType>Open</switchType>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                                    <group href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onLeave>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

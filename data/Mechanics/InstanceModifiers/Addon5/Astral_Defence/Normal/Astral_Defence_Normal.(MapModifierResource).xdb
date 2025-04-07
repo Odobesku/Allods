@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.map.basicElements.MapModifierResource>
+    <Header>
+        <resourceId>251989</resourceId>
+    </Header>
+    <name href="Astral_Defence_Normal.(MapModifierResource).Name.txt" />
+    <description href="Astral_Defence_Normal.(MapModifierResource).Description.txt" />
+    <image href="/Interface/Icons/Equipment/Shield/ShieldHeraldic.(UISingleTexture).xdb" />
+    <cellEffects>
+        <Item type="gameMechanics.elements.effects.EntityImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactRandomAvatarsOnCell">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                            <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                                <value>1</value>
+                            </chanceCalcer>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <affectHolder>false</affectHolder>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactCopyAggroList" />
+                                                        <Item type="gameMechanics.elements.impacts.ImpactSetAllAggro" />
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="/Mechanics/Spells/AstarlIslands/CommonSpells/SummonStun.(BuffResource).xdb" />
+                                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                                <multiplier>1.5</multiplier>
+                                                            </durationScaler>
+                                                        </Item>
+                                                    </impacts>
+                                                    <object href="Astral_Defence.(MobWorld).xdb" />
+                                                    <pool href="/Mechanics/InstanceModifiers/Addon5/SummonLimit.(SummonPool).xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsMob" />
+                                            <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+                                                    <groups>
+                                                        <Item href="/Mechanics/InstanceModifiers/Addon5/Not_Astral_Modifiers.(ActionGroup).xdb" />
+                                                    </groups>
+                                                </predicate>
+                                            </Item>
+                                        </predicates>
+                                    </filter>
+                                    <targetsLimit>1</targetsLimit>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.world.ship.elements.PredicateStandingOnShip" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                        <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                    </predicates>
+                </Item>
+            </impacts>
+            <tick>30000</tick>
+            <initialDelay>-1</initialDelay>
+        </Item>
+    </cellEffects>
+</gameMechanics.map.basicElements.MapModifierResource>

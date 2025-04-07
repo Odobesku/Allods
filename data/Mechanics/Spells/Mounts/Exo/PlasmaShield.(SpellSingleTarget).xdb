@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>204428</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/StunBreakers.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/FearBreakers.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/HoldBreakers.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/MindControlBreakers.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/KnockdownBreakers.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Description href="/Mechanics/Spells/Mounts/Exo/PlasmaShield.(SpellSingleTarget).Description.txt" />
+    <Name href="/Mechanics/Spells/Mounts/Exo/PlasmaShield.(SpellSingleTarget).Name.txt" />
+    <defaultAction>-1</defaultAction>
+    <element>PHYSICAL</element>
+    <iffPolicy>Friends</iffPolicy>
+    <image href="/Interface/Icons/Mounts/SpellsMounts/ExoShield01.(UISingleTexture).xdb#xpointer(/client.Widgets.UISingleTexture)" />
+    <level>1</level>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMounted" />
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="PlasmaShield00.(BuffResource).xdb" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                <predicate type="gameMechanics.constructor.basicElements.PredicateOr">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceItem">
+                            <item href="/Items/BoxSpecialLoot/Cannon/ManaBattery.xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                            <buff href="Energize.(BuffResource).xdb" />
+                            <range>
+                                <min>10</min>
+                                <max>99</max>
+                            </range>
+                        </Item>
+                    </predicates>
+                </predicate>
+                <clientData href="EnergizeCD.(ClientData).xdb" />
+            </Item>
+        </casterConditions>
+        <cooldown type="gameMechanics.constructor.schemes.spell.SpellSimpleCooldown">
+            <duration>600000</duration>
+            <stage>Launch</stage>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <hideText>false</hideText>
+                <predicate type="gameMechanics.constructor.basicElements.PredicateOr">
+                    <hideText>false</hideText>
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <hideText>false</hideText>
+                            <buff href="/Mechanics/Spells/Mounts/Exo/PlasmaShield00.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <consumeStacks>0</consumeStacks>
+                            <anyRank>true</anyRank>
+                        </Item>
+                    </predicates>
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <hideText>false</hideText>
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <hideText>false</hideText>
+                    <buff href="/Mechanics/Spells/Mounts/Exo/PSCD.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <consumeStacks>0</consumeStacks>
+                    <anyRank>true</anyRank>
+                </predicate>
+            </Item>
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                        <buff href="Energize.(BuffResource).xdb" />
+                        <range>
+                            <min>10</min>
+                            <max>99</max>
+                        </range>
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.StackBuff">
+                        <buff href="Energize.(BuffResource).xdb" />
+                        <delta type="gameMechanics.elements.calcers.FloatData">
+                            <value>-10</value>
+                        </delta>
+                    </Item>
+                </impacts>
+                <elseImpacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="Energize.(BuffResource).xdb" />
+                        <stacks type="gameMechanics.elements.calcers.FloatData">
+                            <value>30</value>
+                        </stacks>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactDestroyItem">
+                        <item href="/Items/BoxSpecialLoot/Cannon/ManaBattery.xdb" />
+                    </Item>
+                </elseImpacts>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="PlasmaShield00.(BuffResource).xdb" />
+                        <durationScalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mul>0.045</mul>
+                            <mulCalcer type="gameMechanics.elements.calcers.CalcerMountFromGroupMaxLevel">
+                                <group href="/Mechanics/Mounts/Groups/ExoMounts.(MountGroupResource).xdb" />
+                            </mulCalcer>
+                            <sum>0.5</sum>
+                        </durationScalerTarget>
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <prepareDuration>0</prepareDuration>
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>30</value>
+    </range>
+    <sysName></sysName>
+    <targetType>STTCurrentTarget</targetType>
+    <uiSpellBookPageType>SPELLBOOK_PAGE_HALO</uiSpellBookPageType>
+    <visualScripts href="/Mechanics/Spells/Mounts/Exo/PlasmaShield.(SpellVisScripts).xdb#xpointer(/client.VisualConstructor.SpellVisScripts)" />
+    <autoAppendToActionPanel>true</autoAppendToActionPanel>
+    <ignoreGlobalCooldown>false</ignoreGlobalCooldown>
+    <isExploit>false</isExploit>
+    <isHiddenAction>false</isHiddenAction>
+    <isWorkOnDead>false</isWorkOnDead>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>false</needInFront>
+    <replaceLowRanks>false</replaceLowRanks>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>243381</resourceId>
+        <isPrototype>true</isPrototype>
+        <Variables>
+            <range>10</range>
+            <count />
+            <count_incr />
+            <buff />
+            <radius />
+            <goblinObj />
+        </Variables>
+    </Header>
+    <contextActionInfo>
+        <priority>101</priority>
+        <contextName href="../Spell_Name.txt" />
+        <contextDescription href="../Spell_Desc.txt" />
+        <contextImage href="/Interface/Icons/Context/ContextResurrection.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    </contextActionInfo>
+    <Name href="../Spell_Prototype.txt" />
+    <image href="/Interface/Icons/Equipment/Mace/MaceNewbie.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value var="range" />
+    </range>
+    <targetType>STTPoint</targetType>
+    <isAggro>false</isAggro>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff hrefvar="buff" />
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateCreature" />
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                <buff hrefvar="buff" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                <destination type="gameMechanics.map.destination.DestinationModified">
+                    <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint">
+                        <yawDelta type="constructor.basicElements.AngleDegrees">
+                            <value>180</value>
+                        </yawDelta>
+                    </destination>
+                    <modifiers>
+                        <Item type="gameMechanics.map.destination.modifier.ModifierTrailFrom">
+                            <from type="gameMechanics.map.destination.SelfPosDestination" />
+                        </Item>
+                    </modifiers>
+                </destination>
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="GoblinBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <sum var="count" />
+                            <mul var="count_incr" />
+                            <mulCalcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                <buff href="Quality_Marker.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </mulCalcer>
+                        </durationScaler>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactDevicesAround">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+                                                <level>1</level>
+                                            </Item>
+                                        </predicates>
+                                        <impactsIf>
+                                            <Item type="gameMechanics.elements.impacts.ReturningImpactsGeneric">
+                                                <impacts>
+                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                        <buff href="../GoblinMovementBuff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                        </impactsIf>
+                                    </Item>
+                                </impacts>
+                                <destination type="gameMechanics.map.destination.RelativePos" />
+                                <shape type="gameMechanics.constructor.schemes.spell.area.CylinderWithHeight" />
+                                <radius var="radius" />
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateDevice" />
+                                </predicates>
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactDevicesAround">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                <delay>1000</delay>
+                                <limitCalc type="gameMechanics.elements.calcers.FloatToLongCalcer">
+                                    <calcer type="gameMechanics.elements.calcers.CalcerSum">
+                                        <summands>
+                                            <Item type="gameMechanics.elements.calcers.FloatData">
+                                                <value var="count" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.calcers.CalcerMul">
+                                                <calcers>
+                                                    <Item type="gameMechanics.elements.calcers.FloatData">
+                                                        <value var="count_incr" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                                        <buff href="Quality_Marker.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                    </Item>
+                                                </calcers>
+                                            </Item>
+                                        </summands>
+                                    </calcer>
+                                </limitCalc>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+                                                <level>1</level>
+                                            </Item>
+                                        </predicates>
+                                        <impactsIf>
+                                            <Item type="gameMechanics.world.device.ImpactDeviceHeal">
+                                                <amount type="gameMechanics.elements.calcers.CalcerMul">
+                                                    <calcers>
+                                                        <Item type="gameMechanics.elements.calcers.FloatData">
+                                                            <value>47.368</value>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.calcers.CalcerExp">
+                                                            <base>1.33</base>
+                                                            <powCalc type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                                                <buff href="Level_Marker.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </powCalc>
+                                                        </Item>
+                                                    </calcers>
+                                                </amount>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactClientData">
+                                                <data href="../DeviceRepairGoodEffect_ClientData.xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                            </Item>
+                                        </impactsIf>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impacts>
+                        <destination type="gameMechanics.map.destination.RelativePos" />
+                        <shape type="gameMechanics.constructor.schemes.spell.area.CylinderWithHeight" />
+                        <radius var="radius" />
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateDevice" />
+                        </predicates>
+                    </Item>
+                </impacts>
+                <object hrefvar="goblinObj" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                <buff href="Level_Marker.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                <buff href="Quality_Marker.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <radius var="radius" />
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

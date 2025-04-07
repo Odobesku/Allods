@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>207691</resourceId>
+    </Header>
+    <Name href="Buff.(BuffResource).Name.txt" />
+    <Description href="Buff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Mage/MageBastion.(UISingleTexture).xdb" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/Mage63_Citadel_Upgrade.(VisObjectTemplate).xdb" />
+            <fadeOutTime>300</fadeOutTime>
+            <locator>Slot_Global</locator>
+            <offendTime />
+            <offset z="0.2" />
+            <ignoreParentRotation>true</ignoreParentRotation>
+        </Item>
+    </visualEffects>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectMoveTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Buff.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+            <distDelta>3</distDelta>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Stacking.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+                    <spell href="Spell.(SpellSingleTarget).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                    <spell href="Spell.(SpellSingleTarget).xdb" />
+                    <duration>10000</duration>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Jump</Item>
+                <Item>ExternalMove</Item>
+                <Item>Rooted</Item>
+            </actions>
+            <rooted>true</rooted>
+        </Item>
+        <Item type="gameMechanics.elements.effects.MultiplyStat">
+            <stat type="gameMechanics.elements.stat.StatResistance">
+                <element>EPHYSICAL</element>
+            </stat>
+            <multiplier>1.25</multiplier>
+        </Item>
+        <Item type="gameMechanics.elements.effects.MultiplyStat">
+            <stat type="gameMechanics.elements.stat.StatResistance">
+                <element>EELEMENTAL</element>
+            </stat>
+            <multiplier>1.25</multiplier>
+        </Item>
+        <Item type="gameMechanics.elements.effects.MultiplyStat">
+            <stat type="gameMechanics.elements.stat.StatResistance">
+                <element>EDIVINE</element>
+            </stat>
+            <multiplier>1.25</multiplier>
+        </Item>
+        <Item type="gameMechanics.elements.effects.MultiplyStat">
+            <stat type="gameMechanics.elements.stat.StatResistance">
+                <element>ENATURE</element>
+            </stat>
+            <multiplier>1.25</multiplier>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffInterceptor">
+            <impactsOnDetach>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Buff.(BuffResource).xdb" />
+                </Item>
+            </impactsOnDetach>
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.PredicateBuffEquals">
+                    <buff href="/Mechanics/Spells/CommonBuffs/Aspects/CC/Buff01.(BuffResource).xdb" />
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffInterceptor">
+            <impactsOnAttach>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Buff.(BuffResource).xdb" />
+                </Item>
+            </impactsOnAttach>
+            <predicates>
+                <Item type="gameMechanics.constructor.basicElements.PredicateGenericOr">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.schemes.buff.PredicateBuffEquals">
+                            <buff href="/Mechanics/GameRoot/Mount/MountBuff.xdb" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                            <groups>
+                                <Item href="/Mechanics/Spells/Groups/BearingBuffs.xdb" />
+                            </groups>
+                        </Item>
+                    </predicates>
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.SpellExtraImpacts">
+            <casterPreImpacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Buff.(BuffResource).xdb" />
+                </Item>
+            </casterPreImpacts>
+            <destination type="gameMechanics.elements.effects.SpellExtraImpacts$DestinationSpells">
+                <spells>
+                    <Item href="/Mechanics/Spells/Mage63/Spells/Blink/Spell01.(SpellSingleTarget).xdb" />
+                </spells>
+            </destination>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

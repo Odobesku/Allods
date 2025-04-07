@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>245569</resourceId>
+    </Header>
+    <Name href="SavantChannel.(BuffResource).Name.txt" />
+    <Description href="SavantChannel.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Modifiers/WeaknessTenses.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                    <element>LIGHTNING</element>
+                    <damage>15</damage>
+                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.5</coeff>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectAddContextActionsGeneric">
+            <actions>
+                <Item href="/Mechanics/Creatures/ArchitectSiege/ZC12_Map02/KrigContextAction.(SpellSingleTarget).xdb" />
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+                            <spawn>
+                                <scriptID>Unn_10_9</scriptID>
+                                <map href="/Maps/ZC12_Map02/MapResource.xdb" />
+                            </spawn>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                    <data href="UnnAdvice2.(ClientData).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                    <spell href="/Mechanics/Creatures/ArchitectSiege/ZC12_Map02/KrigContextAction.(SpellSingleTarget).xdb" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="/Mechanics/Creatures/ArchitectSiege/ZC12_Map02/KrigBombProtection.(BuffResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/Mechanics/Creatures/ArchitectSiege/ZC12_Map02/KrigBombProtection.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                                    <spell href="109_SavantChannel.(SpellSingleTarget).xdb" />
+                                    <duration>
+                                        <minute>10</minute>
+                                    </duration>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactResetActiveAction" />
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="SavantEnrage.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                                    <spell href="109_SavantTargetPhase.(SpellSingleTarget).xdb" />
+                                    <duration>
+                                        <second>3</second>
+                                    </duration>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="SavantTargetTransform.(BuffResource).xdb" />
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <duration>1000</duration>
+    <isHelpful>false</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

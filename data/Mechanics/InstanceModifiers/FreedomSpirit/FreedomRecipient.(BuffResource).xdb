@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>252359</resourceId>
+    </Header>
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EntityImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.map.variables.ImpactIfMapVariable">
+                            <variable href="IsThereFreedomSpiritOnMap.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                            <predicates>
+                                <Item type="gameMechanics.map.variables.PredicateMapVariableEqualsGeneric">
+                                    <variableResource href="IsThereFreedomSpiritOnMap.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                                    <expectedValue type="gameMechanics.constructor.basicElements.FloatZero" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                            <radius>60</radius>
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="IncomingFreedomSpirit.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </Item>
+                                            </impacts>
+                                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                        <buff href="FreedomRecipient.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                                </predicates>
+                                            </filter>
+                                            <targetsLimit>1</targetsLimit>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                            <summandIf>1</summandIf>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+            <tick>30000</tick>
+            <initialDelay>15000</initialDelay>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/EvadeProtectedBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

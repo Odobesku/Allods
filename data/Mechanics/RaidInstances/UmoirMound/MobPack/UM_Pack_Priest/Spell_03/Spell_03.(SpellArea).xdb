@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>227319</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MobsCooldowns.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="Spell_03.(SpellArea).Name.txt" />
+    <Description href="" />
+    <image href="/Interface/Icons/Spells/Paladin/PaladinBlessedSword.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Paladin/CrusaderStrike.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="" />
+    <descTemplate href="" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <needLos>false</needLos>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>3000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+        </targetConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceMana">
+                <mana>44</mana>
+                <manaType>
+                    <Item>Mana</Item>
+                </manaType>
+            </Item>
+        </casterResources>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ScaledPhysicalWeaponDamage">
+                <impactsOnHitCaster>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="Spell_03_Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsOnHitCaster>
+                <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                    <scalers>
+                        <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mul>0.1</mul>
+                            <mulCalcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                <buff href="Spell_03_Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                <forAllRanks>true</forAllRanks>
+                            </mulCalcer>
+                            <sum>1</sum>
+                        </Item>
+                        <Item type="gameMechanics.elements.scalers.WeaponScaler" />
+                    </scalers>
+                </scaler>
+                <avgDamage>25</avgDamage>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <maxTargets>2</maxTargets>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+    <radius>5</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

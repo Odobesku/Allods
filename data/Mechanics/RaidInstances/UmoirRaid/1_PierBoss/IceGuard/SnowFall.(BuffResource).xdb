@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>225376</resourceId>
+    </Header>
+    <Name href="SnowFall.(BuffResource).Name.txt" />
+    <Description href="SnowFall.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Misc/Event/Snowballs.(UISingleTexture).xdb" />
+    <visScript href="/Spells/VisScripts/Bosses/UmoirRaid/PierBoss1_IceGuard_SnowFall.(BuffVisScripts).xdb" />
+    <interfaceHighPriority>true</interfaceHighPriority>
+    <nameTemplate href="SnowFall.(BuffResource).Name.txt" />
+    <descTemplate href="SnowFall.(BuffResource).Description.txt" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                    <projectileData>
+                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                            <destination type="gameMechanics.map.destination.DestinationModified">
+                                <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                <modifiers>
+                                    <Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
+                                </modifiers>
+                            </destination>
+                        </moveType>
+                        <resource href="SnowFall.(ProjectileResource).xdb" />
+                    </projectileData>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+            <initialDelay>4000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.MagicDoT">
+            <parameters>
+                <tickLength>1000</tickLength>
+                <damagePerTick>4</damagePerTick>
+            </parameters>
+            <element>COLD</element>
+            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.2</coeff>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="SnowFall.(BuffResource).xdb" />
+                </Item>
+            </onLeave>
+        </Item>
+    </effects>
+    <duration>15000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+        <Item href="/Mechanics/RaidInstances/UmoirRaid/UmoirRaid.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

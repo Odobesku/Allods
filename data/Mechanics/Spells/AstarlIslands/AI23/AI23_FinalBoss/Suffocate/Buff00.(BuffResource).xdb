@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>194337</resourceId>
+    </Header>
+    <Name href="Buff00.(BuffResource).Name.txt" />
+    <Description href="Buff00.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Psionic/PsionicSuffocate.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="HungInAir.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Jump</Item>
+                <Item>Move</Item>
+                <Item>Rotate</Item>
+            </actions>
+            <rooted>true</rooted>
+        </Item>
+        <Item type="gameMechanics.elements.effects.MagicDoT">
+            <parameters>
+                <tickLength>1000</tickLength>
+                <damagePerTick>5</damagePerTick>
+                <affectOnStartTick>true</affectOnStartTick>
+            </parameters>
+            <element>SHADOW</element>
+            <progressiveMultiplier>0.5</progressiveMultiplier>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActionsExceptGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="SaveYourself/SaveYourselfBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <impactsOnAttach>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
+                                            <affectPets>false</affectPets>
+                                            <excludeCaster>true</excludeCaster>
+                                            <excludeTarget>true</excludeTarget>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                    <predicates>
+                                                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                    </predicates>
+                                                    <impactsIf>
+                                                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                                    <buff href="SaveYourself/SaveYourselfBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impactsIf>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsOnAttach>
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="SaveYourself/SaveYourselfBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOff>
+        </Item>
+    </effects>
+    <isHelpful>false</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.map.scriptZone.ScriptZone>
+    <Header>
+        <resourceId>224577</resourceId>
+    </Header>
+    <filter type="gameMechanics.world.creature.AvatarFilter" />
+    <conditionsIn>
+        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+            <predicate type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="R7_Capsule_Check_Avatar.(BuffResource).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="Inf_Plane.(BuffResource).xdb" />
+                    </Item>
+                </predicates>
+            </predicate>
+        </Item>
+        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+            <predicate type="gameMechanics.elements.predicates.PredicateHasVariable">
+                <resource href="/Mechanics/RaidInstances/ArchBaseRaid/Other/R7_Psyker_Kill.(MapVariableResource).xdb" />
+            </predicate>
+        </Item>
+        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+            <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+        </Item>
+    </conditionsIn>
+    <impactsIn>
+        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+            <delay>1000</delay>
+            <impacts>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="R7_Capsule_Check_Avatar.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+            <buff href="Inf_Plane.(BuffResource).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+            <buff href="Phys_Plane.(BuffResource).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+            <spawn>
+                <scriptID>R7_Capsule_4</scriptID>
+                <map href="/Maps/ArchBase_Raid/MapResource.xdb" />
+            </spawn>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+            <predicates>
+                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="R7_Capsule_Check.(BuffResource).xdb" />
+                    </predicate>
+                </Item>
+            </predicates>
+            <impactsIf>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="R7_Capsule_Check.(BuffResource).xdb" />
+                </Item>
+            </impactsIf>
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactScriptZoneSetDisabled">
+            <zone href="R7_Capsule_4.(ScriptZone).xdb" />
+        </Item>
+    </impactsIn>
+</gameMechanics.map.scriptZone.ScriptZone>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.mob.interaction.Cue>
+    <Header>
+        <resourceId>243559</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="GoToAstralIntro_Proto.(Cue).Name.txt" />
+    <text href="GoToAstralIntro_Proto.(Cue).Text.txt" />
+    <isSpecial>true</isSpecial>
+    <conditions>
+        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+            <quest hrefvar="quest" />
+            <status>Started</status>
+        </Item>
+    </conditions>
+    <additionalConditions>
+        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+            <predicate type="gameMechanics.world.ship.elements.PredicateHasSummonedShip" />
+        </Item>
+        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="/Mechanics/GameRoot/MatchMakingQueue.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </predicate>
+        </Item>
+    </additionalConditions>
+    <impacts>
+        <Item type="itemService.elements.astral.ImpactSummonTempShip">
+            <shipResource hrefvar="IntroductionShip" />
+            <impacts>
+                <Item type="gameMechanics.world.ship.elements.ImpactTeleportShip">
+                    <sector href="/Mechanics/Astral/Sectors/NewbieAstral/IntroductionSector/IntroductionSector.(AstralSectorResource).xdb#xpointer(/gameMechanics.world.bigAstral.AstralSectorResource)" />
+                    <success>
+                        <Item type="gameMechanics.constructor.basicElements.ImpactNull" />
+                    </success>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactTeleportToCasterTransport">
+                            <slotName>Slot_Teleport_02</slotName>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                    <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderDeviceInSlot">
+                        <slot>Slot_RudderHorizontal_01</slot>
+                    </addresseeFinder>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                            <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                <offset>3</offset>
+                                <turn>ToBase</turn>
+                            </destination>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Mechanics/Astral/Sectors/NewbieAstral/IntroductionSector/Mobs/Mercs/Merc.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactSetFaction">
+                                    <faction hrefvar="faction" />
+                                </Item>
+                            </impacts>
+                            <object href="/Mechanics/Astral/Sectors/NewbieAstral/IntroductionSector/Mobs/Mercs/Tank.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                            <level type="gameMechanics.elements.calcers.CalcerLevelCap" />
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                    <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderDeviceInSlot">
+                        <slot>Slot_Scaner_01</slot>
+                    </addresseeFinder>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                            <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                <offset>3</offset>
+                                <yaw type="constructor.basicElements.AngleDegrees">
+                                    <value var="AngleDegrees" />
+                                </yaw>
+                                <turn>ToBase</turn>
+                            </destination>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactSetFaction">
+                                    <faction hrefvar="faction" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Mechanics/Astral/Sectors/NewbieAstral/IntroductionSector/Mobs/Mercs/Merc.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                            <object href="/Mechanics/Astral/Sectors/NewbieAstral/IntroductionSector/Mobs/Mercs/Healer.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                            <level type="gameMechanics.elements.calcers.CalcerLevelCap" />
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.world.ship.elements.ImpactAllDevices">
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/Astral/Sectors/NewbieAstral/IntroductionSector/Tours/Hub1/ControlBuffs/DeviceShutDown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impacts>
+                            <filter type="gameMechanics.world.device.filters.UsableDeviceTypeFilter">
+                                <allowedTypes>
+                                    <Item href="/Mechanics/Ships/UsableDeviceTypes/Scaner.xdb#xpointer(/gameMechanics.world.device.UsableDeviceType)" />
+                                    <Item href="/Mechanics/Ships/UsableDeviceTypes/EngineHorizontal.xdb#xpointer(/gameMechanics.world.device.UsableDeviceType)" />
+                                    <Item href="/Mechanics/Ships/UsableDeviceTypes/EngineVertical.xdb#xpointer(/gameMechanics.world.device.UsableDeviceType)" />
+                                    <Item href="/Mechanics/Ships/UsableDeviceTypes/Rudder.xdb#xpointer(/gameMechanics.world.device.UsableDeviceType)" />
+                                </allowedTypes>
+                            </filter>
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/Astral/Sectors/NewbieAstral/IntroductionSector/Tours/Hub1/ControlBuffs/DieHard.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                            <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderShipOwner" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                    <delay>3000</delay>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactStartQuiz">
+                                            <question href="/Mechanics/Astral/Sectors/NewbieAstral/IntroductionSector/Mobs/Mercs/TextMessage/Start.(Question).xdb#xpointer(/gameMechanics.world.quiz.Question)" />
+                                            <paramsCalcers>
+                                                <stringEntries>
+                                                    <Item>
+                                                        <name>Name</name>
+                                                        <calcer type="gameMechanics.elements.calcers.CasterNameCalcer" />
+                                                    </Item>
+                                                </stringEntries>
+                                            </paramsCalcers>
+                                            <participants type="gameMechanics.elements.addresseeFinders.AddressesFinderSelf" />
+                                            <resultsHandler type="gameMechanics.elements.common.SingleResultHandler">
+                                                <impactsOnSuccess>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateGreaterLong">
+                                                                <lhs type="gameMechanics.elements.calcers.CalcerLongParam">
+                                                                    <paramName>choice</paramName>
+                                                                </lhs>
+                                                                <rhs type="gameMechanics.elements.calcers.LongData">
+                                                                    <value>0</value>
+                                                                </rhs>
+                                                            </Item>
+                                                        </predicates>
+                                                        <impactsIf>
+                                                            <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                                                                <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderBoundShip" />
+                                                                <impacts>
+                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                        <buff href="/Mechanics/Astral/Sectors/NewbieAstral/IntroductionSector/Tours/Hub1/ControlBuffs/GoByTour1.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                    </Item>
+                                                                </impacts>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactSetStackCount">
+                                                                <buff href="/Mechanics/Astral/Sectors/NewbieAstral/IntroductionSector/Tours/Hub1/ControlBuffs/AvatarsBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                <stackCount>1</stackCount>
+                                                            </Item>
+                                                        </impactsIf>
+                                                        <impactsElse>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                                                <predicates>
+                                                                    <Item type="gameMechanics.elements.predicates.PredicateFaction">
+                                                                        <faction href="/World/Factions/League.xdb#xpointer(/gameMechanics.world.creature.Faction)" />
+                                                                    </Item>
+                                                                </predicates>
+                                                                <impacts>
+                                                                    <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                                                        <destination type="gameMechanics.map.destination.AbsolutePos">
+                                                                            <map href="/Maps/AstralHangarLeague/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                                            <coord x="316.3" y="1368.1" z="73.8" />
+                                                                        </destination>
+                                                                        <finishImpacts>
+                                                                            <Item type="gameMechanics.elements.impacts.ImpactDespawnShip">
+                                                                                <safe>false</safe>
+                                                                            </Item>
+                                                                        </finishImpacts>
+                                                                    </Item>
+                                                                </impacts>
+                                                                <elseImpacts>
+                                                                    <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                                                        <destination type="gameMechanics.map.destination.AbsolutePos">
+                                                                            <map href="/Maps/AstralHangarHadagan/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                                            <coord x="299.3" y="1701" z="63.5" />
+                                                                        </destination>
+                                                                        <finishImpacts>
+                                                                            <Item type="gameMechanics.elements.impacts.ImpactDespawnShip">
+                                                                                <safe>false</safe>
+                                                                            </Item>
+                                                                        </finishImpacts>
+                                                                    </Item>
+                                                                </elseImpacts>
+                                                            </Item>
+                                                        </impactsElse>
+                                                    </Item>
+                                                </impactsOnSuccess>
+                                            </resultsHandler>
+                                            <timeout>
+                                                <minute>5</minute>
+                                            </timeout>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacherStackRange">
+                                    <buff href="/Mechanics/Astral/Sectors/NewbieAstral/IntroductionSector/Tours/Hub1/ControlBuffs/AvatarsBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    <range>
+                                        <min>2</min>
+                                        <max>2</max>
+                                    </range>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+    </impacts>
+</gameMechanics.world.mob.interaction.Cue>

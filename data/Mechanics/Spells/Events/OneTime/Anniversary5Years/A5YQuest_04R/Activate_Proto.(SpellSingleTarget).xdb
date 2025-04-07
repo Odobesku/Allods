@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>209833</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="A5YQuest.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <image href="/Interface/Icons/Spells/Mage/ControlFire.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>5</value>
+    </range>
+    <mechanics>
+        <cooldown>
+            <duration>5000</duration>
+            <group href="A5YQuest.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="/World/Quests/LoreEvents/Anniversary5Years/Anniversary5Years_04R_E.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Started</status>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="/World/Quests/LoreEvents/Anniversary5Years/Anniversary5Years_04R_L.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Started</status>
+                    </Item>
+                </predicates>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateExternal">
+                        <predicateResource href="ElemActive.(PredicateResource).xdb#xpointer(/gameMechanics.constructor.basicElements.PredicateResource)" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                        <data href="ElemActive.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                    </Item>
+                </impacts>
+                <elseImpacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff hrefvar="buff_VisualFlag" />
+                    </Item>
+                </elseImpacts>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateExternal">
+                        <predicateResource href="ElemActive.(PredicateResource).xdb#xpointer(/gameMechanics.constructor.basicElements.PredicateResource)" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                        <data href="ElemActive.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                    </Item>
+                </impacts>
+                <elseImpacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                        <predicates>
+                            <Item type="gameMechanics.elements.resources.ResourceItem">
+                                <item hrefvar="itemForSummon" />
+                            </Item>
+                        </predicates>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                <impacts>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="ElemGivePlane.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                        <impacts>
+                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                <buff href="ElemGivePlane.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                <predicates>
+                                                    <Item type="gameMechanics.world.pet.PredicateHasPet" />
+                                                </predicates>
+                                                <impactsIf>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactsToPet">
+                                                        <impacts>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="ElemGivePlane.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impactsIf>
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </impacts>
+                                <object hrefvar="summonMob" />
+                                <level type="gameMechanics.elements.calcers.CalcerLevel" />
+                                <pool hrefvar="summonPool" />
+                                <isPersonalPool>true</isPersonalPool>
+                            </Item>
+                        </impacts>
+                        <elseImpacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                                <pool href="MainElemental.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                                <isPersonalPool>true</isPersonalPool>
+                                <impacts>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff hrefvar="buff_Ray" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </elseImpacts>
+                    </Item>
+                </elseImpacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

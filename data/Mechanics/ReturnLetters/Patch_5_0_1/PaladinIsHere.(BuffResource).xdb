@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>249120</resourceId>
+        <Prototype href="/Mechanics/Spells/Events/AssistantProto/AssistantIsHere.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+        <Variables>
+            <CheckAssistantLost_buff>CheckPaladinLost.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)</CheckAssistantLost_buff>
+            <SummonImpactList>SummonAssistant.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)</SummonImpactList>
+        </Variables>
+    </Header>
+    <Name href="PaladinIsHere.(BuffResource).Name.txt" />
+    <Description href="PaladinIsHere.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Equipment/Shield/ShieldHeraldic.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                    <data href="PaladinIsGone.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateInGroup" />
+                            </predicates>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                    <delay>4000</delay>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="PaladinIsHere.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+                                    <impacts>
+                                        <Item type="gameMechanics.world.avatar.assistants.ImpactsToAssistant">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                    <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                    <data href="YouInGroup.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                </Item>
+                                            </impacts>
+                                            <assistantResource href="PaladinAssistant.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>5000</tick>
+        </Item>
+    </effects>
+    <duration>900000</duration>
+</gameMechanics.constructor.schemes.buff.BuffResource>

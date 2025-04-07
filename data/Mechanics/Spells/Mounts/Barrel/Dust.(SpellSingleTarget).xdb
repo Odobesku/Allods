@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>204714</resourceId>
+    </Header>
+    <contextActionInfo>
+        <priority>1</priority>
+        <contextName href="Dust.(SpellSingleTarget).ContextName.txt" />
+        <contextDescription href="Dust.(SpellSingleTarget).ContextDescription.txt" />
+        <contextImage href="/Interface/Icons/Mounts/SpellsMounts/MountBarrelDusty.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    </contextActionInfo>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="Dust.(SpellSingleTarget).Name.txt" />
+    <Description href="Dust.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Mounts/SpellsMounts/MountBarrelDusty.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Mount/MountBarrelDusty.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="" />
+    <descTemplate href="" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>300000</duration>
+            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mul>-0.04</mul>
+                <mulCalcer type="gameMechanics.elements.calcers.MountLevelCalcer">
+                    <mount href="/Mechanics/Mounts/6thGrade/Mounts/BarrelBase.(MountResource).xdb#xpointer(/gameMechanics.constructor.schemes.mount.MountResource)" />
+                </mulCalcer>
+                <sum>1</sum>
+            </scaler>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMounted" />
+            <Item type="gameMechanics.elements.predicates.PredicateMountFromGroupFeeded">
+                <group href="/Mechanics/Mounts/Groups/Barrel9Grade.(MountGroupResource).xdb#xpointer(/gameMechanics.constructor.schemes.mount.MountGroupResource)" />
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/Mounts/Prototypes/AntiNormalMountCC.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="DustActive.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/Mounts/Prototypes/AntiNormalMountCC.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

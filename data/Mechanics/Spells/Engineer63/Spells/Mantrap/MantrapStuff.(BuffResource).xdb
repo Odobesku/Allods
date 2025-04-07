@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>216004</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="MantrapStuff.(BuffResource).Name.txt" />
+    <Description href="MantrapStuff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Engineer/EngineerDrill.(UISingleTexture).xdb" />
+    <visScript href="/Spells/VisScripts/Engineer/Mantrap.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                    <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <affectGroup>Enemies</affectGroup>
+                                    <conditions>
+                                        <Item type="gameMechanics.elements.predicates.PredicateHasBuffFromAddressee">
+                                            <buff href="MantrapOnTargetBuff.(BuffResource).xdb" />
+                                            <from type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                        </Item>
+                                    </conditions>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="MantrapOnTargetBuff.(BuffResource).xdb" />
+                                            <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                        </Item>
+                                    </impacts>
+                                    <targetsLimit>1</targetsLimit>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.IncomingHealModifier">
+            <affectsPureHeal>true</affectsPureHeal>
+            <priority>Multiplier</priority>
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-1</coeff>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToSpellFromGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/CrowdControlSpells.xdb" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToBuffs">
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb" />
+                    </groups>
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectAllowNoVisibleTargets" />
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Rotate</Item>
+            </actions>
+            <rooted>true</rooted>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="ManTrapLifetime.(BuffResource).xdb" />
+                            <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AbonentLostWatcher">
+            <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="MantrapStuff01.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.MultiplyStat">
+            <stat type="gameMechanics.elements.stat.StatFullHealth" />
+            <multiplier var="multiplier" />
+        </Item>
+    </effects>
+    <duration>1000</duration>
+    <isHelpful>true</isHelpful>
+    <ranks>
+        <Item href="MantrapStuff01.(BuffResource).xdb" />
+        <Item href="MantrapStuff02.(BuffResource).xdb" />
+        <Item href="MantrapStuff03.(BuffResource).xdb" />
+    </ranks>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/EngineerSpecialDevices.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

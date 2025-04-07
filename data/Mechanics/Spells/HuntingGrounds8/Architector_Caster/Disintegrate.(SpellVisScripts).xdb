@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<actionBarStart type="VisActionList">
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="CreatureAnimationAction">
+				<animations>
+					<Item>readySpellOmni</Item>
+				</animations>
+				<channel>CHANNEL_KNOCKDOWN</channel>
+				<advanced>
+					<speed>0.4</speed>
+					<autoHasten>
+						<mode>AUTOHASTEN_FULLPLAYBACK</mode>
+					</autoHasten>
+					<animationKeysAction>
+						<Item>
+							<action type="CreatureTakeArrowAction">
+								<enchantedArrowIndex>1</enchantedArrowIndex>
+							</action>
+						</Item>
+					</animationKeysAction>
+				</advanced>
+			</Item>
+			<Item type="CreatureEffectsAction">
+				<visualEffects>
+					<Item>
+						<effectFx href="/Spells/FX/Spells/StalkerCheapShot_PreCast.(VisObjectTemplate).xdb" />
+						<locator>Slot_TopFX</locator>
+					</Item>
+				</visualEffects>
+			</Item>
+			<Item type="Sound3DAction">
+				<sound>
+					<project href="/SFX/Spells/Sounds.(FMODProject).xdb" />
+					<name>spells/Stalker/StalkerArrowHit</name>
+				</sound>
+			</Item>
+			<Item type="CreatureEffectsOnTarget">
+				<visualEffects>
+					<Item>
+						<delay>8000</delay>
+						<effectFx href="/Spells/FX/Spells/Items/RPG_Cast.(VisObjectTemplate).xdb" />
+						<scale>0.5</scale>
+						<locator>Slot_TopFX</locator>
+					</Item>
+				</visualEffects>
+			</Item>
+			<Item type="CreatureChannelDirectAction">
+				<channelingFx href="/Spells/FX/Spells/Items/RPG_Channeling.(VisObjectTemplate).xdb" />
+				<startPoint type="VisPointLocator">
+					<locator>Head</locator>
+				</startPoint>
+				<endPoint type="VisPointLocator">
+					<locator>Slot_FX</locator>
+				</endPoint>
+				<fadeInTime>100</fadeInTime>
+				<fadeOutTime>100</fadeOutTime>
+			</Item>
+		</elements>
+	</actionBarStart>
+	<launch type="VisActionList">
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="CreatureAnimationAction">
+				<animations>
+					<Item>spellCastDirected</Item>
+				</animations>
+				<channelOverrideScript />
+			</Item>
+			<Item type="VisActionList">
+				<elements>
+					<Item type="VisActionDelay">
+						<time>300</time>
+					</Item>
+					<Item type="CreatureProjectileAction">
+						<projectileFx href="/Spells/FX/Spells/MageLightningArrowAbility.(VisObjectTemplate).xdb" />
+						<explosionFx href="/Spells/FX/Spells/HitLightning_big_01.(VisObjectTemplate).xdb" />
+						<theGe>3</theGe>
+						<pointOnCaster type="VisPointLocator">
+							<locator>Slot_TopFX</locator>
+						</pointOnCaster>
+						<pointOnTarget type="VisPointLocator">
+							<locator>Slot_Global</locator>
+						</pointOnTarget>
+					</Item>
+				</elements>
+			</Item>
+		</elements>
+	</launch>
+</SpellVisScripts>

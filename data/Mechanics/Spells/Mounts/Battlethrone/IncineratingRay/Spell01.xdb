@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>204534</resourceId>
+    </Header>
+    <contextActionInfo>
+        <priority>1</priority>
+        <contextName href="Spell_Name.txt" />
+        <contextDescription href="Spell_Desc.txt" />
+        <contextImage href="/Interface/Icons/Mounts/SpellsMounts/IncineratingRay.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    </contextActionInfo>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DisabledOnRemort.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <element>FIRE</element>
+    <Name href="Spell_Name.txt" />
+    <Description href="Spell_Desc.txt" />
+    <image href="/Interface/Icons/Mounts/SpellsMounts/IncineratingRay.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Mount/BattleMountTurret_IncineratingRay.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="Spell_Name.txt.template" />
+    <descTemplate href="Spell_Desc.txt.template" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>60</value>
+    </range>
+    <level>1</level>
+    <prepareDuration>0</prepareDuration>
+    <immutablePrepareDuration>false</immutablePrepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <isAggro>true</isAggro>
+    <replaceLowRanks>false</replaceLowRanks>
+    <isWorkOnDead>false</isWorkOnDead>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>true</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>false</ignoreGlobalCooldown>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsMountFed">
+                <mount href="/Mechanics/Mounts/3rdGrade/Mounts/BattleMount.(MountResource).xdb#xpointer(/gameMechanics.constructor.schemes.mount.MountResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateMounted" />
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateCreature" />
+        </targetConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="/Mechanics/Spells/Mounts/Battlethrone/Energize/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                <anyRank>true</anyRank>
+                <consumeStacks>1</consumeStacks>
+            </Item>
+        </casterResources>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.PartiallyScaledMagicDamage">
+                <element>FIRE</element>
+                <threatMultiplier>0</threatMultiplier>
+                <damage>1</damage>
+                <impactsOnHitTarget>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                <allowOverrideCaster>false</allowOverrideCaster>
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impactsOnHitTarget>
+                <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                    <mul>0.03</mul>
+                    <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                        <externalCalcer href="/Mechanics/GameRoot/Mount/MountBaseDamageCalcer.(CalcerFloatResource).xdb#xpointer(/constructor.elements.CalcerFloatResource)" />
+                    </mulCalcer>
+                    <sum>0</sum>
+                </scaler>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>0</speed>
+    <maxTargets>-1</maxTargets>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+    <radius>10</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

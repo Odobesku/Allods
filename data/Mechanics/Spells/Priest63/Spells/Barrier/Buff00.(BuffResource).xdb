@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>207334</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="Spell00.(SpellSingleTarget).Name.txt" />
+    <Description href="Buff00.(BuffResource).Description02.txt" />
+    <image href="/Interface/Icons/Spells/Paladin/PaladinWordsOfLight.(UISingleTexture).xdb" />
+    <visScript href="/Spells/VisScripts/Priest/Barrier.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.DamageThreshold">
+            <healthCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                <calcers>
+                    <Item type="gameMechanics.elements.calcers.FullHealthCalcer" />
+                    <Item type="gameMechanics.elements.calcers.LinearCalcer">
+                        <mul>0.01</mul>
+                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                            <externalCalcer hrefvar="externalCalcer" />
+                        </mulCalcer>
+                        <sum>0</sum>
+                    </Item>
+                </calcers>
+            </healthCalcer>
+            <outOfCombatPolicy>Nothing</outOfCombatPolicy>
+            <ownerDamageFactor type="gameMechanics.elements.calcers.FloatData">
+                <value>0</value>
+            </ownerDamageFactor>
+            <barrierDamageFactor type="gameMechanics.elements.calcers.FloatData">
+                <value>1</value>
+            </barrierDamageFactor>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>5</radius>
+                    <affectGroup>Enemies</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.PureDamage">
+                                    <damage>1</damage>
+                                    <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                        <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer" />
+                                        <additionalMultiplier>
+                                            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                <mul>0.01</mul>
+                                                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                    <externalCalcer hrefvar="externalCalcer" />
+                                                </mulCalcer>
+                                            </scaler>
+                                        </additionalMultiplier>
+                                    </scaler>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                        <filters>
+                            <Item type="gameMechanics.world.creature.AvatarFilter" />
+                            <Item type="gameMechanics.world.creature.AliveFilter" />
+                        </filters>
+                    </filter>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff hrefvar="buff" />
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <duration>6000</duration>
+    <isHelpful>true</isHelpful>
+    <isMultiple>true</isMultiple>
+    <ranks>
+        <Item href="Buff01.(BuffResource).xdb" />
+        <Item href="Buff02.(BuffResource).xdb" />
+    </ranks>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

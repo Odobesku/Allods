@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>193322</resourceId>
+    </Header>
+    <Name href="AI38_LightAoE.(SpellArea).Name.txt" />
+    <visualScripts href="AI38_LightAoE.(SpellVisScripts).xdb" />
+    <mechanics>
+        <cooldown>
+            <duration>6500</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="AI38_FazeLight.(BuffResource).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                        <mobs>
+                            <Item href="/Mechanics/Spells/AstarlIslands/AI38/Packs/AI38_Solo_LightMage.(MobWorld).xdb" />
+                        </mobs>
+                    </Item>
+                </predicates>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                    </Item>
+                </predicates>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="AI38_FireAoE.(BuffResource).xdb" />
+                </predicate>
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                <element>LIGHTNING</element>
+                <damage>25</damage>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/Spells/CommonBuffs/Stun/BuffStun.xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                        <ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="AI38_LightAoE.(BuffResource).xdb" />
+                    </Item>
+                </impacts>
+                <elseImpacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="AI38_LightAoE_Normal.(BuffResource).xdb" />
+                    </Item>
+                </elseImpacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>20</speed>
+    <radius>3</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

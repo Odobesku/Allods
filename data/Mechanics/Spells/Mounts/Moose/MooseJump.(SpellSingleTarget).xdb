@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>204712</resourceId>
+    </Header>
+    <contextActionInfo>
+        <priority>1</priority>
+    </contextActionInfo>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="MooseJump.(SpellSingleTarget).Name.txt" />
+    <Description href="MooseJump.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Mounts/SpellsMounts/HorseAcceleration.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Mount/Drake_Flight.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>2000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMounted" />
+            <Item type="gameMechanics.elements.predicates.PredicateMountFromGroupFeeded">
+                <group href="/Mechanics/Mounts/Groups/Moose9GradePlus.(MountGroupResource).xdb#xpointer(/gameMechanics.constructor.schemes.mount.MountGroupResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="EnergyForMooseJump.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="EnergyForMooseJump.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                <consumeStacks>1</consumeStacks>
+            </Item>
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactAvatarJump">
+                <destination type="gameMechanics.map.destination.DestinationModified">
+                    <destination type="gameMechanics.map.destination.RelativePos">
+                        <faceSourcePos>false</faceSourcePos>
+                    </destination>
+                    <modifiers>
+                        <Item type="gameMechanics.map.destination.modifier.ModifierRelativePolar">
+                            <radius type="gameMechanics.elements.calcers.FloatData">
+                                <value>20</value>
+                            </radius>
+                        </Item>
+                        <Item type="gameMechanics.map.destination.modifier.ModifierIfCheckPath">
+                            <pathChecker type="space.pathfinding.pathChecker.PathDeviationLimited">
+                                <angle>1.57</angle>
+                            </pathChecker>
+                            <modifierElse type="gameMechanics.map.destination.modifier.ModifierTrailFrom" />
+                        </Item>
+                    </modifiers>
+                </destination>
+                <speed>35</speed>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

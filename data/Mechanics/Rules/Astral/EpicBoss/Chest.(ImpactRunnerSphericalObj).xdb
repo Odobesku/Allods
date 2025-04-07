@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.astralTeleports.ImpactRunnerSphericalObj>
+    <Header>
+        <resourceId>230833</resourceId>
+    </Header>
+    <parts>
+        <Item type="VisEntityVisualizer">
+            <visObj href="/Spells/FX/Ships/AstralAnomalyChestSarnFire.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+            <scale>15</scale>
+        </Item>
+        <Item type="AstralHubObjectPart">
+            <name href="Chest_Name.txt" />
+            <description href="Chest_Desc.txt" />
+            <image href="/Interface/Ingame/ContextAstralMap/AstralHubMark/Wreckage.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+        </Item>
+        <Item type="PositionSynchronizer" />
+    </parts>
+    <name href="Chest_Name.txt" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectAstralPerimeterCollision">
+            <radius>50</radius>
+            <impactsIn>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="BuffChestOnShip.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.world.bigAstral.elements.ImpactsOnSectors">
+                    <selector type="gameMechanics.world.bigAstral.elements.StaticSectorSelector">
+                        <sector href="/Mechanics/Astral/SectorEpicBoss/Sector.(AstralSectorResource).xdb#xpointer(/gameMechanics.world.bigAstral.AstralSectorResource)" />
+                    </selector>
+                    <impacts>
+                        <Item type="gameMechanics.world.bigAstral.activities.ImpactRemoveActivity">
+                            <activities>
+                                <Item href="Chest.(AstralActivity).xdb#xpointer(/gameMechanics.world.bigAstral.activities.AstralActivity)" />
+                            </activities>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsIn>
+            <impactsOnSelfIn>
+                <Item type="gameMechanics.world.astralObjectsInteractions.ImpactSwitchAstralObject">
+                    <enabled>false</enabled>
+                </Item>
+            </impactsOnSelfIn>
+            <inPredicates>
+                <Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
+                    <onSlave type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="BlockChestPickUp.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </predicate>
+                    </onSlave>
+                </Item>
+            </inPredicates>
+        </Item>
+    </effects>
+</gameMechanics.world.astralTeleports.ImpactRunnerSphericalObj>

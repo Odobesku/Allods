@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>236736</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="AstralFarmStacks.Prototype.(BuffResource).Name.txt" />
+    <image href="/Interface/Ingame/ContextAstralMap/AstralHubMark/Wreckage.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectStackTrigger">
+            <count>100</count>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.world.ship.elements.ImpactAddChest">
+                            <chestType hrefvar="chestType" />
+                            <casterImpacts>
+                                <Item type="gameMechanics.elements.impacts.SendImpactsToAddressees">
+                                    <addresseesFinder type="gameMechanics.elements.addresseeFinders.AddressesCalcerOnlineShipBounds" />
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                            <data href="/Mechanics/Astral/AstralFarm/TotalChests.(ClientData).xdb" />
+                                            <calcers>
+                                                <longEntries>
+                                                    <Item>
+                                                        <name>Count</name>
+                                                        <calcer type="gameMechanics.elements.calcers.FloatToLongCalcer">
+                                                            <calcer type="gameMechanics.elements.calcers.CalcerMax">
+                                                                <calcers>
+                                                                    <Item type="gameMechanics.elements.calcers.FloatData">
+                                                                        <value>0</value>
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.elements.calcers.LongToFloatCalcer">
+                                                                        <calcer type="gameMechanics.elements.calcers.CalcerLongSum">
+                                                                            <calcers>
+                                                                                <Item type="gameMechanics.world.ship.elements.calcers.CalcerTreasureFreeSpace" />
+                                                                                <Item type="gameMechanics.elements.calcers.LongData">
+                                                                                    <value>-1</value>
+                                                                                </Item>
+                                                                            </calcers>
+                                                                        </calcer>
+                                                                    </Item>
+                                                                </calcers>
+                                                            </calcer>
+                                                        </calcer>
+                                                    </Item>
+                                                </longEntries>
+                                            </calcers>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </casterImpacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.StackBuff">
+                            <buff hrefvar="selfbuff" />
+                            <delta type="gameMechanics.elements.calcers.FloatData">
+                                <value>-100</value>
+                            </delta>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff hrefvar="buff1" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff hrefvar="buff2" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff hrefvar="buff3" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff hrefvar="buff4" />
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+    <stackLimit>1000</stackLimit>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

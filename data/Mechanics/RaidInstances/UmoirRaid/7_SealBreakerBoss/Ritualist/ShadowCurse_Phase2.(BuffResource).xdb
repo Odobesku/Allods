@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>225088</resourceId>
+    </Header>
+    <Name href="ShadowCurse_Phase2.(BuffResource).Name.txt" />
+    <Description href="ShadowCurse_Phase2.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Necromancer/NecromancerDarkPower.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/PocketSpellAstral01.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+            <scale>2</scale>
+            <locator>Slot_FX</locator>
+        </Item>
+    </visualEffects>
+    <interfaceHighPriority>true</interfaceHighPriority>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="/Mechanics/RaidInstances/AstralExplosion.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>7</radius>
+                    <affectGroup>Enemies</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                            <element>SHADOW</element>
+                            <damage>8</damage>
+                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.world.creature.AvatarFilter" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                    <object href="Shadow.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="ShadowCurse_Phase2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </onLeave>
+        </Item>
+    </effects>
+    <duration>5000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/RaidInstances/UmoirRaid/UmoirRaid.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

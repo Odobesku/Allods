@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.mount.MountResource>
+    <Header>
+        <resourceId>210577</resourceId>
+        <Prototype href="/Mechanics/Spells/Events/BMWarAllStars/BattleMountApril_Proto.(MountResource).xdb#xpointer(/gameMechanics.constructor.schemes.mount.MountResource)" />
+        <Variables>
+            <basicSkin>BaseSkin.(MountSkin).xdb#xpointer(/gameMechanics.constructor.schemes.mount.MountSkin)</basicSkin>
+        </Variables>
+    </Header>
+    <Name href="BMWarAllStarsManaBike.(MountResource).Name.txt" />
+    <contextActions>
+        <Item href="Energize.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        <Item href="BlazingTrail.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        <Item href="Pulse.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+    </contextActions>
+    <ridingEffects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Immunity.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="TechAcceleration.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="TechAcceleration.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="Immunity.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    <durationScaler type="gameMechanics.elements.scalers.ScalerBuff">
+                                        <buff href="TechAcceleration.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        <summand>0</summand>
+                                    </durationScaler>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSwimTrigger">
+            <impactsOnStartSwim>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="SwimTrigger.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="DistanceMeasure.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="AngleMeasure.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Acceleration.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="TechAcceleration.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOnStartSwim>
+            <impactsOnStopSwim>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="SwimTrigger.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOnStopSwim>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="SwimTrigger.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="DistanceMeasure.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="AngleMeasure.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Acceleration.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="TechAcceleration.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impacts>
+            <tick>600</tick>
+            <initialDelay>600</initialDelay>
+        </Item>
+        <Item type="gameMechanics.constructor.basicElements.EffectList">
+            <effectsResource href="/Mechanics/GameRoot/Mount/SpellsDismount.(EffectListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.EffectListResource)" />
+        </Item>
+    </ridingEffects>
+    <alternativeSkins href="BMWarManaBikeSkins.(SkinListResource).xdb#xpointer(/gameMechanics.constructor.schemes.mount.SkinListResource)" />
+    <ignoreWater>true</ignoreWater>
+    <corpulence>2.2</corpulence>
+</gameMechanics.constructor.schemes.mount.MountResource>

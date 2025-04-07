@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>192384</resourceId>
+    </Header>
+    <Name href="AI68_ChannelingRay.(BuffResource).Name.txt" />
+    <needVisualize>false</needVisualize>
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <effects>
+        <Item type="gameMechanics.elements.effects.triggerLine.EffectTriggerLine">
+            <impactsIn>
+                <impactsFromCaster>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                <mobs>
+                                    <Item href="AI68_Boss_Toad_Necromancer.(MobWorld).xdb" />
+                                </mobs>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                <impacts>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="AI68_RayCancel.(BuffResource).xdb" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impactsIf>
+                        <impactsElse>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                            </Item>
+                                        </predicates>
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="LineDamage.(BuffResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                        <data href="LineHitBoss3.(ClientData).xdb" />
+                                    </Item>
+                                </impactsIf>
+                            </Item>
+                        </impactsElse>
+                    </Item>
+                </impactsFromCaster>
+            </impactsIn>
+            <impactsOut>
+                <impactsFromCaster>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="LineDamage.(BuffResource).xdb" />
+                    </Item>
+                </impactsFromCaster>
+            </impactsOut>
+            <minLength>1</minLength>
+            <maxLength>85</maxLength>
+            <reconnect>true</reconnect>
+            <width>2</width>
+            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                <mobs>
+                                    <Item href="AI68_Boss_Toad_Necromancer.(MobWorld).xdb" />
+                                </mobs>
+                            </Item>
+                        </predicates>
+                    </Item>
+                </predicates>
+            </filter>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="StackDamage.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+            <initialDelay>1000</initialDelay>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <isAE>true</isAE>
+</gameMechanics.constructor.schemes.buff.BuffResource>

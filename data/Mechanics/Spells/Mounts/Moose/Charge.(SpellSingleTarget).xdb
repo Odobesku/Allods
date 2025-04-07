@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>204710</resourceId>
+    </Header>
+    <contextActionInfo>
+        <priority>2</priority>
+        <contextName href="Charge.(SpellSingleTarget).ContextName.txt" />
+        <contextDescription href="Charge.(SpellSingleTarget).ContextDescription.txt" />
+        <contextImage href="/Interface/Icons/Mounts/SpellsMounts/MountMooseSpurtStun.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    </contextActionInfo>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/MountSpeedBoosts.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="Charge.(SpellSingleTarget).Name.txt" />
+    <Description href="Charge.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Mounts/SpellsMounts/MountMooseSpurtStun.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <minRange type="gameMechanics.elements.calcers.FloatData">
+        <value>4</value>
+    </minRange>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>300000</duration>
+            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mul>-0.04</mul>
+                <mulCalcer type="gameMechanics.elements.calcers.CalcerMountFromGroupMaxLevel">
+                    <group href="/Mechanics/Mounts/Groups/Moose9Grade.(MountGroupResource).xdb#xpointer(/gameMechanics.constructor.schemes.mount.MountGroupResource)" />
+                </mulCalcer>
+                <sum>1</sum>
+            </scaler>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMounted" />
+            <Item type="gameMechanics.elements.predicates.PredicateMountFromGroupFeeded">
+                <group href="/Mechanics/Mounts/Groups/Moose9Grade.(MountGroupResource).xdb#xpointer(/gameMechanics.constructor.schemes.mount.MountGroupResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateRemote">
+                <range>4</range>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/Mounts/Prototypes/AntiNormalMountCC.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="Charge.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

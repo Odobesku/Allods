@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>207626</resourceId>
+    </Header>
+    <name href="Ability.(AbilityResource).Name.txt" />
+    <description href="Ability.(AbilityResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Mage/MageClairvoyance.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectVariable">
+            <resource href="IceVar.(VariableResource).xdb" />
+            <impactsOnChange>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceVariable">
+                            <variable href="IceVar.(VariableResource).xdb" />
+                            <sub>3</sub>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="IceVisual.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsElse>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="IceVisual.(BuffResource).xdb" />
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="IceVisual.(BuffResource).xdb" />
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsOnChange>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectVariable">
+            <resource href="FireVar.(VariableResource).xdb" />
+            <impactsOnChange>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceVariable">
+                            <variable href="FireVar.(VariableResource).xdb" />
+                            <sub>3</sub>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="FireVisual.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsElse>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="FireVisual.(BuffResource).xdb" />
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="FireVisual.(BuffResource).xdb" />
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsOnChange>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectVariable">
+            <resource href="LightningVar.(VariableResource).xdb" />
+            <impactsOnChange>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceVariable">
+                            <variable href="LightningVar.(VariableResource).xdb" />
+                            <sub>3</sub>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="LightningVisual.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsElse>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="LightningVisual.(BuffResource).xdb" />
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="LightningVisual.(BuffResource).xdb" />
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsOnChange>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                            <delay>5000</delay>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                                            <variable href="IceVar.(VariableResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                                            <variable href="LightningVar.(VariableResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                                            <variable href="FireVar.(VariableResource).xdb" />
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ReviveTrigger">
+            <impactsOnRevive>
+                <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                    <variable href="IceVar.(VariableResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                    <variable href="LightningVar.(VariableResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                    <variable href="FireVar.(VariableResource).xdb" />
+                </Item>
+            </impactsOnRevive>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                    <variable href="IceVar.(VariableResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                    <variable href="LightningVar.(VariableResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                    <variable href="FireVar.(VariableResource).xdb" />
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+    <majorEffect>0</majorEffect>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

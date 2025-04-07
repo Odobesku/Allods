@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>238233</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value var="value" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>FormulaPercent</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Misc/Crafting/NoProperty.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <nameTemplate href="Ability_Name.txt.template" />
+    <descTemplate href="Ability_Desc.txt.template" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.BuffExtraEffects">
+            <buffs>
+                <Item href="/Mechanics/Spells/DruidV2/EntanglingRoots/Buff01.xdb" />
+                <Item href="/Mechanics/Spells/DruidV2/EntanglingRoots/Buff02.xdb" />
+            </buffs>
+            <effects>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="CanBeRooted.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                                    <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                                        <value var="value" />
+                                    </chanceCalcer>
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Mechanics/Spells/CommonBuffs/Root/Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                <multiplier>2</multiplier>
+                                            </durationScaler>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="CanBeRooted.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="CanBeRooted.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsOn>
+                    <impactsOff>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="CanBeRooted.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsOff>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <ranks>
+        <Item href="Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+        <Item href="Ability02.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+    </ranks>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

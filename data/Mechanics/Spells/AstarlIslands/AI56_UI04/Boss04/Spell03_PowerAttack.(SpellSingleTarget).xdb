@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>184113</resourceId>
+    </Header>
+    <element>ASTRAL</element>
+    <Name href="Spell03_PowerAttack.(SpellSingleTarget).Name.txt" />
+    <image href="/Interface/Icons/Spells/Warrior/WarriorPowerAttackUpgrade.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Warrior/PowerAttack.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>3000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/Spells/AstarlIslands/AI56_UI04/AETrash01/Buff04_InDarkness.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                <element>ASTRAL</element>
+                <damage>20</damage>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="Buff01_VampiricDebuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.PureHeal">
+                                <heal>1</heal>
+                                <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                        <multiplier>0.05</multiplier>
+                                    </mulCalcer>
+                                </scalerTarget>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsIf>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>30</speed>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

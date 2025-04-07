@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>221696</resourceId>
+    </Header>
+    <Name href="RepairPartsContextActionSpell.(SpellSingleTarget).Name.txt" />
+    <Description href="RepairPartsContextActionSpell.(SpellSingleTarget).Description.txt" />
+    <visualScripts href="RepairPartsContextActionSpell.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>5</value>
+    </range>
+    <targetType>STTPoint</targetType>
+    <iffPolicy>Everyone</iffPolicy>
+    <mechanics>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                <mobs>
+                    <Item href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/AllyTurret/AllyTurret.(MobWorld).xdb" />
+                </mobs>
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+                        <level>1</level>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                <buff href="RepairPartsContextActionBuff.(BuffResource).xdb" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.DirectHeal">
+                        <heal>1</heal>
+                        <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                <multiplier>0.75</multiplier>
+                            </mulCalcer>
+                        </scalerTarget>
+                    </Item>
+                </impactsIf>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <radius>4</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

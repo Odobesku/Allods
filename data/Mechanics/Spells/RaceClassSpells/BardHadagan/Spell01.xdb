@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>196774</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MeleeAttacks.xdb" />
+        <Item href="/Mechanics/Spells/Groups/RaceClassSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/InsuranceTrigger.xdb" />
+    </groups>
+    <element>PHYSICAL</element>
+    <Name href="Spell_Name.txt" />
+    <Description href="Spell_Desc.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value>21.44</value>
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>WeaponScalerMin</formula>
+            </scaler>
+        </Item>
+        <Item>
+            <name>var1</name>
+            <value>21.44</value>
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>WeaponScalerMax</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Paladin/PaladinSacrifice.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Warrior/SilentBlow.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <level>1</level>
+    <prepareDuration>0</prepareDuration>
+    <targetType>STTCurrentTarget</targetType>
+    <iffPolicy>Enemies</iffPolicy>
+    <launchWhenReady>true</launchWhenReady>
+    <mechanics>
+        <cooldown>
+            <stage>Launch</stage>
+            <duration>60000</duration>
+            <group href="/Mechanics/Spells/Groups/RaceClassSpells.xdb" />
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateUsesWeapon" />
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                <spell href="/Mechanics/Spells/RaceClassSpells/BardKania/Spell01.xdb" />
+                <duration>120000</duration>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ScaledPhysicalWeaponDamage">
+                        <impactsOnHitTarget>
+                            <Item type="gameMechanics.elements.impacts.DoubleAttackIsolator">
+                                <impacts>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/SilenceDisarm/SilenceDisarm.(BuffResource).xdb" />
+                                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                            <multiplier>6</multiplier>
+                                        </durationScaler>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impactsOnHitTarget>
+                        <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                            <scalers>
+                                <Item type="gameMechanics.elements.scalers.PowerDPSScaler" />
+                                <Item type="gameMechanics.elements.scalers.WeaponDpsScaler" />
+                            </scalers>
+                        </scaler>
+                        <avgDamage>21.44</avgDamage>
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>0</speed>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

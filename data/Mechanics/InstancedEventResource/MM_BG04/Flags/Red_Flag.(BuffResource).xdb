@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>241943</resourceId>
+    </Header>
+    <Name href="Red_Flag.(BuffResource).Name.txt" />
+    <Description href="Red_Flag.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Equipment/Cloth/TabardRedSash.(UISingleTexture).xdb" />
+    <visualEffects>
+        <Item>
+            <effectFx href="Red_Flag.(VisObjectTemplate).xdb" />
+            <lockScale>true</lockScale>
+            <scale>0.18</scale>
+        </Item>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/BG04_Decal_Red.(VisObjectTemplate).xdb" />
+            <effectAlias href="" />
+            <offendTime />
+        </Item>
+    </visualEffects>
+    <visScript href="Red_Flag.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectInZoneTracker">
+            <buff href="Red_Flag.(BuffResource).xdb" />
+            <activeZone href="/Maps/Domination04/Zones/Domination04/Domination.(ZoneResource).xdb" />
+            <trackData href="RedFlag.(TrackDataResource).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                    <impactsResource href="/Mechanics/Mounts/Prototypes/ExoAntiDismount.(ImpactListResource).xdb" />
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                    <destination type="gameMechanics.map.destination.DestinationModified">
+                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                        <modifiers>
+                            <Item type="gameMechanics.map.destination.modifier.ModifierTraceNear" />
+                        </modifiers>
+                    </destination>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                    <impactsResource href="Flag_Return_To_Center_Red.(ImpactListResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                    <delay>5000</delay>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/Abilities/GurluhsorTower/Boss8_2Bifurcation/InvisPlane.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactSetFaction">
+                            <faction href="/Mechanics/InstancedEventResource/MM_BG04/Mobs/RedBoots.(Faction).xdb" />
+                        </Item>
+                    </impacts>
+                    <traceDown>true</traceDown>
+                    <object href="/Mechanics/InstancedEventResource/MM_BG04/Mobs/Warrior/Warrior.(MobWorld).xdb" />
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectHandleLeaveMission">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Red_Flag.(BuffResource).xdb" />
+                    <anyRank>false</anyRank>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <affectHolder>false</affectHolder>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                <ability href="/Mechanics/InstancedEventResource/MM_BG04/Mobs/AIEffect.(AbilityResource).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.battleground.map.PredicateBattleMemberMark">
+                                <mark href="/Maps/Domination04/Marks/BlueMark.(BattlegroundPlayerSpawnPlace).xdb" />
+                            </Item>
+                        </predicates>
+                    </filter>
+                    <targetsLimit>3</targetsLimit>
+                </Item>
+            </impacts>
+            <tick>25000</tick>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffInterceptor">
+            <impactsOnAttach>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>500</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                            <data href="CantMount.(ClientData).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOnAttach>
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.PredicateBuffEquals">
+                    <buff href="/Mechanics/GameRoot/Mount/MountBuff.xdb" />
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffInterceptor">
+            <impactsOnAttach>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/Burden_Passenger.(BuffResource).xdb" />
+                </Item>
+            </impactsOnAttach>
+            <forceAttachBuff>false</forceAttachBuff>
+            <repelChanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                <value>1</value>
+            </repelChanceCalcer>
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.PredicateBuffEquals">
+                    <buff href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/Burden_Passenger.(BuffResource).xdb" />
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DisableSpellsPredicate">
+            <predicate type="gameMechanics.elements.predicates.PredicateIsMountAction" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/TeleportationSpells.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectMapWideReplicated" />
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/Shroud.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.15</coeff>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffInterceptor">
+            <impactsOnAttach>
+                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                    <group href="/Mechanics/Spells/Groups/TeleportationSpells.xdb" />
+                </Item>
+            </impactsOnAttach>
+            <forceAttachBuff>false</forceAttachBuff>
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/TeleportationSpells.xdb" />
+                    </groups>
+                </Item>
+            </predicates>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/Dismount.xdb" />
+        <Item href="/Mechanics/Spells/Groups/CantBeChopperPassenger.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

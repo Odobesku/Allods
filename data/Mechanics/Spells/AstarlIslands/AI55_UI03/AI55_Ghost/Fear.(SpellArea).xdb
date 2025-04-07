@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>186192</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Fears.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="Fear.(SpellArea).Name.txt" />
+    <nameTemplate href="Fear.(SpellArea)_Name.txt.template" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>5</value>
+    </range>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>600000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+                <level>0.2</level>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                        <radius>15</radius>
+                        <affectGroup>Enemies</affectGroup>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                                <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                                    <value>0.666667</value>
+                                </chanceCalcer>
+                                <impacts>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="/Mechanics/Spells/AstarlIslands/AI22/FishBoss/Fear.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        <durationScaler type="gameMechanics.elements.scalers.RandomScaler">
+                                            <range>
+                                                <min>1</min>
+                                                <max>3</max>
+                                            </range>
+                                        </durationScaler>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impacts>
+                        <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </predicates>
+                                </Item>
+                            </predicates>
+                        </filter>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <radius>0</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

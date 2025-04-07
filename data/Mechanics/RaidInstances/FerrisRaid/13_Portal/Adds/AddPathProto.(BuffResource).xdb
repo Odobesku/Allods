@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>222298</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                    <projectileData>
+                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                            <destination type="gameMechanics.map.destination.DestinationLocator">
+                                <locator>
+                                    <scriptID var="TeleportLocator" />
+                                    <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                </locator>
+                            </destination>
+                        </moveType>
+                        <resource href="TeleportFX.(ProjectileResource).xdb" />
+                    </projectileData>
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="StartImmunity.(BuffResource).xdb" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                            <destination type="gameMechanics.map.destination.DestinationLocator">
+                                <locator>
+                                    <scriptID var="TeleportLocator" />
+                                    <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                </locator>
+                            </destination>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                            <mobs>
+                                                <Item href="CannonArchitect/CannonArchitect.(MobWorld).xdb" />
+                                            </mobs>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                    </predicates>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                                                    <value>1</value>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsOn>
+                    <impactsOff>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                                            <value>1</value>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                                    <value>10</value>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                        </predicates>
+                                    </filter>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <radius>25</radius>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                                    <value>100</value>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                        </predicates>
+                                    </filter>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsOff>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <isClientReplicated>false</isClientReplicated>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+        <Item href="/Mechanics/RaidInstances/Phase1.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

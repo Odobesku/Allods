@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>216136</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="Charge.(SpellSingleTarget).Name.txt" />
+    <Description href="Buff0.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Warrior/WarriorCharge.(UISingleTexture).xdb" />
+    <visScript href="/Spells/VisScripts/Warrior/Charge.(BuffVisScripts).xdb" />
+    <interfaceHighPriority>true</interfaceHighPriority>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Charge">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ScaledPhysicalWeaponDamage">
+                            <impactsOnHitTarget>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/Spells/CommonBuffs/Root/Buff.(BuffResource).xdb" />
+                                    <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                        <mulCalcer type="gameMechanics.elements.calcers.FloatData">
+                                            <value>1.5</value>
+                                        </mulCalcer>
+                                    </durationScaler>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="/Spells/ClientData/Charge.(ClientData).xdb" />
+                                </Item>
+                            </impactsOnHitTarget>
+                            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                                <scalers>
+                                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                            <externalCalcer hrefvar="externalCalcer" />
+                                        </mulCalcer>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.scalers.PowerDPSScaler" />
+                                    <Item type="gameMechanics.elements.scalers.WeaponDpsScaler" />
+                                </scalers>
+                            </scaler>
+                            <avgDamage>1</avgDamage>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <buff hrefvar="buff" />
+            <speedFactor>3</speedFactor>
+            <predicate type="gameMechanics.elements.predicates.PredicateReachTarget" />
+            <pathChecker type="space.pathfinding.pathChecker.PathDeviationLimited">
+                <angle>0.5236</angle>
+            </pathChecker>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToSpellFromGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/MovementImpairingSpells.xdb" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToBuffs">
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/MovementImpairingSpells.xdb" />
+                    </groups>
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffInterceptor">
+            <impactsOnAttach>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff hrefvar="buff" />
+                    <anyRank>false</anyRank>
+                </Item>
+            </impactsOnAttach>
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs_IgnoreWill.(ActionGroup).xdb" />
+                    </groups>
+                </Item>
+                <Item type="gameMechanics.constructor.basicElements.PredicateGenericNot">
+                    <predicate type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                        <groups>
+                            <Item href="/Mechanics/Spells/Groups/Silence.xdb" />
+                        </groups>
+                    </predicate>
+                </Item>
+            </predicates>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <ranks>
+        <Item href="Buff01.(BuffResource).xdb" />
+        <Item href="Buff02.(BuffResource).xdb" />
+        <Item href="Buff03.(BuffResource).xdb" />
+    </ranks>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>202824</resourceId>
+    </Header>
+    <Name href="Driller_Charge.(BuffResource).Name.txt" />
+    <Description href="Driller_Charge.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Engineer/EngineerDrill.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="/Mechanics/Spells/AstarlIslands/UI03/PlotMain/Boss/RamStrikeCharge.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>1.25</coeff>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectForceMove">
+            <destinations>
+                <Item type="gameMechanics.elements.calcers.DestinationSpellTargetThrust">
+                    <maxDist>2</maxDist>
+                </Item>
+            </destinations>
+            <impactsOnArrived>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="Driller_CheckBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                        <multiplier>2</multiplier>
+                    </durationScaler>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Driller_Charge.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOnArrived>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Rotate</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.TickableAura">
+            <tick>1000</tick>
+            <affectGroup>Enemies</affectGroup>
+            <radius>5</radius>
+            <filter type="gameMechanics.constructor.basicElements.FilterOr">
+                <filters>
+                    <Item type="gameMechanics.world.creature.AvatarFilter">
+                        <withPet>true</withPet>
+                    </Item>
+                    <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </predicates>
+                    </Item>
+                </filters>
+            </filter>
+            <impactsIn>
+                <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                    <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                    <minDamage>25</minDamage>
+                    <maxDamage>25</maxDamage>
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/Spells/AstarlIslands/UI03/PlotMain/Boss/Bleeding.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsIn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        </Item>
+    </effects>
+    <duration>2000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

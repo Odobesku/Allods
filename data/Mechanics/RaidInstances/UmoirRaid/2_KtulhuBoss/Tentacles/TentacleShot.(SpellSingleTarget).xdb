@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>225594</resourceId>
+    </Header>
+    <Name href="TentacleShot.(SpellSingleTarget).Name.txt" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>50</value>
+    </range>
+    <prepareDuration>3000</prepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <isAggro>false</isAggro>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor">
+                    <radius>50</radius>
+                </distributor>
+                <data href="/Spells/ClientData/HitAstral.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                <spawn>
+                    <scriptID>Ship</scriptID>
+                    <map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                </spawn>
+                <onBehalfOfTarget>true</onBehalfOfTarget>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.PureDamage">
+                        <damage>1</damage>
+                        <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                <multiplier>0.001</multiplier>
+                            </mulCalcer>
+                        </scalerTarget>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                <radius>4</radius>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                        <element>ASTRAL</element>
+                        <damage>8</damage>
+                        <impactsOnHitTarget>
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor">
+                                    <radius>50</radius>
+                                </distributor>
+                                <data href="/Spells/ClientData/HitAstral.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                            </Item>
+                        </impactsOnHitTarget>
+                        <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                    </Item>
+                </impacts>
+                <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                    <filters>
+                        <Item type="gameMechanics.world.creature.AliveFilter" />
+                        <Item type="gameMechanics.world.creature.AvatarFilter" />
+                    </filters>
+                </filter>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <isAE>true</isAE>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

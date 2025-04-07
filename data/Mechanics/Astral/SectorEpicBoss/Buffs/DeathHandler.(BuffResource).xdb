@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>234865</resourceId>
+    </Header>
+    <Name href="DeathHandler.txt" />
+    <Description href="DeathHandler.Description.txt" />
+    <image href="/Interface/Icons/Misc/AstralShip.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <nameTemplate href="DeathHandler.txt" />
+    <descTemplate href="DeathHandler.Description.txt" />
+    <effects>
+        <Item type="gameMechanics.world.ship.elements.effects.EffectShipDieHard">
+            <impactsOnAttach>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/Ships/ShipDieHard.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/Ships/ShipDamageSuppressor.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                        <multiplier>2</multiplier>
+                    </durationScaler>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferredGeneric">
+                    <delay>5500</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                    <buff href="EpicBossDeathCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    <range>
+                                        <max>2</max>
+                                    </range>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.world.ship.elements.ImpactEmergencyTeleport">
+                                    <hubCalcer type="gameMechanics.elements.calcers.CalcerLongMulFloat">
+                                        <calcerLong type="gameMechanics.elements.calcers.LongData">
+                                            <value>1</value>
+                                        </calcerLong>
+                                        <calcerFloat type="gameMechanics.constructor.basicElements.ScalerCalcer">
+                                            <scaler type="gameMechanics.elements.scalers.RandomScaler">
+                                                <range>
+                                                    <min>1</min>
+                                                    <max>4</max>
+                                                </range>
+                                            </scaler>
+                                            <value>1</value>
+                                        </calcerFloat>
+                                    </hubCalcer>
+                                    <impactsOnArrive>
+                                        <Item type="gameMechanics.world.ship.elements.ImpactCoolReactor" />
+                                        <Item type="gameMechanics.world.ship.elements.ImpactSetSpeed">
+                                            <speedMod>0</speedMod>
+                                        </Item>
+                                        <Item type="gameMechanics.world.ship.elements.ImpactRudderTurn">
+                                            <omegaMod>0</omegaMod>
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="ShipRepair.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                            <impactsResource href="/Mechanics/Ships/ShipDieHard_AfterTeleportFX.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                                        </Item>
+                                    </impactsOnArrive>
+                                    <posCalcer type="gameMechanics.map.astral.RandomHubPosCalcer" />
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.world.ship.elements.ImpactReturnShipToSavedPos" />
+                                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                    <impacts>
+                                        <Item type="gameMechanics.world.ship.elements.ImpactCoolReactor" />
+                                        <Item type="gameMechanics.world.ship.elements.ImpactSetSpeed">
+                                            <speedMod>0</speedMod>
+                                        </Item>
+                                        <Item type="gameMechanics.world.ship.elements.ImpactRudderTurn">
+                                            <omegaMod>0</omegaMod>
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="ShipRepair.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                            <impactsResource href="/Mechanics/Ships/ShipDieHard_AfterTeleportFX.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsRuleActive">
+                            <rule href="/Mechanics/Rules/Astral/EpicBoss/Wormholes.(RuleResource).xdb#xpointer(/gameMechanics.world.rules.RuleResource)" />
+                        </Item>
+                    </predicates>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                    <buff href="ShipSlayer.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    <range>
+                                        <min>2</min>
+                                        <max>100</max>
+                                    </range>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.StackBuff">
+                                    <buff href="ShipSlayer.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    <resetTimer>false</resetTimer>
+                                    <anyRank>false</anyRank>
+                                    <delta type="gameMechanics.elements.calcers.FloatData">
+                                        <value>-2</value>
+                                    </delta>
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="EpicBossDeathCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsOnAttach>
+            <impactsToKiller>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsRuleActive">
+                            <rule href="/Mechanics/Rules/Astral/EpicBoss/Wormholes.(RuleResource).xdb#xpointer(/gameMechanics.world.rules.RuleResource)" />
+                        </Item>
+                    </predicates>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactsIf">
+                            <predicate type="gameMechanics.constructor.basicElements.BinaryPredicateAnd">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateNotMaster" />
+                                </predicates>
+                            </predicate>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.world.ship.elements.PredicateIsShip" />
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="ShipSlayer.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsToKiller>
+            <priority>-10</priority>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferredGeneric">
+                    <delay>0</delay>
+                    <impacts>
+                        <Item type="gameMechanics.world.ship.elements.ImpactScanAllHubs" />
+                    </impacts>
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

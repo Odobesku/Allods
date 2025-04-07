@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>230830</resourceId>
+    </Header>
+    <Name href="BuffChestOnShip.txt" />
+    <Description href="BuffChestOnShip.Description.txt" />
+    <image href="/Interface/Icons/Misc/Chests/ChestMeteorite.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <sysUIScriptName>AstralChest</sysUIScriptName>
+    <nameTemplate href="BuffChestOnShip.txt" />
+    <descTemplate href="BuffChestOnShip.Description.txt" />
+    <effects>
+        <Item type="gameMechanics.world.ship.elements.EffectBlockIslands" />
+        <Item type="gameMechanics.world.ship.elements.EffectBlockAstrolabe">
+            <reason href="AstrolabeBlockedClientData.xdb#xpointer(/gameMechanics.world.ClientData)" />
+        </Item>
+        <Item type="gameMechanics.world.ship.elements.EffectTracker">
+            <poi>
+                <mapPoi href="ShipWithChest.(AstralMapPOI).xdb#xpointer(/gameMechanics.world.bigAstral.AstralMapPOI)" />
+                <scanerPoi href="ShipWithChest.(ScanerPOI).xdb#xpointer(/gameMechanics.world.bigAstral.ScanerPOI)" />
+                <global>true</global>
+            </poi>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectShipDieHardTrigger">
+            <toKillerImpacts>
+                <Item type="gameMechanics.elements.impacts.ImpactsIfGeneric">
+                    <predicate type="gameMechanics.constructor.basicElements.BinaryPredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateNotMaster" />
+                            <Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
+                                <onSlave type="gameMechanics.world.ship.elements.PredicateIsShip" />
+                            </Item>
+                        </predicates>
+                    </predicate>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="BuffChestOnShip.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                    <impactsResource href="ChestRespawnInSector.(ImpactListGenericResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </toKillerImpacts>
+            <toVictimImpacts>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="BuffChestOnShip.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </toVictimImpacts>
+            <toVictimWoKillerImpacts>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                            <impactsResource href="ChestRespawnInSector.(ImpactListGenericResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </toVictimWoKillerImpacts>
+        </Item>
+        <Item type="gameMechanics.world.ship.elements.effects.EffectShipSpeedModifier">
+            <modifier>0.66</modifier>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.AstralSectorDistributor">
+                        <sector type="gameMechanics.world.bigAstral.elements.CurrentSectorSelector" />
+                        <faction type="gameMechanics.elements.calcers.ZoneDistributor$AnyFaction" />
+                    </distributor>
+                    <data href="RewardReceived.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactSummonGeneric">
+                    <destination type="gameMechanics.map.destination.AbsolutePos">
+                        <coord x="0" y="1000" z="0" />
+                    </destination>
+                    <object href="/Mechanics/Astral/SectorEpicBoss/StaticHub/WormholeObject.(ImpactRunnerSphericalObj).xdb#xpointer(/gameMechanics.world.astralTeleports.ImpactRunnerSphericalObj)" />
+                </Item>
+                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                    <impactsResource href="DropShipLoot.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSectorChangedTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="BuffChestOnShip.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                            <impactsResource href="ChestRespawnInSector.(ImpactListGenericResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.world.ship.elements.EffectImpactsOnDeath">
+            <impactsOnKiller>
+                <Item type="gameMechanics.elements.impacts.ImpactsIfGeneric">
+                    <predicate type="gameMechanics.constructor.basicElements.BinaryPredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateNotMaster" />
+                            <Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
+                                <onSlave type="gameMechanics.world.ship.elements.PredicateIsShip" />
+                            </Item>
+                        </predicates>
+                    </predicate>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="BuffChestOnShip.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                    <impactsResource href="ChestRespawnInSector.(ImpactListGenericResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsOnKiller>
+            <impactsOnVictimWoKiller>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                            <impactsResource href="ChestRespawnInSector.(ImpactListGenericResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOnVictimWoKiller>
+            <impactsOnVictim>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="BuffChestOnShip.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOnVictim>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectShipDespawnTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                            <impactsResource href="ChestRespawnInSector.(ImpactListGenericResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectMapWideReplicated" />
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="BlockChestPickUp.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+    <duration>600000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/AstralShipInterhubTravelBlockers.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroupElement)" />
+        <Item href="/Mechanics/Ships/Reactor/BlockSelfDestruct.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

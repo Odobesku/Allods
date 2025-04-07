@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>222536</resourceId>
+    </Header>
+    <Name href="Spell_ContextAction_ThrowFood.(SpellSingleTarget).Name.txt" />
+    <Description href="Spell_ContextAction_ThrowFood.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Misc/Food/PancakesUpgrade.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Bosses/SnowFolkChief/Spell_ContextAction_ThrowFood.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>20</value>
+    </range>
+    <needLos>false</needLos>
+    <isAggro>false</isAggro>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>1000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                <mobs>
+                    <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChieftainBoss/ChieftainBoss.(MobWorld).xdb" />
+                </mobs>
+            </Item>
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                <buff href="Buff_FoodCarrier.(BuffResource).xdb" />
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                        <buff href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChieftainBoss/AnnihilatingStomps/AnnihilatingStompsChannel.(BuffResource).xdb" />
+                        <range>
+                            <min>1</min>
+                            <max>1</max>
+                        </range>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.StackBuff">
+                        <buff href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChieftainBoss/AnnihilatingStomps/AnnihilatingStompsChannel.(BuffResource).xdb" />
+                        <resetTimer>false</resetTimer>
+                        <delta type="gameMechanics.elements.calcers.FloatData">
+                            <value>-1</value>
+                        </delta>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChieftainBoss/AnnihilatingStomps/AnnihilatingStompsChannelAmplification.(BuffResource).xdb" />
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.StackBuff">
+                        <buff href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChieftainBoss/AnnihilatingStomps/AnnihilatingStompsChannel.(BuffResource).xdb" />
+                        <resetTimer>false</resetTimer>
+                        <delta type="gameMechanics.elements.calcers.FloatData">
+                            <value>-1</value>
+                        </delta>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>30</speed>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

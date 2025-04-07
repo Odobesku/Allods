@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>186372</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss02/Necro.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="Boss02/DemonAlive.(BuffResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                    <spawnResource href="/Maps/AstralDungeon04/SpawnTables/Boss02.(SpawnTable).xdb" />
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="Boss02/MasterAlive.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="Boss02/DemonProtection.(BuffResource).xdb" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger" />
+        <Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-1</coeff>
+            </scaler>
+            <attackerConditions>
+                <Item type="gameMechanics.elements.predicates.PredicateFaction">
+                    <faction href="/World/Factions/WildWild.(Faction).xdb" />
+                </Item>
+            </attackerConditions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                            <pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ResetSpawnTable">
+                            <table href="/Maps/AstralDungeon04/SpawnTables/Boss02.(SpawnTable).xdb" />
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="Boss02/MasterAlive.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                    <buff href="Boss02/DemonAlive.(BuffResource).xdb" />
+                                                </Item>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="Boss02/DemonDead.(BuffResource).xdb" />
+                                                </Item>
+                                            </impactsIf>
+                                        </Item>
+                                    </impacts>
+                                    <spawnResource href="/Maps/AstralDungeon04/SpawnTables/Boss02.(SpawnTable).xdb" />
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                                    <pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                                    </impacts>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOnStrike">
+            <impactsToTarget>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/RaidInstances/Tank.(BuffResource).xdb" />
+                </Item>
+            </impactsToTarget>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>208638</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/ArchitectorSpells.(ActionGroupElement).xdb" />
+        <Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/RiftBossSpells.(ActionGroup).xdb" />
+    </groups>
+    <Name href="RD_Architector_Boss2_AddShot.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="RD_Architector_Boss2_AddShot.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <prepareDuration>2000</prepareDuration>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>6000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                <mobs>
+                    <Item href="/Mechanics/Spells/Rifts/RiftRandomMobs/RD_Architector_AE1.(MobWorld).xdb" />
+                </mobs>
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                <radius>10</radius>
+                <affectGroup>All</affectGroup>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                <element>LIGHTNING</element>
+                                <forceAE>true</forceAE>
+                                <damage>1</damage>
+                                <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                                    <scalers>
+                                        <Item type="gameMechanics.elements.scalers.MagicScaler" />
+                                        <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                            <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/EscapableDamageBoss.(CalcerFloatResource).xdb" />
+                                            </mulCalcer>
+                                        </Item>
+                                    </scalers>
+                                </scaler>
+                            </Item>
+                        </impactsIf>
+                        <impactsElse>
+                            <Item type="gameMechanics.elements.impacts.PureDamage">
+                                <damage>1</damage>
+                                <scaler type="gameMechanics.elements.scalers.TrivialScaler" />
+                                <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                        <multiplier>0.3</multiplier>
+                                    </mulCalcer>
+                                </scalerTarget>
+                            </Item>
+                        </impactsElse>
+                    </Item>
+                </impacts>
+                <filter type="gameMechanics.constructor.basicElements.FilterOr">
+                    <filters>
+                        <Item type="gameMechanics.world.creature.AvatarFilter" />
+                        <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="/Mechanics/Spells/Rifts/RiftRandomMobs/RD_Architector_AE1.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </filters>
+                </filter>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>20</speed>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

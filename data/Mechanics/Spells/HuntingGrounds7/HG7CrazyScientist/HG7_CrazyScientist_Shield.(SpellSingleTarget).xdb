@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>202707</resourceId>
+    </Header>
+    <element>ASTRAL</element>
+    <Name href="HG7_CrazyScientist_Shield.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="HG7_CrazyScientist_PrecastShield.(SpellVisScripts).xdb" />
+    <prepareDuration>2000</prepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <iffPolicy>Friends</iffPolicy>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>25000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="HG7_CrazyScientist_Shield.(BuffResource).xdb" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="HG7_CrazyScientist_HPLow.(BuffResource).xdb" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="HG7_CrazyScientist_Shield.(BuffResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+                    <range min="0" max="80" />
+                    <withinRange>false</withinRange>
+                    <minCandidatesCount>2</minCandidatesCount>
+                    <targetCount>2</targetCount>
+                </selector>
+                <impacts>
+                    <Item>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                <delay>1000</delay>
+                                <impacts>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="HG7_CrazyScientist_Bomba.(BuffResource).xdb" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

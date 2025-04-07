@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>221740</resourceId>
+    </Header>
+    <Name href="SwarmBuff.(BuffResource).Name.txt" />
+    <Description href="SwarmBuff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Mounts/MountWaspArch.(UISingleTexture).xdb" />
+    <visualEffects />
+    <visScript href="SwarmBuff.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateDeviceNear">
+                            <radius>10</radius>
+                            <devices>
+                                <Item href="DefensiveDome/Dome.(SteleResource).xdb" />
+                            </devices>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="SwarmBuff.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="Allies/ShieldProtected_Dome.(BuffResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="Hacking/HackerShield.(BuffResource).xdb" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="SwarmBuffStackable.(BuffResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impacts>
+            <initialDelay>1000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectZoneEnterLeaveChecker">
+            <impactsOnLeave>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="SwarmBuff.(BuffResource).xdb" />
+                </Item>
+            </impactsOnLeave>
+            <activeZone href="/Maps/FerrisRaid/Zones/RaidFerris4_FR14.(ZoneResource).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                            <zone href="/Maps/FerrisRaid/Zones/RaidFerris4_FR14.(ZoneResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="SwarmBuff.(BuffResource).xdb" />
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+            <initialDelay>500</initialDelay>
+        </Item>
+    </effects>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+        <Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

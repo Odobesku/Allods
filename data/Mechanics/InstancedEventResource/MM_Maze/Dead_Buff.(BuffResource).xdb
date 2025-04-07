@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>242354</resourceId>
+    </Header>
+    <Name href="Dead_Buff.(BuffResource).Name.txt" />
+    <Description href="Dead_Buff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Priest/PriestSilence.(UISingleTexture).xdb" />
+    <visScript href="/Spells/VisScripts/Necromancer/FeignDeath.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDoesNotAggro" />
+        <Item type="gameMechanics.elements.effects.DamageZeroSuppressor" />
+        <Item type="gameMechanics.elements.effects.ImmunityToHarmfulSpells" />
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactSetHealthToFull" />
+                <Item type="gameMechanics.elements.impacts.ImpactSetManaToFull" />
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler.(BuffResource).xdb" />
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Rotate</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToBuffs">
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.PredicateBuffHarmful" />
+                <Item type="gameMechanics.constructor.basicElements.PredicateGenericNot">
+                    <predicate type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                        <groups>
+                            <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+                        </groups>
+                    </predicate>
+                </Item>
+            </predicates>
+        </Item>
+    </effects>
+    <duration>30000</duration>
+    <isStackable>false</isStackable>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>237741</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="/Mechanics/Abilities/NecromancerTalents/AcidRain/AcidRain.(AbilityResource).Name.txt" />
+    <description href="/Mechanics/Abilities/NecromancerTalents/AcidRain/AcidRain.(AbilityResource).Description.txt" />
+    <descVars>
+        <Item>
+            <name>chance</name>
+            <value var="chance" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>FormulaPercent</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Engineer/EngineerAcidShot.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.SpellExtraImpacts">
+            <targetImpacts>
+                <Item type="gameMechanics.elements.impacts.CasterProbabilisticImpact">
+                    <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                        <value var="chance" />
+                    </chanceCalcer>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsUnderEnvelope">
+                            <spell href="/Mechanics/Spells/Necromancer/AcidBolt/Spell01.xdb" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="/Mechanics/Abilities/NecromancerTalents/AcidRain/AcidBolt.(ClientData).xdb" />
+                                    <calcers>
+                                        <addressEntries>
+                                            <Item>
+                                                <name>caster</name>
+                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                            </Item>
+                                            <Item>
+                                                <name>target</name>
+                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                            </Item>
+                                        </addressEntries>
+                                    </calcers>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                    <delay>1000</delay>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                            <element>ACID</element>
+                                            <threatMultiplier>0</threatMultiplier>
+                                            <damage>1</damage>
+                                            <impactsOnHitTarget>
+                                                <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                                                    <mark href="/Mechanics/Abilities/NecromancerTalents/AcidPoison/AcidPoison.(MarkResource).xdb" />
+                                                </Item>
+                                            </impactsOnHitTarget>
+                                            <impactsOnHitCaster>
+                                                <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                                                    <mark href="/Mechanics/Abilities/NecromancerTalents/Spellweave/Vamp_CD.(MarkResource).xdb" />
+                                                </Item>
+                                            </impactsOnHitCaster>
+                                            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                                                <scalers>
+                                                    <Item type="gameMechanics.elements.scalers.ScalerIf">
+                                                        <condition type="gameMechanics.elements.predicates.PredicateHasSpell">
+                                                            <spell href="/Mechanics/Spells/Necromancer/AcidBolt/Spell03.xdb" />
+                                                            <anyRank>false</anyRank>
+                                                        </condition>
+                                                        <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                                                            <multiplier>24.8424</multiplier>
+                                                        </scalerIf>
+                                                        <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                                            <condition type="gameMechanics.elements.predicates.PredicateHasSpell">
+                                                                <spell href="/Mechanics/Spells/Necromancer/AcidBolt/Spell02.xdb" />
+                                                                <anyRank>false</anyRank>
+                                                            </condition>
+                                                            <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+                                                                <multiplier>23.628</multiplier>
+                                                            </scalerIf>
+                                                            <scalerElse type="gameMechanics.elements.scalers.LinearScaler">
+                                                                <multiplier>19.2984</multiplier>
+                                                            </scalerElse>
+                                                        </scalerElse>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.scalers.MagicScaler" />
+                                                    <Item type="gameMechanics.elements.scalers.LinearScaler">
+                                                        <multiplier>0.5</multiplier>
+                                                    </Item>
+                                                </scalers>
+                                            </scaler>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </targetImpacts>
+            <destination type="gameMechanics.elements.effects.SpellExtraImpacts$DestinationSpells">
+                <spells>
+                    <Item href="/Mechanics/Spells/Necromancer/AcidBolt/Spell01.xdb" />
+                </spells>
+            </destination>
+        </Item>
+    </effects>
+    <ranks>
+        <Item href="/Mechanics/Abilities/NecromancerTalents/AcidRain/AcidRain01.(AbilityResource).xdb" />
+        <Item href="/Mechanics/Abilities/NecromancerTalents/AcidRain/AcidRain02.(AbilityResource).xdb" />
+        <Item href="/Mechanics/Abilities/NecromancerTalents/AcidRain/AcidRain03.(AbilityResource).xdb" />
+    </ranks>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>224541</resourceId>
+    </Header>
+    <Name href="R7_Psyker_Aura_Check.(BuffResource).Name.txt" />
+    <Description href="R7_Psyker_Aura_Check.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Engineer/Exhaust.(UISingleTexture).xdb" />
+    <visScript href="R7_PhysAura_Check.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.MagicDoT">
+            <parameters>
+                <tickLength>2000</tickLength>
+                <damagePerTick>2</damagePerTick>
+            </parameters>
+            <element>LIGHTNING</element>
+            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                            <radius>10</radius>
+                            <affectHolder>false</affectHolder>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="R7_AuraCheck_DAta.(ClientData).xdb" />
+                                    <calcers>
+                                        <addressEntries>
+                                            <Item>
+                                                <name>caster</name>
+                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                            </Item>
+                                            <Item>
+                                                <name>target</name>
+                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                            </Item>
+                                        </addressEntries>
+                                    </calcers>
+                                </Item>
+                            </impacts>
+                            <filter type="gameMechanics.world.creature.MobFilter" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+            <initialDelay>500</initialDelay>
+        </Item>
+    </effects>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/RaidInstances/ArchBaseRaid/SiegeBoss/R7_ArchBase_Raid.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

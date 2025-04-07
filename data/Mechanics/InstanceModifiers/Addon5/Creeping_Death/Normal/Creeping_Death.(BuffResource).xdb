@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>251823</resourceId>
+    </Header>
+    <Name href="Creeping_Death.(BuffResource).Name.txt" />
+    <Description href="Creeping_Death.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Necromancer/PetModeAggressive.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactKill" />
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="/Mechanics/InstanceModifiers/Addon5/Creeping_Death/Creeping_Death_FX_Damage.(ClientData).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>4</radius>
+                    <affectGroup>Enemies</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                            <element>POISON</element>
+                            <damage>80</damage>
+                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                </predicates>
+                            </Item>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+                                    <groups>
+                                        <Item href="/Mechanics/InstanceModifiers/Addon5/Not_Astral_Modifiers.(ActionGroup).xdb" />
+                                    </groups>
+                                </predicate>
+                            </Item>
+                        </predicates>
+                    </filter>
+                </Item>
+            </impacts>
+            <tick>3000</tick>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>4</radius>
+                    <affectHolder>false</affectHolder>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                            <time>1000</time>
+                            <distance>10</distance>
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                <mobs>
+                                    <Item href="Creeping_Death.(MobWorld).xdb" />
+                                </mobs>
+                            </Item>
+                        </predicates>
+                    </filter>
+                </Item>
+            </impacts>
+            <tick>3000</tick>
+        </Item>
+    </effects>
+    <duration>25000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

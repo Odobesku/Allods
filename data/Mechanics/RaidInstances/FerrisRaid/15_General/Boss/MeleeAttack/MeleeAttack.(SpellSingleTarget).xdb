@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>222983</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MeleeAttacks.xdb" />
+    </groups>
+    <Name href="MeleeAttack.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="/Spells/VisScripts/Common/AutoAttackMelee.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>2000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="/Mechanics/RaidInstances/FerrisRaid/15_General/Boss/AvatarCount.(BuffResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateSpellCooldownReady">
+                    <spell href="/Mechanics/RaidInstances/FerrisRaid/15_General/Boss/WingsAOE/WingsAOE.(SpellSingleTarget).xdb" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                        <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                        <minDamage>715</minDamage>
+                        <maxDamage>715</maxDamage>
+                    </Item>
+                </impacts>
+                <elseImpacts>
+                    <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                        <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                        <minDamage>1250</minDamage>
+                        <maxDamage>1250</maxDamage>
+                    </Item>
+                </elseImpacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

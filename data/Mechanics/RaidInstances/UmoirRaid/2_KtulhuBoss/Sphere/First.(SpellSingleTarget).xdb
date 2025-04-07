@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>225612</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/RaidInstances/UmoirRaid/UmoirRaid.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/SummerBoss2012.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <element>ASTRAL</element>
+    <Name href="First.(SpellSingleTarget).Name.txt" />
+    <Description href="First.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Spells/Modifiers/WeaknessTenses.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <sysName>1</sysName>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Friends</iffPolicy>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>5000</duration>
+        </cooldown>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="First.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                        <spawn>
+                            <scriptID>KtulhuBrain</scriptID>
+                            <map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                        </spawn>
+                        <onBehalfOfTarget>true</onBehalfOfTarget>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="BrainDamage.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIncrementBuffDuration">
+                                        <buff href="BrainDamage.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        <delta type="gameMechanics.elements.calcers.FloatData">
+                                            <value>10000</value>
+                                        </delta>
+                                    </Item>
+                                </impactsIf>
+                                <impactsElse>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="BrainDamage.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                </impactsElse>
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="First.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                        <data href="Fail.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                        <spawn>
+                            <scriptID>KtulhuBrain</scriptID>
+                            <map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                        </spawn>
+                        <onBehalfOfTarget>true</onBehalfOfTarget>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.StackBuff">
+                                <buff href="BrainDamage.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                <resetTimer>false</resetTimer>
+                                <delta type="gameMechanics.elements.calcers.FloatData">
+                                    <value>-1</value>
+                                </delta>
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="First.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="Second.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="Third.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsElse>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.RandomImpact">
+                <entries>
+                    <Item>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.StackBuffRange">
+                                <buff href="/Mechanics/RaidInstances/UmoirRaid/2_KtulhuBoss/Sphere.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                <resetTimer>false</resetTimer>
+                                <anyRank>false</anyRank>
+                                <delta min="-25" max="-20" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item>
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacherStackRange">
+                                <buff href="/Mechanics/RaidInstances/UmoirRaid/2_KtulhuBoss/Sphere.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                <range>
+                                    <min>20</min>
+                                    <max>25</max>
+                                </range>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </entries>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                <data href="FirstFX.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

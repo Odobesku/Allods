@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<Header>
+		<Prototype href="/Spells/VisScripts/Prototypes/MobDirect.(SpellVisScripts).xdb" />
+		<Variables>
+			<FixPointCaster>true</FixPointCaster>
+			<FixPointTarget>true</FixPointTarget>
+			<FXOnCaster>/Spells/FX/Mobs/WormGlacial_CorruptionCleaveCast_Ice.(VisObjectTemplate).xdb</FXOnCaster>
+			<LocatorNameOnCaster />
+			<LocatorNameOnTargets />
+			<LocatorOnTargets>Slot_FX</LocatorOnTargets>
+			<LocatorOnCaster>Slot_Global</LocatorOnCaster>
+			<HitPostFXOnTargets />
+			<CastAnimation>spellCastDirected</CastAnimation>
+			<FXOnTargets />
+			<AnimationPreCastMode>LOOP</AnimationPreCastMode>
+			<PreCastAnimation>specialCast</PreCastAnimation>
+		</Variables>
+	</Header>
+	<wholeCasting type="VisActionList">
+		<elements>
+			<Item type="CreatureTurnToTargetAction">
+				<visActionID>WormLockOnTarget</visActionID>
+			</Item>
+		</elements>
+	</wholeCasting>
+	<launch type="VisActionList">
+		<elements>
+			<Item type="CreatureAnimationAction">
+				<animations>
+					<Item var="CastAnimation" />
+				</animations>
+				<channel>CHANNEL_ABILITY</channel>
+			</Item>
+			<Item type="VisActionList">
+				<play>Simultaneously</play>
+				<elements>
+					<Item type="CreatureEffectsAction" />
+				</elements>
+			</Item>
+			<Item type="VisActionList">
+				<elements>
+					<Item type="VisActionDelay">
+						<time>3000</time>
+					</Item>
+					<Item type="VisActionStopAction">
+						<stoppedActionID>WormRotationLock</stoppedActionID>
+					</Item>
+				</elements>
+			</Item>
+			<Item type="VisActionList">
+				<elements>
+					<Item type="VisActionDelay">
+						<time>2000</time>
+					</Item>
+					<Item type="VisActionStopAction">
+						<stoppedActionID>WormLockOnTarget</stoppedActionID>
+					</Item>
+				</elements>
+			</Item>
+		</elements>
+	</launch>
+</SpellVisScripts>

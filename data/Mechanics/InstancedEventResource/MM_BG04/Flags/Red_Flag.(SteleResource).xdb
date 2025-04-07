@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.device.SteleResource>
+    <Header>
+        <resourceId>241942</resourceId>
+    </Header>
+    <persistentParts>
+        <Item type="gameMechanics.elements.bunchparts.BunchPartAttachEffects">
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectInZoneTracker">
+                    <buff href="Red_Flag_Tracker.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <activeZone href="/Maps/Domination04/Zones/Domination04/Domination.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                    <trackData href="RedFlag.(TrackDataResource).xdb#xpointer(/gameMechanics.world.avatar.TrackDataResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="Red_Flag_Tracker.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsOn>
+                </Item>
+                <Item type="gameMechanics.elements.effects.TickableAura">
+                    <affectGroup>All</affectGroup>
+                    <radius>5</radius>
+                    <filter type="gameMechanics.world.creature.AvatarFilter" />
+                    <impactsIn>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                <Item type="gameMechanics.battleground.map.PredicateBattleMemberMark">
+                                    <mark href="/Maps/Domination04/Marks/RedMark.(BattlegroundPlayerSpawnPlace).xdb#xpointer(/gameMechanics.battleground.BattlegroundPlayerSpawnPlace)" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ReturningImpactsGeneric">
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="Red_Flag.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                        <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                                            <variable href="/Mechanics/InstancedEventResource/MM_BG04/Red_Flag_On_Base.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                                            <summand>-1</summand>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.ZoneDistributor">
+                                                <zone type="gameMechanics.elements.calcers.ZoneDistributor$OwnZone" />
+                                            </distributor>
+                                            <data href="RedFlagCaptured.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpactGeneric">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.device.DeviceDie" />
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                <Item type="gameMechanics.battleground.map.PredicateBattleMemberMark">
+                                    <mark href="/Maps/Domination04/Marks/RedMark.(BattlegroundPlayerSpawnPlace).xdb#xpointer(/gameMechanics.battleground.BattlegroundPlayerSpawnPlace)" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                            <zone href="FlagRed.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.constructor.basicElements.ImpactNull" />
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                                            <table href="/Maps/Domination04/SpawnTables/Blue_Flag.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                                        </Item>
+                                        <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                                            <variable href="/Mechanics/InstancedEventResource/MM_BG04/Red_Flag_On_Base.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                                            <summand>1</summand>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.ZoneDistributor">
+                                                <zone type="gameMechanics.elements.calcers.ZoneDistributor$OwnZone" />
+                                            </distributor>
+                                            <data href="RedFlagReturned.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsIn>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.constructor.schemes.buff.BuffsResource" />
+    </persistentParts>
+    <name href="Red_Flag.(SteleResource).Name.txt" />
+    <visObj href="/Creatures/GolemJunes/GolemJunesCracked.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+    <visScripts href="/Mechanics/InstancedEventResource/MM_BG03/Golems/Golem.(DeviceVisScripts).xdb#xpointer(/DeviceVisScripts)" />
+    <corpseDuration>1</corpseDuration>
+    <corpseEmptyDuration>1</corpseEmptyDuration>
+</gameMechanics.world.device.SteleResource>

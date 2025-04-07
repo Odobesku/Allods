@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>186457</resourceId>
+    </Header>
+    <Name href="AstralCleave.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="AstralCleave.(SpellVisScripts).xdb" />
+    <prepareDuration>3000</prepareDuration>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>10000</duration>
+        </cooldown>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.RunImpactsInShape">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                </predicates>
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                <element>ASTRAL</element>
+                                <damage>125</damage>
+                                <impactsOnHitTarget>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="AstralArmorDebuff.(BuffResource).xdb" />
+                                    </Item>
+                                </impactsOnHitTarget>
+                                <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impacts>
+                <shape type="gameMechanics.constructor.schemes.spell.area.Cone">
+                    <angle type="constructor.basicElements.AngleDegrees">
+                        <value>45</value>
+                    </angle>
+                </shape>
+                <affectGroup>Enemies</affectGroup>
+                <radius type="gameMechanics.elements.impacts.RunImpactsInShape$FixedRadius">
+                    <value>15</value>
+                </radius>
+                <affectMainTarget>false</affectMainTarget>
+                <workOnDead>false</workOnDead>
+                <shapeCenterPosition>Caster</shapeCenterPosition>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/WormGlacialBoss/DoNotMove.(BuffResource).xdb" />
+                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                    <multiplier>2.5</multiplier>
+                </durationScaler>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                <spell href="/Mechanics/Spells/AutoAttack/MeleeDamage.xdb" />
+                <duration>
+                    <second>2</second>
+                    <ms>500</ms>
+                </duration>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                <selector type="gameMechanics.tools.SelectorRandomNotLess">
+                    <minIndex>1</minIndex>
+                </selector>
+                <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            </predicates>
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                    </predicates>
+                </filter>
+                <impacts>
+                    <Item>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                <projectileData>
+                                    <moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
+                                    <resource href="AstralPuddleWhirlwind.(ProjectileResource).xdb" />
+                                </projectileData>
+                                <pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                <projectileData>
+                                    <moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
+                                    <resource href="AstralPuddleWhirlwind.(ProjectileResource).xdb" />
+                                </projectileData>
+                                <pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                <projectileData>
+                                    <moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
+                                    <resource href="AstralPuddleWhirlwind.(ProjectileResource).xdb" />
+                                </projectileData>
+                                <pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                <selector type="gameMechanics.tools.SelectorParticular">
+                    <index>0</index>
+                </selector>
+                <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            </predicates>
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                    </predicates>
+                </filter>
+                <impacts>
+                    <Item>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                <projectileData>
+                                    <moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
+                                    <resource href="AstralPuddleWhirlwind.(ProjectileResource).xdb" />
+                                </projectileData>
+                                <pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+                <spawn>
+                    <scriptID>TZ03Slave</scriptID>
+                    <map href="/Maps/AstralDungeon04/MapResource.xdb" />
+                </spawn>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactModifySpellCooldownGeneric">
+                        <spell href="SacrificeChannel.(SpellSingleTarget).xdb" />
+                        <factor>1</factor>
+                        <sum>-3333333</sum>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <isAE>true</isAE>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

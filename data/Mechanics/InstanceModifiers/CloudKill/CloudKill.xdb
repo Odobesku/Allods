@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.map.basicElements.MapModifierResource>
+    <Header>
+        <resourceId>251789</resourceId>
+    </Header>
+    <name href="CloudKill.txt" />
+    <description href="CloudKill.Description.txt" />
+    <image href="/Interface/Icons/Spells/Modifiers/ThePoisonousCloud.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <mapEffects>
+        <Item type="gameMechanics.elements.effects.AddMapSpecificEffects">
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    </predicates>
+                    <effectsIf>
+                        <Item type="gameMechanics.elements.effects.LayeredHealthTrigger">
+                            <layers>
+                                <Item>
+                                    <percent>0.001</percent>
+                                    <mechanics>
+                                        <effectsWhileOff>
+                                            <Item type="gameMechanics.elements.effects.Switch">
+                                                <impactsOn>
+                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                        <buff href="ResurrectShield/ResurrestShield.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                    </Item>
+                                                </impactsOn>
+                                            </Item>
+                                        </effectsWhileOff>
+                                    </mechanics>
+                                </Item>
+                            </layers>
+                        </Item>
+                    </effectsIf>
+                </Item>
+            </effects>
+        </Item>
+    </mapEffects>
+    <cellEffects>
+        <Item type="gameMechanics.elements.effects.EntityImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactRandomAvatarsOnCell">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                            <projectileData>
+                                <moveType type="gameMechanics.world.projectile.MoveTypeDisorient">
+                                    <radius>10</radius>
+                                    <destination type="gameMechanics.map.destination.RelativeTrailPos">
+                                        <center type="gameMechanics.map.destination.RelativeRotatePos">
+                                            <base type="gameMechanics.map.destination.RelativePos" />
+                                            <offset>10</offset>
+                                        </center>
+                                        <offset x="0" y="0" z="0" />
+                                    </destination>
+                                </moveType>
+                                <resource href="Projectile.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                            </projectileData>
+                        </Item>
+                    </impacts>
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.world.ship.elements.PredicateStandingOnShip" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                    </predicates>
+                </Item>
+            </impacts>
+            <tick>90000</tick>
+            <initialDelay>-1</initialDelay>
+        </Item>
+    </cellEffects>
+    <weight>2</weight>
+    <exclusions>
+        <Item href="/Maps/AstralIsle57_UI05/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+        <Item href="/Maps/AstralIsle61/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+        <Item href="/Maps/AstralIsle18/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+    </exclusions>
+</gameMechanics.map.basicElements.MapModifierResource>

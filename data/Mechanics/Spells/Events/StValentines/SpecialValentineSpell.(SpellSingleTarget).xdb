@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>210394</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Events/EventSpells.(ActionGroup).xdb" />
+    </groups>
+    <Name href="SpecialValentineSpell.(SpellSingleTarget)_Name.txt" />
+    <Description href="SpecialValentineSpell.(SpellSingleTarget)_Desc.txt" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>5</value>
+    </range>
+    <prepareDuration>3000</prepareDuration>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <isAggro>false</isAggro>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Friends</iffPolicy>
+    <launchWhenReady>true</launchWhenReady>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="/World/Quests/ZoneHadagan1/StValentines/HadaganQuestBlindedStart.(QuestResource).xdb" />
+                        <status>Started</status>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="/World/Quests/ZoneLeague1/StValentines/KaniaQuestBlindedStart.(QuestResource).xdb" />
+                        <status>Started</status>
+                    </Item>
+                </predicates>
+            </Item>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="BlindedByLove.(BuffResource).xdb" />
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateCanTake">
+                <item href="/Items/QuestItems/StValentines/LargeValentine2014.(ItemResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="BlindedByLove.(BuffResource).xdb" />
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateCharacterSex">
+                        <sex href="/Mechanics/Sex/Male.xdb" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateCharacterSex">
+                                <sex href="/Mechanics/Sex/Female.xdb" />
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateCanTake">
+                                        <item href="/Items/QuestItems/StValentines/LargeValentine2014.(ItemResource).xdb" />
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+                                        <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                                            <item href="/Items/QuestItems/StValentines/LargeValentine2014.(ItemResource).xdb" />
+                                        </item>
+                                    </Item>
+                                </impactsIf>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                        <id href="/World/Quests/ZoneHadagan1/StValentines/HadaganQuestBlindedStartBuffCounter.(QuestCountId).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                        <id href="/World/Quests/ZoneHadagan1/StValentines/World/Quests/ZoneLeague1/KaniaQuestBlindedStartBuffCounter.(QuestCountId).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                        <buff href="BlindedByLove.(BuffResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactConsumeResources">
+                                        <resources>
+                                            <Item type="gameMechanics.elements.resources.ResourceItem">
+                                                <item href="/Items/QuestItems/StValentines/SpecialValentine.(ItemResource).xdb" />
+                                            </Item>
+                                        </resources>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impactsIf>
+                        <impactsElse>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateExternal">
+                                        <predicateResource href="/World/Quests/ZoneHadagan1/ZH1_Wedding/PredicatesHomo.(PredicateResource).xdb" />
+                                    </Item>
+                                </predicates>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                        <predicates>
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateCharacterSex">
+                                                        <sex href="/Mechanics/Sex/Male.xdb" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateExternal">
+                                                        <predicateResource href="/World/Quests/ZoneHadagan1/ZH1_Wedding/PredicatesHomo.(PredicateResource).xdb" />
+                                                    </Item>
+                                                </predicates>
+                                            </Item>
+                                        </predicates>
+                                        <impactsIf>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateCanTake">
+                                                        <item href="/Items/QuestItems/StValentines/LargeValentine2014.(ItemResource).xdb" />
+                                                    </Item>
+                                                </predicates>
+                                                <impactsIf>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+                                                        <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                                                            <item href="/Items/QuestItems/StValentines/LargeValentine2014.(ItemResource).xdb" />
+                                                        </item>
+                                                    </Item>
+                                                </impactsIf>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                        <id href="/World/Quests/ZoneHadagan1/StValentines/HadaganQuestBlindedStartBuffCounter.(QuestCountId).xdb" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                        <id href="/World/Quests/ZoneHadagan1/StValentines/World/Quests/ZoneLeague1/KaniaQuestBlindedStartBuffCounter.(QuestCountId).xdb" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                        <buff href="BlindedByLove.(BuffResource).xdb" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactConsumeResources">
+                                                        <resources>
+                                                            <Item type="gameMechanics.elements.resources.ResourceItem">
+                                                                <item href="/Items/QuestItems/StValentines/SpecialValentine.(ItemResource).xdb" />
+                                                            </Item>
+                                                        </resources>
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                        </impactsIf>
+                                        <impactsElse>
+                                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                        <data href="WrongSex.(ClientData).xdb" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                        </impactsElse>
+                                    </Item>
+                                </impacts>
+                                <elseImpacts>
+                                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                <data href="WrongSex.(ClientData).xdb" />
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </elseImpacts>
+                            </Item>
+                        </impactsElse>
+                    </Item>
+                </impacts>
+                <elseImpacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateCharacterSex">
+                                <sex href="/Mechanics/Sex/Female.xdb" />
+                            </Item>
+                        </predicates>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateCharacterSex">
+                                        <sex href="/Mechanics/Sex/Male.xdb" />
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateCanTake">
+                                                <item href="/Items/QuestItems/StValentines/LargeValentine2014.(ItemResource).xdb" />
+                                            </Item>
+                                        </predicates>
+                                        <impactsIf>
+                                            <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+                                                <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                                                    <item href="/Items/QuestItems/StValentines/LargeValentine2014.(ItemResource).xdb" />
+                                                </item>
+                                            </Item>
+                                        </impactsIf>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                <id href="/World/Quests/ZoneHadagan1/StValentines/HadaganQuestBlindedStartBuffCounter.(QuestCountId).xdb" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                <id href="/World/Quests/ZoneHadagan1/StValentines/World/Quests/ZoneLeague1/KaniaQuestBlindedStartBuffCounter.(QuestCountId).xdb" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                <buff href="BlindedByLove.(BuffResource).xdb" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactConsumeResources">
+                                                <resources>
+                                                    <Item type="gameMechanics.elements.resources.ResourceItem">
+                                                        <item href="/Items/QuestItems/StValentines/SpecialValentine.(ItemResource).xdb" />
+                                                    </Item>
+                                                </resources>
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </impactsIf>
+                                <impactsElse>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                        <predicates>
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateExternal">
+                                                <predicateResource href="/World/Quests/ZoneHadagan1/ZH1_Wedding/PredicatesHomo.(PredicateResource).xdb" />
+                                            </Item>
+                                        </predicates>
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                <predicates>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateCharacterSex">
+                                                                <sex href="/Mechanics/Sex/Female.xdb" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateExternal">
+                                                                <predicateResource href="/World/Quests/ZoneHadagan1/ZH1_Wedding/PredicatesHomo.(PredicateResource).xdb" />
+                                                            </Item>
+                                                        </predicates>
+                                                    </Item>
+                                                </predicates>
+                                                <impactsIf>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateCanTake">
+                                                                <item href="/Items/QuestItems/StValentines/LargeValentine2014.(ItemResource).xdb" />
+                                                            </Item>
+                                                        </predicates>
+                                                        <impactsIf>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+                                                                <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                                                                    <item href="/Items/QuestItems/StValentines/LargeValentine2014.(ItemResource).xdb" />
+                                                                </item>
+                                                            </Item>
+                                                        </impactsIf>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                                <id href="/World/Quests/ZoneHadagan1/StValentines/HadaganQuestBlindedStartBuffCounter.(QuestCountId).xdb" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                                                <id href="/World/Quests/ZoneHadagan1/StValentines/World/Quests/ZoneLeague1/KaniaQuestBlindedStartBuffCounter.(QuestCountId).xdb" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                                <buff href="BlindedByLove.(BuffResource).xdb" />
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactConsumeResources">
+                                                                <resources>
+                                                                    <Item type="gameMechanics.elements.resources.ResourceItem">
+                                                                        <item href="/Items/QuestItems/StValentines/SpecialValentine.(ItemResource).xdb" />
+                                                                    </Item>
+                                                                </resources>
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impactsIf>
+                                                <impactsElse>
+                                                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                                <data href="WrongSex.(ClientData).xdb" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impactsElse>
+                                            </Item>
+                                        </impacts>
+                                        <elseImpacts>
+                                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                        <data href="WrongSex.(ClientData).xdb" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                        </elseImpacts>
+                                    </Item>
+                                </impactsElse>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </elseImpacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

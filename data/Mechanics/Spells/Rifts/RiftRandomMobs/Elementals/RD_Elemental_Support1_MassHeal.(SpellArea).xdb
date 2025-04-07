@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>208759</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/ElementalSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/RiftSupportSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/RiftMeleeSpells.(ActionGroup).xdb" />
+    </groups>
+    <Name href="RD_Elemental_Support1_MassHeal.(SpellArea).Name.txt" />
+    <visualScripts href="RD_Elemental_Support1_MassHeal.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>6</value>
+    </range>
+    <prepareDuration>2000</prepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>12000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                <radius>6</radius>
+                <affectGroup>Enemies</affectGroup>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                        <element>POISON</element>
+                        <damage>1</damage>
+                        <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                            <scalers>
+                                <Item type="gameMechanics.elements.scalers.MagicScaler" />
+                                <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                        <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/AdditionalDamageCommon.(CalcerFloatResource).xdb" />
+                                    </mulCalcer>
+                                </Item>
+                            </scalers>
+                        </scaler>
+                    </Item>
+                </impacts>
+                <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                    <filters>
+                        <Item type="gameMechanics.world.creature.AvatarFilter" />
+                        <Item type="gameMechanics.world.creature.AliveFilter" />
+                    </filters>
+                </filter>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                <radius>12</radius>
+                <affectGroup>Friends</affectGroup>
+                <affectHolder>false</affectHolder>
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="RD_Elemental_Support1_MassHeal.(BuffResource).xdb" />
+                    </Item>
+                </impacts>
+                <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                    </predicates>
+                </filter>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="/Mechanics/Spells/Rifts/Abilities/StopBuff.(BuffResource).xdb" />
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <shapeCenterPosition>Caster</shapeCenterPosition>
+    <radius>8</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

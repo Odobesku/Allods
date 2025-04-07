@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>193471</resourceId>
+    </Header>
+    <element>POISON</element>
+    <Name href="AI38_Cleave.(SpellArea).Name.txt" />
+    <visualScripts href="/Mechanics/Spells/AstarlIslands/AI38/Packs/AI38_Turtle_Cleave.(SpellVisScripts).xdb" />
+    <prepareDuration>2200</prepareDuration>
+    <targetType>STTPoint</targetType>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>5000</duration>
+        </cooldown>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.RunImpactsInShape">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                </predicates>
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                <element>PHYSICAL</element>
+                                <damage>100</damage>
+                                <impactsOnHitTarget>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="/Mechanics/Spells/AstarlIslands/AI38/Packs/AI38_ChannelingCleave2.(BuffResource).xdb" />
+                                    </Item>
+                                </impactsOnHitTarget>
+                                <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impacts>
+                <shape type="gameMechanics.constructor.schemes.spell.area.Cone">
+                    <angle type="constructor.basicElements.AngleDegrees">
+                        <value>26</value>
+                    </angle>
+                </shape>
+                <affectGroup>Enemies</affectGroup>
+                <radius type="gameMechanics.elements.impacts.RunImpactsInShape$FixedRadius">
+                    <value>20</value>
+                </radius>
+                <affectMainTarget>false</affectMainTarget>
+                <workOnDead>false</workOnDead>
+                <shapeCenterPosition>Caster</shapeCenterPosition>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/WormGlacialBoss/DoNotMove.(BuffResource).xdb" />
+                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                    <multiplier>2.5</multiplier>
+                </durationScaler>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                <spell href="/Mechanics/Spells/AutoAttack/MeleeDamage.xdb" />
+                <duration>
+                    <second>2</second>
+                    <ms>500</ms>
+                </duration>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <shapeCenterPosition>Caster</shapeCenterPosition>
+    <radius>15</radius>
+    <stopOnNoTargets>false</stopOnNoTargets>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

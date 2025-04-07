@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>221782</resourceId>
+    </Header>
+    <Name href="ChargedAvatar_Instable.(BuffResource).Name.txt" />
+    <Description href="ChargedAvatar_Instable.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Equipment/Trinket/AstralBomb_01.(UISingleTexture).xdb" />
+    <visualEffects />
+    <visScript href="ChargedAvatar_Instable.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                            <projectileData>
+                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                </moveType>
+                                <resource href="Explosion_Big.(ProjectileResource).xdb" />
+                            </projectileData>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                            <radius>30</radius>
+                            <affectHolder>false</affectHolder>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                            <spawn>
+                                                <scriptID>14_SoldierBoss</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </spawn>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.DirectDamage">
+                                                            <damage>1</damage>
+                                                            <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                                                    <multiplier>0.9</multiplier>
+                                                                </mulCalcer>
+                                                            </scalerTarget>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                                    <time>1000</time>
+                                    <distance>12</distance>
+                                </Item>
+                            </impacts>
+                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                </predicates>
+                            </filter>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.DirectDamage">
+                    <damage>1</damage>
+                    <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                            <multiplier>0.5</multiplier>
+                        </mulCalcer>
+                    </scalerTarget>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>14_SoldierBoss</scriptID>
+                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/RaidInstances/FerrisRaid/14_PvtSwarm/Boss/ChargeTheBoss.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DispelInterceptor">
+            <holderImpacts>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="ChargedAvatar_Stable.(BuffResource).xdb" />
+                    <durationScalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="gameMechanics.elements.calcers.CalcerBuffDuration">
+                            <buff href="ChargedAvatar_Instable.(BuffResource).xdb" />
+                            <multiplier>1</multiplier>
+                        </mulCalcer>
+                    </durationScalerTarget>
+                </Item>
+            </holderImpacts>
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.PredicateBuffEquals">
+                    <buff href="ChargedAvatar_Instable.(BuffResource).xdb" />
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/RaidInstances/DisableEscapes.(BuffResource).xdb" />
+                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                        <multiplier>5</multiplier>
+                    </durationScaler>
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+    <duration>5000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Magics.xdb" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+        <Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>221470</resourceId>
+    </Header>
+    <Name href="AutoAttack.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="/Spells/VisScripts/Common/AutoAttackMelee.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <prepareDuration>2000</prepareDuration>
+    <mechanics>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="BloodCDCD.(BuffResource).xdb" />
+                    </Item>
+                </predicates>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                        <data href="/Mechanics/Spells/AstarlIslands/AI15/HunterBlink/Hit.(ClientData).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="BloodCDCD.(BuffResource).xdb" />
+                    </Item>
+                </impactsElse>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceAnyBuff">
+                        <buffs>
+                            <Item href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/FeedTheChicks/Knockdown.(BuffResource).xdb" />
+                            <Item href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/HMThrow/SaveContextActionBuff.(BuffResource).xdb" />
+                            <Item href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/AntiChickBuff.(BuffResource).xdb" />
+                        </buffs>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.DirectDamage">
+                        <damage>1</damage>
+                        <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                <multiplier>0.003</multiplier>
+                            </mulCalcer>
+                            <additionalMultiplier>
+                                <scaler type="gameMechanics.elements.scalers.RandomScaler">
+                                    <range>
+                                        <min>3</min>
+                                        <max>7</max>
+                                    </range>
+                                </scaler>
+                            </additionalMultiplier>
+                        </scalerTarget>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.DirectDamage">
+                        <damage>1</damage>
+                        <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                <multiplier>0.0055</multiplier>
+                            </mulCalcer>
+                            <additionalMultiplier>
+                                <scaler type="gameMechanics.elements.scalers.RandomScaler">
+                                    <range>
+                                        <min>4</min>
+                                        <max>8</max>
+                                    </range>
+                                </scaler>
+                            </additionalMultiplier>
+                        </scalerTarget>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

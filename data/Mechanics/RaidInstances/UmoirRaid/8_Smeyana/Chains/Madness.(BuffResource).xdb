@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>225980</resourceId>
+    </Header>
+    <Name href="Madness.(BuffResource).Name.txt" />
+    <Description href="Madness.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Psionic/SearedMind.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/ReadySpellDirectCurseWand.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+            <scale>2</scale>
+            <locator>Slot_FX</locator>
+            <useVisObjectSettings>FROM_TARGET</useVisObjectSettings>
+        </Item>
+    </visualEffects>
+    <interfaceHighPriority>true</interfaceHighPriority>
+    <effects>
+        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+            <conditionalImpacts>
+                <Item>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.PureDamage">
+                                                    <damage>1</damage>
+                                                    <scaler type="gameMechanics.elements.scalers.TrivialScaler" />
+                                                    <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                        <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                                            <multiplier>0.25</multiplier>
+                                                        </mulCalcer>
+                                                    </scalerTarget>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </conditionalImpacts>
+            <stages>
+                <Item>Launch</Item>
+            </stages>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectInstantiating">
+            <effects>
+                <Item type="gameMechanics.elements.effects.TickableAura">
+                    <affectGroup>Friends</affectGroup>
+                    <radius>5</radius>
+                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                        <filters>
+                            <Item type="gameMechanics.world.creature.AvatarFilter" />
+                            <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="Madness.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </predicate>
+                                    </Item>
+                                </predicates>
+                            </Item>
+                        </filters>
+                    </filter>
+                    <impactsIn>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="MadnessDetacher.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsIn>
+                    <impactsOut>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="MadnessDetacher.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsOut>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <duration>30000</duration>
+    <stackLimit>20</stackLimit>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/RaidInstances/UmoirRaid/UmoirRaid.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

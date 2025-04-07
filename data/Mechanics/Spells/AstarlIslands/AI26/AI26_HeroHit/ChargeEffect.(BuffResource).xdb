@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>192066</resourceId>
+    </Header>
+    <Name href="ChargeEffect.(BuffResource).Name02.txt" />
+    <visScript href="Charge.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <needVisualize>false</needVisualize>
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>1.3</coeff>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectForceMove">
+            <destinations>
+                <Item type="gameMechanics.elements.calcers.DestinationSpellTargetThrust">
+                    <maxDist>8</maxDist>
+                </Item>
+            </destinations>
+            <impactsOnArrived>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="ChargeEffect.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOnArrived>
+            <impactsOnPathNotFound>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="ChargeEffect.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                    <spell href="Charge.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                </Item>
+            </impactsOnPathNotFound>
+        </Item>
+        <Item type="gameMechanics.elements.effects.PreciseAura">
+            <radius>3</radius>
+            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </predicates>
+                    </Item>
+                </predicates>
+            </filter>
+            <impactsIn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/Spells/CommonBuffs/KnockDown/BuffKnockDown.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                            <time>300</time>
+                            <distance>5</distance>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                            <impactsOnHitTarget>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Mechanics/Spells/CommonBuffs/KnockDown/BuffKnockDown.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                <multiplier>5</multiplier>
+                                            </durationScaler>
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impactsOnHitTarget>
+                            <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                            <minDamage>100</minDamage>
+                            <maxDamage>100</maxDamage>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsIn>
+        </Item>
+    </effects>
+    <duration>6000</duration>
+    <isStackable>false</isStackable>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <isAE>true</isAE>
+</gameMechanics.constructor.schemes.buff.BuffResource>

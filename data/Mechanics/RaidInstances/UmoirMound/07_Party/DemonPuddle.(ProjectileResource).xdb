@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.projectile.ProjectileResource>
+    <Header>
+        <resourceId>226452</resourceId>
+    </Header>
+    <name href="DemonPuddle.(ProjectileResource).Name.txt" />
+    <visObject href="/Spells/FX/Mobs/Demon_FlurryAstral_Aoe.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+    <altitude>0.05</altitude>
+    <lifeLengthCap>30000</lifeLengthCap>
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.EntityImpactCreaturesAround">
+                    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+                    <radius>5</radius>
+                    <affectGroup>Enemies</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                            <element>ASTRAL</element>
+                                            <damage>20</damage>
+                                            <impactsOnHitTarget>
+                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                    <data href="ClientData/Visual_DemonPuddleHit.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                </Item>
+                                            </impactsOnHitTarget>
+                                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                            <spawnResource href="/Maps/UmoirMound/SpawnTables/07_Party_Demon.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                        <filters>
+                            <Item type="gameMechanics.world.creature.AvatarFilter" />
+                            <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="AstralFlurryHit.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </predicate>
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="CurseBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </predicate>
+                                    </Item>
+                                </predicates>
+                            </Item>
+                        </filters>
+                    </filter>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+            <initialDelay>2000</initialDelay>
+        </Item>
+    </effects>
+</gameMechanics.world.projectile.ProjectileResource>

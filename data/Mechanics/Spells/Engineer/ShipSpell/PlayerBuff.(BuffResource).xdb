@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>219826</resourceId>
+    </Header>
+    <Name href="PlayerBuff.(BuffResource).Name.txt" />
+    <Description href="PlayerBuff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Equipment/Ships/Figures.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <interfaceHighPriority>true</interfaceHighPriority>
+    <effects>
+        <Item type="gameMechanics.world.ship.elements.TriggerUse">
+            <impactsStart>
+                <Item type="gameMechanics.elements.impacts.ImpactsIf">
+                    <predicate type="gameMechanics.world.ship.elements.PredicateOurDevice" />
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                                            <addresseeFinder type="gameMechanics.world.device.AddresseeFinderUsingDevice" />
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                    <predicates>
+                                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                            <buff href="IAmATiredDevice.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </Item>
+                                                    </predicates>
+                                                    <impactsElse>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="CooldownClearing.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            <durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
+                                                                <buff href="PlayerBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                <tickLength>1</tickLength>
+                                                            </durationScaler>
+                                                        </Item>
+                                                    </impactsElse>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                            <data href="DeviceError.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsStart>
+        </Item>
+    </effects>
+    <duration>180000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

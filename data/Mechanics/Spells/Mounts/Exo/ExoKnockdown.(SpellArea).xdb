@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>204381</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb" />
+    </groups>
+    <Name href="ExoKnockdown.(SpellArea).Name.txt" />
+    <Description href="ExoKnockdown.(SpellArea).Description.txt" />
+    <image href="/Interface/Icons/Spells/Warrior/Push.(UISingleTexture).xdb" />
+    <visualScripts href="ExoKnockdown.(SpellVisScripts).xdb" />
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>180000</duration>
+            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mul>-0.03333</mul>
+                <mulCalcer type="gameMechanics.elements.calcers.CalcerMountFromGroupMaxLevel">
+                    <group href="/Mechanics/Mounts/Groups/ExoMountsV2.(MountGroupResource).xdb" />
+                </mulCalcer>
+                <sum>1</sum>
+            </scaler>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMountFromGroupFeeded">
+                <group href="/Mechanics/Mounts/Groups/ExoMountsV2.(MountGroupResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateMounted" />
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/Mounts/Prototypes/AntiExoCC.(BuffResource).xdb" />
+                </predicate>
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="ExoKnockDown.(BuffResource).xdb" />
+                <impactsOnAttach>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="/Mechanics/Mounts/Prototypes/AntiExoCC.(BuffResource).xdb" />
+                    </Item>
+                </impactsOnAttach>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <shapeCenterPosition>Caster</shapeCenterPosition>
+    <radius>5</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

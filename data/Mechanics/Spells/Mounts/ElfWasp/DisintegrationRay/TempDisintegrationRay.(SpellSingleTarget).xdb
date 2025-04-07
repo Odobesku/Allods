@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>204678</resourceId>
+    </Header>
+    <contextActionInfo>
+        <priority>100495</priority>
+        <contextName href="DisintegrationRay.(SpellSingleTarget).Name.txt" />
+        <contextDescription href="DisintegrationRay.(SpellSingleTarget).Description.txt" />
+        <contextImage href="/Interface/Icons/Mounts/SpellsMounts/DestructiveBeam.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    </contextActionInfo>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DisabledOnRemort.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <element>ASTRAL</element>
+    <Name href="DisintegrationRay.(SpellSingleTarget).Name.txt" />
+    <Description href="DisintegrationRay.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Mounts/SpellsMounts/DestructiveBeam.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Mount/ElfWasp_DisintegrationRay.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>2000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMounted" />
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateCreature" />
+        </targetConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="/Mechanics/Spells/Mounts/ElfWasp/Energize/TmpWaspBuff.(BuffResource).xdb" />
+                <consumeStacks>1</consumeStacks>
+            </Item>
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                    <value>0.33</value>
+                </chanceCalcer>
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="/Mechanics/Spells/Mounts/ElfWasp/SubspaceEnergy/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                <radius>8</radius>
+                <affectGroup>Enemies</affectGroup>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.PartiallyScaledMagicDamage">
+                        <element>ASTRAL</element>
+                        <threatMultiplier>0</threatMultiplier>
+                        <damage>1</damage>
+                        <impactsOnHitTarget>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impactsOnHitTarget>
+                        <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mul>0.15</mul>
+                            <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                <externalCalcer href="/Mechanics/GameRoot/Mount/MountBaseDamageCalcer.(CalcerFloatResource).xdb#xpointer(/constructor.elements.CalcerFloatResource)" />
+                            </mulCalcer>
+                        </scaler>
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

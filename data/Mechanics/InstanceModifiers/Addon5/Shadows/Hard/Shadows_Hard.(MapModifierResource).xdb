@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.map.basicElements.MapModifierResource>
+    <Header>
+        <resourceId>251948</resourceId>
+    </Header>
+    <name href="Shadows_Hard.(MapModifierResource).Name02.txt" />
+    <description href="Shadows_Hard.(MapModifierResource).Description.txt" />
+    <image href="/Interface/Icons/Misc/Quest/BlackCat.(UISingleTexture).xdb" />
+    <mapEffects>
+        <Item type="gameMechanics.elements.effects.AddMapSpecificEffects">
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="Shadow_VisibilityRuleResource.(BuffResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsOn>
+                </Item>
+            </effects>
+        </Item>
+    </mapEffects>
+    <cellEffects>
+        <Item type="gameMechanics.elements.effects.EntityImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactRandomAvatarsOnCell">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                            <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                                <value>1</value>
+                            </chanceCalcer>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                    <destination type="gameMechanics.map.destination.DestinationModified">
+                                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                        <modifiers>
+                                            <Item type="gameMechanics.map.destination.modifier.ModifierSelectReachable">
+                                                <alternatives>
+                                                    <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                                        <verticalRange min="5" max="5" />
+                                                        <horizontalRange min="7" max="12" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.map.destination.modifier.ModifierTraceNear" />
+                                                </alternatives>
+                                                <safetyRadius>0.05</safetyRadius>
+                                            </Item>
+                                        </modifiers>
+                                    </destination>
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="Shadow.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                                    </impacts>
+                                    <object href="Shadow.(MobWorld).xdb" />
+                                    <pool href="/Mechanics/InstanceModifiers/Addon5/SummonLimit.(SummonPool).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.world.ship.elements.PredicateStandingOnShip" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                        <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                    </predicates>
+                </Item>
+            </impacts>
+            <tick>25000</tick>
+            <initialDelay>-1</initialDelay>
+        </Item>
+    </cellEffects>
+    <weight>2</weight>
+</gameMechanics.map.basicElements.MapModifierResource>

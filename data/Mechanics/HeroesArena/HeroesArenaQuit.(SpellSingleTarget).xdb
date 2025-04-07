@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>261790</resourceId>
+    </Header>
+    <element>LIGHTNING</element>
+    <Name href="HeroesArenaQuit.(SpellSingleTarget).Name.txt" />
+    <Description href="HeroesArenaQuit.(SpellSingleTarget).Description.txt" />
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactStartQuiz">
+                <question href="LeaveConfirmation.(Question).xdb#xpointer(/gameMechanics.world.quiz.Question)" />
+                <participants type="gameMechanics.elements.addresseeFinders.AddressesCalcerSingle">
+                    <calcer type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                </participants>
+                <resultsHandler type="gameMechanics.elements.common.SingleResultHandler">
+                    <impactsOnSuccess>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateGreaterLong">
+                                    <lhs type="gameMechanics.elements.calcers.CalcerLongParam">
+                                        <paramName>choice</paramName>
+                                    </lhs>
+                                    <rhs type="gameMechanics.elements.calcers.LongData">
+                                        <value>0</value>
+                                    </rhs>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.scenarios.ImpactEvacuate" />
+                            </impactsIf>
+                        </Item>
+                    </impactsOnSuccess>
+                </resultsHandler>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <canStartNotBeeingInSpellbook>true</canStartNotBeeingInSpellbook>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

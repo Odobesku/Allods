@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>224253</resourceId>
+    </Header>
+    <Name href="R7_CageSphere_10Seconds_Check.(BuffResource).Name.txt" />
+    <Description href="R7_CageSphere_10Seconds_Check.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Psionic/PsionicTimeLapse.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>50</radius>
+                    <affectGroup>Enemies</affectGroup>
+                    <affectHolder>false</affectHolder>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor">
+                                <radius>40</radius>
+                            </distributor>
+                            <data href="R7_CageSphere_10Seconds_Check.(ClientData).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                            <element>SHADOW</element>
+                            <damage>40</damage>
+                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="R7_Cage_DoT.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnCell">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="R7_Cage_Sphere.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="R7_Cage_Sphere.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.world.creature.AvatarFilter" />
+                    <perTargetScaling>Divide</perTargetScaling>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <duration>10000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/RaidInstances/ArchBaseRaid/SiegeBoss/R7_ArchBase_Raid.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

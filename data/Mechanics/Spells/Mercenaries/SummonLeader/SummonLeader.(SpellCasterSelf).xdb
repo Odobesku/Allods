@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>218933</resourceId>
+    </Header>
+    <Name href="/Mechanics/Spells/Mercenaries/SummonLeader/SummonLeader.(SpellCasterSelf)_Name.txt" />
+    <Description href="/Mechanics/Spells/Mercenaries/SummonLeader/SummonLeader.(SpellCasterSelf)_Desc.txt" />
+    <image href="/Interface/Icons/Misc/Itemmall/MercenariesBerserker.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Common/Summon.(SpellVisScripts).xdb" />
+    <sysName>SummonLeader</sysName>
+    <nameTemplate href="/Mechanics/Spells/Mercenaries/SummonLeader/SummonLeader.(SpellCasterSelf)_Name.txt.template" />
+    <descTemplate href="/Mechanics/Spells/Mercenaries/SummonLeader/SummonLeader.(SpellCasterSelf)_Desc.txt.template" />
+    <uiSpellBookPageType>SPELLBOOK_PAGE_OTHER</uiSpellBookPageType>
+    <prepareDuration>3000</prepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <iffPolicy>Friends</iffPolicy>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>10000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+            </Item>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="/Mechanics/Spells/Mercenaries/InstSpecificBuff/CanSummonMercs.(BuffResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
+                <hideText>true</hideText>
+                <key href="/System/ContentKeys/Mercenaries.(ContentKey).xdb" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateInRaid" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                <hideText>true</hideText>
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.predicates.PredicateMobNear">
+                            <radius>35</radius>
+                            <mobs>
+                                <Item href="/Characters/Kania_male/Instances/ZoneLeague1/MercNPC_Leader.(MobWorld).xdb" />
+                            </mobs>
+                        </predicate>
+                    </Item>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.predicates.PredicateMobNear">
+                            <radius>35</radius>
+                            <mobs>
+                                <Item href="/Characters/Hadagan_male/Instances/ZoneHadagan1/MercNPC_Leader.(MobWorld).xdb" />
+                            </mobs>
+                        </predicate>
+                    </Item>
+                </predicates>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/Spells/Mercenaries/SummonLeader/DisintegrateLeader.(BuffResource).xdb" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="/Mechanics/Spells/Mercenaries/SummonLeader/DisintegrateLeader.(BuffResource).xdb" />
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateFaction">
+                        <faction href="/World/Factions/League.xdb" />
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                        <destination type="gameMechanics.map.destination.RelativeTrailPos">
+                            <center type="gameMechanics.map.destination.RelativeRotatePos">
+                                <base type="gameMechanics.map.destination.RelativePos" />
+                                <offset>3</offset>
+                                <turn>ToTarget</turn>
+                            </center>
+                        </destination>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                <impacts>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="/Mechanics/Spells/Mercenaries/SummonLeader/DisintegrateLeader.(BuffResource).xdb" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/Mechanics/Spells/Mercenaries/SummonLeader/DisintegrateLeader.(BuffResource).xdb" />
+                            </Item>
+                        </impacts>
+                        <object href="/Characters/Kania_male/Instances/ZoneLeague1/MercNPC_Leader.(MobWorld).xdb" />
+                        <level type="gameMechanics.elements.calcers.CalcerLevel" />
+                        <planeSyncStrategy>Sync</planeSyncStrategy>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateFaction">
+                                <faction href="/World/Factions/Empire.xdb" />
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                <destination type="gameMechanics.map.destination.RelativeTrailPos">
+                                    <center type="gameMechanics.map.destination.RelativeRotatePos">
+                                        <base type="gameMechanics.map.destination.RelativePos" />
+                                        <offset>3</offset>
+                                        <turn>ToTarget</turn>
+                                    </center>
+                                </destination>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                        <impacts>
+                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                <buff href="/Mechanics/Spells/Mercenaries/SummonLeader/DisintegrateLeader.(BuffResource).xdb" />
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="/Mechanics/Spells/Mercenaries/SummonLeader/DisintegrateLeader.(BuffResource).xdb" />
+                                    </Item>
+                                </impacts>
+                                <object href="/Characters/Hadagan_male/Instances/ZoneHadagan1/MercNPC_Leader.(MobWorld).xdb" />
+                                <level type="gameMechanics.elements.calcers.CalcerLevel" />
+                                <planeSyncStrategy>Sync</planeSyncStrategy>
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impactsElse>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.constructor.basicElements.PredicateAnd">
+                            <predicates>
+                                <Item type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
+                                    <assistantResource href="/Mechanics/Characters/HumMobs/Mercenaries/Tank/Tank.(AssistantResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
+                                    <assistantResource href="/Mechanics/Characters/HumMobs/Mercenaries/Healer/Healer.(AssistantResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
+                                    <assistantResource href="/Mechanics/Characters/HumMobs/Mercenaries/Archer/Archer.(AssistantResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
+                                    <assistantResource href="/Mechanics/Characters/HumMobs/Mercenaries/Berserker/Berserker.(AssistantResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
+                                    <assistantResource href="/Mechanics/Characters/HumMobs/Mercenaries/Witcher/Witcher.(AssistantResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
+                                    <assistantResource href="/Mechanics/Characters/HumMobs/Mercenaries/Wizard/Wizard.(AssistantResource).xdb" />
+                                </Item>
+                            </predicates>
+                        </predicate>
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactCaseGeneric">
+                        <cases>
+                            <Item>
+                                <predicates>
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/LFG/Buffs/Phase2Mercs.(BuffResource).xdb" />
+                                    </Item>
+                                </predicates>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactInhabitAssistant">
+                                        <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Tank/Tank.(AssistantResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactInhabitAssistant">
+                                        <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Healer/Healer.(AssistantResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactInhabitAssistant">
+                                        <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Archer/Archer.(AssistantResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactInhabitAssistant">
+                                        <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Berserker/Berserker.(AssistantResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactInhabitAssistant">
+                                        <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Witcher/Witcher.(AssistantResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactInhabitAssistant">
+                                        <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Wizard/Wizard.(AssistantResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                        <buff href="/Mechanics/LFG/Buffs/Phase2Mercs.(BuffResource).xdb" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                            <Item>
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateHasItemsCount">
+                                        <items>
+                                            <Item href="/Items/QuestItems/ZoneLeague1/Quest_Learn_Mercenaries/Quest_Learn_Mercenaries.(ItemResource).xdb" />
+                                        </items>
+                                        <totalCount>1</totalCount>
+                                    </Item>
+                                </predicates>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateAssistantInhabits">
+                                                <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Tank/Tank.(AssistantResource).xdb" />
+                                            </Item>
+                                        </predicates>
+                                        <elseImpacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactInhabitAssistant">
+                                                <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Tank/Tank.(AssistantResource).xdb" />
+                                            </Item>
+                                        </elseImpacts>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateAssistantInhabits">
+                                                <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Healer/Healer.(AssistantResource).xdb" />
+                                            </Item>
+                                        </predicates>
+                                        <elseImpacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactInhabitAssistant">
+                                                <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Healer/Healer.(AssistantResource).xdb" />
+                                            </Item>
+                                        </elseImpacts>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateAssistantInhabits">
+                                                <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Archer/Archer.(AssistantResource).xdb" />
+                                            </Item>
+                                        </predicates>
+                                        <elseImpacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactInhabitAssistant">
+                                                <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Archer/Archer.(AssistantResource).xdb" />
+                                            </Item>
+                                        </elseImpacts>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateAssistantInhabits">
+                                                <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Berserker/Berserker.(AssistantResource).xdb" />
+                                            </Item>
+                                        </predicates>
+                                        <elseImpacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactInhabitAssistant">
+                                                <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Berserker/Berserker.(AssistantResource).xdb" />
+                                            </Item>
+                                        </elseImpacts>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateAssistantInhabits">
+                                                <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Witcher/Witcher.(AssistantResource).xdb" />
+                                            </Item>
+                                        </predicates>
+                                        <elseImpacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactInhabitAssistant">
+                                                <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Witcher/Witcher.(AssistantResource).xdb" />
+                                            </Item>
+                                        </elseImpacts>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateAssistantInhabits">
+                                                <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Wizard/Wizard.(AssistantResource).xdb" />
+                                            </Item>
+                                        </predicates>
+                                        <elseImpacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactInhabitAssistant">
+                                                <assistant href="/Mechanics/Characters/HumMobs/Mercenaries/Wizard/Wizard.(AssistantResource).xdb" />
+                                            </Item>
+                                        </elseImpacts>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactDestroyItem">
+                                        <item href="/Items/QuestItems/ZoneLeague1/Quest_Learn_Mercenaries/Quest_Learn_Mercenaries.(ItemResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                        <id href="/World/Quests/ZoneHadagan1/Quest_Learn_Mercenaries02/CountId01.(QuestCountId).xdb" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </cases>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

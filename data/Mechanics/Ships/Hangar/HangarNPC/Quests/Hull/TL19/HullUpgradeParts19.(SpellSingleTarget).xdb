@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>243637</resourceId>
+    </Header>
+    <Name href="/Mechanics/Ships/Hangar/HangarNPC/Quests/Hull/TL15/HullUpgradeParts.(SpellSingleTarget).Name.txt" />
+    <Description href="/Mechanics/Ships/Hangar/HangarNPC/Quests/Hull/TL15/HullUpgradeParts.(SpellSingleTarget).Description.txt" />
+    <autoAppendToActionPanel>false</autoAppendToActionPanel>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                <predicate type="gameMechanics.constructor.basicElements.PredicateAnd">
+                    <predicates>
+                        <Item type="gameMechanics.world.ship.elements.PredicateInHangar" />
+                        <Item type="gameMechanics.world.ship.elements.PredicateHasSummonedShip" />
+                    </predicates>
+                </predicate>
+                <clientData href="/Mechanics/Ships/Hangar/HangarNPC/Quests/Hull/Hangar.(ClientData).xdb" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.world.ship.elements.PredicateHasShipInProgress" />
+            </Item>
+            <Item type="gameMechanics.elements.resources.ResourceActiveItem">
+                <number>15</number>
+            </Item>
+            <Item type="gameMechanics.elements.resources.ResourceAltCurrency">
+                <currency href="/Mechanics/Ships/CraftCrystals/CraftCrystal_TL19.(AlternativeCurrency).xdb" />
+                <count>5</count>
+            </Item>
+            <Item type="gameMechanics.world.ship.elements.PredicateHasBoundShip" />
+            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                <predicate type="gameMechanics.elements.predicates.PredicateHasNoBorrowedShip" />
+                <clientData href="/Mechanics/Ships/Hangar/HangarNPC/Quests/Hull/HasBorrowedShip.(ClientData).xdb" />
+            </Item>
+            <Item type="gameMechanics.world.ship.elements.PredicateOnBoundShip">
+                <predicates>
+                    <Item type="gameMechanics.world.ship.elements.PredicateShipOwner" />
+                </predicates>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactStartQuiz">
+                <question href="/Mechanics/Ships/Hangar/HangarNPC/Quests/Hull/Upgrade.(Question).xdb" />
+                <participants type="gameMechanics.elements.addresseeFinders.AddressesFinderSelf" />
+                <resultsHandler type="gameMechanics.elements.common.SingleResultHandler">
+                    <impactsOnSuccess>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateEqualsLong">
+                                    <lhs type="gameMechanics.elements.calcers.LongData">
+                                        <value>1</value>
+                                    </lhs>
+                                    <rhs type="gameMechanics.elements.calcers.CalcerLongParam">
+                                        <paramName>choice</paramName>
+                                    </rhs>
+                                </Item>
+                                <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                                    <predicate type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                        <predicates>
+                                            <Item type="gameMechanics.world.ship.elements.PredicateInHangar" />
+                                            <Item type="gameMechanics.world.ship.elements.PredicateHasSummonedShip" />
+                                        </predicates>
+                                    </predicate>
+                                    <clientData href="/Mechanics/Ships/Hangar/HangarNPC/Quests/Hull/Hangar.(ClientData).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.world.ship.elements.PredicateHasShipInProgress" />
+                                </Item>
+                                <Item type="gameMechanics.elements.resources.ResourceAltCurrency">
+                                    <currency href="/Mechanics/Ships/CraftCrystals/CraftCrystal_TL19.(AlternativeCurrency).xdb" />
+                                    <count>5</count>
+                                </Item>
+                                <Item type="gameMechanics.world.ship.elements.PredicateHasBoundShip" />
+                                <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateHasNoBorrowedShip" />
+                                    <clientData href="/Mechanics/Ships/Hangar/HangarNPC/Quests/Hull/HasBorrowedShip.(ClientData).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.predicates.PredicateHasItemsCount">
+                                    <items>
+                                        <Item href="HullUpgradeParts19.(ItemResource).xdb" />
+                                    </items>
+                                    <totalCount>15</totalCount>
+                                    <checkDress>false</checkDress>
+                                </Item>
+                                <Item type="gameMechanics.world.ship.elements.PredicateOnBoundShip">
+                                    <predicates>
+                                        <Item type="gameMechanics.world.ship.elements.PredicateShipOwner" />
+                                    </predicates>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                                    <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderShip" />
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateGreaterLong">
+                                                    <lhs type="gameMechanics.elements.calcers.LongData">
+                                                        <value>19</value>
+                                                    </lhs>
+                                                    <rhs type="gameMechanics.world.ship.elements.calcers.CalcerShipTL" />
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactDestroyItemsCount">
+                                                            <item href="HullUpgradeParts19.(ItemResource).xdb" />
+                                                            <count type="gameMechanics.elements.calcers.LongData">
+                                                                <value>15</value>
+                                                            </count>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+                                                            <currency href="/Mechanics/Ships/CraftCrystals/CraftCrystal_TL19.(AlternativeCurrency).xdb" />
+                                                            <sumCalcer type="gameMechanics.elements.calcers.FloatData">
+                                                                <value>-5</value>
+                                                            </sumCalcer>
+                                                        </Item>
+                                                        <Item type="gameMechanics.world.ship.elements.ImpactAddShipInUpgrade">
+                                                            <constructionTime>864000000</constructionTime>
+                                                            <modification type="gameMechanics.world.ship.elements.ImpactAddShipInUpgrade$ShipModificationTechLevel">
+                                                                <techLevel>19</techLevel>
+                                                            </modification>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impactsIf>
+                                            <impactsElse>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                            <data href="/Mechanics/Ships/Hangar/HangarNPC/Quests/Hull/TL.(ClientData).xdb" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impactsElse>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsOnSuccess>
+                </resultsHandler>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

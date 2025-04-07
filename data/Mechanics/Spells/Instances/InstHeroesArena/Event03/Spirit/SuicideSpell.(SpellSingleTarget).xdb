@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>195708</resourceId>
+    </Header>
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>50</value>
+    </range>
+    <needLos>false</needLos>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.map.variables.PredicateMapVariableGreater">
+                <variableResource href="/Maps/Inst_HeroesArena/ScriptZones/WaveNumberNew.xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                <minValue type="gameMechanics.elements.calcers.FloatData">
+                    <value>12.5</value>
+                </minValue>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateIsRuleActive">
+                    <rule href="/Mechanics/Spells/Instances/InstHeroesArena/DeactivateNewSpells.(RuleResource).xdb#xpointer(/gameMechanics.world.rules.RuleResource)" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+                <level>0.15</level>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMobClass">
+                <mobClass href="/Mechanics/MobClasses/HalflingFighter.xdb#xpointer(/gameMechanics.world.mob.MobClass)" />
+            </Item>
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                <projectileData>
+                    <moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
+                    <resource href="SuicideAnimation.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                </projectileData>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                <projectileData>
+                    <moveType type="gameMechanics.world.projectile.MoveTypePursuitSpellTarget" />
+                    <resource href="Soul.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                </projectileData>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>226194</resourceId>
+    </Header>
+    <Name href="Spell01.(SpellArea).Name.txt" />
+    <visualScripts href="/Spells/VisScripts/Bosses/UmoirRaid_GoblinTrioBoss/GoblinBossBooby_Cleave.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>5000</duration>
+        </cooldown>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.RunImpactsInShape">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="Buff01.(BuffResource).xdb" />
+                            </Item>
+                        </impactsIf>
+                        <impactsElse>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                            <mobs>
+                                                <Item href="/Mechanics/RaidInstances/UmoirRaid/4_GoblinTrioBoss/Goblin02Boss.(MobWorld).xdb" />
+                                                <Item href="/Mechanics/RaidInstances/UmoirRaid/4_GoblinTrioBoss/Goblin03Boss.(MobWorld).xdb" />
+                                            </mobs>
+                                        </predicate>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.predicates.PredicateCreature" />
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="Buff01.(BuffResource).xdb" />
+                                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                            <multiplier>4</multiplier>
+                                        </durationScaler>
+                                    </Item>
+                                </impactsIf>
+                            </Item>
+                        </impactsElse>
+                    </Item>
+                </impacts>
+                <shape type="gameMechanics.constructor.schemes.spell.area.Cone">
+                    <angle type="constructor.basicElements.AngleDegrees">
+                        <value>45</value>
+                    </angle>
+                </shape>
+                <affectGroup>All</affectGroup>
+                <radius type="gameMechanics.elements.impacts.RunImpactsInShape$FixedRadius">
+                    <value>10</value>
+                </radius>
+                <shapeCenterPosition>Caster</shapeCenterPosition>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                <minDamage>3</minDamage>
+                <maxDamage>4</maxDamage>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Cone">
+        <angle type="constructor.basicElements.AngleDegrees">
+            <value>45</value>
+        </angle>
+    </shape>
+    <shapeCenterPosition>Caster</shapeCenterPosition>
+    <radius>10</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

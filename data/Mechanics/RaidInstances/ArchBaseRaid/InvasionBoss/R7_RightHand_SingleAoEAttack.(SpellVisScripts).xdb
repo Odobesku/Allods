@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<actionBarStart type="CreatureEffectsAction">
+		<visualEffects>
+			<Item>
+				<delay>250</delay>
+				<effectFx href="/Spells/FX/Spells/InvasionBossAdds_Ready01.(VisObjectTemplate).xdb" />
+				<lockScale>true</lockScale>
+				<scale>3.8</scale>
+				<locator>FROM_LOCATOR_NAME</locator>
+				<locatorName>Slot_Special01</locatorName>
+			</Item>
+		</visualEffects>
+	</actionBarStart>
+	<wholeCasting type="CreatureAnimationAction">
+		<animations>
+			<Item>attack</Item>
+		</animations>
+		<channel>CHANNEL_ATTACK</channel>
+		<channelOverrideScript />
+		<advanced>
+			<offendType>ONEOFFEND_ONETARGET</offendType>
+			<stopIfRotated>true</stopIfRotated>
+			<stopIfMoved>true</stopIfMoved>
+			<eventPlaybackEnd>true</eventPlaybackEnd>
+			<turnToTarget>NO_TURN</turnToTarget>
+		</advanced>
+	</wholeCasting>
+	<launch type="VisActionList">
+		<play>Simultaneously</play>
+		<playWhile />
+		<elements>
+			<Item type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile type="VisActionDelay">
+					<time>1500</time>
+				</playWhile>
+				<elements>
+					<Item type="CreatureChannelDirectAction">
+						<channelingFx href="/Spells/FX/Spells/Channel_InvasionBossAdds_MainRed.(VisObjectTemplate).xdb" />
+						<fxLength>20</fxLength>
+						<startPoint type="VisPointLocator">
+							<locator>FROM_LOCATOR_NAME</locator>
+							<locatorName>Slot_Special01</locatorName>
+						</startPoint>
+						<alternativeStartPoint />
+						<endPoint type="VisPointLocator">
+							<shift y="1" />
+							<locator>Slot_Global</locator>
+						</endPoint>
+						<alternativeEndPoint type="VisPointLocator">
+							<locator>Slot_TopFX</locator>
+						</alternativeEndPoint>
+						<scaleTextureU>true</scaleTextureU>
+						<offendTime />
+						<secondaryTargetParams>
+							<channelingFx href="" />
+							<offendTime />
+						</secondaryTargetParams>
+					</Item>
+				</elements>
+			</Item>
+			<Item type="CreatureEffectsAction">
+				<visualEffects>
+					<Item>
+						<effectFx href="/Spells/FX/Mobs/PortalBoss_Discharge_Hit.(VisObjectTemplate).xdb" />
+						<scale>2</scale>
+						<locator>FROM_LOCATOR_NAME</locator>
+						<locatorName>Slot_Special01</locatorName>
+					</Item>
+				</visualEffects>
+			</Item>
+			<Item type="CreatureEffectsOnTarget">
+				<visualEffects>
+					<Item>
+						<effectFx href="/Spells/FX/Spells/Cannon_MW_HitExplosion.(VisObjectTemplate).xdb" />
+						<effectAlias href="" />
+						<fixPoint>true</fixPoint>
+						<lockScale>true</lockScale>
+						<scale>1.1</scale>
+						<locator>Slot_Global</locator>
+						<offendTime />
+					</Item>
+				</visualEffects>
+				<stopOnDeath>false</stopOnDeath>
+			</Item>
+		</elements>
+		<stopOnDeath>false</stopOnDeath>
+	</launch>
+	<playOnTargets>
+		<specialAction />
+	</playOnTargets>
+</SpellVisScripts>

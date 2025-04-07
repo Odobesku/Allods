@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>188918</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="Boss02_Carpet.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Boss02_Carpet.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </onEnter>
+            <onLeave>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="Boss02_Carpet.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.HealthTrigger">
+            <healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
+                <multiplier>0.4</multiplier>
+            </healthOn>
+            <healthOff type="gameMechanics.elements.calcers.FullHealthCalcer">
+                <multiplier>0.1</multiplier>
+            </healthOff>
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHealthHigher">
+                            <level>0.11</level>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactMobMorph">
+                            <newMobWorld href="Boss02_AstralElem.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                            <data href="/Mechanics/Spells/AstarlIslands/AI61/AI61_Commoners/AI61_Boss02_Morph.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactMobChat">
+                            <msg href="/Mechanics/Spells/AstarlIslands/AI61/AI61_Commoners/AI61_Boss02_Morph.(TextMessage).xdb#xpointer(/gameMechanics.world.TextMessage)" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+    <disableWhileDead>true</disableWhileDead>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

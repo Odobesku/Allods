@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>196757</resourceId>
+    </Header>
+    <Name href="Buff02.(BuffResource).Name.txt" />
+    <Description href="Buff02.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Misc/Herbarium/TumbleWeed.(UISingleTexture).xdb" />
+    <visScript href="/Spells/BuffVisScripts/HotEvil.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                    <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Buff01.xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EventTrigger">
+            <eventClasses>
+                <Item>gameMechanics.elements.events.EventDeath</Item>
+            </eventClasses>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Buff02.(BuffResource).xdb" />
+                    <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactsIf">
+                    <predicate type="gameMechanics.constructor.basicElements.BinaryPredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateDistance">
+                                <range min="0" max="40" />
+                            </Item>
+                            <Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
+                                <onMaster type="gameMechanics.elements.predicates.PredicateHealthHigher">
+                                    <level>0.1</level>
+                                </onMaster>
+                            </Item>
+                        </predicates>
+                    </predicate>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.PureHeal">
+                            <heal>0.1</heal>
+                            <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer" />
+                            </scalerTarget>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Buff02.(BuffResource).xdb" />
+                            <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                            <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="Buff01.xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+            <initialDelay>100</initialDelay>
+        </Item>
+    </effects>
+    <duration>6000</duration>
+    <isHelpful>true</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>204635</resourceId>
+        <isPrototype>true</isPrototype>
+        <Variables>
+            <grade>/Mechanics/Mounts/Groups/Mammoth5Grade.xdb#xpointer(/gameMechanics.constructor.schemes.mount.MountGroupResource)</grade>
+            <buff>Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)</buff>
+        </Variables>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/CrowdControlSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <element>PHYSICAL</element>
+    <Name href="Spell_Name.txt" />
+    <Description href="Spell_Desc.txt" />
+    <image href="/Interface/Icons/Mounts/SpellsMounts/BlowTusks.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Mount/MammothTusks.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="Spell_Name.txt.template" />
+    <descTemplate href="Spell_Desc.txt.template" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <level>1</level>
+    <prepareDuration>0</prepareDuration>
+    <immutablePrepareDuration>false</immutablePrepareDuration>
+    <needLos>true</needLos>
+    <targetType>STTCurrentTarget</targetType>
+    <isAggro>true</isAggro>
+    <replaceLowRanks>true</replaceLowRanks>
+    <isWorkOnDead>false</isWorkOnDead>
+    <ranks>
+        <Item href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        <Item href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+    </ranks>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>true</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>false</ignoreGlobalCooldown>
+    <launchWhenReady>false</launchWhenReady>
+    <needInFront>true</needInFront>
+    <mechanics>
+        <cooldown>
+            <stage>Launch</stage>
+            <duration>40000</duration>
+            <group href="" />
+            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mul>-0.025</mul>
+                <mulCalcer type="gameMechanics.elements.calcers.CalcerMountFromGroupMaxLevel">
+                    <group hrefvar="grade" />
+                </mulCalcer>
+                <sum>1</sum>
+            </scaler>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMounted">
+                <hideText>false</hideText>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateMountFromGroupFeeded">
+                <hideText>false</hideText>
+                <group hrefvar="grade" />
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/Mounts/Prototypes/AntiNormalMountCC.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                <time>1000</time>
+                <impactsOnLand>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff hrefvar="buff" />
+                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mul>0.1</mul>
+                            <mulCalcer type="gameMechanics.elements.calcers.CalcerMountFromGroupMaxLevel">
+                                <group hrefvar="grade" />
+                            </mulCalcer>
+                            <sum>1</sum>
+                        </durationScaler>
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="/Mechanics/Mounts/Prototypes/AntiNormalMountCC.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsOnLand>
+                <distance>20</distance>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>0</speed>
+    <isAE>false</isAE>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

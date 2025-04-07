@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>252368</resourceId>
+    </Header>
+    <Name href="RealDamagingBuff.(BuffResource).Name.txt" />
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.StackBuff">
+                            <buff href="EvolvedVirus.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <delta type="gameMechanics.elements.calcers.FloatData">
+                                <value>1</value>
+                            </delta>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="EvolutionCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="EvolvedVirus.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsFromPhantom">
+                            <phantom href="JumpingDeathPhantom.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.PureDamage">
+                                    <damage>0.01</damage>
+                                    <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                        <mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                                            <calcers>
+                                                <Item type="gameMechanics.elements.calcers.FullHealthCalcer" />
+                                                <Item type="gameMechanics.constructor.basicElements.ScalerCalcer">
+                                                    <scaler type="gameMechanics.elements.scalers.ExponentialScaler">
+                                                        <pow type="gameMechanics.elements.calcers.CalcerLongMulFloat">
+                                                            <calcerLong type="gameMechanics.elements.calcers.LongData">
+                                                                <value>1</value>
+                                                            </calcerLong>
+                                                            <calcerFloat type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                                                <buff href="EvolvedVirus.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </calcerFloat>
+                                                        </pow>
+                                                    </scaler>
+                                                    <value>1.3</value>
+                                                </Item>
+                                            </calcers>
+                                        </mulCalcer>
+                                    </scalerTarget>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <initialDelay>2000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactsFromPhantom">
+                                    <phantom href="JumpingDeathPhantom.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.DirectDamage">
+                                            <damage>0.01</damage>
+                                            <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                <mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                                                    <calcers>
+                                                        <Item type="gameMechanics.elements.calcers.FullHealthCalcer" />
+                                                        <Item type="gameMechanics.constructor.basicElements.ScalerCalcer">
+                                                            <scaler type="gameMechanics.elements.scalers.ExponentialScaler">
+                                                                <pow type="gameMechanics.elements.calcers.CalcerLongMulFloat">
+                                                                    <calcerLong type="gameMechanics.elements.calcers.LongData">
+                                                                        <value>1</value>
+                                                                    </calcerLong>
+                                                                    <calcerFloat type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                                                        <buff href="EvolvedVirus.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                    </calcerFloat>
+                                                                </pow>
+                                                            </scaler>
+                                                            <value>1.3</value>
+                                                        </Item>
+                                                    </calcers>
+                                                </mulCalcer>
+                                            </scalerTarget>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

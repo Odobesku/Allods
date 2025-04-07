@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<actionBarStart type="VisActionList">
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="CreatureAnimationAction">
+				<mode>LOOP</mode>
+				<animations>
+					<Item>readySpellOmni</Item>
+				</animations>
+			</Item>
+			<Item type="CreatureEffectsAction">
+				<visualEffects>
+					<Item>
+						<effectFx href="/Spells/FX/Spells/ReadySpellDirect01Down.(VisObjectTemplate).xdb" />
+						<locator>Slot_Global</locator>
+					</Item>
+				</visualEffects>
+			</Item>
+		</elements>
+	</actionBarStart>
+	<wholeCasting type="CreatureEffectsAction">
+		<visualEffects>
+			<Item>
+				<effectFx href="/Spells/FX/World/GlowYellowComplex.(VisObjectTemplate).xdb" />
+				<scale>5</scale>
+				<fadeInTime>3000</fadeInTime>
+				<fadeOutTime>300</fadeOutTime>
+				<locator>Slot_Head</locator>
+				<offset y="-0.6" z="-0.9" />
+			</Item>
+		</visualEffects>
+	</wholeCasting>
+	<launch type="VisActionList">
+		<play>Simultaneously</play>
+		<playWhile type="VisActionDelay">
+			<time>1000</time>
+		</playWhile>
+		<preconditional>false</preconditional>
+		<elements>
+			<Item type="CreatureAnimationAction">
+				<mode>DIE</mode>
+				<animations>
+					<Item>spellCastDirected</Item>
+				</animations>
+				<advanced>
+					<offendType>ONEOFFEND_ONETARGET</offendType>
+					<eventPlaybackEnd>true</eventPlaybackEnd>
+					<waitRealEvent>WAIT_DEFAULT</waitRealEvent>
+				</advanced>
+			</Item>
+			<Item type="CreatureChannelDirectAction">
+				<channelingFx href="/Spells/FX/Mobs/Carrier_Light_Architect_Channel_Fast.(VisObjectTemplate).xdb" />
+				<fxLength>20</fxLength>
+				<startPoint type="VisPointLocator">
+					<shift z="-0.8" />
+					<locator>Slot_Head</locator>
+				</startPoint>
+				<endPoint type="VisPointLocator">
+					<locator>Slot_FX</locator>
+					<member>Default_Member</member>
+				</endPoint>
+				<alternativeEndPoint type="VisPointLocator">
+					<locator>Slot_Global</locator>
+				</alternativeEndPoint>
+			</Item>
+			<Item type="CreatureEffectsAction">
+				<visualEffects>
+					<Item>
+						<effectFx href="/Spells/FX/Mobs/PortalBoss_Discharge_Hit.(VisObjectTemplate).xdb" />
+						<locator>Slot_FX</locator>
+					</Item>
+				</visualEffects>
+			</Item>
+		</elements>
+	</launch>
+	<playOnTargets>
+		<specialAction type="CreatureEffectsAction">
+			<visualEffects>
+				<Item>
+					<effectFx href="/Spells/FX/Spells/Sealbreaker_Death_Hit.(VisObjectTemplate).xdb" />
+					<scale>0.6</scale>
+					<locator>Slot_BodyFX</locator>
+				</Item>
+			</visualEffects>
+		</specialAction>
+	</playOnTargets>
+</SpellVisScripts>

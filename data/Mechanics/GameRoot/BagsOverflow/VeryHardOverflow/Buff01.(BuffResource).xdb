@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>239150</resourceId>
+    </Header>
+    <Name href="Buff01.(BuffResource).Name.txt" />
+    <Description href="Buff01.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Equipment/Bag/ImpossiblyHighBurden.(UISingleTexture).xdb" />
+    <sysUIScriptName>BagsOverflow</sysUIScriptName>
+    <effects>
+        <Item type="gameMechanics.elements.effects.DeathTrigger" />
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateGroupSpellActiveState">
+                                    <group href="/Mechanics/Spells/Groups/LooterSpells.xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                    <impactsResource href="/Mechanics/Looters/Return/LooterReturn.(ImpactListResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/GameRoot/BagsOverflow/HardOverflow/Buff01.xdb" />
+                            </predicate>
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.constructor.schemes.spell.spellstate.PredicateGroupSpellActiveState">
+                                <group href="/Mechanics/Spells/Groups/LooterSpells.xdb" />
+                            </predicate>
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/GameRoot/BagsOverflow/NormalOverflow/Buff01.xdb" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                            <impactsResource href="/Mechanics/Looters/Return/LooterReturn2.(ImpactListResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.WhileAlive">
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectDisableAct">
+                    <actions>
+                        <Item>Jump</Item>
+                    </actions>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectMountSpeedModifier">
+                    <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                        <coeff>-0.9</coeff>
+                    </effectScaler>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+                    <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                        <coeff>-0.9</coeff>
+                    </effectScaler>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <isStackable>false</isStackable>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb" />
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

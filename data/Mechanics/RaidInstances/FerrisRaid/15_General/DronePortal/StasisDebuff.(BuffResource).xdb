@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>222997</resourceId>
+    </Header>
+    <Name href="StasisDebuff.(BuffResource).Name.txt" />
+    <Description href="StasisDebuff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Misc/Event/SparkStaticDot.(UISingleTexture).xdb" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Mobs/Architect_Swarm_StaticDebuff.(VisObjectTemplate).xdb" />
+            <locator>Slot_FX</locator>
+            <offset y="0.1" />
+        </Item>
+    </visualEffects>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <effects>
+                <Item type="gameMechanics.elements.effects.MagicDoT">
+                    <parameters>
+                        <damagePerTick>5</damagePerTick>
+                        <affectOnStartTick>true</affectOnStartTick>
+                        <impactsPerTick>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="StaticDebuffStun.(BuffResource).xdb" />
+                                <durationScalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mulCalcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                        <buff href="StasisDebuff.(BuffResource).xdb" />
+                                    </mulCalcer>
+                                </durationScalerTarget>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                <data href="StaticDebuffStunEffect.(ClientData).xdb" />
+                            </Item>
+                        </impactsPerTick>
+                    </parameters>
+                    <element>ASTRAL</element>
+                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <stackLimit>100</stackLimit>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/Magics.xdb" />
+        <Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

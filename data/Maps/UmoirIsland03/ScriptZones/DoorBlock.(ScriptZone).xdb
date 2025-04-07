@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.map.scriptZone.ScriptZone>
+    <Header>
+        <resourceId>29475</resourceId>
+    </Header>
+    <filter type="gameMechanics.world.creature.AvatarFilter" />
+    <conditionsIn>
+        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+            <quest href="/World/Quests/UmoirIsland03/UI03_Quest02_1/UI03_Quest02_1.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+            <status>Started</status>
+        </Item>
+        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+            <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+                <quest href="/World/Quests/UmoirIsland03/UI03_Quest02_1/UI03_Quest02_1.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                <counterResource href="/Creatures/MountSpider/Instances/UmoirIsland03/RobotBoss.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                <value>1</value>
+            </predicate>
+        </Item>
+    </conditionsIn>
+    <impactsIn>
+        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+            <spawn>
+                <scriptID>LabDoor01</scriptID>
+                <map href="/Maps/UmoirIsland03/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+            </spawn>
+            <impacts>
+                <Item type="gameMechanics.elements.device.DoorSwitch">
+                    <switchType>Close</switchType>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                    <visualState>2</visualState>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                            <delay>6000</delay>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.device.DeviceDie" />
+            </impacts>
+            <spawnResource href="/Maps/UmoirIsland03/SpawnTables/RobotSpiderBox.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+        </Item>
+        <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+            <table href="/Maps/UmoirIsland03/SpawnTables/RobotSpiderBoss.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactDisableScriptZoneTemporarily">
+            <zone href="DoorBlock.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+            <period>600000</period>
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+            <impacts>
+                <Item type="gameMechanics.world.avatar.assistants.ImpactsToAssistant">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactForgetAbility">
+                            <ability href="/Characters/Hadagan_male/Instances/UmoirIsland03/DeathStun.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/World/Quests/UmoirIsland03/UI03_Quest02/LifeGuard.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                    <assistantResource href="/World/Quests/UmoirIsland03/UI03_Quest01/SvyatogorAssistant.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+                </Item>
+            </impacts>
+        </Item>
+    </impactsIn>
+    <considerAsWhole>true</considerAsWhole>
+</gameMechanics.map.scriptZone.ScriptZone>

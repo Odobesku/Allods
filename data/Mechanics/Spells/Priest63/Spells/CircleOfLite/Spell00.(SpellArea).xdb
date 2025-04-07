@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>207210</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/Magics.xdb" />
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/InsuranceHealTrigger.xdb" />
+    </groups>
+    <element>HOLY</element>
+    <Name href="Spell00.(SpellArea).Name.txt" />
+    <Description href="Spell00.(SpellArea).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value>1</value>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                            <externalCalcer hrefvar="externalCalcer" />
+                        </mulCalcer>
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                        <formula>HealScaler</formula>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Priest/ExpelDemon.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Priest/CircleOfLite.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>30</value>
+    </range>
+    <prepareDuration>3000</prepareDuration>
+    <targetType>STTPoint</targetType>
+    <ranks>
+        <Item href="Spell01.(SpellArea).xdb" />
+        <Item href="Spell02.(SpellArea).xdb" />
+        <Item href="Spell03.(SpellArea).xdb" />
+    </ranks>
+    <iffPolicy>Friends</iffPolicy>
+    <launchWhenReady>true</launchWhenReady>
+    <mechanics>
+        <cooldown>
+            <duration>30000</duration>
+        </cooldown>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceIf">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                        <ability href="/Mechanics/Spells/Priest63/Abilities/CircleOfLiteZeal/Ability01.(AbilityResource).xdb" />
+                    </Item>
+                </predicates>
+                <resourceIf type="gameMechanics.elements.resources.ResourceVariable">
+                    <variable href="/Mechanics/Spells/Priest63/Abilities/Zeal/Zeal.(VariableResource).xdb" />
+                    <sub>1</sub>
+                </resourceIf>
+                <resourceElse type="gameMechanics.elements.resources.ResourceVariable">
+                    <variable href="/Mechanics/Spells/Priest63/Abilities/Zeal/Zeal.(VariableResource).xdb" />
+                    <sub>0</sub>
+                </resourceElse>
+            </Item>
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                <projectileData>
+                    <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                        <destination type="gameMechanics.map.destination.DestinationModified">
+                            <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+                            <modifiers>
+                                <Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
+                            </modifiers>
+                        </destination>
+                    </moveType>
+                    <resource hrefvar="resource" />
+                </projectileData>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <radius>10</radius>
+    <stopOnNoTargets>false</stopOnNoTargets>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

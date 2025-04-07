@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>204777</resourceId>
+    </Header>
+    <Name href="FireCone.(SpellArea).Name.txt" />
+    <visualScripts href="FireCone.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="FireCone.(SpellArea).NameTemplate.txt" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>10000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateCreature" />
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/Spells/AstarlIslands/AI45/AI45_SummerLizardFire_Buff_Animation.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                <delay>500</delay>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                        <data href="/Mechanics/Spells/AstarlIslands/AI45/AI45_SummerLizardFire.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                        <element>FIRE</element>
+                        <damage>35</damage>
+                        <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="FireDoT.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Cone">
+        <angle type="constructor.basicElements.AngleDegrees">
+            <value>45</value>
+        </angle>
+    </shape>
+    <shapeCenterPosition>Caster</shapeCenterPosition>
+    <radius>10</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

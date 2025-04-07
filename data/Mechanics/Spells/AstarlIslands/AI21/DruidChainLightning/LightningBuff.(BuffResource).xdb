@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>189206</resourceId>
+    </Header>
+    <Name href="LightningBuff.(BuffResource).Name.txt" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactsFromPhantom">
+                    <phantom href="/Characters/Kania_male/Instances/AstralIsle21/DruidMele.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                            <element>LIGHTNING</element>
+                            <damage>50</damage>
+                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="JumpCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <radius>10</radius>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                            <data href="ChainLightning_Long.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                            <calcers>
+                                                <addressEntries>
+                                                    <Item>
+                                                        <name>caster</name>
+                                                        <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                                    </Item>
+                                                    <Item>
+                                                        <name>target</name>
+                                                        <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                                    </Item>
+                                                </addressEntries>
+                                            </calcers>
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="LightningBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="JumpCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            <stacks type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                                <buff href="JumpCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            </stacks>
+                                        </Item>
+                                    </impacts>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                    </Item>
+                                                </predicates>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                    <buff href="JumpCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </predicate>
+                                            </Item>
+                                        </predicates>
+                                    </filter>
+                                    <targetsLimit>1</targetsLimit>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.StackBuff">
+                    <buff href="JumpCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <delta type="gameMechanics.elements.calcers.FloatData">
+                        <value>-1</value>
+                    </delta>
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+    <duration>500</duration>
+    <isStackable>false</isStackable>
+    <isHelpful>false</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <isClientReplicated>false</isClientReplicated>
+    <isAE>true</isAE>
+</gameMechanics.constructor.schemes.buff.BuffResource>

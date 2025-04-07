@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>245572</resourceId>
+    </Header>
+    <visualScripts href="109_SavantTargetPhase.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>50</value>
+    </range>
+    <needLos>false</needLos>
+    <isAggro>false</isAggro>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>16000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.predicates.PredicateHealthHigher">
+                            <level>0.75</level>
+                        </predicate>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="SavantEnrage.(BuffResource).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                        <spell href="109_SavantChannel.(SpellSingleTarget).xdb" />
+                        <duration>
+                            <ms>500</ms>
+                        </duration>
+                    </Item>
+                </impactsIf>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                        <data href="TargetPhase0.(ClientData).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                        <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                            <offset>15</offset>
+                            <yaw type="constructor.basicElements.AngleDegrees">
+                                <value>180</value>
+                            </yaw>
+                        </destination>
+                        <finishImpacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                <delay>250</delay>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                <data href="TargetPhase.(ClientData).xdb" />
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </finishImpacts>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/Wait.(BuffResource).xdb" />
+                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                    <multiplier>0.25</multiplier>
+                </durationScaler>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

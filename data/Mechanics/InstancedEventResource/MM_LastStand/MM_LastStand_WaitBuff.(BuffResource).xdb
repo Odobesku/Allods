@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>241681</resourceId>
+    </Header>
+    <Name href="MM_LastStand_WaitBuff.(BuffResource).Name.txt" />
+    <Description href="MM_LastStand_WaitBuff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Priest/PriestSilence.(UISingleTexture).xdb" />
+    <sysUIScriptName>BattlegroundStartAwaiting</sysUIScriptName>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToBuffs">
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.PredicateBuffHarmful" />
+                <Item type="gameMechanics.constructor.basicElements.PredicateGenericNot">
+                    <predicate type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                        <groups>
+                            <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+                        </groups>
+                    </predicate>
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DisableSpellsPredicate">
+            <predicate type="gameMechanics.elements.predicates.PredicateSpellInGroup">
+                <group href="/Mechanics/Spells/Groups/SpeedBoosts.xdb" />
+            </predicate>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DisableSpellsPredicate">
+            <predicate type="gameMechanics.elements.predicates.PredicateSpellInGroup">
+                <group href="/Mechanics/Spells/Groups/MountSpeedBoosts.(ActionGroup).xdb" />
+            </predicate>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="LastStand_DeadBuff.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactRevive" />
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="MM_LastStand_Achievment.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                    <predicates>
+                                        <Item type="gameMechanics.battleground.map.PredicateBattleMemberMark">
+                                            <mark href="MM_LastStand_blue_mark.(BattlegroundPlayerSpawnPlace).xdb" />
+                                        </Item>
+                                        <Item type="avatarPopulation.service.impl.matchMakingImpl.map.PredicateInstancedEventRound">
+                                            <round>1</round>
+                                        </Item>
+                                    </predicates>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateFaction">
+                                                    <faction href="/World/Factions/Empire.xdb" />
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                    <spawn>
+                                                        <scriptID>LS_ship</scriptID>
+                                                        <map href="/Maps/LastStand/MapResource.xdb" />
+                                                    </spawn>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                                                            <visualState>1</visualState>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impactsIf>
+                                            <impactsElse>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                    <spawn>
+                                                        <scriptID>LS_ship</scriptID>
+                                                        <map href="/Maps/LastStand/MapResource.xdb" />
+                                                    </spawn>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                                                            <visualState>2</visualState>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impactsElse>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>1000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.battleground.map.PredicateBattleMemberMark">
+                                    <mark href="MM_LastStand_blue_mark.(BattlegroundPlayerSpawnPlace).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="MM_LastStand_Hover.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactAvatarJump">
+                                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                                        <locator>
+                                            <scriptID>LS_02_02</scriptID>
+                                            <map href="/Maps/LastStand/MapResource.xdb" />
+                                        </locator>
+                                    </destination>
+                                    <speed>20</speed>
+                                    <impactsOnLand>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                            <delay>1000</delay>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                    <buff href="MM_LastStand_Hover.(BuffResource).xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impactsOnLand>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                    <delay>10000</delay>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                                    <zone href="/Maps/LastStand/ScriptZones/Ship_Zone.(ScriptZone).xdb" />
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                                                        <locator>
+                                                            <scriptID>LS_02_02</scriptID>
+                                                            <map href="/Maps/LastStand/MapResource.xdb" />
+                                                        </locator>
+                                                    </destination>
+                                                </Item>
+                                            </impactsIf>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactHealAll" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.battleground.map.PredicateBattleMemberMark">
+                            <mark href="MM_LastStand_Red_mark.(BattlegroundPlayerSpawnPlace).xdb" />
+                        </Item>
+                        <Item type="avatarPopulation.service.impl.matchMakingImpl.map.PredicateInstancedEventRound">
+                            <round>1</round>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="MM_LastStand_bust_buff_02.(BuffResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>120000</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="avatarPopulation.service.impl.matchMakingImpl.map.PredicateInstancedEventRound">
+                                    <round>1</round>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.battleground.map.PredicateBattleMemberMark">
+                                            <mark href="MM_LastStand_blue_mark.(BattlegroundPlayerSpawnPlace).xdb" />
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                            <data href="LastStand_Blue_Start_Help.(ClientData).xdb" />
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                            <data href="LastStand_Red_Start_Help.(ClientData).xdb" />
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsOn>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToHarmfulSpells" />
+        <Item type="gameMechanics.elements.effects.DamageZeroSuppressor" />
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="LastStand_DeadBuff.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.battleground.map.PredicateBattleMemberMark">
+                                            <mark href="MM_LastStand_blue_mark.(BattlegroundPlayerSpawnPlace).xdb" />
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                            <destination type="gameMechanics.map.destination.DestinationLocator">
+                                                <locator>
+                                                    <scriptID>LS_02_01</scriptID>
+                                                    <map href="/Maps/LastStand/MapResource.xdb" />
+                                                </locator>
+                                            </destination>
+                                            <finishImpacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactRevive" />
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="MM_LastStand_WaitBuff.(BuffResource).xdb" />
+                                                </Item>
+                                            </finishImpacts>
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                            <destination type="gameMechanics.map.destination.DestinationLocator">
+                                                <locator>
+                                                    <scriptID>LS_01_02</scriptID>
+                                                    <map href="/Maps/LastStand/MapResource.xdb" />
+                                                </locator>
+                                            </destination>
+                                            <finishImpacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactRevive" />
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="MM_LastStand_WaitBuff.(BuffResource).xdb" />
+                                                </Item>
+                                            </finishImpacts>
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <duration>30000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb" />
+        <Item href="/Mechanics/Spells/Groups/Shroud.xdb" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

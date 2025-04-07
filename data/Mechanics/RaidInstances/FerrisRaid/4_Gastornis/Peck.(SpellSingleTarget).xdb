@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>222565</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+    </groups>
+    <Name href="Peck.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="Peck.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <prepareDuration>1000</prepareDuration>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>12000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="GastornisP2.(BuffResource).xdb" />
+                                </predicate>
+                            </Item>
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                            </Item>
+                        </predicates>
+                    </Item>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                        </predicate>
+                    </Item>
+                </predicates>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="ChargeResource.(BuffResource).xdb" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="/Mechanics/Spells/CommonBuffs/Stun/BuffStunNoCC.xdb" />
+                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                            <multiplier>3</multiplier>
+                        </durationScaler>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                        <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                        <minDamage>35</minDamage>
+                        <maxDamage>35</maxDamage>
+                    </Item>
+                </impacts>
+                <elseImpacts>
+                    <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                        <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                        <minDamage>28</minDamage>
+                        <maxDamage>30</maxDamage>
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="/Mechanics/Spells/CommonBuffs/KnockDown/BufffKnockDownNoCC.xdb" />
+                    </Item>
+                </elseImpacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

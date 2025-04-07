@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>200469</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="Buff.(BuffResource).Name.txt" />
+    <Description href="Buff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/CommonState/Aspect_Buff.(UISingleTexture).xdb" />
+    <descVars>
+        <Item>
+            <name>perc</name>
+            <value>1</value>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                            <externalCalcer hrefvar="externalCalcer" />
+                        </mulCalcer>
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                        <formula>FormulaPercent</formula>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+        <Item>
+            <name>eff</name>
+            <value>1</value>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                        <formula>FormulaPercent</formula>
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                            <externalCalcer hrefvar="statCalc" />
+                        </mulCalcer>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+    </descVars>
+    <effects>
+        <Item type="gameMechanics.elements.effects.ForgetSpellTrigger">
+            <spell href="Spell01.(SpellSingleTarget).xdb" />
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Buff01.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffDurationModifier">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/CommonBuffs01.xdb" />
+                <Item href="/Mechanics/Spells/Groups/CommonDebuffs.(ActionGroup).xdb" />
+                <Item href="/Mechanics/Spells/Groups/ClassesGroupBuffs.(ActionGroup).xdb" />
+            </groups>
+            <multiplier type="gameMechanics.elements.calcers.CalcerSum">
+                <summands>
+                    <Item type="gameMechanics.elements.calcers.FloatData">
+                        <value>1</value>
+                    </Item>
+                    <Item type="constructor.elements.CalcerFloatExternal">
+                        <externalCalcer hrefvar="externalCalcer" />
+                    </Item>
+                </summands>
+            </multiplier>
+        </Item>
+        <Item type="gameMechanics.elements.effects.SpellPrepareDurationModifier">
+            <spell href="Spell01.(SpellSingleTarget).xdb" />
+            <factor>-1</factor>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsToAllAssistants">
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <effectsIf>
+                        <Item type="gameMechanics.elements.effects.BuffDurationModifier">
+                            <groups>
+                                <Item href="/Mechanics/Spells/Groups/CommonBuffs01.xdb" />
+                                <Item href="/Mechanics/Spells/Groups/CommonDebuffs.(ActionGroup).xdb" />
+                                <Item href="/Mechanics/Spells/Groups/ClassesGroupBuffs.(ActionGroup).xdb" />
+                            </groups>
+                            <multiplier type="gameMechanics.elements.calcers.CalcerSum">
+                                <summands>
+                                    <Item type="gameMechanics.elements.calcers.FloatData">
+                                        <value>1</value>
+                                    </Item>
+                                    <Item type="constructor.elements.CalcerFloatExternal">
+                                        <externalCalcer hrefvar="externalCalcer" />
+                                    </Item>
+                                </summands>
+                            </multiplier>
+                        </Item>
+                    </effectsIf>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsToPet">
+            <effects>
+                <Item type="gameMechanics.elements.effects.BuffDurationModifier">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/CommonBuffs01.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/CommonDebuffs.(ActionGroup).xdb" />
+                        <Item href="/Mechanics/Spells/Groups/ClassesGroupBuffs.(ActionGroup).xdb" />
+                    </groups>
+                    <multiplier type="gameMechanics.elements.calcers.CalcerSum">
+                        <summands>
+                            <Item type="gameMechanics.elements.calcers.FloatData">
+                                <value>1</value>
+                            </Item>
+                            <Item type="constructor.elements.CalcerFloatExternal">
+                                <externalCalcer hrefvar="externalCalcer" />
+                            </Item>
+                        </summands>
+                    </multiplier>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.SummandStat">
+            <stat type="gameMechanics.elements.stat.SpecialStat">
+                <stat href="/Mechanics/SpecialStats/BuffPower.(SpecialStatResource).xdb" />
+            </stat>
+            <value>1</value>
+            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                    <externalCalcer hrefvar="statCalc" />
+                </mulCalcer>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.SummandStat">
+            <stat type="gameMechanics.elements.stat.SpecialStat">
+                <stat href="/Mechanics/SpecialStats/DebuffPower.(SpecialStatResource).xdb" />
+            </stat>
+            <value>1</value>
+            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                    <externalCalcer hrefvar="statCalc" />
+                </mulCalcer>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.SpellsModifier">
+            <predicates>
+                <Item type="gameMechanics.constructor.basicElements.PredicateGenericOr">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateSpellInGroup">
+                            <group href="/Mechanics/Spells/Groups/RaceClassSpells.xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateSpellInGroup">
+                            <group href="/Mechanics/Spells/Groups/RemortSpells.(ActionGroup).xdb" />
+                        </Item>
+                    </predicates>
+                </Item>
+            </predicates>
+            <modifiers>
+                <Item type="gameMechanics.elements.spell.SpellEnvelopeModifier">
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.BuffDurationModifier">
+                            <groups>
+                                <Item href="/Mechanics/Spells/Groups/CommonBuffs01.xdb" />
+                                <Item href="/Mechanics/Spells/Groups/CommonDebuffs.(ActionGroup).xdb" />
+                            </groups>
+                            <multiplier type="gameMechanics.elements.calcers.InverseCalcer">
+                                <value type="gameMechanics.elements.calcers.CalcerSum">
+                                    <summands>
+                                        <Item type="gameMechanics.elements.calcers.FloatData">
+                                            <value>1</value>
+                                        </Item>
+                                        <Item type="constructor.elements.CalcerFloatExternal">
+                                            <externalCalcer hrefvar="externalCalcer" />
+                                        </Item>
+                                    </summands>
+                                </value>
+                            </multiplier>
+                        </Item>
+                    </effects>
+                    <onBehalfOfHolder>true</onBehalfOfHolder>
+                </Item>
+            </modifiers>
+        </Item>
+    </effects>
+    <isStackable>false</isStackable>
+    <isHelpful>true</isHelpful>
+    <ranks>
+        <Item href="Buff01.(BuffResource).xdb" />
+        <Item href="Buff02.(BuffResource).xdb" />
+        <Item href="Buff03.(BuffResource).xdb" />
+    </ranks>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb" />
+        <Item href="/Mechanics/Spells/Groups/CommonAspects.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

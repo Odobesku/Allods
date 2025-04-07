@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>189327</resourceId>
+    </Header>
+    <Name href="Buff_damage_largest.(BuffResource).Name.txt" />
+    <Description href="Buff_damage_largest.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Mage/Firewall.(UISingleTexture).xdb" />
+    <needVisualize>false</needVisualize>
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <nameTemplate href="Buff_damage_largest.(BuffResource)_Name.txt.template" />
+    <descTemplate href="Buff_damage_largest.(BuffResource)_Desc.txt.template" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectIfOverTime">
+            <predicates>
+                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="Buff_no_damage_largest.(BuffResource).xdb" />
+                    </predicate>
+                </Item>
+            </predicates>
+            <impactsIf>
+                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                    <element>FIRE</element>
+                    <damage>50</damage>
+                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                </Item>
+            </impactsIf>
+            <runImpactsOnEachTick>true</runImpactsOnEachTick>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Buff_damage_largest.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Buff_no_damage_largest.(BuffResource).xdb" />
+                </Item>
+            </onLeave>
+        </Item>
+    </effects>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

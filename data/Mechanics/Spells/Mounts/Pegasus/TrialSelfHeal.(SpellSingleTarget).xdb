@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>204704</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb" />
+    </groups>
+    <Name href="TrialSelfHeal.(SpellSingleTarget).Name.txt" />
+    <Description href="TrialSelfHeal.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Mounts/SpellsMounts/Treatment.(UISingleTexture).xdb" />
+    <targetType>STTSelf</targetType>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>180000</duration>
+            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mul>-0.03333</mul>
+                <mulCalcer type="gameMechanics.elements.calcers.CalcerMountFromGroupMaxLevel">
+                    <group href="/Mechanics/Mounts/Groups/Pegasus6thGrade.(MountGroupResource).xdb" />
+                </mulCalcer>
+                <sum>1</sum>
+            </scaler>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMounted" />
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="SelfHeal.(BuffResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.PureHeal">
+                <heal>1</heal>
+                <scalerCaster type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                    <mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                        <calcers>
+                            <Item type="constructor.elements.CalcerFloatExternal">
+                                <externalCalcer href="/Mechanics/GameRoot/Mount/MountHealthCalcer.(CalcerFloatResource).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.elements.calcers.FloatData">
+                                <value>0.1</value>
+                            </Item>
+                        </calcers>
+                    </mulCalcer>
+                </scalerCaster>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

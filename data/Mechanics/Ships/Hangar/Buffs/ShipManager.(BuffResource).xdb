@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>243519</resourceId>
+    </Header>
+    <isClientReplicated>false</isClientReplicated>
+    <isHelpful>true</isHelpful>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectTrigger">
+            <triggers>
+                <Item type="gameMechanics.elements.triggers.BoundShipTrigger">
+                    <toShipPredicates>
+                        <Item type="gameMechanics.world.ship.elements.PredicatePermission">
+                            <permission>Return</permission>
+                        </Item>
+                    </toShipPredicates>
+                </Item>
+                <Item type="gameMechanics.elements.triggers.ZoneTrigger">
+                    <predicates>
+                        <Item type="gameMechanics.world.ship.elements.PredicateInHangar" />
+                    </predicates>
+                </Item>
+            </triggers>
+            <mechanics>
+                <effectsWhileOn>
+                    <Item type="gameMechanics.elements.effects.EffectAddContextActions">
+                        <actions>
+                            <Item href="/Mechanics/Spells/BestFriends/ReturnShip.(SpellCasterSelf).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                        </actions>
+                    </Item>
+                </effectsWhileOn>
+            </mechanics>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectTrigger">
+            <triggers>
+                <Item type="gameMechanics.elements.triggers.BoundShipTrigger">
+                    <toShipPredicates>
+                        <Item type="gameMechanics.world.ship.elements.PredicatePermission">
+                            <permission>Lend</permission>
+                        </Item>
+                    </toShipPredicates>
+                </Item>
+                <Item type="gameMechanics.elements.triggers.ZoneTrigger">
+                    <predicates>
+                        <Item type="gameMechanics.world.ship.elements.PredicateInHangar" />
+                        <Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
+                            <key href="/System/ContentKeys/BestFriends.(ContentKey).xdb#xpointer(/basement.contentkey.ContentKey)" />
+                        </Item>
+                    </predicates>
+                </Item>
+                <Item type="gameMechanics.elements.triggers.TargetTrigger">
+                    <toTargetPredicates>
+                        <Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
+                            <onSlave type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    <Item type="gameMechanics.elements.predicates.PredicateHasNoBorrowedShip" />
+                                </predicates>
+                            </onSlave>
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateBestFriends" />
+                    </toTargetPredicates>
+                </Item>
+            </triggers>
+            <mechanics>
+                <effectsWhileOn>
+                    <Item type="gameMechanics.elements.effects.EffectAddContextActions">
+                        <actions>
+                            <Item href="/Mechanics/Spells/BestFriends/LendShip.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                        </actions>
+                    </Item>
+                </effectsWhileOn>
+            </mechanics>
+        </Item>
+    </effects>
+    <canBeSaved>true</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

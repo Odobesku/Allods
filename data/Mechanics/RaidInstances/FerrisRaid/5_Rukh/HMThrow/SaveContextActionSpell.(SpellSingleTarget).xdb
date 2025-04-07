@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>221477</resourceId>
+    </Header>
+    <Name href="SaveContextActionSpell.(SpellSingleTarget).Name.txt" />
+    <Description href="SaveContextActionSpell.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Misc/Quest/Fishnet.(UISingleTexture).xdb" />
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.resources.ResourceAnyBuff">
+                                        <buffs>
+                                            <Item href="ToNest1.(BuffResource).xdb" />
+                                            <Item href="ToNest2.(BuffResource).xdb" />
+                                            <Item href="ToNest3.(BuffResource).xdb" />
+                                        </buffs>
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="SavedBuff.(BuffResource).xdb" />
+                                    </Item>
+                                </impactsIf>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactEntitiesAround">
+                <radius>10</radius>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateRespawnableResource">
+                                <resources>
+                                    <Item href="TargetNest.(ProjectileResource).xdb" />
+                                </resources>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                        <projectileData>
+                                            <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                            </moveType>
+                                            <resource href="SavingProjectile.(ProjectileResource).xdb" />
+                                        </projectileData>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                        <delay>250</delay>
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                                        </impacts>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/RaidInstances/FerrisRaid/5_Rukh/AntiChickBuff.(BuffResource).xdb" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

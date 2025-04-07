@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>186486</resourceId>
+    </Header>
+    <Name href="RapidFireMobBuff.(BuffResource).Name.txt" />
+    <Description href="RapidFireMobBuff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Stalker/StalkerRapidFire.(UISingleTexture).xdb" />
+    <visScript href="RapidFireHoldCrossbow.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableAction">
+            <action href="RecoilJump.(SpellSingleTarget).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAction">
+            <action href="RangeShot.(SpellSingleTarget).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                    <spell href="RapidFire.(SpellSingleTarget).xdb" />
+                    <duration>
+                        <second>2</second>
+                    </duration>
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                    <spell href="RapidFire.(SpellSingleTarget).xdb" />
+                    <duration>
+                        <hour>1</hour>
+                    </duration>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <affectGroup>Enemies</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="RapidFireTarget.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                    </Item>
+                                </predicates>
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                        </predicates>
+                    </filter>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffInterceptor">
+            <impactsOnAttach>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="RapidFireMobBuff.(BuffResource).xdb" />
+                </Item>
+            </impactsOnAttach>
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/Knockdowns.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/Fears.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/CrowdControlSpells.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/Blinds.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/Stuns.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/Disarms.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs_IgnoreWill.(ActionGroup).xdb" />
+                        <Item href="/Mechanics/Spells/Groups/CommonDebuffs.(ActionGroup).xdb" />
+                    </groups>
+                </Item>
+            </predicates>
+        </Item>
+    </effects>
+    <duration>10000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

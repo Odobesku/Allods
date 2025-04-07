@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>209948</resourceId>
+    </Header>
+    <Name href="Propaganda.(SpellSingleTarget).Name.txt" />
+    <Description href="Propaganda.(SpellSingleTarget).Description.txt" />
+    <visualScripts href="/Spells/VisScripts/Items/ScrollSpell.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <prepareDuration>3000</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateHasGuildProgress" />
+            <Item type="gameMechanics.elements.predicates.PredicateGuildRight">
+                <memberRight>GMRWearSymobolics</memberRight>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                        <zone href="/Maps/Kania/Zones/ZoneLeague1/ZL1_0Capital.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                        <zone href="/Maps/Hadagan/Zones/ZoneHadagan1/ZoneHadagan1.xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                    </Item>
+                </predicates>
+            </Item>
+        </casterConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceActiveItem" />
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.AddGuildLoyalty">
+                <amount>10</amount>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactAddGuildAuthorityPure">
+                <calcer type="gameMechanics.elements.calcers.FloatData">
+                    <value>50000</value>
+                </calcer>
+                <guildOnly>false</guildOnly>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor">
+                    <radius>25</radius>
+                </distributor>
+                <data href="PropagandaMessage.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                <calcers>
+                    <stringEntries>
+                        <Item>
+                            <name>avatarName</name>
+                            <calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
+                        </Item>
+                        <Item>
+                            <name>guildName</name>
+                            <calcer type="gameMechanics.elements.calcers.GuildNameCalcer" />
+                        </Item>
+                    </stringEntries>
+                </calcers>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

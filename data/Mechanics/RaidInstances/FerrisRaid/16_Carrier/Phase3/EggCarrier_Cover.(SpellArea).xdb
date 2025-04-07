@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>220879</resourceId>
+    </Header>
+    <contextActionInfo>
+        <priority>88</priority>
+    </contextActionInfo>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/NotAffectStealth.xdb" />
+    </groups>
+    <Name href="EggCarrier_Cover.(SpellArea).Name.txt" />
+    <Description href="EggCarrier_Cover.(SpellArea).Description.txt" />
+    <image href="/Interface/Icons/Special/Emotions/Sit.(UISingleTexture).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>0</value>
+    </range>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>1000</duration>
+        </cooldown>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+                        <spell href="EggCarrier_Cover.(SpellArea).xdb" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+                        <spell href="EggCarrier_Cover.(SpellArea).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="EggCarrier_Cover.(BuffResource).xdb" />
+                    </Item>
+                </impacts>
+                <elseImpacts>
+                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellActivate">
+                        <spell href="EggCarrier_Cover.(SpellArea).xdb" />
+                        <effects>
+                            <Item type="gameMechanics.elements.effects.EffectDisableAllActionsExceptGroup">
+                                <groups>
+                                    <Item href="/Mechanics/Spells/Groups/NotAffectStealth.xdb" />
+                                </groups>
+                            </Item>
+                            <Item type="gameMechanics.elements.effects.EffectDisableAct">
+                                <actions>
+                                    <Item>Move</Item>
+                                    <Item>Jump</Item>
+                                    <Item>Rotate</Item>
+                                </actions>
+                            </Item>
+                        </effects>
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="EggCarrier_Cover.(BuffResource).xdb" />
+                    </Item>
+                </elseImpacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <radius>0</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

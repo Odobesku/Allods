@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>221250</resourceId>
+    </Header>
+    <Name href="Throw_HM.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="Throw_HM.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>85</value>
+    </range>
+    <prepareDuration>3500</prepareDuration>
+    <needLos>false</needLos>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="Throw_Taunt.(BuffResource).xdb" />
+                            </Item>
+                        </impacts>
+                        <impactsFromTarget>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="Throw_DmgMod.(BuffResource).xdb" />
+                                <stacks type="gameMechanics.elements.calcers.FloatData">
+                                    <value>3</value>
+                                </stacks>
+                            </Item>
+                        </impactsFromTarget>
+                        <traceDown>true</traceDown>
+                        <object href="Throw_HM.(MobWorld).xdb" />
+                        <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb" />
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

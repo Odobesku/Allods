@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>227228</resourceId>
+    </Header>
+    <Name href="GreenBallInside.(BuffResource).Name.txt" />
+    <Description href="GreenBallInside.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Misc/Buffs/BuffMagicBallGreen.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Mobs/Jaga_Green_BallInside.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+            <locator>Slot_TopFX</locator>
+        </Item>
+    </visualEffects>
+    <visScript href="" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/Steles/DefenseGreen.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </predicate>
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="RedBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </predicate>
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="BlueBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </predicate>
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="TehUltimateBallDefence.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactsFromPhantom">
+                            <phantom href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/04_Witch_Yaga.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                    <element>POISON</element>
+                                    <damage>20</damage>
+                                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="BallHitRecently_Green.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                        <multiplier>7</multiplier>
+                    </durationScaler>
+                </Item>
+            </impacts>
+            <tick>7000</tick>
+            <initialDelay>1000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <radius>10</radius>
+                                    <affectHolder>false</affectHolder>
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/Add/BallsCollected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                            <data href="GreenSpark.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                            <calcers>
+                                                <addressEntries>
+                                                    <Item>
+                                                        <name>caster</name>
+                                                        <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                                    </Item>
+                                                    <Item>
+                                                        <name>target</name>
+                                                        <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                                    </Item>
+                                                </addressEntries>
+                                            </calcers>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                    <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                    <impactsOnNoTargets>
+                                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                            <affectHolder>false</affectHolder>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsFromPhantom">
+                                                    <phantom href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/04_Witch_Yaga.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </Item>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                                    <predicates>
+                                                                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                                    </predicates>
+                                                                    <impactsElse>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/Add/BallsCollected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                        </Item>
+                                                                    </impactsElse>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                    <data href="GreenSpark.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                    <calcers>
+                                                        <addressEntries>
+                                                            <Item>
+                                                                <name>caster</name>
+                                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                                            </Item>
+                                                            <Item>
+                                                                <name>target</name>
+                                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                                            </Item>
+                                                        </addressEntries>
+                                                    </calcers>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                            <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                                <predicates>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                                                <predicates>
+                                                                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                                        <mobs>
+                                                                            <Item href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/Add/Jagas_Minion.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                                            <Item href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/Add/Jagas_Minion_2.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                                        </mobs>
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                                                        <buff href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/Add/BallsCollected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                        <range>
+                                                                            <max>2</max>
+                                                                        </range>
+                                                                    </Item>
+                                                                </predicates>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                        </predicates>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                            <buff href="RedBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </predicate>
+                                                    </Item>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                            <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </predicate>
+                                                    </Item>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                            <buff href="BlueBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </predicate>
+                                                    </Item>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                            <buff href="BallHitRecently_Green.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </predicate>
+                                                    </Item>
+                                                </predicates>
+                                            </filter>
+                                            <autotarget type="gameMechanics.constructor.schemes.spell.multiTarget.ClosestAutotarget">
+                                                <group>All</group>
+                                                <conditions>
+                                                    <Item type="gameMechanics.constructor.basicElements.BinaryPredicateNot">
+                                                        <predicate type="gameMechanics.elements.predicates.PredicateIsAggroLeader" />
+                                                    </Item>
+                                                </conditions>
+                                            </autotarget>
+                                        </Item>
+                                    </impactsOnNoTargets>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                        <mobs>
+                                                            <Item href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/Add/Jagas_Minion.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                            <Item href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/Add/Jagas_Minion_2.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                        </mobs>
+                                                    </Item>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                            <buff href="RedBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </predicate>
+                                                    </Item>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                            <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </predicate>
+                                                    </Item>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                            <buff href="BlueBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </predicate>
+                                                    </Item>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                            <buff href="BallHitRecently_Green.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </predicate>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                                        <buff href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/Add/BallsCollected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        <range>
+                                                            <max>2</max>
+                                                        </range>
+                                                    </Item>
+                                                </predicates>
+                                            </Item>
+                                        </predicates>
+                                    </filter>
+                                    <targetsLimit>1</targetsLimit>
+                                    <autotarget type="gameMechanics.constructor.schemes.spell.multiTarget.ClosestAutotarget">
+                                        <group>All</group>
+                                    </autotarget>
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="BallHitRecently_Green.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                <multiplier>5.5</multiplier>
+                            </durationScaler>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <affectHolder>false</affectHolder>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsFromPhantom">
+                                            <phantom href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/04_Witch_Yaga.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                            <data href="GreenSpark.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                            <calcers>
+                                                <addressEntries>
+                                                    <Item>
+                                                        <name>caster</name>
+                                                        <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                                    </Item>
+                                                    <Item>
+                                                        <name>target</name>
+                                                        <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                                    </Item>
+                                                </addressEntries>
+                                            </calcers>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                    <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                            <buff href="RedBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </predicate>
+                                                    </Item>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                            <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </predicate>
+                                                    </Item>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                            <buff href="BlueBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </predicate>
+                                                    </Item>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                            <buff href="BallHitRecently_Green.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </predicate>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                                </predicates>
+                                            </Item>
+                                        </predicates>
+                                    </filter>
+                                    <autotarget type="gameMechanics.constructor.schemes.spell.multiTarget.ClosestAutotarget">
+                                        <group>All</group>
+                                        <conditions>
+                                            <Item type="gameMechanics.constructor.basicElements.BinaryPredicateNot">
+                                                <predicate type="gameMechanics.elements.predicates.PredicateIsAggroLeader" />
+                                            </Item>
+                                        </conditions>
+                                    </autotarget>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impacts>
+            <tick>7000</tick>
+            <initialDelay>7000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                    <impactsResource href="DeathRelesaingBallsImpacts.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="RedBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="BlueBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                            <radius>10</radius>
+                                            <affectHolder>false</affectHolder>
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </Item>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="TehUltimateBallDefence.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                    <data href="GreenSpark.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                    <calcers>
+                                                        <addressEntries>
+                                                            <Item>
+                                                                <name>caster</name>
+                                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                                            </Item>
+                                                            <Item>
+                                                                <name>target</name>
+                                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                                            </Item>
+                                                        </addressEntries>
+                                                    </calcers>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                            <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                            <impactsOnNoTargets>
+                                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                                    <affectHolder>false</affectHolder>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactsFromPhantom">
+                                                            <phantom href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/04_Witch_Yaga.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                        </Item>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="TehUltimateBallDefence.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                        </Item>
+                                                                    </impacts>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                            <data href="GreenSpark.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                            <calcers>
+                                                                <addressEntries>
+                                                                    <Item>
+                                                                        <name>caster</name>
+                                                                        <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                                                    </Item>
+                                                                    <Item>
+                                                                        <name>target</name>
+                                                                        <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                                                    </Item>
+                                                                </addressEntries>
+                                                            </calcers>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                                    <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                                <predicates>
+                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                                                        <predicates>
+                                                                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                                                <mobs>
+                                                                                    <Item href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/Add/Jagas_Minion.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                                                    <Item href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/Add/Jagas_Minion_2.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                                                </mobs>
+                                                                            </Item>
+                                                                            <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                                                                <buff href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/Add/BallsCollected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                                <range>
+                                                                                    <max>2</max>
+                                                                                </range>
+                                                                            </Item>
+                                                                        </predicates>
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                                </predicates>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                                    <buff href="RedBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </predicate>
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                                    <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </predicate>
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                                    <buff href="BlueBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </predicate>
+                                                            </Item>
+                                                        </predicates>
+                                                    </filter>
+                                                    <autotarget type="gameMechanics.constructor.schemes.spell.multiTarget.ClosestAutotarget">
+                                                        <group>All</group>
+                                                        <conditions>
+                                                            <Item type="gameMechanics.constructor.basicElements.BinaryPredicateNot">
+                                                                <predicate type="gameMechanics.elements.predicates.PredicateIsAggroLeader" />
+                                                            </Item>
+                                                        </conditions>
+                                                    </autotarget>
+                                                </Item>
+                                            </impactsOnNoTargets>
+                                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                                <predicates>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                                <mobs>
+                                                                    <Item href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/Add/Jagas_Minion.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                                    <Item href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/Add/Jagas_Minion_2.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                                </mobs>
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                                    <buff href="RedBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </predicate>
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                                    <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </predicate>
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                                    <buff href="BlueBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </predicate>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                                                <buff href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/Add/BallsCollected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                <range>
+                                                                    <max>2</max>
+                                                                </range>
+                                                            </Item>
+                                                        </predicates>
+                                                    </Item>
+                                                </predicates>
+                                            </filter>
+                                            <targetsLimit>1</targetsLimit>
+                                            <autotarget type="gameMechanics.constructor.schemes.spell.multiTarget.ClosestAutotarget">
+                                                <group>All</group>
+                                            </autotarget>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="BallHitRecently_Green.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                        <multiplier>5.5</multiplier>
+                                    </durationScaler>
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                            <affectHolder>false</affectHolder>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsFromPhantom">
+                                                    <phantom href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/04_Witch_Yaga.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </Item>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff href="TehUltimateBallDefence.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                    <data href="GreenSpark.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                    <calcers>
+                                                        <addressEntries>
+                                                            <Item>
+                                                                <name>caster</name>
+                                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                                            </Item>
+                                                            <Item>
+                                                                <name>target</name>
+                                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                                            </Item>
+                                                        </addressEntries>
+                                                    </calcers>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                            <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                                <predicates>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                                    <buff href="RedBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </predicate>
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                                    <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </predicate>
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                                    <buff href="BlueBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </predicate>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                                        </predicates>
+                                                    </Item>
+                                                </predicates>
+                                            </filter>
+                                            <autotarget type="gameMechanics.constructor.schemes.spell.multiTarget.ClosestAutotarget">
+                                                <group>All</group>
+                                                <conditions>
+                                                    <Item type="gameMechanics.constructor.basicElements.BinaryPredicateNot">
+                                                        <predicate type="gameMechanics.elements.predicates.PredicateIsAggroLeader" />
+                                                    </Item>
+                                                </conditions>
+                                            </autotarget>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/Steles/DefenseGreen.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactsFromPhantom">
+                            <phantom href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/04_Witch_Yaga.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                    <element>POISON</element>
+                                    <damage>5</damage>
+                                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+            <initialDelay>1000</initialDelay>
+        </Item>
+    </effects>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

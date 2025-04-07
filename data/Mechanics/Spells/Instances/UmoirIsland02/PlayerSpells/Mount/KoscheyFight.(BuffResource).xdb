@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>195894</resourceId>
+    </Header>
+    <needVisualize>false</needVisualize>
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <effects>
+        <Item type="gameMechanics.elements.effects.LifeGuard">
+            <level>0.01</level>
+        </Item>
+        <Item type="gameMechanics.elements.effects.HealthTrigger">
+            <healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
+                <multiplier>0.05</multiplier>
+            </healthOn>
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                            <spell href="/Mechanics/Spells/Instances/UmoirIsland02/UI02_Koschey/TeleportAvatar.(SpellSingleTarget).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="KoscheyFightCastTeleport.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                    <time>1000</time>
+                    <distance>15</distance>
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="KoscheyFightStun.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+                    <impacts>
+                        <Item type="gameMechanics.world.avatar.assistants.ImpactsToAssistant">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                                    <time>1000</time>
+                                    <distance>15</distance>
+                                </Item>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="KoscheyFightStun.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                            <assistantResource href="/Mechanics/Spells/Instances/UmoirIsland02/UI02_Dreadnawt/UI02_AssistantResource.(AssistantResource).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+            </predicates>
+            <effectsIf>
+                <Item type="gameMechanics.elements.effects.EffectSetReputation">
+                    <faction href="/World/Factions/Umoir/UI02_Koschey.(Faction).xdb" />
+                    <value>-50000</value>
+                </Item>
+            </effectsIf>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EventTrigger">
+            <eventClasses>
+                <Item>gameMechanics.elements.events.EventLeaveCombat</Item>
+            </eventClasses>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="KoscheyFight.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+                    <impacts>
+                        <Item type="gameMechanics.world.avatar.assistants.ImpactsToAssistant">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="KoscheyFightAssistant.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllAggro" />
+                            </impacts>
+                            <assistantResource href="/Mechanics/Spells/Instances/UmoirIsland02/UI02_Dreadnawt/UI02_AssistantResource.(AssistantResource).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/QuestSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

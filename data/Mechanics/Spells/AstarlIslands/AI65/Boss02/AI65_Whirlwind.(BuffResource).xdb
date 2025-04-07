@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>191195</resourceId>
+    </Header>
+    <Name href="AI65_Whirlwind.(BuffResource).Name.txt" />
+    <Description href="AI65_Whirlwind.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Warrior/WarriorWhirlwindUpgrade.(UISingleTexture).xdb" />
+    <visScript href="/Mechanics/Spells/AstarlIslands/AI41/IronManBoss/Whirlwind.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>7</radius>
+                    <affectGroup>Enemies</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                            <impactsOnHitTarget>
+                                <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                                    <time>500</time>
+                                    <distance>15</distance>
+                                </Item>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/Spells/CommonBuffs/KnockDown/BuffKnockDown.xdb" />
+                                </Item>
+                            </impactsOnHitTarget>
+                            <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                            <minDamage>75</minDamage>
+                            <maxDamage>75</maxDamage>
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                    </Item>
+                                </predicates>
+                            </Item>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="AI65_CookFire.(BuffResource).xdb" />
+                                </predicate>
+                            </Item>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="AI65_ReadyToCook.(BuffResource).xdb" />
+                                </predicate>
+                            </Item>
+                        </predicates>
+                    </filter>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                    <spell href="/Mechanics/Spells/AstarlIslands/AI64/Boss02WoodCutters/AI64_WoodCutter02_GoToTarget.(SpellSingleTarget).xdb" />
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+            <initialDelay>1500</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.ExponentialEffectScaler">
+                <base>0.35</base>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DisableLocalEvade" />
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+        </Item>
+    </effects>
+    <duration>10000</duration>
+    <isStackable>false</isStackable>
+    <isHelpful>true</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <isAE>true</isAE>
+</gameMechanics.constructor.schemes.buff.BuffResource>

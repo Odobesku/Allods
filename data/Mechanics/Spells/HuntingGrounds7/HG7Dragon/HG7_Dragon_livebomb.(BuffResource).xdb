@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>202600</resourceId>
+    </Header>
+    <Name href="HG7_Dragon_livebomb.(BuffResource).Name.txt" />
+    <Description href="HG7_Dragon_livebomb.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Equipment/Trinket/AstralBomb_01.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="HG7_Dragon_BombBuff.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>25000</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                    </impactsOn>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="HG7_Dragon_deathexplosion.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>8</radius>
+                    <affectGroup>Enemies</affectGroup>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                            <delay>300</delay>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                    <element>LIGHTNING</element>
+                                    <damage>84</damage>
+                                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <finishImpacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                            <delay>600</delay>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                            </impacts>
+                        </Item>
+                    </finishImpacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                        </predicates>
+                    </filter>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>2000</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.TickableAura">
+                    <tick>1000</tick>
+                    <affectGroup>Enemies</affectGroup>
+                    <radius>7</radius>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                        </predicates>
+                    </filter>
+                    <holderImpactsIn>
+                        <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                    </holderImpactsIn>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisorient">
+            <radius>10</radius>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.4</coeff>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToAllActions" />
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <isAE>true</isAE>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

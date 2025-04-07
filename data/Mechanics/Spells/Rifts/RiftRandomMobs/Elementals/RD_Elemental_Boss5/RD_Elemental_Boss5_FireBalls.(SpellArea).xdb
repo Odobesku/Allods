@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>208860</resourceId>
+    </Header>
+    <element>FIRE</element>
+    <Name href="RD_Elemental_Boss5_FireBalls.(SpellArea).Name.txt" />
+    <image href="/Interface/Icons/Spells/Mage/MageFireball.(UISingleTexture).xdb" />
+    <visualScripts href="RD_Elemental_Boss5_FireBalls.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>50</value>
+    </range>
+    <minRange type="gameMechanics.elements.calcers.FloatData">
+        <value>16</value>
+    </minRange>
+    <prepareDuration>150</prepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTPoint</targetType>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/Spells/AstarlIslands/CommonSpells/SpellCD.(BuffResource).xdb" />
+                    <consumeStacks>12</consumeStacks>
+                </predicate>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/Spells/AstarlIslands/CommonSpells/SpellCD.(BuffResource).xdb" />
+                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                    <multiplier>8</multiplier>
+                </durationScaler>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfCasterGeneric">
+                        <predicates>
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/Spells/AstarlIslands/CommonSpells/SpellCD.(BuffResource).xdb" />
+                                <consumeStacks>11</consumeStacks>
+                            </Item>
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/Spells/AstarlIslands/CommonSpells/SpellCD.(BuffResource).xdb" />
+                                <consumeStacks>12</consumeStacks>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                <buff href="RD_Elemental_Boss5_FireBalls.(BuffResource).xdb" />
+                            </Item>
+                        </impactsIf>
+                        <impactsElse>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="RD_Elemental_Boss5_FireBalls.(BuffResource).xdb" />
+                            </Item>
+                        </impactsElse>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                <element>FIRE</element>
+                <damage>1</damage>
+                <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                    <scalers>
+                        <Item type="gameMechanics.elements.scalers.MagicScaler" />
+                        <Item type="gameMechanics.elements.scalers.ScalerIf">
+                            <condition type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+                                <quality href="/Mechanics/MobQualities/Elite.xdb" />
+                            </condition>
+                            <scalerIf type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                    <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/PartiallyEscapableDamageCommon.(CalcerFloatResource).xdb" />
+                                </mulCalcer>
+                            </scalerIf>
+                            <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                <condition type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+                                    <quality href="/Mechanics/MobQualities/Boss.xdb" />
+                                </condition>
+                                <scalerIf type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                        <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/PartiallyEscapableDamageElite.(CalcerFloatResource).xdb" />
+                                    </mulCalcer>
+                                </scalerIf>
+                                <scalerElse type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                        <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/PartiallyEscapableDamageBoss.(CalcerFloatResource).xdb" />
+                                    </mulCalcer>
+                                </scalerElse>
+                            </scalerElse>
+                        </Item>
+                    </scalers>
+                </scaler>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>11</speed>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+    <radius>2</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

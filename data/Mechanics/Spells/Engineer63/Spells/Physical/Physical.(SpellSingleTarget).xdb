@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>215831</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Engineer/Shots/Shots.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/InsuranceTrigger.xdb" />
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/RangedAttacks.xdb" />
+    </groups>
+    <Name href="Physical.(SpellSingleTarget).Name.txt" />
+    <Description href="Physical.(SpellSingleTarget).Description.txt" />
+    <descVars>
+        <Item>
+            <name>dmg</name>
+            <value var="damage" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>WeaponScaler</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Equipment/Ships/Shot/FireShot01.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Engineer/Physical_Shot.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <ranks>
+        <Item href="Physical01.(SpellSingleTarget).xdb" />
+        <Item href="Physical02.(SpellSingleTarget).xdb" />
+        <Item href="Physical03.(SpellSingleTarget).xdb" />
+    </ranks>
+    <iffPolicy>Enemies</iffPolicy>
+    <launchWhenReady>true</launchWhenReady>
+    <mechanics>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateCreature" />
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/Spells/Engineer63/Abilities/Reactor/AutoCoolingDisable.(BuffResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                                <variable href="/Mechanics/Spells/Engineer63/Abilities/Reactor/Overheating.(VariableResource).xdb" />
+                                <summand>40</summand>
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                        <mark href="/Mechanics/Spells/Engineer63/Spells/Acid/ShotOnCaster.(MarkResource).xdb" />
+                    </Item>
+                </impacts>
+                <groupRepeaters>true</groupRepeaters>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                        <impactsOnHitTarget>
+                            <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                                <mark href="/Mechanics/Spells/Engineer63/Spells/Acid/ShotOnTarget.(MarkResource).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                                <mark href="PhysShotTarget.(MarkResource).xdb" />
+                            </Item>
+                        </impactsOnHitTarget>
+                        <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                            <scalers>
+                                <Item type="gameMechanics.elements.scalers.WeaponDpsScaler" />
+                                <Item type="gameMechanics.elements.scalers.PowerDPSScaler" />
+                            </scalers>
+                        </scaler>
+                        <minDamage var="damage" />
+                        <maxDamage var="damage" />
+                    </Item>
+                </impacts>
+                <groupRepeaters>true</groupRepeaters>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

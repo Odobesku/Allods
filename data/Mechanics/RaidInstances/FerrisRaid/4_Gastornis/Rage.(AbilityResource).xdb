@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>222560</resourceId>
+    </Header>
+    <name href="Rage.(AbilityResource).Name.txt" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectsIfCaster">
+            <predicates>
+                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                </Item>
+            </predicates>
+            <effectsElse>
+                <Item type="gameMechanics.elements.effects.HealthTrigger">
+                    <healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
+                        <multiplier>0.3</multiplier>
+                    </healthOn>
+                    <impactsOn>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="GastornisP2.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="GastornisP1.(BuffResource).xdb" />
+                        </Item>
+                    </impactsOn>
+                    <impactsOff>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="GastornisP1.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="GastornisP2.(BuffResource).xdb" />
+                        </Item>
+                    </impactsOff>
+                </Item>
+            </effectsElse>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="GastornisP1.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>FR_4_Door_In_1</scriptID>
+                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.device.DoorSwitch" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>FR_4_Door_In_2</scriptID>
+                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.device.DoorSwitch" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                                    <value>1</value>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                    <predicates>
+                                                        <Item type="gameMechanics.elements.predicates.PredicateMobNear">
+                                                            <radius>40.5</radius>
+                                                            <mobs>
+                                                                <Item href="Gastornis.(MobWorld).xdb" />
+                                                            </mobs>
+                                                        </Item>
+                                                    </predicates>
+                                                    <impactsElse>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                                            <destination type="gameMechanics.map.destination.DestinationLocatorSpread">
+                                                                <locator>
+                                                                    <scriptID>FR_4</scriptID>
+                                                                    <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                                                </locator>
+                                                                <horizontalSpread>10</horizontalSpread>
+                                                            </destination>
+                                                        </Item>
+                                                    </impactsElse>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onEnter>
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="FlockGast.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impactsElse>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
+                                    <device>
+                                        <scriptID>GastMeatID</scriptID>
+                                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                    </device>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>FR_4_Door_In_1</scriptID>
+                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.device.DoorSwitch" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>FR_4_Door_In_2</scriptID>
+                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.device.DoorSwitch" />
+                    </impacts>
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="Meat.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="Meat.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Influence</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="Meat.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Influence</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="Meat.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="GastornisP1.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="RunAndSmash.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>60000</tick>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectMobStatQuality">
+            <quality href="/Mechanics/RaidInstances/FerrisRaid/Other/Part2_Stats.(MobStatQuality).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                    <variable href="4_Gastornis.(MapVariableResource).xdb" />
+                    <summand>1</summand>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
+                            <device>
+                                <scriptID>4_chest_hm</scriptID>
+                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                            </device>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
+                            <device>
+                                <scriptID>4_chest</scriptID>
+                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                            </device>
+                        </Item>
+                    </impactsElse>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>FR_4_Door_Out_1</scriptID>
+                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.device.DoorSwitch" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>FR_4_Door_Out_2</scriptID>
+                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.device.DoorSwitch" />
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>0.25</coeff>
+            </scaler>
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+            <conditionalImpacts>
+                <Item>
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="GlobalCooldownNoAttackShared.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactSpellGroupCooldown">
+                            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+                            <duration>2000</duration>
+                        </Item>
+                    </impacts>
+                    <conditions>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateGenericNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateSpellInGroup">
+                                <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+                            </predicate>
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateGenericNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                                <spells>
+                                    <Item href="HungerHM.(SpellSingleTarget).xdb" />
+                                    <Item href="PreyHM.(SpellSingleTarget).xdb" />
+                                </spells>
+                            </predicate>
+                        </Item>
+                    </conditions>
+                </Item>
+                <Item>
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="GlobalCooldownNoAttackShared.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                    <conditions>
+                        <Item type="gameMechanics.elements.predicates.PredicateSpellInGroup">
+                            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+                        </Item>
+                    </conditions>
+                </Item>
+            </conditionalImpacts>
+            <stages>
+                <Item>Launch</Item>
+            </stages>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

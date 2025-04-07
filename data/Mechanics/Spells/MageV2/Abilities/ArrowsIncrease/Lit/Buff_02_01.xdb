@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>217895</resourceId>
+    </Header>
+    <Name href="Buff_02__Name.txt" />
+    <Description href="Buff_02__Desc.txt" />
+    <image href="/Interface/Icons/Special/Talents/Mage/LightningBonus.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <nameTemplate href="Buff_02__Name.txt.template" />
+    <descTemplate href="Buff_02__Desc.txt.template" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.NotStackableEffects">
+            <effects>
+                <Item type="gameMechanics.elements.effects.SpellPrepareDurationModifier">
+                    <spell href="/Mechanics/Spells/MageV2/LightningArrow/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                    <factor>-0.5</factor>
+                </Item>
+                <Item type="gameMechanics.elements.effects.SpellCostModifier">
+                    <spell href="/Mechanics/Spells/MageV2/LightningArrow/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                    <factor>-0.5</factor>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EventTrigger">
+            <conditionalEvents>
+                <Item>
+                    <obj>gameMechanics.elements.events.EventSpellStarted</obj>
+                    <predicate type="gameMechanics.elements.predicates.PredicateEventSpellStarted">
+                        <spell href="/Mechanics/Spells/MageV2/LightningArrow/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                    </predicate>
+                </Item>
+            </conditionalEvents>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="/Mechanics/Spells/MageV2/Abilities/ReturnLightning/ReturnLightning.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </predicates>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.StackBuff">
+                                            <buff href="Buff_02_01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            <resetTimer>false</resetTimer>
+                                            <delta type="gameMechanics.elements.calcers.FloatData">
+                                                <value>-1</value>
+                                            </delta>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impacts>
+            <eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+        </Item>
+    </effects>
+    <duration>30000</duration>
+    <isStackable>true</isStackable>
+    <stackLimit>5</stackLimit>
+    <isGradual>false</isGradual>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <isMultiple>false</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <isClientReplicated>true</isClientReplicated>
+</gameMechanics.constructor.schemes.buff.BuffResource>

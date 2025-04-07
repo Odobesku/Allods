@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>214900</resourceId>
+    </Header>
+    <Name href="Bomb.(BuffResource).Name.txt" />
+    <Description href="Bomb.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Mage/MageConflagrate.(UISingleTexture).xdb" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Mechanics/Spells/HuntingGrounds7/HG7CrazyScientist/HG7_CrazyScientist_bombDecal.(VisObjectTemplate).xdb" />
+        </Item>
+    </visualEffects>
+    <visScript href="/Mechanics/Spells/HuntingGrounds7/HG7CrazyScientist/HG7_CrazyScientist_bombBuff.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <radius>7</radius>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateIsMob" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                    <element>FIRE</element>
+                                    <damage>60</damage>
+                                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="/Mechanics/Spells/HuntingGrounds7/HG7CrazyScientist/HG7_CrazyScientist_BomExplosion.(ClientData).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="/Creatures/Colossus/Instances/HuntingGround8/HG8_ArchitectorTank.(MobWorld).xdb" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="Barrier.(BuffResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOff>
+        </Item>
+    </effects>
+    <duration>5000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

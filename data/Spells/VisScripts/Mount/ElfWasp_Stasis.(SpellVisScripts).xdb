@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<launch type="VisActionList">
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="CreatureSetFlagAction">
+				<flagName>Flag_MountNeeded</flagName>
+				<timeOut>0.5</timeOut>
+			</Item>
+			<Item type="VisActionList">
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>Flag_Emote</flagName>
+				</playWhile>
+				<elements>
+					<Item type="VisActionDelay">
+						<time>500</time>
+					</Item>
+				</elements>
+			</Item>
+			<Item type="VisActionList">
+				<play>Simultaneously</play>
+				<elements>
+					<Item type="CreatureAnimationAction">
+						<animations>
+							<Item>attack</Item>
+						</animations>
+						<advanced>
+							<backgroundAfterFirstKey>true</backgroundAfterFirstKey>
+							<stopIfMoved>true</stopIfMoved>
+							<eventPlaybackEnd>true</eventPlaybackEnd>
+							<turnToTarget>TURN_DEFAULT</turnToTarget>
+							<waitRealEvent>WAIT_FROMFIRSTKEY</waitRealEvent>
+						</advanced>
+					</Item>
+					<Item type="CreatureEffectsAction">
+						<visualEffects>
+							<Item>
+								<delay>0</delay>
+								<effectFx href="/Spells/FX/Mobs/MountWasp_ProjectileCast.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+								<fixPoint>false</fixPoint>
+								<scale>1</scale>
+								<locator>FROM_LOCATOR_NAME</locator>
+								<member>Mount</member>
+								<locatorName>Hips</locatorName>
+								<offendTime type="EffectOffendConstDelay">
+									<delay>0</delay>
+								</offendTime>
+							</Item>
+						</visualEffects>
+					</Item>
+					<Item type="CreatureVisActionStartThrow" />
+					<Item type="CreatureProjectileAction">
+						<projectileFx href="/Spells/FX/Mobs/MountWasp_Projectile.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+						<explosionFx href="/Spells/FX/Mobs/MountWasp_ProjectileHit.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+						<theGe>12</theGe>
+						<pointOnCaster type="VisPointLocator">
+							<locator>FROM_LOCATOR_NAME</locator>
+							<member>Mount</member>
+							<locatorName>Slot_Special03</locatorName>
+						</pointOnCaster>
+						<pointOnTarget type="VisPointLocator">
+							<locator>Slot_FX</locator>
+						</pointOnTarget>
+						<offendTime type="EffectOffendConstDelay">
+							<delay>500</delay>
+						</offendTime>
+					</Item>
+					<Item type="Sound3DAction">
+						<sound>
+							<project href="/SFX/Spells/Sounds.(FMODProject).xdb#xpointer(/FMODProject)" />
+							<name>spells/Mage/MageBlinkAbility</name>
+						</sound>
+					</Item>
+				</elements>
+			</Item>
+		</elements>
+	</launch>
+	<playOnTargets>
+		<specialAction />
+	</playOnTargets>
+</SpellVisScripts>

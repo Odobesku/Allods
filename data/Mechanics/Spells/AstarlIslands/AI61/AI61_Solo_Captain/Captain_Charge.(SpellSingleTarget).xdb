@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>188830</resourceId>
+    </Header>
+    <Name href="Captain_Charge.(SpellSingleTarget).Name.txt" />
+    <image href="/Interface/Icons/Spells/Warrior/WarriorCharge.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Mechanics/Creatures/MechMelee/Instances/AstralIsland50/Charge_prepare.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="Captain_Charge.(SpellSingleTarget).NameTemplate.txt" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>60</value>
+    </range>
+    <minRange type="gameMechanics.elements.calcers.FloatData">
+        <value>15</value>
+    </minRange>
+    <immutablePrepareDuration>true</immutablePrepareDuration>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>16000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="Captain_Charge.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="Captain_Charge.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                        <radius>10</radius>
+                        <affectGroup>Enemies</affectGroup>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                                <time>1000</time>
+                                <impactsOnLand>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="AI61_Knockdown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                                        <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                                        <minDamage>10</minDamage>
+                                        <maxDamage>10</maxDamage>
+                                    </Item>
+                                </impactsOnLand>
+                                <distance>5</distance>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

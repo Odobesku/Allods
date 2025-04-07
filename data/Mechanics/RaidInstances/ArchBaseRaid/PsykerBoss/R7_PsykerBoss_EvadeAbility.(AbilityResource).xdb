@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>224583</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>4000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                            <spawn>
+                                <scriptID>3th_Door_Switch</scriptID>
+                                <map href="/Maps/ArchBase_Raid/MapResource.xdb" />
+                            </spawn>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                                    <visualState>2</visualState>
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
+                            <device>
+                                <scriptID>3th_Door_Switch_Collision</scriptID>
+                                <map href="/Maps/ArchBase_Raid/MapResource.xdb" />
+                            </device>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                                            <value>1</value>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                <mobs>
+                                    <Item href="R7_InfPsyker_Add.(MobWorld).xdb" />
+                                    <Item href="R7_InfPsyker_Add_HM.(MobWorld).xdb" />
+                                </mobs>
+                            </Item>
+                        </predicates>
+                    </filter>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                                    <value>1</value>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onEnter>
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnCell">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                            <group href="/Mechanics/RaidInstances/ArchBaseRaid/SiegeBoss/R7_ArchBase_Raid.(ActionGroup).xdb" />
+                        </Item>
+                    </impacts>
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                    </predicates>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                    </predicates>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ResetSpawnTable">
+                    <table href="R7_InfPsyker_Add_HM.(SpawnTable).xdb" />
+                </Item>
+            </onLeave>
+            <effects>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                                    <predicates>
+                                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                                <buff href="Phys_Plane.(BuffResource).xdb" />
+                                                            </predicate>
+                                                        </Item>
+                                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                                <buff href="Inf_Plane.(BuffResource).xdb" />
+                                                            </predicate>
+                                                        </Item>
+                                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                            <predicate type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                                        </Item>
+                                                    </predicates>
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="Phys_Plane.(BuffResource).xdb" />
+                                                </Item>
+                                            </impactsIf>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <tick>3000</tick>
+                </Item>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                            </predicates>
+                                            <impactsElse>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.DirectDamage">
+                                                                    <damage>1</damage>
+                                                                    <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                        <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer" />
+                                                                    </scalerTarget>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impactsElse>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                            <spawnResource href="R7_PsykerBoss_HM.(SpawnTable).xdb" />
+                        </Item>
+                    </impacts>
+                    <tick>5000</tick>
+                    <initialDelay>4000</initialDelay>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <level>55</level>
+    <disableWhileDead>true</disableWhileDead>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

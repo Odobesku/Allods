@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>222526</resourceId>
+    </Header>
+    <image href="/Interface/Icons/Special/Emoticons/OvertipIcons/Run.(UISingleTexture).xdb" />
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>1</coeff>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectForceMove">
+            <destinations>
+                <Item type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+            </destinations>
+            <impactsOnArrived>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="ForceMoveBuff.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                            <mobs>
+                                <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChampionMelee/ChampionMelee.(MobWorld).xdb" />
+                            </mobs>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <radius>25</radius>
+                                    <affectGroup>Enemies</affectGroup>
+                                    <affectHolder>false</affectHolder>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactSetAllAggro" />
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="AddsForceAggro.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="AddsForceAggro.(BuffResource).xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                    <impactsOnNoTargets>
+                                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                            <radius>15</radius>
+                                            <affectGroup>Enemies</affectGroup>
+                                            <affectHolder>false</affectHolder>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactSetAllAggro" />
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="AddsForceAggro.(BuffResource).xdb" />
+                                                </Item>
+                                            </impacts>
+                                            <impactsOnNoTargets>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                    <spawn>
+                                                        <scriptID>2_ChieftainBoss</scriptID>
+                                                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                                    </spawn>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impactsOnNoTargets>
+                                            <impactsOnTargetsFound>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                    <spawn>
+                                                        <scriptID>2_ChieftainBoss</scriptID>
+                                                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                                    </spawn>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactRemoveAggro" />
+                                                    </impacts>
+                                                </Item>
+                                            </impactsOnTargetsFound>
+                                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                        <mobs>
+                                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChieftainBossAddMelee/ChieftainBossAddMelee.(MobWorld).xdb" />
+                                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChieftainBossAddRange/ChieftainBossAddRange.(MobWorld).xdb" />
+                                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChieftainBossAddShaman/ChieftainBossAddShaman.(MobWorld).xdb" />
+                                                        </mobs>
+                                                    </Item>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                            <buff href="AddsForceAggro.(BuffResource).xdb" />
+                                                        </predicate>
+                                                    </Item>
+                                                </predicates>
+                                            </filter>
+                                        </Item>
+                                    </impactsOnNoTargets>
+                                    <impactsOnTargetsFound>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="ChampForceAggro.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                            <spawn>
+                                                <scriptID>2_ChieftainBoss</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </spawn>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactRemoveAggro" />
+                                            </impacts>
+                                        </Item>
+                                    </impactsOnTargetsFound>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                <mobs>
+                                                    <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChieftainBossAddMelee/ChieftainBossAddMelee.(MobWorld).xdb" />
+                                                </mobs>
+                                            </Item>
+                                        </predicates>
+                                    </filter>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                            <mobs>
+                                <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChampionRange/ChampionRange.(MobWorld).xdb" />
+                            </mobs>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <radius>25</radius>
+                                    <affectGroup>Enemies</affectGroup>
+                                    <affectHolder>false</affectHolder>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactSetAllAggro" />
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="AddsForceAggro.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="AddsForceAggro.(BuffResource).xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                    <impactsOnNoTargets>
+                                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                            <radius>15</radius>
+                                            <affectGroup>Enemies</affectGroup>
+                                            <affectHolder>false</affectHolder>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactSetAllAggro" />
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="AddsForceAggro.(BuffResource).xdb" />
+                                                </Item>
+                                            </impacts>
+                                            <impactsOnNoTargets>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                    <spawn>
+                                                        <scriptID>2_ChieftainBoss</scriptID>
+                                                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                                    </spawn>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impactsOnNoTargets>
+                                            <impactsOnTargetsFound>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                    <spawn>
+                                                        <scriptID>2_ChieftainBoss</scriptID>
+                                                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                                    </spawn>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactRemoveAggro" />
+                                                    </impacts>
+                                                </Item>
+                                            </impactsOnTargetsFound>
+                                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                        <mobs>
+                                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChieftainBossAddMelee/ChieftainBossAddMelee.(MobWorld).xdb" />
+                                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChieftainBossAddRange/ChieftainBossAddRange.(MobWorld).xdb" />
+                                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChieftainBossAddShaman/ChieftainBossAddShaman.(MobWorld).xdb" />
+                                                        </mobs>
+                                                    </Item>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                            <buff href="AddsForceAggro.(BuffResource).xdb" />
+                                                        </predicate>
+                                                    </Item>
+                                                </predicates>
+                                            </filter>
+                                        </Item>
+                                    </impactsOnNoTargets>
+                                    <impactsOnTargetsFound>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="AddsForceAggro.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                            <spawn>
+                                                <scriptID>2_ChieftainBoss</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </spawn>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactRemoveAggro" />
+                                            </impacts>
+                                        </Item>
+                                    </impactsOnTargetsFound>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                <mobs>
+                                                    <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChieftainBossAddRange/ChieftainBossAddRange.(MobWorld).xdb" />
+                                                </mobs>
+                                            </Item>
+                                        </predicates>
+                                    </filter>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                            <mobs>
+                                <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChampionShaman/ChampionShaman.(MobWorld).xdb" />
+                            </mobs>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <radius>25</radius>
+                                    <affectGroup>Enemies</affectGroup>
+                                    <affectHolder>false</affectHolder>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactSetAllAggro" />
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="AddsForceAggro.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="AddsForceAggro.(BuffResource).xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                    <impactsOnNoTargets>
+                                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                            <radius>15</radius>
+                                            <affectGroup>Enemies</affectGroup>
+                                            <affectHolder>false</affectHolder>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactSetAllAggro" />
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="AddsForceAggro.(BuffResource).xdb" />
+                                                </Item>
+                                            </impacts>
+                                            <impactsOnNoTargets>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                    <spawn>
+                                                        <scriptID>2_ChieftainBoss</scriptID>
+                                                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                                    </spawn>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ForceAggro" />
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impactsOnNoTargets>
+                                            <impactsOnTargetsFound>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                    <spawn>
+                                                        <scriptID>2_ChieftainBoss</scriptID>
+                                                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                                    </spawn>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactRemoveAggro" />
+                                                    </impacts>
+                                                </Item>
+                                            </impactsOnTargetsFound>
+                                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                        <mobs>
+                                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChieftainBossAddMelee/ChieftainBossAddMelee.(MobWorld).xdb" />
+                                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChieftainBossAddRange/ChieftainBossAddRange.(MobWorld).xdb" />
+                                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChieftainBossAddShaman/ChieftainBossAddShaman.(MobWorld).xdb" />
+                                                        </mobs>
+                                                    </Item>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                            <buff href="AddsForceAggro.(BuffResource).xdb" />
+                                                        </predicate>
+                                                    </Item>
+                                                </predicates>
+                                            </filter>
+                                        </Item>
+                                    </impactsOnNoTargets>
+                                    <impactsOnTargetsFound>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="AddsForceAggro.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                            <spawn>
+                                                <scriptID>2_ChieftainBoss</scriptID>
+                                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                            </spawn>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactRemoveAggro" />
+                                            </impacts>
+                                        </Item>
+                                    </impactsOnTargetsFound>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                <mobs>
+                                                    <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChieftainBossAddShaman/ChieftainBossAddShaman.(MobWorld).xdb" />
+                                                </mobs>
+                                            </Item>
+                                        </predicates>
+                                    </filter>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOnArrived>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectNoAggro" />
+        <Item type="gameMechanics.elements.effects.EffectUnworthyOfAttention" />
+    </effects>
+    <duration>30000</duration>
+    <isStackable>false</isStackable>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

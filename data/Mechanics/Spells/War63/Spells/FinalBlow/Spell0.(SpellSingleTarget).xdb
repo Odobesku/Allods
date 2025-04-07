@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>216170</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/MeleeAttacks.xdb" />
+        <Item href="/Mechanics/Spells/Groups/InsuranceTrigger.xdb" />
+        <Item href="/Mechanics/Spells/Groups/Thrusts.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+    </groups>
+    <Name href="Spell.(SpellSingleTarget).Name.txt" />
+    <Description href="Spell.(SpellSingleTarget).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value var="avgDamage" />
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                        <formula>WeaponScaler</formula>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Warrior/WarriorFlurryOfBlows.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Warrior/GrimStrike.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <ranks>
+        <Item href="Spell01.(SpellSingleTarget).xdb" />
+        <Item href="Spell02.(SpellSingleTarget).xdb" />
+        <Item href="Spell03.(SpellSingleTarget).xdb" />
+    </ranks>
+    <modifiers>
+        <Item type="gameMechanics.elements.spell.SpellEnvelopeModifier">
+            <effects>
+                <Item type="gameMechanics.elements.effects.OutgoingCritChanceSummand">
+                    <impactProducer href="Spell01.(SpellSingleTarget).xdb" />
+                    <summand>1</summand>
+                </Item>
+            </effects>
+            <onBehalfOfHolder>true</onBehalfOfHolder>
+        </Item>
+    </modifiers>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>6000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateUsesWeapon" />
+        </casterConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceCombatAdvantage">
+                <minValue>20</minValue>
+                <ability href="/Mechanics/Spells/War63/Abilities/CombatAdvantage/Ability.(AbilityResource).xdb" />
+            </Item>
+        </casterResources>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ScaledPhysicalWeaponDamage">
+                        <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                            <scalers>
+                                <Item type="gameMechanics.elements.scalers.PowerDPSScaler" />
+                                <Item type="gameMechanics.elements.scalers.WeaponDpsScaler" />
+                            </scalers>
+                        </scaler>
+                        <avgDamage var="avgDamage" />
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

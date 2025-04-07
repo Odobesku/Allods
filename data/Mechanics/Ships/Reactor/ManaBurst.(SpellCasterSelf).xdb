@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>243850</resourceId>
+    </Header>
+    <Name href="ManaBurst.txt" />
+    <prepareDuration>0</prepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+    <mechanics>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.device.EntityClientData">
+                <data href="ManaBurst.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderTransport" />
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactOnShipCreatures">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/Ships/Lazareth/Buff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </predicate>
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.ImpactManaburstKick" />
+                                </impactsIf>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/Ships/Lazareth/Buff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </predicate>
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/Ships/Lazareth/ProtectionBuff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </predicate>
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/Ships/Repair/OldDevices/GoblinBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </predicate>
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.DirectDamageGeneric">
+                                        <damage type="gameMechanics.elements.calcers.CalcerDiff">
+                                            <minuend type="gameMechanics.world.ship.elements.calcers.CalcerCurrentEnergy" />
+                                            <subtrahend type="gameMechanics.world.ship.elements.calcers.CalcerMaxEnergy" />
+                                        </damage>
+                                        <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                            <mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                                                <calcers>
+                                                    <Item type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                                        <multiplier>0.33</multiplier>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.calcers.InverseCalcer">
+                                                        <value type="gameMechanics.world.ship.elements.calcers.CalcerMaxEnergy" />
+                                                    </Item>
+                                                </calcers>
+                                            </mulCalcer>
+                                            <additionalMultiplier>
+                                                <scaler type="gameMechanics.elements.scalers.TrivialScaler" />
+                                                <value>1</value>
+                                            </additionalMultiplier>
+                                        </scalerTarget>
+                                    </Item>
+                                </impactsIf>
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.world.ship.elements.ImpactAllDevices">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                        <predicates>
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateGreater">
+                                                        <lhs type="gameMechanics.elements.calcers.HealthCalcer" />
+                                                        <rhs type="gameMechanics.elements.calcers.FloatData">
+                                                            <value>1</value>
+                                                        </rhs>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateDevice">
+                                                        <deviceResources>
+                                                            <Item href="/Mechanics/Ships/Rudder/OldDevices/Rudder.(UsableDeviceResource).xdb#xpointer(/gameMechanics.world.device.UsableDeviceResource)" />
+                                                            <Item href="/Mechanics/Ships/Engine/OldDevices/Engine.(UsableDeviceResource).xdb#xpointer(/gameMechanics.world.device.UsableDeviceResource)" />
+                                                            <Item href="/Mechanics/Ships/EngineV/OldDevices/EngineV.(UsableDeviceResource).xdb#xpointer(/gameMechanics.world.device.UsableDeviceResource)" />
+                                                            <Item href="/Mechanics/Ships/Engine/OldDevices/Engine.Adaptable.(UsableDeviceResource).xdb#xpointer(/gameMechanics.world.device.UsableDeviceResource)" />
+                                                        </deviceResources>
+                                                    </Item>
+                                                </predicates>
+                                            </Item>
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                                <predicates>
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.predicates.PredicateDevice">
+                                                            <deviceResources>
+                                                                <Item href="/Mechanics/Ships/Rudder/OldDevices/Rudder.(UsableDeviceResource).xdb#xpointer(/gameMechanics.world.device.UsableDeviceResource)" />
+                                                                <Item href="/Mechanics/Ships/Engine/OldDevices/Engine.(UsableDeviceResource).xdb#xpointer(/gameMechanics.world.device.UsableDeviceResource)" />
+                                                                <Item href="/Mechanics/Ships/EngineV/OldDevices/EngineV.(UsableDeviceResource).xdb#xpointer(/gameMechanics.world.device.UsableDeviceResource)" />
+                                                                <Item href="/Mechanics/Ships/Engine/OldDevices/Engine.Adaptable.(UsableDeviceResource).xdb#xpointer(/gameMechanics.world.device.UsableDeviceResource)" />
+                                                            </deviceResources>
+                                                        </predicate>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateGreater">
+                                                        <lhs type="gameMechanics.elements.calcers.HealthCalcer" />
+                                                        <rhs type="gameMechanics.elements.calcers.FloatData">
+                                                            <value>0</value>
+                                                        </rhs>
+                                                    </Item>
+                                                </predicates>
+                                            </Item>
+                                        </predicates>
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.world.ship.elements.ImpactDeviceHit">
+                                        <damage type="gameMechanics.elements.calcers.CalcerMul">
+                                            <calcers>
+                                                <Item type="gameMechanics.constructor.basicElements.ScalerCalcer">
+                                                    <scaler type="gameMechanics.elements.scalers.RandomScaler">
+                                                        <range>
+                                                            <max>1000</max>
+                                                        </range>
+                                                    </scaler>
+                                                    <value>0.001</value>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.calcers.CalcerSum">
+                                                    <summands>
+                                                        <Item type="gameMechanics.elements.calcers.LinearCalcer">
+                                                            <mul>-1</mul>
+                                                            <mulCalcer type="gameMechanics.world.ship.elements.calcers.CalcerMaxEnergy" />
+                                                            <sum>0</sum>
+                                                        </Item>
+                                                        <Item type="gameMechanics.world.ship.elements.calcers.CalcerCurrentEnergy" />
+                                                    </summands>
+                                                </Item>
+                                            </calcers>
+                                        </damage>
+                                    </Item>
+                                </impactsIf>
+                            </Item>
+                        </impacts>
+                        <filter type="gameMechanics.world.device.filters.DamagableUsableDeviceFilter" />
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <speed>0</speed>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

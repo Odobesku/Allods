@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>186178</resourceId>
+    </Header>
+    <Name href="StrengthenSelf.(BuffResource).Name.txt" />
+    <Description href="StrengthenSelf.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Modifiers/PowerAstral.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="StrengthenSelf.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <nameTemplate href="StrengthenSelf.(BuffResource).Name.txt" />
+    <descTemplate href="StrengthenSelf.(BuffResource).Description.txt" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>0.5</coeff>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectForceMove">
+            <destinations>
+                <Item type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+            </destinations>
+            <impactsOnArrived>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                            <radius>5</radius>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                                    <impactsOnHitTarget>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateHealthHigher">
+                                                    <level>0.5</level>
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                                                    <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                                                    <minDamage>50</minDamage>
+                                                    <maxDamage>50</maxDamage>
+                                                </Item>
+                                            </impactsIf>
+                                        </Item>
+                                    </impactsOnHitTarget>
+                                    <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                                    <minDamage>50</minDamage>
+                                    <maxDamage>50</maxDamage>
+                                </Item>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="SlowdownBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="StrikeTarget.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impacts>
+                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="StrikeTarget.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                </predicates>
+                            </filter>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="StrengthenSelf.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOnArrived>
+        </Item>
+    </effects>
+    <duration>10000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/ProtectionBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

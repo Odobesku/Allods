@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>200458</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="Buff.(BuffResource).Name.txt" />
+    <Description href="Buff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/CommonState/Aspect_Damage.(UISingleTexture).xdb" />
+    <visScript href="/Spells/VisScripts/Stalker/SetAspect_DD.(BuffVisScripts).xdb" />
+    <descVars>
+        <Item>
+            <name>perc</name>
+            <value>1</value>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                            <externalCalcer hrefvar="externalCalcer" />
+                        </mulCalcer>
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                        <formula>FormulaPercent</formula>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+    </descVars>
+    <effects>
+        <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+            <scaler type="gameMechanics.elements.scalers.MultLinearEffectScaler">
+                <coeff>1</coeff>
+                <calcer type="constructor.elements.CalcerFloatExternal">
+                    <externalCalcer hrefvar="externalCalcer" />
+                </calcer>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsToAllAssistants">
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <effectsIf>
+                        <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+                            <scaler type="gameMechanics.elements.scalers.MultLinearEffectScaler">
+                                <coeff>1</coeff>
+                                <calcer type="constructor.elements.CalcerFloatExternal">
+                                    <externalCalcer hrefvar="externalCalcer" />
+                                </calcer>
+                            </scaler>
+                        </Item>
+                    </effectsIf>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsToPet">
+            <effects>
+                <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+                    <scaler type="gameMechanics.elements.scalers.MultLinearEffectScaler">
+                        <coeff>1</coeff>
+                        <calcer type="constructor.elements.CalcerFloatExternal">
+                            <externalCalcer hrefvar="externalCalcer" />
+                        </calcer>
+                    </scaler>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+            </predicates>
+            <effectsIf>
+                <Item type="gameMechanics.elements.effects.SpellPrepareDurationModifier">
+                    <spell href="Spell01.(SpellSingleTarget).xdb" />
+                    <factor>-1</factor>
+                </Item>
+            </effectsIf>
+        </Item>
+    </effects>
+    <isStackable>false</isStackable>
+    <isHelpful>true</isHelpful>
+    <ranks>
+        <Item href="Buff01.(BuffResource).xdb" />
+        <Item href="Buff02.(BuffResource).xdb" />
+        <Item href="Buff03.(BuffResource).xdb" />
+    </ranks>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb" />
+        <Item href="/Mechanics/Spells/Groups/CommonAspects.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

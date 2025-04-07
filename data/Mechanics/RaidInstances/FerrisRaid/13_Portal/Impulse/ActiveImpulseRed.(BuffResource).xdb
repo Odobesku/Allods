@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>222390</resourceId>
+    </Header>
+    <Name href="ActiveImpulseRed.(BuffResource).Name.txt" />
+    <Description href="ActiveImpulseRed.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Misc/Buffs/BuffMagicBallRed.(UISingleTexture).xdb" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Mobs/PortalBoss_ActiveImpulseRead_Common.(VisObjectTemplate).xdb" />
+            <effectAlias href="" />
+            <scale>1</scale>
+            <fadeInTime>300</fadeInTime>
+            <fadeOutTime>300</fadeOutTime>
+            <locator>Slot_TopFX</locator>
+            <offendTime />
+            <offset z="1.3" />
+        </Item>
+    </visualEffects>
+    <effects>
+        <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>0.25</coeff>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.NotStackableEffects">
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectInstantiating">
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.TickableAura">
+                            <affectGroup>All</affectGroup>
+                            <radius>16.25</radius>
+                            <delayIn>2000</delayIn>
+                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="ActiveImpulseBlue.(BuffResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Defender/DefenderBuff.(BuffResource).xdb" />
+                                        </predicate>
+                                    </Item>
+                                </predicates>
+                            </filter>
+                            <impactsIn>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="OppositeImpulses.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="OppositeImpulses.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIn>
+                            <impactsOut>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="OppositeImpulses.(BuffResource).xdb" />
+                                    <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="OppositeImpulses.(BuffResource).xdb" />
+                                            <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsOut>
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <radius>16.25</radius>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                    <buff href="ActiveImpulseBlue.(BuffResource).xdb" />
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                                    <data href="OppositeImpulses.(ClientData).xdb" />
+                                                    <calcers>
+                                                        <addressEntries>
+                                                            <Item>
+                                                                <name>caster</name>
+                                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                                            </Item>
+                                                            <Item>
+                                                                <name>target</name>
+                                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                                            </Item>
+                                                        </addressEntries>
+                                                    </calcers>
+                                                </Item>
+                                            </impactsIf>
+                                            <impactsElse>
+                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                    <predicates>
+                                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                            <buff href="ActiveImpulseRed.(BuffResource).xdb" />
+                                                        </Item>
+                                                    </predicates>
+                                                    <impactsIf>
+                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                            <buff href="OppositeImpulses.(BuffResource).xdb" />
+                                                            <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                                    <buff href="OppositeImpulses.(BuffResource).xdb" />
+                                                                    <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impactsIf>
+                                                </Item>
+                                            </impactsElse>
+                                        </Item>
+                                    </impacts>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                    <buff href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Defender/DefenderBuff.(BuffResource).xdb" />
+                                                </predicate>
+                                            </Item>
+                                        </predicates>
+                                    </filter>
+                                </Item>
+                            </impacts>
+                            <tick>1000</tick>
+                        </Item>
+                    </effects>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsToPet">
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectInstantiating">
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+                            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                                <coeff>0.25</coeff>
+                            </scaler>
+                        </Item>
+                    </effects>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <stackLimit>4</stackLimit>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/Events/EventBuffs.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

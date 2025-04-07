@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>238843</resourceId>
+    </Header>
+    <Name href="MatchMakingQueue.(BuffResource).Name.txt" />
+    <Description href="MatchMakingQueue.(BuffResource).Description.txt" />
+    <image href="/Interface/Ingame/ContextGuild/RelatedTextures/Mwar/MwarBattlesGroupIcon.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <effects>
+        <Item type="gameMechanics.world.ship.elements.EffectMapChanged">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                            <predicates>
+                                <Item type="gameMechanics.world.ship.elements.PredicateInAstralHub" />
+                                <Item type="gameMechanics.map.instance.astralIsland.PredicateOnAstralIsland" />
+                            </predicates>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactLeaveFromEventQueues" />
+                    </impactsIf>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                            <predicates>
+                                <Item type="gameMechanics.world.ship.elements.PredicateInAstralHub" />
+                                <Item type="gameMechanics.map.instance.astralIsland.PredicateOnAstralIsland" />
+                                <Item type="gameMechanics.elements.predicates.PredicateInZone">
+                                    <zone href="/Maps/Inst_HeroesArena/Zones/HeroesArena/HeroesArena.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactLeaveFromEventQueues" />
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="LFGQueue.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                            <data href="ClientData/LFGQueue.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                        </Item>
+                        <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactLeaveFromEventQueues" />
+                    </impactsIf>
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <isClientReplicated>false</isClientReplicated>
+</gameMechanics.constructor.schemes.buff.BuffResource>

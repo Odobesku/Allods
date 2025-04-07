@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<Header>
+		<isPrototype>true</isPrototype>
+		<Variables>
+			<TurrPrecastEffectOnTrunk />
+			<GunPrecastEffectOnTrunk />
+			<TurrFXProjectile />
+			<GunFXProjectile />
+			<TurrLocatorNameOnTarget>Slot_Global</TurrLocatorNameOnTarget>
+			<GunLocatorNameOnTarget>Slot_Global</GunLocatorNameOnTarget>
+			<GunFXOnTarget />
+			<TurrFXOnTarget />
+			<TurrGe>5</TurrGe>
+			<GunGe>5</GunGe>
+		</Variables>
+	</Header>
+	<actionBarStart type="VisActionList">
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="VisActionList">
+				<visActionID>Turell</visActionID>
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>Artillery</flagName>
+				</playWhile>
+				<preconditional>true</preconditional>
+				<elements>
+					<Item type="CreatureAnimationAction">
+						<mode>LOOP</mode>
+						<animations>
+							<Item>channelCastDirected</Item>
+						</animations>
+						<channel>CHANNEL_ATTACK</channel>
+					</Item>
+				</elements>
+			</Item>
+			<Item type="VisActionList">
+				<visActionID>Gun</visActionID>
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>Artillery</flagName>
+					<checkIsSet>false</checkIsSet>
+				</playWhile>
+				<preconditional>true</preconditional>
+				<elements>
+					<Item type="CreatureAnimationAction">
+						<animations>
+							<Item>channelCastDirectedEngineer</Item>
+						</animations>
+						<channel>CHANNEL_ATTACK</channel>
+					</Item>
+				</elements>
+			</Item>
+		</elements>
+	</actionBarStart>
+	<wholeCasting type="VisActionList">
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="VisActionList">
+				<visActionID>Turrel</visActionID>
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>Artillery</flagName>
+				</playWhile>
+				<preconditional>true</preconditional>
+				<elements>
+					<Item type="CreatureEffectsAction">
+						<visualEffects>
+							<Item>
+								<effectFx hrefvar="TurrPrecastEffectOnTrunk" />
+								<locator>FROM_LOCATOR_NAME</locator>
+								<member>Mount</member>
+								<locatorName>Turret_transform</locatorName>
+							</Item>
+						</visualEffects>
+					</Item>
+				</elements>
+			</Item>
+			<Item type="VisActionList">
+				<visActionID>noTurrel</visActionID>
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>Artillery</flagName>
+					<checkIsSet>false</checkIsSet>
+				</playWhile>
+				<preconditional>true</preconditional>
+				<elements>
+					<Item type="CreatureEffectsAction">
+						<visualEffects>
+							<Item>
+								<effectFx hrefvar="GunPrecastEffectOnTrunk" />
+								<fixPoint>false</fixPoint>
+								<scale>1</scale>
+								<locator>Slot_Global</locator>
+								<member>Caster</member>
+								<locatorName />
+							</Item>
+						</visualEffects>
+					</Item>
+				</elements>
+			</Item>
+		</elements>
+	</wholeCasting>
+	<launch type="VisActionList">
+		<visActionID>Turell</visActionID>
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>Artillery</flagName>
+				</playWhile>
+				<preconditional>true</preconditional>
+				<elements>
+					<Item type="CreatureAnimationAction">
+						<animations>
+							<Item>attack</Item>
+						</animations>
+						<channel>CHANNEL_ATTACK</channel>
+						<advanced>
+							<backgroundAfterFirstKey>true</backgroundAfterFirstKey>
+							<changeChannelAfterFirstKey>CHANGE</changeChannelAfterFirstKey>
+							<channelAfterFirstKey>CHANNEL_ATTACK</channelAfterFirstKey>
+						</advanced>
+					</Item>
+					<Item type="CreatureVisActionStartThrow" />
+					<Item type="CreatureProjectileAction">
+						<projectileFx hrefvar="TurrFXProjectile" />
+						<explosionFx hrefvar="TurrFXOnTarget" />
+						<theGe var="TurrGe" />
+						<pointOnCaster type="VisPointLocator">
+							<locator>FROM_LOCATOR_NAME</locator>
+							<member>Mount</member>
+							<locatorName>Slot_Special01</locatorName>
+						</pointOnCaster>
+						<pointOnTarget type="VisPointLocator">
+							<locator var="TurrLocatorNameOnTarget" />
+						</pointOnTarget>
+						<offendTime type="EffectOffendConstDelay" />
+					</Item>
+				</elements>
+			</Item>
+			<Item type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>Artillery</flagName>
+					<checkIsSet>false</checkIsSet>
+				</playWhile>
+				<preconditional>true</preconditional>
+				<elements>
+					<Item type="CreatureAnimationAction">
+						<animations>
+							<Item>spellCastDirectedEngineer</Item>
+						</animations>
+						<channel>CHANNEL_ATTACK</channel>
+						<advanced>
+							<backgroundAfterFirstKey>true</backgroundAfterFirstKey>
+							<changeChannelAfterFirstKey>CHANGE</changeChannelAfterFirstKey>
+							<channelAfterFirstKey>CHANNEL_ATTACK</channelAfterFirstKey>
+						</advanced>
+					</Item>
+					<Item type="CreatureVisActionStartThrow" />
+					<Item type="CreatureProjectileAction">
+						<projectileFx hrefvar="GunFXProjectile" />
+						<explosionFx hrefvar="GunFXOnTarget" />
+						<theGe var="GunGe" />
+						<pointOnCaster type="VisPointLocator">
+							<locator>Slot_Hand_L</locator>
+						</pointOnCaster>
+						<pointOnTarget type="VisPointLocator">
+							<locator var="GunLocatorNameOnTarget" />
+						</pointOnTarget>
+						<offendTime type="EffectOffendConstDelay" />
+					</Item>
+				</elements>
+			</Item>
+		</elements>
+	</launch>
+	<playOnTargets>
+		<specialAction />
+	</playOnTargets>
+</SpellVisScripts>

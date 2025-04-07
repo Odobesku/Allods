@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>187570</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="UndPriest_AEHeal.(SpellArea).Name.txt" />
+    <visualScripts href="UndPriest_AEHeal.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <prepareDuration>6000</prepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>30000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateMobWorld">
+                    <mobs>
+                        <Item href="AI63_Pack_UndPriest.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    </mobs>
+                </predicate>
+            </Item>
+        </targetConditions>
+        <channelingMechanics>
+            <channelingBuff href="UndPriest_AEHeal.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+        </channelingMechanics>
+        <casterChannelingEffects>
+            <Item type="gameMechanics.elements.effects.Switch">
+                <impactsOn>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="AI63_CCImmunity.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsOn>
+            </Item>
+        </casterChannelingEffects>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                <buff href="AI63_CCImmunity.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <shapeCenterPosition>Caster</shapeCenterPosition>
+    <radius>10</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

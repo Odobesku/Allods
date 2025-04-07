@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>186280</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="/Characters/Undead_male/Instances/AstralIsle55/MainGuardDead.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="BuffCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.StackBuff">
+                                            <buff href="BuffCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            <delta type="gameMechanics.elements.calcers.FloatData">
+                                                <value>-1</value>
+                                            </delta>
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                                    <delay>3000</delay>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                            <destination type="gameMechanics.map.destination.DestinationLocator">
+                                                                <locator>
+                                                                    <scriptID>Boss02Spawn</scriptID>
+                                                                    <map href="/Maps/AstralIsle55_UI03/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                                </locator>
+                                                                <yaw type="constructor.basicElements.AngleDegrees">
+                                                                    <value>180</value>
+                                                                </yaw>
+                                                            </destination>
+                                                            <object href="/Characters/Undead_male/Instances/AstralIsle55/MainGuardGhost.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                            <pool href="Boss02.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                    <spawnResource href="/Maps/AstralIsle55_UI03/SpawnTables/AI55_Boss02.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                            <radius>15</radius>
+                            <affectGroup>Enemies</affectGroup>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                                    <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                                        <value>0.666667</value>
+                                    </chanceCalcer>
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="BuffOnDeadGuardFear.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            </Item>
+                                        </predicates>
+                                    </Item>
+                                </predicates>
+                            </filter>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>207690</resourceId>
+    </Header>
+    <Name href="Stacking.(BuffResource).Name.txt" />
+    <Description href="Stacking.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Mage/MageCitadel.(UISingleTexture).xdb" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/Mage63_Citadel_Stacking.(VisObjectTemplate).xdb" />
+            <fadeOutTime>500</fadeOutTime>
+            <locator>Slot_Global</locator>
+            <offset z="0.2" />
+            <rotation x="0" y="0" z="0" />
+            <ignoreParentRotation>true</ignoreParentRotation>
+        </Item>
+    </visualEffects>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectMoveTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Stacking.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+            <distDelta>3</distDelta>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectStackTrigger">
+            <count>5</count>
+            <impacts>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="Buff.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.StackBuff">
+                    <buff href="Stacking.(BuffResource).xdb" />
+                    <delta type="gameMechanics.elements.calcers.FloatData">
+                        <value>1</value>
+                    </delta>
+                </Item>
+            </impacts>
+            <initialDelay>1000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="Buff.(BuffResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsElse>
+                        <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+                            <spell href="Spell.(SpellSingleTarget).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                            <spell href="Spell.(SpellSingleTarget).xdb" />
+                            <duration>10000</duration>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Jump</Item>
+                <Item>ExternalMove</Item>
+                <Item>Rooted</Item>
+            </actions>
+            <rooted>true</rooted>
+        </Item>
+        <Item type="gameMechanics.elements.effects.MultiplyStat">
+            <stat type="gameMechanics.elements.stat.StatResistance">
+                <element>EPHYSICAL</element>
+            </stat>
+            <multiplier>1.05</multiplier>
+        </Item>
+        <Item type="gameMechanics.elements.effects.MultiplyStat">
+            <stat type="gameMechanics.elements.stat.StatResistance">
+                <element>EELEMENTAL</element>
+            </stat>
+            <multiplier>1.05</multiplier>
+        </Item>
+        <Item type="gameMechanics.elements.effects.MultiplyStat">
+            <stat type="gameMechanics.elements.stat.StatResistance">
+                <element>EDIVINE</element>
+            </stat>
+            <multiplier>1.05</multiplier>
+        </Item>
+        <Item type="gameMechanics.elements.effects.MultiplyStat">
+            <stat type="gameMechanics.elements.stat.StatResistance">
+                <element>ENATURE</element>
+            </stat>
+            <multiplier>1.05</multiplier>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffInterceptor">
+            <impactsOnDetach>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Stacking.(BuffResource).xdb" />
+                </Item>
+            </impactsOnDetach>
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.PredicateBuffEquals">
+                    <buff href="/Mechanics/Spells/CommonBuffs/Aspects/CC/Buff01.(BuffResource).xdb" />
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffInterceptor">
+            <impactsOnAttach>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Stacking.(BuffResource).xdb" />
+                </Item>
+            </impactsOnAttach>
+            <predicates>
+                <Item type="gameMechanics.constructor.basicElements.PredicateGenericOr">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.schemes.buff.PredicateBuffEquals">
+                            <buff href="/Mechanics/GameRoot/Mount/MountBuff.xdb" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                            <groups>
+                                <Item href="/Mechanics/Spells/Groups/BearingBuffs.xdb" />
+                            </groups>
+                        </Item>
+                    </predicates>
+                </Item>
+            </predicates>
+        </Item>
+    </effects>
+    <stackLimit>5</stackLimit>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>187741</resourceId>
+    </Header>
+    <visualScripts href="Boss03_SelfBurn_teleport.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <prepareDuration>1000</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>45000</duration>
+        </cooldown>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                <radius>10</radius>
+                <affectGroup>Enemies</affectGroup>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                        <time>1000</time>
+                        <distance>8</distance>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                        <destination type="gameMechanics.map.destination.DestinationLocator">
+                            <locator>
+                                <scriptID>AI63_Boss03</scriptID>
+                                <map href="/Maps/AstralIsle63/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                            </locator>
+                        </destination>
+                        <finishImpacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/Mechanics/Spells/AstarlIslands/AI63/AI63_StopMove.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                <delay>1000</delay>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                                        <spell href="Boss03_SelfBurn.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </finishImpacts>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

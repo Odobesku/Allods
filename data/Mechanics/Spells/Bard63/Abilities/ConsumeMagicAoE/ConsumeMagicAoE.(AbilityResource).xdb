@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>215228</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="ConsumeMagicAoE.(AbilityResource).Name.txt" />
+    <description href="ConsumeMagicAoE.(AbilityResource).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value var="value" />
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Bard/ExtraEnergyOnDispel.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.BuffExtraEffects">
+            <buffs>
+                <Item href="/Mechanics/Spells/CommonBuffs/Aspects/Support/Buff01.(BuffResource).xdb" />
+            </buffs>
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectMarkedImpacts">
+                    <mark href="/Mechanics/Spells/Bard63/Spells/ConsumeMagic/ConsumeMagicAoEMark.(MarkResource).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+                                    <spell href="/Mechanics/Spells/CommonSpells/AoEDisable/AoEDisable.(SpellSingleTarget).xdb" />
+                                </Item>
+                            </predicates>
+                            <elseImpacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <radius>15</radius>
+                                    <affectGroup>Enemies</affectGroup>
+                                    <affectHolder>false</affectHolder>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.DispelMagic">
+                                            <magics href="/Mechanics/Spells/Groups/Magics.xdb" />
+                                            <impactsOnDispel>
+                                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                                                            <mark href="/Mechanics/Spells/Bard63/Spells/ConsumeMagic/ConsumeMagicOnCaster.(MarkResource).xdb" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                                                    <mark href="/Mechanics/Spells/Bard63/Spells/ConsumeMagic/ConsumeMagicOnTarget.(MarkResource).xdb" />
+                                                </Item>
+                                            </impactsOnDispel>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                                                    <mark href="/Mechanics/Spells/Bard63/Spells/ConsumeMagic/ConsumeMagicOnTargetBeforeDispell.(MarkResource).xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                    <targetsLimit var="targetsLimit" />
+                                    <sorting type="gameMechanics.elements.targetSelector.sorts.SortByDistance">
+                                        <order>Ascending</order>
+                                    </sorting>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                                                    <spell href="/Mechanics/Spells/Bard63/Spells/ConsumeMagic/ConsumeMagic03.(SpellSingleTarget).xdb" />
+                                                    <duration>40000</duration>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </elseImpacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AbilityUnlockerEffect">
+            <abilities>
+                <Item href="/Mechanics/Spells/CommonSpells/AoEDisable/AoEDisableAbility.(AbilityResource).xdb" />
+            </abilities>
+        </Item>
+    </effects>
+    <ranks>
+        <Item href="ConsumeMagicAoE01.(AbilityResource).xdb" />
+        <Item href="ConsumeMagicAoE02.(AbilityResource).xdb" />
+        <Item href="ConsumeMagicAoE03.(AbilityResource).xdb" />
+    </ranks>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>191577</resourceId>
+    </Header>
+    <Name href="AI60_FinalBoss_Channel.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="AI60_FinalBoss_Channel.(SpellVisScripts).xdb" />
+    <prepareDuration>20000</prepareDuration>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <stage>Start</stage>
+            <duration>18000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                <mobs>
+                    <Item href="AI60_FinalBoss_Necromancer.(MobWorld).xdb" />
+                </mobs>
+            </Item>
+        </targetConditions>
+        <channelingMechanics>
+            <channelingBuff href="AI60_FinalBoss_Channel.(BuffResource).xdb" />
+            <finishImpacts>
+                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                            <element>ASTRAL</element>
+                            <damage>75</damage>
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                    </Item>
+                                </predicates>
+                            </Item>
+                        </predicates>
+                    </filter>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="AI60_FinalBoss_Channel_Finish.(ClientData).xdb" />
+                </Item>
+            </finishImpacts>
+        </channelingMechanics>
+    </mechanics>
+    <isAE>true</isAE>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

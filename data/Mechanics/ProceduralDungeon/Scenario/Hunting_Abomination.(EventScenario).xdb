@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.elements.scenarios.EventScenario>
+    <Header>
+        <resourceId>250543</resourceId>
+    </Header>
+    <name href="Hunting_Abomination.(EventScenario).Name.txt" />
+    <rootElement type="gameMechanics.elements.scenarios.SequenceElement">
+        <elements>
+            <Item type="gameMechanics.elements.scenarios.TimerElement">
+                <delay>
+                    <minute>15</minute>
+                </delay>
+                <failOnTimeout>true</failOnTimeout>
+                <controlChildElement type="gameMechanics.elements.scenarios.spawn.SpawnElement">
+                    <spawnEntries>
+                        <Item type="gameMechanics.elements.scenarios.spawn.SpawnElement$SpawnEntry">
+                            <spawnFactory type="gameMechanics.elements.scenarios.spawn.MobPoolSpawnFactory">
+                                <mobPool href="/Mechanics/ProceduralDungeon/Pool/Hunting_Target.(MobPool).xdb" />
+                            </spawnFactory>
+                            <place type="gameMechanics.elements.scenarios.destinationFinders.DestinationFinderTag">
+                                <tag href="/Mechanics/ProceduralDungeon/Tag/Hunting_Start.(IdentifiableTagResource).xdb" />
+                            </place>
+                            <spawnAllInOnePlace>false</spawnAllInOnePlace>
+                        </Item>
+                    </spawnEntries>
+                    <controlChildElement type="gameMechanics.elements.scenarios.SequenceElement">
+                        <elements>
+                            <Item type="gameMechanics.elements.scenarios.StartEventGoalElement">
+                                <eventGoal href="/Mechanics/ProceduralDungeon/Goal/Hunting_Abomination.(KillMobsEventGoal).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.elements.scenarios.MoveToElement">
+                                <destination type="gameMechanics.elements.scenarios.destinationFinders.DestinationFinderTag">
+                                    <tag href="/Mechanics/ProceduralDungeon/Tag/Caravan_Middle.(IdentifiableTagResource).xdb" />
+                                </destination>
+                                <failOnSpawnDie>false</failOnSpawnDie>
+                                <mapGoalResource href="/Mechanics/ProceduralDungeon/Goal/Hunting_Abomination.(KillMobsEventGoal).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.elements.scenarios.InverterElement">
+                                <controlChildElement type="gameMechanics.elements.scenarios.MoveToElement">
+                                    <destination type="gameMechanics.elements.scenarios.destinationFinders.DestinationFinderTag">
+                                        <tag href="/Mechanics/ProceduralDungeon/Tag/Hunting_Abomination_Ending.(IdentifiableTagResource).xdb" />
+                                    </destination>
+                                    <mapGoalResource href="/Mechanics/ProceduralDungeon/Goal/Hunting_Abomination.(KillMobsEventGoal).xdb" />
+                                </controlChildElement>
+                            </Item>
+                        </elements>
+                    </controlChildElement>
+                    <optionalChildElement type="gameMechanics.elements.scenarios.RepeatElement">
+                        <element type="gameMechanics.elements.scenarios.SequenceElement">
+                            <elements>
+                                <Item type="gameMechanics.elements.scenarios.TimerElement">
+                                    <delay>
+                                        <second>15</second>
+                                    </delay>
+                                </Item>
+                                <Item type="gameMechanics.elements.scenarios.SuccessElement">
+                                    <element type="gameMechanics.elements.scenarios.SelectorElement">
+                                        <elements>
+                                            <Item type="gameMechanics.elements.scenarios.spawn.SpawnElement">
+                                                <spawnEntries>
+                                                    <Item type="gameMechanics.elements.scenarios.spawn.SpawnElement$SpawnEntry">
+                                                        <spawnFactory type="gameMechanics.elements.scenarios.spawn.MobPoolSpawnFactory">
+                                                            <mobPool href="Attach_Escort_ForesPool.(MobPool).xdb" />
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                                                            <projectileData>
+                                                                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                                                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                                                </moveType>
+                                                                                <resource href="Summon.(ProjectileResource).xdb" />
+                                                                            </projectileData>
+                                                                        </Item>
+                                                                    </impacts>
+                                                                </Item>
+                                                            </impacts>
+                                                        </spawnFactory>
+                                                        <place type="gameMechanics.elements.scenarios.destinationFinders.DestinationFinderTag">
+                                                            <tag href="TestScenario/Attach_Escort_Forest.(IdentifiableTagResource).xdb" />
+                                                            <distanceFilter>
+                                                                <place type="gameMechanics.elements.scenarios.destinationFinders.DestinationFinderSpawnedObject" />
+                                                                <maxDistance>40</maxDistance>
+                                                            </distanceFilter>
+                                                        </place>
+                                                        <spawnAllInOnePlace>false</spawnAllInOnePlace>
+                                                    </Item>
+                                                </spawnEntries>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.scenarios.spawn.SpawnElement">
+                                                <spawnEntries>
+                                                    <Item type="gameMechanics.elements.scenarios.spawn.SpawnElement$SpawnEntry">
+                                                        <spawnFactory type="gameMechanics.elements.scenarios.spawn.MobPoolSpawnFactory">
+                                                            <mobPool href="Attach_Escort_Abomination_Pool.(MobPool).xdb" />
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                                                            <projectileData>
+                                                                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                                                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                                                </moveType>
+                                                                                <resource href="Summon.(ProjectileResource).xdb" />
+                                                                            </projectileData>
+                                                                        </Item>
+                                                                    </impacts>
+                                                                </Item>
+                                                            </impacts>
+                                                        </spawnFactory>
+                                                        <place type="gameMechanics.elements.scenarios.destinationFinders.DestinationFinderTag">
+                                                            <tag href="TestScenario/Attach_Escort_Abomination.(IdentifiableTagResource).xdb" />
+                                                            <distanceFilter>
+                                                                <place type="gameMechanics.elements.scenarios.destinationFinders.DestinationFinderSpawnedObject" />
+                                                                <maxDistance>40</maxDistance>
+                                                            </distanceFilter>
+                                                        </place>
+                                                        <spawnAllInOnePlace>false</spawnAllInOnePlace>
+                                                    </Item>
+                                                </spawnEntries>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.scenarios.spawn.SpawnElement">
+                                                <spawnEntries>
+                                                    <Item type="gameMechanics.elements.scenarios.spawn.SpawnElement$SpawnEntry">
+                                                        <spawnFactory type="gameMechanics.elements.scenarios.spawn.MobPoolSpawnFactory">
+                                                            <mobPool href="Attach_Escort_Ruins_Pool.(MobPool).xdb" />
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                                                            <projectileData>
+                                                                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                                                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                                                </moveType>
+                                                                                <resource href="Summon.(ProjectileResource).xdb" />
+                                                                            </projectileData>
+                                                                        </Item>
+                                                                    </impacts>
+                                                                </Item>
+                                                            </impacts>
+                                                        </spawnFactory>
+                                                        <place type="gameMechanics.elements.scenarios.destinationFinders.DestinationFinderTag">
+                                                            <tag href="TestScenario/Attach_Escort_Ruins.(IdentifiableTagResource).xdb" />
+                                                            <distanceFilter>
+                                                                <place type="gameMechanics.elements.scenarios.destinationFinders.DestinationFinderSpawnedObject" />
+                                                                <maxDistance>40</maxDistance>
+                                                            </distanceFilter>
+                                                        </place>
+                                                        <spawnAllInOnePlace>false</spawnAllInOnePlace>
+                                                    </Item>
+                                                </spawnEntries>
+                                            </Item>
+                                        </elements>
+                                    </element>
+                                </Item>
+                            </elements>
+                        </element>
+                        <count>50</count>
+                    </optionalChildElement>
+                </controlChildElement>
+            </Item>
+            <Item type="gameMechanics.elements.scenarios.CompleteEventGoalElement">
+                <eventGoal href="/Mechanics/ProceduralDungeon/Goal/Hunting_Abomination.(KillMobsEventGoal).xdb" />
+            </Item>
+        </elements>
+    </rootElement>
+    <successLootTable href="/Mechanics/ProceduralDungeon/Loot/PDLootGroup.(LootTableResource).xdb" />
+</gameMechanics.elements.scenarios.EventScenario>

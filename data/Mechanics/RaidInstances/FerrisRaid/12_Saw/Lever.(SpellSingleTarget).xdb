@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>223019</resourceId>
+    </Header>
+    <Name href="Lever.(SpellSingleTarget).Name.txt" />
+    <image href="/Interface/Icons/Context/ContextUse.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Common/Use.(SpellVisScripts).xdb" />
+    <isExploit>true</isExploit>
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>2</value>
+    </range>
+    <prepareDuration>1000</prepareDuration>
+    <iffPolicy>Everyone</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>2000</duration>
+        </cooldown>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.map.variables.PredicateMapVariableGreater">
+                        <hideText>true</hideText>
+                        <variableResource href="/Mechanics/RaidInstances/FerrisRaid/9_RoboGuards/RoboGuards.(MapVariableResource).xdb" />
+                        <minValue type="gameMechanics.elements.calcers.FloatData">
+                            <value>0</value>
+                        </minValue>
+                    </Item>
+                    <Item type="gameMechanics.map.variables.PredicateMapVariableGreater">
+                        <hideText>true</hideText>
+                        <variableResource href="/Mechanics/RaidInstances/FerrisRaid/11_Clone_Elf/11_Elf.(MapVariableResource).xdb" />
+                        <minValue type="gameMechanics.elements.calcers.FloatData">
+                            <value>0</value>
+                        </minValue>
+                    </Item>
+                    <Item type="gameMechanics.map.variables.PredicateMapVariableLess">
+                        <hideText>true</hideText>
+                        <variableResource href="12_Saw.(MapVariableResource).xdb" />
+                        <maxValue type="gameMechanics.elements.calcers.FloatData">
+                            <value>1</value>
+                        </maxValue>
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                        <spawn>
+                            <scriptID>12_Speaker_1</scriptID>
+                            <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                        </spawn>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                        <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                        <data href="/Mechanics/RaidInstances/FerrisRaid/Voice/12_Saw/00_Intro.(ClientData).xdb" />
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                        <delay>9000</delay>
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                                <data href="/Mechanics/RaidInstances/FerrisRaid/Voice/12_Saw/01_Intro.(ClientData).xdb" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.device.DeviceDie" />
+                                        </impacts>
+                                        <spawnResource href="Levers.(SpawnTable).xdb" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                        <impacts>
+                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                <buff href="/Mechanics/RaidInstances/Player_Screen_Fade.(BuffResource).xdb" />
+                                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                    <multiplier>2</multiplier>
+                                                </durationScaler>
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                <delay>3000</delay>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                                        <table href="Decoy.(SpawnTable).xdb" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impacts>
+                <elseImpacts>
+                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                <data href="LeversInactive.(ClientData).xdb" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </elseImpacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

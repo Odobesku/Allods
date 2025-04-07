@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>219522</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="ChannelingBuff.(BuffResource).Name.txt" />
+    <Description href="ChannelingBuff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Engineer/AstralRayGun.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <effects>
+        <Item type="gameMechanics.constructor.basicElements.CountingEffectOverTime">
+            <effect type="gameMechanics.elements.effects.ImpactsOverTime">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateGreater">
+                                        <lhs type="gameMechanics.elements.calcers.VariableValueCalcer">
+                                            <variable href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                                        </lhs>
+                                        <rhs type="gameMechanics.elements.calcers.CalcerSum">
+                                            <summands>
+                                                <Item type="gameMechanics.elements.calcers.FloatData">
+                                                    <value>-200</value>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.calcers.CalcerMul">
+                                                    <calcers>
+                                                        <Item type="gameMechanics.elements.calcers.FloatData">
+                                                            <value>40</value>
+                                                        </Item>
+                                                        <Item type="gameMechanics.constructor.basicElements.ScalerCalcer">
+                                                            <scaler type="gameMechanics.elements.scalers.ScalerBuff">
+                                                                <buff href="CasterBeamPowerCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                <summand>0</summand>
+                                                                <stackCountSummand>1</stackCountSummand>
+                                                            </scaler>
+                                                            <value>1</value>
+                                                        </Item>
+                                                    </calcers>
+                                                </Item>
+                                            </summands>
+                                        </rhs>
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.RunImpactsInShape">
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                                <element>ASTRAL</element>
+                                                <damage var="damage" />
+                                                <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                                                    <scalers>
+                                                        <Item type="gameMechanics.elements.scalers.MagicScaler" />
+                                                        <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                            <mulCalcer type="gameMechanics.constructor.basicElements.ScalerCalcer">
+                                                                <scaler type="gameMechanics.elements.scalers.ScalerBuff">
+                                                                    <buff href="CasterBeamPowerCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                    <summand>0</summand>
+                                                                    <stackCountSummand>1</stackCountSummand>
+                                                                </scaler>
+                                                                <value>1</value>
+                                                            </mulCalcer>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.scalers.ScalerIf">
+                                                            <condition type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                                                <ability href="/Mechanics/Spells/Engineer/Abilities/BeamCannonUpg/Ability01.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                            </condition>
+                                                            <scalerIf type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                                                <ability href="/Mechanics/Spells/Engineer/Abilities/BeamCannonUpg/Ability01.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                                <mul>0.05</mul>
+                                                            </scalerIf>
+                                                            <scalerElse type="gameMechanics.elements.scalers.TrivialScaler" />
+                                                        </Item>
+                                                    </scalers>
+                                                </scaler>
+                                            </Item>
+                                        </impacts>
+                                        <shape type="gameMechanics.constructor.schemes.spell.area.RectangularRay">
+                                            <width>7</width>
+                                        </shape>
+                                        <affectGroup>Enemies</affectGroup>
+                                        <radius type="gameMechanics.elements.impacts.RunImpactsInShape$FixedRadius">
+                                            <value>20</value>
+                                        </radius>
+                                        <workOnDead>false</workOnDead>
+                                        <needLosToTarget>true</needLosToTarget>
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="CasterBeamPowerCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.RepeatedImpact">
+                                        <impact type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                                            <variable href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                                            <summand>-30</summand>
+                                        </impact>
+                                        <count type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                            <buff href="CasterBeamPowerCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </count>
+                                    </Item>
+                                </impactsIf>
+                                <impactsElse>
+                                    <Item type="gameMechanics.elements.impacts.ImpactResetActiveAction" />
+                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                        <data href="BeamCannonOverheating.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                    </Item>
+                                </impactsElse>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </effect>
+            <ticksCount>3</ticksCount>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="CasterBeamPowerCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOff>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <isMultiple>true</isMultiple>
+    <ranks>
+        <Item href="Buff01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+        <Item href="Buff02.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+        <Item href="Buff03.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+    </ranks>
+    <isForthright>true</isForthright>
+    <isAE>true</isAE>
+    <canBeSaved>true</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>215903</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="FireTurretStuff.(BuffResource).Name.txt" />
+    <Description href="FireTurretStuff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Engineer/EngineerAcidTurrel.(UISingleTexture).xdb" />
+    <visScript href="/Spells/VisScripts/Engineer/AcidTurretStuff.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="AcidTurretLifeTime.(BuffResource).xdb" />
+                            <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Jump</Item>
+                <Item>Rotate</Item>
+            </actions>
+            <rooted>true</rooted>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DisableSpellsPredicate">
+            <predicate type="gameMechanics.elements.predicates.PredicateSpellInGroup">
+                <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+            </predicate>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.RunImpactsInShape">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                                    <element>ACID</element>
+                                                    <forceAE>true</forceAE>
+                                                    <damage>1</damage>
+                                                    <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                                                        <scalers>
+                                                            <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                                    <externalCalcer hrefvar="externalCalcer" />
+                                                                </mulCalcer>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.scalers.MagicScaler" />
+                                                            <Item type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                                                <ability href="/Mechanics/Spells/Engineer63/Abilities/AttackDevicesMoreDamage/AttackDevicesMoreDamage01.(AbilityResource).xdb" />
+                                                                <mul>0.12</mul>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.scalers.BuffRankScaler">
+                                                                <buff href="/Mechanics/Spells/Engineer63/Abilities/MechMoreDamageAfterShot/DeviceDamageAura01.(BuffResource).xdb" />
+                                                                <mul>0.15</mul>
+                                                                <checkCaster>true</checkCaster>
+                                                            </Item>
+                                                        </scalers>
+                                                    </scaler>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                            <groupRepeaters>true</groupRepeaters>
+                        </Item>
+                    </impacts>
+                    <shape type="gameMechanics.constructor.schemes.spell.area.Cone">
+                        <angle type="constructor.basicElements.AngleDegrees">
+                            <value>30</value>
+                        </angle>
+                    </shape>
+                    <affectGroup>Enemies</affectGroup>
+                    <radius type="gameMechanics.elements.impacts.RunImpactsInShape$FixedRadius">
+                        <value>15</value>
+                    </radius>
+                    <workOnDead>false</workOnDead>
+                </Item>
+            </impacts>
+            <tick>500</tick>
+        </Item>
+        <Item type="gameMechanics.elements.effects.IncomingHealModifier">
+            <affectsPureHeal>true</affectsPureHeal>
+            <priority>Multiplier</priority>
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-1</coeff>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.MultiplyStat">
+            <stat type="gameMechanics.elements.stat.StatFullHealth" />
+            <multiplier>0.25</multiplier>
+        </Item>
+    </effects>
+    <duration>6000</duration>
+    <isStackable>false</isStackable>
+    <isHelpful>true</isHelpful>
+    <isMultiple>true</isMultiple>
+    <ranks>
+        <Item href="FireTurretStuff01.(BuffResource).xdb" />
+        <Item href="FireTurretStuff02.(BuffResource).xdb" />
+        <Item href="FireTurretStuff03.(BuffResource).xdb" />
+    </ranks>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/EngineerAttackDevices.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

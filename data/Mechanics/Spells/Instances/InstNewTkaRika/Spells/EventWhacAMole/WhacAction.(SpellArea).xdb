@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>195147</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/QuestSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/ActionBarChange.(ActionGroup).xdb" />
+    </groups>
+    <Name href="WhacAction.(SpellArea).Name.txt" />
+    <Description href="WhacAction.(SpellArea).Description.txt" />
+    <image href="/Interface/Icons/Misc/Quest/Stone.(UISingleTexture).xdb" />
+    <visualScripts href="/Mechanics/Spells/Instances/InstTkaRika/SpellWhacked.(SpellVisScripts).xdb" />
+    <sysName>TR_WhacEvent_Spell01</sysName>
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>85</value>
+    </range>
+    <targetType>STTPoint</targetType>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>250</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                <mobs>
+                    <Item href="/Mechanics/Spells/Instances/InstNewTkaRika/Mobs/Mole.(MobWorld).xdb" />
+                </mobs>
+            </Item>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="/Mechanics/Spells/Instances/InstNewTkaRika/MoleFear.(BuffResource).xdb" />
+            </Item>
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                <projectileData>
+                    <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                        <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+                    </moveType>
+                    <resource href="WhacProjectile.(ProjectileResource).xdb" />
+                </projectileData>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                <impacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="/Mechanics/Spells/Instances/InstNewTkaRika/Buffs/EventWhacAMole/MoleWhacked.(BuffResource).xdb" />
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>200</speed>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+    <radius>5</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

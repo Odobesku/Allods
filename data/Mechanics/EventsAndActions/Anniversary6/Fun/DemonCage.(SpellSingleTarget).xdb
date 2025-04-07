@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>239249</resourceId>
+    </Header>
+    <contextActionInfo>
+        <contextName href="/Mechanics/EventsAndActions/Anniversary6/Fun/DemonCage_Name.txt" />
+        <contextDescription href="/Mechanics/EventsAndActions/Anniversary6/Fun/DemonCageWound.(BuffResource).Description.txt" />
+        <contextImage href="/Interface/Icons/Special/Emotions/Point.(UISingleTexture).xdb" />
+    </contextActionInfo>
+    <Name href="/Mechanics/EventsAndActions/Anniversary6/Fun/DemonCage_Name.txt" />
+    <Description href="/Mechanics/EventsAndActions/Anniversary6/Fun/DemonCage.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Special/Emotions/Point.(UISingleTexture).xdb" />
+    <visualScripts href="/Mechanics/EventsAndActions/Anniversary6/Fun/UseDemonCage.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <iffPolicy>Everyone</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>2000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateCreatureLevel">
+                <minLevel type="gameMechanics.formulas.IntConstantValue">
+                    <value>20</value>
+                </minLevel>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                        <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/EventsAndActions/Anniversary6/Fun/CageCD.(BuffResource).xdb" />
+                            </predicate>
+                        </predicate>
+                        <clientData href="/Mechanics/EventsAndActions/Anniversary6/Fun/CageCD.(ClientData).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                        <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/EventsAndActions/Anniversary6/Fun/CDEnough.(BuffResource).xdb" />
+                            </predicate>
+                        </predicate>
+                        <clientData href="/Mechanics/EventsAndActions/Anniversary6/Fun/Enough.(ClientData).xdb" />
+                    </Item>
+                </predicates>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/EventsAndActions/Anniversary6/Fun/Brave.(BuffResource).xdb" />
+                <impactsOnAttach>
+                    <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                        <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                            <value>0.5</value>
+                        </chanceCalcer>
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/Mechanics/EventsAndActions/Anniversary6/Fun/DemonCageWound.(BuffResource).xdb" />
+                                <durationScaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                                    <scalers>
+                                        <Item type="gameMechanics.elements.scalers.SumBuffsStackScaler">
+                                            <buffs>
+                                                <Item href="/Mechanics/EventsAndActions/Anniversary6/Fun/Brave.(BuffResource).xdb" />
+                                            </buffs>
+                                        </Item>
+                                    </scalers>
+                                </durationScaler>
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                        <chanceCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                            <calcers>
+                                <Item type="gameMechanics.elements.calcers.FloatData">
+                                    <value>0.01</value>
+                                </Item>
+                                <Item type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                    <buff href="/Mechanics/EventsAndActions/Anniversary6/Fun/Brave.(BuffResource).xdb" />
+                                </Item>
+                            </calcers>
+                        </chanceCalcer>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+                                <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                                    <item href="/Items/QuestItems/Event_1stAnniversary/Coins/BronzeCoin.xdb" />
+                                </item>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsOnAttach>
+                <stacks type="gameMechanics.elements.calcers.FloatData">
+                    <value>1</value>
+                </stacks>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                <visualState>2</visualState>
+            </Item>
+            <Item type="gameMechanics.elements.device.DeviceImpactsDeferred">
+                <delay>2200</delay>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                        <visualState>0</visualState>
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

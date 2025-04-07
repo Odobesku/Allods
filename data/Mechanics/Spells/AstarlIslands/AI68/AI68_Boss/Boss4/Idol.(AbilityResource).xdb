@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>192474</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Jump</Item>
+                <Item>Rotate</Item>
+                <Item>ExternalMove</Item>
+            </actions>
+            <rooted>true</rooted>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                        <locator>
+                            <scriptID>boss4_portal1</scriptID>
+                            <map href="/Maps/AstralIsle68/MapResource.xdb" />
+                        </locator>
+                    </destination>
+                    <object href="Boss4_portal.(MobWorld).xdb" />
+                    <pool href="boss4_common_pool.(SummonPool).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                        <locator>
+                            <scriptID>boss4_portal2</scriptID>
+                            <map href="/Maps/AstralIsle68/MapResource.xdb" />
+                        </locator>
+                    </destination>
+                    <object href="Boss4_portal.(MobWorld).xdb" />
+                    <pool href="boss4_common_pool.(SummonPool).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                    <table href="/Maps/AstralIsle68/SpawnTables/Bossfight_wall.(SpawnTable).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactScriptZoneSetDisabled">
+                    <zone href="/Maps/AstralIsle68/ScriptZones/AI68_Bossfight.(ScriptZone).xdb" />
+                    <disable>false</disable>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                    <selector type="gameMechanics.tools.SelectorParticular">
+                        <index>0</index>
+                    </selector>
+                    <impacts>
+                        <Item>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
+                                                            <affectPets>false</affectPets>
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                                                                            <impacts>
+                                                                                <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                                                                    <value>1</value>
+                                                                                </Item>
+                                                                            </impacts>
+                                                                            <spawnResource href="/Maps/AstralIsle68/SpawnTables/BossSpirit.(SpawnTable).xdb" />
+                                                                        </Item>
+                                                                    </impacts>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsToMaster">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
+                                                                            <affectPets>false</affectPets>
+                                                                            <impacts>
+                                                                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                                                                    <impacts>
+                                                                                        <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                                                                                            <impacts>
+                                                                                                <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                                                                                    <value>1</value>
+                                                                                                </Item>
+                                                                                            </impacts>
+                                                                                            <spawnResource href="/Maps/AstralIsle68/SpawnTables/BossSpirit.(SpawnTable).xdb" />
+                                                                                        </Item>
+                                                                                    </impacts>
+                                                                                </Item>
+                                                                            </impacts>
+                                                                        </Item>
+                                                                    </impacts>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onEnter>
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="boss4_common_pool.(SummonPool).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                            <pool href="Captain.(SummonPool).xdb" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                            <spawn>
+                                <scriptID>Spirit</scriptID>
+                                <map href="/Maps/AstralIsle68/MapResource.xdb" />
+                            </spawn>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                                    <visualState>1</visualState>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                            <delay>5000</delay>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                                    <table href="/Maps/AstralIsle68/SpawnTables/TeleportToShip.(SpawnTable).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsElse>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                    <spawnResource href="/Maps/AstralIsle68/SpawnTables/Bossfight_wall.(SpawnTable).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>1000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactScriptZoneSetDisabled">
+                            <zone href="/Maps/AstralIsle68/ScriptZones/AI68_Bossfight.(ScriptZone).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="LeaveBattle.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Visibility</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="/Mechanics/Spells/AstarlIslands/AI68/AI68_Packs/KittenPLane.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Visibility</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="/Mechanics/Spells/AstarlIslands/AI68/AI68_Packs/KittenPLane.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Influence</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="/Mechanics/Spells/AstarlIslands/AI68/AI68_Packs/KittenPLane.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Influence</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="/Mechanics/Spells/AstarlIslands/AI68/AI68_Packs/KittenPLane.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="/Mechanics/Spells/AstarlIslands/AI68/AI68_Packs/KittenPLane.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="/Mechanics/Spells/AstarlIslands/AI68/AI68_Packs/KittenPLane.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddPlane">
+            <plane href="Idol.(Plane).xdb" />
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

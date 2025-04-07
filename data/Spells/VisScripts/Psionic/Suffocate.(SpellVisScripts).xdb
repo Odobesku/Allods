@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<Header>
+		<Prototype href="/Spells/VisScripts/Prototypes/Ray.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+		<Variables>
+			<FXOnWand />
+			<FXRay>/Spells/FX/Spells/PsionicSuffocateAbility.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)</FXRay>
+			<PreCastFX>/Spells/VisScripts/Prototypes/PreCastFXAstralWand.(CreatureVisActionResource).xdb#xpointer(/CreatureVisActionResource)</PreCastFX>
+			<FXOnTarget>/Spells/FX/Spells/PsionicSuffocateAbilityHit.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)</FXOnTarget>
+			<LocatorOnCaster>Wand_Slot_FX</LocatorOnCaster>
+			<LocatorNameOnTargets />
+			<RaySecondaryVelocity>0</RaySecondaryVelocity>
+			<MultyTargetMode>FromCaster</MultyTargetMode>
+			<FXOnCaster />
+			<LocatorOnTargets>Slot_FX</LocatorOnTargets>
+			<LocatorNameOnCaster />
+			<RayLength>2</RayLength>
+			<RaySecondaryLength>2</RaySecondaryLength>
+			<RayVelocity>0</RayVelocity>
+			<FXRaySecondary />
+			<Animation>channelCastDirectedWand</Animation>
+		</Variables>
+	</Header>
+	<actionBarStart type="VisActionList">
+		<play>InSequence</play>
+		<elements>
+			<Item type="CreatureAnimationAction">
+				<channel>CHANNEL_ABILITY</channel>
+				<advanced>
+					<backgroundAfterFirstKey>true</backgroundAfterFirstKey>
+					<changeChannelAfterFirstKey>CHANGE</changeChannelAfterFirstKey>
+					<channelAfterFirstKey>CHANNEL_ATTACK</channelAfterFirstKey>
+				</advanced>
+			</Item>
+			<Item type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile />
+				<elements>
+					<Item type="CreatureChannelDirectAction">
+						<channelingFx hrefvar="FXRay" />
+						<startPoint type="VisPointLocator">
+							<locator var="LocatorOnCaster" />
+						</startPoint>
+						<alternativeStartPoint />
+						<endPoint type="VisPointLocator">
+							<locator var="LocatorOnTargets" />
+						</endPoint>
+						<alternativeEndPoint />
+						<fadeInTime>200</fadeInTime>
+						<fadeOutTime>100</fadeOutTime>
+						<offendTime type="EffectOffendConstDelay" />
+						<secondaryTargetParams>
+							<channelingFx hrefvar="FXRaySecondary" />
+							<offendTime />
+						</secondaryTargetParams>
+					</Item>
+					<Item type="CreatureEffectsOnTarget">
+						<visualEffects>
+							<Item>
+								<effectFx hrefvar="FXOnTarget" />
+								<effectAlias href="" />
+								<locator var="LocatorOnTargets" />
+								<offendTime />
+							</Item>
+						</visualEffects>
+					</Item>
+					<Item type="CreatureEffectsAction">
+						<visualEffects>
+							<Item>
+								<effectFx hrefvar="FXOnCaster" />
+								<effectAlias href="" />
+								<locator var="LocatorOnCaster" />
+								<offendTime />
+							</Item>
+							<Item>
+								<effectFx hrefvar="FXOnWand" />
+								<effectAlias href="" />
+								<fixPoint>true</fixPoint>
+								<locator>Slot_Hand_R</locator>
+								<offendTime />
+							</Item>
+						</visualEffects>
+					</Item>
+				</elements>
+			</Item>
+		</elements>
+	</actionBarStart>
+</SpellVisScripts>

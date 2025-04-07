@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>218114</resourceId>
+    </Header>
+    <isHidden>true</isHidden>
+    <name href="Ability_Name.txt" />
+    <nameTemplate href="Ability_Name.txt.template" />
+    <descTemplate href="Ability_Desc.txt.template" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectVariable">
+            <resource href="FlagBuffActive.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+            <valueTriggers>
+                <Item>
+                    <onGreaterOrEqual>false</onGreaterOrEqual>
+                    <value type="gameMechanics.elements.calcers.FloatData">
+                        <value>0.5</value>
+                    </value>
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.DeathTrigger">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.predicates.PredicateGreater">
+                                                <lhs type="gameMechanics.elements.calcers.AlternativeCurrencyCalcer">
+                                                    <currency href="/Mechanics/AlternativeCurrencies/RemortStabilize.(AlternativeCurrency).xdb#xpointer(/gameMechanics.constructor.schemes.item.AlternativeCurrency)" />
+                                                </lhs>
+                                                <rhs type="gameMechanics.elements.calcers.FloatData">
+                                                    <value>49</value>
+                                                </rhs>
+                                            </predicate>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateGreater">
+                                                    <lhs type="gameMechanics.elements.calcers.AlternativeCurrencyCalcer">
+                                                        <currency href="/Mechanics/AlternativeCurrencies/RemortDeathProtector.(AlternativeCurrency).xdb#xpointer(/gameMechanics.constructor.schemes.item.AlternativeCurrency)" />
+                                                    </lhs>
+                                                    <rhs type="gameMechanics.constructor.basicElements.FloatZero" />
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                    <predicates>
+                                                        <Item type="gameMechanics.elements.predicates.PredicateGreater">
+                                                            <lhs type="gameMechanics.elements.calcers.AlternativeCurrencyCalcer">
+                                                                <currency href="/Mechanics/AlternativeCurrencies/RemortDeathProtector.(AlternativeCurrency).xdb#xpointer(/gameMechanics.constructor.schemes.item.AlternativeCurrency)" />
+                                                            </lhs>
+                                                            <rhs type="gameMechanics.elements.calcers.FloatData">
+                                                                <value>1</value>
+                                                            </rhs>
+                                                        </Item>
+                                                    </predicates>
+                                                    <impactsIf>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                            <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                            <data href="DeathExpLossPreventer/SuccessPrevent.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                        </Item>
+                                                    </impactsIf>
+                                                    <impactsElse>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                            <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                            <data href="DeathExpLossPreventer/SuccessPrevent_NoMore.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                        </Item>
+                                                    </impactsElse>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+                                                    <currency href="/Mechanics/AlternativeCurrencies/RemortDeathProtector.(AlternativeCurrency).xdb#xpointer(/gameMechanics.constructor.schemes.item.AlternativeCurrency)" />
+                                                    <sumCalcer type="gameMechanics.elements.calcers.FloatData">
+                                                        <value>-1</value>
+                                                    </sumCalcer>
+                                                </Item>
+                                            </impactsIf>
+                                            <impactsElse>
+                                                <Item type="gameMechanics.elements.impacts.ImpactAddExperience">
+                                                    <calcer type="gameMechanics.elements.calcers.CalcerCurrentLevelExp">
+                                                        <factor>-0.1</factor>
+                                                    </calcer>
+                                                    <slice href="" />
+                                                    <direct>true</direct>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                    <predicates>
+                                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                            <predicate type="gameMechanics.elements.predicates.PredicateHasContentKey">
+                                                                <key href="/System/ContentKeys/P2P_shard/P2P_shard_Zones.(ContentKey).xdb#xpointer(/basement.contentkey.ContentKey)" />
+                                                            </predicate>
+                                                        </Item>
+                                                    </predicates>
+                                                    <impactsIf>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                            <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                            <data href="DeathExpLossPreventer/NoPrevent.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                        </Item>
+                                                    </impactsIf>
+                                                </Item>
+                                            </impactsElse>
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse />
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.Switch">
+                            <impactsOn>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="RebornBuff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impactsOn>
+                            <impactsOff>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="RebornBuff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    <anyRank>false</anyRank>
+                                </Item>
+                            </impactsOff>
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+                            <group href="/Mechanics/Spells/Groups/DisabledOnRemort.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.EffectPowerMultiplier">
+                            <multiplier type="gameMechanics.elements.calcers.FloatData">
+                                <value>0.66</value>
+                            </multiplier>
+                        </Item>
+                    </effects>
+                </Item>
+                <Item>
+                    <onGreaterOrEqual>true</onGreaterOrEqual>
+                    <value type="gameMechanics.elements.calcers.FloatData">
+                        <value>0.5</value>
+                    </value>
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.EffectExperienceGrowthModifier">
+                            <filter type="gameMechanics.world.avatar.development.DevelopmentFilterEqual">
+                                <source>Kill</source>
+                            </filter>
+                            <slice href="/Mechanics/Slices/DefaultExperienceSlice.xdb#xpointer(/gameMechanics.world.avatar.development.ExperienceSlice)" />
+                            <prio>Multiplier</prio>
+                            <addPart type="gameMechanics.elements.calcers.FloatData">
+                                <value>-1</value>
+                            </addPart>
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.EffectExperienceGrowthModifier">
+                            <filter type="gameMechanics.world.avatar.development.DevelopmentFilterEqual">
+                                <source>Quest</source>
+                            </filter>
+                            <prio>Multiplier</prio>
+                            <addPart type="gameMechanics.elements.calcers.FloatData">
+                                <value>-1</value>
+                            </addPart>
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.EffectExperienceGrowthModifier">
+                            <filter type="gameMechanics.world.avatar.development.DevelopmentFilterEqual">
+                                <source>Impact</source>
+                            </filter>
+                            <prio>Multiplier</prio>
+                            <addPart type="gameMechanics.elements.calcers.FloatData">
+                                <value>-1</value>
+                            </addPart>
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.EffectExperienceGrowthModifier">
+                            <filter type="gameMechanics.world.avatar.development.DevelopmentFilterEqual">
+                                <source>ImpactDirect</source>
+                            </filter>
+                            <prio>Multiplier</prio>
+                            <addPart type="gameMechanics.elements.calcers.FloatData">
+                                <value>-1</value>
+                            </addPart>
+                        </Item>
+                    </effects>
+                </Item>
+            </valueTriggers>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                    <variable href="FlagBuffActive.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                </Item>
+            </impactsOn>
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="SwitchBuff.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <anyRank>false</anyRank>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectLevelUpTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateCreatureLevel">
+                            <minLevel type="gameMechanics.formulas.MaxLevelConstant" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactForgetAbility">
+                            <ability href="Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactGrantUnlock">
+                            <unlock href="/Mechanics/Unlocks/RemortGrantedAbilities/Unlock.xdb#xpointer(/gameMechanics.constructor.schemes.unlock.UnlockResource)" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

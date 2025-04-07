@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<Header>
+		<Prototype href="/Spells/VisScripts/Prototypes/RangedAttack.(SpellVisScripts).xdb" />
+		<Variables>
+			<AttackAnimation>USE_CURRENT_RANGED_ATTACK</AttackAnimation>
+			<LocatorNameOnArrow>Slot_FX</LocatorNameOnArrow>
+			<FxOnHands />
+			<LoadHoldMode>LOOP</LoadHoldMode>
+			<LoadHoldAnimation>USE_CURRENT_RANGED_LOADHOLD</LoadHoldAnimation>
+			<FxProjectile />
+		</Variables>
+	</Header>
+	<actionBarStart type="VisActionList">
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="CreatureAnimationAction" />
+			<Item type="CreatureEffectsAction">
+				<visualEffects>
+					<Item>
+						<delay>200</delay>
+						<locator>Slot_Hand_L</locator>
+					</Item>
+				</visualEffects>
+			</Item>
+		</elements>
+	</actionBarStart>
+	<launch type="VisActionList">
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="VisActionStopAction">
+				<stoppedActionID>AttachString</stoppedActionID>
+			</Item>
+			<Item type="CreatureItemAnimationAction">
+				<itemsSlot>RANGED</itemsSlot>
+				<animation>attack</animation>
+			</Item>
+			<Item type="CreatureAnimationAction">
+				<channel>CHANNEL_ATTACK</channel>
+			</Item>
+			<Item type="CreatureThrowArrowAction">
+				<enchantedArrowIndex>1</enchantedArrowIndex>
+				<arrowInTargetTime>15000</arrowInTargetTime>
+				<theGe>8</theGe>
+			</Item>
+			<Item type="Sound3DAction" />
+			<Item type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>EnchantCold</flagName>
+				</playWhile>
+				<preconditional>true</preconditional>
+				<elements>
+					<Item type="CreatureThrowArrowAction">
+						<enchantedArrowIndex>1</enchantedArrowIndex>
+						<arrowInTargetTime>15000</arrowInTargetTime>
+						<theGe>8</theGe>
+						<additionalEffectFx href="/Spells/FX/Weapon/ArrowEnchantTrail_Blue.(VisObjectTemplate).xdb" />
+						<offendTime type="EffectOffendConstDelay" />
+					</Item>
+				</elements>
+			</Item>
+			<Item type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>EnchantFire</flagName>
+				</playWhile>
+				<preconditional>true</preconditional>
+				<elements>
+					<Item type="CreatureThrowArrowAction">
+						<enchantedArrowIndex>1</enchantedArrowIndex>
+						<arrowInTargetTime>15000</arrowInTargetTime>
+						<theGe>8</theGe>
+						<additionalEffectFx href="/Spells/FX/Weapon/ArrowEnchantTrail_Red.(VisObjectTemplate).xdb" />
+						<offendTime type="EffectOffendConstDelay" />
+					</Item>
+				</elements>
+			</Item>
+			<Item type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>EnchantPoison</flagName>
+				</playWhile>
+				<preconditional>true</preconditional>
+				<elements>
+					<Item type="CreatureThrowArrowAction">
+						<enchantedArrowIndex>1</enchantedArrowIndex>
+						<arrowInTargetTime>15000</arrowInTargetTime>
+						<theGe>8</theGe>
+						<additionalEffectFx href="/Spells/FX/Weapon/ArrowEnchantTrail_Green.(VisObjectTemplate).xdb" />
+						<offendTime type="EffectOffendConstDelay" />
+					</Item>
+				</elements>
+			</Item>
+			<Item type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile type="PredicateCreatureFlagAction">
+					<flagName>BonusDmgAll</flagName>
+				</playWhile>
+				<preconditional>true</preconditional>
+				<elements>
+					<Item type="CreatureThrowArrowAction">
+						<enchantedArrowIndex>1</enchantedArrowIndex>
+						<arrowInTargetTime>15000</arrowInTargetTime>
+						<theGe>8</theGe>
+						<additionalEffectFx href="/Spells/FX/Spells/War63_BuffRage_Hand.(VisObjectTemplate).xdb" />
+						<offendTime type="EffectOffendConstDelay" />
+					</Item>
+				</elements>
+			</Item>
+		</elements>
+	</launch>
+	<playOnTargets>
+		<specialAction type="VisActionList">
+			<elements>
+				<Item type="Sound3DAction">
+					<sound>
+						<project href="/SFX/Spells/Sounds.(FMODProject).xdb" />
+						<name>spells/Stalker/StalkerArrowHit</name>
+					</sound>
+					<alias href="" />
+				</Item>
+				<Item type="CreatureEffectsAction">
+					<visualEffects>
+						<Item>
+							<effectFx href="/Spells/FX/Spells/Hit_Architect.(VisObjectTemplate).xdb" />
+							<scale>3</scale>
+							<locator>Slot_BodyFX</locator>
+						</Item>
+					</visualEffects>
+				</Item>
+			</elements>
+		</specialAction>
+	</playOnTargets>
+</SpellVisScripts>

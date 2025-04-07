@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>218842</resourceId>
+    </Header>
+    <Name href="Buff_Name.txt" />
+    <Description href="Buff_Desc.txt" />
+    <image href="/Interface/Icons/Spells/Paladin/PaladinTaunt.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/WarriorTauntAbility.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+            <locator>Slot_Head</locator>
+        </Item>
+    </visualEffects>
+    <visScript href="/Spells/VisScripts/Warrior/Taunt.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <nameTemplate href="Buff_Name.txt.template" />
+    <descTemplate href="Buff_Desc.txt.template" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.AddParticularVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Outgoing</vector>
+                <direction>Outgoing</direction>
+                <plane href="/Mechanics/Planes/WarriorTaunt.xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddParticularVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Outgoing</vector>
+                <direction>Self</direction>
+                <plane href="/Mechanics/Planes/WarriorTaunt.xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddPlane">
+            <plane href="/Mechanics/Planes/WarriorTaunt.xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDamageTrigger">
+            <eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+            <scaleImpactsByDamage>true</scaleImpactsByDamage>
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.offender.PredicateNot">
+                    <predicate type="gameMechanics.elements.predicates.offender.PredicateOffenderIsCaster" />
+                </Item>
+            </predicates>
+            <impacts>
+                <casterToTarget>
+                    <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                        <variable href="/Mechanics/Variables/WarriorTauntVariable01.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                        <summand>-1</summand>
+                    </Item>
+                </casterToTarget>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDamageTrigger">
+            <eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+            <scaleImpactsByDamage>true</scaleImpactsByDamage>
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.offender.PredicateOffenderIsOwner" />
+            </predicates>
+            <impacts>
+                <casterToTarget>
+                    <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                        <variable href="/Mechanics/Variables/WarriorTauntVariable01.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                        <summand>-1</summand>
+                    </Item>
+                </casterToTarget>
+            </impacts>
+        </Item>
+    </effects>
+    <duration>10000</duration>
+    <isStackable>false</isStackable>
+    <isHelpful>false</isHelpful>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Taunt.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

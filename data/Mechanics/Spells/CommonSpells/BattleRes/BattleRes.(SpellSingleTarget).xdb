@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>200173</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb" />
+        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/Resurrection.(ActionGroup).xdb" />
+    </groups>
+    <Name href="BattleRes.(SpellSingleTarget).Name.txt" />
+    <Description href="BattleRes.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Misc/Buffs/BuffURGoldenSpark.(UISingleTexture).xdb" />
+    <visualScripts href="BattleRes.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>10</value>
+    </range>
+    <prepareDuration>3000</prepareDuration>
+    <isWorkOnDead>true</isWorkOnDead>
+    <iffPolicy>Friends</iffPolicy>
+    <launchWhenReady>true</launchWhenReady>
+    <mechanics>
+        <cooldown>
+            <duration>300000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                    <buff href="/Mechanics/RaidInstances/BattleResLimit/NoResSmallRaid.(BuffResource).xdb" />
+                    <range>
+                        <min>2</min>
+                        <max>2</max>
+                    </range>
+                </predicate>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+            <Item type="gameMechanics.elements.predicates.PredicateIsDead" />
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                    <buff href="/Mechanics/RaidInstances/BattleResLimit/NoResSmallRaid.(BuffResource).xdb" />
+                    <range>
+                        <min>2</min>
+                        <max>2</max>
+                    </range>
+                </predicate>
+            </Item>
+        </targetConditions>
+        <conditions>
+            <Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
+                <affectGroup>Raid</affectGroup>
+            </Item>
+        </conditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.Resurrect">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactBaseHealth">
+                        <healthMultiplier>0.4</healthMultiplier>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactsToUnionMembers">
+                        <affectPets>false</affectPets>
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/Mechanics/RaidInstances/BattleResLimit/NoResSmallRaid.(BuffResource).xdb" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+                <timeOut>1</timeOut>
+                <force>true</force>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>218121</resourceId>
+    </Header>
+    <Name href="Spell.txt" />
+    <Description href="Spell.Description.txt" />
+    <image href="/Interface/Icons/Misc/Itemmall/IMGrainOfIncense.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <nameTemplate href="Spell.(SpellSingleTarget).NameTemplate.txt" />
+    <descTemplate href="Spell.(SpellSingleTarget).DescTemplate.txt" />
+    <immutablePrepareDuration>true</immutablePrepareDuration>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateGreater">
+                    <lhs type="gameMechanics.elements.calcers.AlternativeCurrencyCalcer">
+                        <currency href="/Mechanics/AlternativeCurrencies/RemortStabilize.(AlternativeCurrency).xdb#xpointer(/gameMechanics.constructor.schemes.item.AlternativeCurrency)" />
+                    </lhs>
+                    <rhs type="gameMechanics.elements.calcers.FloatData">
+                        <value>49</value>
+                    </rhs>
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                <ability href="/Mechanics/Spells/Remort/RemortAbility/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+            </Item>
+        </casterConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceActiveItem" />
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.predicates.PredicateGreater">
+                            <lhs type="gameMechanics.elements.calcers.AlternativeCurrencyCalcer">
+                                <currency href="/Mechanics/AlternativeCurrencies/RemortStabilize.(AlternativeCurrency).xdb#xpointer(/gameMechanics.constructor.schemes.item.AlternativeCurrency)" />
+                            </lhs>
+                            <rhs type="gameMechanics.elements.calcers.FloatData">
+                                <value>48</value>
+                            </rhs>
+                        </predicate>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+                        <currency href="/Mechanics/AlternativeCurrencies/RemortDeathProtector.(AlternativeCurrency).xdb#xpointer(/gameMechanics.constructor.schemes.item.AlternativeCurrency)" />
+                        <sumCalcer type="gameMechanics.elements.calcers.FloatData">
+                            <value>1</value>
+                        </sumCalcer>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+                        <currency href="/Mechanics/AlternativeCurrencies/RemortDeathProtector.(AlternativeCurrency).xdb#xpointer(/gameMechanics.constructor.schemes.item.AlternativeCurrency)" />
+                        <sumCalcer type="gameMechanics.elements.calcers.AlternativeCurrencyCalcer">
+                            <currency href="/Mechanics/AlternativeCurrencies/RemortDeathProtector.(AlternativeCurrency).xdb#xpointer(/gameMechanics.constructor.schemes.item.AlternativeCurrency)" />
+                        </sumCalcer>
+                        <multiplier>-1</multiplier>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                        <data href="FullStabilizer.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                    </Item>
+                </impactsElse>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+                <currency href="/Mechanics/AlternativeCurrencies/RemortStabilize.(AlternativeCurrency).xdb#xpointer(/gameMechanics.constructor.schemes.item.AlternativeCurrency)" />
+                <sumCalcer type="gameMechanics.elements.calcers.FloatData">
+                    <value>1</value>
+                </sumCalcer>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <iffPolicy>Friends</iffPolicy>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

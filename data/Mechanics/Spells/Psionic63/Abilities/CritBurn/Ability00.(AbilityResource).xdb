@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>220278</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="Ability00.(AbilityResource).Name.txt" />
+    <description href="Ability00.(AbilityResource).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value var="stack" />
+        </Item>
+        <Item>
+            <name>var1</name>
+            <value var="damage" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>MagicScaler</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Mage/ControlFire.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.BuffExtraEffects">
+            <buffs>
+                <Item href="/Mechanics/Spells/CommonBuffs/Aspects/DD/Buff01.(BuffResource).xdb" />
+            </buffs>
+            <effects>
+                <Item type="gameMechanics.elements.effects.SpellExtraImpacts">
+                    <targetImpacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsIf">
+                            <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromAddressee">
+                                <buff href="Buff01.(BuffResource).xdb" />
+                                <from type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                            </predicate>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ScaledImpacts">
+                                    <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                        <mulCalcer type="gameMechanics.elements.calcers.CalcerSum">
+                                            <summands>
+                                                <Item type="gameMechanics.constructor.basicElements.ScalerCalcer">
+                                                    <scaler type="gameMechanics.elements.scalers.ScalerBuff">
+                                                        <buff href="Buff01.(BuffResource).xdb" />
+                                                        <summand>0</summand>
+                                                        <checkCaster>true</checkCaster>
+                                                    </scaler>
+                                                    <value>1</value>
+                                                </Item>
+                                                <Item type="gameMechanics.constructor.basicElements.ScalerCalcer">
+                                                    <scaler type="gameMechanics.elements.scalers.ScalerBuff">
+                                                        <buff href="Buff02.(BuffResource).xdb" />
+                                                        <summand>0</summand>
+                                                        <checkCaster>true</checkCaster>
+                                                    </scaler>
+                                                    <value>1</value>
+                                                </Item>
+                                                <Item type="gameMechanics.constructor.basicElements.ScalerCalcer">
+                                                    <scaler type="gameMechanics.elements.scalers.ScalerBuff">
+                                                        <buff href="Buff03.(BuffResource).xdb" />
+                                                        <summand>0</summand>
+                                                        <checkCaster>true</checkCaster>
+                                                    </scaler>
+                                                    <value>1</value>
+                                                </Item>
+                                            </summands>
+                                        </mulCalcer>
+                                    </scalerTarget>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                                    <element>ASTRAL</element>
+                                                    <damage var="damage" />
+                                                    <impactsOnHitTarget>
+                                                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                                    <buff href="Buff01.(BuffResource).xdb" />
+                                                                    <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impactsOnHitTarget>
+                                                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                                </Item>
+                                            </impacts>
+                                            <groupRepeaters>true</groupRepeaters>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </targetImpacts>
+                    <destination type="gameMechanics.elements.effects.SpellExtraImpacts$DestinationSpells">
+                        <spells>
+                            <Item href="/Mechanics/Spells/Psionic63/Spells/PsychicBurn/Spell01.(SpellSingleTarget).xdb" />
+                        </spells>
+                    </destination>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectOnDamageDoneTrigger">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.offender.PredicateAnd">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.offender.PredicateIsCrit" />
+                                <Item type="gameMechanics.elements.predicates.offender.PredicateIsForthright" />
+                                <Item type="gameMechanics.elements.predicates.offender.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.offender.PredicateIsAE" />
+                                </Item>
+                                <Item type="gameMechanics.elements.predicates.offender.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.offender.PredicateActionGroup">
+                                        <groups>
+                                            <Item href="/Mechanics/Spells/Groups/DamageOverTime.(ActionGroup).xdb" />
+                                        </groups>
+                                    </predicate>
+                                </Item>
+                                <Item type="gameMechanics.elements.predicates.offender.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.offender.PredicateProducer">
+                                        <producers>
+                                            <Item href="/Mechanics/Spells/Psionic63/Spells/PsychicBurn/Spell01.(SpellSingleTarget).xdb" />
+                                            <Item href="/Mechanics/Spells/Psionic63/Spells/PsychicBurn/Spell02.(SpellSingleTarget).xdb" />
+                                            <Item href="/Mechanics/Spells/Psionic63/Spells/PsychicBurn/Spell03.(SpellSingleTarget).xdb" />
+                                        </producers>
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </predicates>
+                    <impactsOnDamageDone>
+                        <Item type="gameMechanics.constructor.basicElements.ImpactNull" />
+                    </impactsOnDamageDone>
+                    <impactsToVictim>
+                        <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff hrefvar="buff" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsToVictim>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <ranks>
+        <Item href="Ability01.(AbilityResource).xdb" />
+        <Item href="Ability02.(AbilityResource).xdb" />
+        <Item href="Ability03.(AbilityResource).xdb" />
+    </ranks>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

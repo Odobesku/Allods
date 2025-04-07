@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>214979</resourceId>
+    </Header>
+    <name href="DriveResource.(AbilityResource).Name.txt" />
+    <description href="DriveResource.(AbilityResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Bard/LessMassDissonaceCD.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectVariable">
+            <resource href="Drive.(VariableResource).xdb" />
+            <impactsOnChange>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                </Item>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateVariableEquals">
+                                        <resource href="Drive.(VariableResource).xdb" />
+                                        <value>3</value>
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                            <variable href="Drive.(VariableResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOnChange>
+            <impactsOnDec>
+                <Item type="gameMechanics.elements.impacts.RepeatedImpactScale">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.predicates.PredicateVariableLessThan">
+                                            <resource href="Drive.(VariableResource).xdb" />
+                                            <value>3</value>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                            <delay>5000</delay>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                            <predicates>
+                                                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                    <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                                                </Item>
+                                                            </predicates>
+                                                            <impactsIf>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                                                                    <variable href="Drive.(VariableResource).xdb" />
+                                                                </Item>
+                                                            </impactsIf>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOnDec>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>5000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                                            <variable href="Drive.(VariableResource).xdb" />
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CastOnMove">
+            <spells>
+                <Item href="/Mechanics/Spells/Bard63/Spells/GuitarAoE/GuitarAoE01.(SpellArea).xdb" />
+            </spells>
+            <moveTypes>
+                <Item>Step</Item>
+            </moveTypes>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

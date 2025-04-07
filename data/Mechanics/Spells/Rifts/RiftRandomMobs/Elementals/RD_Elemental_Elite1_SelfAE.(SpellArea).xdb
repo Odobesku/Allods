@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>208766</resourceId>
+    </Header>
+    <interruptsActionGroups />
+    <groups>
+        <Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/ElementalSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/RiftEliteSpells.(ActionGroup).xdb" />
+    </groups>
+    <element>LIGHTNING</element>
+    <Name href="RD_Elemental_Elite1_SelfAE.(SpellArea).Name.txt" />
+    <descVars />
+    <visualScripts href="RD_Elemental_Elite1_SelfAE.(SpellVisScripts).xdb" />
+    <prepareDuration>3000</prepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <ranks />
+    <modifiers />
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>16000</duration>
+        </cooldown>
+        <casterConditions />
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+        </targetConditions>
+        <conditions />
+        <casterResources />
+        <casterChannelingEffects />
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/Spells/Rifts/Abilities/StopBuff.(BuffResource).xdb" />
+                <impactsOnAttach />
+                <impactsOnFail />
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                <element>LIGHTNING</element>
+                <damage>1</damage>
+                <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                    <scalers>
+                        <Item type="gameMechanics.elements.scalers.MagicScaler" />
+                        <Item type="gameMechanics.elements.scalers.ScalerIf">
+                            <condition type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+                                <quality href="/Mechanics/MobQualities/Elite.xdb" />
+                            </condition>
+                            <scalerIf type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                    <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/EscapableDamageCommon.(CalcerFloatResource).xdb" />
+                                </mulCalcer>
+                            </scalerIf>
+                            <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                <condition type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+                                    <quality href="/Mechanics/MobQualities/Boss.xdb" />
+                                </condition>
+                                <scalerIf type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                        <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/EscapableDamageElite.(CalcerFloatResource).xdb" />
+                                    </mulCalcer>
+                                </scalerIf>
+                                <scalerElse type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                        <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/EscapableDamageBoss.(CalcerFloatResource).xdb" />
+                                    </mulCalcer>
+                                </scalerElse>
+                            </scalerElse>
+                        </Item>
+                    </scalers>
+                </scaler>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <shapeCenterPosition>Caster</shapeCenterPosition>
+    <radius>10</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

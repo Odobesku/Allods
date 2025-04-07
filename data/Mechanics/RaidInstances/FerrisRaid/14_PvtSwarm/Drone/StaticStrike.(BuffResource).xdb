@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>221925</resourceId>
+    </Header>
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/PocketSpellLightning01.(VisObjectTemplate).xdb" />
+            <scale>1.825</scale>
+            <locator>Slot_BodyFX</locator>
+        </Item>
+        <Item>
+            <delay>250</delay>
+            <effectFx href="/Spells/FX/Spells/PocketSpellLightning01.(VisObjectTemplate).xdb" />
+            <scale>1.825</scale>
+            <locator>Slot_BodyFX</locator>
+        </Item>
+    </visualEffects>
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+            <conditionalImpacts>
+                <Item>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="StaticStrike.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                            <radius>16</radius>
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="StaticDebuff.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="/Mechanics/Spells/AstarlIslands/AI21/DruidChainLightning/ChainLightning_Long.(ClientData).xdb" />
+                                    <calcers>
+                                        <addressEntries>
+                                            <Item>
+                                                <name>caster</name>
+                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                            </Item>
+                                            <Item>
+                                                <name>target</name>
+                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                            </Item>
+                                        </addressEntries>
+                                    </calcers>
+                                </Item>
+                            </impacts>
+                            <impactsOnNoTargets>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="StaticDebuff.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                                    <data href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/YakBoss/LightningSphere/LightningHit.(ClientData).xdb" />
+                                </Item>
+                            </impactsOnNoTargets>
+                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                </predicates>
+                            </filter>
+                            <targetsLimit>1</targetsLimit>
+                        </Item>
+                    </impacts>
+                    <conditions>
+                        <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                            <spells>
+                                <Item href="SingleShot.(SpellSingleTarget).xdb" />
+                            </spells>
+                        </Item>
+                    </conditions>
+                </Item>
+            </conditionalImpacts>
+            <stages>
+                <Item>Launch</Item>
+            </stages>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

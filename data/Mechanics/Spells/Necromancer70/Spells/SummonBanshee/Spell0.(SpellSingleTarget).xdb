@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>198904</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/Magics.xdb" />
+        <Item href="/Mechanics/Spells/Necromancer70/Spells/SummonProts/Summons.(ActionGroup).xdb" />
+    </groups>
+    <element>SHADOW</element>
+    <Name href="/Mechanics/Spells/Necromancer70/Spells/SummonBanshee/Spell0_Name.txt" />
+    <Description href="/Mechanics/Spells/Necromancer70/Spells/SummonBanshee/Spell0_Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value>1</value>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                            <externalCalcer hrefvar="externalCalcer" />
+                        </mulCalcer>
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                        <formula>FormulaPercent</formula>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+        <Item>
+            <name>var1</name>
+            <value>5</value>
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>MagicScaler</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Necromancer/SummonBanshee.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Necromancer/SummonSkeleton.(SpellVisScripts).xdb" />
+    <targetType>STTSelf</targetType>
+    <ranks>
+        <Item href="/Mechanics/Spells/Necromancer70/Spells/SummonBanshee/Spell01.(SpellSingleTarget).xdb" />
+        <Item href="/Mechanics/Spells/Necromancer70/Spells/SummonBanshee/Spell02.(SpellSingleTarget).xdb" />
+        <Item href="/Mechanics/Spells/Necromancer70/Spells/SummonBanshee/Spell03.(SpellSingleTarget).xdb" />
+    </ranks>
+    <iffPolicy>Friends</iffPolicy>
+    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>1500</duration>
+        </cooldown>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceVariable">
+                <ability href="/Mechanics/Spells/Necromancer70/Abilities/BloodDrops/Ability0.(AbilityResource).xdb" />
+                <variable href="/Mechanics/Spells/Necromancer70/Abilities/BloodDrops/BloodPool.(VariableResource).xdb" />
+                <sub>5</sub>
+            </Item>
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.world.pet.PredicateHasPet" />
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                        <predicates>
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/Spells/Necromancer70/Spells/SummonBanshee/SummonedBanshee.(BuffResource).xdb" />
+                            </Item>
+                        </predicates>
+                        <impacts>
+                            <Item type="gameMechanics.world.pet.ImpactDismissPet" />
+                            <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                                <group href="/Mechanics/Spells/Groups/PetRelogEnforcer.(ActionGroup).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellGroupDeactivate">
+                                <group href="/Mechanics/Spells/Necromancer70/Spells/SummonProts/Summons.(ActionGroup).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactActiveSpellCancelCooldown" />
+                        </impacts>
+                        <elseImpacts>
+                            <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellGroupDeactivate">
+                                <group href="/Mechanics/Spells/Necromancer70/Spells/SummonProts/Summons.(ActionGroup).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/Mechanics/Spells/Necromancer70/Spells/SummonBanshee/SummonedBanshee.(BuffResource).xdb" />
+                            </Item>
+                        </elseImpacts>
+                    </Item>
+                </impacts>
+                <elseImpacts>
+                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellGroupDeactivate">
+                        <group href="/Mechanics/Spells/Necromancer70/Spells/SummonProts/Summons.(ActionGroup).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="/Mechanics/Spells/Necromancer70/Spells/SummonBanshee/SummonedBanshee.(BuffResource).xdb" />
+                    </Item>
+                </elseImpacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

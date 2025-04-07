@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>245568</resourceId>
+    </Header>
+    <Name href="SavantTargetTransform.(BuffResource).Name.txt" />
+    <Description href="SavantTargetTransform.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Modifiers/EliteAstral.(UISingleTexture).xdb" />
+    <visScript href="/Mechanics/RaidInstances/FerrisRaid/15_General/TripodPortal/ArchitectTransformation.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Move</Item>
+                <Item>Rotate</Item>
+                <Item>Jump</Item>
+            </actions>
+            <rooted>true</rooted>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+        <Item type="gameMechanics.elements.effects.EffectDisableAllSpells" />
+        <Item type="gameMechanics.elements.effects.EffectUnworthyOfAttention" />
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                    <element>LIGHTNING</element>
+                    <damage>30</damage>
+                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                            <spell href="109_SavantChannel.(SpellSingleTarget).xdb" />
+                            <duration>
+                                <minute>10</minute>
+                            </duration>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactResetActiveAction" />
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="SavantEnrage.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                            <spell href="109_SavantTargetPhase.(SpellSingleTarget).xdb" />
+                            <duration>
+                                <second>3</second>
+                            </duration>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <duration>4000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+        <Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

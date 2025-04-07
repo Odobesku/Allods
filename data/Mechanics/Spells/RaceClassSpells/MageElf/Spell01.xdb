@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>196753</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RaceClassSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/CrowdControlSpells.xdb" />
+    </groups>
+    <element>ASTRAL</element>
+    <Name href="Spell_Name.txt" />
+    <Description href="Spell_Desc.txt" />
+    <image href="/Interface/Icons/Spells/Necromancer/NecromancerFear.chn.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Mage/RaceClass_MageElf.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <level>1</level>
+    <prepareDuration>0</prepareDuration>
+    <immutablePrepareDuration>false</immutablePrepareDuration>
+    <replaceLowRanks>true</replaceLowRanks>
+    <isWorkOnDead>false</isWorkOnDead>
+    <modifiers>
+        <Item type="gameMechanics.elements.spell.SpellEnvelopeModifier">
+            <effects>
+                <Item type="gameMechanics.elements.effects.BuffExtraEffects">
+                    <buffs>
+                        <Item href="/Mechanics/Spells/CommonBuffs/Fear/Buff.xdb" />
+                    </buffs>
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.EffectJumpOnDetach">
+                            <jumps type="gameMechanics.elements.calcers.LongData">
+                                <value>1</value>
+                            </jumps>
+                            <buff href="/Mechanics/Spells/CommonBuffs/Fear/Buff.xdb" />
+                            <autotarget type="gameMechanics.constructor.schemes.spell.multiTarget.FilteringAutotarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                </predicates>
+                                <autotarget type="gameMechanics.constructor.schemes.spell.multiTarget.ClosestAutotarget">
+                                    <group>Enemies</group>
+                                </autotarget>
+                            </autotarget>
+                            <onBehalfOfCaster>true</onBehalfOfCaster>
+                            <radius>20</radius>
+                            <inCasterRange>true</inCasterRange>
+                            <finishImpacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                    <value>10</value>
+                                </Item>
+                            </finishImpacts>
+                        </Item>
+                    </effects>
+                </Item>
+            </effects>
+            <onBehalfOfHolder>true</onBehalfOfHolder>
+        </Item>
+    </modifiers>
+    <iffPolicy>Enemies</iffPolicy>
+    <launchWhenReady>false</launchWhenReady>
+    <mechanics>
+        <cooldown>
+            <stage>Launch</stage>
+            <duration>60000</duration>
+            <group href="/Mechanics/Spells/Groups/RaceClassSpells.xdb" />
+        </cooldown>
+        <targetImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/Spells/CommonBuffs/Fear/Buff.xdb" />
+                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                    <multiplier>3</multiplier>
+                </durationScaler>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                <value>10</value>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>0</speed>
+    <isAE>false</isAE>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

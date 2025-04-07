@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.map.tour.Tour>
+    <Header>
+        <resourceId>234931</resourceId>
+    </Header>
+    <route href="RouteShield.(Route).xdb#xpointer(/gameMechanics.map.tour.Route)" />
+    <speed>0.001</speed>
+    <impactPoints>
+        <Item>
+            <point>2</point>
+            <impacts type="gameMechanics.world.transport.TransportImpacts">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="ControlBuffs/GoByTourShield.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                                <buff href="ControlBuffs/GoByTourOut.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                <range>
+                                                    <max>5</max>
+                                                </range>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                        </predicates>
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="ControlBuffs/GoByTourShield.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                </impactsIf>
+                                <impactsElse>
+                                    <Item type="gameMechanics.world.ship.elements.ImpactGoByTour">
+                                        <tour href="TourOut.(Tour).xdb#xpointer(/gameMechanics.map.tour.Tour)" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                                        <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderShipOwner" />
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                <buff href="ControlBuffs/ShieldRecharger.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                                        <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderShipOwner" />
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                <data href="/Mechanics/Astral/Sectors/NewbieAstral/IntroductionSector/Mobs/Mercs/TextMessage/TourOut2.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </impactsElse>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </impacts>
+        </Item>
+        <Item skiped="" />
+    </impactPoints>
+    <destoyTravelerAtEnd>false</destoyTravelerAtEnd>
+</gameMechanics.map.tour.Tour>

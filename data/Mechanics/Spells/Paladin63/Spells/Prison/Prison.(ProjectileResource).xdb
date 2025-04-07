@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.projectile.ProjectileResource>
+    <Header>
+        <resourceId>206827</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="Prison.(ProjectileResource).Name.txt" />
+    <visObject href="/Spells/FX/Spells/Paladin63_Prison.(VisObjectTemplate).xdb" />
+    <altitude>0.05</altitude>
+    <effects>
+        <Item type="gameMechanics.elements.effects.TickableEntityAura">
+            <tick>1000</tick>
+            <affectGroup>Enemies</affectGroup>
+            <radius>5</radius>
+            <impactsIn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff hrefvar="buff" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="IsEnemy.(BuffResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsElse>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="IsEnemy.(BuffResource).xdb" />
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsIn>
+            <impactsOut>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff hrefvar="buff" />
+                </Item>
+            </impactsOut>
+        </Item>
+        <Item type="gameMechanics.elements.effects.TickableAura">
+            <tick>1000</tick>
+            <affectGroup>Enemies</affectGroup>
+            <radius>5</radius>
+            <onBehalfOfHolder>true</onBehalfOfHolder>
+            <impactsOut>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="PullBuff.(BuffResource).xdb" />
+                </Item>
+            </impactsOut>
+        </Item>
+    </effects>
+</gameMechanics.world.projectile.ProjectileResource>

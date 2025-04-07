@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>222215</resourceId>
+    </Header>
+    <image href="/Interface/Icons/Spells/Psionic/PsionicTimeLapse.(UISingleTexture).xdb" />
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.RandomConditionalImpact">
+                            <entries>
+                                <Item>
+                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="ResourceSliceAndDice.(BuffResource).xdb" />
+                                    </predicate>
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="SliceAndDice/WarningSliceAndDice.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item>
+                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="SliceAndDice/ResourceBeamLeft.(BuffResource).xdb" />
+                                    </predicate>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                                            <spell href="SidePanels/PanelBeam_Left.(SpellArea).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item>
+                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="SliceAndDice/ResourceBeamRight.(BuffResource).xdb" />
+                                    </predicate>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                                            <spell href="SidePanels/PanelBeam_Right.(SpellArea).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </entries>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="NoImpulseCast.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                    <impactsResource href="ImpulseCast.(ImpactListResource).xdb" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>20000</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                    <impactsResource href="ImpulseCast.(ImpactListResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsOn>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>30000</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsElse>
+                                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                    <impactsResource href="ImpulseCast.(ImpactListResource).xdb" />
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impactsOn>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                    <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+                        <range min="0" max="1" />
+                        <withinRange>false</withinRange>
+                        <minCandidatesCount>1</minCandidatesCount>
+                        <targetCount>1</targetCount>
+                    </selector>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                            <Item type="gameMechanics.elements.resources.ResourceAnyBuff">
+                                <buffs>
+                                    <Item href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Impulse/ImpulseBlue.(BuffResource).xdb" />
+                                    <Item href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Impulse/ImpulseRed.(BuffResource).xdb" />
+                                    <Item href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Impulse/ActiveImpulseBlue.(BuffResource).xdb" />
+                                    <Item href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Impulse/ActiveImpulseRed.(BuffResource).xdb" />
+                                </buffs>
+                            </Item>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Impulse/HM_Switch_Cooldown.(BuffResource).xdb" />
+                                </predicate>
+                            </Item>
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Defender/DefenderBuff.(BuffResource).xdb" />
+                                </predicate>
+                            </Item>
+                        </predicates>
+                    </filter>
+                    <impacts>
+                        <Item>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Impulse/ActiveImpulseBlue.(BuffResource).xdb" />
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Impulse/ImpulseSwitchToRed.(BuffResource).xdb" />
+                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                <multiplier>1.5</multiplier>
+                                            </durationScaler>
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                    <buff href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Impulse/ActiveImpulseRed.(BuffResource).xdb" />
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Impulse/ImpulseSwitchToBlue.(BuffResource).xdb" />
+                                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                        <multiplier>1.5</multiplier>
+                                                    </durationScaler>
+                                                </Item>
+                                            </impactsIf>
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Impulse/HM_Switch_Cooldown.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>6000</tick>
+            <initialDelay>7500</initialDelay>
+        </Item>
+    </effects>
+    <duration>1000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

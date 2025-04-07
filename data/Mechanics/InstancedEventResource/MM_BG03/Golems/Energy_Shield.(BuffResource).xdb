@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>242277</resourceId>
+    </Header>
+    <Name href="Energy_Shield.(BuffResource).Name.txt" />
+    <Description href="Energy_Shield.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Mounts/EnergyShield.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visScript href="EnergyShield.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.DamageZeroSuppressor" />
+        <Item type="gameMechanics.elements.effects.ImmunityToSpellFromGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                <Item href="/Mechanics/Spells/Groups/CrowdControlSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Hover" />
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                    <group href="/Mechanics/Spells/Groups/Fears.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                    <group href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                    <group href="/Mechanics/Spells/Groups/Knockdowns.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                    <group href="/Mechanics/Spells/Groups/MindControlBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                    <group href="/Mechanics/Spells/Groups/Stuns.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.DirectHeal">
+                    <heal>1</heal>
+                    <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                            <multiplier>0.15</multiplier>
+                        </mulCalcer>
+                    </scalerTarget>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                    <group href="/Mechanics/Spells/Groups/Poisons.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                    <group href="/Mechanics/Spells/Groups/Diseases.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToBuffs">
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.PredicateBuffHarmful" />
+                <Item type="gameMechanics.constructor.basicElements.PredicateGenericNot">
+                    <predicate type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                        <groups>
+                            <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                        </groups>
+                    </predicate>
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImmunityToHarmfulSpells" />
+    </effects>
+    <duration>5000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>true</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

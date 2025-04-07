@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>243458</resourceId>
+    </Header>
+    <Name href="HullUpgradeMaxHP.(SpellSingleTarget).Name.txt" />
+    <Description href="HullUpgradeMaxHP.(SpellSingleTarget).Description.txt" />
+    <prepareDuration>5000</prepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                <predicate type="gameMechanics.constructor.basicElements.PredicateOr">
+                    <predicates>
+                        <Item type="gameMechanics.world.ship.elements.PredicateHasUpgradableShip">
+                            <newShipResource href="/Mechanics/Ships/AstralShip/AstralShipKaniaNew_HullUpgradeMaxHP.(ShipResource).xdb#xpointer(/gameMechanics.world.ship.ShipResource)" />
+                        </Item>
+                        <Item type="gameMechanics.world.ship.elements.PredicateHasUpgradableShip">
+                            <newShipResource href="/Mechanics/Ships/AstralShip/AstralShipHadagan_HullUpgradeMaxHP.(ShipResource).xdb#xpointer(/gameMechanics.world.ship.ShipResource)" />
+                        </Item>
+                    </predicates>
+                </predicate>
+                <clientData href="/Mechanics/Ships/Hangar/HangarNPC/Quests/Hull/TL.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                <predicate type="gameMechanics.constructor.basicElements.PredicateAnd">
+                    <predicates>
+                        <Item type="gameMechanics.world.ship.elements.PredicateInHangar" />
+                        <Item type="gameMechanics.world.ship.elements.PredicateHasSummonedShip" />
+                    </predicates>
+                </predicate>
+                <clientData href="/Mechanics/Ships/Hangar/HangarNPC/Quests/Hull/Hangar.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.world.ship.elements.PredicateHasShipInProgress" />
+            </Item>
+            <Item type="gameMechanics.world.ship.elements.PredicateHasBoundShip" />
+            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                <predicate type="gameMechanics.elements.predicates.PredicateHasNoBorrowedShip" />
+                <clientData href="/Mechanics/Ships/Hangar/HangarNPC/Quests/Hull/HasBorrowedShip.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+            </Item>
+        </casterConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceActiveItem" />
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateFaction">
+                        <faction href="/World/Factions/League.xdb#xpointer(/gameMechanics.world.creature.Faction)" />
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.world.ship.elements.ImpactAddShipInUpgrade">
+                        <constructionTime>0</constructionTime>
+                        <modification type="gameMechanics.world.ship.elements.ImpactAddShipInUpgrade$ShipModificationResource">
+                            <shipResource href="/Mechanics/Ships/AstralShip/AstralShipKaniaNew_HullUpgradeMaxHP.(ShipResource).xdb#xpointer(/gameMechanics.world.ship.ShipResource)" />
+                        </modification>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.world.ship.elements.ImpactAddShipInUpgrade">
+                        <constructionTime>0</constructionTime>
+                        <modification type="gameMechanics.world.ship.elements.ImpactAddShipInUpgrade$ShipModificationResource">
+                            <shipResource href="/Mechanics/Ships/AstralShip/AstralShipHadagan_HullUpgradeMaxHP.(ShipResource).xdb#xpointer(/gameMechanics.world.ship.ShipResource)" />
+                        </modification>
+                    </Item>
+                </impactsElse>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactGrantUnlock">
+                <unlock href="/Mechanics/Unlocks/Ship/HullUpgradeMaxHP.(UnlockResource).xdb#xpointer(/gameMechanics.constructor.schemes.unlock.UnlockResource)" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

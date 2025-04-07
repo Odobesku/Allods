@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>220755</resourceId>
+    </Header>
+    <image href="/Interface/Ingame/Lottery/Textures/Numerals/Num2.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                    <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+                        <range min="0" max="1" />
+                        <withinRange>false</withinRange>
+                        <minCandidatesCount>1</minCandidatesCount>
+                        <targetCount>1</targetCount>
+                    </selector>
+                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                        <filters>
+                            <Item type="gameMechanics.world.creature.AvatarFilter" />
+                            <Item type="gameMechanics.world.creature.AliveFilter" />
+                            <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="YakBoss/LightningSphere/LightningSphereTarget.(BuffResource).xdb" />
+                                        </predicate>
+                                    </Item>
+                                </predicates>
+                            </Item>
+                        </filters>
+                    </filter>
+                    <impacts>
+                        <Item>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                            <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                                <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                <offset>8</offset>
+                                            </destination>
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="YakBoss/PursuitingSphere/ForcedAggro.(BuffResource).xdb" />
+                                                </Item>
+                                            </impacts>
+                                            <traceDown>true</traceDown>
+                                            <object href="PursuitingSphere/PursuitingSphere.(MobWorld).xdb" />
+                                            <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>12000</tick>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOnStrike">
+            <impactsToTarget>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                            <buff href="YakBoss/Arrhythmia.(BuffResource).xdb" />
+                            <range>
+                                <max>9</max>
+                            </range>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="YakBoss/Arrhythmia.(BuffResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsToTarget>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                    <destination type="gameMechanics.map.destination.DestinationModified">
+                        <destination type="gameMechanics.map.destination.DestinationLocator">
+                            <locator>
+                                <scriptID>7_Yak_Loc</scriptID>
+                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                            </locator>
+                        </destination>
+                        <modifiers>
+                            <Item type="gameMechanics.map.destination.modifier.ModifierSelectReachable">
+                                <alternatives>
+                                    <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+                                        <verticalRange min="0" max="0" />
+                                        <horizontalRange min="0" max="28" />
+                                    </Item>
+                                </alternatives>
+                                <safetyRadius>0.1</safetyRadius>
+                            </Item>
+                        </modifiers>
+                    </destination>
+                    <traceDown>true</traceDown>
+                    <object href="EnergySource/EnergySource.(MobWorld).xdb" />
+                    <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb" />
+                </Item>
+            </impacts>
+            <tick>12000</tick>
+            <initialDelay>3000</initialDelay>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                    <selector type="gameMechanics.tools.SelectorRandomNotLess">
+                        <minIndex>1</minIndex>
+                    </selector>
+                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                        <filters>
+                            <Item type="gameMechanics.world.creature.AvatarFilter" />
+                            <Item type="gameMechanics.world.creature.AliveFilter" />
+                            <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="YakBoss/LightningCurse/LightningCurse.(BuffResource).xdb" />
+                                        </predicate>
+                                    </Item>
+                                </predicates>
+                            </Item>
+                        </filters>
+                    </filter>
+                    <impacts>
+                        <Item>
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="YakBoss/LightningCurse/LightningCurse.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>20000</tick>
+            <initialDelay>12500</initialDelay>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <isClientReplicated>false</isClientReplicated>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>223290</resourceId>
+    </Header>
+    <Name href="Enrage_Aura.(BuffResource).Name.txt" />
+    <Description href="Enrage_Aura.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Warrior/WarriorInnerRage.(UISingleTexture).xdb" />
+    <interfaceHighPriority>true</interfaceHighPriority>
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.constructor.basicElements.PredicateOr">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/RaidInstances/FerrisRaid/3_Mammoth/Mammoth/RiverPull/RiverPull.(BuffResource).xdb" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/RaidInstances/FerrisRaid/3_Mammoth/Mammoth/RiverPull/RiverCharge.(BuffResource).xdb" />
+                                            </Item>
+                                        </predicates>
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="Rage_Damage.(BuffResource).xdb" />
+                                    <impactsOnAttach>
+                                        <Item type="gameMechanics.elements.impacts.ImpactSetStackCount">
+                                            <buff href="Rage_Damage.(BuffResource).xdb" />
+                                            <stackCount>1</stackCount>
+                                            <stackCalcer type="gameMechanics.elements.calcers.FloatToLongCalcer">
+                                                <calcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                                                    <buff href="Enrage_Aura.(BuffResource).xdb" />
+                                                </calcer>
+                                            </stackCalcer>
+                                        </Item>
+                                    </impactsOnAttach>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="Rage_Damage.(BuffResource).xdb" />
+                </Item>
+            </impactsOff>
+        </Item>
+    </effects>
+    <stackLimit>6</stackLimit>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

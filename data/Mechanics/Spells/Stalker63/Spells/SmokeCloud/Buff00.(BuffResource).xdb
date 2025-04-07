@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>197046</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="Buff00.(BuffResource).Name.txt" />
+    <Description href="Buff00.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Stalker/CloudOfSmoke.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.Dodge" />
+        <Item type="gameMechanics.elements.effects.MagicDodge" />
+        <Item type="gameMechanics.elements.effects.SummandStat">
+            <stat type="gameMechanics.elements.stat.StatDodgeChance" />
+            <value>1</value>
+            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mulCalcer type="gameMechanics.elements.calcers.CalcerSum">
+                    <summands>
+                        <Item type="constructor.elements.CalcerFloatExternal">
+                            <externalCalcer hrefvar="chanceCalc" />
+                        </Item>
+                        <Item type="gameMechanics.elements.calcers.CalcerIf">
+                            <predicate type="gameMechanics.elements.predicates.PredicateBinaryWrapper">
+                                <master type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                <slave type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                <binary type="gameMechanics.constructor.basicElements.BinaryPredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateNotMaster" />
+                                </binary>
+                            </predicate>
+                            <calcerIf type="gameMechanics.elements.calcers.CalcerIf">
+                                <predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                    <ability href="/Mechanics/Spells/Stalker63/Abilities/AspectTankSmokeCloud/Ability02.(AbilityResource).xdb" />
+                                    <anyRank>false</anyRank>
+                                </predicate>
+                                <calcerIf type="gameMechanics.elements.calcers.FloatData">
+                                    <value>50</value>
+                                </calcerIf>
+                                <calcerElse type="gameMechanics.elements.calcers.CalcerIf">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                        <ability href="/Mechanics/Spells/Stalker63/Abilities/AspectTankSmokeCloud/Ability01.(AbilityResource).xdb" />
+                                        <anyRank>false</anyRank>
+                                    </predicate>
+                                    <calcerIf type="gameMechanics.elements.calcers.FloatData">
+                                        <value>25</value>
+                                    </calcerIf>
+                                    <calcerElse type="gameMechanics.constructor.basicElements.FloatZero" />
+                                </calcerElse>
+                            </calcerIf>
+                        </Item>
+                    </summands>
+                </mulCalcer>
+            </scaler>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <isMultiple>true</isMultiple>
+    <ranks>
+        <Item href="Buff01.(BuffResource).xdb" />
+        <Item href="Buff02.(BuffResource).xdb" />
+        <Item href="Buff03.(BuffResource).xdb" />
+    </ranks>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

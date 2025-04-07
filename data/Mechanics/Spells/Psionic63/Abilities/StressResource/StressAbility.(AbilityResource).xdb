@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>220194</resourceId>
+    </Header>
+    <name href="StressAbility.(AbilityResource).Name.txt" />
+    <description href="StressAbility.(AbilityResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Psionic/Kontakter.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectVariable">
+            <resource href="StressResource.(VariableResource).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                    <variable href="StressResource.(VariableResource).xdb" />
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                            <variable href="StressResource.(VariableResource).xdb" />
+                            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                <mulCalcer type="gameMechanics.elements.calcers.CalcerSum">
+                                    <summands>
+                                        <Item type="gameMechanics.elements.calcers.CalcerIf">
+                                            <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                            </predicate>
+                                            <calcerIf type="gameMechanics.elements.calcers.FloatData">
+                                                <value>-10</value>
+                                            </calcerIf>
+                                            <calcerElse type="gameMechanics.elements.calcers.CalcerIf">
+                                                <predicate type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                                    <predicates>
+                                                        <Item type="gameMechanics.elements.predicates.PredicateVariableEqualsGreatThan">
+                                                            <resource href="StressResource.(VariableResource).xdb" />
+                                                            <minValue>51</minValue>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.predicates.PredicateVariableLessThan">
+                                                            <resource href="StressResource.(VariableResource).xdb" />
+                                                            <value>100</value>
+                                                        </Item>
+                                                    </predicates>
+                                                </predicate>
+                                                <calcerIf type="gameMechanics.elements.calcers.FloatData">
+                                                    <value>-3</value>
+                                                </calcerIf>
+                                                <calcerElse type="gameMechanics.elements.calcers.CalcerIf">
+                                                    <predicate type="gameMechanics.elements.predicates.PredicateVariableLessThan">
+                                                        <resource href="StressResource.(VariableResource).xdb" />
+                                                        <value>51</value>
+                                                    </predicate>
+                                                    <calcerIf type="gameMechanics.elements.calcers.FloatData">
+                                                        <value>-7</value>
+                                                    </calcerIf>
+                                                    <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                                                        <value>0</value>
+                                                    </calcerElse>
+                                                </calcerElse>
+                                            </calcerElse>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.calcers.CalcerIf">
+                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/Spells/Psionic63/Spells/Archont/Buff01.(BuffResource).xdb" />
+                                                <anyRank>false</anyRank>
+                                            </predicate>
+                                            <calcerIf type="gameMechanics.elements.calcers.LinearCalcer">
+                                                <mul>-1</mul>
+                                                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                    <externalCalcer href="/Mechanics/Spells/Psionic63/Spells/Archont/CalcerStress01.(CalcerFloatResource).xdb" />
+                                                </mulCalcer>
+                                                <sum>0</sum>
+                                            </calcerIf>
+                                            <calcerElse type="gameMechanics.elements.calcers.CalcerIf">
+                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                    <buff href="/Mechanics/Spells/Psionic63/Spells/Archont/Buff02.(BuffResource).xdb" />
+                                                    <anyRank>false</anyRank>
+                                                </predicate>
+                                                <calcerIf type="gameMechanics.elements.calcers.LinearCalcer">
+                                                    <mul>-1</mul>
+                                                    <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                        <externalCalcer href="/Mechanics/Spells/Psionic63/Spells/Archont/CalcerStress02.(CalcerFloatResource).xdb" />
+                                                    </mulCalcer>
+                                                    <sum>0</sum>
+                                                </calcerIf>
+                                                <calcerElse type="gameMechanics.elements.calcers.CalcerIf">
+                                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                        <buff href="/Mechanics/Spells/Psionic63/Spells/Archont/Buff03.(BuffResource).xdb" />
+                                                        <anyRank>false</anyRank>
+                                                    </predicate>
+                                                    <calcerIf type="gameMechanics.elements.calcers.LinearCalcer">
+                                                        <mul>-1</mul>
+                                                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                            <externalCalcer href="/Mechanics/Spells/Psionic63/Spells/Archont/CalcerStress03.(CalcerFloatResource).xdb" />
+                                                        </mulCalcer>
+                                                        <sum>0</sum>
+                                                    </calcerIf>
+                                                    <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                                                        <value>0</value>
+                                                    </calcerElse>
+                                                </calcerElse>
+                                            </calcerElse>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.calcers.CalcerIf">
+                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/Spells/Psionic63/Spells/Concentration/Buff01.(BuffResource).xdb" />
+                                            </predicate>
+                                            <calcerIf type="gameMechanics.elements.calcers.FloatData">
+                                                <value>-2</value>
+                                            </calcerIf>
+                                            <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                                                <value>0</value>
+                                            </calcerElse>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.calcers.CalcerIf">
+                                            <predicate type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateVariableLessThan">
+                                                        <resource href="StressResource.(VariableResource).xdb" />
+                                                        <value>100</value>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                        <buff href="/Mechanics/Spells/CommonBuffs/Aspects/CC/Buff01.(BuffResource).xdb" />
+                                                        <consumeStacks>1</consumeStacks>
+                                                    </Item>
+                                                </predicates>
+                                            </predicate>
+                                            <calcerIf type="gameMechanics.elements.calcers.CalcerIf">
+                                                <predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                                    <ability href="/Mechanics/Spells/Psionic63/Abilities/AspectCCStress/Ability01.(AbilityResource).xdb" />
+                                                    <anyRank>false</anyRank>
+                                                </predicate>
+                                                <calcerIf type="gameMechanics.elements.calcers.LinearCalcer">
+                                                    <mul>-1</mul>
+                                                    <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                        <externalCalcer href="/Mechanics/Spells/Psionic63/Abilities/AspectCCStress/Calcer01.(CalcerFloatResource).xdb" />
+                                                    </mulCalcer>
+                                                    <sum>0</sum>
+                                                </calcerIf>
+                                                <calcerElse type="gameMechanics.elements.calcers.CalcerIf">
+                                                    <predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                                        <ability href="/Mechanics/Spells/Psionic63/Abilities/AspectCCStress/Ability02.(AbilityResource).xdb" />
+                                                        <anyRank>false</anyRank>
+                                                    </predicate>
+                                                    <calcerIf type="gameMechanics.elements.calcers.LinearCalcer">
+                                                        <mul>-1</mul>
+                                                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                            <externalCalcer href="/Mechanics/Spells/Psionic63/Abilities/AspectCCStress/Calcer02.(CalcerFloatResource).xdb" />
+                                                        </mulCalcer>
+                                                        <sum>0</sum>
+                                                    </calcerIf>
+                                                    <calcerElse type="gameMechanics.elements.calcers.CalcerIf">
+                                                        <predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                                            <ability href="/Mechanics/Spells/Psionic63/Abilities/AspectCCStress/Ability03.(AbilityResource).xdb" />
+                                                            <anyRank>false</anyRank>
+                                                        </predicate>
+                                                        <calcerIf type="gameMechanics.elements.calcers.LinearCalcer">
+                                                            <mul>-1</mul>
+                                                            <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                                <externalCalcer href="/Mechanics/Spells/Psionic63/Abilities/AspectCCStress/Calcer03.(CalcerFloatResource).xdb" />
+                                                            </mulCalcer>
+                                                            <sum>0</sum>
+                                                        </calcerIf>
+                                                        <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                                                            <value>0</value>
+                                                        </calcerElse>
+                                                    </calcerElse>
+                                                </calcerElse>
+                                            </calcerIf>
+                                            <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                                                <value>0</value>
+                                            </calcerElse>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.calcers.CalcerIf">
+                                            <predicate type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateVariableLessThan">
+                                                        <resource href="StressResource.(VariableResource).xdb" />
+                                                        <value>100</value>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                        <buff href="/Mechanics/Spells/CommonBuffs/Aspects/Support/Buff01.(BuffResource).xdb" />
+                                                        <consumeStacks>1</consumeStacks>
+                                                    </Item>
+                                                </predicates>
+                                            </predicate>
+                                            <calcerIf type="gameMechanics.elements.calcers.CalcerIf">
+                                                <predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                                    <ability href="/Mechanics/Spells/Psionic63/Abilities/AspectSupportStress/Ability01.(AbilityResource).xdb" />
+                                                    <anyRank>false</anyRank>
+                                                </predicate>
+                                                <calcerIf type="gameMechanics.elements.calcers.LinearCalcer">
+                                                    <mul>-1</mul>
+                                                    <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                        <externalCalcer href="/Mechanics/Spells/Psionic63/Abilities/AspectSupportStress/Calcer01.(CalcerFloatResource).xdb" />
+                                                    </mulCalcer>
+                                                    <sum>0</sum>
+                                                </calcerIf>
+                                                <calcerElse type="gameMechanics.elements.calcers.CalcerIf">
+                                                    <predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                                        <ability href="/Mechanics/Spells/Psionic63/Abilities/AspectSupportStress/Ability02.(AbilityResource).xdb" />
+                                                        <anyRank>false</anyRank>
+                                                    </predicate>
+                                                    <calcerIf type="gameMechanics.elements.calcers.LinearCalcer">
+                                                        <mul>-1</mul>
+                                                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                            <externalCalcer href="/Mechanics/Spells/Psionic63/Abilities/AspectSupportStress/Calcer02.(CalcerFloatResource).xdb" />
+                                                        </mulCalcer>
+                                                        <sum>0</sum>
+                                                    </calcerIf>
+                                                    <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                                                        <value>0</value>
+                                                    </calcerElse>
+                                                </calcerElse>
+                                            </calcerIf>
+                                            <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                                                <value>0</value>
+                                            </calcerElse>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.calcers.CalcerIf">
+                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/Spells/Psionic63/Abilities/AspectSupportTrance/Buff01.(BuffResource).xdb" />
+                                                <anyRank>false</anyRank>
+                                            </predicate>
+                                            <calcerIf type="gameMechanics.elements.calcers.LinearCalcer">
+                                                <mul>-1</mul>
+                                                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                    <externalCalcer href="/Mechanics/Spells/Psionic63/Abilities/AspectSupportTrance/CalcerStress01.(CalcerFloatResource).xdb" />
+                                                </mulCalcer>
+                                                <sum>0</sum>
+                                            </calcerIf>
+                                            <calcerElse type="gameMechanics.elements.calcers.CalcerIf">
+                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                    <buff href="/Mechanics/Spells/Psionic63/Abilities/AspectSupportTrance/Buff02.(BuffResource).xdb" />
+                                                    <anyRank>false</anyRank>
+                                                </predicate>
+                                                <calcerIf type="gameMechanics.elements.calcers.LinearCalcer">
+                                                    <mul>-1</mul>
+                                                    <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                        <externalCalcer href="/Mechanics/Spells/Psionic63/Abilities/AspectSupportTrance/CalcerStress02.(CalcerFloatResource).xdb" />
+                                                    </mulCalcer>
+                                                    <sum>0</sum>
+                                                </calcerIf>
+                                                <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                                                    <value>0</value>
+                                                </calcerElse>
+                                            </calcerElse>
+                                        </Item>
+                                    </summands>
+                                </mulCalcer>
+                            </scaler>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>1000</tick>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

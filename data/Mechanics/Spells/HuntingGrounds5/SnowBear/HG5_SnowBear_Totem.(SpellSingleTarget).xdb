@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>202907</resourceId>
+    </Header>
+    <Name href="HG5_SnowBear_Totem.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="/Mechanics/Spells/AstarlIslands/AI57_UI05/boss2/OmniCast.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <prepareDuration>1000</prepareDuration>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>30000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="HG5_SnowBear_CheckBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                <destination type="gameMechanics.map.destination.DestinationModified">
+                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                    <modifiers>
+                        <Item type="gameMechanics.map.destination.modifier.ModifierSelectReachable">
+                            <alternatives>
+                                <Item type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
+                                    <radius type="gameMechanics.elements.calcers.FloatData">
+                                        <value>15</value>
+                                    </radius>
+                                </Item>
+                            </alternatives>
+                        </Item>
+                    </modifiers>
+                </destination>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactCopyAggroList" />
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="HG5_SnowBear_CheckBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impacts>
+                <object href="HG5_SnowBear_Summon.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                <pool href="/Mechanics/Spells/HuntingGrounds/HuntingGround4/HG4_Boss_Cook/TotemPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="G5_SnowBear_CheckBuff2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

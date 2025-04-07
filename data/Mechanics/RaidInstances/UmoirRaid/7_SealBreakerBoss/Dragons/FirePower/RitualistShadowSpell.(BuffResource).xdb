@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>225053</resourceId>
+    </Header>
+    <visScript href="RitualistShadowSpell.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                    <data href="RitualistShadowSpell.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                    <calcers>
+                        <addressEntries>
+                            <Item>
+                                <name>caster</name>
+                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                            </Item>
+                            <Item>
+                                <name>target</name>
+                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                            </Item>
+                        </addressEntries>
+                    </calcers>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="/Mechanics/RaidInstances/UmoirRaid/7_SealBreakerBoss/CombatState/RitualVisual.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                            <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+                                <range min="0" max="1" />
+                                <withinRange>false</withinRange>
+                                <minCandidatesCount>1</minCandidatesCount>
+                                <targetCount>1</targetCount>
+                            </selector>
+                            <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                                <filters>
+                                    <Item type="gameMechanics.world.creature.AvatarFilter" />
+                                    <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                    <buff href="/Mechanics/RaidInstances/UmoirRaid/7_SealBreakerBoss/CombatState/BossTank.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </predicate>
+                                            </Item>
+                                        </predicates>
+                                    </Item>
+                                </filters>
+                            </filter>
+                            <impacts>
+                                <Item>
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Mechanics/RaidInstances/UmoirRaid/7_SealBreakerBoss/Ritualist/ShadowCurse/ShadowCurse.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/RaidInstances/UmoirRaid/7_SealBreakerBoss/Dragons/RitualistNoPower.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/RaidInstances/UmoirRaid/7_SealBreakerBoss/CombatState/RitualVisual.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/UmoirRaid/Voice/VoiceNotice.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </predicates>
+                            <elseImpacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/RaidInstances/UmoirRaid/Voice/VoiceNotice.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                        <multiplier>5</multiplier>
+                                    </durationScaler>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.RandomImpact">
+                                                    <entries>
+                                                        <Item>
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                    <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                                    <data href="/Mechanics/RaidInstances/UmoirRaid/Voice/TD5.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                        <Item>
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                    <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                                    <data href="/Mechanics/RaidInstances/UmoirRaid/Voice/TD55.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                        <Item>
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                    <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                                    <data href="/Mechanics/RaidInstances/UmoirRaid/Voice/TD555.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </entries>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </elseImpacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <duration>5000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

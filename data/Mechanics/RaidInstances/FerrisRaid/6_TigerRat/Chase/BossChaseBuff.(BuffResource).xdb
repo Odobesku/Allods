@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>222653</resourceId>
+    </Header>
+    <Name href="BossChaseBuff.(BuffResource).Name.txt" />
+    <Description href="BossChaseBuff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Warrior/WarriorInnerRage.(UISingleTexture).xdb" />
+    <needVisualizeDuration>false</needVisualizeDuration>
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOnStrike">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="BossChaseBuff.(BuffResource).xdb" />
+                </Item>
+            </impacts>
+            <impactsToTarget>
+                <Item type="gameMechanics.elements.impacts.DirectDamage">
+                    <damage>1</damage>
+                    <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                            <multiplier>1.5</multiplier>
+                        </mulCalcer>
+                    </scaler>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="TargetBuff.(BuffResource).xdb" />
+                </Item>
+            </impactsToTarget>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectForcedAggroLeader" />
+        <Item type="gameMechanics.elements.effects.ImmunityToSpellFromGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/Taunt.xdb" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.RandomImpactGeneric">
+                                    <entries>
+                                        <Item>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                                                    <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+                                                        <range min="0" max="1" />
+                                                        <withinRange>false</withinRange>
+                                                        <minCandidatesCount>3</minCandidatesCount>
+                                                        <targetCount>3</targetCount>
+                                                    </selector>
+                                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                                                <predicates>
+                                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                                            <buff href="/Mechanics/RaidInstances/FerrisRaid/6_TigerRat/JumpSeries/JumpTarget.(BuffResource).xdb" />
+                                                                        </predicate>
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                                                </predicates>
+                                                            </Item>
+                                                        </predicates>
+                                                    </filter>
+                                                    <impacts>
+                                                        <Item>
+                                                            <impacts>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff href="/Mechanics/RaidInstances/FerrisRaid/6_TigerRat/JumpSeries/JumpTarget.(BuffResource).xdb" />
+                                                                </Item>
+                                                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="/Mechanics/RaidInstances/FerrisRaid/6_TigerRat/JumpSeries/JumpResource.(BuffResource).xdb" />
+                                                                        </Item>
+                                                                    </impacts>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                        <Item>
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="/Mechanics/RaidInstances/FerrisRaid/6_TigerRat/Howl/HowlPrepare.(BuffResource).xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </entries>
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="ChaseHMCooldown.(BuffResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="/Mechanics/RaidInstances/FerrisRaid/6_TigerRat/Unworthy.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.75</coeff>
+            </effectScaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectsDeferred">
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+                            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                                <coeff>0.25</coeff>
+                            </effectScaler>
+                        </Item>
+                    </effects>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectsDeferred">
+                    <delay>2000</delay>
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+                            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                                <coeff>0.25</coeff>
+                            </effectScaler>
+                        </Item>
+                    </effects>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectsDeferred">
+                    <delay>3000</delay>
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+                            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                                <coeff>0.25</coeff>
+                            </effectScaler>
+                        </Item>
+                    </effects>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectsDeferred">
+                    <delay>4000</delay>
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+                            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                                <coeff>0.25</coeff>
+                            </effectScaler>
+                        </Item>
+                    </effects>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectsDeferred">
+                    <delay>5000</delay>
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+                            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                                <coeff>0.25</coeff>
+                            </effectScaler>
+                        </Item>
+                    </effects>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectsDeferred">
+                    <delay>7000</delay>
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+                            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                                <coeff>0.375</coeff>
+                            </effectScaler>
+                        </Item>
+                    </effects>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectsDeferred">
+                    <delay>9000</delay>
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+                            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                                <coeff>0.375</coeff>
+                            </effectScaler>
+                        </Item>
+                    </effects>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <duration>30000</duration>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/RaidInstances/UmoirMound/07_Party/RemoveableByScroll.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

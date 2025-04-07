@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>227298</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MobsCooldowns.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="Spell_02.(SpellSingleTarget).Name.txt" />
+    <Description href="" />
+    <image href="/Interface/Icons/Spells/Warrior/WarriorCleave.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/WorldBoss/AC4/ElfCultistBossCursedBlast.xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="" />
+    <descTemplate href="" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <needLos>false</needLos>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Enemies</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>4000</duration>
+            <group href="/Mechanics/Spells/Groups/MobsCooldowns.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                <buff href="Spell_02_mark.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                <range>
+                    <min>3</min>
+                    <max>3</max>
+                </range>
+            </Item>
+        </targetConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceMana">
+                <mana>20</mana>
+                <manaType>
+                    <Item>Energy</Item>
+                </manaType>
+            </Item>
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/RaidInstances/UmoirMound/MobPack/UM_Pack_Paladin/Spell_01/Spell_01_Charge_mark.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                <spell href="/Mechanics/RaidInstances/UmoirMound/MobPack/UM_Pack_Paladin/Spell_01/Spell_01.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                <impactsOnHitTarget>
+                    <Item type="gameMechanics.elements.impacts.StackBuff">
+                        <buff href="Spell_02_mark.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        <resetTimer>false</resetTimer>
+                        <anyRank>false</anyRank>
+                        <delta type="gameMechanics.elements.calcers.FloatData">
+                            <value>-3</value>
+                        </delta>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.RepeatedImpact">
+                        <impact type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                            <threatMultiplier>0</threatMultiplier>
+                            <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                            <minDamage>60</minDamage>
+                            <maxDamage>84</maxDamage>
+                        </impact>
+                        <count type="gameMechanics.elements.calcers.FloatData">
+                            <value>12</value>
+                        </count>
+                    </Item>
+                </impactsOnHitTarget>
+                <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                <minDamage>60</minDamage>
+                <maxDamage>84</maxDamage>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>50</speed>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

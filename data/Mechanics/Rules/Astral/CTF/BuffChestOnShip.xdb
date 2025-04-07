@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>230712</resourceId>
+    </Header>
+    <needVisualize>false</needVisualize>
+    <effects>
+        <Item type="gameMechanics.world.ship.elements.EffectMapChanged">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactsIfGeneric">
+                    <predicate type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
+                        <onSlave type="gameMechanics.world.ship.elements.PredicateInHangar" />
+                    </predicate>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                            <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderRule">
+                                <rule href="Rule.xdb#xpointer(/gameMechanics.world.rules.RuleResource)" />
+                            </addresseeFinder>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactEndRuleActiveState" />
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.world.ship.elements.EffectBlockIslands" />
+        <Item type="gameMechanics.world.ship.elements.EffectBlockAstrolabe">
+            <reason href="AstrolabeBlockedClientData.xdb#xpointer(/gameMechanics.world.ClientData)" />
+        </Item>
+        <Item type="gameMechanics.world.ship.elements.EffectPiratizeShip" />
+        <Item type="gameMechanics.elements.effects.EffectRuleFinishedImpacts">
+            <rule href="Rule.xdb#xpointer(/gameMechanics.world.rules.RuleResource)" />
+            <impacts>
+                <Item type="gameMechanics.constructor.basicElements.ImpactNull" />
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.world.ship.elements.EffectImpactsOnDeath">
+            <impactsOnKiller>
+                <Item type="gameMechanics.elements.impacts.ImpactsIfGeneric">
+                    <predicate type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
+                        <onSlave type="gameMechanics.world.ship.elements.PredicateIsShip" />
+                    </predicate>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="BuffChestOnShip.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactSpawnObject">
+                            <resource href="ChestDropped.(ImpactRunnerSphericalObj).xdb#xpointer(/gameMechanics.world.astralTeleports.ImpactRunnerSphericalObj)" />
+                            <dist>100</dist>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsOnKiller>
+            <impactsOnVictimWoKiller>
+                <Item type="gameMechanics.elements.impacts.ImpactSpawnObject">
+                    <resource href="ChestDropped.(ImpactRunnerSphericalObj).xdb#xpointer(/gameMechanics.world.astralTeleports.ImpactRunnerSphericalObj)" />
+                    <dist>100</dist>
+                </Item>
+            </impactsOnVictimWoKiller>
+            <impactsOnVictim>
+                <Item type="gameMechanics.constructor.basicElements.ImpactNull" />
+            </impactsOnVictim>
+        </Item>
+    </effects>
+    <duration>0</duration>
+    <isStackable>false</isStackable>
+    <stackLimit>1</stackLimit>
+    <isGradual>false</isGradual>
+    <isHelpful>true</isHelpful>
+    <isMultiple>false</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <isClientReplicated>false</isClientReplicated>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>240159</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
+                    <isPersonalPool>true</isPersonalPool>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+            </onLeave>
+            <effects>
+                <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+                    <conditionalImpacts>
+                        <Item>
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="UnstoppableCast.(BuffResource).xdb" />
+                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                        <multiplier>3.5</multiplier>
+                                    </durationScaler>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                                    <addresseeFinder type="gameMechanics.elements.addresseeFinders.FinderActiveSpellTarget" />
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                            <projectileData>
+                                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                                </moveType>
+                                                <resource href="PowerStrikeDecale.(ProjectileResource).xdb" />
+                                            </projectileData>
+                                            <pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                            <conditions>
+                                <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                                    <spells>
+                                        <Item href="PowerStrike.(SpellSingleTarget).xdb" />
+                                    </spells>
+                                </Item>
+                            </conditions>
+                        </Item>
+                    </conditionalImpacts>
+                    <stages>
+                        <Item>Start</Item>
+                    </stages>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

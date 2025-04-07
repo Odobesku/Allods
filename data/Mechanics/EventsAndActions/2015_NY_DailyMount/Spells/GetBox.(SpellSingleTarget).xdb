@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>239645</resourceId>
+    </Header>
+    <Name href="GetBox.(SpellSingleTarget).Name.txt" />
+    <image href="/Interface/Icons/Misc/Event/AllodsBirthdayPresent.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>5</value>
+    </range>
+    <iffPolicy>Everyone</iffPolicy>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/EmpireDailyGetPresents.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Started</status>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                        <quest href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/LeagueDailyGetPresents.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                        <status>Started</status>
+                    </Item>
+                </predicates>
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateIsRuleActive">
+                <rule href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Rules/GetTheGoat.(RuleResource).xdb#xpointer(/gameMechanics.world.rules.RuleResource)" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateBinaryWrapper">
+                        <binary type="gameMechanics.elements.predicates.PredicateHasBuffFromAddressee">
+                            <buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/Summon.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            <from type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                        </binary>
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.CasterProbabilisticImpact">
+                        <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                            <value>0.67</value>
+                        </chanceCalcer>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                                <id href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/BoxCount.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                            </Item>
+                        </impacts>
+                        <impactsOnFail>
+                            <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                <destination type="gameMechanics.elements.calcers.DestinationBehind">
+                                    <comfortRange>1</comfortRange>
+                                    <maxSteps>1</maxSteps>
+                                </destination>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                        <impacts>
+                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                <buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/SeeThief.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </impacts>
+                                <object href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Mobs/Thief.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                <level type="gameMechanics.elements.calcers.CalcerLevel" />
+                            </Item>
+                        </impactsOnFail>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                        <destination type="gameMechanics.map.destination.RelativePos">
+                            <coord x="1" y="1" />
+                        </destination>
+                        <plane href="/Mechanics/EventsAndActions/2015_NY_DailyMount/HiddenBox.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+                        <object href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftBox.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.device.DeviceDie" />
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

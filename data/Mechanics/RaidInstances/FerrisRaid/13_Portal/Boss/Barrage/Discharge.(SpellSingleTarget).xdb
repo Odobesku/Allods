@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>222255</resourceId>
+    </Header>
+    <Name href="Discharge.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="Discharge.(SpellVisScripts).xdb" />
+    <prepareDuration>3000</prepareDuration>
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>500</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Boss/NoImpulseCast.(BuffResource).xdb" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Boss/SliceAndDice/WarningVisual.(BuffResource).xdb" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                    </Item>
+                </predicates>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                        <spell href="Discharge.(SpellSingleTarget).xdb" />
+                        <duration>
+                            <second>2</second>
+                        </duration>
+                    </Item>
+                </impactsElse>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+                    <range min="0" max="1" />
+                    <withinRange>false</withinRange>
+                    <minCandidatesCount>3</minCandidatesCount>
+                    <targetCount>3</targetCount>
+                </selector>
+                <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                    </predicates>
+                </filter>
+                <impacts>
+                    <Item>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor">
+                                    <radius>30</radius>
+                                </distributor>
+                                <data href="DischargeHit.(ClientData).xdb" />
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                                    </Item>
+                                </predicates>
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                        <element>ASTRAL</element>
+                                        <damage>22</damage>
+                                        <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                    </Item>
+                                </impacts>
+                                <elseImpacts>
+                                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                        <element>ASTRAL</element>
+                                        <damage>30</damage>
+                                        <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                    </Item>
+                                </elseImpacts>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

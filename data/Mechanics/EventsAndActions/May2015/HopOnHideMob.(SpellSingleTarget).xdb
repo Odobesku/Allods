@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>239429</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <Name href="" />
+    <Description href="HopOnHideMob.(SpellSingleTarget).Description.txt" />
+    <iffPolicy>Everyone</iffPolicy>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateHasItemsCount">
+                <items>
+                    <Item href="ParadeTicket.(ItemResource).xdb" />
+                </items>
+                <totalCount var="Tickets" />
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff hrefvar="HopOnBuff" />
+                        </predicate>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff hrefvar="HopOnBuff" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactDismount" />
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+                                <groups>
+                                    <Item href="/Mechanics/Spells/Groups/ExoMountsBufs.(ActionGroup).xdb" />
+                                </groups>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ImpactDismount" />
+                        </impactsIf>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactConsumeResources">
+                        <resources>
+                            <Item type="gameMechanics.elements.resources.ResourceSpecificItem">
+                                <item href="ParadeTicket.(ItemResource).xdb" />
+                                <count var="Tickets" />
+                            </Item>
+                        </resources>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff hrefvar="HopOnBuff" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="Move.(BuffResource).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+                        <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+                            <item href="ParadeTicket.(ItemResource).xdb" />
+                        </item>
+                        <count var="Tickets" />
+                    </Item>
+                </impactsElse>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="VisibilityMount.(BuffResource).xdb" />
+                        </predicate>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="VisibilityMount.(BuffResource).xdb" />
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="VisibilityMount.(BuffResource).xdb" />
+                    </Item>
+                </impactsElse>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<Header>
+		<Variables>
+			<FXProjectile>/Spells/FX/Mobs/Carrier_Projectile_Slap.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)</FXProjectile>
+			<FXProjectileHit>/Spells/FX/Mobs/PortalBoss_Discharge_Hit.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)</FXProjectileHit>
+		</Variables>
+	</Header>
+	<launch type="VisActionList">
+		<play>Simultaneously</play>
+		<playWhile />
+		<elements>
+			<Item type="CreatureAnimationAction">
+				<animations>
+					<Item>attack01</Item>
+				</animations>
+				<channelOverrideScript />
+				<advanced>
+					<turnToTarget>NO_TURN</turnToTarget>
+				</advanced>
+			</Item>
+			<Item type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile />
+				<elements>
+					<Item type="CreatureEffectsAction">
+						<visualEffects>
+							<Item>
+								<delay>550</delay>
+								<effectFx href="/Spells/FX/Mobs/Carrier_SpellCast_Slap.(VisObjectTemplate).xdb" />
+								<effectAlias href="" />
+								<fixPoint>true</fixPoint>
+								<fadeOutTime>0</fadeOutTime>
+								<locator>Slot_Global</locator>
+								<offendTime />
+							</Item>
+						</visualEffects>
+					</Item>
+					<Item type="VisActionList">
+						<playWhile />
+						<elements>
+							<Item type="VisActionDelay">
+								<time>650</time>
+							</Item>
+							<Item type="VisActionList">
+								<playWhile />
+								<elements>
+									<Item type="CreatureVisActionStartThrow" />
+									<Item type="CreatureProjectileAction">
+										<projectileFx hrefvar="FXProjectile" />
+										<explosionFx hrefvar="FXProjectileHit" />
+										<theGe>0</theGe>
+										<pointOnCaster type="VisPointLocator" />
+										<pointOnTarget type="VisPointLocator">
+											<locator>Slot_FX</locator>
+										</pointOnTarget>
+										<offendTime />
+									</Item>
+								</elements>
+							</Item>
+						</elements>
+					</Item>
+				</elements>
+			</Item>
+		</elements>
+	</launch>
+</SpellVisScripts>

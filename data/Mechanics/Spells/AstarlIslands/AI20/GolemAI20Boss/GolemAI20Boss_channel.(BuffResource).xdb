@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>194629</resourceId>
+    </Header>
+    <Name href="GolemAI20Boss_channel.(BuffResource).Name.txt" />
+    <Description href="GolemAI20Boss_channel.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Equipment/Ships/Shot/FireShot01.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/OpFirework_TargetSkull.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+            <scale>1.2</scale>
+            <locator>Slot_TopFX</locator>
+        </Item>
+    </visualEffects>
+    <visScript href="/Spells/BuffVisScripts/DotFire.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.MagicDoT">
+            <parameters>
+                <scalerTarget type="gameMechanics.elements.scalers.ScalerBuff">
+                    <buff href="GolemAI20Boss_channelCount.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <summand>1</summand>
+                </scalerTarget>
+                <scaleOnTick>true</scaleOnTick>
+                <tickLength>1000</tickLength>
+                <damagePerTick>12</damagePerTick>
+                <impactsPerTick>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="GolemAI20Boss_channelCount.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsPerTick>
+            </parameters>
+            <element>FIRE</element>
+            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="GolemAI20Boss_channelCount.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                            <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+                                <range min="0" max="1" />
+                                <withinRange>false</withinRange>
+                                <minCandidatesCount>0</minCandidatesCount>
+                                <targetCount>0</targetCount>
+                            </selector>
+                            <impacts>
+                                <Item>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="GolemAI20Boss_channelLine.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.triggerLine.EffectTriggerLine">
+            <impactsIn type="gameMechanics.elements.effects.triggerLine.EffectTriggerLine$ImpactsPack">
+                <impactsFromCaster>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="GolemAI20Boss_channelLine.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsFromCaster>
+            </impactsIn>
+            <impactsOut type="gameMechanics.elements.effects.triggerLine.EffectTriggerLine$ImpactsPack">
+                <impactsFromCaster>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="GolemAI20Boss_channelLine.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </impactsFromCaster>
+            </impactsOut>
+            <minLength>1</minLength>
+            <maxLength>40</maxLength>
+            <reconnect>true</reconnect>
+            <width>2</width>
+            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </predicates>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                </predicates>
+            </filter>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="GolemAI20Boss_channel.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </onLeave>
+        </Item>
+    </effects>
+    <isHelpful>false</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

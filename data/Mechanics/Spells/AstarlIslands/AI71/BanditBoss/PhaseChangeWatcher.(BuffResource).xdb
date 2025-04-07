@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>188384</resourceId>
+    </Header>
+    <image href="/Interface/Icons/Misc/Quest/ChervelitsDisk.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceAnyBuff">
+                                    <buffs>
+                                        <Item href="ChargeBuff.(BuffResource).xdb" />
+                                        <Item href="ChargeResource.(BuffResource).xdb" />
+                                        <Item href="PowerStrikeResource.(BuffResource).xdb" />
+                                        <Item href="Phase2.(BuffResource).xdb" />
+                                    </buffs>
+                                </Item>
+                                <Item type="gameMechanics.elements.predicates.PredicateHealthHigher">
+                                    <level>0.5</level>
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </predicates>
+                    <impactsElse>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="Phase2.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="PhaseChangeWatcher.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                            <spell href="Execute.(SpellSingleTarget).xdb" />
+                            <duration>
+                                <hour>1</hour>
+                            </duration>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="ChargeResource.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                            <selector type="gameMechanics.tools.SelectorShuffle" />
+                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                            </Item>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                        </predicates>
+                                    </Item>
+                                </predicates>
+                            </filter>
+                            <impacts>
+                                <Item>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="ChargeTarget.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                            <spell href="ChargeSpell.(SpellArea).xdb" />
+                            <duration>
+                                <second>2</second>
+                            </duration>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                                    <spell href="CrushingBlow.(SpellSingleTarget).xdb" />
+                                    <duration>
+                                        <second>2</second>
+                                    </duration>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="CoolHead.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="PowerStrikeResource.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="ChargeTarget.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impacts>
+            <tick>4000</tick>
+            <initialDelay>2000</initialDelay>
+        </Item>
+    </effects>
+    <isHelpful>true</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <isClientReplicated>false</isClientReplicated>
+</gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>188410</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/Spells/AstarlIslands/AI71/Common/PlagueCarrier/PlagueCarrierBuff.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/Spells/AstarlIslands/AI71/Common/RatFood/RatFood.(BuffResource).xdb" />
+                    <stacks type="gameMechanics.elements.calcers.FloatData">
+                        <value>3</value>
+                    </stacks>
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectsDeferred">
+                    <delayExtensionMax>4000</delayExtensionMax>
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <radius>20</radius>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                                            <chanceCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                                                <calcers>
+                                                    <Item type="gameMechanics.elements.calcers.FloatData">
+                                                        <value>0.1</value>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.calcers.HealthInferiorityCalcer" />
+                                                </calcers>
+                                            </chanceCalcer>
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="/Mechanics/Spells/AstarlIslands/AI71/Common/PlagueCarrier/PlagueDOT.(BuffResource).xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                        </predicates>
+                                    </filter>
+                                    <targetsLimit>2</targetsLimit>
+                                </Item>
+                            </impacts>
+                            <tick>8000</tick>
+                        </Item>
+                    </effects>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+            <conditionalImpacts>
+                <Item>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="ChewingCooldown.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <radius>40</radius>
+                                    <affectHolder>false</affectHolder>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                                            <spell href="PullChannel.(SpellSingleTarget).xdb" />
+                                            <duration>
+                                                <second>20</second>
+                                            </duration>
+                                        </Item>
+                                    </impacts>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                <mobs>
+                                                    <Item href="Infected.(MobWorld).xdb" />
+                                                </mobs>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                        </predicates>
+                                    </filter>
+                                    <targetsLimit>3</targetsLimit>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                            <spell href="ChewingChannel.(SpellSingleTarget).xdb" />
+                            <duration>
+                                <second>1</second>
+                            </duration>
+                        </Item>
+                    </impacts>
+                    <conditions>
+                        <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                            <spells>
+                                <Item href="PullChannel.(SpellSingleTarget).xdb" />
+                            </spells>
+                        </Item>
+                    </conditions>
+                </Item>
+            </conditionalImpacts>
+            <stages>
+                <Item>Start</Item>
+            </stages>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Enlarge">
+            <factor>1.2</factor>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

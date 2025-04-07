@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>222746</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.BuffInterceptor">
+            <impactsOnAttach>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="Channel_Hard_Stack_Balada.(BuffResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.StackBuff">
+                            <buff href="Channel_Hard_Stack_Balada.(BuffResource).xdb" />
+                            <delta type="gameMechanics.elements.calcers.FloatData">
+                                <value>-1</value>
+                            </delta>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="Silence.(BuffResource).xdb" />
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsOnAttach>
+            <forceAttachBuff>false</forceAttachBuff>
+            <predicates>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb" />
+                    </groups>
+                </Item>
+            </predicates>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectsIfTargetGeneric">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <effectsIf>
+                        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="Random_Element.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                            <tick>20000</tick>
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.ImpactsOnStrike">
+                            <impactsToTarget>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="DoT_Hard.(BuffResource).xdb" />
+                                </Item>
+                            </impactsToTarget>
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                                    <spell href="Death_Rain.(SpellArea).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                                    <spell href="Channel_Hard.(SpellSingleTarget).xdb" />
+                                    <duration>3000</duration>
+                                </Item>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="StopCast.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                                    <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+                                        <range min="0" max="1" />
+                                        <withinRange>false</withinRange>
+                                        <minCandidatesCount>1</minCandidatesCount>
+                                        <targetCount>1</targetCount>
+                                    </selector>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                        </predicates>
+                                    </filter>
+                                    <impacts>
+                                        <Item>
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="Bomb_Hard.(BuffResource).xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                            <tick>30000</tick>
+                            <initialDelay>30000</initialDelay>
+                        </Item>
+                    </effectsIf>
+                    <effectsElse>
+                        <Item type="gameMechanics.elements.effects.ImpactsOnStrike">
+                            <impactsToTarget>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="DoT_Normal.(BuffResource).xdb" />
+                                </Item>
+                            </impactsToTarget>
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                                    <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+                                        <range min="0" max="1" />
+                                        <withinRange>false</withinRange>
+                                        <minCandidatesCount>1</minCandidatesCount>
+                                        <targetCount>1</targetCount>
+                                    </selector>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                        </predicates>
+                                    </filter>
+                                    <impacts>
+                                        <Item>
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="Bomb_Normal.(BuffResource).xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                            <tick>30000</tick>
+                            <initialDelay>30000</initialDelay>
+                        </Item>
+                    </effectsElse>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                            <spawn>
+                                <scriptID>ElfClone_combat_door</scriptID>
+                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                            </spawn>
+                            <impacts>
+                                <Item type="gameMechanics.elements.device.DoorSwitch">
+                                    <switchType>Close</switchType>
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                            <data href="/Mechanics/RaidInstances/FerrisRaid/Voice/11_Clone_Elf/01_Aggro.(ClientData).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                                    <value>1</value>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                    <predicates>
+                                                        <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                                            <zone href="/Maps/FerrisRaid/ScriptZones/FR11.(ScriptZone).xdb" />
+                                                        </Item>
+                                                    </predicates>
+                                                    <impactsElse>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                                                            <destination type="gameMechanics.map.destination.DestinationLocatorSpread">
+                                                                <locator>
+                                                                    <scriptID>FR_11</scriptID>
+                                                                    <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                                                </locator>
+                                                                <horizontalSpread>6</horizontalSpread>
+                                                            </destination>
+                                                        </Item>
+                                                    </impactsElse>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/RaidInstances/FerrisRaid/Voice/VoiceCooldown.(BuffResource).xdb" />
+                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                <multiplier>7000</multiplier>
+                            </durationScaler>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onEnter>
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                            <spawn>
+                                <scriptID>ElfClone_combat_door</scriptID>
+                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                            </spawn>
+                            <impacts>
+                                <Item type="gameMechanics.elements.device.DoorSwitch">
+                                    <switchType>Open</switchType>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                    <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                    <data href="/Mechanics/RaidInstances/FerrisRaid/Voice/11_Clone_Elf/50_RaidWipe.(ClientData).xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/RaidInstances/FerrisRaid/Voice/VoiceCooldown.(BuffResource).xdb" />
+                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                        <multiplier>7000</multiplier>
+                                    </durationScaler>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                                        <locator>
+                                            <scriptID>ElfClone_Chest</scriptID>
+                                            <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                        </locator>
+                                    </destination>
+                                    <object href="/Mechanics/RaidInstances/FerrisRaid/Other/Loot/11_Chest.(ChestResource).xdb" />
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                        <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                            <variable href="/Mechanics/RaidInstances/FerrisRaid/11_Clone_Elf/11_Elf.(MapVariableResource).xdb" />
+                            <summand>1</summand>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                                            <group href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                            <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
+                            <device>
+                                <scriptID>LeverElf</scriptID>
+                                <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                            </device>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="Channel_Hard_Stack_Balada_Dispel.(BuffResource).xdb" />
+                </Item>
+            </onEnter>
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                            <data href="/Mechanics/RaidInstances/FerrisRaid/Voice/11_Clone_Elf/60_BossDeath.(ClientData).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+            <conditionalImpacts>
+                <Item>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/FerrisRaid/Voice/VoiceCooldown.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Mechanics/RaidInstances/FerrisRaid/Voice/VoiceCooldown.(BuffResource).xdb" />
+                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                                <multiplier>10000</multiplier>
+                                            </durationScaler>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.RandomImpactGeneric">
+                                            <entries>
+                                                <Item>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                                            <data href="/Mechanics/RaidInstances/FerrisRaid/Voice/11_Clone_Elf/10_Common.(ClientData).xdb" />
+                                                                        </Item>
+                                                                    </impacts>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                                <Item>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                                            <data href="/Mechanics/RaidInstances/FerrisRaid/Voice/11_Clone_Elf/11_Common.(ClientData).xdb" />
+                                                                        </Item>
+                                                                    </impacts>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                                <Item>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                                            <data href="/Mechanics/RaidInstances/FerrisRaid/Voice/11_Clone_Elf/12_Common.(ClientData).xdb" />
+                                                                        </Item>
+                                                                    </impacts>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </entries>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impacts>
+                    <conditions>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateGenericNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                                <spells>
+                                    <Item href="/Mechanics/Spells/AutoAttack/MeleeDamage.xdb" />
+                                </spells>
+                            </predicate>
+                        </Item>
+                    </conditions>
+                </Item>
+            </conditionalImpacts>
+            <stages>
+                <Item>Start</Item>
+            </stages>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>ExternalMove</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>0.25</coeff>
+            </scaler>
+            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.LayeredHealthTriggerGeneric">
+            <layers>
+                <Item>
+                    <percent>0.51</percent>
+                    <impacts>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/RaidInstances/FerrisRaid/Voice/VoiceCooldown.(BuffResource).xdb" />
+                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                <multiplier>1.2e+006</multiplier>
+                            </durationScaler>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item>
+                    <percent>0.5</percent>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Channel_Hard_Stack_Balada_Enrage.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="50Hp_Heal.(BuffResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                                        <locator>
+                                            <scriptID>ElfClone_FinalFaze</scriptID>
+                                            <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                        </locator>
+                                    </destination>
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Mechanics/RaidInstances/FerrisRaid/11_Clone_Elf/Tank/TeleportVisual.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                    <object href="/Mechanics/RaidInstances/FerrisRaid/11_Clone_Elf/Tank/Tank.(MobWorld).xdb" />
+                                    <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb" />
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                                        <locator>
+                                            <scriptID>ElfClone_FinalFaze</scriptID>
+                                            <map href="/Maps/FerrisRaid/MapResource.xdb" />
+                                        </locator>
+                                    </destination>
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Mechanics/RaidInstances/FerrisRaid/11_Clone_Elf/Tank/TeleportVisual.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                    <object href="/Mechanics/RaidInstances/FerrisRaid/11_Clone_Elf/Tank/Tank.(MobWorld).xdb" />
+                                    <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb" />
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impacts>
+                </Item>
+            </layers>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

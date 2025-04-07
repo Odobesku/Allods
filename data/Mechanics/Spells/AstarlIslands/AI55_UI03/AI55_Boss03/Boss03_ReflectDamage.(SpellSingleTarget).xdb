@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>186301</resourceId>
+    </Header>
+    <Name href="Boss03_ReflectDamage.(SpellSingleTarget).Name.txt" />
+    <nameTemplate href="Boss03_ReflectDamage.(SpellSingleTarget).Name.txt" />
+    <targetType>STTSelf</targetType>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>30000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="Boss03_ScorpionDeath.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="Boss03_SpiderDeath.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="Boss03_ZEMMyDeath.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="Boss03_ReflectDamage.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                    <mul>-1</mul>
+                    <mulCalcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+                        <buff href="Boss03_AddDeath.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </mulCalcer>
+                    <additionalMultiplier>
+                        <scaler type="gameMechanics.elements.scalers.LinearScaler">
+                            <multiplier>0.25</multiplier>
+                        </scaler>
+                    </additionalMultiplier>
+                    <sum>1</sum>
+                </durationScaler>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                <mobs>
+                                    <Item href="AI55_ScorpionAdd.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                    <Item href="AI55_SpiderAdd.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                    <Item href="AI55_ZEMMyAdd.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                </mobs>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="EnergyBattery.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impacts>
+                <spawnResource href="/Maps/AstralIsle55_UI03/SpawnTables/AI55_Boss03.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <iffPolicy>Friends</iffPolicy>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

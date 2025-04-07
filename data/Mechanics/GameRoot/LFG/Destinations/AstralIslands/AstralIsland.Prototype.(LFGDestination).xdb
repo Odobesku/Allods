@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<avatarPopulation.service.impl.lookingForGroupImpl.scheme.LFGDestination>
+    <Header>
+        <resourceId>238919</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <category href="/Mechanics/GameRoot/LFG/Destinations/Category/Astral.(LFGDestinationCategory).xdb#xpointer(/LFGDestinationCategory)" />
+    <requiredCurrency href="/Mechanics/AlternativeCurrencies/AstralTicket.(AlternativeCurrency).xdb#xpointer(/gameMechanics.constructor.schemes.item.AlternativeCurrency)" />
+    <action type="avatarPopulation.service.impl.lookingForGroupImpl.strategies.EnterMapsPoolAction">
+        <mapsPoolResource href="/Mechanics/Astral/IslandPools/5.0/Tier1.(MapsPoolResource).xdb#xpointer(/gameMechanics.world.bigAstral.MapsPoolResource)" />
+        <action>JumpDirect</action>
+        <operations>
+            <Item>ConsumeAstralMap</Item>
+            <Item>ConsumeTicket</Item>
+        </operations>
+        <sector hrefvar="sector" />
+        <impactsOnEnter>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateIsGroupLeader" />
+                </predicates>
+                <impactsIf>
+                    <Item type="itemService.elements.astral.ImpactSummonTempShip">
+                        <shipResource hrefvar="shipResource" />
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/Mechanics/GameRoot/LFG/Phase1ShipBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                            <Item type="itemService.elements.astral.ImpactSetSailingPort">
+                                <sailingPort hrefvar="sailingPort" />
+                            </Item>
+                        </impacts>
+                        <owner>Group</owner>
+                        <permissions>LfgShip</permissions>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateInGroup" />
+                        </predicates>
+                        <impactsElse>
+                            <Item type="itemService.elements.astral.ImpactSummonTempShip">
+                                <shipResource hrefvar="shipResource" />
+                                <impacts>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="/Mechanics/GameRoot/LFG/Phase1ShipBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                    <Item type="itemService.elements.astral.ImpactSetSailingPort">
+                                        <sailingPort hrefvar="sailingPort" />
+                                    </Item>
+                                </impacts>
+                                <permissions>LfgShip</permissions>
+                            </Item>
+                        </impactsElse>
+                    </Item>
+                </impactsElse>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                <destination type="gameMechanics.map.destination.DestinationLocalLocator">
+                    <scriptID>IslandEntrance</scriptID>
+                </destination>
+            </Item>
+        </impactsOnEnter>
+    </action>
+    <impactsOnSuccess>
+        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+            <impacts>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/LFG/Quests/RuleQuests/IsLFGBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/GameRoot/LFG/LFGBuffs/LFG_RandomBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/GameRoot/LFG/LFGBuffs/LFG_RandomBuff_timer.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/GameRoot/LFG/LFGBuffs/LFG_RandomGroupAura.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+        </Item>
+    </impactsOnSuccess>
+    <impactsOnFail>
+        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="/Mechanics/GameRoot/LFG/LFGBuffs/LFG_RandomBuff_timer.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="/Mechanics/GameRoot/LFGQueue.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/GameRoot/LFG/LFGBuffs/LFG_RandomBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impacts>
+        </Item>
+    </impactsOnFail>
+    <impactsOnEnterQueue>
+        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateEqualsLong">
+                            <lhs type="avatarPopulation.service.impl.lookingForGroupImpl.elements.CalcerLFGJoinPremadeSize" />
+                            <rhs type="gameMechanics.elements.calcers.LongData">
+                                <value>1</value>
+                            </rhs>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/GameRoot/LFG/LFGBuffs/LFG_RandomBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/Mechanics/GameRoot/LFG/LFGBuffs/LFG_RandomBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/Mechanics/GameRoot/LFG/LFGBuffs/LFG_RandomBuff_timer.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impacts>
+        </Item>
+    </impactsOnEnterQueue>
+    <faction hrefvar="faction" />
+    <predicates>
+        <Item type="gameMechanics.elements.predicates.PredicateUnlock">
+            <unlock hrefvar="unlock" />
+        </Item>
+        <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+            <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/GameRoot/MatchMakingQueue.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </predicate>
+            <clientData href="/Mechanics/GameRoot/ClientData/LFGQueue.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+        </Item>
+    </predicates>
+    <additionalPredicates>
+        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+            <predicate type="gameMechanics.constructor.basicElements.PredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.world.ship.elements.PredicateInAstralHub" />
+                    <Item type="gameMechanics.map.instance.astralIsland.PredicateOnAstralIsland" />
+                    <Item type="avatarPopulation.service.impl.matchMakingImpl.map.PredicateInstancedEventMember" />
+                    <Item type="gameMechanics.elements.predicates.PredicateInRaid" />
+                    <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                    <Item type="gameMechanics.elements.scenarios.predicates.PredicateIsOnEventScenarioMap" />
+                </predicates>
+            </predicate>
+        </Item>
+        <Item type="gameMechanics.elements.predicates.PredicateGroupHasNoOfflineMembers" />
+    </additionalPredicates>
+    <departPredicates>
+        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+    </departPredicates>
+</avatarPopulation.service.impl.lookingForGroupImpl.scheme.LFGDestination>

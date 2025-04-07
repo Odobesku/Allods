@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.ability.AbilityResource>
+    <Header>
+        <resourceId>237336</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.HealthTrigger">
+            <healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
+                <multiplier>0.6</multiplier>
+            </healthOn>
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                    <destination type="gameMechanics.map.destination.DestinationLocalLocator">
+                        <scriptID>WinterAdd1</scriptID>
+                    </destination>
+                    <object href="/Characters/Kania_male/Instances/AstralIsle45/AI45_Winter_Add1.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    <pool href="WinterBoss_Adds.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                    <variable href="AI45_BossCounter.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <summand>1</summand>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>7000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                            <destination type="gameMechanics.map.destination.DestinationLocalLocator">
+                                <scriptID>WinterAdd1</scriptID>
+                            </destination>
+                            <object href="/Characters/Kania_female/Instances/AstralIsle45/AI45_WinterBoss2.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="WinterBoss_Adds.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="WinterBoss_Add_Slow01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="WinterBoss_Add_Slow102.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                </Item>
+                            </impacts>
+                            <filter type="gameMechanics.constructor.basicElements.FilterOr">
+                                <filters>
+                                    <Item type="gameMechanics.world.creature.AvatarFilter" />
+                                    <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            </Item>
+                                        </predicates>
+                                    </Item>
+                                </filters>
+                            </filter>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactEntitiesAround">
+                    <radius>45</radius>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                </Item>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateIsMob" />
+                                </Item>
+                                <Item type="gameMechanics.elements.predicates.PredicateProjectile" />
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="WinterBoss_Adds.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+            </onLeave>
+            <effects>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactScriptZoneSetDisabled">
+                            <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch1.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactScriptZoneSetDisabled">
+                            <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch2.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactScriptZoneSetDisabled">
+                            <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch3.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactScriptZoneSetDisabled">
+                            <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch4.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactScriptZoneSetDisabled">
+                            <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch5.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                            <delay>500</delay>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.RandomImpact">
+                                            <entries>
+                                                <Item>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactScriptZoneSetDisabled">
+                                                            <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch1.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                                                            <disable>false</disable>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                                            <projectileData>
+                                                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                                    <destination type="gameMechanics.map.destination.DestinationLocalLocator">
+                                                                        <scriptID>WinterBoss_Torch1</scriptID>
+                                                                    </destination>
+                                                                </moveType>
+                                                                <resource href="/Mechanics/Spells/AstarlIslands/AI45/AI45_WinterFlame.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                                                            </projectileData>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                            <spawn>
+                                                                <scriptID>AI45_WinterBoss</scriptID>
+                                                                <map href="/Maps/AstralIsle45/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                            </spawn>
+                                                            <onBehalfOfTarget>true</onBehalfOfTarget>
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                                    <predicates>
+                                                                        <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                                                            <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch1check.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                                                                        </Item>
+                                                                    </predicates>
+                                                                    <impactsIf>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="AI45_WinterTorchBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                        </Item>
+                                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                                            <buff href="WinterBoss_Coldstack.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                        </Item>
+                                                                    </impactsIf>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                            <predicates>
+                                                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                                <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                                                    <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch1.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                                                                </Item>
+                                                            </predicates>
+                                                            <impactsIf>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff href="AI45_WinterTorch_Avatar.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </Item>
+                                                            </impactsIf>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                                <Item>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactScriptZoneSetDisabled">
+                                                            <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch2.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                                                            <disable>false</disable>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                                            <projectileData>
+                                                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                                    <destination type="gameMechanics.map.destination.DestinationLocalLocator">
+                                                                        <scriptID>WinterBoss_Torch2</scriptID>
+                                                                    </destination>
+                                                                </moveType>
+                                                                <resource href="/Mechanics/Spells/AstarlIslands/AI45/AI45_WinterFlame.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                                                            </projectileData>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                            <spawn>
+                                                                <scriptID>AI45_WinterBoss</scriptID>
+                                                                <map href="/Maps/AstralIsle45/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                            </spawn>
+                                                            <onBehalfOfTarget>true</onBehalfOfTarget>
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                                    <predicates>
+                                                                        <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                                                            <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch2check.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                                                                        </Item>
+                                                                    </predicates>
+                                                                    <impactsIf>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="AI45_WinterTorchBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                        </Item>
+                                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                                            <buff href="WinterBoss_Coldstack.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                        </Item>
+                                                                    </impactsIf>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                            <predicates>
+                                                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                                <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                                                    <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch2.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                                                                </Item>
+                                                            </predicates>
+                                                            <impactsIf>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff href="AI45_WinterTorch_Avatar.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </Item>
+                                                            </impactsIf>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                                <Item>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactScriptZoneSetDisabled">
+                                                            <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch3.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                                                            <disable>false</disable>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                                            <projectileData>
+                                                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                                    <destination type="gameMechanics.map.destination.DestinationLocalLocator">
+                                                                        <scriptID>WinterBoss_Torch3</scriptID>
+                                                                    </destination>
+                                                                </moveType>
+                                                                <resource href="/Mechanics/Spells/AstarlIslands/AI45/AI45_WinterFlame.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                                                            </projectileData>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                            <spawn>
+                                                                <scriptID>AI45_WinterBoss</scriptID>
+                                                                <map href="/Maps/AstralIsle45/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                            </spawn>
+                                                            <onBehalfOfTarget>true</onBehalfOfTarget>
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                                    <predicates>
+                                                                        <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                                                            <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch3check.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                                                                        </Item>
+                                                                    </predicates>
+                                                                    <impactsIf>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="AI45_WinterTorchBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                        </Item>
+                                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                                            <buff href="WinterBoss_Coldstack.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                        </Item>
+                                                                    </impactsIf>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                            <predicates>
+                                                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                                <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                                                    <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch3.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                                                                </Item>
+                                                            </predicates>
+                                                            <impactsIf>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff href="AI45_WinterTorch_Avatar.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </Item>
+                                                            </impactsIf>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                                <Item>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactScriptZoneSetDisabled">
+                                                            <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch4.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                                                            <disable>false</disable>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                                            <projectileData>
+                                                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                                    <destination type="gameMechanics.map.destination.DestinationLocalLocator">
+                                                                        <scriptID>WinterBoss_Torch4</scriptID>
+                                                                    </destination>
+                                                                </moveType>
+                                                                <resource href="/Mechanics/Spells/AstarlIslands/AI45/AI45_WinterFlame.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                                                            </projectileData>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                            <spawn>
+                                                                <scriptID>AI45_WinterBoss</scriptID>
+                                                                <map href="/Maps/AstralIsle45/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                            </spawn>
+                                                            <onBehalfOfTarget>true</onBehalfOfTarget>
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                                    <predicates>
+                                                                        <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                                                            <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch4check.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                                                                        </Item>
+                                                                    </predicates>
+                                                                    <impactsIf>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="AI45_WinterTorchBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                        </Item>
+                                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                                            <buff href="WinterBoss_Coldstack.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                        </Item>
+                                                                    </impactsIf>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                            <predicates>
+                                                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                                <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                                                    <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch4.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                                                                </Item>
+                                                            </predicates>
+                                                            <impactsIf>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff href="AI45_WinterTorch_Avatar.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </Item>
+                                                            </impactsIf>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                                <Item>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactScriptZoneSetDisabled">
+                                                            <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch5.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                                                            <disable>false</disable>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                                            <projectileData>
+                                                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                                                    <destination type="gameMechanics.map.destination.DestinationLocalLocator">
+                                                                        <scriptID>WinterBoss_Torch5</scriptID>
+                                                                    </destination>
+                                                                </moveType>
+                                                                <resource href="/Mechanics/Spells/AstarlIslands/AI45/AI45_WinterFlame.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+                                                            </projectileData>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                                                            <spawn>
+                                                                <scriptID>AI45_WinterBoss</scriptID>
+                                                                <map href="/Maps/AstralIsle45/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                                                            </spawn>
+                                                            <onBehalfOfTarget>true</onBehalfOfTarget>
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                                    <predicates>
+                                                                        <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                                                            <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch5check.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                                                                        </Item>
+                                                                    </predicates>
+                                                                    <impactsIf>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="AI45_WinterTorchBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                        </Item>
+                                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                                            <buff href="WinterBoss_Coldstack.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                        </Item>
+                                                                    </impactsIf>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                            <predicates>
+                                                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                                <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+                                                                    <zone href="/Maps/AstralIsle45/ScriptZones/WinterBoss_Torch5.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+                                                                </Item>
+                                                            </predicates>
+                                                            <impactsIf>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff href="AI45_WinterTorch_Avatar.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                </Item>
+                                                            </impactsIf>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </entries>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="AI45_WinterTorchBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="AI45_WinterTorch_Avatar.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <tick>30000</tick>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <effects>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="AI45_WinterTorchBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            </predicate>
+                                        </Item>
+                                    </predicates>
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="WinterBoss_Coldstack.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <tick>4000</tick>
+                    <initialDelay>5000</initialDelay>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.HealthTrigger">
+            <healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
+                <multiplier>0.35</multiplier>
+            </healthOn>
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                    <destination type="gameMechanics.map.destination.DestinationLocalLocator">
+                        <scriptID>WinterAdd3</scriptID>
+                    </destination>
+                    <object href="/Characters/Kania_male/Instances/AstralIsle45/AI45_Winter_Add1.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    <pool href="WinterBoss_Adds.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Mechanics/Spells/AstarlIslands/AI45/AI45_WinterHelpBoss.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <stacks type="gameMechanics.elements.calcers.FloatData">
+                        <value>25</value>
+                    </stacks>
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.HealthTrigger">
+            <healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
+                <multiplier>0.6</multiplier>
+            </healthOn>
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                    <destination type="gameMechanics.map.destination.DestinationLocalLocator">
+                        <scriptID>WinterAdd2</scriptID>
+                    </destination>
+                    <object href="/Characters/Kania_male/Instances/AstralIsle45/AI45_Winter_Add1.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    <pool href="WinterBoss_Adds.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.HealthTrigger">
+            <healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
+                <multiplier>0.6</multiplier>
+            </healthOn>
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                    <destination type="gameMechanics.map.destination.DestinationLocalLocator">
+                        <scriptID>WinterAdd3</scriptID>
+                    </destination>
+                    <object href="/Characters/Kania_male/Instances/AstralIsle45/AI45_Winter_Add1.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    <pool href="WinterBoss_Adds.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.HealthTrigger">
+            <healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
+                <multiplier>0.35</multiplier>
+            </healthOn>
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                    <destination type="gameMechanics.map.destination.DestinationLocalLocator">
+                        <scriptID>WinterAdd3</scriptID>
+                    </destination>
+                    <object href="/Characters/Kania_male/Instances/AstralIsle45/AI45_Winter_Add1.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    <pool href="WinterBoss_Adds.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.HealthTrigger">
+            <healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
+                <multiplier>0.35</multiplier>
+            </healthOn>
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                    <destination type="gameMechanics.map.destination.DestinationLocalLocator">
+                        <scriptID>WinterAdd3</scriptID>
+                    </destination>
+                    <object href="/Characters/Kania_male/Instances/AstralIsle45/AI45_Winter_Add1.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                    <pool href="WinterBoss_Adds.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+</gameMechanics.constructor.schemes.ability.AbilityResource>

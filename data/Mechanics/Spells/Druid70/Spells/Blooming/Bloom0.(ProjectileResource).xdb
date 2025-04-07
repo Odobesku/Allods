@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.projectile.ProjectileResource>
+    <Header>
+        <resourceId>214378</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="Bloom0.(ProjectileResource).Name.txt" />
+    <visObject href="/Spells/FX/Spells/Druid70_BloomingFlower_ProjectileAll.(VisObjectTemplate).xdb" />
+    <lifeLengthCap>8000</lifeLengthCap>
+    <impactsOnDeath>
+        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+            <radius>20</radius>
+            <affectGroup>Group</affectGroup>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="/Mechanics/Spells/Druid70/Abilities/SpringBloomHealUp/Buff01.(BuffResource).xdb" />
+                    <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                </Item>
+            </impacts>
+            <filter type="gameMechanics.world.creature.AliveFilter" />
+        </Item>
+    </impactsOnDeath>
+    <effects>
+        <Item type="gameMechanics.elements.effects.TickableAura">
+            <affectGroup>Group</affectGroup>
+            <affectSelf>true</affectSelf>
+            <radius>20</radius>
+            <impactsIn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff hrefvar="buff" />
+                </Item>
+            </impactsIn>
+            <impactsOut>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="/Mechanics/Spells/Druid70/Spells/Blooming/Buff01.(BuffResource).xdb" />
+                    <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                <buff href="/Mechanics/Spells/Druid70/Abilities/HealingSpring/Buff01.(BuffResource).xdb" />
+                            </predicate>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/Mechanics/Spells/Druid70/Spells/Blooming/Buff01.(BuffResource).xdb" />
+                            <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOut>
+        </Item>
+    </effects>
+</gameMechanics.world.projectile.ProjectileResource>

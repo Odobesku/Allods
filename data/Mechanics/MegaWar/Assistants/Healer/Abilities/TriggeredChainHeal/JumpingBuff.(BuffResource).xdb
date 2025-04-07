@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>228531</resourceId>
+    </Header>
+    <Name href="JumpingBuff.(BuffResource)_Name.txt" />
+    <Description href="JumpingBuff.(BuffResource)_Desc.txt" />
+    <image href="/Interface/Icons/Misc/Herbarium/Spore.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <nameTemplate href="JumpingBuff.(BuffResource)_Name.txt.template" />
+    <descTemplate href="JumpingBuff.(BuffResource)_Desc.txt.template" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectDamageTrigger">
+            <impacts>
+                <casterToTarget>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="JumpingBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </casterToTarget>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactHeal">
+                    <scalerCaster type="gameMechanics.elements.scalers.HealScaler" />
+                    <heal>18.64</heal>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectJumpOnDetach">
+            <jumps type="gameMechanics.elements.calcers.LongData">
+                <value>5</value>
+            </jumps>
+            <buff href="JumpingBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+            <autotarget type="gameMechanics.constructor.schemes.spell.multiTarget.FriendWithMinHPAutotarget">
+                <radius>20</radius>
+            </autotarget>
+            <radius>20</radius>
+            <inCasterRange>false</inCasterRange>
+            <keepTrack>false</keepTrack>
+            <renewingEffects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOff>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                            <data href="TriggeredChainHeal.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                            <calcers>
+                                <addressEntries>
+                                    <Item>
+                                        <name>caster</name>
+                                        <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                    </Item>
+                                    <Item>
+                                        <name>target</name>
+                                        <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                                    </Item>
+                                </addressEntries>
+                            </calcers>
+                        </Item>
+                    </impactsOff>
+                </Item>
+            </renewingEffects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AbonentLostWatcher">
+            <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.StackBuff">
+                    <buff href="JumpingBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    <anyRank>false</anyRank>
+                    <resetTimer>false</resetTimer>
+                    <delta type="gameMechanics.elements.calcers.FloatData">
+                        <value>-6</value>
+                    </delta>
+                </Item>
+            </impacts>
+        </Item>
+    </effects>
+    <duration>5000</duration>
+    <isHelpful>true</isHelpful>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/Magics.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <canBeSaved>true</canBeSaved>
+</gameMechanics.constructor.schemes.buff.BuffResource>

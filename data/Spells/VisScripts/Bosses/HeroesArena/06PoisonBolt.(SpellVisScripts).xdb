@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<Header>
+		<Prototype href="/Spells/VisScripts/Prototypes/MobProjectile.(SpellVisScripts).xdb" />
+		<Variables>
+			<PreCastAnimation>readyCast</PreCastAnimation>
+			<FXProjectile>/Spells/FX/Spells/NecromancerNeurotoxin_Projectile.(VisObjectTemplate).xdb</FXProjectile>
+			<FXOnTargets />
+			<CastAnimation>spellCastDirected</CastAnimation>
+			<FXOnCaster>/Spells/FX/Spells/ReadySpellDirectPoisonWand_Cast.(VisObjectTemplate).xdb</FXOnCaster>
+			<LocatorNameOnCaster>Slot_Special01</LocatorNameOnCaster>
+			<FXProjectileHit>/Spells/FX/Spells/HitPoisonBig.(VisObjectTemplate).xdb</FXProjectileHit>
+			<ProjectileLocatorOnTarget>Slot_FX</ProjectileLocatorOnTarget>
+			<FxOnHands>/Spells/FX/Spells/ReadySpellDirectPoison.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)</FxOnHands>
+			<HitPostFXOnTargets />
+			<LocatorOnCaster>FROM_LOCATOR_NAME</LocatorOnCaster>
+			<FixPointCaster>true</FixPointCaster>
+		</Variables>
+	</Header>
+	<actionBarStart type="VisActionList">
+		<play>InSequence</play>
+	</actionBarStart>
+	<wholeCasting type="VisActionList">
+		<elements>
+			<Item type="CreatureEffectsAction">
+				<visualEffects>
+					<Item>
+						<scale>2</scale>
+					</Item>
+					<Item>
+						<scale>2</scale>
+						<locator>Slot_Hand_R</locator>
+						<locatorName>Slot_Special01</locatorName>
+					</Item>
+				</visualEffects>
+			</Item>
+		</elements>
+	</wholeCasting>
+	<launch type="VisActionList">
+		<elements>
+			<Item skiped="" />
+			<Item type="VisActionList">
+				<elements>
+					<Item type="CreatureEffectsAction">
+						<visualEffects>
+							<Item>
+								<effectFx hrefvar="FXOnCaster" />
+								<effectAlias href="" />
+								<fixPoint var="FixPointCaster" />
+								<scale>0.5</scale>
+								<locator var="LocatorOnCaster" />
+								<locatorName var="LocatorNameOnCaster" />
+								<offendTime type="EffectOffendConstDelay" />
+							</Item>
+						</visualEffects>
+					</Item>
+					<Item type="VisActionList">
+						<elements>
+							<Item skiped="" />
+							<Item type="CreatureProjectileAction">
+								<pointOnCaster type="VisPointLocator">
+									<locatorName>Slot_Special01</locatorName>
+								</pointOnCaster>
+							</Item>
+						</elements>
+					</Item>
+				</elements>
+			</Item>
+		</elements>
+	</launch>
+</SpellVisScripts>

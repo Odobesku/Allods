@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>241335</resourceId>
+    </Header>
+    <Name href="Companion_Heal.(SpellSingleTarget).Name.txt" />
+    <image href="/Interface/Icons/Spells/Paladin/PaladinPrayer.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Paladin/LightNova.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="Companion_Heal.(SpellSingleTarget).Name.txt" />
+    <prepareDuration>1000</prepareDuration>
+    <immutablePrepareDuration>true</immutablePrepareDuration>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration>20000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/Characters/Kania_female/UI06_Companion_Death.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </predicate>
+            </Item>
+        </casterConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                <radius>20</radius>
+                <affectGroup>Friends</affectGroup>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                        <data href="/Spells/ClientData/GreaterHealing.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactHeal">
+                        <heal>1</heal>
+                        <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+                                <multiplier>0.4</multiplier>
+                            </mulCalcer>
+                        </scalerTarget>
+                        <scalerCaster type="gameMechanics.elements.scalers.TrivialScaler" />
+                    </Item>
+                </impacts>
+                <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                    <mobs>
+                                        <Item href="/Characters/Kania_female/Instances/UmoirIsland06/UI06_Companion.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                        <Item href="/Characters/Kania_female/Instances/UmoirIsland06/UI06_CompanionQuest.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                    </mobs>
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </predicates>
+                </filter>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

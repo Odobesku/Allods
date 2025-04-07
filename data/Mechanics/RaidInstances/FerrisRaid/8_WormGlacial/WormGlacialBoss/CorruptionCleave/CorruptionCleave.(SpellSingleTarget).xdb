@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>221550</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+        <Item href="/Mechanics/Spells/Groups/FerrisRaid_Worm.(ActionGroup).xdb" />
+    </groups>
+    <element>COLD</element>
+    <Name href="CorruptionCleave.(SpellSingleTarget).Name.txt" />
+    <visualScripts href="CorruptionCleave_PerfectFreeze.(SpellVisScripts).xdb" />
+    <needLos>false</needLos>
+    <isAggro>false</isAggro>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>666666</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/WormGlacialBoss/Phase3.(BuffResource).xdb" />
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="/Mechanics/RaidInstances/Tank.(BuffResource).xdb" />
+            </Item>
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.RunImpactsInShape">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                <element>ASTRAL</element>
+                                <damage>30</damage>
+                                <impactsOnHitTarget>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="CorruptionDeadlyDebuff.(BuffResource).xdb" />
+                                    </Item>
+                                </impactsOnHitTarget>
+                                <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impacts>
+                <shape type="gameMechanics.constructor.schemes.spell.area.Cone">
+                    <angle type="constructor.basicElements.AngleDegrees">
+                        <value>56</value>
+                    </angle>
+                </shape>
+                <affectGroup>Enemies</affectGroup>
+                <radius type="gameMechanics.elements.impacts.RunImpactsInShape$FixedRadius">
+                    <value>80</value>
+                </radius>
+                <affectMainTarget>false</affectMainTarget>
+                <workOnDead>false</workOnDead>
+                <shapeCenterPosition>Caster</shapeCenterPosition>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                <buff href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/WormGlacialBoss/Phase2/CorruptChargeResource.(BuffResource).xdb" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

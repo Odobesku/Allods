@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SpellVisScripts>
+	<actionBarStart type="VisActionList">
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="CreatureAnimationAction">
+				<mode>LOOP</mode>
+				<animations>
+					<Item>channelCastDirectedEngineer</Item>
+				</animations>
+				<channel>CHANNEL_ABILITY</channel>
+				<advanced>
+					<offendType>EVERYKEY_ALLOFFENDS</offendType>
+				</advanced>
+			</Item>
+		</elements>
+	</actionBarStart>
+	<wholeCasting type="VisActionList">
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="CreatureEffectsAction">
+				<visualEffects>
+					<Item>
+						<effectFx href="/Spells/FX/Spells/Engineer_Defibrillation_Ready.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+					</Item>
+					<Item>
+						<effectFx href="/Spells/FX/Spells/Engineer_Defibrillation_ReadyGun.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+						<locator>FROM_LOCATOR_NAME</locator>
+						<locatorName>Slot_Hand_R</locatorName>
+					</Item>
+				</visualEffects>
+			</Item>
+		</elements>
+	</wholeCasting>
+	<launch type="VisActionList">
+		<visActionID>0</visActionID>
+		<play>Simultaneously</play>
+		<playWhile />
+		<preconditional>true</preconditional>
+		<elements>
+			<Item type="VisActionList">
+				<play>Simultaneously</play>
+				<playWhile />
+				<preconditional>true</preconditional>
+				<elements>
+					<Item type="CreatureAnimationAction">
+						<mode>DIE</mode>
+						<animations>
+							<Item>spellCastDirectedEngineer</Item>
+						</animations>
+						<channel>CHANNEL_ABILITY</channel>
+						<channelOverrideScript />
+						<advanced>
+							<backgroundAfterFirstKey>true</backgroundAfterFirstKey>
+							<changeChannelAfterFirstKey>CHANGE</changeChannelAfterFirstKey>
+							<channelAfterFirstKey>CHANNEL_ATTACK</channelAfterFirstKey>
+							<offendType>EVERYKEY_ALLOFFENDS</offendType>
+						</advanced>
+					</Item>
+					<Item type="CreatureChannelDirectAction">
+						<channelingFx href="/Spells/FX/Spells/Engineer_Defibrillation_Channel.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+						<fxLength>5</fxLength>
+						<startPoint type="VisPointLocator">
+							<locator>Slot_Hand_R</locator>
+						</startPoint>
+						<endPoint type="VisPointLocator" />
+						<offendTime />
+						<secondaryTargetParams>
+							<channelingFx href="" />
+							<offendTime />
+						</secondaryTargetParams>
+					</Item>
+				</elements>
+			</Item>
+			<Item type="CreatureEffectsOnTarget">
+				<visualEffects>
+					<Item>
+						<effectFx href="/Spells/FX/Spells/Engineer_Defibrillation_Hit.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+						<fixPoint>true</fixPoint>
+						<lockScale>false</lockScale>
+						<fadeOutTime>600</fadeOutTime>
+						<locator>Global</locator>
+						<member>Group</member>
+					</Item>
+				</visualEffects>
+			</Item>
+		</elements>
+	</launch>
+	<playOnTargets>
+		<specialAction />
+	</playOnTargets>
+</SpellVisScripts>

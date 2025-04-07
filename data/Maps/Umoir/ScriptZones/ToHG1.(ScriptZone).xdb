@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.map.scriptZone.ScriptZone>
+    <Header>
+        <resourceId>23427</resourceId>
+    </Header>
+    <filter type="gameMechanics.world.creature.AvatarFilter" />
+    <conditionsIn>
+        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+            <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+        </Item>
+        <Item type="gameMechanics.elements.predicates.PredicateCreatureLevel">
+            <minLevel type="gameMechanics.formulas.IntConstantValue">
+                <value>60</value>
+            </minLevel>
+        </Item>
+        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+            <quest href="/World/Quests/HuntingGround1/HG1_Post/HG1_Post.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+        </Item>
+    </conditionsIn>
+    <impactsIn>
+        <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+            <destination type="gameMechanics.map.destination.DestinationLocator">
+                <locator>
+                    <scriptID>HG1_Enter</scriptID>
+                    <map href="/Maps/HuntingGround1/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+                </locator>
+            </destination>
+        </Item>
+        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+                    <quest href="/World/Quests/HuntingGround1/HG1_Post/HG1_Post.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+                    <status>Started</status>
+                </Item>
+            </predicates>
+            <impactsIf>
+                <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+                    <id href="/World/Quests/HuntingGround1/HG1_Post/Counter_1.(QuestCountId).xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+                </Item>
+            </impactsIf>
+        </Item>
+    </impactsIn>
+</gameMechanics.map.scriptZone.ScriptZone>

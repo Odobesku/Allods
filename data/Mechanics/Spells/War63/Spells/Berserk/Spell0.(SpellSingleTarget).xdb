@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>216240</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/AmmoSpells.(ActionGroup).xdb" />
+    </groups>
+    <Name href="Spell0.(SpellSingleTarget).Name.txt" />
+    <Description href="Spell0.(SpellSingleTarget).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value>1</value>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mul>500</mul>
+                        <mulCalcer type="gameMechanics.elements.calcers.CalcerSum">
+                            <summands>
+                                <Item type="gameMechanics.elements.calcers.ItemQualityCalcer">
+                                    <dressSlot>AMMO</dressSlot>
+                                </Item>
+                                <Item type="gameMechanics.elements.calcers.FloatData">
+                                    <value>-1</value>
+                                </Item>
+                            </summands>
+                        </mulCalcer>
+                        <sum>3000</sum>
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                        <formula>FormulaSeconds</formula>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Warrior/MotivatedAggression.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Warrior/Berserk.(SpellVisScripts).xdb" />
+    <targetType>STTSelf</targetType>
+    <ranks>
+        <Item href="Spell01.(SpellSingleTarget).xdb" />
+        <Item href="Spell02.(SpellSingleTarget).xdb" />
+        <Item href="Spell03.(SpellSingleTarget).xdb" />
+    </ranks>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+    <mechanics>
+        <cooldown>
+            <duration var="cd_duration" />
+        </cooldown>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceIf">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateEquipped">
+                        <dressType>AMMO</dressType>
+                        <itemClass href="/Mechanics/ItemClasses/Other_InfiniteTeardrop.(ItemClass).xdb" />
+                    </Item>
+                </predicates>
+                <resourceIf type="gameMechanics.constructor.basicElements.ResourceUniversal" />
+                <resourceElse type="gameMechanics.elements.resources.ResourceDressItem">
+                    <slot>AMMO</slot>
+                    <count>4</count>
+                </resourceElse>
+            </Item>
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="Buff.(BuffResource).xdb" />
+                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                    <mul>750</mul>
+                    <mulCalcer type="gameMechanics.elements.calcers.CalcerSum">
+                        <summands>
+                            <Item type="gameMechanics.elements.calcers.ItemQualityCalcer">
+                                <dressSlot>AMMO</dressSlot>
+                            </Item>
+                            <Item type="gameMechanics.elements.calcers.FloatData">
+                                <value>-1</value>
+                            </Item>
+                        </summands>
+                    </mulCalcer>
+                    <sum>5000</sum>
+                </durationScaler>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.area.SpellArea>
+    <Header>
+        <resourceId>253398</resourceId>
+    </Header>
+    <autoAppendToActionPanel>false</autoAppendToActionPanel>
+    <level>70</level>
+    <immutablePrepareDuration>true</immutablePrepareDuration>
+    <targetType>STTSelf</targetType>
+    <iffPolicy>Everyone</iffPolicy>
+    <launchWhenReady>true</launchWhenReady>
+    <mechanics>
+        <cooldown>
+            <duration>2000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                <predicate type="avatarPopulation.service.impl.matchMakingImpl.event.predicates.PredicateBattleEventMember">
+                    <eventResource href="/Mechanics/Arena_1x1/InstancedEvent/MM_RatePvPArena_Base_1x1_Season01_7_0.(RatingPvPEvent).xdb" />
+                </predicate>
+                <clientData href="/Mechanics/Arena_1x1/Tickets/CantBetInWorld.(ClientData).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/Arena_1x1/Tickets/CanBet.(BuffResource).xdb" />
+                </predicate>
+                <clientData href="/Mechanics/Arena_1x1/Tickets/CantBetInCombat.(ClientData).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/Arena_1x1/Tickets/CantBet.(BuffResource).xdb" />
+                    </predicate>
+                </predicate>
+                <clientData href="/Mechanics/Arena_1x1/Tickets/CantBetQuickly.(ClientData).xdb" />
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+            <Item type="avatarPopulation.service.impl.matchMakingImpl.event.predicates.PredicateBattleEventMember">
+                <eventResource href="/Mechanics/Arena_1x1/InstancedEvent/MM_RatePvPArena_Base_1x1_Season01_7_0.(RatingPvPEvent).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <buff href="/Mechanics/Arena_1x1/Tickets/CanBet.(BuffResource).xdb" />
+            </Item>
+        </targetConditions>
+        <conditions>
+            <Item type="gameMechanics.constructor.basicElements.BinaryPredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
+                        <onMaster type="gameMechanics.battleground.map.PredicateBattleMemberMark">
+                            <mark href="/Maps/PvPArena01/Marks/Blue.(BattlegroundPlayerSpawnPlace).xdb" />
+                        </onMaster>
+                        <onSlave type="gameMechanics.battleground.map.PredicateBattleMemberMark">
+                            <mark href="/Maps/PvPArena01/Marks/Red.(BattlegroundPlayerSpawnPlace).xdb" />
+                        </onSlave>
+                    </Item>
+                    <Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
+                        <onMaster type="gameMechanics.battleground.map.PredicateBattleMemberMark">
+                            <mark href="/Maps/PvPArena01/Marks/Red.(BattlegroundPlayerSpawnPlace).xdb" />
+                        </onMaster>
+                        <onSlave type="gameMechanics.battleground.map.PredicateBattleMemberMark">
+                            <mark href="/Maps/PvPArena01/Marks/Blue.(BattlegroundPlayerSpawnPlace).xdb" />
+                        </onSlave>
+                    </Item>
+                </predicates>
+            </Item>
+        </conditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceItem">
+                        <item href="Bet1.(ItemResource).xdb" />
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/Mechanics/Arena_1x1/Tickets/CantBet.(BuffResource).xdb" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="/Mechanics/Arena_1x1/Tickets/CantBet.(BuffResource).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactStartQuiz">
+                        <question href="/Mechanics/Arena_1x1/Tickets/Quiz.(Question).xdb" />
+                        <paramsCalcers>
+                            <resourceEntries>
+                                <Item>
+                                    <name>item</name>
+                                    <resource href="Bet1.(ItemResource).xdb" />
+                                </Item>
+                            </resourceEntries>
+                            <stringEntries>
+                                <Item>
+                                    <name>caster</name>
+                                    <calcer type="gameMechanics.elements.calcers.CasterNameCalcer" />
+                                </Item>
+                            </stringEntries>
+                        </paramsCalcers>
+                        <participants type="gameMechanics.elements.addresseeFinders.AddressesCalcerSingle">
+                            <calcer type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                        </participants>
+                        <resultsHandler type="gameMechanics.elements.common.SingleResultHandler">
+                            <impactsOnSuccess>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateGreaterLong">
+                                            <lhs type="gameMechanics.elements.calcers.CalcerLongParam">
+                                                <paramName>choice</paramName>
+                                            </lhs>
+                                            <rhs type="gameMechanics.elements.calcers.LongData">
+                                                <value>0</value>
+                                            </rhs>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                            <data href="/Mechanics/Arena_1x1/Tickets/AcceptBet.(ClientData).xdb" />
+                                            <calcers>
+                                                <stringEntries>
+                                                    <Item>
+                                                        <name>target</name>
+                                                        <calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
+                                                    </Item>
+                                                </stringEntries>
+                                            </calcers>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactDestroyItem">
+                                            <item href="Bet1.(ItemResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactDestroyItem">
+                                                    <item href="Bet1.(ItemResource).xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                        <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactUpdateEventAchievement">
+                                            <achievement href="/Mechanics/Arena_1x1/InstancedEvent/Bet.(BattleEventAchievementResource).xdb" />
+                                            <summand>1000</summand>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                            <impacts>
+                                                <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactUpdateEventAchievement">
+                                                    <achievement href="/Mechanics/Arena_1x1/InstancedEvent/Bet.(BattleEventAchievementResource).xdb" />
+                                                    <summand>1000</summand>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                            <data href="/Mechanics/Arena_1x1/Tickets/DeclineBet.(ClientData).xdb" />
+                                            <calcers>
+                                                <stringEntries>
+                                                    <Item>
+                                                        <name>target</name>
+                                                        <calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
+                                                    </Item>
+                                                </stringEntries>
+                                            </calcers>
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="/Mechanics/Arena_1x1/Tickets/CantBet.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="/Mechanics/Arena_1x1/Tickets/CantBet.(BuffResource).xdb" />
+                                </Item>
+                            </impactsOnSuccess>
+                            <impactsOnFail>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                    <data href="/Mechanics/Arena_1x1/Tickets/DeclineBet.(ClientData).xdb" />
+                                    <calcers>
+                                        <stringEntries>
+                                            <Item>
+                                                <name>target</name>
+                                                <calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
+                                            </Item>
+                                        </stringEntries>
+                                    </calcers>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="/Mechanics/Arena_1x1/Tickets/CantBet.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="/Mechanics/Arena_1x1/Tickets/CantBet.(BuffResource).xdb" />
+                                </Item>
+                            </impactsOnFail>
+                        </resultsHandler>
+                        <timeout>
+                            <second>5</second>
+                        </timeout>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                        <data href="/Mechanics/Arena_1x1/Tickets/EnemyHasNoItem.(ClientData).xdb" />
+                        <calcers>
+                            <resourceEntries>
+                                <Item>
+                                    <name>item</name>
+                                    <resource href="Bet1.(ItemResource).xdb" />
+                                </Item>
+                            </resourceEntries>
+                            <stringEntries>
+                                <Item>
+                                    <name>target</name>
+                                    <calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
+                                </Item>
+                            </stringEntries>
+                        </calcers>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <maxTargets>1</maxTargets>
+    <radius>200</radius>
+</gameMechanics.constructor.schemes.spell.area.SpellArea>

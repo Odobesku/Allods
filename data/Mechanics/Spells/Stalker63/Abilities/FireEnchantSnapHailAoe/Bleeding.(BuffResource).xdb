@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.buff.BuffResource>
+    <Header>
+        <resourceId>197022</resourceId>
+    </Header>
+    <Name href="Bleeding.(BuffResource).Name.txt" />
+    <Description href="Bleeding.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Stalker/StalkerArrowHeartseeking.chn.(UISingleTexture).xdb" />
+    <visualEffects>
+        <Item>
+            <effectFx href="/Spells/FX/Spells/DotBlood.(VisObjectTemplate).xdb" />
+            <fadeInTime>100</fadeInTime>
+            <fadeOutTime>100</fadeOutTime>
+            <locator>Slot_BodyFX</locator>
+        </Item>
+    </visualEffects>
+    <effects>
+        <Item type="gameMechanics.elements.effects.PhysicalDoT">
+            <parameters>
+                <tickLength>1000</tickLength>
+                <damagePerTick>1</damagePerTick>
+                <affectedByDoubleAttack>true</affectedByDoubleAttack>
+            </parameters>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.PowerDPSScaler" />
+                    <Item type="gameMechanics.elements.scalers.WeaponDpsScaler">
+                        <source>Ranged</source>
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="gameMechanics.elements.calcers.CalcerIf">
+                            <predicate type="gameMechanics.elements.predicates.PredicateHasSpell">
+                                <spell href="/Mechanics/Spells/Stalker63/Spells/EnchantFire/Spell03.(SpellSingleTarget).xdb" />
+                                <anyRank>false</anyRank>
+                            </predicate>
+                            <calcerIf type="constructor.elements.CalcerFloatExternal">
+                                <externalCalcer href="/Mechanics/Spells/Stalker63/Spells/EnchantFire/CalcerDamageDirect03.(CalcerFloatResource).xdb" />
+                            </calcerIf>
+                            <calcerElse type="gameMechanics.elements.calcers.CalcerIf">
+                                <predicate type="gameMechanics.elements.predicates.PredicateHasSpell">
+                                    <spell href="/Mechanics/Spells/Stalker63/Spells/EnchantFire/Spell02.(SpellSingleTarget).xdb" />
+                                    <anyRank>false</anyRank>
+                                </predicate>
+                                <calcerIf type="constructor.elements.CalcerFloatExternal">
+                                    <externalCalcer href="/Mechanics/Spells/Stalker63/Spells/EnchantFire/CalcerDamageDirect02.(CalcerFloatResource).xdb" />
+                                </calcerIf>
+                                <calcerElse type="constructor.elements.CalcerFloatExternal">
+                                    <externalCalcer href="/Mechanics/Spells/Stalker63/Spells/EnchantFire/CalcerDamageDirect01.(CalcerFloatResource).xdb" />
+                                </calcerElse>
+                            </calcerElse>
+                        </mulCalcer>
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="gameMechanics.elements.calcers.AbilityRankCalcer">
+                            <ability href="Ability02.(AbilityResource).xdb" />
+                            <mul>0.14</mul>
+                        </mulCalcer>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+    </effects>
+    <duration>6000</duration>
+    <isStackable>false</isStackable>
+    <isHelpful>false</isHelpful>
+    <isMultiple>true</isMultiple>
+    <canBeSaved>false</canBeSaved>
+    <isAE>true</isAE>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/DamageOverTime.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/Bleeding.(ActionGroup).xdb" />
+    </groups>
+</gameMechanics.constructor.schemes.buff.BuffResource>

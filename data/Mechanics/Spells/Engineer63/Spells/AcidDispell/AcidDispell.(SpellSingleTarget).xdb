@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+    <Header>
+        <resourceId>215985</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/InsuranceTrigger.xdb" />
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/RangedAttacks.xdb" />
+    </groups>
+    <element>ACID</element>
+    <Name href="AcidDispell.(SpellSingleTarget).Name.txt" />
+    <Description href="AcidDispell.(SpellSingleTarget).Description.txt" />
+    <descVars>
+        <Item>
+            <name>dmg</name>
+            <value>1</value>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                        <formula>MagicScaler</formula>
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                            <externalCalcer hrefvar="externalCalcer" />
+                        </mulCalcer>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Engineer/EngineerAcidShot.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Engineer/AcidDispell.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <prepareDuration var="prepareDuration" />
+    <ranks>
+        <Item href="AcidDispell01.(SpellSingleTarget).xdb" />
+        <Item href="AcidDispell02.(SpellSingleTarget).xdb" />
+        <Item href="AcidDispell03.(SpellSingleTarget).xdb" />
+    </ranks>
+    <iffPolicy>Enemies</iffPolicy>
+    <launchWhenReady>true</launchWhenReady>
+    <mechanics>
+        <cooldown>
+            <duration var="duration" />
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateCreature" />
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.DispelMagic">
+                <magics href="/Mechanics/Spells/Groups/Magics.xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                <mark href="AcidDispellAoE.(MarkResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.MarkedImpact">
+                <mark href="AcidDispellOnTarget.(MarkResource).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                        <element>ACID</element>
+                        <damage>1</damage>
+                        <impactsOnHitTarget></impactsOnHitTarget>
+                        <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                            <scalers>
+                                <Item type="gameMechanics.elements.scalers.MagicScaler" />
+                                <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                        <externalCalcer hrefvar="externalCalcer" />
+                                    </mulCalcer>
+                                </Item>
+                            </scalers>
+                        </scaler>
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>280</speed>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.projectile.ProjectileResource>
+    <Header>
+        <resourceId>225237</resourceId>
+    </Header>
+    <name href="Bomb.(ProjectileResource).Name.txt" />
+    <visObject href="/Mechanics/Characters/Undead_male/AstralIsle50/HitFireball_small.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+    <altitude>0</altitude>
+    <lifeLengthCap>3000</lifeLengthCap>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.EntityImpactCreaturesAround">
+                    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+                    <radius>8</radius>
+                    <affectHolder>false</affectHolder>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                    <element>FIRE</element>
+                                    <damage>14</damage>
+                                    <scaler type="gameMechanics.elements.scalers.MagicScaler" />
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                            <mobs>
+                                                <Item href="/Mechanics/RaidInstances/UmoirRaid/7_5_Ritual/Phase2Summons/Phase2Fire.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                <Item href="/Mechanics/RaidInstances/UmoirRaid/7_5_Ritual/Phase2Summons/Phase2Shadow.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                            </mobs>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="FireDebuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impacts>
+                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                        <filters>
+                            <Item type="gameMechanics.world.creature.AliveFilter" />
+                            <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                <mobs>
+                                                    <Item href="/Mechanics/RaidInstances/UmoirRaid/7_5_Ritual/Phase2Summons/Phase2Shadow.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                </mobs>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                                <mobs>
+                                                    <Item href="/Mechanics/RaidInstances/UmoirRaid/7_5_Ritual/Phase2Summons/Phase2Fire.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+                                                </mobs>
+                                            </Item>
+                                        </predicates>
+                                    </Item>
+                                </predicates>
+                            </Item>
+                        </filters>
+                    </filter>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+            </impactsOn>
+        </Item>
+    </effects>
+</gameMechanics.world.projectile.ProjectileResource>

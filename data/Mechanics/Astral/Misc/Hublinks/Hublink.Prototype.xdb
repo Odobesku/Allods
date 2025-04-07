@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gameMechanics.world.astralTeleports.ImpactRunnerSphericalObj>
+    <Header>
+        <resourceId>234317</resourceId>
+        <isPrototype>true</isPrototype>
+        <Variables>
+            <name />
+        </Variables>
+    </Header>
+    <parts>
+        <Item type="VisEntityVisualizer">
+            <visObj href="/Spells/FX/Ships/Hubhole_TL1.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+            <scale>1</scale>
+        </Item>
+        <Item type="AstralHubObjectPart">
+            <name hrefvar="name" />
+            <description href="HublinkDesc.txt" />
+            <image hrefvar="image" />
+        </Item>
+        <Item type="PositionSynchronizer" />
+    </parts>
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectAstralPerimeterCollision">
+            <radius>50</radius>
+            <impactsIn>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+                            <groups>
+                                <Item href="/Mechanics/Spells/Groups/AstralShipInterhubTravelBlockers.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroupElement)" />
+                            </groups>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="HublinkLocked.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.world.ship.elements.ImpactHublinkJump" />
+                    </impactsElse>
+                </Item>
+            </impactsIn>
+            <impactsOut>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="HublinkLocked.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </impactsOut>
+        </Item>
+    </effects>
+</gameMechanics.world.astralTeleports.ImpactRunnerSphericalObj>
