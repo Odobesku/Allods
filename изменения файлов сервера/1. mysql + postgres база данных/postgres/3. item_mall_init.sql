@@ -23,6 +23,7 @@ INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "posi
 INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "position", "hidden") VALUES (111, 'Chests.txt', 151291907, 170579976, 2, 'f');
 -- INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "position", "hidden") VALUES (12, 'Sets.txt', 151291919, 170579970, 1, 'f');
 INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "position", "hidden") VALUES (13, 'Style.txt', 151291905, 170579998, 1, 'f');
+INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "position", "hidden") VALUES (133, 'Style.txt', 151291919, 170579998, 2, 'f');
 INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "position", "hidden") VALUES (14, 'Crafting.txt', 151291920, 170579981, 1, 'f');
 
 delete from item where true;
@@ -109,6 +110,8 @@ INSERT INTO public.item (res_id, stack_count, category_id, position, is_activate
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739952090, 1, 77, 112, 1, 'ITEM', 'sellable', null, 0);
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739951516, 1, 77, 113, 1, 'ITEM', 'sellable', null, 0);
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739815345, 1, 77, 114, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739978607, 1, 77, 115, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739978606, 1, 77, 116, 1, 'ITEM', 'sellable', null, 0);
 
 -- Inventory 8 категория (сумка)
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739871028, 1, 8, 2, 1, 'ITEM', 'sellable', null, 0);
@@ -173,13 +176,13 @@ INSERT INTO public.item (res_id, stack_count, category_id, position, is_activate
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739949226, 1, 10, 10, 1, 'ITEM', 'sellable', null, 0);
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739949227, 1, 10, 11, 1, 'ITEM', 'sellable', null, 0);
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739949313, 1, 10, 12, 1, 'ITEM', 'sellable', null, 0);
-INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 285227026, 1,10, 13, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 285227026, 1, 10, 13, 1, 'ITEM', 'sellable', null, 0);
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 501681, 1,    10, 14, 1, 'ITEM', 'sellable', null, 0);
-INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 501679, 1,    10, 15, 1, 'ITEM', 'sellable', null, 0);
+-- cant find INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 501679, 1,    10, 15, 1, 'ITEM', 'sellable', null, 0);
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 501678, 1,    10, 16, 1, 'ITEM', 'sellable', null, 0);
-INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739949336, 1,    10, 17, 1, 'ITEM', 'sellable', null, 0);
-INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739949334, 1,    10, 18, 1, 'ITEM', 'sellable', null, 0);
-INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739949333, 1,    10, 19, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739949336, 1, 10, 17, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739949334, 1, 10, 18, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739949333, 1, 10, 19, 1, 'ITEM', 'sellable', null, 0);
 
 -- Potions 100 эссенции категория (зелья)
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (284952581, 1,    100, 21, 1, 'ITEM', 'sellable', null, 0);
@@ -219,14 +222,39 @@ INSERT INTO public.item (res_id, stack_count, category_id, position, is_activate
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (739948657, 1, 111, 12, 1, 'ITEM', 'sellable', null, 0);
 
 -- Style - стиль 13 категория (стиль)
-INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 334152705, 1, 13, 3, 1, 'ITEM', 'sellable', null, 0);
-INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 178556945, 1, 13, 4, 1, 'ITEM', 'sellable', null, 0);
-INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 275378176, 1, 13, 5, 1, 'ITEM', 'sellable', null, 0);
-INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 178556974, 1, 13, 6, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 239792128, 1, 13, 3, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 334152705, 1, 13, 4, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 178556945, 1, 13, 5, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 275378176, 1, 13, 6, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 178556974, 1, 13, 7, 1, 'ITEM', 'sellable', null, 0);
+
+-- Style - стиль наборы 133 категория (стиль)
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 188024842, 1, 133, 1, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739821951, 1, 133, 2, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739854949, 1, 133, 3, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739868855, 1, 133, 14, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739913057, 1, 133, 15, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739881517, 1, 133, 16, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739980897, 1, 133, 17, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 8880461, 1, 133, 18, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739949453, 1, 133, 19, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739951595, 1, 133, 20, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739885522, 1, 133, 21, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739919616, 1, 133, 22, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 335801344, 1, 133, 23, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 8880463, 1, 133, 24, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 8880465, 1, 133, 25, 1, 'ITEM', 'sellable', null, 0);
 
 -- Crafting - ремёсла 14 категория (ремёсла)
-INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 288729088, 1, 14, 9, 1, 'ITEM', 'sellable', null, 0);
-
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 288729088, 1, 14, 1, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (296494082, 1, 14, 2, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (331945993, 1, 14, 3, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (331945987, 1, 14, 4, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (330285057, 1, 14, 5, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (159803397, 1, 14, 6, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (108106805, 1, 14, 7, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (739913937, 1, 14, 8, 1, 'ITEM', 'sellable', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (329433089, 1, 14, 9, 1, 'ITEM', 'sellable', null, 0);
 
 delete from item_price where true;
 
