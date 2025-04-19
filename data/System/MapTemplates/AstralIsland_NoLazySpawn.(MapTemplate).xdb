@@ -1,288 +1,288 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <mapLoader.MapTemplate>
-	<Header>
-		<resourceId>739934923</resourceId>
-	</Header>
-	<hasPatches>true</hasPatches>
-	<headParts>
-		<parts>
-			<Item type="mapLoader.parts.PlayerCountResource" />
-			<Item type="gameMechanics.map.basicElements.MapCountdownResource">
-				<ttl>0</ttl>
-				<countPlayer>true</countPlayer>
-			</Item>
-			<Item type="gameMechanics.world.avatar.MapCombatStateResource">
-				<enterLocked>false</enterLocked>
-			</Item>
-			<Item type="gameMechanics.map.basicElements.MapSpecificEffectsGeneric">
-				<effects>
-					<Item type="gameMechanics.elements.effects.EffectsIfTargetGeneric">
-						<predicates>
-							<Item type="gameMechanics.world.ship.elements.PredicateIsShip" />
-						</predicates>
-						<effectsIf>
-							<Item type="gameMechanics.elements.effects.EffectMarkedImpacts">
-								<mark href="/Mechanics/Ships/Hangar/ExitHangar.(MarkResource).xdb#xpointer(/gameMechanics.constructor.basicElements.MarkResource)" />
-								<impacts>
-									<Item type="gameMechanics.world.ship.elements.ImpactGoByTourFromPart">
-										<bunchPartClass>gameMechanics.world.bigAstral.ExitTourPart</bunchPartClass>
-									</Item>
-								</impacts>
-							</Item>
-						</effectsIf>
-					</Item>
-					<Item type="gameMechanics.elements.effects.EffectsDeferredGeneric">
-						<delay>0</delay>
-						<effects>
-							<Item type="gameMechanics.world.ship.elements.effects.EffectDeviceShutdown">
-								<reason>TR_TeleportToIsland</reason>
-							</Item>
-						</effects>
-					</Item>
-					<Item type="gameMechanics.elements.effects.EffectsIfTargetGeneric">
-						<predicates>
-							<Item type="gameMechanics.world.ship.elements.PredicateIsShip" />
-						</predicates>
-						<effectsIf>
-							<Item type="gameMechanics.elements.effects.Switch">
-								<impactsOn>
-									<Item type="gameMechanics.elements.impacts.ImpactsDeferredGeneric">
-										<delay>0</delay>
-										<impacts>
-											<Item type="gameMechanics.world.ship.elements.ImpactAllDevices">
-												<impacts>
-													<Item type="gameMechanics.world.ship.elements.ImpactRepairDeviceToFull" />
-												</impacts>
-												<filter type="gameMechanics.world.device.filters.DamagedUsableDeviceFilter" />
-											</Item>
-											<Item type="gameMechanics.world.ship.elements.ImpactAllDevices">
-												<allowedTypes>
-													<Item href="/Mechanics/Ships/UsableDeviceTypes/Shield.xdb#xpointer(/gameMechanics.world.device.UsableDeviceType)" />
-												</allowedTypes>
-												<impacts>
-													<Item type="gameMechanics.world.device.shield.ImpactReplenishShield" />
-												</impacts>
-											</Item>
-											<Item type="gameMechanics.world.ship.elements.ImpactCoolReactor" />
-										</impacts>
-									</Item>
-								</impactsOn>
-							</Item>
-						</effectsIf>
-					</Item>
-				</effects>
-			</Item>
-			<Item type="gameMechanics.map.basicElements.MapSpecificEffects">
-				<effects>
-					<Item type="gameMechanics.elements.effects.EffectsIfTarget">
-						<predicates>
-							<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-						</predicates>
-						<effectsIf>
-							<Item type="gameMechanics.elements.effects.Switch">
-								<impactsOn>
-									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-										<buff href="/Mechanics/Spells/Mercenaries/InstSpecificBuff/CanSummonMercs.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-									</Item>
-									<Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
-										<variable href="/Mechanics/MercUpgrade/mwAvatarCounter.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
-										<summand>1</summand>
-									</Item>
-								</impactsOn>
-								<impactsOff>
-									<Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
-										<variable href="/Mechanics/MercUpgrade/mwAvatarCounter.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
-										<summand>-1</summand>
-									</Item>
-								</impactsOff>
-							</Item>
-							<Item type="gameMechanics.map.variables.MapVariableTrigger">
-								<variableResource href="/Mechanics/MercUpgrade/mwMercCanBeUpgraded.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
-								<impacts>
-									<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-										<impacts>
-											<Item type="gameMechanics.map.variables.ImpactIfMapVariable">
-												<variable href="/Mechanics/MercUpgrade/mwMercCanBeUpgraded.(MapVariableResource).xdb" />
-												<predicates>
-													<Item type="gameMechanics.map.variables.PredicateMapVariableGreaterGeneric">
-														<variableResource href="/Mechanics/MercUpgrade/mwMercCanBeUpgraded.(MapVariableResource).xdb" />
-														<minValue type="gameMechanics.constructor.basicElements.FloatZero" />
-													</Item>
-												</predicates>
-												<impactsIf>
-													<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-														<buff href="/Mechanics/MercUpgrade/CanUpgradeMerc.(BuffResource).xdb" />
-														<stacks type="gameMechanics.map.variables.MapVariableValueCalcer">
-															<resource href="/Mechanics/MercUpgrade/mwMercCanBeUpgraded.(MapVariableResource).xdb" />
-														</stacks>
-													</Item>
-												</impactsIf>
-												<impactsElse>
-													<Item type="gameMechanics.elements.impacts.BuffDetacher">
-														<buff href="/Mechanics/MercUpgrade/CanUpgradeMerc.(BuffResource).xdb" />
-													</Item>
-												</impactsElse>
-											</Item>
-										</impacts>
-									</Item>
-								</impacts>
-							</Item>
-							<Item type="gameMechanics.elements.effects.EffectsIfTarget">
-								<predicates>
-									<Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
-										<key href="/System/ContentKeys/P2P_shard/P2P_shard_Server.(ContentKey).xdb#xpointer(/basement.contentkey.ContentKey)" />
-									</Item>
-								</predicates>
-								<effectsIf>
-									<Item type="gameMechanics.elements.effects.SummandStat">
-										<stat type="gameMechanics.elements.stat.StatDefenceRuneLevel" />
-										<value>1</value>
-									</Item>
-									<Item type="gameMechanics.elements.effects.SummandStat">
-										<stat type="gameMechanics.elements.stat.StatAttackRuneLevel" />
-										<value>1</value>
-									</Item>
-								</effectsIf>
-							</Item>
-							<Item type="gameMechanics.constructor.basicElements.EffectList">
-								<effectsResource href="/Mechanics/Mounts/Prototypes/InstanceDismount.(EffectListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.EffectListResource)" />
-							</Item>
-						</effectsIf>
-					</Item>
-					<Item type="gameMechanics.elements.effects.EffectsIfTarget">
-						<predicates>
-							<Item type="gameMechanics.elements.predicates.PredicateIsMob" />
-						</predicates>
-						<effectsIf>
-							<Item type="gameMechanics.elements.effects.EffectsIfTarget">
-								<predicates>
-									<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-										<predicate type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
-											<quality href="/Mechanics/MobQualities/Boss.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
-										</predicate>
-									</Item>
-								</predicates>
-								<effectsIf>
-									<Item type="gameMechanics.elements.effects.Switch">
-										<impactsOn>
-											<Item type="gameMechanics.elements.impacts.AttachAbility">
-												<ability href="/World/Quests/LoginEventNew/LoginEventNew01_A2_BossAbility.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-											</Item>
-										</impactsOn>
-									</Item>
-								</effectsIf>
-							</Item>
-						</effectsIf>
-					</Item>
-				</effects>
-			</Item>
-			<Item type="gameMechanics.world.bigAstral.hangar.ShipEnterPart">
-				<enterSettings href="/System/Defaults/ShipEnterSettings.xdb#xpointer(/gameMechanics.world.bigAstral.hangar.ShipEnterSettings)" />
-			</Item>
-			<Item type="gameMechanics.elements.bunchparts.MapInstanceMobsProtector">
-				<qualities>
-					<Item href="/Mechanics/MobQualities/Boss.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
-					<Item href="/Mechanics/MobQualities/FinalBoss.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
-				</qualities>
-				<predicates>
-					<Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
-						<key href="/System/ContentKeys/BossAntiAbuse.(ContentKey).xdb#xpointer(/basement.contentkey.ContentKey)" />
-					</Item>
-				</predicates>
-			</Item>
-			<Item type="gameMechanics.map.variables.MapVariablesHolderResource">
-				<variables>
-					<Item href="/Mechanics/MercUpgrade/mwAvatarCounter.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
-					<Item href="/Mechanics/MercUpgrade/mwMercUpgraded.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
-					<Item href="/Mechanics/MercUpgrade/mwMercCanBeUpgraded.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
-					<Item href="/Mechanics/InstanceModifiers/MegaMobs/BossDead.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
-					<Item href="/Mechanics/InstanceModifiers/MegaMobs/MobsOnMap.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
-					<Item href="/Mechanics/InstanceModifiers/MegaMobs/MobsOnMapDead.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
-					<Item href="/Mechanics/InstanceModifiers/Martyrs/mvIsThereAMartyrAlready.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
-					<Item href="/Mechanics/InstanceModifiers/Leaders/IsThereALeaderOnMap.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
-					<Item href="/Mechanics/InstanceModifiers/FreedomSpirit/IsThereFreedomSpiritOnMap.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
-					<Item href="/Mechanics/InstanceModifiers/JumpingDeath/IsThereBuffAlready.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
-					<Item href="/Mechanics/InstanceModifiers/BossCounters/BossCounter.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
-					<Item href="/Mechanics/InstanceModifiers/BossCounters/FinalBossCounter.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
-					<Item href="/Mechanics/InstanceModifiers/Addon5/SafeTry/SafeTryEnabled.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
-					<Item href="/Mechanics/InstancedEventResource/MM_LFG/MM_LFG_AstralIsles/BossKilled.(MapVariableResource).xdb" />
-					<Item href="/Mechanics/Spells/AstarlIslands/Common/BossIndex/Boss1Killed.(MapVariableResource).xdb" />
-					<Item href="/Mechanics/Spells/AstarlIslands/Common/BossIndex/Boss2Killed.(MapVariableResource).xdb" />
-					<Item href="/Mechanics/Spells/AstarlIslands/Common/BossIndex/Boss3Killed.(MapVariableResource).xdb" />
-					<Item href="/Mechanics/Spells/AstarlIslands/Common/BossIndex/Boss4Killed.(MapVariableResource).xdb" />
-				</variables>
-			</Item>
-			<Item type="gameMechanics.elements.bunchparts.BunchPartAttachEffects">
-				<effects>
-					<Item type="gameMechanics.elements.effects.Switch">
-						<impactsOn>
-							<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-								<predicates>
-									<Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
-										<key href="/System/ContentKeys/RescueShip.(ContentKey).xdb#xpointer(/basement.contentkey.ContentKey)" />
-									</Item>
-								</predicates>
-								<impactsIf>
-									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-										<buff href="/Mechanics/Ships/RescueShip/Main.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-									</Item>
-								</impactsIf>
-							</Item>
-						</impactsOn>
-					</Item>
-					<Item type="gameMechanics.map.variables.MapVariableTriggerGeneric">
-						<variableResource href="/Mechanics/InstancedEventResource/MM_LFG/MM_LFG_AstralIsles/BossKilled.(MapVariableResource).xdb" />
-						<impacts>
-							<Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
-								<predicates>
-									<Item type="gameMechanics.map.variables.PredicateMapVariableEquals">
-										<variableResource href="/Mechanics/InstancedEventResource/MM_LFG/MM_LFG_AstralIsles/BossKilled.(MapVariableResource).xdb" />
-										<expectedValue type="gameMechanics.constructor.basicElements.FloatZero" />
-									</Item>
-								</predicates>
-								<impactsIf>
-									<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
-										<impacts>
-											<Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactLockLFGEvent" />
-										</impacts>
-									</Item>
-								</impactsIf>
-							</Item>
-						</impacts>
-					</Item>
-				</effects>
-				<reattachOnTeleport>false</reattachOnTeleport>
-			</Item>
-		</parts>
-	</headParts>
-	<cellParts>
-		<parts>
-			<Item type="gameMechanics.map.basicElements.MapEvacuatorResource">
-				<evacuator type="gameMechanics.map.instance.astralIsland.AstralIslandAvatarEvacuator" />
-			</Item>
-			<Item type="gameMechanics.world.mob.MobCellCountResource">
-				<limit>-1</limit>
-			</Item>
-			<Item type="gameMechanics.map.spawn.SummonPoolManager">
-				<globalPool href="/System/GlobalSummonPools/SummonPoolRaidInstance.xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
-			</Item>
-			<Item type="gameMechanics.world.bigAstral.hangar.BindTargetPartResource" />
-			<Item type="gameMechanics.world.astralTeleports.ShipEvacuatorResource" />
-			<Item type="gameMechanics.world.astralTeleports.CheckPaidPartResource" />
-			<Item type="gameMechanics.map.instance.astralIsland.BoundAvatarsOnlyCellPartResource" />
-			<Item type="gameMechanics.world.bigAstral.PersonalAstralLootResource" />
-			<Item type="gameMechanics.world.avatar.MapAvatarInOutLoggerResource" />
-		</parts>
-	</cellParts>
-	<entrance type="gameMechanics.map.instance.astralIsland.AstralIslandEntrance" />
-	<pathfinderSettings>
-		<superJumpMode>true</superJumpMode>
-	</pathfinderSettings>
-	<mechanicsSettings>
-		<forceSleep>true</forceSleep>
-		<prohibitWorldDrop>true</prohibitWorldDrop>
-		<forDwellersOnly>true</forDwellersOnly>
-		<evadeMob>false</evadeMob>
-		<autoNavigation>false</autoNavigation>
-	</mechanicsSettings>
+    <Header>
+        <resourceId>739934923</resourceId>
+    </Header>
+    <hasPatches>true</hasPatches>
+    <headParts>
+        <parts>
+            <Item type="mapLoader.parts.PlayerCountResource" />
+            <Item type="gameMechanics.map.basicElements.MapCountdownResource">
+                <ttl>0</ttl>
+                <countPlayer>true</countPlayer>
+            </Item>
+            <Item type="gameMechanics.world.avatar.MapCombatStateResource">
+                <enterLocked>false</enterLocked>
+            </Item>
+            <Item type="gameMechanics.map.basicElements.MapSpecificEffectsGeneric">
+                <effects>
+                    <Item type="gameMechanics.elements.effects.EffectsIfTargetGeneric">
+                        <predicates>
+                            <Item type="gameMechanics.world.ship.elements.PredicateIsShip" />
+                        </predicates>
+                        <effectsIf>
+                            <Item type="gameMechanics.elements.effects.EffectMarkedImpacts">
+                                <mark href="/Mechanics/Ships/Hangar/ExitHangar.(MarkResource).xdb#xpointer(/gameMechanics.constructor.basicElements.MarkResource)" />
+                                <impacts>
+                                    <Item type="gameMechanics.world.ship.elements.ImpactGoByTourFromPart">
+                                        <bunchPartClass>gameMechanics.world.bigAstral.ExitTourPart</bunchPartClass>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </effectsIf>
+                    </Item>
+                    <Item type="gameMechanics.elements.effects.EffectsDeferredGeneric">
+                        <delay>0</delay>
+                        <effects>
+                            <Item type="gameMechanics.world.ship.elements.effects.EffectDeviceShutdown">
+                                <reason>TR_TeleportToIsland</reason>
+                            </Item>
+                        </effects>
+                    </Item>
+                    <Item type="gameMechanics.elements.effects.EffectsIfTargetGeneric">
+                        <predicates>
+                            <Item type="gameMechanics.world.ship.elements.PredicateIsShip" />
+                        </predicates>
+                        <effectsIf>
+                            <Item type="gameMechanics.elements.effects.Switch">
+                                <impactsOn>
+                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferredGeneric">
+                                        <delay>0</delay>
+                                        <impacts>
+                                            <Item type="gameMechanics.world.ship.elements.ImpactAllDevices">
+                                                <impacts>
+                                                    <Item type="gameMechanics.world.ship.elements.ImpactRepairDeviceToFull" />
+                                                </impacts>
+                                                <filter type="gameMechanics.world.device.filters.DamagedUsableDeviceFilter" />
+                                            </Item>
+                                            <Item type="gameMechanics.world.ship.elements.ImpactAllDevices">
+                                                <allowedTypes>
+                                                    <Item href="/Mechanics/Ships/UsableDeviceTypes/Shield.xdb#xpointer(/gameMechanics.world.device.UsableDeviceType)" />
+                                                </allowedTypes>
+                                                <impacts>
+                                                    <Item type="gameMechanics.world.device.shield.ImpactReplenishShield" />
+                                                </impacts>
+                                            </Item>
+                                            <Item type="gameMechanics.world.ship.elements.ImpactCoolReactor" />
+                                        </impacts>
+                                    </Item>
+                                </impactsOn>
+                            </Item>
+                        </effectsIf>
+                    </Item>
+                </effects>
+            </Item>
+            <Item type="gameMechanics.map.basicElements.MapSpecificEffects">
+                <effects>
+                    <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                        </predicates>
+                        <effectsIf>
+                            <Item type="gameMechanics.elements.effects.Switch">
+                                <impactsOn>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="/Mechanics/Spells/Mercenaries/InstSpecificBuff/CanSummonMercs.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                    <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                                        <variable href="/Mechanics/MercUpgrade/mwAvatarCounter.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                                        <summand>1</summand>
+                                    </Item>
+                                </impactsOn>
+                                <impactsOff>
+                                    <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                                        <variable href="/Mechanics/MercUpgrade/mwAvatarCounter.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                                        <summand>-1</summand>
+                                    </Item>
+                                </impactsOff>
+                            </Item>
+                            <Item type="gameMechanics.map.variables.MapVariableTrigger">
+                                <variableResource href="/Mechanics/MercUpgrade/mwMercCanBeUpgraded.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                        <impacts>
+                                            <Item type="gameMechanics.map.variables.ImpactIfMapVariable">
+                                                <variable href="/Mechanics/MercUpgrade/mwMercCanBeUpgraded.(MapVariableResource).xdb" />
+                                                <predicates>
+                                                    <Item type="gameMechanics.map.variables.PredicateMapVariableGreaterGeneric">
+                                                        <variableResource href="/Mechanics/MercUpgrade/mwMercCanBeUpgraded.(MapVariableResource).xdb" />
+                                                        <minValue type="gameMechanics.constructor.basicElements.FloatZero" />
+                                                    </Item>
+                                                </predicates>
+                                                <impactsIf>
+                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                        <buff href="/Mechanics/MercUpgrade/CanUpgradeMerc.(BuffResource).xdb" />
+                                                        <stacks type="gameMechanics.map.variables.MapVariableValueCalcer">
+                                                            <resource href="/Mechanics/MercUpgrade/mwMercCanBeUpgraded.(MapVariableResource).xdb" />
+                                                        </stacks>
+                                                    </Item>
+                                                </impactsIf>
+                                                <impactsElse>
+                                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                        <buff href="/Mechanics/MercUpgrade/CanUpgradeMerc.(BuffResource).xdb" />
+                                                    </Item>
+                                                </impactsElse>
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                            <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
+                                        <key href="/System/ContentKeys/P2P_shard/P2P_shard_Server.(ContentKey).xdb#xpointer(/basement.contentkey.ContentKey)" />
+                                    </Item>
+                                </predicates>
+                                <effectsIf>
+                                    <Item type="gameMechanics.elements.effects.SummandStat">
+                                        <stat type="gameMechanics.elements.stat.StatDefenceRuneLevel" />
+                                        <value>1</value>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.effects.SummandStat">
+                                        <stat type="gameMechanics.elements.stat.StatAttackRuneLevel" />
+                                        <value>1</value>
+                                    </Item>
+                                </effectsIf>
+                            </Item>
+                            <Item type="gameMechanics.constructor.basicElements.EffectList">
+                                <effectsResource href="/Mechanics/Mounts/Prototypes/InstanceDismount.(EffectListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.EffectListResource)" />
+                            </Item>
+                        </effectsIf>
+                    </Item>
+                    <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsMob" />
+                        </predicates>
+                        <effectsIf>
+                            <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                        <predicate type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+                                            <quality href="/Mechanics/MobQualities/Boss.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
+                                        </predicate>
+                                    </Item>
+                                </predicates>
+                                <effectsIf>
+                                    <Item type="gameMechanics.elements.effects.Switch">
+                                        <impactsOn>
+                                            <Item type="gameMechanics.elements.impacts.AttachAbility">
+                                                <ability href="/World/Quests/LoginEventNew/LoginEventNew01_A2_BossAbility.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                            </Item>
+                                        </impactsOn>
+                                    </Item>
+                                </effectsIf>
+                            </Item>
+                        </effectsIf>
+                    </Item>
+                </effects>
+            </Item>
+            <Item type="gameMechanics.world.bigAstral.hangar.ShipEnterPart">
+                <enterSettings href="/System/Defaults/ShipEnterSettings.xdb#xpointer(/gameMechanics.world.bigAstral.hangar.ShipEnterSettings)" />
+            </Item>
+            <Item type="gameMechanics.elements.bunchparts.MapInstanceMobsProtector">
+                <qualities>
+                    <Item href="/Mechanics/MobQualities/Boss.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
+                    <Item href="/Mechanics/MobQualities/FinalBoss.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
+                </qualities>
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
+                        <key href="/System/ContentKeys/BossAntiAbuse.(ContentKey).xdb#xpointer(/basement.contentkey.ContentKey)" />
+                    </Item>
+                </predicates>
+            </Item>
+            <Item type="gameMechanics.map.variables.MapVariablesHolderResource">
+                <variables>
+                    <Item href="/Mechanics/MercUpgrade/mwAvatarCounter.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <Item href="/Mechanics/MercUpgrade/mwMercUpgraded.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <Item href="/Mechanics/MercUpgrade/mwMercCanBeUpgraded.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <Item href="/Mechanics/InstanceModifiers/MegaMobs/BossDead.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <Item href="/Mechanics/InstanceModifiers/MegaMobs/MobsOnMap.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <Item href="/Mechanics/InstanceModifiers/MegaMobs/MobsOnMapDead.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <Item href="/Mechanics/InstanceModifiers/Martyrs/mvIsThereAMartyrAlready.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <Item href="/Mechanics/InstanceModifiers/Leaders/IsThereALeaderOnMap.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <Item href="/Mechanics/InstanceModifiers/FreedomSpirit/IsThereFreedomSpiritOnMap.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <Item href="/Mechanics/InstanceModifiers/JumpingDeath/IsThereBuffAlready.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <Item href="/Mechanics/InstanceModifiers/BossCounters/BossCounter.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <Item href="/Mechanics/InstanceModifiers/BossCounters/FinalBossCounter.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <Item href="/Mechanics/InstanceModifiers/Addon5/SafeTry/SafeTryEnabled.(MapVariableResource).xdb#xpointer(/gameMechanics.map.variables.MapVariableResource)" />
+                    <Item href="/Mechanics/InstancedEventResource/MM_LFG/MM_LFG_AstralIsles/BossKilled.(MapVariableResource).xdb" />
+                    <Item href="/Mechanics/Spells/AstarlIslands/Common/BossIndex/Boss1Killed.(MapVariableResource).xdb" />
+                    <Item href="/Mechanics/Spells/AstarlIslands/Common/BossIndex/Boss2Killed.(MapVariableResource).xdb" />
+                    <Item href="/Mechanics/Spells/AstarlIslands/Common/BossIndex/Boss3Killed.(MapVariableResource).xdb" />
+                    <Item href="/Mechanics/Spells/AstarlIslands/Common/BossIndex/Boss4Killed.(MapVariableResource).xdb" />
+                </variables>
+            </Item>
+            <Item type="gameMechanics.elements.bunchparts.BunchPartAttachEffects">
+                <effects>
+                    <Item type="gameMechanics.elements.effects.Switch">
+                        <impactsOn>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
+                                        <key href="/System/ContentKeys/RescueShip.(ContentKey).xdb#xpointer(/basement.contentkey.ContentKey)" />
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="/Mechanics/Ships/RescueShip/Main.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    </Item>
+                                </impactsIf>
+                            </Item>
+                        </impactsOn>
+                    </Item>
+                    <Item type="gameMechanics.map.variables.MapVariableTriggerGeneric">
+                        <variableResource href="/Mechanics/InstancedEventResource/MM_LFG/MM_LFG_AstralIsles/BossKilled.(MapVariableResource).xdb" />
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+                                <predicates>
+                                    <Item type="gameMechanics.map.variables.PredicateMapVariableEquals">
+                                        <variableResource href="/Mechanics/InstancedEventResource/MM_LFG/MM_LFG_AstralIsles/BossKilled.(MapVariableResource).xdb" />
+                                        <expectedValue type="gameMechanics.constructor.basicElements.FloatZero" />
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                                        <impacts>
+                                            <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactLockLFGEvent" />
+                                        </impacts>
+                                    </Item>
+                                </impactsIf>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </effects>
+                <reattachOnTeleport>false</reattachOnTeleport>
+            </Item>
+        </parts>
+    </headParts>
+    <cellParts>
+        <parts>
+            <Item type="gameMechanics.map.basicElements.MapEvacuatorResource">
+                <evacuator type="gameMechanics.map.instance.astralIsland.AstralIslandAvatarEvacuator" />
+            </Item>
+            <Item type="gameMechanics.world.mob.MobCellCountResource">
+                <limit>-1</limit>
+            </Item>
+            <Item type="gameMechanics.map.spawn.SummonPoolManager">
+                <globalPool href="/System/GlobalSummonPools/SummonPoolRaidInstance.xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+            </Item>
+            <Item type="gameMechanics.world.bigAstral.hangar.BindTargetPartResource" />
+            <Item type="gameMechanics.world.astralTeleports.ShipEvacuatorResource" />
+            <Item type="gameMechanics.world.astralTeleports.CheckPaidPartResource" />
+            <Item type="gameMechanics.map.instance.astralIsland.BoundAvatarsOnlyCellPartResource" />
+            <Item type="gameMechanics.world.bigAstral.PersonalAstralLootResource" />
+            <Item type="gameMechanics.world.avatar.MapAvatarInOutLoggerResource" />
+        </parts>
+    </cellParts>
+    <entrance type="gameMechanics.map.instance.astralIsland.AstralIslandEntrance" />
+    <pathfinderSettings>
+        <superJumpMode>true</superJumpMode>
+    </pathfinderSettings>
+    <mechanicsSettings>
+        <forceSleep>true</forceSleep>
+        <prohibitWorldDrop>true</prohibitWorldDrop>
+        <forDwellersOnly>true</forDwellersOnly>
+        <evadeMob>false</evadeMob>
+        <autoNavigation>false</autoNavigation>
+    </mechanicsSettings>
 </mapLoader.MapTemplate>
