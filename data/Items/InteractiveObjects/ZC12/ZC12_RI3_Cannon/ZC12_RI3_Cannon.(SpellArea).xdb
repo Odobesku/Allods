@@ -1,139 +1,139 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <gameMechanics.constructor.schemes.spell.area.SpellArea>
-    <Header>
-        <resourceId>739934433</resourceId>
-    </Header>
-    <Name href="ZC12_RI3_Cannon.(SpellArea).Name.txt" />
-    <Description href="ZC12_RI3_Cannon.(SpellArea).Description.txt" />
-    <image href="/Interface/Icons/Misc/Crafting/HoodAstralCold.(UISingleTexture).xdb" />
-    <range type="gameMechanics.elements.calcers.FloatData">
-        <value>150</value>
-    </range>
-    <targetType>STTSelf</targetType>
-    <iffPolicy>Enemies</iffPolicy>
-    <mechanics>
-        <cooldown>
-            <duration>1500</duration>
-        </cooldown>
-        <casterConditions>
-            <Item type="gameMechanics.world.device.cannon.DeviceHasUser" />
-        </casterConditions>
-        <targetConditions>
-            <Item type="gameMechanics.world.ship.parts.PredicateCannonTargetable" />
-        </targetConditions>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                </impacts>
-                <spawnResource href="/Maps/ZC12_RiftInstance3/SpawnTables/ZC12_RI3_Artillery.(SpawnTable).xdb" />
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactClientData">
-                <data href="/Mechanics/Ships/Cannon/CannonAttack.(ClientData).xdb" />
-            </Item>
-            <Item type="gameMechanics.world.device.cannon.ImpactSendLaunchEvent">
-                <clientData href="/World/Quests/ZC12/WW_4_3/ZC12_RI3_Cannon.(AstralSpell).xdb" />
-                <targetDestination type="gameMechanics.map.destination.DestinationModified">
-                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
-                    <modifiers>
-                        <Item type="gameMechanics.map.destination.modifier.ModifierShiftForward">
-                            <radius type="gameMechanics.elements.calcers.FloatData">
-                                <value>700</value>
-                            </radius>
-                        </Item>
-                    </modifiers>
-                </targetDestination>
-            </Item>
-        </casterImpacts>
-        <targetImpacts>
-            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                <buff href="/Mechanics/Spells/CommonBuffs/Stun/BuffStun.xdb" />
-                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                    <multiplier>2</multiplier>
-                </durationScaler>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                <predicates>
-                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                        <buff href="/World/Quests/ZC12/WW_4_3/ZC12_RI3_ArchitectSiege_Shield.(BuffResource).xdb" />
-                    </Item>
-                </predicates>
-                <impactsIf>
-                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                        <buff href="/World/Quests/ZC12/WW_4_3/ZC12_RI3_ArchitectSiege_Shield.(BuffResource).xdb" />
-                    </Item>
-                </impactsIf>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.EntityImpactCreaturesAround">
-                <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
-                <radius>10</radius>
-                <impacts>
-                    <Item type="gameMechanics.world.device.cannon.ImpactCannonDamage">
-                        <damage type="gameMechanics.elements.calcers.FloatData">
-                            <value>1</value>
-                        </damage>
-                        <damageType>ASTRAL</damageType>
-                        <hitCalcType type="gameMechanics.world.projectile.CannonCalcType">
-                            <critFactor>1.8</critFactor>
-                            <glanceFactor>0.8</glanceFactor>
-                        </hitCalcType>
-                        <targetScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                            <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
-                                <multiplier>0.4</multiplier>
-                            </mulCalcer>
-                            <additionalMultiplier>
-                                <scaler type="gameMechanics.elements.scalers.RandomScaler">
-                                    <range>
-                                        <min>1</min>
-                                        <max>2</max>
-                                    </range>
-                                </scaler>
-                            </additionalMultiplier>
-                        </targetScaler>
-                    </Item>
-                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                        <predicates>
-                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                                <mobs>
-                                    <Item href="/Creatures/Colossus/Instances/ZC12/ZC12_RI3_Colossus.(MobWorld).xdb" />
-                                </mobs>
-                            </Item>
-                        </predicates>
-                        <impactsIf>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="/World/Quests/ZC12/WW_4_3/WW_4_3_ColossusStun.(BuffResource).xdb" />
-                            </Item>
-                        </impactsIf>
-                    </Item>
-                </impacts>
-                <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-                    <predicates>
-                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                            <mobs>
-                                <Item href="/Creatures/ArchitectBot/Instances/ZC12/ZC12_RI3_ArchitectBot.(MobWorld).xdb" />
-                                <Item href="/Creatures/ArchitectBot/Instances/ZC12/ZC12_RI3_ArchitectBot2.(MobWorld).xdb" />
-                                <Item href="/Creatures/ArchitectMele/Instances/ZC12/ZC12_RI3_ArchitectMelee.(MobWorld).xdb" />
-                                <Item href="/Creatures/ArchitectMele/Instances/ZC12/ZC12_RI3_ArchitectMelee2.(MobWorld).xdb" />
-                                <Item href="/Creatures/ArchitectRanger/Instances/ZC12/ZC12_RI3_ArchitectRanger.(MobWorld).xdb" />
-                                <Item href="/Creatures/ArchitectRanger/Instances/ZC12/ZC12_RI3_ArchitectRanger2.(MobWorld).xdb" />
-                                <Item href="/Creatures/ArchitectSiege/Instances/ZC12_RI3_ArchitectSiege.(MobWorld).xdb" />
-                                <Item href="/Creatures/Colossus/Instances/ZC12/ZC12_RI3_Colossus.(MobWorld).xdb" />
-                            </mobs>
-                        </Item>
-                    </predicates>
-                </filter>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactClientData">
-                <data href="ZC12_RI3_Cannon_Explosion.(ClientData).xdb" />
-            </Item>
-        </targetImpacts>
-    </mechanics>
-    <speed>50</speed>
-    <shape type="gameMechanics.constructor.schemes.spell.area.RectangularRay">
-        <width>2</width>
-    </shape>
-    <shapeOrientation type="gameMechanics.elements.common.ShapeOrientationYawAndPitch" />
-    <radius>150</radius>
-    <useAverageThrowDuration>true</useAverageThrowDuration>
-    <stopOnNoTargets>false</stopOnNoTargets>
+	<Header>
+		<resourceId>739934433</resourceId>
+	</Header>
+	<Name href="ZC12_RI3_Cannon.(SpellArea).Name.txt" />
+	<Description href="ZC12_RI3_Cannon.(SpellArea).Description.txt" />
+	<image href="/Interface/Icons/Misc/Crafting/HoodAstralCold.(UISingleTexture).xdb" />
+	<range type="gameMechanics.elements.calcers.FloatData">
+		<value>150</value>
+	</range>
+	<targetType>STTSelf</targetType>
+	<iffPolicy>Enemies</iffPolicy>
+	<mechanics>
+		<cooldown>
+			<duration>1500</duration>
+		</cooldown>
+		<casterConditions>
+			<Item type="gameMechanics.world.device.cannon.DeviceHasUser" />
+		</casterConditions>
+		<targetConditions>
+			<Item type="gameMechanics.world.ship.parts.PredicateCannonTargetable" />
+		</targetConditions>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.Disintegrate" />
+				</impacts>
+				<spawnResource href="/Maps/ZC12_RiftInstance3/SpawnTables/ZC12_RI3_Artillery.(SpawnTable).xdb" />
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactClientData">
+				<data href="/Mechanics/Ships/Cannon/CannonAttack.(ClientData).xdb" />
+			</Item>
+			<Item type="gameMechanics.world.device.cannon.ImpactSendLaunchEvent">
+				<clientData href="/World/Quests/ZC12/WW_4_3/ZC12_RI3_Cannon.(AstralSpell).xdb" />
+				<targetDestination type="gameMechanics.map.destination.DestinationModified">
+					<destination type="gameMechanics.map.destination.SelfPosDestination" />
+					<modifiers>
+						<Item type="gameMechanics.map.destination.modifier.ModifierShiftForward">
+							<radius type="gameMechanics.elements.calcers.FloatData">
+								<value>700</value>
+							</radius>
+						</Item>
+					</modifiers>
+				</targetDestination>
+			</Item>
+		</casterImpacts>
+		<targetImpacts>
+			<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+				<buff href="/Mechanics/Spells/CommonBuffs/Stun/BuffStun.xdb" />
+				<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+					<multiplier>2</multiplier>
+				</durationScaler>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+				<predicates>
+					<Item type="gameMechanics.elements.resources.ResourceBuff">
+						<buff href="/World/Quests/ZC12/WW_4_3/ZC12_RI3_ArchitectSiege_Shield.(BuffResource).xdb" />
+					</Item>
+				</predicates>
+				<impactsIf>
+					<Item type="gameMechanics.elements.impacts.BuffDetacher">
+						<buff href="/World/Quests/ZC12/WW_4_3/ZC12_RI3_ArchitectSiege_Shield.(BuffResource).xdb" />
+					</Item>
+				</impactsIf>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.EntityImpactCreaturesAround">
+				<shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+				<radius>10</radius>
+				<impacts>
+					<Item type="gameMechanics.world.device.cannon.ImpactCannonDamage">
+						<damage type="gameMechanics.elements.calcers.FloatData">
+							<value>1</value>
+						</damage>
+						<damageType>ASTRAL</damageType>
+						<hitCalcType type="gameMechanics.world.projectile.CannonCalcType">
+							<critFactor>1.8</critFactor>
+							<glanceFactor>0.8</glanceFactor>
+						</hitCalcType>
+						<targetScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+							<mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+								<multiplier>0.4</multiplier>
+							</mulCalcer>
+							<additionalMultiplier>
+								<scaler type="gameMechanics.elements.scalers.RandomScaler">
+									<range>
+										<min>1</min>
+										<max>2</max>
+									</range>
+								</scaler>
+							</additionalMultiplier>
+						</targetScaler>
+					</Item>
+					<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+								<mobs>
+									<Item href="/Creatures/Colossus/Instances/ZC12/ZC12_RI3_Colossus.(MobWorld).xdb" />
+								</mobs>
+							</Item>
+						</predicates>
+						<impactsIf>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="/World/Quests/ZC12/WW_4_3/WW_4_3_ColossusStun.(BuffResource).xdb" />
+							</Item>
+						</impactsIf>
+					</Item>
+				</impacts>
+				<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+							<mobs>
+								<Item href="/Creatures/ArchitectBot/Instances/ZC12/ZC12_RI3_ArchitectBot.(MobWorld).xdb" />
+								<Item href="/Creatures/ArchitectBot/Instances/ZC12/ZC12_RI3_ArchitectBot2.(MobWorld).xdb" />
+								<Item href="/Creatures/ArchitectMele/Instances/ZC12/ZC12_RI3_ArchitectMelee.(MobWorld).xdb" />
+								<Item href="/Creatures/ArchitectMele/Instances/ZC12/ZC12_RI3_ArchitectMelee2.(MobWorld).xdb" />
+								<Item href="/Creatures/ArchitectRanger/Instances/ZC12/ZC12_RI3_ArchitectRanger.(MobWorld).xdb" />
+								<Item href="/Creatures/ArchitectRanger/Instances/ZC12/ZC12_RI3_ArchitectRanger2.(MobWorld).xdb" />
+								<Item href="/Creatures/ArchitectSiege/Instances/ZC12_RI3_ArchitectSiege.(MobWorld).xdb" />
+								<Item href="/Creatures/Colossus/Instances/ZC12/ZC12_RI3_Colossus.(MobWorld).xdb" />
+							</mobs>
+						</Item>
+					</predicates>
+				</filter>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactClientData">
+				<data href="ZC12_RI3_Cannon_Explosion.(ClientData).xdb" />
+			</Item>
+		</targetImpacts>
+	</mechanics>
+	<speed>50</speed>
+	<shape type="gameMechanics.constructor.schemes.spell.area.RectangularRay">
+		<width>2</width>
+	</shape>
+	<shapeOrientation type="gameMechanics.elements.common.ShapeOrientationYawAndPitch" />
+	<radius>150</radius>
+	<useAverageThrowDuration>true</useAverageThrowDuration>
+	<stopOnNoTargets>false</stopOnNoTargets>
 </gameMechanics.constructor.schemes.spell.area.SpellArea>

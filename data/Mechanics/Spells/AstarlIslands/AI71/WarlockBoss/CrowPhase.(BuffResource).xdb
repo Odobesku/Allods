@@ -1,205 +1,205 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.buff.BuffResource>
-    <Header>
-        <resourceId>739936210</resourceId>
-    </Header>
-    <image href="/Interface/Icons/Equipment/Helm/LeatherKaniaCrowDruidHelm.(UISingleTexture).xdb" />
-    <visualEffects />
-    <visualPostEffects />
-    <visScript href="CrowPhase.(BuffVisScripts).xdb" />
-    <needVisualize>false</needVisualize>
-    <effects>
-        <Item type="gameMechanics.elements.effects.Switch">
-            <impactsOn>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="PhaseRefresh.(BuffResource).xdb" />
-                </Item>
-                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                    <buff href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/Wait.(BuffResource).xdb" />
-                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                        <multiplier>2</multiplier>
-                    </durationScaler>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
-                            <ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
-                        </Item>
-                    </predicates>
-                    <impactsIf>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="CrowAliveTimer.(BuffResource).xdb" />
-                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                <multiplier>20</multiplier>
-                            </durationScaler>
-                            <stacks type="gameMechanics.elements.calcers.FloatData">
-                                <value>12</value>
-                            </stacks>
-                        </Item>
-                    </impactsIf>
-                    <impactsElse>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="CrowAliveTimer.(BuffResource).xdb" />
-                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                <multiplier>20</multiplier>
-                            </durationScaler>
-                            <stacks type="gameMechanics.elements.calcers.FloatData">
-                                <value>8</value>
-                            </stacks>
-                        </Item>
-                    </impactsElse>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-                            <projectileData>
-                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
-                                <resource href="SummonCrowsBoss.(ProjectileResource).xdb" />
-                            </projectileData>
-                        </Item>
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactResetActiveAction" />
-            </impactsOn>
-            <impactsOff>
-                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
-                    <selector type="gameMechanics.tools.SelectorShuffle" />
-                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-                        <predicates>
-                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                                </predicates>
-                            </Item>
-                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-                        </predicates>
-                    </filter>
-                    <impacts>
-                        <Item>
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                    <buff href="/Mechanics/Spells/AstarlIslands/AI71/CrowAdd/PiercedArmor.(BuffResource).xdb" />
-                                </Item>
-                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                    <buff href="KickPuddleProtection.(BuffResource).xdb" />
-                                </Item>
-                                <Item type="gameMechanics.elements.impacts.ImpactAstralKickToPoint">
-                                    <time>1500</time>
-                                    <destination type="gameMechanics.map.destination.DestinationLocator">
-                                        <locator>
-                                            <scriptID>AI71_Boss04</scriptID>
-                                            <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                                        </locator>
-                                    </destination>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="CrowAliveTimer.(BuffResource).xdb" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
-                    <spell href="DeadlyChannelSpell.(SpellSingleTarget).xdb" />
-                    <duration>
-                        <second>2</second>
-                    </duration>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                    <impacts>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="PhaseRefresh.(BuffResource).xdb" />
-                        </Item>
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="CrowPhasePlane.(BuffResource).xdb" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactEntitiesAround">
-                    <radius>5.5</radius>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.elements.predicates.PredicateRespawnableResource">
-                                    <resources>
-                                        <Item href="PlaugePuddle.(ProjectileResource).xdb" />
-                                    </resources>
-                                </Item>
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                            </impactsIf>
-                        </Item>
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
-                    <spell href="/Mechanics/Spells/AutoAttack/MeleeDamage.xdb" />
-                    <duration>
-                        <second>6</second>
-                    </duration>
-                </Item>
-            </impactsOff>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectNoAggroChecks" />
-        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
-        <Item type="gameMechanics.elements.effects.EffectDisableAct">
-            <actions>
-                <Item>Move</Item>
-                <Item>Rotate</Item>
-            </actions>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectsDeferred">
-            <delay>2500</delay>
-            <effects>
-                <Item type="gameMechanics.elements.effects.Switch">
-                    <impactsOn>
-                        <Item type="gameMechanics.elements.impacts.ImpactTeleport">
-                            <destination type="gameMechanics.map.destination.DestinationLocator">
-                                <locator>
-                                    <scriptID>AI71_Boss04</scriptID>
-                                    <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                                </locator>
-                            </destination>
-                            <finishImpacts>
-                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                    <buff href="/Mechanics/Spells/AstarlIslands/AI71/Common/RestrictRotationAndMovement.(BuffResource).xdb" />
-                                    <durationScalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                        <mulCalcer type="gameMechanics.elements.calcers.CalcerBuffDuration">
-                                            <buff href="CrowPhase.(BuffResource).xdb" />
-                                            <multiplier>0.001</multiplier>
-                                        </mulCalcer>
-                                        <sum>4</sum>
-                                    </durationScalerTarget>
-                                </Item>
-                            </finishImpacts>
-                        </Item>
-                    </impactsOn>
-                </Item>
-            </effects>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectsDeferred">
-            <delay>2000</delay>
-            <effects>
-                <Item type="gameMechanics.elements.effects.Switch">
-                    <impactsOn>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="CrowPhasePlane.(BuffResource).xdb" />
-                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                <multiplier>17</multiplier>
-                            </durationScaler>
-                        </Item>
-                    </impactsOn>
-                </Item>
-            </effects>
-        </Item>
-    </effects>
-    <duration>19000</duration>
-    <isHelpful>false</isHelpful>
-    <canBeSaved>false</canBeSaved>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/BossDisabler.xdb" />
-    </groups>
+	<Header>
+		<resourceId>739936210</resourceId>
+	</Header>
+	<image href="/Interface/Icons/Equipment/Helm/LeatherKaniaCrowDruidHelm.(UISingleTexture).xdb" />
+	<visualEffects />
+	<visualPostEffects />
+	<visScript href="CrowPhase.(BuffVisScripts).xdb" />
+	<needVisualize>false</needVisualize>
+	<effects>
+		<Item type="gameMechanics.elements.effects.Switch">
+			<impactsOn>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="PhaseRefresh.(BuffResource).xdb" />
+				</Item>
+				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+					<buff href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/Wait.(BuffResource).xdb" />
+					<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+						<multiplier>2</multiplier>
+					</durationScaler>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+							<ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
+						</Item>
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="CrowAliveTimer.(BuffResource).xdb" />
+							<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+								<multiplier>20</multiplier>
+							</durationScaler>
+							<stacks type="gameMechanics.elements.calcers.FloatData">
+								<value>12</value>
+							</stacks>
+						</Item>
+					</impactsIf>
+					<impactsElse>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="CrowAliveTimer.(BuffResource).xdb" />
+							<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+								<multiplier>20</multiplier>
+							</durationScaler>
+							<stacks type="gameMechanics.elements.calcers.FloatData">
+								<value>8</value>
+							</stacks>
+						</Item>
+					</impactsElse>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+							<projectileData>
+								<moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
+								<resource href="SummonCrowsBoss.(ProjectileResource).xdb" />
+							</projectileData>
+						</Item>
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactResetActiveAction" />
+			</impactsOn>
+			<impactsOff>
+				<Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+					<selector type="gameMechanics.tools.SelectorShuffle" />
+					<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+						<predicates>
+							<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+								<predicates>
+									<Item type="gameMechanics.elements.resources.ResourceBuff">
+										<buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+									</Item>
+									<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+								</predicates>
+							</Item>
+							<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+						</predicates>
+					</filter>
+					<impacts>
+						<Item>
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.BuffDetacher">
+									<buff href="/Mechanics/Spells/AstarlIslands/AI71/CrowAdd/PiercedArmor.(BuffResource).xdb" />
+								</Item>
+								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+									<buff href="KickPuddleProtection.(BuffResource).xdb" />
+								</Item>
+								<Item type="gameMechanics.elements.impacts.ImpactAstralKickToPoint">
+									<time>1500</time>
+									<destination type="gameMechanics.map.destination.DestinationLocator">
+										<locator>
+											<scriptID>AI71_Boss04</scriptID>
+											<map href="/Maps/AstralIsle71/MapResource.xdb" />
+										</locator>
+									</destination>
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="CrowAliveTimer.(BuffResource).xdb" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+					<spell href="DeadlyChannelSpell.(SpellSingleTarget).xdb" />
+					<duration>
+						<second>2</second>
+					</duration>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+					<impacts>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="PhaseRefresh.(BuffResource).xdb" />
+						</Item>
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="CrowPhasePlane.(BuffResource).xdb" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactEntitiesAround">
+					<radius>5.5</radius>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.elements.predicates.PredicateRespawnableResource">
+									<resources>
+										<Item href="PlaugePuddle.(ProjectileResource).xdb" />
+									</resources>
+								</Item>
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.elements.impacts.Disintegrate" />
+							</impactsIf>
+						</Item>
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+					<spell href="/Mechanics/Spells/AutoAttack/MeleeDamage.xdb" />
+					<duration>
+						<second>6</second>
+					</duration>
+				</Item>
+			</impactsOff>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectNoAggroChecks" />
+		<Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+		<Item type="gameMechanics.elements.effects.EffectDisableAct">
+			<actions>
+				<Item>Move</Item>
+				<Item>Rotate</Item>
+			</actions>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectsDeferred">
+			<delay>2500</delay>
+			<effects>
+				<Item type="gameMechanics.elements.effects.Switch">
+					<impactsOn>
+						<Item type="gameMechanics.elements.impacts.ImpactTeleport">
+							<destination type="gameMechanics.map.destination.DestinationLocator">
+								<locator>
+									<scriptID>AI71_Boss04</scriptID>
+									<map href="/Maps/AstralIsle71/MapResource.xdb" />
+								</locator>
+							</destination>
+							<finishImpacts>
+								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+									<buff href="/Mechanics/Spells/AstarlIslands/AI71/Common/RestrictRotationAndMovement.(BuffResource).xdb" />
+									<durationScalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+										<mulCalcer type="gameMechanics.elements.calcers.CalcerBuffDuration">
+											<buff href="CrowPhase.(BuffResource).xdb" />
+											<multiplier>0.001</multiplier>
+										</mulCalcer>
+										<sum>4</sum>
+									</durationScalerTarget>
+								</Item>
+							</finishImpacts>
+						</Item>
+					</impactsOn>
+				</Item>
+			</effects>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectsDeferred">
+			<delay>2000</delay>
+			<effects>
+				<Item type="gameMechanics.elements.effects.Switch">
+					<impactsOn>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="CrowPhasePlane.(BuffResource).xdb" />
+							<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+								<multiplier>17</multiplier>
+							</durationScaler>
+						</Item>
+					</impactsOn>
+				</Item>
+			</effects>
+		</Item>
+	</effects>
+	<duration>19000</duration>
+	<isHelpful>false</isHelpful>
+	<canBeSaved>false</canBeSaved>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/BossDisabler.xdb" />
+	</groups>
 </gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,166 +1,167 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>739851731</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        <Item href="/Mechanics/Spells/Groups/EngineerArtillerySpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        <Item href="/Mechanics/Spells/Groups/DragonRelic8.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        <Item href="/Mechanics/Spells/Groups/EngineerDefenceDevices.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-    </groups>
-    <Name href="Spell.(SpellSingleTarget).Name.txt" />
-    <Description href="Spell.(SpellSingleTarget).Description.txt" />
-    <descVars>
-        <Item>
-            <name>time</name>
-            <value var="time" />
-            <text href="" />
-        </Item>
-    </descVars>
-    <image href="/Interface/Icons/Spells/Engineer/EngineerDrill.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
-    <visualScripts href="/Spells/VisScripts/Engineer/CarnivorousMantrap_Spell.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
-    <range type="gameMechanics.elements.calcers.FloatData">
-        <value>40</value>
-    </range>
-    <ranks>
-        <Item href="Spell01.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-        <Item href="Spell02.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-        <Item href="Spell03.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-    </ranks>
-    <iffPolicy>Enemies</iffPolicy>
-    <mechanics>
-        <cooldown>
-            <duration>40000</duration>
-            <group href="/Mechanics/Spells/Groups/EngineerDefenceDevices.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        </cooldown>
-        <targetConditions>
-            <Item type="gameMechanics.elements.predicates.PredicateCreature" />
-        </targetConditions>
-        <conditions>
-            <Item type="gameMechanics.elements.predicates.PredicateHasPathBinary"></Item>
-        </conditions>
-        <casterImpacts>
-            <Item type="gameMechanics.constructor.basicElements.ImpactList">
-                <impactsResource href="/Mechanics/Spells/Engineer/EngineerDismount.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
-            </Item>
-        </casterImpacts>
-        <targetImpacts>
-            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                <buff href="TrapPoxy.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                <impactsOnAttach>
-                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.predicates.PredicateFaction">
-                                        <faction href="/World/Factions/League.xdb#xpointer(/gameMechanics.world.creature.Faction)" />
-                                    </Item>
-                                </predicates>
-                                <impacts>
-                                    <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
-                                        <calcDestinationOnTarget>false</calcDestinationOnTarget>
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                                <impacts>
-                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                        <buff href="TargetRootAndEat.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                            <multiplier var="duration3" />
-                                                        </durationScaler>
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="Mantrap_DeathTrigger.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                    <multiplier var="duration1" />
-                                                </durationScaler>
-                                            </Item>
-                                        </impacts>
-                                        <impactsFromTarget>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="Fuel.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                <stacks type="gameMechanics.elements.calcers.CalcerSum">
-                                                    <summands>
-                                                        <Item type="gameMechanics.elements.calcers.FloatData">
-                                                            <value var="fuel1" />
-                                                        </Item>
-                                                        <Item type="gameMechanics.elements.calcers.AbilityRankCalcer">
-                                                            <ability href="/Mechanics/Spells/Engineer/Abilities/MantrapExtraFuel/Ability01.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-                                                            <mul>10</mul>
-                                                        </Item>
-                                                    </summands>
-                                                </stacks>
-                                            </Item>
-                                            <Item type="gameMechanics.elements.impacts.MarkedImpact">
-                                                <mark href="/Mechanics/Spells/Engineer/Abilities/PhysicalDamage/Engineer_Summon_DefenceDevice.(MarkResource).xdb#xpointer(/gameMechanics.constructor.basicElements.MarkResource)" />
-                                            </Item>
-                                        </impactsFromTarget>
-                                        <assistantResource href="ManTrap.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
-                                        <mobResource href="Mantrap.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
-                                        <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                                        <linkMode>Stats</linkMode>
-                                        <planeSyncStrategy>Copy</planeSyncStrategy>
-                                    </Item>
-                                </impacts>
-                                <elseImpacts>
-                                    <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
-                                        <calcDestinationOnTarget>false</calcDestinationOnTarget>
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                                <impacts>
-                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                        <buff href="TargetRootAndEat.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                            <multiplier var="duration4" />
-                                                        </durationScaler>
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="Mantrap_DeathTrigger.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                    <multiplier var="duration2" />
-                                                </durationScaler>
-                                            </Item>
-                                        </impacts>
-                                        <impactsFromTarget>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="Fuel.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                <stacks type="gameMechanics.elements.calcers.CalcerSum">
-                                                    <summands>
-                                                        <Item type="gameMechanics.elements.calcers.FloatData">
-                                                            <value var="fuel2" />
-                                                        </Item>
-                                                        <Item type="gameMechanics.elements.calcers.AbilityRankCalcer">
-                                                            <ability href="/Mechanics/Spells/Engineer/Abilities/MantrapExtraFuel/Ability01.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-                                                            <mul>10</mul>
-                                                        </Item>
-                                                    </summands>
-                                                </stacks>
-                                            </Item>
-                                            <Item type="gameMechanics.elements.impacts.MarkedImpact">
-                                                <mark href="/Mechanics/Spells/Engineer/Abilities/PhysicalDamage/Engineer_Summon_DefenceDevice.(MarkResource).xdb#xpointer(/gameMechanics.constructor.basicElements.MarkResource)" />
-                                            </Item>
-                                        </impactsFromTarget>
-                                        <assistantResource href="ManTrap.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
-                                        <mobResource href="MantrapHadagan.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
-                                        <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                                        <linkMode>Stats</linkMode>
-                                        <planeSyncStrategy>Copy</planeSyncStrategy>
-                                    </Item>
-                                </elseImpacts>
-                            </Item>
-                        </impacts>
-                    </Item>
-                </impactsOnAttach>
-            </Item>
-        </targetImpacts>
-    </mechanics>
-    <speed>10</speed>
+	<Header>
+		<resourceId>739851731</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		<Item href="/Mechanics/Spells/Groups/EngineerArtillerySpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		<Item href="/Mechanics/Spells/Groups/DragonRelic8.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		<Item href="/Mechanics/Spells/Groups/EngineerDefenceDevices.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+	</groups>
+	<Name href="Spell.(SpellSingleTarget).Name.txt" />
+	<Description href="Spell.(SpellSingleTarget).Description.txt" />
+	<descVars>
+		<Item>
+			<name>time</name>
+			<value var="time" />
+			<text href="" />
+		</Item>
+	</descVars>
+	<image href="/Interface/Icons/Spells/Engineer/EngineerDrill.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+	<visualScripts href="/Spells/VisScripts/Engineer/CarnivorousMantrap_Spell.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+	<range type="gameMechanics.elements.calcers.FloatData">
+		<value>40</value>
+	</range>
+	<ranks>
+		<Item href="Spell01.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+		<Item href="Spell02.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+		<Item href="Spell03.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+	</ranks>
+	<iffPolicy>Enemies</iffPolicy>
+	<mechanics>
+		<cooldown>
+			<duration>40000</duration>
+			<group href="/Mechanics/Spells/Groups/EngineerDefenceDevices.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		</cooldown>
+		<targetConditions>
+			<Item type="gameMechanics.elements.predicates.PredicateCreature" />
+		</targetConditions>
+		<conditions>
+			<Item type="gameMechanics.elements.predicates.PredicateHasPathBinary">
+			</Item>
+		</conditions>
+		<casterImpacts>
+			<Item type="gameMechanics.constructor.basicElements.ImpactList">
+				<impactsResource href="/Mechanics/Spells/Engineer/EngineerDismount.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+			</Item>
+		</casterImpacts>
+		<targetImpacts>
+			<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+				<buff href="TrapPoxy.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				<impactsOnAttach>
+					<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+								<predicates>
+									<Item type="gameMechanics.elements.predicates.PredicateFaction">
+										<faction href="/World/Factions/League.xdb#xpointer(/gameMechanics.world.creature.Faction)" />
+									</Item>
+								</predicates>
+								<impacts>
+									<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+										<destination type="gameMechanics.map.destination.SelfPosDestination" />
+										<calcDestinationOnTarget>false</calcDestinationOnTarget>
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+												<impacts>
+													<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+														<buff href="TargetRootAndEat.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+															<multiplier var="duration3" />
+														</durationScaler>
+													</Item>
+												</impacts>
+											</Item>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="Mantrap_DeathTrigger.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+												<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+													<multiplier var="duration1" />
+												</durationScaler>
+											</Item>
+										</impacts>
+										<impactsFromTarget>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="Fuel.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+												<stacks type="gameMechanics.elements.calcers.CalcerSum">
+													<summands>
+														<Item type="gameMechanics.elements.calcers.FloatData">
+															<value var="fuel1" />
+														</Item>
+														<Item type="gameMechanics.elements.calcers.AbilityRankCalcer">
+															<ability href="/Mechanics/Spells/Engineer/Abilities/MantrapExtraFuel/Ability01.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+															<mul>10</mul>
+														</Item>
+													</summands>
+												</stacks>
+											</Item>
+											<Item type="gameMechanics.elements.impacts.MarkedImpact">
+												<mark href="/Mechanics/Spells/Engineer/Abilities/PhysicalDamage/Engineer_Summon_DefenceDevice.(MarkResource).xdb#xpointer(/gameMechanics.constructor.basicElements.MarkResource)" />
+											</Item>
+										</impactsFromTarget>
+										<assistantResource href="ManTrap.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+										<mobResource href="Mantrap.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+										<level type="gameMechanics.elements.calcers.CalcerLevel" />
+										<linkMode>Stats</linkMode>
+										<planeSyncStrategy>Copy</planeSyncStrategy>
+									</Item>
+								</impacts>
+								<elseImpacts>
+									<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+										<destination type="gameMechanics.map.destination.SelfPosDestination" />
+										<calcDestinationOnTarget>false</calcDestinationOnTarget>
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+												<impacts>
+													<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+														<buff href="TargetRootAndEat.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+															<multiplier var="duration4" />
+														</durationScaler>
+													</Item>
+												</impacts>
+											</Item>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="Mantrap_DeathTrigger.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+												<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+													<multiplier var="duration2" />
+												</durationScaler>
+											</Item>
+										</impacts>
+										<impactsFromTarget>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="Fuel.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+												<stacks type="gameMechanics.elements.calcers.CalcerSum">
+													<summands>
+														<Item type="gameMechanics.elements.calcers.FloatData">
+															<value var="fuel2" />
+														</Item>
+														<Item type="gameMechanics.elements.calcers.AbilityRankCalcer">
+															<ability href="/Mechanics/Spells/Engineer/Abilities/MantrapExtraFuel/Ability01.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+															<mul>10</mul>
+														</Item>
+													</summands>
+												</stacks>
+											</Item>
+											<Item type="gameMechanics.elements.impacts.MarkedImpact">
+												<mark href="/Mechanics/Spells/Engineer/Abilities/PhysicalDamage/Engineer_Summon_DefenceDevice.(MarkResource).xdb#xpointer(/gameMechanics.constructor.basicElements.MarkResource)" />
+											</Item>
+										</impactsFromTarget>
+										<assistantResource href="ManTrap.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+										<mobResource href="MantrapHadagan.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+										<level type="gameMechanics.elements.calcers.CalcerLevel" />
+										<linkMode>Stats</linkMode>
+										<planeSyncStrategy>Copy</planeSyncStrategy>
+									</Item>
+								</elseImpacts>
+							</Item>
+						</impacts>
+					</Item>
+				</impactsOnAttach>
+			</Item>
+		</targetImpacts>
+	</mechanics>
+	<speed>10</speed>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

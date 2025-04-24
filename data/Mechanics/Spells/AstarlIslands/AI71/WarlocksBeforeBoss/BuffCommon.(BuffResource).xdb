@@ -1,186 +1,186 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.buff.BuffResource>
-    <Header>
-        <resourceId>739939133</resourceId>
-    </Header>
-    <Name href="BuffCommon.(BuffResource).Name.txt" />
-    <Description href="BuffCommon.(BuffResource).Description.txt" />
-    <image href="/Interface/Icons/Equipment/Staff/StaffBat.(UISingleTexture).xdb" />
-    <visScript href="WarlockOmniChanneler.(BuffVisScripts).xdb" />
-    <effects>
-        <Item type="gameMechanics.elements.effects.Switch">
-            <impactsOn>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="/Mechanics/Spells/AstarlIslands/AI71/Warlock/Alertness.(BuffResource).xdb" />
-                </Item>
-            </impactsOn>
-        </Item>
-        <Item type="gameMechanics.elements.effects.DisableLocalEvade" />
-        <Item type="gameMechanics.elements.effects.EffectDisableAct">
-            <actions>
-                <Item>Move</Item>
-                <Item>Jump</Item>
-                <Item>Rotate</Item>
-            </actions>
-            <rooted>true</rooted>
-        </Item>
-        <Item type="gameMechanics.elements.effects.DeathTrigger">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-                    <impacts>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="DomeOpening.(BuffResource).xdb" />
-                        </Item>
-                    </impacts>
-                    <spawnResource href="/Maps/AstralIsle71/SpawnTables/4_PackWarlocks01.(SpawnTable).xdb" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-                    <impacts>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="DomeOpening.(BuffResource).xdb" />
-                        </Item>
-                    </impacts>
-                    <spawnResource href="/Maps/AstralIsle71/SpawnTables/4_PackWarlocks02.(SpawnTable).xdb" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-                    <impacts>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="DomeOpening.(BuffResource).xdb" />
-                        </Item>
-                    </impacts>
-                    <spawnResource href="/Maps/AstralIsle71/SpawnTables/4_PackWarlocks03.(SpawnTable).xdb" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                    <delay>500</delay>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="BuffCommon.(BuffResource).xdb" />
-                        </Item>
-                    </impacts>
-                </Item>
-            </impacts>
-        </Item>
-        <Item type="gameMechanics.elements.effects.Enlarge">
-            <factor>1.05</factor>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
-        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
-            <onEnter>
-                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                    <buff href="AvatarCount.(BuffResource).xdb" />
-                </Item>
-            </onEnter>
-            <onLeave>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
-                    <pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
-                    <isPersonalPool>true</isPersonalPool>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
-                                    <group href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="AvatarCount.(BuffResource).xdb" />
-                </Item>
-            </onLeave>
-            <effects>
-                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
-                            <selector type="gameMechanics.tools.SelectorRandomNotLess">
-                                <minIndex>0</minIndex>
-                            </selector>
-                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-                                <predicates>
-                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                                <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
-                                            </Item>
-                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                                        </predicates>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-                                </predicates>
-                            </filter>
-                            <impacts>
-                                <Item>
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
-                                            <element>ASTRAL</element>
-                                            <damage>20</damage>
-                                            <impactsOnHitTarget>
-                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
-                                                    <data href="WarlockAuraHit.(ClientData).xdb" />
-                                                </Item>
-                                            </impactsOnHitTarget>
-                                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                    <tick>2500</tick>
-                    <initialDelay>1000</initialDelay>
-                </Item>
-                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
-                            <selector type="gameMechanics.tools.SelectorRandomNotLess">
-                                <minIndex>0</minIndex>
-                            </selector>
-                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-                                <predicates>
-                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                                <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
-                                            </Item>
-                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                                        </predicates>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                            <buff href="/Mechanics/Spells/AstarlIslands/AI71/Common/PlagueCarrier/PlagueDOT.(BuffResource).xdb" />
-                                        </predicate>
-                                    </Item>
-                                </predicates>
-                            </filter>
-                            <impacts>
-                                <Item>
-                                    <impacts>
-                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                            <buff href="/Mechanics/Spells/AstarlIslands/AI71/Common/PlagueCarrier/PlagueDOT.(BuffResource).xdb" />
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                    <tick>10000</tick>
-                    <initialDelay>3500</initialDelay>
-                </Item>
-            </effects>
-        </Item>
-    </effects>
-    <isHelpful>true</isHelpful>
-    <canBeSaved>false</canBeSaved>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/EvadeProtectedBuffs.xdb" />
-        <Item href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
-        <Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb" />
-    </groups>
+	<Header>
+		<resourceId>739939133</resourceId>
+	</Header>
+	<Name href="BuffCommon.(BuffResource).Name.txt" />
+	<Description href="BuffCommon.(BuffResource).Description.txt" />
+	<image href="/Interface/Icons/Equipment/Staff/StaffBat.(UISingleTexture).xdb" />
+	<visScript href="WarlockOmniChanneler.(BuffVisScripts).xdb" />
+	<effects>
+		<Item type="gameMechanics.elements.effects.Switch">
+			<impactsOn>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="/Mechanics/Spells/AstarlIslands/AI71/Warlock/Alertness.(BuffResource).xdb" />
+				</Item>
+			</impactsOn>
+		</Item>
+		<Item type="gameMechanics.elements.effects.DisableLocalEvade" />
+		<Item type="gameMechanics.elements.effects.EffectDisableAct">
+			<actions>
+				<Item>Move</Item>
+				<Item>Jump</Item>
+				<Item>Rotate</Item>
+			</actions>
+			<rooted>true</rooted>
+		</Item>
+		<Item type="gameMechanics.elements.effects.DeathTrigger">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+					<impacts>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="DomeOpening.(BuffResource).xdb" />
+						</Item>
+					</impacts>
+					<spawnResource href="/Maps/AstralIsle71/SpawnTables/4_PackWarlocks01.(SpawnTable).xdb" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+					<impacts>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="DomeOpening.(BuffResource).xdb" />
+						</Item>
+					</impacts>
+					<spawnResource href="/Maps/AstralIsle71/SpawnTables/4_PackWarlocks02.(SpawnTable).xdb" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+					<impacts>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="DomeOpening.(BuffResource).xdb" />
+						</Item>
+					</impacts>
+					<spawnResource href="/Maps/AstralIsle71/SpawnTables/4_PackWarlocks03.(SpawnTable).xdb" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+					<delay>500</delay>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="BuffCommon.(BuffResource).xdb" />
+						</Item>
+					</impacts>
+				</Item>
+			</impacts>
+		</Item>
+		<Item type="gameMechanics.elements.effects.Enlarge">
+			<factor>1.05</factor>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+		<Item type="gameMechanics.elements.effects.CombatStateTrigger">
+			<onEnter>
+				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+					<buff href="AvatarCount.(BuffResource).xdb" />
+				</Item>
+			</onEnter>
+			<onLeave>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+					<pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
+					<isPersonalPool>true</isPersonalPool>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+									<group href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="AvatarCount.(BuffResource).xdb" />
+				</Item>
+			</onLeave>
+			<effects>
+				<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+							<selector type="gameMechanics.tools.SelectorRandomNotLess">
+								<minIndex>0</minIndex>
+							</selector>
+							<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+								<predicates>
+									<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+										<predicates>
+											<Item type="gameMechanics.elements.resources.ResourceBuff">
+												<buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+											</Item>
+											<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+										</predicates>
+									</Item>
+									<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+								</predicates>
+							</filter>
+							<impacts>
+								<Item>
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+											<element>ASTRAL</element>
+											<damage>20</damage>
+											<impactsOnHitTarget>
+												<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+													<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+													<data href="WarlockAuraHit.(ClientData).xdb" />
+												</Item>
+											</impactsOnHitTarget>
+											<scaler type="gameMechanics.elements.scalers.MagicScaler" />
+										</Item>
+									</impacts>
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+					<tick>2500</tick>
+					<initialDelay>1000</initialDelay>
+				</Item>
+				<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+							<selector type="gameMechanics.tools.SelectorRandomNotLess">
+								<minIndex>0</minIndex>
+							</selector>
+							<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+								<predicates>
+									<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+										<predicates>
+											<Item type="gameMechanics.elements.resources.ResourceBuff">
+												<buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+											</Item>
+											<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+										</predicates>
+									</Item>
+									<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+									<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+										<predicate type="gameMechanics.elements.resources.ResourceBuff">
+											<buff href="/Mechanics/Spells/AstarlIslands/AI71/Common/PlagueCarrier/PlagueDOT.(BuffResource).xdb" />
+										</predicate>
+									</Item>
+								</predicates>
+							</filter>
+							<impacts>
+								<Item>
+									<impacts>
+										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+											<buff href="/Mechanics/Spells/AstarlIslands/AI71/Common/PlagueCarrier/PlagueDOT.(BuffResource).xdb" />
+										</Item>
+									</impacts>
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+					<tick>10000</tick>
+					<initialDelay>3500</initialDelay>
+				</Item>
+			</effects>
+		</Item>
+	</effects>
+	<isHelpful>true</isHelpful>
+	<canBeSaved>false</canBeSaved>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/EvadeProtectedBuffs.xdb" />
+		<Item href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
+		<Item href="/Mechanics/Spells/Groups/DeathSafeBuff.xdb" />
+	</groups>
 </gameMechanics.constructor.schemes.buff.BuffResource>

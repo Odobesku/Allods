@@ -1,468 +1,466 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>739924383</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
-        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/Magics.xdb" />
-    </groups>
-    <element>ASTRAL</element>
-    <Name href="Spell00.(SpellSingleTarget).Name.txt" />
-    <Description href="Spell00.(SpellSingleTarget).Description.txt" />
-    <descVars>
-        <Item>
-            <name>var0</name>
-            <value var="duration" />
-        </Item>
-        <Item>
-            <name>var1</name>
-            <value>100</value>
-            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                <mulCalcer type="constructor.elements.CalcerFloatExternal">
-                    <externalCalcer hrefvar="calcerHP" />
-                </mulCalcer>
-            </scaler>
-        </Item>
-        <Item>
-            <name>var3</name>
-            <value>1</value>
-            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-                <scalers>
-                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
-                            <externalCalcer hrefvar="calcerDamage" />
-                        </mulCalcer>
-                    </Item>
-                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-                        <formula>MagicScaler</formula>
-                    </Item>
-                </scalers>
-            </scaler>
-        </Item>
-    </descVars>
-    <image href="/Interface/Icons/Spells/Psionic/PsionicDominate.(UISingleTexture).xdb" />
-    <visualScripts href="/Spells/VisScripts/Psionic/Projection.(SpellVisScripts).xdb" />
-    <range type="gameMechanics.elements.calcers.FloatData">
-        <value>40</value>
-    </range>
-    <isAggro>false</isAggro>
-    <ranks>
-        <Item href="Spell01.(SpellSingleTarget).xdb" />
-        <Item href="Spell02.(SpellSingleTarget).xdb" />
-        <Item href="Spell03.(SpellSingleTarget).xdb" />
-    </ranks>
-    <iffPolicy>Enemies</iffPolicy>
-    <triggersGlobalCooldown>false</triggersGlobalCooldown>
-    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
-    <launchWhenReady>true</launchWhenReady>
-    <mechanics>
-        <cooldown>
-            <duration>20000</duration>
-        </cooldown>
-        <casterResources>
-            <Item type="gameMechanics.elements.resources.ResourceIncVariable">
-                <variable href="/Mechanics/Spells/Psionic63/Abilities/StressResource/StressResource.(VariableResource).xdb" />
-                <inc>20</inc>
-            </Item>
-        </casterResources>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactCaseGeneric">
-                <cases>
-                    <Item>
-                        <predicates>
-                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                <predicate type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
-                                    <assistantResource href="Projection01.(AssistantResource).xdb" />
-                                </predicate>
-                            </Item>
-                        </predicates>
-                        <impacts>
-                            <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                                <destination type="gameMechanics.map.destination.DestinationModified">
-                                    <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                                    <modifiers>
-                                        <Item type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
-                                            <radius type="gameMechanics.elements.calcers.FloatData">
-                                                <value>5</value>
-                                            </radius>
-                                        </Item>
-                                    </modifiers>
-                                </destination>
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff hrefvar="buffProjection" />
-                                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                            <multiplier var="duration" />
-                                        </durationScaler>
-                                    </Item>
-                                    <Item type="gameMechanics.constructor.basicElements.ImpactList">
-                                        <impactsResource href="AssistantList.(ImpactListResource).xdb" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                        <impacts>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="HiddenTargetShare.(BuffResource).xdb" />
-                                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                    <multiplier var="duration" />
-                                                </durationScaler>
-                                            </Item>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="ProjCounter.(BuffResource).xdb" />
-                                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                    <multiplier var="duration" />
-                                                </durationScaler>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impacts>
-                                <traceDown>true</traceDown>
-                                <assistantResource href="Projection01.(AssistantResource).xdb" />
-                                <mobResource hrefvar="mobResource" />
-                                <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                                <linkMode>ModifiedHealth</linkMode>
-                                <planeSyncStrategy>Sync</planeSyncStrategy>
-                            </Item>
-                        </impacts>
-                    </Item>
-                    <Item>
-                        <predicates>
-                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                <predicate type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
-                                    <assistantResource href="Projection02.(AssistantResource).xdb" />
-                                </predicate>
-                            </Item>
-                        </predicates>
-                        <impacts>
-                            <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                                <destination type="gameMechanics.map.destination.DestinationModified">
-                                    <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                                    <modifiers>
-                                        <Item type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
-                                            <radius type="gameMechanics.elements.calcers.FloatData">
-                                                <value>5</value>
-                                            </radius>
-                                        </Item>
-                                    </modifiers>
-                                </destination>
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff hrefvar="buffProjection" />
-                                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                            <multiplier var="duration" />
-                                        </durationScaler>
-                                    </Item>
-                                    <Item type="gameMechanics.constructor.basicElements.ImpactList">
-                                        <impactsResource href="AssistantList.(ImpactListResource).xdb" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                        <impacts>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="HiddenTargetShare.(BuffResource).xdb" />
-                                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                    <multiplier var="duration" />
-                                                </durationScaler>
-                                            </Item>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="ProjCounter.(BuffResource).xdb" />
-                                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                    <multiplier var="duration" />
-                                                </durationScaler>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impacts>
-                                <traceDown>true</traceDown>
-                                <assistantResource href="Projection02.(AssistantResource).xdb" />
-                                <mobResource hrefvar="mobResource" />
-                                <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                                <linkMode>ModifiedHealth</linkMode>
-                                <planeSyncStrategy>Sync</planeSyncStrategy>
-                            </Item>
-                        </impacts>
-                    </Item>
-                    <Item>
-                        <predicates>
-                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                <predicate type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
-                                    <assistantResource href="Projection03.(AssistantResource).xdb" />
-                                </predicate>
-                            </Item>
-                        </predicates>
-                        <impacts>
-                            <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                                <destination type="gameMechanics.map.destination.DestinationModified">
-                                    <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                                    <modifiers>
-                                        <Item type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
-                                            <radius type="gameMechanics.elements.calcers.FloatData">
-                                                <value>5</value>
-                                            </radius>
-                                        </Item>
-                                    </modifiers>
-                                </destination>
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff hrefvar="buffProjection" />
-                                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                            <multiplier var="duration" />
-                                        </durationScaler>
-                                    </Item>
-                                    <Item type="gameMechanics.constructor.basicElements.ImpactList">
-                                        <impactsResource href="AssistantList.(ImpactListResource).xdb" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                        <impacts>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="HiddenTargetShare.(BuffResource).xdb" />
-                                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                    <multiplier var="duration" />
-                                                </durationScaler>
-                                            </Item>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="ProjCounter.(BuffResource).xdb" />
-                                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                    <multiplier var="duration" />
-                                                </durationScaler>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impacts>
-                                <traceDown>true</traceDown>
-                                <assistantResource href="Projection03.(AssistantResource).xdb" />
-                                <mobResource hrefvar="mobResource" />
-                                <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                                <linkMode>ModifiedHealth</linkMode>
-                                <planeSyncStrategy>Sync</planeSyncStrategy>
-                            </Item>
-                        </impacts>
-                    </Item>
-                    <Item>
-                        <predicates>
-                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                <predicate type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
-                                    <assistantResource href="Projection04.(AssistantResource).xdb" />
-                                </predicate>
-                            </Item>
-                        </predicates>
-                        <impacts>
-                            <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                                <destination type="gameMechanics.map.destination.DestinationModified">
-                                    <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                                    <modifiers>
-                                        <Item type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
-                                            <radius type="gameMechanics.elements.calcers.FloatData">
-                                                <value>5</value>
-                                            </radius>
-                                        </Item>
-                                    </modifiers>
-                                </destination>
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff hrefvar="buffProjection" />
-                                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                            <multiplier var="duration" />
-                                        </durationScaler>
-                                    </Item>
-                                    <Item type="gameMechanics.constructor.basicElements.ImpactList">
-                                        <impactsResource href="AssistantList.(ImpactListResource).xdb" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                        <impacts>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="HiddenTargetShare.(BuffResource).xdb" />
-                                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                    <multiplier var="duration" />
-                                                </durationScaler>
-                                            </Item>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="ProjCounter.(BuffResource).xdb" />
-                                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                    <multiplier var="duration" />
-                                                </durationScaler>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impacts>
-                                <traceDown>true</traceDown>
-                                <assistantResource href="Projection04.(AssistantResource).xdb" />
-                                <mobResource hrefvar="mobResource" />
-                                <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                                <linkMode>ModifiedHealth</linkMode>
-                                <planeSyncStrategy>Sync</planeSyncStrategy>
-                            </Item>
-                        </impacts>
-                    </Item>
-                    <Item>
-                        <predicates>
-                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                <predicate type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
-                                    <assistantResource href="Projection05.(AssistantResource).xdb" />
-                                </predicate>
-                            </Item>
-                        </predicates>
-                        <impacts>
-                            <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                                <destination type="gameMechanics.map.destination.DestinationModified">
-                                    <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                                    <modifiers>
-                                        <Item type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
-                                            <radius type="gameMechanics.elements.calcers.FloatData">
-                                                <value>5</value>
-                                            </radius>
-                                        </Item>
-                                    </modifiers>
-                                </destination>
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff hrefvar="buffProjection" />
-                                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                            <multiplier var="duration" />
-                                        </durationScaler>
-                                    </Item>
-                                    <Item type="gameMechanics.constructor.basicElements.ImpactList">
-                                        <impactsResource href="AssistantList.(ImpactListResource).xdb" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                        <impacts>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="HiddenTargetShare.(BuffResource).xdb" />
-                                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                    <multiplier var="duration" />
-                                                </durationScaler>
-                                            </Item>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="ProjCounter.(BuffResource).xdb" />
-                                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                    <multiplier var="duration" />
-                                                </durationScaler>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impacts>
-                                <traceDown>true</traceDown>
-                                <assistantResource href="Projection05.(AssistantResource).xdb" />
-                                <mobResource hrefvar="mobResource" />
-                                <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                                <linkMode>ModifiedHealth</linkMode>
-                                <planeSyncStrategy>Sync</planeSyncStrategy>
-                            </Item>
-                        </impacts>
-                    </Item>
-                    <Item>
-                        <predicates>
-                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                <predicate type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
-                                    <assistantResource href="Projection06.(AssistantResource).xdb" />
-                                </predicate>
-                            </Item>
-                        </predicates>
-                        <impacts>
-                            <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                                <destination type="gameMechanics.map.destination.DestinationModified">
-                                    <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                                    <modifiers>
-                                        <Item type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
-                                            <radius type="gameMechanics.elements.calcers.FloatData">
-                                                <value>5</value>
-                                            </radius>
-                                        </Item>
-                                    </modifiers>
-                                </destination>
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff hrefvar="buffProjection" />
-                                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                            <multiplier var="duration" />
-                                        </durationScaler>
-                                    </Item>
-                                    <Item type="gameMechanics.constructor.basicElements.ImpactList">
-                                        <impactsResource href="AssistantList.(ImpactListResource).xdb" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                        <impacts>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="HiddenTargetShare.(BuffResource).xdb" />
-                                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                    <multiplier var="duration" />
-                                                </durationScaler>
-                                            </Item>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="ProjCounter.(BuffResource).xdb" />
-                                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                    <multiplier var="duration" />
-                                                </durationScaler>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impacts>
-                                <traceDown>true</traceDown>
-                                <assistantResource href="Projection06.(AssistantResource).xdb" />
-                                <mobResource hrefvar="mobResource" />
-                                <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                                <linkMode>ModifiedHealth</linkMode>
-                                <planeSyncStrategy>Sync</planeSyncStrategy>
-                            </Item>
-                        </impacts>
-                    </Item>
-                </cases>
-                <defaultImpacts>
-                    <Item type="gameMechanics.world.avatar.assistants.ImpactsToAssistant">
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.ImpactKill" />
-                        </impacts>
-                        <assistantResource href="Projection01.(AssistantResource).xdb" />
-                    </Item>
-                    <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                        <destination type="gameMechanics.map.destination.DestinationModified">
-                            <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                            <modifiers>
-                                <Item type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
-                                    <radius type="gameMechanics.elements.calcers.FloatData">
-                                        <value>5</value>
-                                    </radius>
-                                </Item>
-                            </modifiers>
-                        </destination>
-                        <impacts>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff hrefvar="buffProjection" />
-                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                    <multiplier var="duration" />
-                                </durationScaler>
-                            </Item>
-                            <Item type="gameMechanics.constructor.basicElements.ImpactList">
-                                <impactsResource href="AssistantList.(ImpactListResource).xdb" />
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="HiddenTargetShare.(BuffResource).xdb" />
-                                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                            <multiplier var="duration" />
-                                        </durationScaler>
-                                    </Item>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="ProjCounter.(BuffResource).xdb" />
-                                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                            <multiplier var="duration" />
-                                        </durationScaler>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                        </impacts>
-                        <traceDown>true</traceDown>
-                        <assistantResource href="Projection01.(AssistantResource).xdb" />
-                        <mobResource hrefvar="mobResource" />
-                        <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                        <linkMode>ModifiedHealth</linkMode>
-                        <planeSyncStrategy>Sync</planeSyncStrategy>
-                    </Item>
-                </defaultImpacts>
-            </Item>
-        </casterImpacts>
-        <linkedAbility href="OrdersAutoLearn.(AbilityResource).xdb" />
-    </mechanics>
+	<Header>
+		<resourceId>739924383</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
+		<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/Magics.xdb" />
+	</groups>
+	<element>ASTRAL</element>
+	<Name href="Spell00.(SpellSingleTarget).Name.txt" />
+	<Description href="Spell00.(SpellSingleTarget).Description.txt" />
+	<descVars>
+		<Item>
+			<name>var0</name>
+			<value var="duration" />
+		</Item>
+		<Item>
+			<name>var1</name>
+			<value>100</value>
+			<scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+				<mulCalcer type="constructor.elements.CalcerFloatExternal">
+					<externalCalcer hrefvar="calcerHP" />
+				</mulCalcer>
+			</scaler>
+		</Item>
+		<Item>
+			<name>var3</name>
+			<value>1</value>
+			<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+				<scalers>
+					<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+						<mulCalcer type="constructor.elements.CalcerFloatExternal">
+							<externalCalcer hrefvar="calcerDamage" />
+						</mulCalcer>
+					</Item>
+					<Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+						<formula>MagicScaler</formula>
+					</Item>
+				</scalers>
+			</scaler>
+		</Item>
+	</descVars>
+	<image href="/Interface/Icons/Spells/Psionic/PsionicDominate.(UISingleTexture).xdb" />
+	<visualScripts href="/Spells/VisScripts/Psionic/Projection.(SpellVisScripts).xdb" />
+	<range type="gameMechanics.elements.calcers.FloatData">
+		<value>40</value>
+	</range>
+	<isAggro>false</isAggro>
+	<ranks>
+		<Item href="Spell01.(SpellSingleTarget).xdb" />
+		<Item href="Spell02.(SpellSingleTarget).xdb" />
+		<Item href="Spell03.(SpellSingleTarget).xdb" />
+	</ranks>
+	<iffPolicy>Enemies</iffPolicy>
+	<launchWhenReady>true</launchWhenReady>
+	<mechanics>
+		<cooldown>
+			<duration>20000</duration>
+		</cooldown>
+		<casterResources>
+			<Item type="gameMechanics.elements.resources.ResourceIncVariable">
+				<variable href="/Mechanics/Spells/Psionic63/Abilities/StressResource/StressResource.(VariableResource).xdb" />
+				<inc>20</inc>
+			</Item>
+		</casterResources>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactCaseGeneric">
+				<cases>
+					<Item>
+						<predicates>
+							<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+								<predicate type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
+									<assistantResource href="Projection01.(AssistantResource).xdb" />
+								</predicate>
+							</Item>
+						</predicates>
+						<impacts>
+							<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+								<destination type="gameMechanics.map.destination.DestinationModified">
+									<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+									<modifiers>
+										<Item type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
+											<radius type="gameMechanics.elements.calcers.FloatData">
+												<value>5</value>
+											</radius>
+										</Item>
+									</modifiers>
+								</destination>
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff hrefvar="buffProjection" />
+										<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+											<multiplier var="duration" />
+										</durationScaler>
+									</Item>
+									<Item type="gameMechanics.constructor.basicElements.ImpactList">
+										<impactsResource href="AssistantList.(ImpactListResource).xdb" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+										<impacts>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="HiddenTargetShare.(BuffResource).xdb" />
+												<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+													<multiplier var="duration" />
+												</durationScaler>
+											</Item>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="ProjCounter.(BuffResource).xdb" />
+												<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+													<multiplier var="duration" />
+												</durationScaler>
+											</Item>
+										</impacts>
+									</Item>
+								</impacts>
+								<traceDown>true</traceDown>
+								<assistantResource href="Projection01.(AssistantResource).xdb" />
+								<mobResource hrefvar="mobResource" />
+								<level type="gameMechanics.elements.calcers.CalcerLevel" />
+								<linkMode>ModifiedHealth</linkMode>
+								<planeSyncStrategy>Sync</planeSyncStrategy>
+							</Item>
+						</impacts>
+					</Item>
+					<Item>
+						<predicates>
+							<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+								<predicate type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
+									<assistantResource href="Projection02.(AssistantResource).xdb" />
+								</predicate>
+							</Item>
+						</predicates>
+						<impacts>
+							<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+								<destination type="gameMechanics.map.destination.DestinationModified">
+									<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+									<modifiers>
+										<Item type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
+											<radius type="gameMechanics.elements.calcers.FloatData">
+												<value>5</value>
+											</radius>
+										</Item>
+									</modifiers>
+								</destination>
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff hrefvar="buffProjection" />
+										<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+											<multiplier var="duration" />
+										</durationScaler>
+									</Item>
+									<Item type="gameMechanics.constructor.basicElements.ImpactList">
+										<impactsResource href="AssistantList.(ImpactListResource).xdb" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+										<impacts>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="HiddenTargetShare.(BuffResource).xdb" />
+												<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+													<multiplier var="duration" />
+												</durationScaler>
+											</Item>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="ProjCounter.(BuffResource).xdb" />
+												<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+													<multiplier var="duration" />
+												</durationScaler>
+											</Item>
+										</impacts>
+									</Item>
+								</impacts>
+								<traceDown>true</traceDown>
+								<assistantResource href="Projection02.(AssistantResource).xdb" />
+								<mobResource hrefvar="mobResource" />
+								<level type="gameMechanics.elements.calcers.CalcerLevel" />
+								<linkMode>ModifiedHealth</linkMode>
+								<planeSyncStrategy>Sync</planeSyncStrategy>
+							</Item>
+						</impacts>
+					</Item>
+					<Item>
+						<predicates>
+							<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+								<predicate type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
+									<assistantResource href="Projection03.(AssistantResource).xdb" />
+								</predicate>
+							</Item>
+						</predicates>
+						<impacts>
+							<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+								<destination type="gameMechanics.map.destination.DestinationModified">
+									<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+									<modifiers>
+										<Item type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
+											<radius type="gameMechanics.elements.calcers.FloatData">
+												<value>5</value>
+											</radius>
+										</Item>
+									</modifiers>
+								</destination>
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff hrefvar="buffProjection" />
+										<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+											<multiplier var="duration" />
+										</durationScaler>
+									</Item>
+									<Item type="gameMechanics.constructor.basicElements.ImpactList">
+										<impactsResource href="AssistantList.(ImpactListResource).xdb" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+										<impacts>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="HiddenTargetShare.(BuffResource).xdb" />
+												<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+													<multiplier var="duration" />
+												</durationScaler>
+											</Item>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="ProjCounter.(BuffResource).xdb" />
+												<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+													<multiplier var="duration" />
+												</durationScaler>
+											</Item>
+										</impacts>
+									</Item>
+								</impacts>
+								<traceDown>true</traceDown>
+								<assistantResource href="Projection03.(AssistantResource).xdb" />
+								<mobResource hrefvar="mobResource" />
+								<level type="gameMechanics.elements.calcers.CalcerLevel" />
+								<linkMode>ModifiedHealth</linkMode>
+								<planeSyncStrategy>Sync</planeSyncStrategy>
+							</Item>
+						</impacts>
+					</Item>
+					<Item>
+						<predicates>
+							<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+								<predicate type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
+									<assistantResource href="Projection04.(AssistantResource).xdb" />
+								</predicate>
+							</Item>
+						</predicates>
+						<impacts>
+							<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+								<destination type="gameMechanics.map.destination.DestinationModified">
+									<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+									<modifiers>
+										<Item type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
+											<radius type="gameMechanics.elements.calcers.FloatData">
+												<value>5</value>
+											</radius>
+										</Item>
+									</modifiers>
+								</destination>
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff hrefvar="buffProjection" />
+										<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+											<multiplier var="duration" />
+										</durationScaler>
+									</Item>
+									<Item type="gameMechanics.constructor.basicElements.ImpactList">
+										<impactsResource href="AssistantList.(ImpactListResource).xdb" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+										<impacts>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="HiddenTargetShare.(BuffResource).xdb" />
+												<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+													<multiplier var="duration" />
+												</durationScaler>
+											</Item>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="ProjCounter.(BuffResource).xdb" />
+												<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+													<multiplier var="duration" />
+												</durationScaler>
+											</Item>
+										</impacts>
+									</Item>
+								</impacts>
+								<traceDown>true</traceDown>
+								<assistantResource href="Projection04.(AssistantResource).xdb" />
+								<mobResource hrefvar="mobResource" />
+								<level type="gameMechanics.elements.calcers.CalcerLevel" />
+								<linkMode>ModifiedHealth</linkMode>
+								<planeSyncStrategy>Sync</planeSyncStrategy>
+							</Item>
+						</impacts>
+					</Item>
+					<Item>
+						<predicates>
+							<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+								<predicate type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
+									<assistantResource href="Projection05.(AssistantResource).xdb" />
+								</predicate>
+							</Item>
+						</predicates>
+						<impacts>
+							<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+								<destination type="gameMechanics.map.destination.DestinationModified">
+									<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+									<modifiers>
+										<Item type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
+											<radius type="gameMechanics.elements.calcers.FloatData">
+												<value>5</value>
+											</radius>
+										</Item>
+									</modifiers>
+								</destination>
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff hrefvar="buffProjection" />
+										<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+											<multiplier var="duration" />
+										</durationScaler>
+									</Item>
+									<Item type="gameMechanics.constructor.basicElements.ImpactList">
+										<impactsResource href="AssistantList.(ImpactListResource).xdb" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+										<impacts>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="HiddenTargetShare.(BuffResource).xdb" />
+												<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+													<multiplier var="duration" />
+												</durationScaler>
+											</Item>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="ProjCounter.(BuffResource).xdb" />
+												<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+													<multiplier var="duration" />
+												</durationScaler>
+											</Item>
+										</impacts>
+									</Item>
+								</impacts>
+								<traceDown>true</traceDown>
+								<assistantResource href="Projection05.(AssistantResource).xdb" />
+								<mobResource hrefvar="mobResource" />
+								<level type="gameMechanics.elements.calcers.CalcerLevel" />
+								<linkMode>ModifiedHealth</linkMode>
+								<planeSyncStrategy>Sync</planeSyncStrategy>
+							</Item>
+						</impacts>
+					</Item>
+					<Item>
+						<predicates>
+							<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+								<predicate type="gameMechanics.world.avatar.assistants.PredicateHasAssistant">
+									<assistantResource href="Projection06.(AssistantResource).xdb" />
+								</predicate>
+							</Item>
+						</predicates>
+						<impacts>
+							<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+								<destination type="gameMechanics.map.destination.DestinationModified">
+									<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+									<modifiers>
+										<Item type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
+											<radius type="gameMechanics.elements.calcers.FloatData">
+												<value>5</value>
+											</radius>
+										</Item>
+									</modifiers>
+								</destination>
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff hrefvar="buffProjection" />
+										<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+											<multiplier var="duration" />
+										</durationScaler>
+									</Item>
+									<Item type="gameMechanics.constructor.basicElements.ImpactList">
+										<impactsResource href="AssistantList.(ImpactListResource).xdb" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+										<impacts>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="HiddenTargetShare.(BuffResource).xdb" />
+												<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+													<multiplier var="duration" />
+												</durationScaler>
+											</Item>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="ProjCounter.(BuffResource).xdb" />
+												<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+													<multiplier var="duration" />
+												</durationScaler>
+											</Item>
+										</impacts>
+									</Item>
+								</impacts>
+								<traceDown>true</traceDown>
+								<assistantResource href="Projection06.(AssistantResource).xdb" />
+								<mobResource hrefvar="mobResource" />
+								<level type="gameMechanics.elements.calcers.CalcerLevel" />
+								<linkMode>ModifiedHealth</linkMode>
+								<planeSyncStrategy>Sync</planeSyncStrategy>
+							</Item>
+						</impacts>
+					</Item>
+				</cases>
+				<defaultImpacts>
+					<Item type="gameMechanics.world.avatar.assistants.ImpactsToAssistant">
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.ImpactKill" />
+						</impacts>
+						<assistantResource href="Projection01.(AssistantResource).xdb" />
+					</Item>
+					<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+						<destination type="gameMechanics.map.destination.DestinationModified">
+							<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+							<modifiers>
+								<Item type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
+									<radius type="gameMechanics.elements.calcers.FloatData">
+										<value>5</value>
+									</radius>
+								</Item>
+							</modifiers>
+						</destination>
+						<impacts>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff hrefvar="buffProjection" />
+								<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+									<multiplier var="duration" />
+								</durationScaler>
+							</Item>
+							<Item type="gameMechanics.constructor.basicElements.ImpactList">
+								<impactsResource href="AssistantList.(ImpactListResource).xdb" />
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="HiddenTargetShare.(BuffResource).xdb" />
+										<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+											<multiplier var="duration" />
+										</durationScaler>
+									</Item>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="ProjCounter.(BuffResource).xdb" />
+										<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+											<multiplier var="duration" />
+										</durationScaler>
+									</Item>
+								</impacts>
+							</Item>
+						</impacts>
+						<traceDown>true</traceDown>
+						<assistantResource href="Projection01.(AssistantResource).xdb" />
+						<mobResource hrefvar="mobResource" />
+						<level type="gameMechanics.elements.calcers.CalcerLevel" />
+						<linkMode>ModifiedHealth</linkMode>
+						<planeSyncStrategy>Sync</planeSyncStrategy>
+					</Item>
+				</defaultImpacts>
+			</Item>
+		</casterImpacts>
+		<linkedAbility href="OrdersAutoLearn.(AbilityResource).xdb" />
+	</mechanics>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

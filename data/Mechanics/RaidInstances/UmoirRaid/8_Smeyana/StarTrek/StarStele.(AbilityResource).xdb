@@ -1,562 +1,562 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
-    <Header>
-        <resourceId>739873594</resourceId>
-    </Header>
-    <visualScript type="CreatureEffectsAction">
-        <visualEffects>
-            <Item>
-                <effectFx href="/Spells/FX/Mobs/Smeyana_MoonPuddle.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
-                <lockScale>true</lockScale>
-                <locator>Slot_Global</locator>
-            </Item>
-        </visualEffects>
-    </visualScript>
-    <effects>
-        <Item type="gameMechanics.elements.effects.EffectDisableAct">
-            <actions>
-                <Item>Move</Item>
-                <Item>Rotate</Item>
-            </actions>
-            <rooted>true</rooted>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectsIfCaster">
-            <predicates>
-                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                    <mobs>
-                        <Item href="StarStele2.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
-                    </mobs>
-                </Item>
-            </predicates>
-            <effectsIf>
-                <Item type="gameMechanics.elements.effects.TickableAura">
-                    <affectGroup>Enemies</affectGroup>
-                    <radius>4</radius>
-                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
-                        <filters>
-                            <Item type="gameMechanics.world.creature.AvatarFilter" />
-                            <Item type="gameMechanics.world.creature.AliveFilter" />
-                        </filters>
-                    </filter>
-                    <impactsIn>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                    <buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                    <buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                            </impactsIf>
-                            <impactsElse>
-                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                    <buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                            </impactsElse>
-                        </Item>
-                    </impactsIn>
-                    <impactsOut>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                    </impactsOut>
-                </Item>
-                <Item type="gameMechanics.elements.effects.EffectDamageTrigger">
-                    <damageType>MultipliersAbsorb</damageType>
-                    <impacts>
-                        <casterToOffender>
-                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                        <buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </Item>
-                                </predicates>
-                                <impactsIf>
-                                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.StackBuff">
-                                                <buff href="StarStele_Target.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                <delta type="gameMechanics.elements.calcers.FloatData">
-                                                    <value>-1</value>
-                                                </delta>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impactsIf>
-                                <impactsElse>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                                        </predicates>
-                                        <impactsIf>
-                                            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                                                        <affectGroup>Friends</affectGroup>
-                                                        <impacts>
-                                                            <Item type="gameMechanics.elements.impacts.PureDamage">
-                                                                <damage>1</damage>
-                                                                <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
-                                                                        <multiplier>0.1</multiplier>
-                                                                    </mulCalcer>
-                                                                </scaler>
-                                                            </Item>
-                                                        </impacts>
-                                                        <filter type="gameMechanics.world.creature.AvatarFilter" />
-                                                    </Item>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                        <distributor type="gameMechanics.elements.calcers.ZoneDistributor" />
-                                                        <data href="/Mechanics/RaidInstances/UmoirRaid/6_5_ExoShiftBoss/Pulse/Pulse.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </impactsIf>
-                                    </Item>
-                                </impactsElse>
-                            </Item>
-                        </casterToOffender>
-                    </impacts>
-                </Item>
-            </effectsIf>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectsIfCaster">
-            <predicates>
-                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                    <mobs>
-                        <Item href="StarStele3.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
-                    </mobs>
-                </Item>
-            </predicates>
-            <effectsIf>
-                <Item type="gameMechanics.elements.effects.TickableAura">
-                    <affectGroup>Enemies</affectGroup>
-                    <radius>4</radius>
-                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
-                        <filters>
-                            <Item type="gameMechanics.world.creature.AvatarFilter" />
-                            <Item type="gameMechanics.world.creature.AliveFilter" />
-                        </filters>
-                    </filter>
-                    <impactsIn>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                    <buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star3.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                    <buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                            </impactsIf>
-                            <impactsElse>
-                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                    <buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                            </impactsElse>
-                        </Item>
-                    </impactsIn>
-                    <impactsOut>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                    </impactsOut>
-                </Item>
-                <Item type="gameMechanics.elements.effects.EffectDamageTrigger">
-                    <damageType>MultipliersAbsorb</damageType>
-                    <impacts>
-                        <casterToOffender>
-                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                        <buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star3.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </Item>
-                                </predicates>
-                                <impactsIf>
-                                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.StackBuff">
-                                                <buff href="StarStele_Target.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                <delta type="gameMechanics.elements.calcers.FloatData">
-                                                    <value>-1</value>
-                                                </delta>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impactsIf>
-                                <impactsElse>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                                        </predicates>
-                                        <impactsIf>
-                                            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                                                        <affectGroup>Friends</affectGroup>
-                                                        <impacts>
-                                                            <Item type="gameMechanics.elements.impacts.PureDamage">
-                                                                <damage>1</damage>
-                                                                <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
-                                                                        <multiplier>0.1</multiplier>
-                                                                    </mulCalcer>
-                                                                </scaler>
-                                                            </Item>
-                                                        </impacts>
-                                                        <filter type="gameMechanics.world.creature.AvatarFilter" />
-                                                    </Item>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                        <distributor type="gameMechanics.elements.calcers.ZoneDistributor" />
-                                                        <data href="/Mechanics/RaidInstances/UmoirRaid/6_5_ExoShiftBoss/Pulse/Pulse.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </impactsIf>
-                                    </Item>
-                                </impactsElse>
-                            </Item>
-                        </casterToOffender>
-                    </impacts>
-                </Item>
-            </effectsIf>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectsIfCaster">
-            <predicates>
-                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                    <mobs>
-                        <Item href="StarStele4.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
-                    </mobs>
-                </Item>
-            </predicates>
-            <effectsIf>
-                <Item type="gameMechanics.elements.effects.TickableAura">
-                    <affectGroup>Enemies</affectGroup>
-                    <radius>4</radius>
-                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
-                        <filters>
-                            <Item type="gameMechanics.world.creature.AvatarFilter" />
-                            <Item type="gameMechanics.world.creature.AliveFilter" />
-                        </filters>
-                    </filter>
-                    <impactsIn>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                    <buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star4.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                    <buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                            </impactsIf>
-                            <impactsElse>
-                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                    <buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                            </impactsElse>
-                        </Item>
-                    </impactsIn>
-                    <impactsOut>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                    </impactsOut>
-                </Item>
-                <Item type="gameMechanics.elements.effects.EffectDamageTrigger">
-                    <damageType>MultipliersAbsorb</damageType>
-                    <impacts>
-                        <casterToOffender>
-                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                        <buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star4.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </Item>
-                                </predicates>
-                                <impactsIf>
-                                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.StackBuff">
-                                                <buff href="StarStele_Target.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                <delta type="gameMechanics.elements.calcers.FloatData">
-                                                    <value>-1</value>
-                                                </delta>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impactsIf>
-                                <impactsElse>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                                        </predicates>
-                                        <impactsIf>
-                                            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                                                        <affectGroup>Friends</affectGroup>
-                                                        <impacts>
-                                                            <Item type="gameMechanics.elements.impacts.PureDamage">
-                                                                <damage>1</damage>
-                                                                <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
-                                                                        <multiplier>0.1</multiplier>
-                                                                    </mulCalcer>
-                                                                </scaler>
-                                                            </Item>
-                                                        </impacts>
-                                                        <filter type="gameMechanics.world.creature.AvatarFilter" />
-                                                    </Item>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                        <distributor type="gameMechanics.elements.calcers.ZoneDistributor" />
-                                                        <data href="/Mechanics/RaidInstances/UmoirRaid/6_5_ExoShiftBoss/Pulse/Pulse.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </impactsIf>
-                                    </Item>
-                                </impactsElse>
-                            </Item>
-                        </casterToOffender>
-                    </impacts>
-                </Item>
-            </effectsIf>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectsIfCaster">
-            <predicates>
-                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                    <mobs>
-                        <Item href="StarStele5.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
-                    </mobs>
-                </Item>
-            </predicates>
-            <effectsIf>
-                <Item type="gameMechanics.elements.effects.TickableAura">
-                    <affectGroup>Enemies</affectGroup>
-                    <radius>4</radius>
-                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
-                        <filters>
-                            <Item type="gameMechanics.world.creature.AvatarFilter" />
-                            <Item type="gameMechanics.world.creature.AliveFilter" />
-                        </filters>
-                    </filter>
-                    <impactsIn>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                    <buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star5.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                    <buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                            </impactsIf>
-                            <impactsElse>
-                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                    <buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                            </impactsElse>
-                        </Item>
-                    </impactsIn>
-                    <impactsOut>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                    </impactsOut>
-                </Item>
-                <Item type="gameMechanics.elements.effects.EffectDamageTrigger">
-                    <damageType>MultipliersAbsorb</damageType>
-                    <impacts>
-                        <casterToOffender>
-                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                        <buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star5.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </Item>
-                                </predicates>
-                                <impactsIf>
-                                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.StackBuff">
-                                                <buff href="StarStele_Target.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                <delta type="gameMechanics.elements.calcers.FloatData">
-                                                    <value>-1</value>
-                                                </delta>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impactsIf>
-                                <impactsElse>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                                        </predicates>
-                                        <impactsIf>
-                                            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                                                        <radius>50</radius>
-                                                        <affectGroup>Friends</affectGroup>
-                                                        <impacts>
-                                                            <Item type="gameMechanics.elements.impacts.PureDamage">
-                                                                <damage>1</damage>
-                                                                <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
-                                                                        <multiplier>0.1</multiplier>
-                                                                    </mulCalcer>
-                                                                </scaler>
-                                                            </Item>
-                                                        </impacts>
-                                                        <filter type="gameMechanics.world.creature.AvatarFilter" />
-                                                    </Item>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                        <distributor type="gameMechanics.elements.calcers.ZoneDistributor" />
-                                                        <data href="/Mechanics/RaidInstances/UmoirRaid/6_5_ExoShiftBoss/Pulse/Pulse.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </impactsIf>
-                                    </Item>
-                                </impactsElse>
-                            </Item>
-                        </casterToOffender>
-                    </impacts>
-                </Item>
-            </effectsIf>
-        </Item>
-        <Item type="gameMechanics.elements.effects.Enlarge">
-            <factor>2</factor>
-        </Item>
-        <Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
-            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
-                <coeff>-1</coeff>
-            </scaler>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectInstantiating">
-            <effects>
-                <Item type="gameMechanics.elements.effects.EffectsIfCaster">
-                    <predicates>
-                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                            <mobs>
-                                <Item href="StarStele1.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
-                            </mobs>
-                        </Item>
-                    </predicates>
-                    <effectsIf>
-                        <Item type="gameMechanics.elements.effects.TickableAura">
-                            <affectGroup>Enemies</affectGroup>
-                            <radius>4</radius>
-                            <filter type="gameMechanics.constructor.basicElements.FilterAnd">
-                                <filters>
-                                    <Item type="gameMechanics.world.creature.AvatarFilter" />
-                                    <Item type="gameMechanics.world.creature.AliveFilter" />
-                                </filters>
-                            </filter>
-                            <impactsIn>
-                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                    <predicates>
-                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                            <buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star1.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                        </Item>
-                                    </predicates>
-                                    <impactsIf>
-                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                            <buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                        </Item>
-                                    </impactsIf>
-                                    <impactsElse>
-                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                            <buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                        </Item>
-                                    </impactsElse>
-                                </Item>
-                            </impactsIn>
-                            <impactsOut>
-                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                    <buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                    <buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                            </impactsOut>
-                        </Item>
-                        <Item type="gameMechanics.elements.effects.EffectDamageTrigger">
-                            <damageType>MultipliersAbsorb</damageType>
-                            <impacts>
-                                <casterToOffender>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                                <buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star1.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                            </Item>
-                                        </predicates>
-                                        <impactsIf>
-                                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.StackBuff">
-                                                        <buff href="StarStele_Target.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        <delta type="gameMechanics.elements.calcers.FloatData">
-                                                            <value>-1</value>
-                                                        </delta>
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </impactsIf>
-                                        <impactsElse>
-                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                <predicates>
-                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                                                </predicates>
-                                                <impactsIf>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                                        <impacts>
-                                                            <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                                                                <affectGroup>Friends</affectGroup>
-                                                                <impacts>
-                                                                    <Item type="gameMechanics.elements.impacts.PureDamage">
-                                                                        <damage>1</damage>
-                                                                        <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                                            <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
-                                                                                <multiplier>0.1</multiplier>
-                                                                            </mulCalcer>
-                                                                        </scaler>
-                                                                    </Item>
-                                                                </impacts>
-                                                                <filter type="gameMechanics.world.creature.AvatarFilter" />
-                                                            </Item>
-                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                                <distributor type="gameMechanics.elements.calcers.ZoneDistributor" />
-                                                                <data href="/Mechanics/RaidInstances/UmoirRaid/6_5_ExoShiftBoss/Pulse/Pulse.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                            </Item>
-                                                        </impacts>
-                                                    </Item>
-                                                </impactsIf>
-                                            </Item>
-                                        </impactsElse>
-                                    </Item>
-                                </casterToOffender>
-                            </impacts>
-                        </Item>
-                    </effectsIf>
-                </Item>
-            </effects>
-        </Item>
-    </effects>
+	<Header>
+		<resourceId>739873594</resourceId>
+	</Header>
+	<visualScript type="CreatureEffectsAction">
+		<visualEffects>
+			<Item>
+				<effectFx href="/Spells/FX/Mobs/Smeyana_MoonPuddle.(VisObjectTemplate).xdb#xpointer(/VisObjectTemplate)" />
+				<lockScale>true</lockScale>
+				<locator>Slot_Global</locator>
+			</Item>
+		</visualEffects>
+	</visualScript>
+	<effects>
+		<Item type="gameMechanics.elements.effects.EffectDisableAct">
+			<actions>
+				<Item>Move</Item>
+				<Item>Rotate</Item>
+			</actions>
+			<rooted>true</rooted>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectsIfCaster">
+			<predicates>
+				<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+					<mobs>
+						<Item href="StarStele2.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+					</mobs>
+				</Item>
+			</predicates>
+			<effectsIf>
+				<Item type="gameMechanics.elements.effects.TickableAura">
+					<affectGroup>Enemies</affectGroup>
+					<radius>4</radius>
+					<filter type="gameMechanics.constructor.basicElements.FilterAnd">
+						<filters>
+							<Item type="gameMechanics.world.creature.AvatarFilter" />
+							<Item type="gameMechanics.world.creature.AliveFilter" />
+						</filters>
+					</filter>
+					<impactsIn>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.elements.resources.ResourceBuff">
+									<buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+									<buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</impactsIf>
+							<impactsElse>
+								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+									<buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</impactsElse>
+						</Item>
+					</impactsIn>
+					<impactsOut>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+					</impactsOut>
+				</Item>
+				<Item type="gameMechanics.elements.effects.EffectDamageTrigger">
+					<damageType>MultipliersAbsorb</damageType>
+					<impacts>
+						<casterToOffender>
+							<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+								<predicates>
+									<Item type="gameMechanics.elements.resources.ResourceBuff">
+										<buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+								</predicates>
+								<impactsIf>
+									<Item type="gameMechanics.elements.impacts.ReturningImpact">
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.StackBuff">
+												<buff href="StarStele_Target.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+												<delta type="gameMechanics.elements.calcers.FloatData">
+													<value>-1</value>
+												</delta>
+											</Item>
+										</impacts>
+									</Item>
+								</impactsIf>
+								<impactsElse>
+									<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+										<predicates>
+											<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+										</predicates>
+										<impactsIf>
+											<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+														<affectGroup>Friends</affectGroup>
+														<impacts>
+															<Item type="gameMechanics.elements.impacts.PureDamage">
+																<damage>1</damage>
+																<scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+																	<mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+																		<multiplier>0.1</multiplier>
+																	</mulCalcer>
+																</scaler>
+															</Item>
+														</impacts>
+														<filter type="gameMechanics.world.creature.AvatarFilter" />
+													</Item>
+													<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+														<distributor type="gameMechanics.elements.calcers.ZoneDistributor" />
+														<data href="/Mechanics/RaidInstances/UmoirRaid/6_5_ExoShiftBoss/Pulse/Pulse.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+													</Item>
+												</impacts>
+											</Item>
+										</impactsIf>
+									</Item>
+								</impactsElse>
+							</Item>
+						</casterToOffender>
+					</impacts>
+				</Item>
+			</effectsIf>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectsIfCaster">
+			<predicates>
+				<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+					<mobs>
+						<Item href="StarStele3.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+					</mobs>
+				</Item>
+			</predicates>
+			<effectsIf>
+				<Item type="gameMechanics.elements.effects.TickableAura">
+					<affectGroup>Enemies</affectGroup>
+					<radius>4</radius>
+					<filter type="gameMechanics.constructor.basicElements.FilterAnd">
+						<filters>
+							<Item type="gameMechanics.world.creature.AvatarFilter" />
+							<Item type="gameMechanics.world.creature.AliveFilter" />
+						</filters>
+					</filter>
+					<impactsIn>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.elements.resources.ResourceBuff">
+									<buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star3.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+									<buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</impactsIf>
+							<impactsElse>
+								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+									<buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</impactsElse>
+						</Item>
+					</impactsIn>
+					<impactsOut>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+					</impactsOut>
+				</Item>
+				<Item type="gameMechanics.elements.effects.EffectDamageTrigger">
+					<damageType>MultipliersAbsorb</damageType>
+					<impacts>
+						<casterToOffender>
+							<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+								<predicates>
+									<Item type="gameMechanics.elements.resources.ResourceBuff">
+										<buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star3.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+								</predicates>
+								<impactsIf>
+									<Item type="gameMechanics.elements.impacts.ReturningImpact">
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.StackBuff">
+												<buff href="StarStele_Target.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+												<delta type="gameMechanics.elements.calcers.FloatData">
+													<value>-1</value>
+												</delta>
+											</Item>
+										</impacts>
+									</Item>
+								</impactsIf>
+								<impactsElse>
+									<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+										<predicates>
+											<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+										</predicates>
+										<impactsIf>
+											<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+														<affectGroup>Friends</affectGroup>
+														<impacts>
+															<Item type="gameMechanics.elements.impacts.PureDamage">
+																<damage>1</damage>
+																<scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+																	<mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+																		<multiplier>0.1</multiplier>
+																	</mulCalcer>
+																</scaler>
+															</Item>
+														</impacts>
+														<filter type="gameMechanics.world.creature.AvatarFilter" />
+													</Item>
+													<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+														<distributor type="gameMechanics.elements.calcers.ZoneDistributor" />
+														<data href="/Mechanics/RaidInstances/UmoirRaid/6_5_ExoShiftBoss/Pulse/Pulse.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+													</Item>
+												</impacts>
+											</Item>
+										</impactsIf>
+									</Item>
+								</impactsElse>
+							</Item>
+						</casterToOffender>
+					</impacts>
+				</Item>
+			</effectsIf>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectsIfCaster">
+			<predicates>
+				<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+					<mobs>
+						<Item href="StarStele4.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+					</mobs>
+				</Item>
+			</predicates>
+			<effectsIf>
+				<Item type="gameMechanics.elements.effects.TickableAura">
+					<affectGroup>Enemies</affectGroup>
+					<radius>4</radius>
+					<filter type="gameMechanics.constructor.basicElements.FilterAnd">
+						<filters>
+							<Item type="gameMechanics.world.creature.AvatarFilter" />
+							<Item type="gameMechanics.world.creature.AliveFilter" />
+						</filters>
+					</filter>
+					<impactsIn>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.elements.resources.ResourceBuff">
+									<buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star4.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+									<buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</impactsIf>
+							<impactsElse>
+								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+									<buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</impactsElse>
+						</Item>
+					</impactsIn>
+					<impactsOut>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+					</impactsOut>
+				</Item>
+				<Item type="gameMechanics.elements.effects.EffectDamageTrigger">
+					<damageType>MultipliersAbsorb</damageType>
+					<impacts>
+						<casterToOffender>
+							<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+								<predicates>
+									<Item type="gameMechanics.elements.resources.ResourceBuff">
+										<buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star4.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+								</predicates>
+								<impactsIf>
+									<Item type="gameMechanics.elements.impacts.ReturningImpact">
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.StackBuff">
+												<buff href="StarStele_Target.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+												<delta type="gameMechanics.elements.calcers.FloatData">
+													<value>-1</value>
+												</delta>
+											</Item>
+										</impacts>
+									</Item>
+								</impactsIf>
+								<impactsElse>
+									<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+										<predicates>
+											<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+										</predicates>
+										<impactsIf>
+											<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+														<affectGroup>Friends</affectGroup>
+														<impacts>
+															<Item type="gameMechanics.elements.impacts.PureDamage">
+																<damage>1</damage>
+																<scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+																	<mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+																		<multiplier>0.1</multiplier>
+																	</mulCalcer>
+																</scaler>
+															</Item>
+														</impacts>
+														<filter type="gameMechanics.world.creature.AvatarFilter" />
+													</Item>
+													<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+														<distributor type="gameMechanics.elements.calcers.ZoneDistributor" />
+														<data href="/Mechanics/RaidInstances/UmoirRaid/6_5_ExoShiftBoss/Pulse/Pulse.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+													</Item>
+												</impacts>
+											</Item>
+										</impactsIf>
+									</Item>
+								</impactsElse>
+							</Item>
+						</casterToOffender>
+					</impacts>
+				</Item>
+			</effectsIf>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectsIfCaster">
+			<predicates>
+				<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+					<mobs>
+						<Item href="StarStele5.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+					</mobs>
+				</Item>
+			</predicates>
+			<effectsIf>
+				<Item type="gameMechanics.elements.effects.TickableAura">
+					<affectGroup>Enemies</affectGroup>
+					<radius>4</radius>
+					<filter type="gameMechanics.constructor.basicElements.FilterAnd">
+						<filters>
+							<Item type="gameMechanics.world.creature.AvatarFilter" />
+							<Item type="gameMechanics.world.creature.AliveFilter" />
+						</filters>
+					</filter>
+					<impactsIn>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.elements.resources.ResourceBuff">
+									<buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star5.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+									<buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</impactsIf>
+							<impactsElse>
+								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+									<buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</impactsElse>
+						</Item>
+					</impactsIn>
+					<impactsOut>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+					</impactsOut>
+				</Item>
+				<Item type="gameMechanics.elements.effects.EffectDamageTrigger">
+					<damageType>MultipliersAbsorb</damageType>
+					<impacts>
+						<casterToOffender>
+							<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+								<predicates>
+									<Item type="gameMechanics.elements.resources.ResourceBuff">
+										<buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star5.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+								</predicates>
+								<impactsIf>
+									<Item type="gameMechanics.elements.impacts.ReturningImpact">
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.StackBuff">
+												<buff href="StarStele_Target.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+												<delta type="gameMechanics.elements.calcers.FloatData">
+													<value>-1</value>
+												</delta>
+											</Item>
+										</impacts>
+									</Item>
+								</impactsIf>
+								<impactsElse>
+									<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+										<predicates>
+											<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+										</predicates>
+										<impactsIf>
+											<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+														<radius>50</radius>
+														<affectGroup>Friends</affectGroup>
+														<impacts>
+															<Item type="gameMechanics.elements.impacts.PureDamage">
+																<damage>1</damage>
+																<scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+																	<mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+																		<multiplier>0.1</multiplier>
+																	</mulCalcer>
+																</scaler>
+															</Item>
+														</impacts>
+														<filter type="gameMechanics.world.creature.AvatarFilter" />
+													</Item>
+													<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+														<distributor type="gameMechanics.elements.calcers.ZoneDistributor" />
+														<data href="/Mechanics/RaidInstances/UmoirRaid/6_5_ExoShiftBoss/Pulse/Pulse.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+													</Item>
+												</impacts>
+											</Item>
+										</impactsIf>
+									</Item>
+								</impactsElse>
+							</Item>
+						</casterToOffender>
+					</impacts>
+				</Item>
+			</effectsIf>
+		</Item>
+		<Item type="gameMechanics.elements.effects.Enlarge">
+			<factor>2</factor>
+		</Item>
+		<Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
+			<scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+				<coeff>-1</coeff>
+			</scaler>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectInstantiating">
+			<effects>
+				<Item type="gameMechanics.elements.effects.EffectsIfCaster">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+							<mobs>
+								<Item href="StarStele1.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+							</mobs>
+						</Item>
+					</predicates>
+					<effectsIf>
+						<Item type="gameMechanics.elements.effects.TickableAura">
+							<affectGroup>Enemies</affectGroup>
+							<radius>4</radius>
+							<filter type="gameMechanics.constructor.basicElements.FilterAnd">
+								<filters>
+									<Item type="gameMechanics.world.creature.AvatarFilter" />
+									<Item type="gameMechanics.world.creature.AliveFilter" />
+								</filters>
+							</filter>
+							<impactsIn>
+								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+									<predicates>
+										<Item type="gameMechanics.elements.resources.ResourceBuff">
+											<buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star1.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+										</Item>
+									</predicates>
+									<impactsIf>
+										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+											<buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+										</Item>
+									</impactsIf>
+									<impactsElse>
+										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+											<buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+										</Item>
+									</impactsElse>
+								</Item>
+							</impactsIn>
+							<impactsOut>
+								<Item type="gameMechanics.elements.impacts.BuffDetacher">
+									<buff href="Fail.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+								<Item type="gameMechanics.elements.impacts.BuffDetacher">
+									<buff href="Win.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</impactsOut>
+						</Item>
+						<Item type="gameMechanics.elements.effects.EffectDamageTrigger">
+							<damageType>MultipliersAbsorb</damageType>
+							<impacts>
+								<casterToOffender>
+									<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+										<predicates>
+											<Item type="gameMechanics.elements.resources.ResourceBuff">
+												<buff href="/Mechanics/RaidInstances/UmoirRaid/8_Smeyana/Stars/Star1.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+											</Item>
+										</predicates>
+										<impactsIf>
+											<Item type="gameMechanics.elements.impacts.ReturningImpact">
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.StackBuff">
+														<buff href="StarStele_Target.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														<delta type="gameMechanics.elements.calcers.FloatData">
+															<value>-1</value>
+														</delta>
+													</Item>
+												</impacts>
+											</Item>
+										</impactsIf>
+										<impactsElse>
+											<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+												<predicates>
+													<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+												</predicates>
+												<impactsIf>
+													<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+														<impacts>
+															<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+																<affectGroup>Friends</affectGroup>
+																<impacts>
+																	<Item type="gameMechanics.elements.impacts.PureDamage">
+																		<damage>1</damage>
+																		<scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+																			<mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+																				<multiplier>0.1</multiplier>
+																			</mulCalcer>
+																		</scaler>
+																	</Item>
+																</impacts>
+																<filter type="gameMechanics.world.creature.AvatarFilter" />
+															</Item>
+															<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+																<distributor type="gameMechanics.elements.calcers.ZoneDistributor" />
+																<data href="/Mechanics/RaidInstances/UmoirRaid/6_5_ExoShiftBoss/Pulse/Pulse.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+															</Item>
+														</impacts>
+													</Item>
+												</impactsIf>
+											</Item>
+										</impactsElse>
+									</Item>
+								</casterToOffender>
+							</impacts>
+						</Item>
+					</effectsIf>
+				</Item>
+			</effects>
+		</Item>
+	</effects>
 </gameMechanics.constructor.schemes.ability.AbilityResource>

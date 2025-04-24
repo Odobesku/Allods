@@ -1,187 +1,187 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.buff.BuffResource>
-    <Header>
-        <resourceId>739940418</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <Name href="ChainHealDamage.(SpellSingleTarget).Name.txt" />
-    <needVisualize>false</needVisualize>
-    <needVisualizeDuration>false</needVisualizeDuration>
-    <effects>
-        <Item type="gameMechanics.elements.effects.Switch">
-            <impactsOn>
-                <Item type="gameMechanics.elements.impacts.ImpactsIf">
-                    <predicate type="gameMechanics.constructor.basicElements.BinaryPredicateOr">
-                        <predicates>
-                            <Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
-                                <affectGroup>Enemies</affectGroup>
-                            </Item>
-                            <Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
-                                <affectGroup>Friends</affectGroup>
-                            </Item>
-                        </predicates>
-                    </predicate>
-                    <impactsIf>
-                        <Item type="gameMechanics.elements.impacts.MarkedImpact">
-                            <mark href="ChainHealDamageOnTarget.(MarkResource).xdb" />
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.ImpactsIf">
-                            <predicate type="gameMechanics.elements.predicates.PredicateAffectGroup">
-                                <affectGroup>Enemies</affectGroup>
-                            </predicate>
-                            <impactsIf>
-                                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ExecuteImpactsUnderEffects">
-                                                    <effects>
-                                                        <Item type="gameMechanics.elements.effects.EffectsIfCaster">
-                                                            <predicates>
-                                                                <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                                                    <buff href="/Mechanics/Spells/CommonBuffs/Aspects/DD/Buff01.(BuffResource).xdb" />
-                                                                </Item>
-                                                            </predicates>
-                                                            <effectsIf>
-                                                                <Item type="gameMechanics.elements.effects.IncomingCritProbabilitySummand">
-                                                                    <summand type="gameMechanics.elements.calcers.FloatData">
-                                                                        <value>1</value>
-                                                                    </summand>
-                                                                </Item>
-                                                            </effectsIf>
-                                                        </Item>
-                                                    </effects>
-                                                    <impacts>
-                                                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
-                                                            <element>DISEASE</element>
-                                                            <damage>1</damage>
-                                                            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-                                                                <scalers>
-                                                                    <Item type="gameMechanics.elements.scalers.MagicScaler" />
-                                                                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
-                                                                            <externalCalcer hrefvar="externalCalcerdmg" />
-                                                                        </mulCalcer>
-                                                                    </Item>
-                                                                </scalers>
-                                                            </scaler>
-                                                        </Item>
-                                                    </impacts>
-                                                </Item>
-                                            </impacts>
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
-                                    <data href="ChainVisualEnemy.(ClientData).xdb" />
-                                </Item>
-                            </impactsIf>
-                            <impactsElse>
-                                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ExecuteImpactsUnderEffects">
-                                                    <effects>
-                                                        <Item type="gameMechanics.elements.effects.EffectsIfCaster">
-                                                            <predicates>
-                                                                <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                                                    <buff href="/Mechanics/Spells/CommonBuffs/Aspects/Support/Buff01.(BuffResource).xdb" />
-                                                                </Item>
-                                                            </predicates>
-                                                            <effectsIf>
-                                                                <Item type="gameMechanics.elements.effects.IncomingCritProbabilitySummand">
-                                                                    <summand type="gameMechanics.elements.calcers.FloatData">
-                                                                        <value>1</value>
-                                                                    </summand>
-                                                                </Item>
-                                                            </effectsIf>
-                                                        </Item>
-                                                    </effects>
-                                                    <impacts>
-                                                        <Item type="gameMechanics.elements.impacts.ImpactHeal">
-                                                            <heal>1</heal>
-                                                            <scalerCaster type="gameMechanics.constructor.basicElements.ScalerMultiple">
-                                                                <scalers>
-                                                                    <Item type="gameMechanics.elements.scalers.HealScaler" />
-                                                                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
-                                                                            <externalCalcer hrefvar="externalCalcerheal" />
-                                                                        </mulCalcer>
-                                                                    </Item>
-                                                                </scalers>
-                                                            </scalerCaster>
-                                                        </Item>
-                                                    </impacts>
-                                                </Item>
-                                            </impacts>
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
-                                    <data href="ChainVisualFriend.(ClientData).xdb" />
-                                </Item>
-                            </impactsElse>
-                        </Item>
-                    </impactsIf>
-                </Item>
-            </impactsOn>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectJumpOnDetach">
-            <jumps type="gameMechanics.elements.calcers.CalcerLongSum">
-                <calcers>
-                    <Item type="constructor.elements.CalcerLongExternal">
-                        <externalCalcer hrefvar="externalCalcerJump" />
-                    </Item>
-                    <Item type="constructor.elements.CalcerLongExternal">
-                        <externalCalcer href="/Mechanics/Spells/Bard63/Abilities/ChainMoreJumps/JumpsCountAbilityBonus.(CalcerLongResource).xdb" />
-                    </Item>
-                    <Item type="gameMechanics.elements.calcers.LongData">
-                        <value>-1</value>
-                    </Item>
-                </calcers>
-            </jumps>
-            <buff hrefvar="buff" />
-            <autotarget type="gameMechanics.constructor.schemes.spell.multiTarget.ClosestAutotarget">
-                <group>All</group>
-            </autotarget>
-            <onBehalfOfCaster>true</onBehalfOfCaster>
-            <radius>20</radius>
-            <inCasterRange>false</inCasterRange>
-            <renewingEffects>
-                <Item type="gameMechanics.elements.effects.Switch">
-                    <impactsOff>
-                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
-                            <data href="ChainVisual.(ClientData).xdb" />
-                            <calcers>
-                                <addressEntries>
-                                    <Item>
-                                        <name>caster</name>
-                                        <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
-                                    </Item>
-                                    <Item>
-                                        <name>target</name>
-                                        <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
-                                    </Item>
-                                </addressEntries>
-                            </calcers>
-                        </Item>
-                    </impactsOff>
-                </Item>
-            </renewingEffects>
-        </Item>
-    </effects>
-    <duration>50</duration>
-    <isStackable>false</isStackable>
-    <isHelpful>false</isHelpful>
-    <isMultiple>true</isMultiple>
-    <ranks>
-        <Item href="ChainHealDamage01.(BuffResource).xdb" />
-        <Item href="ChainHealDamage02.(BuffResource).xdb" />
-        <Item href="ChainHealDamage03.(BuffResource).xdb" />
-    </ranks>
-    <canBeSaved>false</canBeSaved>
+	<Header>
+		<resourceId>739940418</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<Name href="ChainHealDamage.(SpellSingleTarget).Name.txt" />
+	<needVisualize>false</needVisualize>
+	<needVisualizeDuration>false</needVisualizeDuration>
+	<effects>
+		<Item type="gameMechanics.elements.effects.Switch">
+			<impactsOn>
+				<Item type="gameMechanics.elements.impacts.ImpactsIf">
+					<predicate type="gameMechanics.constructor.basicElements.BinaryPredicateOr">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
+								<affectGroup>Enemies</affectGroup>
+							</Item>
+							<Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
+								<affectGroup>Friends</affectGroup>
+							</Item>
+						</predicates>
+					</predicate>
+					<impactsIf>
+						<Item type="gameMechanics.elements.impacts.MarkedImpact">
+							<mark href="ChainHealDamageOnTarget.(MarkResource).xdb" />
+						</Item>
+						<Item type="gameMechanics.elements.impacts.ImpactsIf">
+							<predicate type="gameMechanics.elements.predicates.PredicateAffectGroup">
+								<affectGroup>Enemies</affectGroup>
+							</predicate>
+							<impactsIf>
+								<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ExecuteImpactsUnderEffects">
+													<effects>
+														<Item type="gameMechanics.elements.effects.EffectsIfCaster">
+															<predicates>
+																<Item type="gameMechanics.elements.resources.ResourceBuff">
+																	<buff href="/Mechanics/Spells/CommonBuffs/Aspects/DD/Buff01.(BuffResource).xdb" />
+																</Item>
+															</predicates>
+															<effectsIf>
+																<Item type="gameMechanics.elements.effects.IncomingCritProbabilitySummand">
+																	<summand type="gameMechanics.elements.calcers.FloatData">
+																		<value>1</value>
+																	</summand>
+																</Item>
+															</effectsIf>
+														</Item>
+													</effects>
+													<impacts>
+														<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+															<element>DISEASE</element>
+															<damage>1</damage>
+															<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+																<scalers>
+																	<Item type="gameMechanics.elements.scalers.MagicScaler" />
+																	<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+																		<mulCalcer type="constructor.elements.CalcerFloatExternal">
+																			<externalCalcer hrefvar="externalCalcerdmg" />
+																		</mulCalcer>
+																	</Item>
+																</scalers>
+															</scaler>
+														</Item>
+													</impacts>
+												</Item>
+											</impacts>
+										</Item>
+									</impacts>
+								</Item>
+								<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+									<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+									<data href="ChainVisualEnemy.(ClientData).xdb" />
+								</Item>
+							</impactsIf>
+							<impactsElse>
+								<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ExecuteImpactsUnderEffects">
+													<effects>
+														<Item type="gameMechanics.elements.effects.EffectsIfCaster">
+															<predicates>
+																<Item type="gameMechanics.elements.resources.ResourceBuff">
+																	<buff href="/Mechanics/Spells/CommonBuffs/Aspects/Support/Buff01.(BuffResource).xdb" />
+																</Item>
+															</predicates>
+															<effectsIf>
+																<Item type="gameMechanics.elements.effects.IncomingCritProbabilitySummand">
+																	<summand type="gameMechanics.elements.calcers.FloatData">
+																		<value>1</value>
+																	</summand>
+																</Item>
+															</effectsIf>
+														</Item>
+													</effects>
+													<impacts>
+														<Item type="gameMechanics.elements.impacts.ImpactHeal">
+															<heal>1</heal>
+															<scalerCaster type="gameMechanics.constructor.basicElements.ScalerMultiple">
+																<scalers>
+																	<Item type="gameMechanics.elements.scalers.HealScaler" />
+																	<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+																		<mulCalcer type="constructor.elements.CalcerFloatExternal">
+																			<externalCalcer hrefvar="externalCalcerheal" />
+																		</mulCalcer>
+																	</Item>
+																</scalers>
+															</scalerCaster>
+														</Item>
+													</impacts>
+												</Item>
+											</impacts>
+										</Item>
+									</impacts>
+								</Item>
+								<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+									<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+									<data href="ChainVisualFriend.(ClientData).xdb" />
+								</Item>
+							</impactsElse>
+						</Item>
+					</impactsIf>
+				</Item>
+			</impactsOn>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectJumpOnDetach">
+			<jumps type="gameMechanics.elements.calcers.CalcerLongSum">
+				<calcers>
+					<Item type="constructor.elements.CalcerLongExternal">
+						<externalCalcer hrefvar="externalCalcerJump" />
+					</Item>
+					<Item type="constructor.elements.CalcerLongExternal">
+						<externalCalcer href="/Mechanics/Spells/Bard63/Abilities/ChainMoreJumps/JumpsCountAbilityBonus.(CalcerLongResource).xdb" />
+					</Item>
+					<Item type="gameMechanics.elements.calcers.LongData">
+						<value>-1</value>
+					</Item>
+				</calcers>
+			</jumps>
+			<buff hrefvar="buff" />
+			<autotarget type="gameMechanics.constructor.schemes.spell.multiTarget.ClosestAutotarget">
+				<group>All</group>
+			</autotarget>
+			<onBehalfOfCaster>true</onBehalfOfCaster>
+			<radius>20</radius>
+			<inCasterRange>false</inCasterRange>
+			<renewingEffects>
+				<Item type="gameMechanics.elements.effects.Switch">
+					<impactsOff>
+						<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+							<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+							<data href="ChainVisual.(ClientData).xdb" />
+							<calcers>
+								<addressEntries>
+									<Item>
+										<name>caster</name>
+										<finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+									</Item>
+									<Item>
+										<name>target</name>
+										<finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+									</Item>
+								</addressEntries>
+							</calcers>
+						</Item>
+					</impactsOff>
+				</Item>
+			</renewingEffects>
+		</Item>
+	</effects>
+	<duration>50</duration>
+	<isStackable>false</isStackable>
+	<isHelpful>false</isHelpful>
+	<isMultiple>true</isMultiple>
+	<ranks>
+		<Item href="ChainHealDamage01.(BuffResource).xdb" />
+		<Item href="ChainHealDamage02.(BuffResource).xdb" />
+		<Item href="ChainHealDamage03.(BuffResource).xdb" />
+	</ranks>
+	<canBeSaved>false</canBeSaved>
 </gameMechanics.constructor.schemes.buff.BuffResource>

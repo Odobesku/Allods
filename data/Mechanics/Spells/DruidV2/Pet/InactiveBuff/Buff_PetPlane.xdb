@@ -1,183 +1,183 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.buff.BuffResource>
-    <Header>
-        <resourceId>59539</resourceId>
-    </Header>
-    <Name href="Buff_PetPlaneName.txt" />
-    <Description href="Buff_PetPlaneDesc.txt" />
-    <image href="/Interface/Icons/Spells/Paladin/PaladinCleanse.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
-    <visScript href="Pet.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
-    <nameTemplate href="Buff_PetPlaneName.txt" />
-    <descTemplate href="Buff_PetPlaneDesc.txt" />
-    <effects>
-        <Item type="gameMechanics.elements.effects.Switch">
-            <impactsOn>
-                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                    <buff href="AnimationStun.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactIsolator">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactsToMaster">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                    <predicates>
-                                        <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
-                                            <spell href="/Mechanics/Spells/DruidV2/PCRest/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                                        </Item>
-                                    </predicates>
-                                    <impactsIf>
-                                        <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
-                                            <spell href="/Mechanics/Spells/DruidV2/PCRest/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                                        </Item>
-                                    </impactsIf>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                </Item>
-            </impactsOn>
-            <impactsOff>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="/Mechanics/Spells/DruidV2/DruidAbility/NoAggroBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactIsolator">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactsToMaster">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                    <predicates>
-                                        <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
-                                            <spell href="/Mechanics/Spells/DruidV2/PCRest/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                                        </Item>
-                                    </predicates>
-                                    <impactsElse>
-                                        <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellActivate">
-                                            <spell href="/Mechanics/Spells/DruidV2/PCRest/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                                        </Item>
-                                    </impactsElse>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                </Item>
-            </impactsOff>
-        </Item>
-        <Item type="gameMechanics.elements.effects.ImmunityToBuffs">
-            <predicates>
-                <Item type="gameMechanics.constructor.schemes.buff.PredicateBuffHarmful" />
-            </predicates>
-        </Item>
-        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.elements.predicates.PredicateHealthHigher">
-                            <level>0.99</level>
-                        </Item>
-                    </predicates>
-                    <impactsElse>
-                        <Item type="gameMechanics.elements.impacts.DirectHeal">
-                            <heal>1</heal>
-                            <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                <mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
-                                    <calcers>
-                                        <Item type="gameMechanics.elements.calcers.FullHealthCalcer" />
-                                        <Item type="gameMechanics.elements.calcers.AbilityRankCalcer">
-                                            <ability href="/Mechanics/Abilities/DruidTalentsV2/PetRealmUpgrade/petAbility/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-                                            <mul>0.018</mul>
-                                            <sum>0.05</sum>
-                                        </Item>
-                                    </calcers>
-                                </mulCalcer>
-                            </scalerTarget>
-                        </Item>
-                    </impactsElse>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.elements.resources.ResourceMana">
-                            <mana>100</mana>
-                            <manaType>
-                                <Item>Energy</Item>
-                            </manaType>
-                        </Item>
-                    </predicates>
-                    <impactsElse>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
-                                    <ability href="/Mechanics/Abilities/DruidTalentsV2/PetRealmUpgrade/petAbility/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-                                </Item>
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                    <predicates>
-                                        <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
-                                            <ability href="/Mechanics/Abilities/DruidTalentsV2/PetRealmUpgrade/petAbility/Ability03.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-                                            <anyRank>false</anyRank>
-                                        </Item>
-                                    </predicates>
-                                    <impactsIf>
-                                        <Item type="gameMechanics.elements.impacts.IncrementManaBase">
-                                            <manaType>Energy</manaType>
-                                            <factor>0.1</factor>
-                                            <threatMultiplier>0</threatMultiplier>
-                                        </Item>
-                                    </impactsIf>
-                                    <impactsElse>
-                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                            <predicates>
-                                                <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
-                                                    <ability href="/Mechanics/Abilities/DruidTalentsV2/PetRealmUpgrade/petAbility/Ability02.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-                                                    <anyRank>false</anyRank>
-                                                </Item>
-                                            </predicates>
-                                            <impactsIf>
-                                                <Item type="gameMechanics.elements.impacts.IncrementManaBase">
-                                                    <manaType>Energy</manaType>
-                                                    <factor>0.08</factor>
-                                                    <threatMultiplier>0</threatMultiplier>
-                                                </Item>
-                                            </impactsIf>
-                                            <impactsElse>
-                                                <Item type="gameMechanics.elements.impacts.IncrementManaBase">
-                                                    <manaType>Energy</manaType>
-                                                    <factor>0.07</factor>
-                                                    <threatMultiplier>0</threatMultiplier>
-                                                </Item>
-                                            </impactsElse>
-                                        </Item>
-                                    </impactsElse>
-                                </Item>
-                            </impactsIf>
-                            <impactsElse>
-                                <Item type="gameMechanics.elements.impacts.IncrementManaBase">
-                                    <manaType>Energy</manaType>
-                                    <factor>0.05</factor>
-                                    <threatMultiplier>0</threatMultiplier>
-                                </Item>
-                            </impactsElse>
-                        </Item>
-                    </impactsElse>
-                </Item>
-            </impacts>
-            <initialDelay>-1</initialDelay>
-        </Item>
-        <Item type="gameMechanics.elements.effects.AddParticularVisibilityRule">
-            <visibilityRule>
-                <channel>Select</channel>
-                <vector>Outgoing</vector>
-                <direction>Outgoing</direction>
-                <plane href="/Mechanics/Planes/DruidPetPlane.xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
-            </visibilityRule>
-            <resolventsFor>
-                <Item type="gameMechanics.elements.addresseeFinders.AddresseeFinderMaster" />
-            </resolventsFor>
-        </Item>
-        <Item type="gameMechanics.elements.effects.AddPlane">
-            <plane href="/Mechanics/Planes/DruidPetPlane.xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
-        </Item>
-    </effects>
-    <isHelpful>true</isHelpful>
-    <canBeSaved>false</canBeSaved>
+	<Header>
+		<resourceId>59539</resourceId>
+	</Header>
+	<Name href="Buff_PetPlaneName.txt" />
+	<Description href="Buff_PetPlaneDesc.txt" />
+	<image href="/Interface/Icons/Spells/Paladin/PaladinCleanse.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+	<visScript href="Pet.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+	<nameTemplate href="Buff_PetPlaneName.txt" />
+	<descTemplate href="Buff_PetPlaneDesc.txt" />
+	<effects>
+		<Item type="gameMechanics.elements.effects.Switch">
+			<impactsOn>
+				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+					<buff href="AnimationStun.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactIsolator">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactsToMaster">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+									<predicates>
+										<Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+											<spell href="/Mechanics/Spells/DruidV2/PCRest/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+										</Item>
+									</predicates>
+									<impactsIf>
+										<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+											<spell href="/Mechanics/Spells/DruidV2/PCRest/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+										</Item>
+									</impactsIf>
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+			</impactsOn>
+			<impactsOff>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="/Mechanics/Spells/DruidV2/DruidAbility/NoAggroBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactIsolator">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactsToMaster">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+									<predicates>
+										<Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+											<spell href="/Mechanics/Spells/DruidV2/PCRest/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+										</Item>
+									</predicates>
+									<impactsElse>
+										<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellActivate">
+											<spell href="/Mechanics/Spells/DruidV2/PCRest/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+										</Item>
+									</impactsElse>
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+			</impactsOff>
+		</Item>
+		<Item type="gameMechanics.elements.effects.ImmunityToBuffs">
+			<predicates>
+				<Item type="gameMechanics.constructor.schemes.buff.PredicateBuffHarmful" />
+			</predicates>
+		</Item>
+		<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateHealthHigher">
+							<level>0.99</level>
+						</Item>
+					</predicates>
+					<impactsElse>
+						<Item type="gameMechanics.elements.impacts.DirectHeal">
+							<heal>1</heal>
+							<scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+								<mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
+									<calcers>
+										<Item type="gameMechanics.elements.calcers.FullHealthCalcer" />
+										<Item type="gameMechanics.elements.calcers.AbilityRankCalcer">
+											<ability href="/Mechanics/Abilities/DruidTalentsV2/PetRealmUpgrade/petAbility/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+											<mul>0.018</mul>
+											<sum>0.05</sum>
+										</Item>
+									</calcers>
+								</mulCalcer>
+							</scalerTarget>
+						</Item>
+					</impactsElse>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.resources.ResourceMana">
+							<mana>100</mana>
+							<manaType>
+								<Item>Energy</Item>
+							</manaType>
+						</Item>
+					</predicates>
+					<impactsElse>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+									<ability href="/Mechanics/Abilities/DruidTalentsV2/PetRealmUpgrade/petAbility/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+								</Item>
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+									<predicates>
+										<Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+											<ability href="/Mechanics/Abilities/DruidTalentsV2/PetRealmUpgrade/petAbility/Ability03.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+											<anyRank>false</anyRank>
+										</Item>
+									</predicates>
+									<impactsIf>
+										<Item type="gameMechanics.elements.impacts.IncrementManaBase">
+											<manaType>Energy</manaType>
+											<factor>0.1</factor>
+											<threatMultiplier>0</threatMultiplier>
+										</Item>
+									</impactsIf>
+									<impactsElse>
+										<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+											<predicates>
+												<Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+													<ability href="/Mechanics/Abilities/DruidTalentsV2/PetRealmUpgrade/petAbility/Ability02.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+													<anyRank>false</anyRank>
+												</Item>
+											</predicates>
+											<impactsIf>
+												<Item type="gameMechanics.elements.impacts.IncrementManaBase">
+													<manaType>Energy</manaType>
+													<factor>0.08</factor>
+													<threatMultiplier>0</threatMultiplier>
+												</Item>
+											</impactsIf>
+											<impactsElse>
+												<Item type="gameMechanics.elements.impacts.IncrementManaBase">
+													<manaType>Energy</manaType>
+													<factor>0.07</factor>
+													<threatMultiplier>0</threatMultiplier>
+												</Item>
+											</impactsElse>
+										</Item>
+									</impactsElse>
+								</Item>
+							</impactsIf>
+							<impactsElse>
+								<Item type="gameMechanics.elements.impacts.IncrementManaBase">
+									<manaType>Energy</manaType>
+									<factor>0.05</factor>
+									<threatMultiplier>0</threatMultiplier>
+								</Item>
+							</impactsElse>
+						</Item>
+					</impactsElse>
+				</Item>
+			</impacts>
+			<initialDelay>-1</initialDelay>
+		</Item>
+		<Item type="gameMechanics.elements.effects.AddParticularVisibilityRule">
+			<visibilityRule>
+				<channel>Select</channel>
+				<vector>Outgoing</vector>
+				<direction>Outgoing</direction>
+				<plane href="/Mechanics/Planes/DruidPetPlane.xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+			</visibilityRule>
+			<resolventsFor>
+				<Item type="gameMechanics.elements.addresseeFinders.AddresseeFinderMaster" />
+			</resolventsFor>
+		</Item>
+		<Item type="gameMechanics.elements.effects.AddPlane">
+			<plane href="/Mechanics/Planes/DruidPetPlane.xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+		</Item>
+	</effects>
+	<isHelpful>true</isHelpful>
+	<canBeSaved>false</canBeSaved>
 </gameMechanics.constructor.schemes.buff.BuffResource>

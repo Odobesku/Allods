@@ -1,162 +1,162 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>739878254</resourceId>
-    </Header>
-    <Name href="DoYouWantToDie.(SpellSingleTarget).Name.txt" />
-    <Description href="DoYouWantToDie.(SpellSingleTarget).Description.txt" />
-    <visualScripts href="Special.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
-    <range type="gameMechanics.elements.calcers.FloatData">
-        <value>7</value>
-    </range>
-    <targetType>STTCurrentTargetNotSelf</targetType>
-    <isAggro>false</isAggro>
-    <iffPolicy>Friends</iffPolicy>
-    <mechanics>
-        <cooldown>
-            <duration>5000</duration>
-        </cooldown>
-        <casterConditions>
-            <Item type="gameMechanics.elements.predicates.PredicateInGroup" />
-            <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
-                <zone href="/Maps/2ndCircle/ScriptZones/ZoneContested3/DieZone.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
-                    <quest href="/World/Quests/ZoneContested3/Q_add_07/Q_add_07.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
-                    <counterResource href="/World/Quests/ZoneContested3/Q_add_07/CountId_1.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
-                </predicate>
-            </Item>
-        </casterConditions>
-        <targetConditions>
-            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.predicates.PredicateQuestStatus">
-                    <quest href="/World/Quests/ZoneContested3/Q_add_07/Q_add_07.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
-                    <status>Active</status>
-                </predicate>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="/World/Quests/ZoneContested3/Q_add_07/DeBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                </predicate>
-            </Item>
-            <Item type="gameMechanics.elements.predicates.PredicateCreatureLevel">
-                <minLevel type="gameMechanics.formulas.IntConstantValue">
-                    <value>32</value>
-                </minLevel>
-            </Item>
-        </targetConditions>
-        <conditions>
-            <Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
-                <affectGroup>Group</affectGroup>
-            </Item>
-        </conditions>
-        <targetImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactStartQuiz">
-                <question href="WannaDie.(Question).xdb#xpointer(/gameMechanics.world.quiz.Question)" />
-                <paramsCalcers>
-                    <stringEntries>
-                        <Item>
-                            <name>caster</name>
-                            <calcer type="gameMechanics.elements.calcers.CasterNameCalcer" />
-                        </Item>
-                    </stringEntries>
-                </paramsCalcers>
-                <participants type="gameMechanics.elements.addresseeFinders.AddressesCalcerSingle">
-                    <calcer type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
-                </participants>
-                <resultsHandler type="gameMechanics.elements.common.SingleResultHandler">
-                    <impactsOnSuccess>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.elements.predicates.PredicateGreaterLong">
-                                    <lhs type="gameMechanics.elements.calcers.CalcerLongParam">
-                                        <paramName>choice</paramName>
-                                    </lhs>
-                                    <rhs type="gameMechanics.elements.calcers.LongData">
-                                        <value>0</value>
-                                    </rhs>
-                                </Item>
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
-                                            <id href="/World/Quests/ZoneContested3/Q_add_07/CountId_1.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                                <Item type="gameMechanics.elements.impacts.ImpactKill" />
-                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                    <buff href="/World/Quests/ZoneContested3/Q_add_07/DeBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                            </impactsIf>
-                            <impactsElse>
-                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-                                            <data href="Refuse_to_die.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                            <calcers>
-                                                <stringEntries>
-                                                    <Item>
-                                                        <name>caster</name>
-                                                        <calcer type="gameMechanics.elements.calcers.CasterNameCalcer" />
-                                                    </Item>
-                                                </stringEntries>
-                                            </calcers>
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impactsElse>
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="SacrificeProcess.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                    </impactsOnSuccess>
-                    <impactsOnFail>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="SacrificeProcess.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                    <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-                                    <data href="Refuse_to_die.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                    <calcers>
-                                        <stringEntries>
-                                            <Item>
-                                                <name>caster</name>
-                                                <calcer type="gameMechanics.elements.calcers.CasterNameCalcer" />
-                                            </Item>
-                                        </stringEntries>
-                                    </calcers>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impactsOnFail>
-                </resultsHandler>
-            </Item>
-            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                <buff href="SacrificeProcess.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                        <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-                        <data href="Thinking.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                        <calcers>
-                            <stringEntries>
-                                <Item>
-                                    <name>caster</name>
-                                    <calcer type="gameMechanics.elements.calcers.CasterNameCalcer" />
-                                </Item>
-                            </stringEntries>
-                        </calcers>
-                    </Item>
-                </impacts>
-            </Item>
-        </targetImpacts>
-    </mechanics>
+	<Header>
+		<resourceId>739878254</resourceId>
+	</Header>
+	<Name href="DoYouWantToDie.(SpellSingleTarget).Name.txt" />
+	<Description href="DoYouWantToDie.(SpellSingleTarget).Description.txt" />
+	<visualScripts href="Special.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+	<range type="gameMechanics.elements.calcers.FloatData">
+		<value>7</value>
+	</range>
+	<targetType>STTCurrentTargetNotSelf</targetType>
+	<isAggro>false</isAggro>
+	<iffPolicy>Friends</iffPolicy>
+	<mechanics>
+		<cooldown>
+			<duration>5000</duration>
+		</cooldown>
+		<casterConditions>
+			<Item type="gameMechanics.elements.predicates.PredicateInGroup" />
+			<Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+				<zone href="/Maps/2ndCircle/ScriptZones/ZoneContested3/DieZone.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+					<quest href="/World/Quests/ZoneContested3/Q_add_07/Q_add_07.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+					<counterResource href="/World/Quests/ZoneContested3/Q_add_07/CountId_1.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+				</predicate>
+			</Item>
+		</casterConditions>
+		<targetConditions>
+			<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.predicates.PredicateQuestStatus">
+					<quest href="/World/Quests/ZoneContested3/Q_add_07/Q_add_07.xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+					<status>Active</status>
+				</predicate>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="/World/Quests/ZoneContested3/Q_add_07/DeBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</predicate>
+			</Item>
+			<Item type="gameMechanics.elements.predicates.PredicateCreatureLevel">
+				<minLevel type="gameMechanics.formulas.IntConstantValue">
+					<value>32</value>
+				</minLevel>
+			</Item>
+		</targetConditions>
+		<conditions>
+			<Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
+				<affectGroup>Group</affectGroup>
+			</Item>
+		</conditions>
+		<targetImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactStartQuiz">
+				<question href="WannaDie.(Question).xdb#xpointer(/gameMechanics.world.quiz.Question)" />
+				<paramsCalcers>
+					<stringEntries>
+						<Item>
+							<name>caster</name>
+							<calcer type="gameMechanics.elements.calcers.CasterNameCalcer" />
+						</Item>
+					</stringEntries>
+				</paramsCalcers>
+				<participants type="gameMechanics.elements.addresseeFinders.AddressesCalcerSingle">
+					<calcer type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+				</participants>
+				<resultsHandler type="gameMechanics.elements.common.SingleResultHandler">
+					<impactsOnSuccess>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.elements.predicates.PredicateGreaterLong">
+									<lhs type="gameMechanics.elements.calcers.CalcerLongParam">
+										<paramName>choice</paramName>
+									</lhs>
+									<rhs type="gameMechanics.elements.calcers.LongData">
+										<value>0</value>
+									</rhs>
+								</Item>
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+											<id href="/World/Quests/ZoneContested3/Q_add_07/CountId_1.xdb#xpointer(/gameMechanics.elements.quest.QuestCountId)" />
+										</Item>
+									</impacts>
+								</Item>
+								<Item type="gameMechanics.elements.impacts.ImpactKill" />
+								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+									<buff href="/World/Quests/ZoneContested3/Q_add_07/DeBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</impactsIf>
+							<impactsElse>
+								<Item type="gameMechanics.elements.impacts.ReturningImpact">
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+											<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+											<data href="Refuse_to_die.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+											<calcers>
+												<stringEntries>
+													<Item>
+														<name>caster</name>
+														<calcer type="gameMechanics.elements.calcers.CasterNameCalcer" />
+													</Item>
+												</stringEntries>
+											</calcers>
+										</Item>
+									</impacts>
+								</Item>
+							</impactsElse>
+						</Item>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="SacrificeProcess.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+					</impactsOnSuccess>
+					<impactsOnFail>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="SacrificeProcess.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+						<Item type="gameMechanics.elements.impacts.ReturningImpact">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+									<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+									<data href="Refuse_to_die.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+									<calcers>
+										<stringEntries>
+											<Item>
+												<name>caster</name>
+												<calcer type="gameMechanics.elements.calcers.CasterNameCalcer" />
+											</Item>
+										</stringEntries>
+									</calcers>
+								</Item>
+							</impacts>
+						</Item>
+					</impactsOnFail>
+				</resultsHandler>
+			</Item>
+			<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+				<buff href="SacrificeProcess.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+						<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+						<data href="Thinking.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+						<calcers>
+							<stringEntries>
+								<Item>
+									<name>caster</name>
+									<calcer type="gameMechanics.elements.calcers.CasterNameCalcer" />
+								</Item>
+							</stringEntries>
+						</calcers>
+					</Item>
+				</impacts>
+			</Item>
+		</targetImpacts>
+	</mechanics>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

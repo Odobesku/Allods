@@ -1,186 +1,186 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.buff.BuffResource>
-    <Header>
-        <resourceId>739826723</resourceId>
-    </Header>
-    <Name href="FireActivation.(BuffResource).Name.txt" />
-    <Description href="FireActivation.(BuffResource).Description.txt" />
-    <image href="/Interface/Icons/Misc/Quest/FireElementalHeart.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
-    <visScript href="/Spells/VisScripts/Bosses/UmoirRaid/FireActivation.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
-    <nameTemplate href="FireActivation.(BuffResource).Name.txt" />
-    <descTemplate href="FireActivation.(BuffResource).DescTemplate.txt" />
-    <effects>
-        <Item type="gameMechanics.elements.effects.EffectInstantiating">
-            <effects>
-                <Item type="gameMechanics.elements.effects.ImpactsOnStrike">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactsToTarget">
-                            <impacts>
-                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                    <buff href="FireStrike.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                </Item>
-            </effects>
-        </Item>
-        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactSummon">
-                            <destination type="gameMechanics.map.destination.DestinationModified">
-                                <destination type="gameMechanics.map.destination.RandomDestination">
-                                    <destinations>
-                                        <Item type="gameMechanics.map.destination.DestinationLocator">
-                                            <locator>
-                                                <scriptID>L1</scriptID>
-                                                <map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
-                                            </locator>
-                                        </Item>
-                                        <Item type="gameMechanics.map.destination.DestinationLocator">
-                                            <locator>
-                                                <scriptID>L2</scriptID>
-                                                <map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
-                                            </locator>
-                                        </Item>
-                                        <Item type="gameMechanics.map.destination.DestinationLocator">
-                                            <locator>
-                                                <scriptID>L3</scriptID>
-                                                <map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
-                                            </locator>
-                                        </Item>
-                                        <Item type="gameMechanics.map.destination.DestinationLocator">
-                                            <locator>
-                                                <scriptID>L4</scriptID>
-                                                <map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
-                                            </locator>
-                                        </Item>
-                                    </destinations>
-                                </destination>
-                                <modifiers>
-                                    <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
-                                        <verticalRange min="0" max="0" />
-                                        <horizontalRange min="1" max="7" />
-                                    </Item>
-                                </modifiers>
-                            </destination>
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                                                    <radius>150</radius>
-                                                    <affectHolder>false</affectHolder>
-                                                    <impacts>
-                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                            <buff href="FireElementalTarget.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        </Item>
-                                                    </impacts>
-                                                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
-                                                        <filters>
-                                                            <Item type="gameMechanics.world.creature.AvatarFilter" />
-                                                            <Item type="gameMechanics.world.creature.AliveFilter" />
-                                                        </filters>
-                                                    </filter>
-                                                    <targetsLimit>1</targetsLimit>
-                                                </Item>
-                                            </impacts>
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                            <object href="FireElemental.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
-                            <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
-                            <data href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/Voice/Voice5.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                        </Item>
-                    </impacts>
-                </Item>
-            </impacts>
-            <tick>30000</tick>
-            <initialDelay>10000</initialDelay>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectInstantiating">
-            <effects>
-                <Item type="gameMechanics.elements.effects.Switch">
-                    <impactsOn>
-                        <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
-                            <spell href="FireFatality.(SpellCasterSelf).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.ImpactEntitiesAround">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
-                                    <predicates>
-                                        <Item type="gameMechanics.elements.predicates.PredicateRespawnableResource">
-                                            <resources>
-                                                <Item href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/IceGuard/SnowFall.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
-                                            </resources>
-                                        </Item>
-                                    </predicates>
-                                    <impactsIf>
-                                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                                    </impactsIf>
-                                </Item>
-                            </impacts>
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.ImpactTeleport">
-                            <destination type="gameMechanics.map.destination.DestinationLocator">
-                                <locator>
-                                    <scriptID>L5</scriptID>
-                                    <map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
-                                </locator>
-                            </destination>
-                            <finishImpacts>
-                                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.ImpactStartSpell">
-                                            <spell href="FireFatality.(SpellCasterSelf).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                                            <spellTarget type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </finishImpacts>
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
-                            <data href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/Voice/Voice3.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                        </Item>
-                    </impactsOn>
-                    <impactsOff>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/WindGuard/WindActivation.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.ImpactEntitiesAround">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
-                                    <predicates>
-                                        <Item type="gameMechanics.elements.predicates.PredicateRespawnableResource">
-                                            <resources>
-                                                <Item href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/IceGuard/IceBall.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
-                                            </resources>
-                                        </Item>
-                                    </predicates>
-                                    <impactsIf>
-                                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                                    </impactsIf>
-                                </Item>
-                            </impacts>
-                        </Item>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/MoveDisable.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                    </impactsOff>
-                </Item>
-            </effects>
-        </Item>
-    </effects>
-    <duration>67000</duration>
-    <isStackable>false</isStackable>
-    <isHelpful>true</isHelpful>
-    <canBeSaved>false</canBeSaved>
+	<Header>
+		<resourceId>739826723</resourceId>
+	</Header>
+	<Name href="FireActivation.(BuffResource).Name.txt" />
+	<Description href="FireActivation.(BuffResource).Description.txt" />
+	<image href="/Interface/Icons/Misc/Quest/FireElementalHeart.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+	<visScript href="/Spells/VisScripts/Bosses/UmoirRaid/FireActivation.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+	<nameTemplate href="FireActivation.(BuffResource).Name.txt" />
+	<descTemplate href="FireActivation.(BuffResource).DescTemplate.txt" />
+	<effects>
+		<Item type="gameMechanics.elements.effects.EffectInstantiating">
+			<effects>
+				<Item type="gameMechanics.elements.effects.ImpactsOnStrike">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactsToTarget">
+							<impacts>
+								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+									<buff href="FireStrike.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+			</effects>
+		</Item>
+		<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactSummon">
+							<destination type="gameMechanics.map.destination.DestinationModified">
+								<destination type="gameMechanics.map.destination.RandomDestination">
+									<destinations>
+										<Item type="gameMechanics.map.destination.DestinationLocator">
+											<locator>
+												<scriptID>L1</scriptID>
+												<map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+											</locator>
+										</Item>
+										<Item type="gameMechanics.map.destination.DestinationLocator">
+											<locator>
+												<scriptID>L2</scriptID>
+												<map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+											</locator>
+										</Item>
+										<Item type="gameMechanics.map.destination.DestinationLocator">
+											<locator>
+												<scriptID>L3</scriptID>
+												<map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+											</locator>
+										</Item>
+										<Item type="gameMechanics.map.destination.DestinationLocator">
+											<locator>
+												<scriptID>L4</scriptID>
+												<map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+											</locator>
+										</Item>
+									</destinations>
+								</destination>
+								<modifiers>
+									<Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+										<verticalRange min="0" max="0" />
+										<horizontalRange min="1" max="7" />
+									</Item>
+								</modifiers>
+							</destination>
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+													<radius>150</radius>
+													<affectHolder>false</affectHolder>
+													<impacts>
+														<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+															<buff href="FireElementalTarget.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														</Item>
+													</impacts>
+													<filter type="gameMechanics.constructor.basicElements.FilterAnd">
+														<filters>
+															<Item type="gameMechanics.world.creature.AvatarFilter" />
+															<Item type="gameMechanics.world.creature.AliveFilter" />
+														</filters>
+													</filter>
+													<targetsLimit>1</targetsLimit>
+												</Item>
+											</impacts>
+										</Item>
+									</impacts>
+								</Item>
+							</impacts>
+							<object href="FireElemental.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+							<pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+						</Item>
+						<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+							<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+							<data href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/Voice/Voice5.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+						</Item>
+					</impacts>
+				</Item>
+			</impacts>
+			<tick>30000</tick>
+			<initialDelay>10000</initialDelay>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectInstantiating">
+			<effects>
+				<Item type="gameMechanics.elements.effects.Switch">
+					<impactsOn>
+						<Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+							<spell href="FireFatality.(SpellCasterSelf).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+						</Item>
+						<Item type="gameMechanics.elements.impacts.ImpactEntitiesAround">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+									<predicates>
+										<Item type="gameMechanics.elements.predicates.PredicateRespawnableResource">
+											<resources>
+												<Item href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/IceGuard/SnowFall.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+											</resources>
+										</Item>
+									</predicates>
+									<impactsIf>
+										<Item type="gameMechanics.elements.impacts.Disintegrate" />
+									</impactsIf>
+								</Item>
+							</impacts>
+						</Item>
+						<Item type="gameMechanics.elements.impacts.ImpactTeleport">
+							<destination type="gameMechanics.map.destination.DestinationLocator">
+								<locator>
+									<scriptID>L5</scriptID>
+									<map href="/Maps/UmoirRaid/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+								</locator>
+							</destination>
+							<finishImpacts>
+								<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ImpactStartSpell">
+											<spell href="FireFatality.(SpellCasterSelf).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+											<spellTarget type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+										</Item>
+									</impacts>
+								</Item>
+							</finishImpacts>
+						</Item>
+						<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+							<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+							<data href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/Voice/Voice3.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+						</Item>
+					</impactsOn>
+					<impactsOff>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/WindGuard/WindActivation.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+						<Item type="gameMechanics.elements.impacts.ImpactEntitiesAround">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+									<predicates>
+										<Item type="gameMechanics.elements.predicates.PredicateRespawnableResource">
+											<resources>
+												<Item href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/IceGuard/IceBall.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+											</resources>
+										</Item>
+									</predicates>
+									<impactsIf>
+										<Item type="gameMechanics.elements.impacts.Disintegrate" />
+									</impactsIf>
+								</Item>
+							</impacts>
+						</Item>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/MoveDisable.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+					</impactsOff>
+				</Item>
+			</effects>
+		</Item>
+	</effects>
+	<duration>67000</duration>
+	<isStackable>false</isStackable>
+	<isHelpful>true</isHelpful>
+	<canBeSaved>false</canBeSaved>
 </gameMechanics.constructor.schemes.buff.BuffResource>

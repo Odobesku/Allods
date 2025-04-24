@@ -1,533 +1,533 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
-    <Header>
-        <resourceId>739868821</resourceId>
-    </Header>
-    <name href="FergardAbility.(AbilityResource).Name.txt" />
-    <effects>
-        <Item type="gameMechanics.elements.effects.Switch">
-            <impactsOn>
-                <Item type="gameMechanics.elements.impacts.ImpactForgetAbility">
-                    <ability href="/Mechanics/Abilities/Bosses/ActivityTracker/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-                </Item>
-            </impactsOn>
-        </Item>
-        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
-            <onLeave>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
-                    <pool href="FergardMarkPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-            </onLeave>
-            <effects>
-                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                    <buff href="PartyKnockdown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                            </predicates>
-                            <impactsElse>
-                                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
-                                    <selector type="gameMechanics.tools.SelectorRandomNotLess">
-                                        <minIndex>0</minIndex>
-                                    </selector>
-                                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
-                                        <filters>
-                                            <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
-                                                <predicates>
-                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                            <buff href="UM_Cape_Item.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        </predicate>
-                                                    </Item>
-                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                            <buff href="UM_Cape_Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        </predicate>
-                                                    </Item>
-                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                            <buff href="DemonStun.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        </predicate>
-                                                    </Item>
-                                                </predicates>
-                                            </Item>
-                                            <Item type="gameMechanics.world.creature.AvatarFilter" />
-                                        </filters>
-                                    </filter>
-                                    <impacts>
-                                        <Item>
-                                            <impacts>
-                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                    <buff href="MarkFergardr.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                </Item>
-                                            </impacts>
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                                <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
-                                    <spell href="Fireball.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                                </Item>
-                            </impactsElse>
-                        </Item>
-                    </impacts>
-                    <tick>25000</tick>
-                    <initialDelay>28000</initialDelay>
-                </Item>
-            </effects>
-        </Item>
-        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
-            <conditionalImpacts>
-                <Item>
-                    <impacts>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="FergardFireballWarningSelf.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                    <predicate type="gameMechanics.elements.resources.ResourceAnyBuff">
-                                        <buffs>
-                                            <Item href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                            <Item href="HeroResurrected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                        </buffs>
-                                    </predicate>
-                                </Item>
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.elements.impacts.RandomImpactGeneric">
-                                    <entries>
-                                        <Item>
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
-                                                    <impacts>
-                                                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-                                                            <impacts>
-                                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                                    <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-                                                                    <data href="/Mechanics/RaidInstances/UmoirMound/Voice/Heroes/Combat/Fergard/00_Fire.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                                </Item>
-                                                            </impacts>
-                                                        </Item>
-                                                    </impacts>
-                                                </Item>
-                                                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-                                                    <impacts>
-                                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                            <predicates>
-                                                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                                                                    <mobs>
-                                                                        <Item href="Fergard.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
-                                                                    </mobs>
-                                                                </Item>
-                                                            </predicates>
-                                                            <impactsIf>
-                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                    <buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                                        <multiplier>16000</multiplier>
-                                                                    </durationScaler>
-                                                                </Item>
-                                                            </impactsIf>
-                                                            <impactsElse>
-                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                    <buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                                        <multiplier>8000</multiplier>
-                                                                    </durationScaler>
-                                                                </Item>
-                                                            </impactsElse>
-                                                        </Item>
-                                                    </impacts>
-                                                    <spawnResource href="/Maps/UmoirMound/SpawnTables/07_Party.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
-                                                </Item>
-                                            </impacts>
-                                        </Item>
-                                        <Item>
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
-                                                    <impacts>
-                                                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-                                                            <impacts>
-                                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                                    <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-                                                                    <data href="/Mechanics/RaidInstances/UmoirMound/Voice/Heroes/Combat/Fergard/01_Fire.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                                </Item>
-                                                            </impacts>
-                                                        </Item>
-                                                    </impacts>
-                                                </Item>
-                                                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-                                                    <impacts>
-                                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                            <predicates>
-                                                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                                                                    <mobs>
-                                                                        <Item href="Fergard.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
-                                                                    </mobs>
-                                                                </Item>
-                                                            </predicates>
-                                                            <impactsIf>
-                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                    <buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                                        <multiplier>16000</multiplier>
-                                                                    </durationScaler>
-                                                                </Item>
-                                                            </impactsIf>
-                                                            <impactsElse>
-                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                    <buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                                        <multiplier>8000</multiplier>
-                                                                    </durationScaler>
-                                                                </Item>
-                                                            </impactsElse>
-                                                        </Item>
-                                                    </impacts>
-                                                    <spawnResource href="/Maps/UmoirMound/SpawnTables/07_Party.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
-                                                </Item>
-                                            </impacts>
-                                        </Item>
-                                    </entries>
-                                </Item>
-                            </impactsIf>
-                        </Item>
-                    </impacts>
-                    <conditions>
-                        <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
-                            <spells>
-                                <Item href="Fireball.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                            </spells>
-                        </Item>
-                    </conditions>
-                </Item>
-            </conditionalImpacts>
-            <stages>
-                <Item>Start</Item>
-            </stages>
-        </Item>
-        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
-            <conditionalImpacts>
-                <Item>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                        <buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </predicate>
-                                </Item>
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                    <predicates>
-                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                            <buff href="CurseBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                        </Item>
-                                    </predicates>
-                                    <impactsIf>
-                                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-                                                    <impacts>
-                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-                                                            <data href="/Mechanics/RaidInstances/UmoirMound/Voice/Heroes/Combat/Fergard/10_CursedFire.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                        </Item>
-                                                    </impacts>
-                                                </Item>
-                                            </impacts>
-                                        </Item>
-                                        <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                    <predicates>
-                                                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                                                            <mobs>
-                                                                <Item href="Fergard.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
-                                                            </mobs>
-                                                        </Item>
-                                                    </predicates>
-                                                    <impactsIf>
-                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                            <buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                                <multiplier>9000</multiplier>
-                                                            </durationScaler>
-                                                        </Item>
-                                                    </impactsIf>
-                                                    <impactsElse>
-                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                            <buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                                <multiplier>8000</multiplier>
-                                                            </durationScaler>
-                                                        </Item>
-                                                    </impactsElse>
-                                                </Item>
-                                            </impacts>
-                                            <spawnResource href="/Maps/UmoirMound/SpawnTables/07_Party.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
-                                        </Item>
-                                    </impactsIf>
-                                    <impactsElse>
-                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                            <predicates>
-                                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                        <buff href="HeroResurrected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                    </predicate>
-                                                </Item>
-                                            </predicates>
-                                            <impactsIf>
-                                                <Item type="gameMechanics.elements.impacts.RandomImpactGeneric">
-                                                    <entries>
-                                                        <Item>
-                                                            <impacts>
-                                                                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
-                                                                    <impacts>
-                                                                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-                                                                            <impacts>
-                                                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                                                    <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-                                                                                    <data href="/Mechanics/RaidInstances/UmoirMound/Voice/Heroes/Combat/Fergard/00_Fire.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                                                </Item>
-                                                                            </impacts>
-                                                                        </Item>
-                                                                    </impacts>
-                                                                </Item>
-                                                                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-                                                                    <impacts>
-                                                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                                            <predicates>
-                                                                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                                                                                    <mobs>
-                                                                                        <Item href="Fergard.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
-                                                                                    </mobs>
-                                                                                </Item>
-                                                                            </predicates>
-                                                                            <impactsIf>
-                                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                                    <buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                                                        <multiplier>16000</multiplier>
-                                                                                    </durationScaler>
-                                                                                </Item>
-                                                                            </impactsIf>
-                                                                            <impactsElse>
-                                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                                    <buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                                                        <multiplier>8000</multiplier>
-                                                                                    </durationScaler>
-                                                                                </Item>
-                                                                            </impactsElse>
-                                                                        </Item>
-                                                                    </impacts>
-                                                                    <spawnResource href="/Maps/UmoirMound/SpawnTables/07_Party.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
-                                                                </Item>
-                                                            </impacts>
-                                                        </Item>
-                                                        <Item>
-                                                            <impacts>
-                                                                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
-                                                                    <impacts>
-                                                                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-                                                                            <impacts>
-                                                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                                                    <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-                                                                                    <data href="/Mechanics/RaidInstances/UmoirMound/Voice/Heroes/Combat/Fergard/01_Fire.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                                                </Item>
-                                                                            </impacts>
-                                                                        </Item>
-                                                                    </impacts>
-                                                                </Item>
-                                                                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-                                                                    <impacts>
-                                                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                                            <predicates>
-                                                                                <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                                                                                    <mobs>
-                                                                                        <Item href="Fergard.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
-                                                                                    </mobs>
-                                                                                </Item>
-                                                                            </predicates>
-                                                                            <impactsIf>
-                                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                                    <buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                                                        <multiplier>16000</multiplier>
-                                                                                    </durationScaler>
-                                                                                </Item>
-                                                                            </impactsIf>
-                                                                            <impactsElse>
-                                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                                    <buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                                                        <multiplier>8000</multiplier>
-                                                                                    </durationScaler>
-                                                                                </Item>
-                                                                            </impactsElse>
-                                                                        </Item>
-                                                                    </impacts>
-                                                                    <spawnResource href="/Maps/UmoirMound/SpawnTables/07_Party.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
-                                                                </Item>
-                                                            </impacts>
-                                                        </Item>
-                                                    </entries>
-                                                </Item>
-                                            </impactsIf>
-                                        </Item>
-                                    </impactsElse>
-                                </Item>
-                            </impactsIf>
-                        </Item>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="SpellcastMovementDisabler.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                <multiplier>5000</multiplier>
-                            </durationScaler>
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                    <buff href="CurseBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
-                                    <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
-                                        <range min="0" max="85" />
-                                        <withinRange>true</withinRange>
-                                        <minCandidatesCount>8</minCandidatesCount>
-                                        <targetCount>8</targetCount>
-                                    </selector>
-                                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
-                                        <filters>
-                                            <Item type="gameMechanics.world.creature.AvatarFilter" />
-                                            <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
-                                                <predicates>
-                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                            <buff href="DemonStun.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        </predicate>
-                                                    </Item>
-                                                </predicates>
-                                            </Item>
-                                        </filters>
-                                    </filter>
-                                    <impacts>
-                                        <Item>
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-                                                    <projectileData>
-                                                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
-                                                            <destination type="gameMechanics.map.destination.DestinationModified">
-                                                                <destination type="gameMechanics.map.destination.SelfPosDestination" />
-                                                                <modifiers>
-                                                                    <Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
-                                                                </modifiers>
-                                                            </destination>
-                                                        </moveType>
-                                                        <resource href="FergardMarkSmall.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
-                                                    </projectileData>
-                                                    <pool href="FergardMarkPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
-                                                </Item>
-                                                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-                                                    <projectileData>
-                                                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
-                                                            <destination type="gameMechanics.map.destination.DestinationModified">
-                                                                <destination type="gameMechanics.map.destination.SelfPosDestination" />
-                                                                <modifiers>
-                                                                    <Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
-                                                                </modifiers>
-                                                            </destination>
-                                                        </moveType>
-                                                        <resource href="FergardMarkBomb.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
-                                                    </projectileData>
-                                                    <pool href="FergardMarkPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
-                                                </Item>
-                                            </impacts>
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impactsIf>
-                            <impactsElse>
-                                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
-                                    <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
-                                        <range min="0" max="85" />
-                                        <withinRange>true</withinRange>
-                                        <minCandidatesCount>4</minCandidatesCount>
-                                        <targetCount>4</targetCount>
-                                    </selector>
-                                    <filter type="gameMechanics.constructor.basicElements.FilterAnd">
-                                        <filters>
-                                            <Item type="gameMechanics.world.creature.AvatarFilter" />
-                                            <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
-                                                <predicates>
-                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                            <buff href="DemonStun.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        </predicate>
-                                                    </Item>
-                                                </predicates>
-                                            </Item>
-                                        </filters>
-                                    </filter>
-                                    <impacts>
-                                        <Item>
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-                                                    <projectileData>
-                                                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
-                                                            <destination type="gameMechanics.map.destination.DestinationModified">
-                                                                <destination type="gameMechanics.map.destination.SelfPosDestination" />
-                                                                <modifiers>
-                                                                    <Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
-                                                                </modifiers>
-                                                            </destination>
-                                                        </moveType>
-                                                        <resource href="FergardMarkSmall.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
-                                                    </projectileData>
-                                                    <pool href="FergardMarkPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
-                                                </Item>
-                                                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-                                                    <projectileData>
-                                                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
-                                                            <destination type="gameMechanics.map.destination.DestinationModified">
-                                                                <destination type="gameMechanics.map.destination.SelfPosDestination" />
-                                                                <modifiers>
-                                                                    <Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
-                                                                </modifiers>
-                                                            </destination>
-                                                        </moveType>
-                                                        <resource href="FergardMarkBomb.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
-                                                    </projectileData>
-                                                    <pool href="FergardMarkPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
-                                                </Item>
-                                            </impacts>
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impactsElse>
-                        </Item>
-                    </impacts>
-                    <conditions>
-                        <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
-                            <spells>
-                                <Item href="FergardBombs.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
-                            </spells>
-                        </Item>
-                    </conditions>
-                </Item>
-            </conditionalImpacts>
-            <stages>
-                <Item>Start</Item>
-            </stages>
-        </Item>
-    </effects>
+	<Header>
+		<resourceId>739868821</resourceId>
+	</Header>
+	<name href="FergardAbility.(AbilityResource).Name.txt" />
+	<effects>
+		<Item type="gameMechanics.elements.effects.Switch">
+			<impactsOn>
+				<Item type="gameMechanics.elements.impacts.ImpactForgetAbility">
+					<ability href="/Mechanics/Abilities/Bosses/ActivityTracker/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+				</Item>
+			</impactsOn>
+		</Item>
+		<Item type="gameMechanics.elements.effects.CombatStateTrigger">
+			<onLeave>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+					<pool href="FergardMarkPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+			</onLeave>
+			<effects>
+				<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.elements.resources.ResourceBuff">
+									<buff href="PartyKnockdown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</predicates>
+							<impactsElse>
+								<Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+									<selector type="gameMechanics.tools.SelectorRandomNotLess">
+										<minIndex>0</minIndex>
+									</selector>
+									<filter type="gameMechanics.constructor.basicElements.FilterAnd">
+										<filters>
+											<Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+												<predicates>
+													<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+														<predicate type="gameMechanics.elements.resources.ResourceBuff">
+															<buff href="UM_Cape_Item.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														</predicate>
+													</Item>
+													<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+														<predicate type="gameMechanics.elements.resources.ResourceBuff">
+															<buff href="UM_Cape_Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														</predicate>
+													</Item>
+													<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+														<predicate type="gameMechanics.elements.resources.ResourceBuff">
+															<buff href="DemonStun.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														</predicate>
+													</Item>
+												</predicates>
+											</Item>
+											<Item type="gameMechanics.world.creature.AvatarFilter" />
+										</filters>
+									</filter>
+									<impacts>
+										<Item>
+											<impacts>
+												<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+													<buff href="MarkFergardr.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+												</Item>
+											</impacts>
+										</Item>
+									</impacts>
+								</Item>
+								<Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+									<spell href="Fireball.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+								</Item>
+							</impactsElse>
+						</Item>
+					</impacts>
+					<tick>25000</tick>
+					<initialDelay>28000</initialDelay>
+				</Item>
+			</effects>
+		</Item>
+		<Item type="gameMechanics.elements.effects.SpellCastTrigger">
+			<conditionalImpacts>
+				<Item>
+					<impacts>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="FergardFireballWarningSelf.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+									<predicate type="gameMechanics.elements.resources.ResourceAnyBuff">
+										<buffs>
+											<Item href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+											<Item href="HeroResurrected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+										</buffs>
+									</predicate>
+								</Item>
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.elements.impacts.RandomImpactGeneric">
+									<entries>
+										<Item>
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+													<impacts>
+														<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+															<impacts>
+																<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+																	<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+																	<data href="/Mechanics/RaidInstances/UmoirMound/Voice/Heroes/Combat/Fergard/00_Fire.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+																</Item>
+															</impacts>
+														</Item>
+													</impacts>
+												</Item>
+												<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+													<impacts>
+														<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+															<predicates>
+																<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+																	<mobs>
+																		<Item href="Fergard.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+																	</mobs>
+																</Item>
+															</predicates>
+															<impactsIf>
+																<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																	<buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																	<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+																		<multiplier>16000</multiplier>
+																	</durationScaler>
+																</Item>
+															</impactsIf>
+															<impactsElse>
+																<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																	<buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																	<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+																		<multiplier>8000</multiplier>
+																	</durationScaler>
+																</Item>
+															</impactsElse>
+														</Item>
+													</impacts>
+													<spawnResource href="/Maps/UmoirMound/SpawnTables/07_Party.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+												</Item>
+											</impacts>
+										</Item>
+										<Item>
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+													<impacts>
+														<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+															<impacts>
+																<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+																	<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+																	<data href="/Mechanics/RaidInstances/UmoirMound/Voice/Heroes/Combat/Fergard/01_Fire.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+																</Item>
+															</impacts>
+														</Item>
+													</impacts>
+												</Item>
+												<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+													<impacts>
+														<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+															<predicates>
+																<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+																	<mobs>
+																		<Item href="Fergard.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+																	</mobs>
+																</Item>
+															</predicates>
+															<impactsIf>
+																<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																	<buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																	<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+																		<multiplier>16000</multiplier>
+																	</durationScaler>
+																</Item>
+															</impactsIf>
+															<impactsElse>
+																<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																	<buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																	<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+																		<multiplier>8000</multiplier>
+																	</durationScaler>
+																</Item>
+															</impactsElse>
+														</Item>
+													</impacts>
+													<spawnResource href="/Maps/UmoirMound/SpawnTables/07_Party.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+												</Item>
+											</impacts>
+										</Item>
+									</entries>
+								</Item>
+							</impactsIf>
+						</Item>
+					</impacts>
+					<conditions>
+						<Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+							<spells>
+								<Item href="Fireball.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+							</spells>
+						</Item>
+					</conditions>
+				</Item>
+			</conditionalImpacts>
+			<stages>
+				<Item>Start</Item>
+			</stages>
+		</Item>
+		<Item type="gameMechanics.elements.effects.SpellCastTrigger">
+			<conditionalImpacts>
+				<Item>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+									<predicate type="gameMechanics.elements.resources.ResourceBuff">
+										<buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</predicate>
+								</Item>
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+									<predicates>
+										<Item type="gameMechanics.elements.resources.ResourceBuff">
+											<buff href="CurseBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+										</Item>
+									</predicates>
+									<impactsIf>
+										<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+													<impacts>
+														<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+															<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+															<data href="/Mechanics/RaidInstances/UmoirMound/Voice/Heroes/Combat/Fergard/10_CursedFire.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+														</Item>
+													</impacts>
+												</Item>
+											</impacts>
+										</Item>
+										<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+													<predicates>
+														<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+															<mobs>
+																<Item href="Fergard.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+															</mobs>
+														</Item>
+													</predicates>
+													<impactsIf>
+														<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+															<buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+															<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+																<multiplier>9000</multiplier>
+															</durationScaler>
+														</Item>
+													</impactsIf>
+													<impactsElse>
+														<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+															<buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+															<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+																<multiplier>8000</multiplier>
+															</durationScaler>
+														</Item>
+													</impactsElse>
+												</Item>
+											</impacts>
+											<spawnResource href="/Maps/UmoirMound/SpawnTables/07_Party.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+										</Item>
+									</impactsIf>
+									<impactsElse>
+										<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+											<predicates>
+												<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+													<predicate type="gameMechanics.elements.resources.ResourceBuff">
+														<buff href="HeroResurrected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+													</predicate>
+												</Item>
+											</predicates>
+											<impactsIf>
+												<Item type="gameMechanics.elements.impacts.RandomImpactGeneric">
+													<entries>
+														<Item>
+															<impacts>
+																<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+																	<impacts>
+																		<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+																			<impacts>
+																				<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+																					<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+																					<data href="/Mechanics/RaidInstances/UmoirMound/Voice/Heroes/Combat/Fergard/00_Fire.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+																				</Item>
+																			</impacts>
+																		</Item>
+																	</impacts>
+																</Item>
+																<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+																	<impacts>
+																		<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+																			<predicates>
+																				<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+																					<mobs>
+																						<Item href="Fergard.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+																					</mobs>
+																				</Item>
+																			</predicates>
+																			<impactsIf>
+																				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																					<buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																					<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+																						<multiplier>16000</multiplier>
+																					</durationScaler>
+																				</Item>
+																			</impactsIf>
+																			<impactsElse>
+																				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																					<buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																					<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+																						<multiplier>8000</multiplier>
+																					</durationScaler>
+																				</Item>
+																			</impactsElse>
+																		</Item>
+																	</impacts>
+																	<spawnResource href="/Maps/UmoirMound/SpawnTables/07_Party.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+																</Item>
+															</impacts>
+														</Item>
+														<Item>
+															<impacts>
+																<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+																	<impacts>
+																		<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+																			<impacts>
+																				<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+																					<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+																					<data href="/Mechanics/RaidInstances/UmoirMound/Voice/Heroes/Combat/Fergard/01_Fire.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+																				</Item>
+																			</impacts>
+																		</Item>
+																	</impacts>
+																</Item>
+																<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+																	<impacts>
+																		<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+																			<predicates>
+																				<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+																					<mobs>
+																						<Item href="Fergard.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+																					</mobs>
+																				</Item>
+																			</predicates>
+																			<impactsIf>
+																				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																					<buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																					<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+																						<multiplier>16000</multiplier>
+																					</durationScaler>
+																				</Item>
+																			</impactsIf>
+																			<impactsElse>
+																				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																					<buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																					<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+																						<multiplier>8000</multiplier>
+																					</durationScaler>
+																				</Item>
+																			</impactsElse>
+																		</Item>
+																	</impacts>
+																	<spawnResource href="/Maps/UmoirMound/SpawnTables/07_Party.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+																</Item>
+															</impacts>
+														</Item>
+													</entries>
+												</Item>
+											</impactsIf>
+										</Item>
+									</impactsElse>
+								</Item>
+							</impactsIf>
+						</Item>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="SpellcastMovementDisabler.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+								<multiplier>5000</multiplier>
+							</durationScaler>
+						</Item>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.elements.resources.ResourceBuff">
+									<buff href="CurseBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+									<selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+										<range min="0" max="85" />
+										<withinRange>true</withinRange>
+										<minCandidatesCount>8</minCandidatesCount>
+										<targetCount>8</targetCount>
+									</selector>
+									<filter type="gameMechanics.constructor.basicElements.FilterAnd">
+										<filters>
+											<Item type="gameMechanics.world.creature.AvatarFilter" />
+											<Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+												<predicates>
+													<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+														<predicate type="gameMechanics.elements.resources.ResourceBuff">
+															<buff href="DemonStun.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														</predicate>
+													</Item>
+												</predicates>
+											</Item>
+										</filters>
+									</filter>
+									<impacts>
+										<Item>
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+													<projectileData>
+														<moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+															<destination type="gameMechanics.map.destination.DestinationModified">
+																<destination type="gameMechanics.map.destination.SelfPosDestination" />
+																<modifiers>
+																	<Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
+																</modifiers>
+															</destination>
+														</moveType>
+														<resource href="FergardMarkSmall.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+													</projectileData>
+													<pool href="FergardMarkPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+												</Item>
+												<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+													<projectileData>
+														<moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+															<destination type="gameMechanics.map.destination.DestinationModified">
+																<destination type="gameMechanics.map.destination.SelfPosDestination" />
+																<modifiers>
+																	<Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
+																</modifiers>
+															</destination>
+														</moveType>
+														<resource href="FergardMarkBomb.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+													</projectileData>
+													<pool href="FergardMarkPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+												</Item>
+											</impacts>
+										</Item>
+									</impacts>
+								</Item>
+							</impactsIf>
+							<impactsElse>
+								<Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+									<selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+										<range min="0" max="85" />
+										<withinRange>true</withinRange>
+										<minCandidatesCount>4</minCandidatesCount>
+										<targetCount>4</targetCount>
+									</selector>
+									<filter type="gameMechanics.constructor.basicElements.FilterAnd">
+										<filters>
+											<Item type="gameMechanics.world.creature.AvatarFilter" />
+											<Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+												<predicates>
+													<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+														<predicate type="gameMechanics.elements.resources.ResourceBuff">
+															<buff href="DemonStun.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														</predicate>
+													</Item>
+												</predicates>
+											</Item>
+										</filters>
+									</filter>
+									<impacts>
+										<Item>
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+													<projectileData>
+														<moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+															<destination type="gameMechanics.map.destination.DestinationModified">
+																<destination type="gameMechanics.map.destination.SelfPosDestination" />
+																<modifiers>
+																	<Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
+																</modifiers>
+															</destination>
+														</moveType>
+														<resource href="FergardMarkSmall.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+													</projectileData>
+													<pool href="FergardMarkPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+												</Item>
+												<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+													<projectileData>
+														<moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+															<destination type="gameMechanics.map.destination.DestinationModified">
+																<destination type="gameMechanics.map.destination.SelfPosDestination" />
+																<modifiers>
+																	<Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
+																</modifiers>
+															</destination>
+														</moveType>
+														<resource href="FergardMarkBomb.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+													</projectileData>
+													<pool href="FergardMarkPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+												</Item>
+											</impacts>
+										</Item>
+									</impacts>
+								</Item>
+							</impactsElse>
+						</Item>
+					</impacts>
+					<conditions>
+						<Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+							<spells>
+								<Item href="FergardBombs.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+							</spells>
+						</Item>
+					</conditions>
+				</Item>
+			</conditionalImpacts>
+			<stages>
+				<Item>Start</Item>
+			</stages>
+		</Item>
+	</effects>
 </gameMechanics.constructor.schemes.ability.AbilityResource>

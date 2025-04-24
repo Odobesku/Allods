@@ -1,276 +1,276 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <mapLoader.MapTemplate>
-    <Header>
-        <resourceId>739877846</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <hasPatches>true</hasPatches>
-    <headParts>
-        <parts>
-            <Item type="mapLoader.parts.PlayerCountResource" />
-            <Item type="mapLoader.parts.MapDestroyerResource" />
-            <Item type="gameMechanics.world.avatar.MapCombatStateResource" />
-            <Item type="gameMechanics.map.basicElements.MapSpecificEffects">
-                <effects>
-                    <Item type="gameMechanics.elements.effects.EffectsIfTarget">
-                        <predicates>
-                            <Item type="gameMechanics.elements.predicates.PredicateIsMob" />
-                        </predicates>
-                        <effectsIf>
-                            <Item type="gameMechanics.world.mob.behaviour.components.effects.EffectCanBeAggred" />
-                        </effectsIf>
-                    </Item>
-                    <Item type="gameMechanics.elements.effects.EffectsIfTarget">
-                        <predicates>
-                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                        </predicates>
-                        <effectsIf>
-                            <Item type="gameMechanics.elements.effects.CombatStateTrigger">
-                                <onLeave>
-                                    <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                                        <impacts>
-                                            <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
-                                                <variable href="/Mechanics/RaidInstances/BattleResLimit/BattleResLimitRaid.(MapVariableResource).xdb" />
-                                                <reset>true</reset>
-                                                <summand>0</summand>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </onLeave>
-                            </Item>
-                            <Item type="gameMechanics.map.variables.MapVariableTrigger">
-                                <variableResource href="/Mechanics/RaidInstances/BattleResLimit/BattleResLimitRaid.(MapVariableResource).xdb" />
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.predicates.PredicateGreater">
-                                                <lhs type="gameMechanics.elements.calcers.FloatData">
-                                                    <value var="isSmallRaid" />
-                                                </lhs>
-                                                <rhs type="gameMechanics.elements.calcers.FloatData">
-                                                    <value>0</value>
-                                                </rhs>
-                                            </Item>
-                                        </predicates>
-                                        <impactsIf>
-                                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                                <buff href="/Mechanics/RaidInstances/BattleResLimit/NoResSmallRaid.(BuffResource).xdb" />
-                                            </Item>
-                                            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                                        <impacts>
-                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                <buff href="/Mechanics/RaidInstances/BattleResLimit/NoResSmallRaid.(BuffResource).xdb" />
-                                                                <stacks type="gameMechanics.map.variables.MapVariableValueCalcer">
-                                                                    <resource href="/Mechanics/RaidInstances/BattleResLimit/BattleResLimitRaid.(MapVariableResource).xdb" />
-                                                                </stacks>
-                                                            </Item>
-                                                        </impacts>
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </impactsIf>
-                                        <impactsElse>
-                                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                                <buff href="/Mechanics/RaidInstances/BattleResLimit/NoRes.(BuffResource).xdb" />
-                                            </Item>
-                                            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                                        <impacts>
-                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                <buff href="/Mechanics/RaidInstances/BattleResLimit/NoRes.(BuffResource).xdb" />
-                                                                <stacks type="gameMechanics.map.variables.MapVariableValueCalcer">
-                                                                    <resource href="/Mechanics/RaidInstances/BattleResLimit/BattleResLimitRaid.(MapVariableResource).xdb" />
-                                                                </stacks>
-                                                            </Item>
-                                                        </impacts>
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </impactsElse>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                            <Item type="gameMechanics.elements.effects.Switch">
-                                <impactsOn>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="/Mechanics/RaidInstances/BattleResLimit/NoResInstance.(BuffResource).xdb" />
-                                    </Item>
-                                </impactsOn>
-                            </Item>
-                            <Item type="gameMechanics.elements.effects.EffectsIfTarget">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
-                                        <key href="/System/ContentKeys/P2P_shard/P2P_RaidBuff.(ContentKey).xdb" />
-                                    </Item>
-                                </predicates>
-                                <effectsIf>
-                                    <Item type="gameMechanics.elements.effects.SummandStat">
-                                        <stat type="gameMechanics.elements.stat.StatDefenceRuneLevel" />
-                                        <value>2</value>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.effects.SummandStat">
-                                        <stat type="gameMechanics.elements.stat.StatAttackRuneLevel" />
-                                        <value>2</value>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
-                                        <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
-                                            <coeff>0.166</coeff>
-                                        </scaler>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.effects.OutgoingHealModifier">
-                                        <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
-                                            <coeff>0.166</coeff>
-                                        </scaler>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.effects.EffectsToPet">
-                                        <effects>
-                                            <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
-                                                <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
-                                                    <coeff>0.166</coeff>
-                                                </scaler>
-                                            </Item>
-                                            <Item type="gameMechanics.elements.effects.OutgoingHealModifier">
-                                                <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
-                                                    <coeff>0.166</coeff>
-                                                </scaler>
-                                            </Item>
-                                        </effects>
-                                    </Item>
-                                </effectsIf>
-                            </Item>
-                            <Item type="gameMechanics.constructor.basicElements.EffectList">
-                                <effectsResource href="/Mechanics/Mounts/Prototypes/InstanceDismount.(EffectListResource).xdb" />
-                            </Item>
-                            <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
-                                <group href="/Mechanics/Spells/Groups/MassTeleport.(ActionGroup).xdb" />
-                            </Item>
-                            <Item type="gameMechanics.elements.effects.EffectSetDisconnectTimeout">
-                                <disconnectTime>300000</disconnectTime>
-                            </Item>
-                        </effectsIf>
-                    </Item>
-                    <Item type="gameMechanics.elements.effects.Switch">
-                        <impactsOn>
-                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                <predicates>
-                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
-                                        <predicates>
-                                            <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
-                                                <spell href="/Mechanics/Looters/Magpie/MagpieGinger/Spell01.xdb" />
-                                            </Item>
-                                            <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
-                                                <spell href="/Mechanics/Looters/Fairy/Spell01.xdb" />
-                                            </Item>
-                                            <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
-                                                <spell href="/Mechanics/Looters/GoblinLooter/Spell01.xdb" />
-                                            </Item>
-                                            <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
-                                                <spell href="/Mechanics/Looters/Magpie/MagpieBlue/Spell01.xdb" />
-                                            </Item>
-                                            <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
-                                                <spell href="/Mechanics/Looters/Magpie/ChineeseMagpies/Spell01.xdb" />
-                                            </Item>
-                                            <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
-                                                <spell href="/Mechanics/Looters/Magpie/TutorialMagpie/Spell01.xdb" />
-                                            </Item>
-                                        </predicates>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                                </predicates>
-                                <impactsIf>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="/Mechanics/Looters/LooterInformer.xdb" />
-                                    </Item>
-                                </impactsIf>
-                                <impactsElse>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                                            <Item type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
-                                                <groups>
-                                                    <Item href="/Mechanics/Spells/Groups/LootersReturningBuffs.(ActionGroup).xdb" />
-                                                </groups>
-                                            </Item>
-                                        </predicates>
-                                        <impactsIf>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="/Mechanics/Looters/HoldMessage.(BuffResource).xdb" />
-                                            </Item>
-                                        </impactsIf>
-                                    </Item>
-                                </impactsElse>
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                                    <Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
-                                        <key href="/System/ContentKeys/P2P_shard/P2P_RaidBuff.(ContentKey).xdb" />
-                                    </Item>
-                                </predicates>
-                                <impactsIf>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="/Mechanics/P2P_shard/RaidAdaptationNotifier.(BuffResource).xdb" />
-                                    </Item>
-                                </impactsIf>
-                            </Item>
-                        </impactsOn>
-                        <impactsOff>
-                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                <buff href="/Mechanics/P2P_shard/RaidAdaptationNotifier.(BuffResource).xdb" />
-                            </Item>
-                        </impactsOff>
-                    </Item>
-                    <Item type="gameMechanics.elements.effects.BuffInterceptor">
-                        <impactsOnAttach>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="/Mechanics/Looters/LooterInformer.xdb" />
-                            </Item>
-                        </impactsOnAttach>
-                        <impactsOnDetach>
-                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                <buff href="/Mechanics/Looters/LooterInformer.xdb" />
-                            </Item>
-                        </impactsOnDetach>
-                        <predicates>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
-                                <groups>
-                                    <Item href="/Mechanics/Spells/Groups/LooterEnforcer.(ActionGroup).xdb" />
-                                </groups>
-                            </Item>
-                        </predicates>
-                    </Item>
-                </effects>
-            </Item>
-            <Item type="gameMechanics.map.variables.MapVariablesHolderResource">
-                <variables>
-                    <Item href="/Mechanics/RaidInstances/BattleResLimit/BattleResLimitRaid.(MapVariableResource).xdb" />
-                </variables>
-            </Item>
-        </parts>
-    </headParts>
-    <cellParts>
-        <parts>
-            <Item type="gameMechanics.world.mob.MobCellCountResource">
-                <limit>10000</limit>
-            </Item>
-            <Item type="gameMechanics.map.spawn.SummonPoolManager">
-                <globalPool href="/System/GlobalSummonPools/SummonPoolRaidInstance.xdb" />
-            </Item>
-        </parts>
-    </cellParts>
-    <entrance type="gameMechanics.map.instance.RaidInstanceEntrance" />
-    <pathfinderSettings>
-        <maxLength>500</maxLength>
-    </pathfinderSettings>
-    <mechanicsSettings>
-        <requireExit>true</requireExit>
-        <forDwellersOnly>true</forDwellersOnly>
-        <evadeMob>false</evadeMob>
-        <forceSleep>false</forceSleep>
-        <prohibitWorldDrop>true</prohibitWorldDrop>
-        <autoNavigation>false</autoNavigation>
-    </mechanicsSettings>
+	<Header>
+		<resourceId>739877846</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<hasPatches>true</hasPatches>
+	<headParts>
+		<parts>
+			<Item type="mapLoader.parts.PlayerCountResource" />
+			<Item type="mapLoader.parts.MapDestroyerResource" />
+			<Item type="gameMechanics.world.avatar.MapCombatStateResource" />
+			<Item type="gameMechanics.map.basicElements.MapSpecificEffects">
+				<effects>
+					<Item type="gameMechanics.elements.effects.EffectsIfTarget">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicateIsMob" />
+						</predicates>
+						<effectsIf>
+							<Item type="gameMechanics.world.mob.behaviour.components.effects.EffectCanBeAggred" />
+						</effectsIf>
+					</Item>
+					<Item type="gameMechanics.elements.effects.EffectsIfTarget">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+						</predicates>
+						<effectsIf>
+							<Item type="gameMechanics.elements.effects.CombatStateTrigger">
+								<onLeave>
+									<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+										<impacts>
+											<Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+												<variable href="/Mechanics/RaidInstances/BattleResLimit/BattleResLimitRaid.(MapVariableResource).xdb" />
+												<reset>true</reset>
+												<summand>0</summand>
+											</Item>
+										</impacts>
+									</Item>
+								</onLeave>
+							</Item>
+							<Item type="gameMechanics.map.variables.MapVariableTrigger">
+								<variableResource href="/Mechanics/RaidInstances/BattleResLimit/BattleResLimitRaid.(MapVariableResource).xdb" />
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+										<predicates>
+											<Item type="gameMechanics.elements.predicates.PredicateGreater">
+												<lhs type="gameMechanics.elements.calcers.FloatData">
+													<value var="isSmallRaid" />
+												</lhs>
+												<rhs type="gameMechanics.elements.calcers.FloatData">
+													<value>0</value>
+												</rhs>
+											</Item>
+										</predicates>
+										<impactsIf>
+											<Item type="gameMechanics.elements.impacts.BuffDetacher">
+												<buff href="/Mechanics/RaidInstances/BattleResLimit/NoResSmallRaid.(BuffResource).xdb" />
+											</Item>
+											<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+														<impacts>
+															<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																<buff href="/Mechanics/RaidInstances/BattleResLimit/NoResSmallRaid.(BuffResource).xdb" />
+																<stacks type="gameMechanics.map.variables.MapVariableValueCalcer">
+																	<resource href="/Mechanics/RaidInstances/BattleResLimit/BattleResLimitRaid.(MapVariableResource).xdb" />
+																</stacks>
+															</Item>
+														</impacts>
+													</Item>
+												</impacts>
+											</Item>
+										</impactsIf>
+										<impactsElse>
+											<Item type="gameMechanics.elements.impacts.BuffDetacher">
+												<buff href="/Mechanics/RaidInstances/BattleResLimit/NoRes.(BuffResource).xdb" />
+											</Item>
+											<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+														<impacts>
+															<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																<buff href="/Mechanics/RaidInstances/BattleResLimit/NoRes.(BuffResource).xdb" />
+																<stacks type="gameMechanics.map.variables.MapVariableValueCalcer">
+																	<resource href="/Mechanics/RaidInstances/BattleResLimit/BattleResLimitRaid.(MapVariableResource).xdb" />
+																</stacks>
+															</Item>
+														</impacts>
+													</Item>
+												</impacts>
+											</Item>
+										</impactsElse>
+									</Item>
+								</impacts>
+							</Item>
+							<Item type="gameMechanics.elements.effects.Switch">
+								<impactsOn>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="/Mechanics/RaidInstances/BattleResLimit/NoResInstance.(BuffResource).xdb" />
+									</Item>
+								</impactsOn>
+							</Item>
+							<Item type="gameMechanics.elements.effects.EffectsIfTarget">
+								<predicates>
+									<Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
+										<key href="/System/ContentKeys/P2P_shard/P2P_RaidBuff.(ContentKey).xdb" />
+									</Item>
+								</predicates>
+								<effectsIf>
+									<Item type="gameMechanics.elements.effects.SummandStat">
+										<stat type="gameMechanics.elements.stat.StatDefenceRuneLevel" />
+										<value>2</value>
+									</Item>
+									<Item type="gameMechanics.elements.effects.SummandStat">
+										<stat type="gameMechanics.elements.stat.StatAttackRuneLevel" />
+										<value>2</value>
+									</Item>
+									<Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+										<scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+											<coeff>0.166</coeff>
+										</scaler>
+									</Item>
+									<Item type="gameMechanics.elements.effects.OutgoingHealModifier">
+										<scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+											<coeff>0.166</coeff>
+										</scaler>
+									</Item>
+									<Item type="gameMechanics.elements.effects.EffectsToPet">
+										<effects>
+											<Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
+												<scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+													<coeff>0.166</coeff>
+												</scaler>
+											</Item>
+											<Item type="gameMechanics.elements.effects.OutgoingHealModifier">
+												<scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+													<coeff>0.166</coeff>
+												</scaler>
+											</Item>
+										</effects>
+									</Item>
+								</effectsIf>
+							</Item>
+							<Item type="gameMechanics.constructor.basicElements.EffectList">
+								<effectsResource href="/Mechanics/Mounts/Prototypes/InstanceDismount.(EffectListResource).xdb" />
+							</Item>
+							<Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+								<group href="/Mechanics/Spells/Groups/MassTeleport.(ActionGroup).xdb" />
+							</Item>
+							<Item type="gameMechanics.elements.effects.EffectSetDisconnectTimeout">
+								<disconnectTime>300000</disconnectTime>
+							</Item>
+						</effectsIf>
+					</Item>
+					<Item type="gameMechanics.elements.effects.Switch">
+						<impactsOn>
+							<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+								<predicates>
+									<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+										<predicates>
+											<Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+												<spell href="/Mechanics/Looters/Magpie/MagpieGinger/Spell01.xdb" />
+											</Item>
+											<Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+												<spell href="/Mechanics/Looters/Fairy/Spell01.xdb" />
+											</Item>
+											<Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+												<spell href="/Mechanics/Looters/GoblinLooter/Spell01.xdb" />
+											</Item>
+											<Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+												<spell href="/Mechanics/Looters/Magpie/MagpieBlue/Spell01.xdb" />
+											</Item>
+											<Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+												<spell href="/Mechanics/Looters/Magpie/ChineeseMagpies/Spell01.xdb" />
+											</Item>
+											<Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+												<spell href="/Mechanics/Looters/Magpie/TutorialMagpie/Spell01.xdb" />
+											</Item>
+										</predicates>
+									</Item>
+									<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+								</predicates>
+								<impactsIf>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="/Mechanics/Looters/LooterInformer.xdb" />
+									</Item>
+								</impactsIf>
+								<impactsElse>
+									<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+										<predicates>
+											<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+											<Item type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+												<groups>
+													<Item href="/Mechanics/Spells/Groups/LootersReturningBuffs.(ActionGroup).xdb" />
+												</groups>
+											</Item>
+										</predicates>
+										<impactsIf>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="/Mechanics/Looters/HoldMessage.(BuffResource).xdb" />
+											</Item>
+										</impactsIf>
+									</Item>
+								</impactsElse>
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+								<predicates>
+									<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+									<Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
+										<key href="/System/ContentKeys/P2P_shard/P2P_RaidBuff.(ContentKey).xdb" />
+									</Item>
+								</predicates>
+								<impactsIf>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="/Mechanics/P2P_shard/RaidAdaptationNotifier.(BuffResource).xdb" />
+									</Item>
+								</impactsIf>
+							</Item>
+						</impactsOn>
+						<impactsOff>
+							<Item type="gameMechanics.elements.impacts.BuffDetacher">
+								<buff href="/Mechanics/P2P_shard/RaidAdaptationNotifier.(BuffResource).xdb" />
+							</Item>
+						</impactsOff>
+					</Item>
+					<Item type="gameMechanics.elements.effects.BuffInterceptor">
+						<impactsOnAttach>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="/Mechanics/Looters/LooterInformer.xdb" />
+							</Item>
+						</impactsOnAttach>
+						<impactsOnDetach>
+							<Item type="gameMechanics.elements.impacts.BuffDetacher">
+								<buff href="/Mechanics/Looters/LooterInformer.xdb" />
+							</Item>
+						</impactsOnDetach>
+						<predicates>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+								<groups>
+									<Item href="/Mechanics/Spells/Groups/LooterEnforcer.(ActionGroup).xdb" />
+								</groups>
+							</Item>
+						</predicates>
+					</Item>
+				</effects>
+			</Item>
+			<Item type="gameMechanics.map.variables.MapVariablesHolderResource">
+				<variables>
+					<Item href="/Mechanics/RaidInstances/BattleResLimit/BattleResLimitRaid.(MapVariableResource).xdb" />
+				</variables>
+			</Item>
+		</parts>
+	</headParts>
+	<cellParts>
+		<parts>
+			<Item type="gameMechanics.world.mob.MobCellCountResource">
+				<limit>10000</limit>
+			</Item>
+			<Item type="gameMechanics.map.spawn.SummonPoolManager">
+				<globalPool href="/System/GlobalSummonPools/SummonPoolRaidInstance.xdb" />
+			</Item>
+		</parts>
+	</cellParts>
+	<entrance type="gameMechanics.map.instance.RaidInstanceEntrance" />
+	<pathfinderSettings>
+		<maxLength>500</maxLength>
+	</pathfinderSettings>
+	<mechanicsSettings>
+		<requireExit>true</requireExit>
+		<forDwellersOnly>true</forDwellersOnly>
+		<evadeMob>false</evadeMob>
+		<forceSleep>false</forceSleep>
+		<prohibitWorldDrop>true</prohibitWorldDrop>
+		<autoNavigation>false</autoNavigation>
+	</mechanicsSettings>
 </mapLoader.MapTemplate>

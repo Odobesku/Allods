@@ -1,199 +1,199 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.world.device.UsableDeviceResource>
-    <Header>
-        <resourceId>739931355</resourceId>
-        <Prototype href="/Mechanics/ObjectTemplates/ShipDevice.(UsableDeviceResource).xdb" />
-        <Variables>
-            <visObjCommon>/Ships/Components/InternalShield_01/InternalShield_01.(VisObjectTemplate).xdb</visObjCommon>
-            <collisionCommon>/Ships/Components/InternalShield_01/InternalShield_01.(Collision).xdb</collisionCommon>
-            <visObjUncommon>/Ships/Components/InternalShield_01A/InternalShield_01A.(VisObjectTemplate).xdb</visObjUncommon>
-            <collisionUncommon>/Ships/Components/InternalShield_01A/InternalShield_01A.(Collision).xdb</collisionUncommon>
-            <visObjRare>/Ships/Components/InternalShield_01B/InternalShield_01B.(VisObjectTemplate).xdb</visObjRare>
-            <collisionRare>/Ships/Components/InternalShield_01B/InternalShield_01B.(Collision).xdb</collisionRare>
-            <visObjEpic>/Ships/Components/InternalShield_01C/InternalShield_01C.(VisObjectTemplate).xdb</visObjEpic>
-            <collisionEpic>/Ships/Components/InternalShield_01C/InternalShield_01C.(Collision).xdb</collisionEpic>
-            <object>/Ships/Components/InternalShield_01C/InternalShield_01C.(StaticObject).xdb</object>
-        </Variables>
-    </Header>
-    <parts>
-        <Item type="DeathHandler">
-            <useParentState>true</useParentState>
-            <deathScript type="DeviceVisActionList">
-                <play>InSequence</play>
-                <elements>
-                    <Item type="DeviceColorAction">
-                        <colorValue>-1</colorValue>
-                    </Item>
-                    <Item type="DeviceVisActionChangeModel">
-                        <priority>5</priority>
-                    </Item>
-                </elements>
-            </deathScript>
-        </Item>
-        <Item type="DeviceOfflineComponent">
-            <onlineScript type="DeviceAnimationAction">
-                <mode>LOOP</mode>
-                <animations>
-                    <Item>idle</Item>
-                </animations>
-            </onlineScript>
-            <offlineScript type="DeviceAnimationAction">
-                <mode>LOOP</mode>
-                <animations>
-                    <Item>idleOffline</Item>
-                </animations>
-            </offlineScript>
-            <malfunctionScript type="DeviceAnimationAction">
-                <mode>LOOP</mode>
-                <animations>
-                    <Item>idleMalfunction</Item>
-                </animations>
-            </malfunctionScript>
-        </Item>
-        <Item type="UsableDeviceClientPart">
-            <type>USDEV_SHIELD</type>
-        </Item>
-        <Item type="VisActionPart">
-            <visAction type="DeviceQualityVisAction">
-                <qualities>
-                    <Item>
-                        <action type="DeviceHealthVisAction">
-                            <actions>
-                                <Item>
-                                    <action type="DeviceVisActionChangeModel">
-                                        <visObj hrefvar="visObjCommon" />
-                                        <collision hrefvar="collisionCommon" />
-                                    </action>
-                                    <health>1</health>
-                                </Item>
-                            </actions>
-                        </action>
-                        <quality href="/Mechanics/ItemQualities/Common.xdb" />
-                    </Item>
-                    <Item>
-                        <action type="DeviceHealthVisAction">
-                            <actions>
-                                <Item>
-                                    <action type="DeviceVisActionChangeModel">
-                                        <visObj hrefvar="visObjUncommon" />
-                                        <collision hrefvar="collisionUncommon" />
-                                    </action>
-                                    <health>1</health>
-                                </Item>
-                            </actions>
-                        </action>
-                        <quality href="/Mechanics/ItemQualities/Uncommon.xdb" />
-                    </Item>
-                    <Item>
-                        <action type="DeviceHealthVisAction">
-                            <actions>
-                                <Item>
-                                    <action type="DeviceVisActionChangeModel">
-                                        <visObj hrefvar="visObjRare" />
-                                        <collision hrefvar="collisionRare" />
-                                    </action>
-                                    <health>1</health>
-                                </Item>
-                            </actions>
-                        </action>
-                        <quality href="/Mechanics/ItemQualities/Rare.xdb" />
-                    </Item>
-                    <Item>
-                        <action type="DeviceHealthVisAction">
-                            <actions>
-                                <Item>
-                                    <action type="DeviceVisActionChangeModel">
-                                        <visObj hrefvar="visObjEpic" />
-                                        <collision hrefvar="collisionEpic" />
-                                    </action>
-                                    <health>1</health>
-                                </Item>
-                            </actions>
-                        </action>
-                        <quality href="/Mechanics/ItemQualities/Epic.xdb" />
-                    </Item>
-                </qualities>
-            </visAction>
-        </Item>
-    </parts>
-    <persistentParts>
-        <Item type="gameMechanics.map.spawn.collision.ShipDeviceCollisionPart">
-            <object hrefvar="object" />
-            <useDelayedCollision>true</useDelayedCollision>
-        </Item>
-        <Item type="gameMechanics.elements.bunchparts.BunchPartAttachEffects">
-            <effects>
-                <Item type="gameMechanics.world.ship.elements.ItemInstalledTrigger">
-                    <effects>
-                        <Item type="gameMechanics.world.device.EffectGroupCooldownMultiplierDevice">
-                            <group href="/Mechanics/Ships/Shield/ShieldSpells.xdb" />
-                            <factor type="gameMechanics.elements.calcers.OnItemCalcer">
-                                <source type="gameMechanics.elements.item.ItemPart" />
-                                <calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerByName">
-                                    <name>cooldown</name>
-                                </calcer>
-                            </factor>
-                        </Item>
-                        <Item type="gameMechanics.world.ship.elements.EffectMapChanged">
-                            <effects>
-                                <Item type="gameMechanics.world.device.shield.EffectShieldPart">
-                                    <maxStrength type="gameMechanics.elements.calcers.CalcerMul">
-                                        <calcers>
-                                            <Item type="gameMechanics.elements.calcers.OnItemCalcer">
-                                                <source type="gameMechanics.elements.item.ItemPart" />
-                                                <calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerByName">
-                                                    <name>strength</name>
-                                                </calcer>
-                                            </Item>
-                                            <Item type="constructor.elements.CalcerFloatExternal">
-                                                <externalCalcer href="/Mechanics/Ships/Calcers/ItemLevel-2.(CalcerFloatResource).xdb" />
-                                            </Item>
-                                        </calcers>
-                                    </maxStrength>
-                                    <fullRegenTime type="gameMechanics.elements.calcers.OnItemCalcer">
-                                        <source type="gameMechanics.elements.item.ItemPart" />
-                                        <calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerByName">
-                                            <name>regenTime</name>
-                                        </calcer>
-                                    </fullRegenTime>
-                                    <regenCost type="gameMechanics.elements.calcers.CalcerMul">
-                                        <calcers>
-                                            <Item type="gameMechanics.elements.calcers.OnItemCalcer">
-                                                <source type="gameMechanics.elements.item.ItemPart" />
-                                                <calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerByName">
-                                                    <name>energy</name>
-                                                </calcer>
-                                            </Item>
-                                            <Item type="constructor.elements.CalcerFloatExternal">
-                                                <externalCalcer href="/Mechanics/Ships/Calcers/ItemLevel-2.(CalcerFloatResource).xdb" />
-                                            </Item>
-                                        </calcers>
-                                    </regenCost>
-                                </Item>
-                            </effects>
-                        </Item>
-                    </effects>
-                </Item>
-                <Item type="gameMechanics.world.device.parts.ImpactsOnUserGeneric">
-                    <userImpactsOnStartUse>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="/Mechanics/Ships/Shield/UsageBuff.xdb" />
-                        </Item>
-                    </userImpactsOnStartUse>
-                    <userImpactsOnFinishUse>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="/Mechanics/Ships/Shield/UsageBuff.xdb" />
-                            <anyRank>false</anyRank>
-                        </Item>
-                    </userImpactsOnFinishUse>
-                </Item>
-            </effects>
-            <reattachOnTeleport>false</reattachOnTeleport>
-        </Item>
-    </persistentParts>
-    <exploitingText href="/Mechanics/Ships/ShipDeviceExploitText.txt" />
-    <spell href="/Mechanics/Ships/ShipDeviceExploit.xdb" />
-    <deviceSpells>
-        <Item href="/Mechanics/Ships/Shield/Adaptable.7.0ActionRegenerateShield.(SpellSingleTarget).xdb" />
-    </deviceSpells>
+	<Header>
+		<resourceId>739931355</resourceId>
+		<Prototype href="/Mechanics/ObjectTemplates/ShipDevice.(UsableDeviceResource).xdb" />
+		<Variables>
+			<visObjCommon>/Ships/Components/InternalShield_01/InternalShield_01.(VisObjectTemplate).xdb</visObjCommon>
+			<collisionCommon>/Ships/Components/InternalShield_01/InternalShield_01.(Collision).xdb</collisionCommon>
+			<visObjUncommon>/Ships/Components/InternalShield_01A/InternalShield_01A.(VisObjectTemplate).xdb</visObjUncommon>
+			<collisionUncommon>/Ships/Components/InternalShield_01A/InternalShield_01A.(Collision).xdb</collisionUncommon>
+			<visObjRare>/Ships/Components/InternalShield_01B/InternalShield_01B.(VisObjectTemplate).xdb</visObjRare>
+			<collisionRare>/Ships/Components/InternalShield_01B/InternalShield_01B.(Collision).xdb</collisionRare>
+			<visObjEpic>/Ships/Components/InternalShield_01C/InternalShield_01C.(VisObjectTemplate).xdb</visObjEpic>
+			<collisionEpic>/Ships/Components/InternalShield_01C/InternalShield_01C.(Collision).xdb</collisionEpic>
+			<object>/Ships/Components/InternalShield_01C/InternalShield_01C.(StaticObject).xdb</object>
+		</Variables>
+	</Header>
+	<parts>
+		<Item type="DeathHandler">
+			<useParentState>true</useParentState>
+			<deathScript type="DeviceVisActionList">
+				<play>InSequence</play>
+				<elements>
+					<Item type="DeviceColorAction">
+						<colorValue>-1</colorValue>
+					</Item>
+					<Item type="DeviceVisActionChangeModel">
+						<priority>5</priority>
+					</Item>
+				</elements>
+			</deathScript>
+		</Item>
+		<Item type="DeviceOfflineComponent">
+			<onlineScript type="DeviceAnimationAction">
+				<mode>LOOP</mode>
+				<animations>
+					<Item>idle</Item>
+				</animations>
+			</onlineScript>
+			<offlineScript type="DeviceAnimationAction">
+				<mode>LOOP</mode>
+				<animations>
+					<Item>idleOffline</Item>
+				</animations>
+			</offlineScript>
+			<malfunctionScript type="DeviceAnimationAction">
+				<mode>LOOP</mode>
+				<animations>
+					<Item>idleMalfunction</Item>
+				</animations>
+			</malfunctionScript>
+		</Item>
+		<Item type="UsableDeviceClientPart">
+			<type>USDEV_SHIELD</type>
+		</Item>
+		<Item type="VisActionPart">
+			<visAction type="DeviceQualityVisAction">
+				<qualities>
+					<Item>
+						<action type="DeviceHealthVisAction">
+							<actions>
+								<Item>
+									<action type="DeviceVisActionChangeModel">
+										<visObj hrefvar="visObjCommon" />
+										<collision hrefvar="collisionCommon" />
+									</action>
+									<health>1</health>
+								</Item>
+							</actions>
+						</action>
+						<quality href="/Mechanics/ItemQualities/Common.xdb" />
+					</Item>
+					<Item>
+						<action type="DeviceHealthVisAction">
+							<actions>
+								<Item>
+									<action type="DeviceVisActionChangeModel">
+										<visObj hrefvar="visObjUncommon" />
+										<collision hrefvar="collisionUncommon" />
+									</action>
+									<health>1</health>
+								</Item>
+							</actions>
+						</action>
+						<quality href="/Mechanics/ItemQualities/Uncommon.xdb" />
+					</Item>
+					<Item>
+						<action type="DeviceHealthVisAction">
+							<actions>
+								<Item>
+									<action type="DeviceVisActionChangeModel">
+										<visObj hrefvar="visObjRare" />
+										<collision hrefvar="collisionRare" />
+									</action>
+									<health>1</health>
+								</Item>
+							</actions>
+						</action>
+						<quality href="/Mechanics/ItemQualities/Rare.xdb" />
+					</Item>
+					<Item>
+						<action type="DeviceHealthVisAction">
+							<actions>
+								<Item>
+									<action type="DeviceVisActionChangeModel">
+										<visObj hrefvar="visObjEpic" />
+										<collision hrefvar="collisionEpic" />
+									</action>
+									<health>1</health>
+								</Item>
+							</actions>
+						</action>
+						<quality href="/Mechanics/ItemQualities/Epic.xdb" />
+					</Item>
+				</qualities>
+			</visAction>
+		</Item>
+	</parts>
+	<persistentParts>
+		<Item type="gameMechanics.map.spawn.collision.ShipDeviceCollisionPart">
+			<object hrefvar="object" />
+			<useDelayedCollision>true</useDelayedCollision>
+		</Item>
+		<Item type="gameMechanics.elements.bunchparts.BunchPartAttachEffects">
+			<effects>
+				<Item type="gameMechanics.world.ship.elements.ItemInstalledTrigger">
+					<effects>
+						<Item type="gameMechanics.world.device.EffectGroupCooldownMultiplierDevice">
+							<group href="/Mechanics/Ships/Shield/ShieldSpells.xdb" />
+							<factor type="gameMechanics.elements.calcers.OnItemCalcer">
+								<source type="gameMechanics.elements.item.ItemPart" />
+								<calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerByName">
+									<name>cooldown</name>
+								</calcer>
+							</factor>
+						</Item>
+						<Item type="gameMechanics.world.ship.elements.EffectMapChanged">
+							<effects>
+								<Item type="gameMechanics.world.device.shield.EffectShieldPart">
+									<maxStrength type="gameMechanics.elements.calcers.CalcerMul">
+										<calcers>
+											<Item type="gameMechanics.elements.calcers.OnItemCalcer">
+												<source type="gameMechanics.elements.item.ItemPart" />
+												<calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerByName">
+													<name>strength</name>
+												</calcer>
+											</Item>
+											<Item type="constructor.elements.CalcerFloatExternal">
+												<externalCalcer href="/Mechanics/Ships/Calcers/ItemLevel-2.(CalcerFloatResource).xdb" />
+											</Item>
+										</calcers>
+									</maxStrength>
+									<fullRegenTime type="gameMechanics.elements.calcers.OnItemCalcer">
+										<source type="gameMechanics.elements.item.ItemPart" />
+										<calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerByName">
+											<name>regenTime</name>
+										</calcer>
+									</fullRegenTime>
+									<regenCost type="gameMechanics.elements.calcers.CalcerMul">
+										<calcers>
+											<Item type="gameMechanics.elements.calcers.OnItemCalcer">
+												<source type="gameMechanics.elements.item.ItemPart" />
+												<calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerByName">
+													<name>energy</name>
+												</calcer>
+											</Item>
+											<Item type="constructor.elements.CalcerFloatExternal">
+												<externalCalcer href="/Mechanics/Ships/Calcers/ItemLevel-2.(CalcerFloatResource).xdb" />
+											</Item>
+										</calcers>
+									</regenCost>
+								</Item>
+							</effects>
+						</Item>
+					</effects>
+				</Item>
+				<Item type="gameMechanics.world.device.parts.ImpactsOnUserGeneric">
+					<userImpactsOnStartUse>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="/Mechanics/Ships/Shield/UsageBuff.xdb" />
+						</Item>
+					</userImpactsOnStartUse>
+					<userImpactsOnFinishUse>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="/Mechanics/Ships/Shield/UsageBuff.xdb" />
+							<anyRank>false</anyRank>
+						</Item>
+					</userImpactsOnFinishUse>
+				</Item>
+			</effects>
+			<reattachOnTeleport>false</reattachOnTeleport>
+		</Item>
+	</persistentParts>
+	<exploitingText href="/Mechanics/Ships/ShipDeviceExploitText.txt" />
+	<spell href="/Mechanics/Ships/ShipDeviceExploit.xdb" />
+	<deviceSpells>
+		<Item href="/Mechanics/Ships/Shield/Adaptable.7.0ActionRegenerateShield.(SpellSingleTarget).xdb" />
+	</deviceSpells>
 </gameMechanics.world.device.UsableDeviceResource>

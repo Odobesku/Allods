@@ -1,305 +1,305 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.area.SpellArea>
-    <Header>
-        <resourceId>739932473</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/EngineerAttackDevices.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/AmmoSpells.(ActionGroup).xdb" />
-    </groups>
-    <Name href="Titan.(SpellArea).Name.txt" />
-    <Description href="Titan.(SpellArea).Description.txt" />
-    <descVars>
-        <Item>
-            <name>dmg</name>
-            <value>1</value>
-            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-                <scalers>
-                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                        <mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
-                            <calcers>
-                                <Item type="constructor.elements.CalcerFloatExternal">
-                                    <externalCalcer hrefvar="externalCalcer" />
-                                </Item>
-                                <Item type="gameMechanics.elements.calcers.LinearCalcer">
-                                    <mul>0.1</mul>
-                                    <mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
-                                        <dressSlot>AMMO</dressSlot>
-                                    </mulCalcer>
-                                    <sum>1</sum>
-                                </Item>
-                            </calcers>
-                        </mulCalcer>
-                    </Item>
-                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-                        <formula>WeaponScaler</formula>
-                    </Item>
-                </scalers>
-            </scaler>
-        </Item>
-        <Item>
-            <name>time</name>
-            <value>1</value>
-            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                <mulCalcer type="constructor.elements.CalcerFloatExternal">
-                    <externalCalcer hrefvar="externalCalcer2" />
-                </mulCalcer>
-            </scaler>
-        </Item>
-        <Item>
-            <name>lifetime</name>
-            <value>1</value>
-            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                <mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
-                    <mul>1.5</mul>
-                    <mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
-                        <dressSlot>AMMO</dressSlot>
-                    </mulCalcer>
-                    <sum>10</sum>
-                </mulCalcer>
-            </scaler>
-        </Item>
-        <Item>
-            <name>hp</name>
-            <value>1</value>
-            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-                <scalers>
-                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-                        <formula>FormulaPercent</formula>
-                    </Item>
-                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                        <mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
-                            <mul>0</mul>
-                            <sum var="hp" />
-                        </mulCalcer>
-                    </Item>
-                </scalers>
-            </scaler>
-        </Item>
-    </descVars>
-    <image href="/Interface/Icons/Mounts/SpellsMounts/EngineerTtitan.(UISingleTexture).xdb" />
-    <visualScripts href="/Spells/VisScripts/Engineer/Turret.(SpellVisScripts).xdb" />
-    <durationBuff href="TitanLifetime.(BuffResource).xdb" />
-    <range type="gameMechanics.elements.calcers.FloatData">
-        <value>40</value>
-    </range>
-    <targetType>STTPoint</targetType>
-    <isAggro>false</isAggro>
-    <ranks>
-        <Item href="Titan01.(SpellArea).xdb" />
-        <Item href="Titan02.(SpellArea).xdb" />
-        <Item href="Titan03.(SpellArea).xdb" />
-    </ranks>
-    <iffPolicy>Everyone</iffPolicy>
-    <mechanics>
-        <cooldown>
-            <duration>300000</duration>
-        </cooldown>
-        <casterConditions>
-            <Item type="gameMechanics.elements.predicates.PredicateHasPath">
-                <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                <maxLength>85</maxLength>
-            </Item>
-        </casterConditions>
-        <casterResources>
-            <Item type="gameMechanics.elements.resources.ResourceIf">
-                <predicates>
-                    <Item type="gameMechanics.elements.predicates.PredicateEquipped">
-                        <dressType>AMMO</dressType>
-                        <itemClass href="/Mechanics/ItemClasses/Other_InfiniteTeardrop.(ItemClass).xdb" />
-                    </Item>
-                </predicates>
-                <resourceIf type="gameMechanics.elements.resources.ResourceMana">
-                    <hideText>true</hideText>
-                    <mana>0</mana>
-                </resourceIf>
-                <resourceElse type="gameMechanics.elements.resources.ResourceDressItem">
-                    <slot>AMMO</slot>
-                    <count>5</count>
-                </resourceElse>
-            </Item>
-        </casterResources>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                <predicates>
-                    <Item type="gameMechanics.elements.predicates.PredicateFaction">
-                        <faction href="/World/Factions/League.xdb" />
-                    </Item>
-                </predicates>
-                <impacts>
-                    <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                        <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                        <impacts>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff hrefvar="buff" />
-                                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                    <mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
-                                        <mul>1.5</mul>
-                                        <mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
-                                            <dressSlot>AMMO</dressSlot>
-                                        </mulCalcer>
-                                        <sum>12</sum>
-                                    </mulCalcer>
-                                </durationScaler>
-                            </Item>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
-                            </Item>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="TitanInvisPlane.(BuffResource).xdb" />
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                <buff href="AmmoDamageIncrease.(BuffResource).xdb" />
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="AmmoDamageIncrease.(BuffResource).xdb" />
-                                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                            <mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
-                                                <mul>1.5</mul>
-                                                <mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
-                                                    <dressSlot>AMMO</dressSlot>
-                                                </mulCalcer>
-                                                <sum>12</sum>
-                                            </mulCalcer>
-                                        </durationScaler>
-                                        <stacks type="gameMechanics.elements.calcers.CalcerMax">
-                                            <calcers>
-                                                <Item type="gameMechanics.elements.calcers.ItemQualityCalcer">
-                                                    <dressSlot>AMMO</dressSlot>
-                                                </Item>
-                                                <Item type="gameMechanics.elements.calcers.FloatData">
-                                                    <value>1</value>
-                                                </Item>
-                                            </calcers>
-                                        </stacks>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                                        <delay>200</delay>
-                                        <impacts>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="TitanLifetime.(BuffResource).xdb" />
-                                                <durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
-                                                    <buff href="TitanStuff01.(BuffResource).xdb" />
-                                                    <tickLength>1000</tickLength>
-                                                </durationScaler>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                        </impacts>
-                        <assistantResource href="Titan.(AssistantResource).xdb" />
-                        <mobResource href="TitanLeague.(MobWorld).xdb" />
-                        <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                        <linkMode>ModifiedHealth</linkMode>
-                        <planeSyncStrategy>Sync</planeSyncStrategy>
-                    </Item>
-                    <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-                        <projectileData>
-                            <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
-                                <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                            </moveType>
-                            <resource hrefvar="resource" />
-                        </projectileData>
-                    </Item>
-                </impacts>
-                <elseImpacts>
-                    <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                        <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                        <impacts>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff hrefvar="buff" />
-                                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                    <mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
-                                        <mul>1.5</mul>
-                                        <mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
-                                            <dressSlot>AMMO</dressSlot>
-                                        </mulCalcer>
-                                        <sum>12</sum>
-                                    </mulCalcer>
-                                </durationScaler>
-                            </Item>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="TitanInvisPlane.(BuffResource).xdb" />
-                            </Item>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                <buff href="AmmoDamageIncrease.(BuffResource).xdb" />
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="AmmoDamageIncrease.(BuffResource).xdb" />
-                                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                            <mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
-                                                <mul>1.5</mul>
-                                                <mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
-                                                    <dressSlot>AMMO</dressSlot>
-                                                </mulCalcer>
-                                                <sum>12</sum>
-                                            </mulCalcer>
-                                        </durationScaler>
-                                        <stacks type="gameMechanics.elements.calcers.CalcerMax">
-                                            <calcers>
-                                                <Item type="gameMechanics.elements.calcers.ItemQualityCalcer">
-                                                    <dressSlot>AMMO</dressSlot>
-                                                </Item>
-                                                <Item type="gameMechanics.elements.calcers.FloatData">
-                                                    <value>1</value>
-                                                </Item>
-                                            </calcers>
-                                        </stacks>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                                        <delay>200</delay>
-                                        <impacts>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="TitanLifetime.(BuffResource).xdb" />
-                                                <durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
-                                                    <buff href="TitanStuff01.(BuffResource).xdb" />
-                                                    <tickLength>1000</tickLength>
-                                                </durationScaler>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                        </impacts>
-                        <assistantResource href="Titan.(AssistantResource).xdb" />
-                        <mobResource href="TitanEmpire.(MobWorld).xdb" />
-                        <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                        <linkMode>ModifiedHealth</linkMode>
-                        <planeSyncStrategy>Sync</planeSyncStrategy>
-                    </Item>
-                    <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-                        <projectileData>
-                            <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
-                                <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                            </moveType>
-                            <resource hrefvar="resourceEmpire" />
-                        </projectileData>
-                    </Item>
-                </elseImpacts>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactSpellGroupCooldown">
-                <group href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
-                <duration>1000</duration>
-            </Item>
-        </casterImpacts>
-    </mechanics>
-    <radius>15</radius>
+	<Header>
+		<resourceId>739932473</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/EngineerAttackDevices.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/AmmoSpells.(ActionGroup).xdb" />
+	</groups>
+	<Name href="Titan.(SpellArea).Name.txt" />
+	<Description href="Titan.(SpellArea).Description.txt" />
+	<descVars>
+		<Item>
+			<name>dmg</name>
+			<value>1</value>
+			<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+				<scalers>
+					<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+						<mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
+							<calcers>
+								<Item type="constructor.elements.CalcerFloatExternal">
+									<externalCalcer hrefvar="externalCalcer" />
+								</Item>
+								<Item type="gameMechanics.elements.calcers.LinearCalcer">
+									<mul>0.1</mul>
+									<mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
+										<dressSlot>AMMO</dressSlot>
+									</mulCalcer>
+									<sum>1</sum>
+								</Item>
+							</calcers>
+						</mulCalcer>
+					</Item>
+					<Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+						<formula>WeaponScaler</formula>
+					</Item>
+				</scalers>
+			</scaler>
+		</Item>
+		<Item>
+			<name>time</name>
+			<value>1</value>
+			<scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+				<mulCalcer type="constructor.elements.CalcerFloatExternal">
+					<externalCalcer hrefvar="externalCalcer2" />
+				</mulCalcer>
+			</scaler>
+		</Item>
+		<Item>
+			<name>lifetime</name>
+			<value>1</value>
+			<scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+				<mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
+					<mul>1.5</mul>
+					<mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
+						<dressSlot>AMMO</dressSlot>
+					</mulCalcer>
+					<sum>10</sum>
+				</mulCalcer>
+			</scaler>
+		</Item>
+		<Item>
+			<name>hp</name>
+			<value>1</value>
+			<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+				<scalers>
+					<Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+						<formula>FormulaPercent</formula>
+					</Item>
+					<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+						<mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
+							<mul>0</mul>
+							<sum var="hp" />
+						</mulCalcer>
+					</Item>
+				</scalers>
+			</scaler>
+		</Item>
+	</descVars>
+	<image href="/Interface/Icons/Mounts/SpellsMounts/EngineerTtitan.(UISingleTexture).xdb" />
+	<visualScripts href="/Spells/VisScripts/Engineer/Turret.(SpellVisScripts).xdb" />
+	<durationBuff href="TitanLifetime.(BuffResource).xdb" />
+	<range type="gameMechanics.elements.calcers.FloatData">
+		<value>40</value>
+	</range>
+	<targetType>STTPoint</targetType>
+	<isAggro>false</isAggro>
+	<ranks>
+		<Item href="Titan01.(SpellArea).xdb" />
+		<Item href="Titan02.(SpellArea).xdb" />
+		<Item href="Titan03.(SpellArea).xdb" />
+	</ranks>
+	<iffPolicy>Everyone</iffPolicy>
+	<mechanics>
+		<cooldown>
+			<duration>300000</duration>
+		</cooldown>
+		<casterConditions>
+			<Item type="gameMechanics.elements.predicates.PredicateHasPath">
+				<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+				<maxLength>85</maxLength>
+			</Item>
+		</casterConditions>
+		<casterResources>
+			<Item type="gameMechanics.elements.resources.ResourceIf">
+				<predicates>
+					<Item type="gameMechanics.elements.predicates.PredicateEquipped">
+						<dressType>AMMO</dressType>
+						<itemClass href="/Mechanics/ItemClasses/Other_InfiniteTeardrop.(ItemClass).xdb" />
+					</Item>
+				</predicates>
+				<resourceIf type="gameMechanics.elements.resources.ResourceMana">
+					<hideText>true</hideText>
+					<mana>0</mana>
+				</resourceIf>
+				<resourceElse type="gameMechanics.elements.resources.ResourceDressItem">
+					<slot>AMMO</slot>
+					<count>5</count>
+				</resourceElse>
+			</Item>
+		</casterResources>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+				<predicates>
+					<Item type="gameMechanics.elements.predicates.PredicateFaction">
+						<faction href="/World/Factions/League.xdb" />
+					</Item>
+				</predicates>
+				<impacts>
+					<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+						<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+						<impacts>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff hrefvar="buff" />
+								<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+									<mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
+										<mul>1.5</mul>
+										<mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
+											<dressSlot>AMMO</dressSlot>
+										</mulCalcer>
+										<sum>12</sum>
+									</mulCalcer>
+								</durationScaler>
+							</Item>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
+							</Item>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="TitanInvisPlane.(BuffResource).xdb" />
+							</Item>
+							<Item type="gameMechanics.elements.impacts.BuffDetacher">
+								<buff href="AmmoDamageIncrease.(BuffResource).xdb" />
+							</Item>
+							<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="AmmoDamageIncrease.(BuffResource).xdb" />
+										<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+											<mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
+												<mul>1.5</mul>
+												<mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
+													<dressSlot>AMMO</dressSlot>
+												</mulCalcer>
+												<sum>12</sum>
+											</mulCalcer>
+										</durationScaler>
+										<stacks type="gameMechanics.elements.calcers.CalcerMax">
+											<calcers>
+												<Item type="gameMechanics.elements.calcers.ItemQualityCalcer">
+													<dressSlot>AMMO</dressSlot>
+												</Item>
+												<Item type="gameMechanics.elements.calcers.FloatData">
+													<value>1</value>
+												</Item>
+											</calcers>
+										</stacks>
+									</Item>
+								</impacts>
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+										<delay>200</delay>
+										<impacts>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="TitanLifetime.(BuffResource).xdb" />
+												<durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
+													<buff href="TitanStuff01.(BuffResource).xdb" />
+													<tickLength>1000</tickLength>
+												</durationScaler>
+											</Item>
+										</impacts>
+									</Item>
+								</impacts>
+							</Item>
+						</impacts>
+						<assistantResource href="Titan.(AssistantResource).xdb" />
+						<mobResource href="TitanLeague.(MobWorld).xdb" />
+						<level type="gameMechanics.elements.calcers.CalcerLevel" />
+						<linkMode>ModifiedHealth</linkMode>
+						<planeSyncStrategy>Sync</planeSyncStrategy>
+					</Item>
+					<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+						<projectileData>
+							<moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+								<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+							</moveType>
+							<resource hrefvar="resource" />
+						</projectileData>
+					</Item>
+				</impacts>
+				<elseImpacts>
+					<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+						<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+						<impacts>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff hrefvar="buff" />
+								<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+									<mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
+										<mul>1.5</mul>
+										<mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
+											<dressSlot>AMMO</dressSlot>
+										</mulCalcer>
+										<sum>12</sum>
+									</mulCalcer>
+								</durationScaler>
+							</Item>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="TitanInvisPlane.(BuffResource).xdb" />
+							</Item>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
+							</Item>
+							<Item type="gameMechanics.elements.impacts.BuffDetacher">
+								<buff href="AmmoDamageIncrease.(BuffResource).xdb" />
+							</Item>
+							<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="AmmoDamageIncrease.(BuffResource).xdb" />
+										<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+											<mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
+												<mul>1.5</mul>
+												<mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
+													<dressSlot>AMMO</dressSlot>
+												</mulCalcer>
+												<sum>12</sum>
+											</mulCalcer>
+										</durationScaler>
+										<stacks type="gameMechanics.elements.calcers.CalcerMax">
+											<calcers>
+												<Item type="gameMechanics.elements.calcers.ItemQualityCalcer">
+													<dressSlot>AMMO</dressSlot>
+												</Item>
+												<Item type="gameMechanics.elements.calcers.FloatData">
+													<value>1</value>
+												</Item>
+											</calcers>
+										</stacks>
+									</Item>
+								</impacts>
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+										<delay>200</delay>
+										<impacts>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="TitanLifetime.(BuffResource).xdb" />
+												<durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
+													<buff href="TitanStuff01.(BuffResource).xdb" />
+													<tickLength>1000</tickLength>
+												</durationScaler>
+											</Item>
+										</impacts>
+									</Item>
+								</impacts>
+							</Item>
+						</impacts>
+						<assistantResource href="Titan.(AssistantResource).xdb" />
+						<mobResource href="TitanEmpire.(MobWorld).xdb" />
+						<level type="gameMechanics.elements.calcers.CalcerLevel" />
+						<linkMode>ModifiedHealth</linkMode>
+						<planeSyncStrategy>Sync</planeSyncStrategy>
+					</Item>
+					<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+						<projectileData>
+							<moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+								<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+							</moveType>
+							<resource hrefvar="resourceEmpire" />
+						</projectileData>
+					</Item>
+				</elseImpacts>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactSpellGroupCooldown">
+				<group href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
+				<duration>1000</duration>
+			</Item>
+		</casterImpacts>
+	</mechanics>
+	<radius>15</radius>
 </gameMechanics.constructor.schemes.spell.area.SpellArea>

@@ -1,143 +1,143 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.buff.BuffResource>
-    <Header>
-        <resourceId>739904329</resourceId>
-    </Header>
-    <Name href="ArtilleryBuff.(BuffResource).Name.txt" />
-    <Description href="ArtilleryBuff.(BuffResource).Description.txt" />
-    <image href="/Interface/Icons/Equipment/Ships/Shot/ElectricShot01.(UISingleTexture).xdb" />
-    <visScript href="ArtilleryBuff.(BuffVisScripts).xdb" />
-    <effects>
-        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
-        <Item type="gameMechanics.elements.effects.EffectDisableAct">
-            <actions>
-                <Item>Move</Item>
-            </actions>
-            <rooted>true</rooted>
-        </Item>
-        <Item type="gameMechanics.elements.effects.DisableLocalEvade" />
-        <Item type="gameMechanics.elements.effects.EffectsDeferred">
-            <delay>500</delay>
-            <effects>
-                <Item type="gameMechanics.elements.effects.EffectInstantiating">
-                    <effects>
-                        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
-                                    <selector type="gameMechanics.tools.SelectorRandomNotLess">
-                                        <minIndex>0</minIndex>
-                                    </selector>
-                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                    <buff href="/Mechanics/RaidInstances/FerrisRaid/9_RoboGuards/RoboBoss/LaserShot_playerCooldown.(BuffResource).xdb" />
-                                                </predicate>
-                                            </Item>
-                                        </predicates>
-                                    </filter>
-                                    <impacts>
-                                        <Item>
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                                    <impacts>
-                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                            <buff href="Aggroleader_1sec.(BuffResource).xdb" />
-                                                        </Item>
-                                                    </impacts>
-                                                </Item>
-                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
-                                                    <data href="ArtilleryShot.(ClientData).xdb" />
-                                                    <calcers>
-                                                        <addressEntries>
-                                                            <Item>
-                                                                <name>caster</name>
-                                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
-                                                            </Item>
-                                                            <Item>
-                                                                <name>target</name>
-                                                                <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
-                                                            </Item>
-                                                        </addressEntries>
-                                                    </calcers>
-                                                </Item>
-                                                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                                                    <delay>500</delay>
-                                                    <impacts>
-                                                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
-                                                            <element>LIGHTNING</element>
-                                                            <damage>25</damage>
-                                                            <scaler type="gameMechanics.elements.scalers.MagicScaler" />
-                                                        </Item>
-                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                            <buff href="/Mechanics/RaidInstances/FerrisRaid/9_RoboGuards/RoboBoss/LaserShot_playerCooldown.(BuffResource).xdb" />
-                                                        </Item>
-                                                    </impacts>
-                                                </Item>
-                                            </impacts>
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                            <tick>1000</tick>
-                        </Item>
-                    </effects>
-                </Item>
-            </effects>
-        </Item>
-        <Item type="gameMechanics.elements.effects.Switch">
-            <impactsOff>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="Aggroleader_1sec.(BuffResource).xdb" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
-                                    <selector type="gameMechanics.tools.SelectorParticular">
-                                        <index>0</index>
-                                    </selector>
-                                    <impacts>
-                                        <Item>
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ForceAggro" />
-                                            </impacts>
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impactsIf>
-                        </Item>
-                    </impacts>
-                </Item>
-            </impactsOff>
-        </Item>
-        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
-            <onLeave>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="ArtilleryBuff.(BuffResource).xdb" />
-                </Item>
-            </onLeave>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectDisableAbility">
-            <ability href="/Mechanics/Abilities/Bosses/ActivityTracker/Ability01.xdb" />
-        </Item>
-        <Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
-            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
-                <coeff>-0.75</coeff>
-            </scaler>
-        </Item>
-    </effects>
-    <isHelpful>true</isHelpful>
-    <canBeSaved>false</canBeSaved>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
-        <Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
-    </groups>
+	<Header>
+		<resourceId>739904329</resourceId>
+	</Header>
+	<Name href="ArtilleryBuff.(BuffResource).Name.txt" />
+	<Description href="ArtilleryBuff.(BuffResource).Description.txt" />
+	<image href="/Interface/Icons/Equipment/Ships/Shot/ElectricShot01.(UISingleTexture).xdb" />
+	<visScript href="ArtilleryBuff.(BuffVisScripts).xdb" />
+	<effects>
+		<Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+		<Item type="gameMechanics.elements.effects.EffectDisableAct">
+			<actions>
+				<Item>Move</Item>
+			</actions>
+			<rooted>true</rooted>
+		</Item>
+		<Item type="gameMechanics.elements.effects.DisableLocalEvade" />
+		<Item type="gameMechanics.elements.effects.EffectsDeferred">
+			<delay>500</delay>
+			<effects>
+				<Item type="gameMechanics.elements.effects.EffectInstantiating">
+					<effects>
+						<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+									<selector type="gameMechanics.tools.SelectorRandomNotLess">
+										<minIndex>0</minIndex>
+									</selector>
+									<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+										<predicates>
+											<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+											<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+												<predicate type="gameMechanics.elements.resources.ResourceBuff">
+													<buff href="/Mechanics/RaidInstances/FerrisRaid/9_RoboGuards/RoboBoss/LaserShot_playerCooldown.(BuffResource).xdb" />
+												</predicate>
+											</Item>
+										</predicates>
+									</filter>
+									<impacts>
+										<Item>
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+													<impacts>
+														<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+															<buff href="Aggroleader_1sec.(BuffResource).xdb" />
+														</Item>
+													</impacts>
+												</Item>
+												<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+													<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+													<data href="ArtilleryShot.(ClientData).xdb" />
+													<calcers>
+														<addressEntries>
+															<Item>
+																<name>caster</name>
+																<finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+															</Item>
+															<Item>
+																<name>target</name>
+																<finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+															</Item>
+														</addressEntries>
+													</calcers>
+												</Item>
+												<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+													<delay>500</delay>
+													<impacts>
+														<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+															<element>LIGHTNING</element>
+															<damage>25</damage>
+															<scaler type="gameMechanics.elements.scalers.MagicScaler" />
+														</Item>
+														<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+															<buff href="/Mechanics/RaidInstances/FerrisRaid/9_RoboGuards/RoboBoss/LaserShot_playerCooldown.(BuffResource).xdb" />
+														</Item>
+													</impacts>
+												</Item>
+											</impacts>
+										</Item>
+									</impacts>
+								</Item>
+							</impacts>
+							<tick>1000</tick>
+						</Item>
+					</effects>
+				</Item>
+			</effects>
+		</Item>
+		<Item type="gameMechanics.elements.effects.Switch">
+			<impactsOff>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="Aggroleader_1sec.(BuffResource).xdb" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+									<selector type="gameMechanics.tools.SelectorParticular">
+										<index>0</index>
+									</selector>
+									<impacts>
+										<Item>
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ForceAggro" />
+											</impacts>
+										</Item>
+									</impacts>
+								</Item>
+							</impactsIf>
+						</Item>
+					</impacts>
+				</Item>
+			</impactsOff>
+		</Item>
+		<Item type="gameMechanics.elements.effects.CombatStateTrigger">
+			<onLeave>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="ArtilleryBuff.(BuffResource).xdb" />
+				</Item>
+			</onLeave>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectDisableAbility">
+			<ability href="/Mechanics/Abilities/Bosses/ActivityTracker/Ability01.xdb" />
+		</Item>
+		<Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
+			<scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+				<coeff>-0.75</coeff>
+			</scaler>
+		</Item>
+	</effects>
+	<isHelpful>true</isHelpful>
+	<canBeSaved>false</canBeSaved>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+		<Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+	</groups>
 </gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,132 +1,132 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.world.mob.interaction.Cue>
-    <Header>
-        <resourceId>284897295</resourceId>
-    </Header>
-    <name href="LoadSupplyCrateEvent.txt" />
-    <text href="LoadSupplyCrateEvent.Text.txt" />
-    <conditions>
-        <Item type="gameMechanics.elements.predicates.PredicateGreaterLong">
-            <lhs type="gameMechanics.world.ship.elements.calcers.CalcerTreasureFreeSpace" />
-            <rhs type="gameMechanics.elements.calcers.LongData">
-                <value>9</value>
-            </rhs>
-        </Item>
-        <Item type="gameMechanics.world.ship.elements.PredicateOnBoundShip">
-            <predicates>
-                <Item type="gameMechanics.world.ship.elements.PredicatePermission">
-                    <permission>BuyChests</permission>
-                </Item>
-                <Item type="gameMechanics.world.ship.elements.PredicateShipOwner" />
-                <Item type="gameMechanics.elements.predicates.PredicateOnSameMap" />
-            </predicates>
-        </Item>
-        <Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
-            <key href="/System/ContentKeys/AstralCaravans.(ContentKey).xdb" />
-        </Item>
-        <Item type="gameMechanics.elements.predicates.PredicateIsRuleActive">
-            <rule href="/Mechanics/Rules/Astral/Caravans/CaravanEvent/Rule.xdb" />
-        </Item>
-        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
-            <predicates>
-                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
-                    <quest href="/World/Quests/AstralHangarLeague/Caravan/CaravanToOutpost.xdb" />
-                    <status>Active</status>
-                </Item>
-                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
-                    <quest href="/World/Quests/AstralHangarHadagan/Caravan/CaravanToOutpost.xdb" />
-                    <status>Active</status>
-                </Item>
-            </predicates>
-        </Item>
-        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-            <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                <buff href="/World/Quests/AstralHangarLeague/Caravan/TookQuest.(BuffResource).xdb" />
-            </predicate>
-        </Item>
-    </conditions>
-    <additionalConditions>
-        <Item type="gameMechanics.elements.predicates.PredicateCreatureLevel">
-            <minLevel type="gameMechanics.formulas.MaxLevelConstant">
-                <summand>-3</summand>
-            </minLevel>
-        </Item>
-    </additionalConditions>
-    <impacts>
-        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
-            <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderBoundShip" />
-            <impacts>
-                <Item type="gameMechanics.world.ship.elements.ImpactAddChest">
-                    <chestType href="/Mechanics/Rules/Astral/Caravans/Chests/SupplyChestEvent.(AstralChestType).xdb" />
-                    <chestCount>10</chestCount>
-                    <chestBindingPredicates>
-                        <Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
-                            <onSlave type="gameMechanics.constructor.basicElements.PredicateNot">
-                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                    <buff href="/World/Quests/AstralHangarLeague/Caravan/TookQuest.(BuffResource).xdb" />
-                                </predicate>
-                            </onSlave>
-                        </Item>
-                    </chestBindingPredicates>
-                </Item>
-            </impacts>
-        </Item>
-        <Item type="gameMechanics.elements.impacts.ImpactIsolator">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
-                    <affectPets>false</affectPets>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.world.ship.elements.PredicateOnBoundShip">
-                                    <predicates>
-                                        <Item type="gameMechanics.world.ship.elements.PredicatePermission">
-                                            <permission>BuyChests</permission>
-                                        </Item>
-                                        <Item type="gameMechanics.elements.predicates.PredicateOnSameMap" />
-                                    </predicates>
-                                </Item>
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                    <buff href="/World/Quests/AstralHangarLeague/Caravan/TookQuest.(BuffResource).xdb" />
-                                </Item>
-                            </impactsIf>
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
-                                    <quest href="/World/Quests/AstralHangarLeague/Caravan/CaravanToOutpost.xdb" />
-                                    <status>Active</status>
-                                </Item>
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
-                                    <id href="/World/Quests/AstralHangarLeague/Caravan/QuestCountLoadedSupplies.(QuestCountId).xdb" />
-                                </Item>
-                            </impactsIf>
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
-                                    <quest href="/World/Quests/AstralHangarHadagan/Caravan/CaravanToOutpost.xdb" />
-                                    <status>Active</status>
-                                </Item>
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
-                                    <id href="/World/Quests/AstralHangarHadagan/Caravan/QuestCountLoadedSupplies.(QuestCountId).xdb" />
-                                </Item>
-                            </impactsIf>
-                        </Item>
-                    </impacts>
-                </Item>
-            </impacts>
-        </Item>
-    </impacts>
-    <nextCues>
-        <Item href="LoadSupplyCrate.(Cue).xdb" />
-        <Item href="LoadSupplyCrateNoShip.(Cue).xdb" />
-        <Item href="RefundSupplyCrate.(Cue).xdb" />
-    </nextCues>
+	<Header>
+		<resourceId>284897295</resourceId>
+	</Header>
+	<name href="LoadSupplyCrateEvent.txt" />
+	<text href="LoadSupplyCrateEvent.Text.txt" />
+	<conditions>
+		<Item type="gameMechanics.elements.predicates.PredicateGreaterLong">
+			<lhs type="gameMechanics.world.ship.elements.calcers.CalcerTreasureFreeSpace" />
+			<rhs type="gameMechanics.elements.calcers.LongData">
+				<value>9</value>
+			</rhs>
+		</Item>
+		<Item type="gameMechanics.world.ship.elements.PredicateOnBoundShip">
+			<predicates>
+				<Item type="gameMechanics.world.ship.elements.PredicatePermission">
+					<permission>BuyChests</permission>
+				</Item>
+				<Item type="gameMechanics.world.ship.elements.PredicateShipOwner" />
+				<Item type="gameMechanics.elements.predicates.PredicateOnSameMap" />
+			</predicates>
+		</Item>
+		<Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
+			<key href="/System/ContentKeys/AstralCaravans.(ContentKey).xdb" />
+		</Item>
+		<Item type="gameMechanics.elements.predicates.PredicateIsRuleActive">
+			<rule href="/Mechanics/Rules/Astral/Caravans/CaravanEvent/Rule.xdb" />
+		</Item>
+		<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+			<predicates>
+				<Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+					<quest href="/World/Quests/AstralHangarLeague/Caravan/CaravanToOutpost.xdb" />
+					<status>Active</status>
+				</Item>
+				<Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+					<quest href="/World/Quests/AstralHangarHadagan/Caravan/CaravanToOutpost.xdb" />
+					<status>Active</status>
+				</Item>
+			</predicates>
+		</Item>
+		<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+			<predicate type="gameMechanics.elements.resources.ResourceBuff">
+				<buff href="/World/Quests/AstralHangarLeague/Caravan/TookQuest.(BuffResource).xdb" />
+			</predicate>
+		</Item>
+	</conditions>
+	<additionalConditions>
+		<Item type="gameMechanics.elements.predicates.PredicateCreatureLevel">
+			<minLevel type="gameMechanics.formulas.MaxLevelConstant">
+				<summand>-3</summand>
+			</minLevel>
+		</Item>
+	</additionalConditions>
+	<impacts>
+		<Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+			<addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderBoundShip" />
+			<impacts>
+				<Item type="gameMechanics.world.ship.elements.ImpactAddChest">
+					<chestType href="/Mechanics/Rules/Astral/Caravans/Chests/SupplyChestEvent.(AstralChestType).xdb" />
+					<chestCount>10</chestCount>
+					<chestBindingPredicates>
+						<Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
+							<onSlave type="gameMechanics.constructor.basicElements.PredicateNot">
+								<predicate type="gameMechanics.elements.resources.ResourceBuff">
+									<buff href="/World/Quests/AstralHangarLeague/Caravan/TookQuest.(BuffResource).xdb" />
+								</predicate>
+							</onSlave>
+						</Item>
+					</chestBindingPredicates>
+				</Item>
+			</impacts>
+		</Item>
+		<Item type="gameMechanics.elements.impacts.ImpactIsolator">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
+					<affectPets>false</affectPets>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.world.ship.elements.PredicateOnBoundShip">
+									<predicates>
+										<Item type="gameMechanics.world.ship.elements.PredicatePermission">
+											<permission>BuyChests</permission>
+										</Item>
+										<Item type="gameMechanics.elements.predicates.PredicateOnSameMap" />
+									</predicates>
+								</Item>
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+									<buff href="/World/Quests/AstralHangarLeague/Caravan/TookQuest.(BuffResource).xdb" />
+								</Item>
+							</impactsIf>
+						</Item>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+									<quest href="/World/Quests/AstralHangarLeague/Caravan/CaravanToOutpost.xdb" />
+									<status>Active</status>
+								</Item>
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+									<id href="/World/Quests/AstralHangarLeague/Caravan/QuestCountLoadedSupplies.(QuestCountId).xdb" />
+								</Item>
+							</impactsIf>
+						</Item>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+									<quest href="/World/Quests/AstralHangarHadagan/Caravan/CaravanToOutpost.xdb" />
+									<status>Active</status>
+								</Item>
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+									<id href="/World/Quests/AstralHangarHadagan/Caravan/QuestCountLoadedSupplies.(QuestCountId).xdb" />
+								</Item>
+							</impactsIf>
+						</Item>
+					</impacts>
+				</Item>
+			</impacts>
+		</Item>
+	</impacts>
+	<nextCues>
+		<Item href="LoadSupplyCrate.(Cue).xdb" />
+		<Item href="LoadSupplyCrateNoShip.(Cue).xdb" />
+		<Item href="RefundSupplyCrate.(Cue).xdb" />
+	</nextCues>
 </gameMechanics.world.mob.interaction.Cue>

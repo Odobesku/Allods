@@ -1,125 +1,125 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
-    <Header>
-        <resourceId>739861653</resourceId>
-    </Header>
-    <name href="AntiRaid.(AbilityResource).Name.txt" />
-    <nameTemplate href="AntiRaid.(AbilityResource).NameTemplate.txt" />
-    <effects>
-        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
-            <onEnter>
-                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                            <delay>10000</delay>
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                    <predicates>
-                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                <buff href="CFH_Check_Single.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                            </predicate>
-                                        </Item>
-                                        <Item type="gameMechanics.elements.predicates.PredicateAggrolistCanSelect">
-                                            <selector type="gameMechanics.tools.SelectorRandomNotLess">
-                                                <minIndex>13</minIndex>
-                                            </selector>
-                                            <filter type="gameMechanics.world.creature.AvatarFilter" />
-                                        </Item>
-                                    </predicates>
-                                    <impactsIf>
-                                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                                            <radius>65</radius>
-                                            <affectGroup>Friends</affectGroup>
-                                            <affectHolder>false</affectHolder>
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                    <predicates>
-                                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                            <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
-                                                        </Item>
-                                                    </predicates>
-                                                    <impactsIf>
-                                                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                                                            <impacts>
-                                                                <Item type="gameMechanics.elements.impacts.ImpactCopyAggroList" />
-                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                    <buff href="CFH_Check.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                </Item>
-                                                            </impacts>
-                                                        </Item>
-                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                            <buff href="CFH_Check_Single.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        </Item>
-                                                    </impactsIf>
-                                                </Item>
-                                            </impacts>
-                                            <filter type="gameMechanics.world.creature.MobFilter" />
-                                        </Item>
-                                    </impactsIf>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                </Item>
-            </onEnter>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectsIfTarget">
-            <predicates>
-                <Item type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
-                    <quality href="/Mechanics/MobQualities/Boss.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
-                </Item>
-                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                    <predicate type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
-                        <quality href="/Mechanics/MobQualities/BossAdd.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
-                    </predicate>
-                </Item>
-            </predicates>
-            <effectsElse>
-                <Item type="gameMechanics.elements.effects.DeathTrigger">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                                    <radius>20</radius>
-                                    <affectGroup>Friends</affectGroup>
-                                    <affectHolder>false</affectHolder>
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.DirectHeal">
-                                            <heal>1</heal>
-                                            <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
-                                                    <multiplier>0.25</multiplier>
-                                                </mulCalcer>
-                                            </scalerTarget>
-                                        </Item>
-                                    </impacts>
-                                    <filter type="gameMechanics.constructor.basicElements.FilterNot">
-                                        <filter type="gameMechanics.constructor.basicElements.FilterAnd">
-                                            <filters>
-                                                <Item type="gameMechanics.world.creature.MobFilter" />
-                                                <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
-                                                    <predicates>
-                                                        <Item type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
-                                                            <quality href="/Mechanics/MobQualities/Boss.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
-                                                        </Item>
-                                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                            <predicate type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
-                                                                <quality href="/Mechanics/MobQualities/BossAdd.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
-                                                            </predicate>
-                                                        </Item>
-                                                        <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
-                                                    </predicates>
-                                                </Item>
-                                            </filters>
-                                        </filter>
-                                    </filter>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                </Item>
-            </effectsElse>
-        </Item>
-    </effects>
+	<Header>
+		<resourceId>739861653</resourceId>
+	</Header>
+	<name href="AntiRaid.(AbilityResource).Name.txt" />
+	<nameTemplate href="AntiRaid.(AbilityResource).NameTemplate.txt" />
+	<effects>
+		<Item type="gameMechanics.elements.effects.CombatStateTrigger">
+			<onEnter>
+				<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+							<delay>10000</delay>
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+									<predicates>
+										<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+											<predicate type="gameMechanics.elements.resources.ResourceBuff">
+												<buff href="CFH_Check_Single.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+											</predicate>
+										</Item>
+										<Item type="gameMechanics.elements.predicates.PredicateAggrolistCanSelect">
+											<selector type="gameMechanics.tools.SelectorRandomNotLess">
+												<minIndex>13</minIndex>
+											</selector>
+											<filter type="gameMechanics.world.creature.AvatarFilter" />
+										</Item>
+									</predicates>
+									<impactsIf>
+										<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+											<radius>65</radius>
+											<affectGroup>Friends</affectGroup>
+											<affectHolder>false</affectHolder>
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+													<predicates>
+														<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+															<predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+														</Item>
+													</predicates>
+													<impactsIf>
+														<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+															<impacts>
+																<Item type="gameMechanics.elements.impacts.ImpactCopyAggroList" />
+																<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																	<buff href="CFH_Check.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																</Item>
+															</impacts>
+														</Item>
+														<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+															<buff href="CFH_Check_Single.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														</Item>
+													</impactsIf>
+												</Item>
+											</impacts>
+											<filter type="gameMechanics.world.creature.MobFilter" />
+										</Item>
+									</impactsIf>
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+			</onEnter>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectsIfTarget">
+			<predicates>
+				<Item type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+					<quality href="/Mechanics/MobQualities/Boss.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
+				</Item>
+				<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+					<predicate type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+						<quality href="/Mechanics/MobQualities/BossAdd.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
+					</predicate>
+				</Item>
+			</predicates>
+			<effectsElse>
+				<Item type="gameMechanics.elements.effects.DeathTrigger">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+									<radius>20</radius>
+									<affectGroup>Friends</affectGroup>
+									<affectHolder>false</affectHolder>
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.DirectHeal">
+											<heal>1</heal>
+											<scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+												<mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+													<multiplier>0.25</multiplier>
+												</mulCalcer>
+											</scalerTarget>
+										</Item>
+									</impacts>
+									<filter type="gameMechanics.constructor.basicElements.FilterNot">
+										<filter type="gameMechanics.constructor.basicElements.FilterAnd">
+											<filters>
+												<Item type="gameMechanics.world.creature.MobFilter" />
+												<Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+													<predicates>
+														<Item type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+															<quality href="/Mechanics/MobQualities/Boss.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
+														</Item>
+														<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+															<predicate type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+																<quality href="/Mechanics/MobQualities/BossAdd.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
+															</predicate>
+														</Item>
+														<Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+													</predicates>
+												</Item>
+											</filters>
+										</filter>
+									</filter>
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+			</effectsElse>
+		</Item>
+	</effects>
 </gameMechanics.constructor.schemes.ability.AbilityResource>

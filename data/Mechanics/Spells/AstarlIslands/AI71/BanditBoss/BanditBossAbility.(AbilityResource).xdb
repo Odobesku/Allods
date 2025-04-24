@@ -1,345 +1,345 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
-    <Header>
-        <resourceId>739936142</resourceId>
-    </Header>
-    <effects>
-        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
-            <onEnter>
-                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                    <buff href="CoolHead.(BuffResource).xdb" />
-                    <stacks type="gameMechanics.elements.calcers.FloatData">
-                        <value>5</value>
-                    </stacks>
-                </Item>
-                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                    <buff href="PhaseChangeWatcher.(BuffResource).xdb" />
-                </Item>
-            </onEnter>
-            <onLeave>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
-                    <pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
-                                    <group href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
-                                </Item>
-                                <Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
-                                    <affectPets>false</affectPets>
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
-                                            <group href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-                    </predicates>
-                    <impactsIf>
-                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                            <delay>7000</delay>
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
-                                    <destination type="gameMechanics.map.destination.DestinationLocator">
-                                        <locator>
-                                            <scriptID>B2Drop</scriptID>
-                                            <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                                        </locator>
-                                    </destination>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impactsIf>
-                </Item>
-            </onLeave>
-        </Item>
-        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
-            <conditionalImpacts>
-                <Item>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
-                            <addresseeFinder type="gameMechanics.elements.addresseeFinders.FinderActiveSpellTarget" />
-                            <impacts>
-                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                    <buff href="ExecuteTarget.(BuffResource).xdb" />
-                                </Item>
-                            </impacts>
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
-                            <spell href="CrushingBlow.(SpellSingleTarget).xdb" />
-                            <duration>
-                                <second>11</second>
-                            </duration>
-                        </Item>
-                    </impacts>
-                    <conditions>
-                        <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
-                            <spells>
-                                <Item href="Execute.(SpellSingleTarget).xdb" />
-                            </spells>
-                        </Item>
-                    </conditions>
-                </Item>
-            </conditionalImpacts>
-            <stages>
-                <Item>Start</Item>
-            </stages>
-        </Item>
-        <Item type="gameMechanics.elements.effects.DeathTrigger">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
-                    <device>
-                        <scriptID>PortalNetwork_2_Stele</scriptID>
-                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                    </device>
-                </Item>
-                <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
-                    <variable href="/Mechanics/Spells/AstarlIslands/AI71/Common/CityPortalNetwork/CityTeleport.(MapVariableResource).xdb" />
-                    <summand>1</summand>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
-                    <table href="/Maps/AstralIsle71/SpawnTables/3_Pack01.(SpawnTable).xdb" />
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                                    <spawn>
-                                        <scriptID>1Flamethrower1</scriptID>
-                                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                                    </spawn>
-                                    <impacts>
-                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                            <buff href="/Mechanics/Spells/AstarlIslands/AI71/FlamethrowersAfterBanditBoss/BuffCommon.(BuffResource).xdb" />
-                                        </Item>
-                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                            <buff href="/Mechanics/Spells/AstarlIslands/AI71/FlamethrowersAfterBanditBoss/Buff1.(BuffResource).xdb" />
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                                    <spawn>
-                                        <scriptID>1Flamethrower2</scriptID>
-                                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                                    </spawn>
-                                    <impacts>
-                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                            <buff href="/Mechanics/Spells/AstarlIslands/AI71/FlamethrowersAfterBanditBoss/BuffCommon.(BuffResource).xdb" />
-                                        </Item>
-                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                            <buff href="/Mechanics/Spells/AstarlIslands/AI71/FlamethrowersAfterBanditBoss/Buff2.(BuffResource).xdb" />
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                                    <spawn>
-                                        <scriptID>1Flamethrower3</scriptID>
-                                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                                    </spawn>
-                                    <impacts>
-                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                            <buff href="/Mechanics/Spells/AstarlIslands/AI71/FlamethrowersAfterBanditBoss/BuffCommon.(BuffResource).xdb" />
-                                        </Item>
-                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                            <buff href="/Mechanics/Spells/AstarlIslands/AI71/FlamethrowersAfterBanditBoss/Buff3.(BuffResource).xdb" />
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                    <spawn>
-                        <scriptID>PlagueCityOverlord</scriptID>
-                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                    </spawn>
-                    <impacts>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="/Mechanics/Spells/AstarlIslands/AI71/LimitedSpawn/3_ExterminatedDistrict.(BuffResource).xdb" />
-                        </Item>
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                    <spawn>
-                        <scriptID>1kit1</scriptID>
-                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                    </spawn>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                    <spawn>
-                        <scriptID>1kit2</scriptID>
-                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                    </spawn>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                    <spawn>
-                        <scriptID>1kit3</scriptID>
-                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                    </spawn>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                    <spawn>
-                        <scriptID>1kit4</scriptID>
-                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                    </spawn>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                    <spawn>
-                        <scriptID>1kit5</scriptID>
-                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                    </spawn>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                    <spawn>
-                        <scriptID>2kit1</scriptID>
-                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                    </spawn>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                    <spawn>
-                        <scriptID>2kit2</scriptID>
-                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                    </spawn>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                    <spawn>
-                        <scriptID>2kit3</scriptID>
-                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                    </spawn>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                    <spawn>
-                        <scriptID>2kit4</scriptID>
-                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                    </spawn>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                    <spawn>
-                        <scriptID>2kit5</scriptID>
-                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                    </spawn>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                    <spawn>
-                        <scriptID>3kit1</scriptID>
-                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                    </spawn>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                    <spawn>
-                        <scriptID>3kit2</scriptID>
-                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                    </spawn>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                    <spawn>
-                        <scriptID>3kit3</scriptID>
-                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                    </spawn>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                    <spawn>
-                        <scriptID>3kit4</scriptID>
-                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                    </spawn>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                    <spawn>
-                        <scriptID>3kit5</scriptID>
-                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                    </spawn>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-                    <spawn>
-                        <scriptID>3kit6</scriptID>
-                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                    </spawn>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-            </impacts>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectsDeferred">
-            <effects>
-                <Item type="gameMechanics.elements.effects.Switch">
-                    <impactsOn>
-                        <Item type="gameMechanics.elements.impacts.ImpactTeleport">
-                            <destination type="gameMechanics.map.destination.DestinationLocator">
-                                <locator>
-                                    <scriptID>B2Sitting</scriptID>
-                                    <map href="/Maps/AstralIsle71/MapResource.xdb" />
-                                </locator>
-                            </destination>
-                        </Item>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="InitialPlane.(BuffResource).xdb" />
-                            <stacks type="gameMechanics.elements.calcers.FloatData">
-                                <value>11</value>
-                            </stacks>
-                        </Item>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="KilledGuardsCount.(BuffResource).xdb" />
-                        </Item>
-                    </impactsOn>
-                </Item>
-            </effects>
-        </Item>
-    </effects>
+	<Header>
+		<resourceId>739936142</resourceId>
+	</Header>
+	<effects>
+		<Item type="gameMechanics.elements.effects.CombatStateTrigger">
+			<onEnter>
+				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+					<buff href="CoolHead.(BuffResource).xdb" />
+					<stacks type="gameMechanics.elements.calcers.FloatData">
+						<value>5</value>
+					</stacks>
+				</Item>
+				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+					<buff href="PhaseChangeWatcher.(BuffResource).xdb" />
+				</Item>
+			</onEnter>
+			<onLeave>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+					<pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+									<group href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
+								</Item>
+								<Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
+									<affectPets>false</affectPets>
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+											<group href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
+										</Item>
+									</impacts>
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+							<delay>7000</delay>
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactTeleport">
+									<destination type="gameMechanics.map.destination.DestinationLocator">
+										<locator>
+											<scriptID>B2Drop</scriptID>
+											<map href="/Maps/AstralIsle71/MapResource.xdb" />
+										</locator>
+									</destination>
+								</Item>
+							</impacts>
+						</Item>
+					</impactsIf>
+				</Item>
+			</onLeave>
+		</Item>
+		<Item type="gameMechanics.elements.effects.SpellCastTrigger">
+			<conditionalImpacts>
+				<Item>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+							<addresseeFinder type="gameMechanics.elements.addresseeFinders.FinderActiveSpellTarget" />
+							<impacts>
+								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+									<buff href="ExecuteTarget.(BuffResource).xdb" />
+								</Item>
+							</impacts>
+						</Item>
+						<Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+							<spell href="CrushingBlow.(SpellSingleTarget).xdb" />
+							<duration>
+								<second>11</second>
+							</duration>
+						</Item>
+					</impacts>
+					<conditions>
+						<Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+							<spells>
+								<Item href="Execute.(SpellSingleTarget).xdb" />
+							</spells>
+						</Item>
+					</conditions>
+				</Item>
+			</conditionalImpacts>
+			<stages>
+				<Item>Start</Item>
+			</stages>
+		</Item>
+		<Item type="gameMechanics.elements.effects.DeathTrigger">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
+					<device>
+						<scriptID>PortalNetwork_2_Stele</scriptID>
+						<map href="/Maps/AstralIsle71/MapResource.xdb" />
+					</device>
+				</Item>
+				<Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+					<variable href="/Mechanics/Spells/AstarlIslands/AI71/Common/CityPortalNetwork/CityTeleport.(MapVariableResource).xdb" />
+					<summand>1</summand>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+					<table href="/Maps/AstralIsle71/SpawnTables/3_Pack01.(SpawnTable).xdb" />
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+									<spawn>
+										<scriptID>1Flamethrower1</scriptID>
+										<map href="/Maps/AstralIsle71/MapResource.xdb" />
+									</spawn>
+									<impacts>
+										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+											<buff href="/Mechanics/Spells/AstarlIslands/AI71/FlamethrowersAfterBanditBoss/BuffCommon.(BuffResource).xdb" />
+										</Item>
+										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+											<buff href="/Mechanics/Spells/AstarlIslands/AI71/FlamethrowersAfterBanditBoss/Buff1.(BuffResource).xdb" />
+										</Item>
+									</impacts>
+								</Item>
+								<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+									<spawn>
+										<scriptID>1Flamethrower2</scriptID>
+										<map href="/Maps/AstralIsle71/MapResource.xdb" />
+									</spawn>
+									<impacts>
+										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+											<buff href="/Mechanics/Spells/AstarlIslands/AI71/FlamethrowersAfterBanditBoss/BuffCommon.(BuffResource).xdb" />
+										</Item>
+										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+											<buff href="/Mechanics/Spells/AstarlIslands/AI71/FlamethrowersAfterBanditBoss/Buff2.(BuffResource).xdb" />
+										</Item>
+									</impacts>
+								</Item>
+								<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+									<spawn>
+										<scriptID>1Flamethrower3</scriptID>
+										<map href="/Maps/AstralIsle71/MapResource.xdb" />
+									</spawn>
+									<impacts>
+										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+											<buff href="/Mechanics/Spells/AstarlIslands/AI71/FlamethrowersAfterBanditBoss/BuffCommon.(BuffResource).xdb" />
+										</Item>
+										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+											<buff href="/Mechanics/Spells/AstarlIslands/AI71/FlamethrowersAfterBanditBoss/Buff3.(BuffResource).xdb" />
+										</Item>
+									</impacts>
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+					<spawn>
+						<scriptID>PlagueCityOverlord</scriptID>
+						<map href="/Maps/AstralIsle71/MapResource.xdb" />
+					</spawn>
+					<impacts>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="/Mechanics/Spells/AstarlIslands/AI71/LimitedSpawn/3_ExterminatedDistrict.(BuffResource).xdb" />
+						</Item>
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+					<spawn>
+						<scriptID>1kit1</scriptID>
+						<map href="/Maps/AstralIsle71/MapResource.xdb" />
+					</spawn>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+					<spawn>
+						<scriptID>1kit2</scriptID>
+						<map href="/Maps/AstralIsle71/MapResource.xdb" />
+					</spawn>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+					<spawn>
+						<scriptID>1kit3</scriptID>
+						<map href="/Maps/AstralIsle71/MapResource.xdb" />
+					</spawn>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+					<spawn>
+						<scriptID>1kit4</scriptID>
+						<map href="/Maps/AstralIsle71/MapResource.xdb" />
+					</spawn>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+					<spawn>
+						<scriptID>1kit5</scriptID>
+						<map href="/Maps/AstralIsle71/MapResource.xdb" />
+					</spawn>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+					<spawn>
+						<scriptID>2kit1</scriptID>
+						<map href="/Maps/AstralIsle71/MapResource.xdb" />
+					</spawn>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+					<spawn>
+						<scriptID>2kit2</scriptID>
+						<map href="/Maps/AstralIsle71/MapResource.xdb" />
+					</spawn>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+					<spawn>
+						<scriptID>2kit3</scriptID>
+						<map href="/Maps/AstralIsle71/MapResource.xdb" />
+					</spawn>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+					<spawn>
+						<scriptID>2kit4</scriptID>
+						<map href="/Maps/AstralIsle71/MapResource.xdb" />
+					</spawn>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+					<spawn>
+						<scriptID>2kit5</scriptID>
+						<map href="/Maps/AstralIsle71/MapResource.xdb" />
+					</spawn>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+					<spawn>
+						<scriptID>3kit1</scriptID>
+						<map href="/Maps/AstralIsle71/MapResource.xdb" />
+					</spawn>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+					<spawn>
+						<scriptID>3kit2</scriptID>
+						<map href="/Maps/AstralIsle71/MapResource.xdb" />
+					</spawn>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+					<spawn>
+						<scriptID>3kit3</scriptID>
+						<map href="/Maps/AstralIsle71/MapResource.xdb" />
+					</spawn>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+					<spawn>
+						<scriptID>3kit4</scriptID>
+						<map href="/Maps/AstralIsle71/MapResource.xdb" />
+					</spawn>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+					<spawn>
+						<scriptID>3kit5</scriptID>
+						<map href="/Maps/AstralIsle71/MapResource.xdb" />
+					</spawn>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+					<spawn>
+						<scriptID>3kit6</scriptID>
+						<map href="/Maps/AstralIsle71/MapResource.xdb" />
+					</spawn>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+			</impacts>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectsDeferred">
+			<effects>
+				<Item type="gameMechanics.elements.effects.Switch">
+					<impactsOn>
+						<Item type="gameMechanics.elements.impacts.ImpactTeleport">
+							<destination type="gameMechanics.map.destination.DestinationLocator">
+								<locator>
+									<scriptID>B2Sitting</scriptID>
+									<map href="/Maps/AstralIsle71/MapResource.xdb" />
+								</locator>
+							</destination>
+						</Item>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="InitialPlane.(BuffResource).xdb" />
+							<stacks type="gameMechanics.elements.calcers.FloatData">
+								<value>11</value>
+							</stacks>
+						</Item>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="KilledGuardsCount.(BuffResource).xdb" />
+						</Item>
+					</impactsOn>
+				</Item>
+			</effects>
+		</Item>
+	</effects>
 </gameMechanics.constructor.schemes.ability.AbilityResource>

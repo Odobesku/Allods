@@ -1,424 +1,424 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <mapLoader.MapResource>
-    <Header>
-        <resourceId>236238877</resourceId>
-    </Header>
-    <minimapLight>
-        <AmbientFactor>0.5</AmbientFactor>
-        <FogStart>100</FogStart>
-        <FogEnd>500</FogEnd>
-        <SunLightYaw>45</SunLightYaw>
-        <SunLightPitch>0</SunLightPitch>
-        <AmbientColor>2017861120</AmbientColor>
-        <DiffuseColor>2017861120</DiffuseColor>
-        <FogColor>2017861120</FogColor>
-        <SpecularColor>0</SpecularColor>
-        <ContourColor>0</ContourColor>
-        <SpecularWaterColor>0</SpecularWaterColor>
-        <WaterGradientStart>-1</WaterGradientStart>
-        <WaterGradientEnd>-1</WaterGradientEnd>
-        <TerrainSpecularColor>0</TerrainSpecularColor>
-        <TerrainContourColor>0</TerrainContourColor>
-    </minimapLight>
-    <name href="Zones/MM_Pvp_Arena/MM_Pvp_Arena.txt" />
-    <exit type="mapLoader.pointer.MapPointerPos">
-        <pointer>
-            <scriptID>AC4_quit</scriptID>
-            <map href="/Maps/ArchipelagoContested4/MapResource.xdb" />
-        </pointer>
-    </exit>
-    <factionExits>
-        <Item>
-            <exit type="mapLoader.pointer.MapPointerPos">
-                <pointer>
-                    <scriptID>Portal_League1_Capital</scriptID>
-                    <map href="/Maps/Kania/MapResource.xdb" />
-                </pointer>
-            </exit>
-            <faction href="/World/Factions/League.xdb" />
-        </Item>
-        <Item>
-            <exit type="mapLoader.pointer.MapPointerPos">
-                <pointer>
-                    <scriptID>Capital_AE1_Teleport</scriptID>
-                    <map href="/Maps/Hadagan/MapResource.xdb" />
-                </pointer>
-            </exit>
-            <faction href="/World/Factions/Empire.xdb" />
-        </Item>
-    </factionExits>
-    <mapTemplate href="/System/MapTemplates/InstancedEventRegular.xdb" />
-    <parts>
-        <parts>
-            <Item type="gameMechanics.map.variables.MapVariablesHolderResource">
-                <variables>
-                    <Item href="ScriptZones/MM_pvpEvent_imp_variable.(MapVariableResource).xdb" />
-                    <Item href="ScriptZones/MM_pvpEvent_lig_variable.(MapVariableResource).xdb" />
-                    <Item href="Buff_Variable.(MapVariableResource).xdb" />
-                    <Item href="Buff_Variable_2.(MapVariableResource).xdb" />
-                </variables>
-            </Item>
-            <Item type="gameMechanics.map.basicElements.MapSpecificEffects">
-                <effects>
-                    <Item type="gameMechanics.elements.effects.EffectsIfTarget">
-                        <predicates>
-                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                        </predicates>
-                        <effectsIf>
-                            <Item type="gameMechanics.elements.effects.SetterSightRadius">
-                                <maxValue>400</maxValue>
-                            </Item>
-                        </effectsIf>
-                    </Item>
-                    <Item type="gameMechanics.elements.effects.EffectAvatarRespawnStrategy">
-                        <respawnStrategy type="gameMechanics.battleground.BattlegroundRespawnStrategy">
-                            <buff href="/Maps/ArchipelagoContested4/Ability/DeadBuff.(BuffResource).xdb" />
-                        </respawnStrategy>
-                    </Item>
-                    <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.RandomImpact">
-                                <entries>
-                                    <Item>
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                                                <delay>6000</delay>
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                        <predicates>
-                                                            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
-                                                                <predicates>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
-                                                                        <predicates>
-                                                                            <Item type="gameMechanics.elements.predicates.PredicateIsDead" />
-                                                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                                <predicate type="gameMechanics.elements.predicates.PredicateInScriptZone">
-                                                                                    <zone href="ScriptZones/Arena_AC4.(ScriptZone).xdb" />
-                                                                                </predicate>
-                                                                            </Item>
-                                                                        </predicates>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Mechanics/InstancedEventResource/MM_Pvp_Arena/Arena_wait/Buff01.xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler.(BuffResource).xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Mechanics/Spells/Domination/DomDeathBuff/DomDeathBuff.(BuffResource).xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler_finish.(BuffResource).xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler_Death02.(BuffResource).xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Mechanics/InstancedEventResource/MM_Pvp_Arena/Arena_wait.(BuffResource).xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Maps/ArchipelagoContested4/Ability/DeadBuff.(BuffResource).xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                </predicates>
-                                                            </Item>
-                                                        </predicates>
-                                                        <impactsIf>
-                                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                                <predicates>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
-                                                                            <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Shame_Buff.(BuffResource).xdb" />
-                                                                            <range>
-                                                                                <min>9</min>
-                                                                                <max>10</max>
-                                                                            </range>
-                                                                        </predicate>
-                                                                    </Item>
-                                                                </predicates>
-                                                                <impactsIf>
-                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacherStackRange">
-                                                                        <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Shame_Buff.(BuffResource).xdb" />
-                                                                        <range>
-                                                                            <min>1</min>
-                                                                            <max>1</max>
-                                                                        </range>
-                                                                    </Item>
-                                                                </impactsIf>
-                                                                <impactsElse>
-                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacherStackRange">
-                                                                        <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Shame_Buff.(BuffResource).xdb" />
-                                                                        <range>
-                                                                            <min>1</min>
-                                                                            <max>1</max>
-                                                                        </range>
-                                                                    </Item>
-                                                                    <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactExitBattleEvent" />
-                                                                </impactsElse>
-                                                            </Item>
-                                                        </impactsIf>
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                    <Item>
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                                                <delay>10000</delay>
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                        <predicates>
-                                                            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
-                                                                <predicates>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
-                                                                        <predicates>
-                                                                            <Item type="gameMechanics.elements.predicates.PredicateIsDead" />
-                                                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                                <predicate type="gameMechanics.elements.predicates.PredicateInScriptZone">
-                                                                                    <zone href="ScriptZones/Arena_AC4.(ScriptZone).xdb" />
-                                                                                </predicate>
-                                                                            </Item>
-                                                                        </predicates>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Mechanics/InstancedEventResource/MM_Pvp_Arena/Arena_wait/Buff01.xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler.(BuffResource).xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Mechanics/Spells/Domination/DomDeathBuff/DomDeathBuff.(BuffResource).xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler_finish.(BuffResource).xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler_Death02.(BuffResource).xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Mechanics/InstancedEventResource/MM_Pvp_Arena/Arena_wait.(BuffResource).xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Maps/ArchipelagoContested4/Ability/DeadBuff.(BuffResource).xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                </predicates>
-                                                            </Item>
-                                                        </predicates>
-                                                        <impactsIf>
-                                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                                <predicates>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
-                                                                            <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Shame_Buff.(BuffResource).xdb" />
-                                                                            <range>
-                                                                                <min>9</min>
-                                                                                <max>10</max>
-                                                                            </range>
-                                                                        </predicate>
-                                                                    </Item>
-                                                                </predicates>
-                                                                <impactsIf>
-                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacherStackRange">
-                                                                        <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Shame_Buff.(BuffResource).xdb" />
-                                                                        <range>
-                                                                            <min>1</min>
-                                                                            <max>1</max>
-                                                                        </range>
-                                                                    </Item>
-                                                                </impactsIf>
-                                                                <impactsElse>
-                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacherStackRange">
-                                                                        <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Shame_Buff.(BuffResource).xdb" />
-                                                                        <range>
-                                                                            <min>1</min>
-                                                                            <max>1</max>
-                                                                        </range>
-                                                                    </Item>
-                                                                    <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactExitBattleEvent" />
-                                                                </impactsElse>
-                                                            </Item>
-                                                        </impactsIf>
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                    <Item>
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                                                <delay>1000</delay>
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                        <predicates>
-                                                            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
-                                                                <predicates>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
-                                                                        <predicates>
-                                                                            <Item type="gameMechanics.elements.predicates.PredicateIsDead" />
-                                                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                                <predicate type="gameMechanics.elements.predicates.PredicateInScriptZone">
-                                                                                    <zone href="ScriptZones/Arena_AC4.(ScriptZone).xdb" />
-                                                                                </predicate>
-                                                                            </Item>
-                                                                        </predicates>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Mechanics/InstancedEventResource/MM_Pvp_Arena/Arena_wait/Buff01.xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler.(BuffResource).xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Mechanics/Spells/Domination/DomDeathBuff/DomDeathBuff.(BuffResource).xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler_finish.(BuffResource).xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler_Death02.(BuffResource).xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Mechanics/InstancedEventResource/MM_Pvp_Arena/Arena_wait.(BuffResource).xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                            <buff href="/Maps/ArchipelagoContested4/Ability/DeadBuff.(BuffResource).xdb" />
-                                                                        </predicate>
-                                                                    </Item>
-                                                                </predicates>
-                                                            </Item>
-                                                        </predicates>
-                                                        <impactsIf>
-                                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                                <predicates>
-                                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                        <predicate type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
-                                                                            <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Shame_Buff.(BuffResource).xdb" />
-                                                                            <range>
-                                                                                <min>9</min>
-                                                                                <max>10</max>
-                                                                            </range>
-                                                                        </predicate>
-                                                                    </Item>
-                                                                </predicates>
-                                                                <impactsIf>
-                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacherStackRange">
-                                                                        <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Shame_Buff.(BuffResource).xdb" />
-                                                                        <range>
-                                                                            <min>1</min>
-                                                                            <max>1</max>
-                                                                        </range>
-                                                                    </Item>
-                                                                </impactsIf>
-                                                                <impactsElse>
-                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacherStackRange">
-                                                                        <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Shame_Buff.(BuffResource).xdb" />
-                                                                        <range>
-                                                                            <min>1</min>
-                                                                            <max>1</max>
-                                                                        </range>
-                                                                    </Item>
-                                                                    <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactExitBattleEvent" />
-                                                                </impactsElse>
-                                                            </Item>
-                                                        </impactsIf>
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </entries>
-                            </Item>
-                        </impacts>
-                        <tick>15000</tick>
-                    </Item>
-                    <Item type="gameMechanics.elements.effects.EffectsIfTarget">
-                        <predicates>
-                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                        </predicates>
-                        <effectsIf>
-                            <Item type="gameMechanics.elements.effects.Switch">
-                                <impactsOn>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler_Death01.(BuffResource).xdb" />
-                                    </Item>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="/Mechanics/Spells/VoteKick/AddAvatar.(BuffResource).xdb" />
-                                    </Item>
-                                </impactsOn>
-                                <impactsOff>
-                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                        <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler_Death01.(BuffResource).xdb" />
-                                        <anyRank>false</anyRank>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                        <buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler_Death01.(BuffResource).xdb" />
-                                        <anyRank>false</anyRank>
-                                    </Item>
-                                </impactsOff>
-                            </Item>
-                        </effectsIf>
-                    </Item>
-                    <Item type="gameMechanics.elements.effects.Switch">
-                        <impactsOff>
-                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                <buff href="/Mechanics/InstancedEventResource/MM_Pvp_Arena/Arena_wait.(BuffResource).xdb" />
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                <buff href="/Mechanics/FairGSonMM/MainUpBuff.(BuffResource).xdb" />
-                            </Item>
-                        </impactsOff>
-                    </Item>
-                </effects>
-            </Item>
-            <Item type="gameMechanics.elements.bunchparts.VotingSpellsPartResource">
-                <spells>
-                    <Item href="/Mechanics/Spells/VoteKick/VoteForKick.(SpellSingleTarget).xdb" />
-                </spells>
-            </Item>
-        </parts>
-    </parts>
+	<Header>
+		<resourceId>236238877</resourceId>
+	</Header>
+	<minimapLight>
+		<AmbientFactor>0.5</AmbientFactor>
+		<FogStart>100</FogStart>
+		<FogEnd>500</FogEnd>
+		<SunLightYaw>45</SunLightYaw>
+		<SunLightPitch>0</SunLightPitch>
+		<AmbientColor>2017861120</AmbientColor>
+		<DiffuseColor>2017861120</DiffuseColor>
+		<FogColor>2017861120</FogColor>
+		<SpecularColor>0</SpecularColor>
+		<ContourColor>0</ContourColor>
+		<SpecularWaterColor>0</SpecularWaterColor>
+		<WaterGradientStart>-1</WaterGradientStart>
+		<WaterGradientEnd>-1</WaterGradientEnd>
+		<TerrainSpecularColor>0</TerrainSpecularColor>
+		<TerrainContourColor>0</TerrainContourColor>
+	</minimapLight>
+	<name href="Zones/MM_Pvp_Arena/MM_Pvp_Arena.txt" />
+	<exit type="mapLoader.pointer.MapPointerPos">
+		<pointer>
+			<scriptID>AC4_quit</scriptID>
+			<map href="/Maps/ArchipelagoContested4/MapResource.xdb" />
+		</pointer>
+	</exit>
+	<factionExits>
+		<Item>
+			<exit type="mapLoader.pointer.MapPointerPos">
+				<pointer>
+					<scriptID>Portal_League1_Capital</scriptID>
+					<map href="/Maps/Kania/MapResource.xdb" />
+				</pointer>
+			</exit>
+			<faction href="/World/Factions/League.xdb" />
+		</Item>
+		<Item>
+			<exit type="mapLoader.pointer.MapPointerPos">
+				<pointer>
+					<scriptID>Capital_AE1_Teleport</scriptID>
+					<map href="/Maps/Hadagan/MapResource.xdb" />
+				</pointer>
+			</exit>
+			<faction href="/World/Factions/Empire.xdb" />
+		</Item>
+	</factionExits>
+	<mapTemplate href="/System/MapTemplates/InstancedEventRegular.xdb" />
+	<parts>
+		<parts>
+			<Item type="gameMechanics.map.variables.MapVariablesHolderResource">
+				<variables>
+					<Item href="ScriptZones/MM_pvpEvent_imp_variable.(MapVariableResource).xdb" />
+					<Item href="ScriptZones/MM_pvpEvent_lig_variable.(MapVariableResource).xdb" />
+					<Item href="Buff_Variable.(MapVariableResource).xdb" />
+					<Item href="Buff_Variable_2.(MapVariableResource).xdb" />
+				</variables>
+			</Item>
+			<Item type="gameMechanics.map.basicElements.MapSpecificEffects">
+				<effects>
+					<Item type="gameMechanics.elements.effects.EffectsIfTarget">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+						</predicates>
+						<effectsIf>
+							<Item type="gameMechanics.elements.effects.SetterSightRadius">
+								<maxValue>400</maxValue>
+							</Item>
+						</effectsIf>
+					</Item>
+					<Item type="gameMechanics.elements.effects.EffectAvatarRespawnStrategy">
+						<respawnStrategy type="gameMechanics.battleground.BattlegroundRespawnStrategy">
+							<buff href="/Maps/ArchipelagoContested4/Ability/DeadBuff.(BuffResource).xdb" />
+						</respawnStrategy>
+					</Item>
+					<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.RandomImpact">
+								<entries>
+									<Item>
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+												<delay>6000</delay>
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+														<predicates>
+															<Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+																<predicates>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+																		<predicates>
+																			<Item type="gameMechanics.elements.predicates.PredicateIsDead" />
+																			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																				<predicate type="gameMechanics.elements.predicates.PredicateInScriptZone">
+																					<zone href="ScriptZones/Arena_AC4.(ScriptZone).xdb" />
+																				</predicate>
+																			</Item>
+																		</predicates>
+																	</Item>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Mechanics/InstancedEventResource/MM_Pvp_Arena/Arena_wait/Buff01.xdb" />
+																		</predicate>
+																	</Item>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler.(BuffResource).xdb" />
+																		</predicate>
+																	</Item>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Mechanics/Spells/Domination/DomDeathBuff/DomDeathBuff.(BuffResource).xdb" />
+																		</predicate>
+																	</Item>
+																	<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler_finish.(BuffResource).xdb" />
+																		</predicate>
+																	</Item>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler_Death02.(BuffResource).xdb" />
+																		</predicate>
+																	</Item>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Mechanics/InstancedEventResource/MM_Pvp_Arena/Arena_wait.(BuffResource).xdb" />
+																		</predicate>
+																	</Item>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Maps/ArchipelagoContested4/Ability/DeadBuff.(BuffResource).xdb" />
+																		</predicate>
+																	</Item>
+																</predicates>
+															</Item>
+														</predicates>
+														<impactsIf>
+															<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+																<predicates>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+																			<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Shame_Buff.(BuffResource).xdb" />
+																			<range>
+																				<min>9</min>
+																				<max>10</max>
+																			</range>
+																		</predicate>
+																	</Item>
+																</predicates>
+																<impactsIf>
+																	<Item type="gameMechanics.constructor.schemes.buff.BuffAttacherStackRange">
+																		<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Shame_Buff.(BuffResource).xdb" />
+																		<range>
+																			<min>1</min>
+																			<max>1</max>
+																		</range>
+																	</Item>
+																</impactsIf>
+																<impactsElse>
+																	<Item type="gameMechanics.constructor.schemes.buff.BuffAttacherStackRange">
+																		<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Shame_Buff.(BuffResource).xdb" />
+																		<range>
+																			<min>1</min>
+																			<max>1</max>
+																		</range>
+																	</Item>
+																	<Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactExitBattleEvent" />
+																</impactsElse>
+															</Item>
+														</impactsIf>
+													</Item>
+												</impacts>
+											</Item>
+										</impacts>
+									</Item>
+									<Item>
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+												<delay>10000</delay>
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+														<predicates>
+															<Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+																<predicates>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+																		<predicates>
+																			<Item type="gameMechanics.elements.predicates.PredicateIsDead" />
+																			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																				<predicate type="gameMechanics.elements.predicates.PredicateInScriptZone">
+																					<zone href="ScriptZones/Arena_AC4.(ScriptZone).xdb" />
+																				</predicate>
+																			</Item>
+																		</predicates>
+																	</Item>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Mechanics/InstancedEventResource/MM_Pvp_Arena/Arena_wait/Buff01.xdb" />
+																		</predicate>
+																	</Item>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler.(BuffResource).xdb" />
+																		</predicate>
+																	</Item>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Mechanics/Spells/Domination/DomDeathBuff/DomDeathBuff.(BuffResource).xdb" />
+																		</predicate>
+																	</Item>
+																	<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler_finish.(BuffResource).xdb" />
+																		</predicate>
+																	</Item>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler_Death02.(BuffResource).xdb" />
+																		</predicate>
+																	</Item>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Mechanics/InstancedEventResource/MM_Pvp_Arena/Arena_wait.(BuffResource).xdb" />
+																		</predicate>
+																	</Item>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Maps/ArchipelagoContested4/Ability/DeadBuff.(BuffResource).xdb" />
+																		</predicate>
+																	</Item>
+																</predicates>
+															</Item>
+														</predicates>
+														<impactsIf>
+															<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+																<predicates>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+																			<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Shame_Buff.(BuffResource).xdb" />
+																			<range>
+																				<min>9</min>
+																				<max>10</max>
+																			</range>
+																		</predicate>
+																	</Item>
+																</predicates>
+																<impactsIf>
+																	<Item type="gameMechanics.constructor.schemes.buff.BuffAttacherStackRange">
+																		<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Shame_Buff.(BuffResource).xdb" />
+																		<range>
+																			<min>1</min>
+																			<max>1</max>
+																		</range>
+																	</Item>
+																</impactsIf>
+																<impactsElse>
+																	<Item type="gameMechanics.constructor.schemes.buff.BuffAttacherStackRange">
+																		<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Shame_Buff.(BuffResource).xdb" />
+																		<range>
+																			<min>1</min>
+																			<max>1</max>
+																		</range>
+																	</Item>
+																	<Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactExitBattleEvent" />
+																</impactsElse>
+															</Item>
+														</impactsIf>
+													</Item>
+												</impacts>
+											</Item>
+										</impacts>
+									</Item>
+									<Item>
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+												<delay>1000</delay>
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+														<predicates>
+															<Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+																<predicates>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+																		<predicates>
+																			<Item type="gameMechanics.elements.predicates.PredicateIsDead" />
+																			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																				<predicate type="gameMechanics.elements.predicates.PredicateInScriptZone">
+																					<zone href="ScriptZones/Arena_AC4.(ScriptZone).xdb" />
+																				</predicate>
+																			</Item>
+																		</predicates>
+																	</Item>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Mechanics/InstancedEventResource/MM_Pvp_Arena/Arena_wait/Buff01.xdb" />
+																		</predicate>
+																	</Item>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler.(BuffResource).xdb" />
+																		</predicate>
+																	</Item>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Mechanics/Spells/Domination/DomDeathBuff/DomDeathBuff.(BuffResource).xdb" />
+																		</predicate>
+																	</Item>
+																	<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler_finish.(BuffResource).xdb" />
+																		</predicate>
+																	</Item>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler_Death02.(BuffResource).xdb" />
+																		</predicate>
+																	</Item>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Mechanics/InstancedEventResource/MM_Pvp_Arena/Arena_wait.(BuffResource).xdb" />
+																		</predicate>
+																	</Item>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																			<buff href="/Maps/ArchipelagoContested4/Ability/DeadBuff.(BuffResource).xdb" />
+																		</predicate>
+																	</Item>
+																</predicates>
+															</Item>
+														</predicates>
+														<impactsIf>
+															<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+																<predicates>
+																	<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																		<predicate type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+																			<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Shame_Buff.(BuffResource).xdb" />
+																			<range>
+																				<min>9</min>
+																				<max>10</max>
+																			</range>
+																		</predicate>
+																	</Item>
+																</predicates>
+																<impactsIf>
+																	<Item type="gameMechanics.constructor.schemes.buff.BuffAttacherStackRange">
+																		<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Shame_Buff.(BuffResource).xdb" />
+																		<range>
+																			<min>1</min>
+																			<max>1</max>
+																		</range>
+																	</Item>
+																</impactsIf>
+																<impactsElse>
+																	<Item type="gameMechanics.constructor.schemes.buff.BuffAttacherStackRange">
+																		<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Shame_Buff.(BuffResource).xdb" />
+																		<range>
+																			<min>1</min>
+																			<max>1</max>
+																		</range>
+																	</Item>
+																	<Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactExitBattleEvent" />
+																</impactsElse>
+															</Item>
+														</impactsIf>
+													</Item>
+												</impacts>
+											</Item>
+										</impacts>
+									</Item>
+								</entries>
+							</Item>
+						</impacts>
+						<tick>15000</tick>
+					</Item>
+					<Item type="gameMechanics.elements.effects.EffectsIfTarget">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+						</predicates>
+						<effectsIf>
+							<Item type="gameMechanics.elements.effects.Switch">
+								<impactsOn>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler_Death01.(BuffResource).xdb" />
+									</Item>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="/Mechanics/Spells/VoteKick/AddAvatar.(BuffResource).xdb" />
+									</Item>
+								</impactsOn>
+								<impactsOff>
+									<Item type="gameMechanics.elements.impacts.BuffDetacher">
+										<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler_Death01.(BuffResource).xdb" />
+										<anyRank>false</anyRank>
+									</Item>
+									<Item type="gameMechanics.elements.impacts.BuffDetacher">
+										<buff href="/Mechanics/InstancedEventResource/MM_BG01/Afk_Disabler_Death01.(BuffResource).xdb" />
+										<anyRank>false</anyRank>
+									</Item>
+								</impactsOff>
+							</Item>
+						</effectsIf>
+					</Item>
+					<Item type="gameMechanics.elements.effects.Switch">
+						<impactsOff>
+							<Item type="gameMechanics.elements.impacts.BuffDetacher">
+								<buff href="/Mechanics/InstancedEventResource/MM_Pvp_Arena/Arena_wait.(BuffResource).xdb" />
+							</Item>
+							<Item type="gameMechanics.elements.impacts.BuffDetacher">
+								<buff href="/Mechanics/FairGSonMM/MainUpBuff.(BuffResource).xdb" />
+							</Item>
+						</impactsOff>
+					</Item>
+				</effects>
+			</Item>
+			<Item type="gameMechanics.elements.bunchparts.VotingSpellsPartResource">
+				<spells>
+					<Item href="/Mechanics/Spells/VoteKick/VoteForKick.(SpellSingleTarget).xdb" />
+				</spells>
+			</Item>
+		</parts>
+	</parts>
 </mapLoader.MapResource>

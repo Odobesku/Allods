@@ -1,484 +1,484 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>739828848</resourceId>
-        <isPrototype>true</isPrototype>
-        <Variables>
-            <Name_Txt />
-            <Which_Class_Predicate />
-        </Variables>
-    </Header>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/ClassChange.xdb" />
-    </groups>
-    <element>ASTRAL</element>
-    <Name hrefvar="Name_Txt" />
-    <Description href="RemortClassExchange.Prototype.(SpellCasterSelf).Description.txt" />
-    <targetType>STTSelf</targetType>
-    <iffPolicy>Friends</iffPolicy>
-    <mechanics>
-        <casterConditions>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.predicates.PredicateCharacterClass">
-                    <characterClass hrefvar="Which_Class_Predicate" />
-                </predicate>
-            </Item>
-            <Item type="gameMechanics.elements.predicates.PredicateResourceReady">
-                <resource href="/Mechanics/GameRoot/ChangeClass/Action.xdb" />
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="avatarPopulation.service.impl.matchMakingImpl.map.PredicateInstancedEventMember" />
-            </Item>
-            <Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
-                <key href="/System/ContentKeys/RemortEquip.(ContentKey).xdb" />
-            </Item>
-            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
-                <predicate type="gameMechanics.constructor.basicElements.PredicateOr">
-                    <predicates>
-                        <Item type="gameMechanics.elements.predicates.PredicateFaction">
-                            <faction href="/World/Factions/League.xdb" />
-                        </Item>
-                        <Item type="gameMechanics.elements.predicates.PredicateFaction">
-                            <faction href="/World/Factions/Empire.xdb" />
-                        </Item>
-                    </predicates>
-                </predicate>
-                <clientData href="/Mechanics/Spells/ItemMall/AvatarDonate/PridenClientData.(ClientData).xdb" />
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
-                <predicates>
-                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                        <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
-                    </Item>
-                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                        <predicate type="gameMechanics.map.instance.astralIsland.PredicateOnAstralIsland" />
-                    </Item>
-                    <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
-                        <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
-                            <predicate type="avatarPopulation.service.impl.lookingForGroupImpl.elements.PredicateLFGRole">
-                                <role>DamageDealer</role>
-                            </predicate>
-                        </predicate>
-                        <clientData href="/ItemMall/Services/Avatar/LFG.(ClientData).xdb" />
-                    </Item>
-                    <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
-                        <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
-                            <predicate type="avatarPopulation.service.impl.lookingForGroupImpl.elements.PredicateLFGRole">
-                                <role>Healer</role>
-                            </predicate>
-                        </predicate>
-                        <clientData href="/ItemMall/Services/Avatar/LFG.(ClientData).xdb" />
-                    </Item>
-                    <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
-                        <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
-                            <predicate type="avatarPopulation.service.impl.lookingForGroupImpl.elements.PredicateLFGRole">
-                                <role>Tank</role>
-                            </predicate>
-                        </predicate>
-                        <clientData href="/ItemMall/Services/Avatar/LFG.(ClientData).xdb" />
-                    </Item>
-                </predicates>
-            </Item>
-        </casterConditions>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                <predicates>
-                    <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
-                        <predicates>
-                            <Item type="gameMechanics.elements.predicates.PredicateGreater">
-                                <lhs type="gameMechanics.elements.calcers.FloatData">
-                                    <value var="value" />
-                                </lhs>
-                                <rhs type="gameMechanics.elements.calcers.FloatData">
-                                    <value>1</value>
-                                </rhs>
-                            </Item>
-                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                <predicate type="gameMechanics.constructor.basicElements.PredicateOr">
-                                    <predicates>
-                                        <Item type="gameMechanics.elements.resources.ResourceAltCurrency">
-                                            <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixBard.(AlternativeCurrency).xdb" />
-                                            <count>1</count>
-                                        </Item>
-                                        <Item type="gameMechanics.elements.resources.ResourceAltCurrency">
-                                            <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixWarrior.(AlternativeCurrency).xdb" />
-                                            <count>1</count>
-                                        </Item>
-                                        <Item type="gameMechanics.elements.resources.ResourceAltCurrency">
-                                            <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixPsionic.(AlternativeCurrency).xdb" />
-                                            <count>1</count>
-                                        </Item>
-                                        <Item type="gameMechanics.elements.resources.ResourceAltCurrency">
-                                            <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixPriest.(AlternativeCurrency).xdb" />
-                                            <count>1</count>
-                                        </Item>
-                                        <Item type="gameMechanics.elements.resources.ResourceAltCurrency">
-                                            <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixStalker.(AlternativeCurrency).xdb" />
-                                            <count>1</count>
-                                        </Item>
-                                        <Item type="gameMechanics.elements.resources.ResourceAltCurrency">
-                                            <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixDruid.(AlternativeCurrency).xdb" />
-                                            <count>1</count>
-                                        </Item>
-                                        <Item type="gameMechanics.elements.resources.ResourceAltCurrency">
-                                            <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixEngeneer.(AlternativeCurrency).xdb" />
-                                            <count>1</count>
-                                        </Item>
-                                        <Item type="gameMechanics.elements.resources.ResourceAltCurrency">
-                                            <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixNecromancer.(AlternativeCurrency).xdb" />
-                                            <count>1</count>
-                                        </Item>
-                                        <Item type="gameMechanics.elements.resources.ResourceAltCurrency">
-                                            <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FizMage.(AlternativeCurrency).xdb" />
-                                            <count>1</count>
-                                        </Item>
-                                        <Item type="gameMechanics.elements.resources.ResourceAltCurrency">
-                                            <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixPaladin.(AlternativeCurrency).xdb" />
-                                            <count>1</count>
-                                        </Item>
-                                    </predicates>
-                                </predicate>
-                            </Item>
-                        </predicates>
-                    </Item>
-                </predicates>
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                        <predicates>
-                            <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
-                                <characterClass href="/Mechanics/Classes/Bard.xdb" />
-                            </Item>
-                        </predicates>
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
-                                <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixBard.(AlternativeCurrency).xdb" />
-                                <sumCalcer type="gameMechanics.elements.calcers.FloatData">
-                                    <value>1</value>
-                                </sumCalcer>
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
-                                <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
-                                    <item href="/ItemMall/Services/Avatar/RemortClassExchange_Bard_temp_self.(ItemResource).xdb" />
-                                </item>
-                                <decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
-                                    <calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                </decayTime>
-                            </Item>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
-                                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                    <mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                </durationScaler>
-                            </Item>
-                        </impacts>
-                        <elseImpacts>
-                            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
-                                        <characterClass href="/Mechanics/Classes/Druid.xdb" />
-                                    </Item>
-                                </predicates>
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
-                                        <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
-                                            <item href="/ItemMall/Services/Avatar/RemortClassExchange_Druid_temp_self.(ItemResource).xdb" />
-                                        </item>
-                                        <decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
-                                            <calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                        </decayTime>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
-                                        <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixDruid.(AlternativeCurrency).xdb" />
-                                        <sumCalcer type="gameMechanics.elements.calcers.FloatData">
-                                            <value>1</value>
-                                        </sumCalcer>
-                                    </Item>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
-                                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                            <mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                        </durationScaler>
-                                    </Item>
-                                </impacts>
-                                <elseImpacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
-                                                <characterClass href="/Mechanics/Classes/Engineer.xdb" />
-                                            </Item>
-                                        </predicates>
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
-                                                <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
-                                                    <item href="/ItemMall/Services/Avatar/RemortClassExchange_Engineer_temp_self.(ItemResource).xdb" />
-                                                </item>
-                                                <decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
-                                                    <calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                                </decayTime>
-                                            </Item>
-                                            <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
-                                                <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixEngeneer.(AlternativeCurrency).xdb" />
-                                                <sumCalcer type="gameMechanics.elements.calcers.FloatData">
-                                                    <value>1</value>
-                                                </sumCalcer>
-                                            </Item>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
-                                                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                    <mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                                </durationScaler>
-                                            </Item>
-                                        </impacts>
-                                        <elseImpacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                                <predicates>
-                                                    <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
-                                                        <characterClass href="/Mechanics/Classes/Mage.xdb" />
-                                                    </Item>
-                                                </predicates>
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
-                                                        <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
-                                                            <item href="/ItemMall/Services/Avatar/RemortClassExchange_Mage_temp_self.(ItemResource).xdb" />
-                                                        </item>
-                                                        <decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
-                                                            <calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                                        </decayTime>
-                                                    </Item>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
-                                                        <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FizMage.(AlternativeCurrency).xdb" />
-                                                        <sumCalcer type="gameMechanics.elements.calcers.FloatData">
-                                                            <value>1</value>
-                                                        </sumCalcer>
-                                                    </Item>
-                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                        <buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
-                                                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                            <mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                                        </durationScaler>
-                                                    </Item>
-                                                </impacts>
-                                                <elseImpacts>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                                        <predicates>
-                                                            <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
-                                                                <characterClass href="/Mechanics/Classes/Necromancer.xdb" />
-                                                            </Item>
-                                                        </predicates>
-                                                        <impacts>
-                                                            <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
-                                                                <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
-                                                                    <item href="/ItemMall/Services/Avatar/RemortClassExchange_Necromancer_temp_self.(ItemResource).xdb" />
-                                                                </item>
-                                                                <decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
-                                                                    <calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                                                </decayTime>
-                                                            </Item>
-                                                            <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
-                                                                <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixNecromancer.(AlternativeCurrency).xdb" />
-                                                                <sumCalcer type="gameMechanics.elements.calcers.FloatData">
-                                                                    <value>1</value>
-                                                                </sumCalcer>
-                                                            </Item>
-                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                <buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
-                                                                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                                    <mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                                                </durationScaler>
-                                                            </Item>
-                                                        </impacts>
-                                                        <elseImpacts>
-                                                            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                                                <predicates>
-                                                                    <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
-                                                                        <characterClass href="/Mechanics/Classes/Paladin.xdb" />
-                                                                    </Item>
-                                                                </predicates>
-                                                                <impacts>
-                                                                    <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
-                                                                        <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
-                                                                            <item href="/ItemMall/Services/Avatar/RemortClassExchange_Paladin_temp_self.(ItemResource).xdb" />
-                                                                        </item>
-                                                                        <decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
-                                                                            <calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                                                        </decayTime>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
-                                                                        <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixPaladin.(AlternativeCurrency).xdb" />
-                                                                        <sumCalcer type="gameMechanics.elements.calcers.FloatData">
-                                                                            <value>1</value>
-                                                                        </sumCalcer>
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                        <buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
-                                                                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                                            <mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                                                        </durationScaler>
-                                                                    </Item>
-                                                                </impacts>
-                                                                <elseImpacts>
-                                                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                                                        <predicates>
-                                                                            <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
-                                                                                <characterClass href="/Mechanics/Classes/Priest.xdb" />
-                                                                            </Item>
-                                                                        </predicates>
-                                                                        <impacts>
-                                                                            <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
-                                                                                <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
-                                                                                    <item href="/ItemMall/Services/Avatar/RemortClassExchange_Priest_temp_self.(ItemResource).xdb" />
-                                                                                </item>
-                                                                                <decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
-                                                                                    <calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                                                                </decayTime>
-                                                                            </Item>
-                                                                            <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
-                                                                                <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixPriest.(AlternativeCurrency).xdb" />
-                                                                                <sumCalcer type="gameMechanics.elements.calcers.FloatData">
-                                                                                    <value>1</value>
-                                                                                </sumCalcer>
-                                                                            </Item>
-                                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                                <buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
-                                                                                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                                                    <mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                                                                </durationScaler>
-                                                                            </Item>
-                                                                        </impacts>
-                                                                        <elseImpacts>
-                                                                            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                                                                <predicates>
-                                                                                    <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
-                                                                                        <characterClass href="/Mechanics/Classes/Psionic.xdb" />
-                                                                                    </Item>
-                                                                                </predicates>
-                                                                                <impacts>
-                                                                                    <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
-                                                                                        <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
-                                                                                            <item href="/ItemMall/Services/Avatar/RemortClassExchange_Psionic_temp_self.(ItemResource).xdb" />
-                                                                                        </item>
-                                                                                        <decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
-                                                                                            <calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                                                                        </decayTime>
-                                                                                    </Item>
-                                                                                    <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
-                                                                                        <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixPsionic.(AlternativeCurrency).xdb" />
-                                                                                        <sumCalcer type="gameMechanics.elements.calcers.FloatData">
-                                                                                            <value>1</value>
-                                                                                        </sumCalcer>
-                                                                                    </Item>
-                                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                                        <buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
-                                                                                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                                                            <mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                                                                        </durationScaler>
-                                                                                    </Item>
-                                                                                </impacts>
-                                                                                <elseImpacts>
-                                                                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                                                                        <predicates>
-                                                                                            <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
-                                                                                                <characterClass href="/Mechanics/Classes/Stalker.xdb" />
-                                                                                            </Item>
-                                                                                        </predicates>
-                                                                                        <impacts>
-                                                                                            <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
-                                                                                                <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
-                                                                                                    <item href="/ItemMall/Services/Avatar/RemortClassExchange_Stalker_temp_self.(ItemResource).xdb" />
-                                                                                                </item>
-                                                                                                <decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
-                                                                                                    <calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                                                                                </decayTime>
-                                                                                            </Item>
-                                                                                            <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
-                                                                                                <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixStalker.(AlternativeCurrency).xdb" />
-                                                                                                <sumCalcer type="gameMechanics.elements.calcers.FloatData">
-                                                                                                    <value>1</value>
-                                                                                                </sumCalcer>
-                                                                                            </Item>
-                                                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                                                <buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
-                                                                                                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                                                                    <mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                                                                                </durationScaler>
-                                                                                            </Item>
-                                                                                        </impacts>
-                                                                                        <elseImpacts>
-                                                                                            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                                                                                <predicates>
-                                                                                                    <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
-                                                                                                        <characterClass href="/Mechanics/Classes/Warrior.xdb" />
-                                                                                                    </Item>
-                                                                                                </predicates>
-                                                                                                <impacts>
-                                                                                                    <Item type="gameMechanics.elements.impacts.ImpactGiveItem">
-                                                                                                        <item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
-                                                                                                            <item href="/ItemMall/Services/Avatar/RemortClassExchange_Warrior_temp_self.(ItemResource).xdb" />
-                                                                                                        </item>
-                                                                                                        <decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
-                                                                                                            <calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                                                                                        </decayTime>
-                                                                                                    </Item>
-                                                                                                    <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
-                                                                                                        <currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixWarrior.(AlternativeCurrency).xdb" />
-                                                                                                        <sumCalcer type="gameMechanics.elements.calcers.FloatData">
-                                                                                                            <value>1</value>
-                                                                                                        </sumCalcer>
-                                                                                                    </Item>
-                                                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                                                        <buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
-                                                                                                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                                                                            <mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                                                                                        </durationScaler>
-                                                                                                    </Item>
-                                                                                                </impacts>
-                                                                                            </Item>
-                                                                                        </elseImpacts>
-                                                                                    </Item>
-                                                                                </elseImpacts>
-                                                                            </Item>
-                                                                        </elseImpacts>
-                                                                    </Item>
-                                                                </elseImpacts>
-                                                            </Item>
-                                                        </elseImpacts>
-                                                    </Item>
-                                                </elseImpacts>
-                                            </Item>
-                                        </elseImpacts>
-                                    </Item>
-                                </elseImpacts>
-                            </Item>
-                        </elseImpacts>
-                    </Item>
-                </impacts>
-                <elseImpacts>
-                    <Item type="itemService.avatar.changeClass.ImpactStartClassChange">
-                        <characterClass hrefvar="characterClass" />
-                        <consumeActiveItem var="consumeActiveItem" />
-                    </Item>
-                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                        <predicates>
-                            <Item type="gameMechanics.elements.predicates.PredicateGreater">
-                                <lhs type="gameMechanics.elements.calcers.FloatData">
-                                    <value var="value" />
-                                </lhs>
-                                <rhs type="gameMechanics.elements.calcers.FloatData">
-                                    <value>1</value>
-                                </rhs>
-                            </Item>
-                        </predicates>
-                        <impactsIf>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
-                                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                    <mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                                </durationScaler>
-                            </Item>
-                        </impactsIf>
-                    </Item>
-                </elseImpacts>
-            </Item>
-        </casterImpacts>
-    </mechanics>
+	<Header>
+		<resourceId>739828848</resourceId>
+		<isPrototype>true</isPrototype>
+		<Variables>
+			<Name_Txt />
+			<Which_Class_Predicate />
+		</Variables>
+	</Header>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/ClassChange.xdb" />
+	</groups>
+	<element>ASTRAL</element>
+	<Name hrefvar="Name_Txt" />
+	<Description href="RemortClassExchange.Prototype.(SpellCasterSelf).Description.txt" />
+	<targetType>STTSelf</targetType>
+	<iffPolicy>Friends</iffPolicy>
+	<mechanics>
+		<casterConditions>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.predicates.PredicateCharacterClass">
+					<characterClass hrefvar="Which_Class_Predicate" />
+				</predicate>
+			</Item>
+			<Item type="gameMechanics.elements.predicates.PredicateResourceReady">
+				<resource href="/Mechanics/GameRoot/ChangeClass/Action.xdb" />
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="avatarPopulation.service.impl.matchMakingImpl.map.PredicateInstancedEventMember" />
+			</Item>
+			<Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
+				<key href="/System/ContentKeys/RemortEquip.(ContentKey).xdb" />
+			</Item>
+			<Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+				<predicate type="gameMechanics.constructor.basicElements.PredicateOr">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateFaction">
+							<faction href="/World/Factions/League.xdb" />
+						</Item>
+						<Item type="gameMechanics.elements.predicates.PredicateFaction">
+							<faction href="/World/Factions/Empire.xdb" />
+						</Item>
+					</predicates>
+				</predicate>
+				<clientData href="/Mechanics/Spells/ItemMall/AvatarDonate/PridenClientData.(ClientData).xdb" />
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+				<predicates>
+					<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+						<predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+					</Item>
+					<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+						<predicate type="gameMechanics.map.instance.astralIsland.PredicateOnAstralIsland" />
+					</Item>
+					<Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+						<predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+							<predicate type="avatarPopulation.service.impl.lookingForGroupImpl.elements.PredicateLFGRole">
+								<role>DamageDealer</role>
+							</predicate>
+						</predicate>
+						<clientData href="/ItemMall/Services/Avatar/LFG.(ClientData).xdb" />
+					</Item>
+					<Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+						<predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+							<predicate type="avatarPopulation.service.impl.lookingForGroupImpl.elements.PredicateLFGRole">
+								<role>Healer</role>
+							</predicate>
+						</predicate>
+						<clientData href="/ItemMall/Services/Avatar/LFG.(ClientData).xdb" />
+					</Item>
+					<Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+						<predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+							<predicate type="avatarPopulation.service.impl.lookingForGroupImpl.elements.PredicateLFGRole">
+								<role>Tank</role>
+							</predicate>
+						</predicate>
+						<clientData href="/ItemMall/Services/Avatar/LFG.(ClientData).xdb" />
+					</Item>
+				</predicates>
+			</Item>
+		</casterConditions>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+				<predicates>
+					<Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicateGreater">
+								<lhs type="gameMechanics.elements.calcers.FloatData">
+									<value var="value" />
+								</lhs>
+								<rhs type="gameMechanics.elements.calcers.FloatData">
+									<value>1</value>
+								</rhs>
+							</Item>
+							<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+								<predicate type="gameMechanics.constructor.basicElements.PredicateOr">
+									<predicates>
+										<Item type="gameMechanics.elements.resources.ResourceAltCurrency">
+											<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixBard.(AlternativeCurrency).xdb" />
+											<count>1</count>
+										</Item>
+										<Item type="gameMechanics.elements.resources.ResourceAltCurrency">
+											<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixWarrior.(AlternativeCurrency).xdb" />
+											<count>1</count>
+										</Item>
+										<Item type="gameMechanics.elements.resources.ResourceAltCurrency">
+											<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixPsionic.(AlternativeCurrency).xdb" />
+											<count>1</count>
+										</Item>
+										<Item type="gameMechanics.elements.resources.ResourceAltCurrency">
+											<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixPriest.(AlternativeCurrency).xdb" />
+											<count>1</count>
+										</Item>
+										<Item type="gameMechanics.elements.resources.ResourceAltCurrency">
+											<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixStalker.(AlternativeCurrency).xdb" />
+											<count>1</count>
+										</Item>
+										<Item type="gameMechanics.elements.resources.ResourceAltCurrency">
+											<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixDruid.(AlternativeCurrency).xdb" />
+											<count>1</count>
+										</Item>
+										<Item type="gameMechanics.elements.resources.ResourceAltCurrency">
+											<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixEngeneer.(AlternativeCurrency).xdb" />
+											<count>1</count>
+										</Item>
+										<Item type="gameMechanics.elements.resources.ResourceAltCurrency">
+											<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixNecromancer.(AlternativeCurrency).xdb" />
+											<count>1</count>
+										</Item>
+										<Item type="gameMechanics.elements.resources.ResourceAltCurrency">
+											<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FizMage.(AlternativeCurrency).xdb" />
+											<count>1</count>
+										</Item>
+										<Item type="gameMechanics.elements.resources.ResourceAltCurrency">
+											<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixPaladin.(AlternativeCurrency).xdb" />
+											<count>1</count>
+										</Item>
+									</predicates>
+								</predicate>
+							</Item>
+						</predicates>
+					</Item>
+				</predicates>
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+								<characterClass href="/Mechanics/Classes/Bard.xdb" />
+							</Item>
+						</predicates>
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+								<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixBard.(AlternativeCurrency).xdb" />
+								<sumCalcer type="gameMechanics.elements.calcers.FloatData">
+									<value>1</value>
+								</sumCalcer>
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+								<item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+									<item href="/ItemMall/Services/Avatar/RemortClassExchange_Bard_temp_self.(ItemResource).xdb" />
+								</item>
+								<decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
+									<calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+								</decayTime>
+							</Item>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
+								<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+									<mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+								</durationScaler>
+							</Item>
+						</impacts>
+						<elseImpacts>
+							<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+								<predicates>
+									<Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+										<characterClass href="/Mechanics/Classes/Druid.xdb" />
+									</Item>
+								</predicates>
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+										<item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+											<item href="/ItemMall/Services/Avatar/RemortClassExchange_Druid_temp_self.(ItemResource).xdb" />
+										</item>
+										<decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
+											<calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+										</decayTime>
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+										<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixDruid.(AlternativeCurrency).xdb" />
+										<sumCalcer type="gameMechanics.elements.calcers.FloatData">
+											<value>1</value>
+										</sumCalcer>
+									</Item>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
+										<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+											<mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+										</durationScaler>
+									</Item>
+								</impacts>
+								<elseImpacts>
+									<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+										<predicates>
+											<Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+												<characterClass href="/Mechanics/Classes/Engineer.xdb" />
+											</Item>
+										</predicates>
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+												<item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+													<item href="/ItemMall/Services/Avatar/RemortClassExchange_Engineer_temp_self.(ItemResource).xdb" />
+												</item>
+												<decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
+													<calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+												</decayTime>
+											</Item>
+											<Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+												<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixEngeneer.(AlternativeCurrency).xdb" />
+												<sumCalcer type="gameMechanics.elements.calcers.FloatData">
+													<value>1</value>
+												</sumCalcer>
+											</Item>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
+												<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+													<mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+												</durationScaler>
+											</Item>
+										</impacts>
+										<elseImpacts>
+											<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+												<predicates>
+													<Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+														<characterClass href="/Mechanics/Classes/Mage.xdb" />
+													</Item>
+												</predicates>
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+														<item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+															<item href="/ItemMall/Services/Avatar/RemortClassExchange_Mage_temp_self.(ItemResource).xdb" />
+														</item>
+														<decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
+															<calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+														</decayTime>
+													</Item>
+													<Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+														<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FizMage.(AlternativeCurrency).xdb" />
+														<sumCalcer type="gameMechanics.elements.calcers.FloatData">
+															<value>1</value>
+														</sumCalcer>
+													</Item>
+													<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+														<buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
+														<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+															<mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+														</durationScaler>
+													</Item>
+												</impacts>
+												<elseImpacts>
+													<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+														<predicates>
+															<Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+																<characterClass href="/Mechanics/Classes/Necromancer.xdb" />
+															</Item>
+														</predicates>
+														<impacts>
+															<Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+																<item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+																	<item href="/ItemMall/Services/Avatar/RemortClassExchange_Necromancer_temp_self.(ItemResource).xdb" />
+																</item>
+																<decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
+																	<calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+																</decayTime>
+															</Item>
+															<Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+																<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixNecromancer.(AlternativeCurrency).xdb" />
+																<sumCalcer type="gameMechanics.elements.calcers.FloatData">
+																	<value>1</value>
+																</sumCalcer>
+															</Item>
+															<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																<buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
+																<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+																	<mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+																</durationScaler>
+															</Item>
+														</impacts>
+														<elseImpacts>
+															<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+																<predicates>
+																	<Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+																		<characterClass href="/Mechanics/Classes/Paladin.xdb" />
+																	</Item>
+																</predicates>
+																<impacts>
+																	<Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+																		<item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+																			<item href="/ItemMall/Services/Avatar/RemortClassExchange_Paladin_temp_self.(ItemResource).xdb" />
+																		</item>
+																		<decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
+																			<calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+																		</decayTime>
+																	</Item>
+																	<Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+																		<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixPaladin.(AlternativeCurrency).xdb" />
+																		<sumCalcer type="gameMechanics.elements.calcers.FloatData">
+																			<value>1</value>
+																		</sumCalcer>
+																	</Item>
+																	<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																		<buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
+																		<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+																			<mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+																		</durationScaler>
+																	</Item>
+																</impacts>
+																<elseImpacts>
+																	<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+																		<predicates>
+																			<Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+																				<characterClass href="/Mechanics/Classes/Priest.xdb" />
+																			</Item>
+																		</predicates>
+																		<impacts>
+																			<Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+																				<item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+																					<item href="/ItemMall/Services/Avatar/RemortClassExchange_Priest_temp_self.(ItemResource).xdb" />
+																				</item>
+																				<decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
+																					<calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+																				</decayTime>
+																			</Item>
+																			<Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+																				<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixPriest.(AlternativeCurrency).xdb" />
+																				<sumCalcer type="gameMechanics.elements.calcers.FloatData">
+																					<value>1</value>
+																				</sumCalcer>
+																			</Item>
+																			<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																				<buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
+																				<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+																					<mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+																				</durationScaler>
+																			</Item>
+																		</impacts>
+																		<elseImpacts>
+																			<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+																				<predicates>
+																					<Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+																						<characterClass href="/Mechanics/Classes/Psionic.xdb" />
+																					</Item>
+																				</predicates>
+																				<impacts>
+																					<Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+																						<item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+																							<item href="/ItemMall/Services/Avatar/RemortClassExchange_Psionic_temp_self.(ItemResource).xdb" />
+																						</item>
+																						<decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
+																							<calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+																						</decayTime>
+																					</Item>
+																					<Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+																						<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixPsionic.(AlternativeCurrency).xdb" />
+																						<sumCalcer type="gameMechanics.elements.calcers.FloatData">
+																							<value>1</value>
+																						</sumCalcer>
+																					</Item>
+																					<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																						<buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
+																						<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+																							<mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+																						</durationScaler>
+																					</Item>
+																				</impacts>
+																				<elseImpacts>
+																					<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+																						<predicates>
+																							<Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+																								<characterClass href="/Mechanics/Classes/Stalker.xdb" />
+																							</Item>
+																						</predicates>
+																						<impacts>
+																							<Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+																								<item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+																									<item href="/ItemMall/Services/Avatar/RemortClassExchange_Stalker_temp_self.(ItemResource).xdb" />
+																								</item>
+																								<decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
+																									<calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+																								</decayTime>
+																							</Item>
+																							<Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+																								<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixStalker.(AlternativeCurrency).xdb" />
+																								<sumCalcer type="gameMechanics.elements.calcers.FloatData">
+																									<value>1</value>
+																								</sumCalcer>
+																							</Item>
+																							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																								<buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
+																								<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+																									<mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+																								</durationScaler>
+																							</Item>
+																						</impacts>
+																						<elseImpacts>
+																							<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+																								<predicates>
+																									<Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+																										<characterClass href="/Mechanics/Classes/Warrior.xdb" />
+																									</Item>
+																								</predicates>
+																								<impacts>
+																									<Item type="gameMechanics.elements.impacts.ImpactGiveItem">
+																										<item type="gameMechanics.constructor.schemes.item.SimpleItemProvider">
+																											<item href="/ItemMall/Services/Avatar/RemortClassExchange_Warrior_temp_self.(ItemResource).xdb" />
+																										</item>
+																										<decayTime type="gameMechanics.elements.calcers.FloatToLongCalcer">
+																											<calcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+																										</decayTime>
+																									</Item>
+																									<Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+																										<currency href="/Mechanics/AlternativeCurrencies/ClassExchange/FixWarrior.(AlternativeCurrency).xdb" />
+																										<sumCalcer type="gameMechanics.elements.calcers.FloatData">
+																											<value>1</value>
+																										</sumCalcer>
+																									</Item>
+																									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																										<buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
+																										<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+																											<mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+																										</durationScaler>
+																									</Item>
+																								</impacts>
+																							</Item>
+																						</elseImpacts>
+																					</Item>
+																				</elseImpacts>
+																			</Item>
+																		</elseImpacts>
+																	</Item>
+																</elseImpacts>
+															</Item>
+														</elseImpacts>
+													</Item>
+												</elseImpacts>
+											</Item>
+										</elseImpacts>
+									</Item>
+								</elseImpacts>
+							</Item>
+						</elseImpacts>
+					</Item>
+				</impacts>
+				<elseImpacts>
+					<Item type="itemService.avatar.changeClass.ImpactStartClassChange">
+						<characterClass hrefvar="characterClass" />
+						<consumeActiveItem var="consumeActiveItem" />
+					</Item>
+					<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicateGreater">
+								<lhs type="gameMechanics.elements.calcers.FloatData">
+									<value var="value" />
+								</lhs>
+								<rhs type="gameMechanics.elements.calcers.FloatData">
+									<value>1</value>
+								</rhs>
+							</Item>
+						</predicates>
+						<impactsIf>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="/ItemMall/Services/Avatar/ClassExchangeBuffTime.(BuffResource).xdb" />
+								<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+									<mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
+								</durationScaler>
+							</Item>
+						</impactsIf>
+					</Item>
+				</elseImpacts>
+			</Item>
+		</casterImpacts>
+	</mechanics>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

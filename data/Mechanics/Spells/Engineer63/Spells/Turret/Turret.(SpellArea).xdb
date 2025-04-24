@@ -1,334 +1,334 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.area.SpellArea>
-    <Header>
-        <resourceId>739931943</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/EngineerTurrets.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/EngineerAttackDevices.(ActionGroup).xdb" />
-    </groups>
-    <Name href="Turret.(SpellArea).Name.txt" />
-    <Description href="Turret.(SpellArea).Description.txt" />
-    <descVars>
-        <Item>
-            <name>dmg</name>
-            <value>1</value>
-            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-                <scalers>
-                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
-                            <externalCalcer hrefvar="externalCalcer" />
-                        </mulCalcer>
-                    </Item>
-                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-                        <formula>WeaponScaler</formula>
-                    </Item>
-                </scalers>
-            </scaler>
-        </Item>
-    </descVars>
-    <image href="/Interface/Icons/Spells/Engineer/EngineerTurrel.(UISingleTexture).xdb" />
-    <visualScripts href="/Spells/VisScripts/Engineer/MiniTurrets_Call.(SpellVisScripts).xdb" />
-    <durationBuff href="TurretLifetime.(BuffResource).xdb" />
-    <range type="gameMechanics.elements.calcers.FloatData">
-        <value>20</value>
-    </range>
-    <targetType>STTPoint</targetType>
-    <isAggro>false</isAggro>
-    <ranks>
-        <Item href="Turret01.(SpellArea).xdb" />
-        <Item href="Turret02.(SpellArea).xdb" />
-        <Item href="Turret03.(SpellArea).xdb" />
-    </ranks>
-    <iffPolicy>Everyone</iffPolicy>
-    <triggersGlobalCooldown>false</triggersGlobalCooldown>
-    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
-    <needInFront>false</needInFront>
-    <mechanics>
-        <cooldown>
-            <duration>25000</duration>
-        </cooldown>
-        <casterConditions>
-            <Item type="gameMechanics.elements.predicates.PredicateHasPath">
-                <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                <maxLength>85</maxLength>
-            </Item>
-        </casterConditions>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                <predicates>
-                    <Item type="gameMechanics.elements.predicates.PredicateFaction">
-                        <faction href="/World/Factions/League.xdb" />
-                    </Item>
-                </predicates>
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                        <predicates>
-                            <Item type="gameMechanics.elements.predicates.PredicatesToAssistant">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-                                </predicates>
-                                <assistantResource href="Turret.(AssistantResource).xdb" />
-                            </Item>
-                        </predicates>
-                        <impacts>
-                            <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                                <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff hrefvar="buff" />
-                                    </Item>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.MarkedImpact">
-                                        <mark href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/DeviceFall.(MarkResource).xdb" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                                                <delay>100</delay>
-                                                <impacts>
-                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                        <buff href="TurretLifetime.(BuffResource).xdb" />
-                                                        <durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
-                                                            <buff href="TurretStuff01.(BuffResource).xdb" />
-                                                            <tickLength>1000</tickLength>
-                                                        </durationScaler>
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
-                                                <ability href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/FallingDevices01.(AbilityResource).xdb" />
-                                            </Item>
-                                        </predicates>
-                                        <elseImpacts>
-                                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                                <impacts>
-                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                        <buff href="/Mechanics/Spells/CommonBuffs/AssistantForkAgro/AssistantForkEnemies.(BuffResource).xdb" />
-                                                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                            <multiplier>20</multiplier>
-                                                        </durationScaler>
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </elseImpacts>
-                                    </Item>
-                                </impacts>
-                                <traceDown>true</traceDown>
-                                <assistantResource href="TurretDouble.(AssistantResource).xdb" />
-                                <mobResource href="LeagueTurret.(MobWorld).xdb" />
-                                <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                                <linkMode>ModifiedHealth</linkMode>
-                                <planeSyncStrategy>Sync</planeSyncStrategy>
-                            </Item>
-                        </impacts>
-                        <elseImpacts>
-                            <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                                <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff hrefvar="buff" />
-                                    </Item>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.MarkedImpact">
-                                        <mark href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/DeviceFall.(MarkResource).xdb" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                                                <delay>100</delay>
-                                                <impacts>
-                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                        <buff href="TurretLifetime.(BuffResource).xdb" />
-                                                        <durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
-                                                            <buff href="TurretStuff01.(BuffResource).xdb" />
-                                                            <tickLength>1000</tickLength>
-                                                        </durationScaler>
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
-                                                <ability href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/FallingDevices01.(AbilityResource).xdb" />
-                                            </Item>
-                                        </predicates>
-                                        <elseImpacts>
-                                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                                <impacts>
-                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                        <buff href="/Mechanics/Spells/CommonBuffs/AssistantForkAgro/AssistantForkEnemies.(BuffResource).xdb" />
-                                                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                            <multiplier>20</multiplier>
-                                                        </durationScaler>
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </elseImpacts>
-                                    </Item>
-                                </impacts>
-                                <traceDown>true</traceDown>
-                                <assistantResource href="Turret.(AssistantResource).xdb" />
-                                <mobResource href="LeagueTurret.(MobWorld).xdb" />
-                                <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                                <linkMode>ModifiedHealth</linkMode>
-                                <planeSyncStrategy>Sync</planeSyncStrategy>
-                            </Item>
-                        </elseImpacts>
-                    </Item>
-                </impacts>
-                <elseImpacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                        <predicates>
-                            <Item type="gameMechanics.elements.predicates.PredicatesToAssistant">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-                                </predicates>
-                                <assistantResource href="Turret.(AssistantResource).xdb" />
-                            </Item>
-                        </predicates>
-                        <impacts>
-                            <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                                <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff hrefvar="buff" />
-                                    </Item>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.MarkedImpact">
-                                        <mark href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/DeviceFall.(MarkResource).xdb" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                                                <delay>100</delay>
-                                                <impacts>
-                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                        <buff href="TurretLifetime.(BuffResource).xdb" />
-                                                        <durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
-                                                            <buff href="TurretStuff01.(BuffResource).xdb" />
-                                                            <tickLength>1000</tickLength>
-                                                        </durationScaler>
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
-                                                <ability href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/FallingDevices01.(AbilityResource).xdb" />
-                                            </Item>
-                                        </predicates>
-                                        <elseImpacts>
-                                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                                <impacts>
-                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                        <buff href="/Mechanics/Spells/CommonBuffs/AssistantForkAgro/AssistantForkEnemies.(BuffResource).xdb" />
-                                                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                            <multiplier>20</multiplier>
-                                                        </durationScaler>
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </elseImpacts>
-                                    </Item>
-                                </impacts>
-                                <traceDown>true</traceDown>
-                                <assistantResource href="TurretDouble.(AssistantResource).xdb" />
-                                <mobResource href="EmpireTurret.(MobWorld).xdb" />
-                                <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                                <linkMode>ModifiedHealth</linkMode>
-                                <planeSyncStrategy>Sync</planeSyncStrategy>
-                            </Item>
-                        </impacts>
-                        <elseImpacts>
-                            <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                                <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff hrefvar="buff" />
-                                    </Item>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.MarkedImpact">
-                                        <mark href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/DeviceFall.(MarkResource).xdb" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                                                <delay>100</delay>
-                                                <impacts>
-                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                        <buff href="TurretLifetime.(BuffResource).xdb" />
-                                                        <durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
-                                                            <buff href="TurretStuff01.(BuffResource).xdb" />
-                                                            <tickLength>1000</tickLength>
-                                                        </durationScaler>
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
-                                                <ability href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/FallingDevices01.(AbilityResource).xdb" />
-                                            </Item>
-                                        </predicates>
-                                        <elseImpacts>
-                                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                                <impacts>
-                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                        <buff href="/Mechanics/Spells/CommonBuffs/AssistantForkAgro/AssistantForkEnemies.(BuffResource).xdb" />
-                                                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                            <multiplier>20</multiplier>
-                                                        </durationScaler>
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </elseImpacts>
-                                    </Item>
-                                </impacts>
-                                <traceDown>true</traceDown>
-                                <assistantResource href="Turret.(AssistantResource).xdb" />
-                                <mobResource href="EmpireTurret.(MobWorld).xdb" />
-                                <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                                <linkMode>ModifiedHealth</linkMode>
-                                <planeSyncStrategy>Sync</planeSyncStrategy>
-                            </Item>
-                        </elseImpacts>
-                    </Item>
-                </elseImpacts>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
-                <spell href="/Mechanics/Spells/Engineer63/Spells/FireTurret/FireTurret01.(SpellArea).xdb" />
-                <duration>25000</duration>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.MarkedImpact">
-                <mark href="TurretCast.(MarkResource).xdb" />
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactSpellGroupCooldown">
-                <group href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
-                <duration>1000</duration>
-            </Item>
-        </casterImpacts>
-    </mechanics>
-    <radius>2</radius>
+	<Header>
+		<resourceId>739931943</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/EngineerTurrets.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/EngineerAttackDevices.(ActionGroup).xdb" />
+	</groups>
+	<Name href="Turret.(SpellArea).Name.txt" />
+	<Description href="Turret.(SpellArea).Description.txt" />
+	<descVars>
+		<Item>
+			<name>dmg</name>
+			<value>1</value>
+			<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+				<scalers>
+					<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+						<mulCalcer type="constructor.elements.CalcerFloatExternal">
+							<externalCalcer hrefvar="externalCalcer" />
+						</mulCalcer>
+					</Item>
+					<Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+						<formula>WeaponScaler</formula>
+					</Item>
+				</scalers>
+			</scaler>
+		</Item>
+	</descVars>
+	<image href="/Interface/Icons/Spells/Engineer/EngineerTurrel.(UISingleTexture).xdb" />
+	<visualScripts href="/Spells/VisScripts/Engineer/MiniTurrets_Call.(SpellVisScripts).xdb" />
+	<durationBuff href="TurretLifetime.(BuffResource).xdb" />
+	<range type="gameMechanics.elements.calcers.FloatData">
+		<value>20</value>
+	</range>
+	<targetType>STTPoint</targetType>
+	<isAggro>false</isAggro>
+	<ranks>
+		<Item href="Turret01.(SpellArea).xdb" />
+		<Item href="Turret02.(SpellArea).xdb" />
+		<Item href="Turret03.(SpellArea).xdb" />
+	</ranks>
+	<iffPolicy>Everyone</iffPolicy>
+	<triggersGlobalCooldown>false</triggersGlobalCooldown>
+	<ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+	<needInFront>false</needInFront>
+	<mechanics>
+		<cooldown>
+			<duration>25000</duration>
+		</cooldown>
+		<casterConditions>
+			<Item type="gameMechanics.elements.predicates.PredicateHasPath">
+				<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+				<maxLength>85</maxLength>
+			</Item>
+		</casterConditions>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+				<predicates>
+					<Item type="gameMechanics.elements.predicates.PredicateFaction">
+						<faction href="/World/Factions/League.xdb" />
+					</Item>
+				</predicates>
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicatesToAssistant">
+								<predicates>
+									<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+								</predicates>
+								<assistantResource href="Turret.(AssistantResource).xdb" />
+							</Item>
+						</predicates>
+						<impacts>
+							<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+								<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff hrefvar="buff" />
+									</Item>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.MarkedImpact">
+										<mark href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/DeviceFall.(MarkResource).xdb" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+												<delay>100</delay>
+												<impacts>
+													<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+														<buff href="TurretLifetime.(BuffResource).xdb" />
+														<durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
+															<buff href="TurretStuff01.(BuffResource).xdb" />
+															<tickLength>1000</tickLength>
+														</durationScaler>
+													</Item>
+												</impacts>
+											</Item>
+										</impacts>
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+										<predicates>
+											<Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+												<ability href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/FallingDevices01.(AbilityResource).xdb" />
+											</Item>
+										</predicates>
+										<elseImpacts>
+											<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+												<impacts>
+													<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+														<buff href="/Mechanics/Spells/CommonBuffs/AssistantForkAgro/AssistantForkEnemies.(BuffResource).xdb" />
+														<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+															<multiplier>20</multiplier>
+														</durationScaler>
+													</Item>
+												</impacts>
+											</Item>
+										</elseImpacts>
+									</Item>
+								</impacts>
+								<traceDown>true</traceDown>
+								<assistantResource href="TurretDouble.(AssistantResource).xdb" />
+								<mobResource href="LeagueTurret.(MobWorld).xdb" />
+								<level type="gameMechanics.elements.calcers.CalcerLevel" />
+								<linkMode>ModifiedHealth</linkMode>
+								<planeSyncStrategy>Sync</planeSyncStrategy>
+							</Item>
+						</impacts>
+						<elseImpacts>
+							<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+								<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff hrefvar="buff" />
+									</Item>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.MarkedImpact">
+										<mark href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/DeviceFall.(MarkResource).xdb" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+												<delay>100</delay>
+												<impacts>
+													<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+														<buff href="TurretLifetime.(BuffResource).xdb" />
+														<durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
+															<buff href="TurretStuff01.(BuffResource).xdb" />
+															<tickLength>1000</tickLength>
+														</durationScaler>
+													</Item>
+												</impacts>
+											</Item>
+										</impacts>
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+										<predicates>
+											<Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+												<ability href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/FallingDevices01.(AbilityResource).xdb" />
+											</Item>
+										</predicates>
+										<elseImpacts>
+											<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+												<impacts>
+													<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+														<buff href="/Mechanics/Spells/CommonBuffs/AssistantForkAgro/AssistantForkEnemies.(BuffResource).xdb" />
+														<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+															<multiplier>20</multiplier>
+														</durationScaler>
+													</Item>
+												</impacts>
+											</Item>
+										</elseImpacts>
+									</Item>
+								</impacts>
+								<traceDown>true</traceDown>
+								<assistantResource href="Turret.(AssistantResource).xdb" />
+								<mobResource href="LeagueTurret.(MobWorld).xdb" />
+								<level type="gameMechanics.elements.calcers.CalcerLevel" />
+								<linkMode>ModifiedHealth</linkMode>
+								<planeSyncStrategy>Sync</planeSyncStrategy>
+							</Item>
+						</elseImpacts>
+					</Item>
+				</impacts>
+				<elseImpacts>
+					<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicatesToAssistant">
+								<predicates>
+									<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+								</predicates>
+								<assistantResource href="Turret.(AssistantResource).xdb" />
+							</Item>
+						</predicates>
+						<impacts>
+							<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+								<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff hrefvar="buff" />
+									</Item>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.MarkedImpact">
+										<mark href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/DeviceFall.(MarkResource).xdb" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+												<delay>100</delay>
+												<impacts>
+													<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+														<buff href="TurretLifetime.(BuffResource).xdb" />
+														<durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
+															<buff href="TurretStuff01.(BuffResource).xdb" />
+															<tickLength>1000</tickLength>
+														</durationScaler>
+													</Item>
+												</impacts>
+											</Item>
+										</impacts>
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+										<predicates>
+											<Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+												<ability href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/FallingDevices01.(AbilityResource).xdb" />
+											</Item>
+										</predicates>
+										<elseImpacts>
+											<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+												<impacts>
+													<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+														<buff href="/Mechanics/Spells/CommonBuffs/AssistantForkAgro/AssistantForkEnemies.(BuffResource).xdb" />
+														<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+															<multiplier>20</multiplier>
+														</durationScaler>
+													</Item>
+												</impacts>
+											</Item>
+										</elseImpacts>
+									</Item>
+								</impacts>
+								<traceDown>true</traceDown>
+								<assistantResource href="TurretDouble.(AssistantResource).xdb" />
+								<mobResource href="EmpireTurret.(MobWorld).xdb" />
+								<level type="gameMechanics.elements.calcers.CalcerLevel" />
+								<linkMode>ModifiedHealth</linkMode>
+								<planeSyncStrategy>Sync</planeSyncStrategy>
+							</Item>
+						</impacts>
+						<elseImpacts>
+							<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+								<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff hrefvar="buff" />
+									</Item>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.MarkedImpact">
+										<mark href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/DeviceFall.(MarkResource).xdb" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+												<delay>100</delay>
+												<impacts>
+													<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+														<buff href="TurretLifetime.(BuffResource).xdb" />
+														<durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
+															<buff href="TurretStuff01.(BuffResource).xdb" />
+															<tickLength>1000</tickLength>
+														</durationScaler>
+													</Item>
+												</impacts>
+											</Item>
+										</impacts>
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+										<predicates>
+											<Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+												<ability href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/FallingDevices01.(AbilityResource).xdb" />
+											</Item>
+										</predicates>
+										<elseImpacts>
+											<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+												<impacts>
+													<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+														<buff href="/Mechanics/Spells/CommonBuffs/AssistantForkAgro/AssistantForkEnemies.(BuffResource).xdb" />
+														<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+															<multiplier>20</multiplier>
+														</durationScaler>
+													</Item>
+												</impacts>
+											</Item>
+										</elseImpacts>
+									</Item>
+								</impacts>
+								<traceDown>true</traceDown>
+								<assistantResource href="Turret.(AssistantResource).xdb" />
+								<mobResource href="EmpireTurret.(MobWorld).xdb" />
+								<level type="gameMechanics.elements.calcers.CalcerLevel" />
+								<linkMode>ModifiedHealth</linkMode>
+								<planeSyncStrategy>Sync</planeSyncStrategy>
+							</Item>
+						</elseImpacts>
+					</Item>
+				</elseImpacts>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+				<spell href="/Mechanics/Spells/Engineer63/Spells/FireTurret/FireTurret01.(SpellArea).xdb" />
+				<duration>25000</duration>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.MarkedImpact">
+				<mark href="TurretCast.(MarkResource).xdb" />
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactSpellGroupCooldown">
+				<group href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
+				<duration>1000</duration>
+			</Item>
+		</casterImpacts>
+	</mechanics>
+	<radius>2</radius>
 </gameMechanics.constructor.schemes.spell.area.SpellArea>

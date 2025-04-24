@@ -1,241 +1,241 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.buff.BuffResource>
-    <Header>
-        <resourceId>739851947</resourceId>
-    </Header>
-    <needVisualize>false</needVisualize>
-    <effects>
-        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
-                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                            <predicate type="gameMechanics.constructor.basicElements.PredicateOr">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                        <buff href="BattleFrenzy.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                        <buff href="BattleFrenzyLight.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
-                                        <groups>
-                                            <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-                                            <Item href="/Mechanics/Spells/Groups/DRMesmerize.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-                                        </groups>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                        <buff href="ReadySteadyFrenzy.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </Item>
-                                </predicates>
-                            </predicate>
-                        </Item>
-                    </predicates>
-                    <impactsIf>
-                        <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
-                            <chanceCalcer type="gameMechanics.elements.calcers.CalcerMul">
-                                <calcers>
-                                    <Item type="gameMechanics.elements.calcers.HealthCalcer" />
-                                    <Item type="gameMechanics.elements.calcers.InverseCalcer">
-                                        <value type="gameMechanics.elements.calcers.FullHealthCalcer" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.calcers.FloatData">
-                                        <value>0.25</value>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.calcers.CalcerIf">
-                                        <predicate type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
-                                            <quality href="/Mechanics/MobQualities/Elite.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
-                                        </predicate>
-                                        <calcerIf type="gameMechanics.elements.calcers.FloatData">
-                                            <value>1</value>
-                                        </calcerIf>
-                                        <calcerElse type="gameMechanics.elements.calcers.CalcerIf">
-                                            <predicate type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
-                                                <quality href="/Mechanics/MobQualities/BossAdd.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
-                                            </predicate>
-                                            <calcerIf type="gameMechanics.elements.calcers.FloatData">
-                                                <value>2</value>
-                                            </calcerIf>
-                                            <calcerElse type="gameMechanics.elements.calcers.FloatData">
-                                                <value>3</value>
-                                            </calcerElse>
-                                        </calcerElse>
-                                    </Item>
-                                </calcers>
-                            </chanceCalcer>
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                                            <radius>25</radius>
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                    <predicates>
-                                                        <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
-                                                            <ability href="/Mechanics/Abilities/Creatures/CCImmunities/Ability.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-                                                        </Item>
-                                                    </predicates>
-                                                    <impactsIf>
-                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                            <buff href="ReadySteadyFrenzy.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        </Item>
-                                                    </impactsIf>
-                                                    <impactsElse>
-                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                            <buff href="BattleFrenzy.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        </Item>
-                                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                            <predicates>
-                                                                <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                                                    <buff href="/Mechanics/Spells/CommonBuffs/WillImmunity/Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                </Item>
-                                                            </predicates>
-                                                            <impactsIf>
-                                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                                                    <buff href="/Mechanics/Spells/CommonBuffs/WillImmunity/Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                </Item>
-                                                            </impactsIf>
-                                                        </Item>
-                                                    </impactsElse>
-                                                </Item>
-                                            </impacts>
-                                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-                                                <predicates>
-                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                                        <buff href="FrenzyAble.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                    </Item>
-                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                        <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
-                                                            <groups>
-                                                                <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-                                                                <Item href="/Mechanics/Spells/Groups/DRMesmerize.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-                                                            </groups>
-                                                        </predicate>
-                                                    </Item>
-                                                </predicates>
-                                            </filter>
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                                <Item type="gameMechanics.elements.impacts.ImpactCastSpellPoint">
-                                    <spell href="BattleFrenzyPseudoSpell.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
-                                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impactsIf>
-                </Item>
-            </impacts>
-            <tick>20000</tick>
-        </Item>
-        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
-            <onEnter>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                            <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
-                                <groups>
-                                    <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-                                    <Item href="/Mechanics/Spells/Groups/DRMesmerize.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-                                </groups>
-                            </predicate>
-                        </Item>
-                    </predicates>
-                    <impactsIf>
-                        <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
-                            <chanceCalcer type="gameMechanics.elements.calcers.CalcerMul">
-                                <calcers>
-                                    <Item type="gameMechanics.elements.calcers.FloatData">
-                                        <value>0.03</value>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.calcers.CalcerIf">
-                                        <predicate type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
-                                            <quality href="/Mechanics/MobQualities/Elite.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
-                                        </predicate>
-                                        <calcerIf type="gameMechanics.elements.calcers.FloatData">
-                                            <value>1</value>
-                                        </calcerIf>
-                                        <calcerElse type="gameMechanics.elements.calcers.CalcerIf">
-                                            <predicate type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
-                                                <quality href="/Mechanics/MobQualities/BossAdd.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
-                                            </predicate>
-                                            <calcerIf type="gameMechanics.elements.calcers.FloatData">
-                                                <value>2</value>
-                                            </calcerIf>
-                                            <calcerElse type="gameMechanics.elements.calcers.FloatData">
-                                                <value>5</value>
-                                            </calcerElse>
-                                        </calcerElse>
-                                    </Item>
-                                </calcers>
-                            </chanceCalcer>
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                                            <radius>25</radius>
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                    <predicates>
-                                                        <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
-                                                            <ability href="/Mechanics/Abilities/Creatures/CCImmunities/Ability.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-                                                        </Item>
-                                                    </predicates>
-                                                    <impactsIf>
-                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                            <buff href="ReadySteadyFrenzy.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        </Item>
-                                                    </impactsIf>
-                                                    <impactsElse>
-                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                            <buff href="BattleFrenzy.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        </Item>
-                                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                            <predicates>
-                                                                <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                                                    <buff href="/Mechanics/Spells/CommonBuffs/WillImmunity/Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                </Item>
-                                                            </predicates>
-                                                            <impactsIf>
-                                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                                                    <buff href="/Mechanics/Spells/CommonBuffs/WillImmunity/Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                </Item>
-                                                            </impactsIf>
-                                                        </Item>
-                                                    </impactsElse>
-                                                </Item>
-                                            </impacts>
-                                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-                                                <predicates>
-                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                                        <buff href="FrenzyAble.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                    </Item>
-                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                        <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
-                                                            <groups>
-                                                                <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-                                                                <Item href="/Mechanics/Spells/Groups/DRMesmerize.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-                                                            </groups>
-                                                        </predicate>
-                                                    </Item>
-                                                </predicates>
-                                            </filter>
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impactsIf>
-                </Item>
-            </onEnter>
-        </Item>
-    </effects>
-    <isHelpful>true</isHelpful>
-    <canBeSaved>false</canBeSaved>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/EvadeProtectedBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        <Item href="/Mechanics/Spells/Groups/Undispelable.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-    </groups>
+	<Header>
+		<resourceId>739851947</resourceId>
+	</Header>
+	<needVisualize>false</needVisualize>
+	<effects>
+		<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+						<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+							<predicate type="gameMechanics.constructor.basicElements.PredicateOr">
+								<predicates>
+									<Item type="gameMechanics.elements.resources.ResourceBuff">
+										<buff href="BattleFrenzy.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+									<Item type="gameMechanics.elements.resources.ResourceBuff">
+										<buff href="BattleFrenzyLight.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+									<Item type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+										<groups>
+											<Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+											<Item href="/Mechanics/Spells/Groups/DRMesmerize.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+										</groups>
+									</Item>
+									<Item type="gameMechanics.elements.resources.ResourceBuff">
+										<buff href="ReadySteadyFrenzy.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+								</predicates>
+							</predicate>
+						</Item>
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+							<chanceCalcer type="gameMechanics.elements.calcers.CalcerMul">
+								<calcers>
+									<Item type="gameMechanics.elements.calcers.HealthCalcer" />
+									<Item type="gameMechanics.elements.calcers.InverseCalcer">
+										<value type="gameMechanics.elements.calcers.FullHealthCalcer" />
+									</Item>
+									<Item type="gameMechanics.elements.calcers.FloatData">
+										<value>0.25</value>
+									</Item>
+									<Item type="gameMechanics.elements.calcers.CalcerIf">
+										<predicate type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+											<quality href="/Mechanics/MobQualities/Elite.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
+										</predicate>
+										<calcerIf type="gameMechanics.elements.calcers.FloatData">
+											<value>1</value>
+										</calcerIf>
+										<calcerElse type="gameMechanics.elements.calcers.CalcerIf">
+											<predicate type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+												<quality href="/Mechanics/MobQualities/BossAdd.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
+											</predicate>
+											<calcerIf type="gameMechanics.elements.calcers.FloatData">
+												<value>2</value>
+											</calcerIf>
+											<calcerElse type="gameMechanics.elements.calcers.FloatData">
+												<value>3</value>
+											</calcerElse>
+										</calcerElse>
+									</Item>
+								</calcers>
+							</chanceCalcer>
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+											<radius>25</radius>
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+													<predicates>
+														<Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+															<ability href="/Mechanics/Abilities/Creatures/CCImmunities/Ability.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+														</Item>
+													</predicates>
+													<impactsIf>
+														<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+															<buff href="ReadySteadyFrenzy.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														</Item>
+													</impactsIf>
+													<impactsElse>
+														<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+															<buff href="BattleFrenzy.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														</Item>
+														<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+															<predicates>
+																<Item type="gameMechanics.elements.resources.ResourceBuff">
+																	<buff href="/Mechanics/Spells/CommonBuffs/WillImmunity/Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																</Item>
+															</predicates>
+															<impactsIf>
+																<Item type="gameMechanics.elements.impacts.BuffDetacher">
+																	<buff href="/Mechanics/Spells/CommonBuffs/WillImmunity/Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																</Item>
+															</impactsIf>
+														</Item>
+													</impactsElse>
+												</Item>
+											</impacts>
+											<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+												<predicates>
+													<Item type="gameMechanics.elements.resources.ResourceBuff">
+														<buff href="FrenzyAble.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+													</Item>
+													<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+														<predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+															<groups>
+																<Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+																<Item href="/Mechanics/Spells/Groups/DRMesmerize.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+															</groups>
+														</predicate>
+													</Item>
+												</predicates>
+											</filter>
+										</Item>
+									</impacts>
+								</Item>
+								<Item type="gameMechanics.elements.impacts.ImpactCastSpellPoint">
+									<spell href="BattleFrenzyPseudoSpell.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+									<destination type="gameMechanics.map.destination.SelfPosDestination" />
+								</Item>
+							</impacts>
+						</Item>
+					</impactsIf>
+				</Item>
+			</impacts>
+			<tick>20000</tick>
+		</Item>
+		<Item type="gameMechanics.elements.effects.CombatStateTrigger">
+			<onEnter>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+							<predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+								<groups>
+									<Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+									<Item href="/Mechanics/Spells/Groups/DRMesmerize.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+								</groups>
+							</predicate>
+						</Item>
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+							<chanceCalcer type="gameMechanics.elements.calcers.CalcerMul">
+								<calcers>
+									<Item type="gameMechanics.elements.calcers.FloatData">
+										<value>0.03</value>
+									</Item>
+									<Item type="gameMechanics.elements.calcers.CalcerIf">
+										<predicate type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+											<quality href="/Mechanics/MobQualities/Elite.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
+										</predicate>
+										<calcerIf type="gameMechanics.elements.calcers.FloatData">
+											<value>1</value>
+										</calcerIf>
+										<calcerElse type="gameMechanics.elements.calcers.CalcerIf">
+											<predicate type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+												<quality href="/Mechanics/MobQualities/BossAdd.xdb#xpointer(/gameMechanics.world.mob.MobQuality)" />
+											</predicate>
+											<calcerIf type="gameMechanics.elements.calcers.FloatData">
+												<value>2</value>
+											</calcerIf>
+											<calcerElse type="gameMechanics.elements.calcers.FloatData">
+												<value>5</value>
+											</calcerElse>
+										</calcerElse>
+									</Item>
+								</calcers>
+							</chanceCalcer>
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+											<radius>25</radius>
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+													<predicates>
+														<Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+															<ability href="/Mechanics/Abilities/Creatures/CCImmunities/Ability.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+														</Item>
+													</predicates>
+													<impactsIf>
+														<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+															<buff href="ReadySteadyFrenzy.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														</Item>
+													</impactsIf>
+													<impactsElse>
+														<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+															<buff href="BattleFrenzy.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														</Item>
+														<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+															<predicates>
+																<Item type="gameMechanics.elements.resources.ResourceBuff">
+																	<buff href="/Mechanics/Spells/CommonBuffs/WillImmunity/Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																</Item>
+															</predicates>
+															<impactsIf>
+																<Item type="gameMechanics.elements.impacts.BuffDetacher">
+																	<buff href="/Mechanics/Spells/CommonBuffs/WillImmunity/Buff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																</Item>
+															</impactsIf>
+														</Item>
+													</impactsElse>
+												</Item>
+											</impacts>
+											<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+												<predicates>
+													<Item type="gameMechanics.elements.resources.ResourceBuff">
+														<buff href="FrenzyAble.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+													</Item>
+													<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+														<predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+															<groups>
+																<Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+																<Item href="/Mechanics/Spells/Groups/DRMesmerize.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+															</groups>
+														</predicate>
+													</Item>
+												</predicates>
+											</filter>
+										</Item>
+									</impacts>
+								</Item>
+							</impacts>
+						</Item>
+					</impactsIf>
+				</Item>
+			</onEnter>
+		</Item>
+	</effects>
+	<isHelpful>true</isHelpful>
+	<canBeSaved>false</canBeSaved>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/EvadeProtectedBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		<Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		<Item href="/Mechanics/Spells/Groups/Undispelable.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+	</groups>
 </gameMechanics.constructor.schemes.buff.BuffResource>

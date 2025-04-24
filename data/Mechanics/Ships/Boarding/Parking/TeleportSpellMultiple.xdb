@@ -1,245 +1,245 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>361930759</resourceId>
-    </Header>
-    <contextActionInfo>
-        <contextName href="TeleportSpellMultipleName.txt" />
-        <contextDescription href="TeleportSpellMultipleDesc.txt" />
-        <contextImage href="/Interface/Icons/Spells/Mage/Gust.(UISingleTexture).xdb" />
-    </contextActionInfo>
-    <Name href="TeleportSpellMultipleName.txt" />
-    <Description href="TeleportSpellMultipleDesc.txt" />
-    <image href="/Interface/Icons/Spells/Mage/Gust.(UISingleTexture).xdb" />
-    <nameTemplate href="TeleportSpellMultipleName.txt" />
-    <descTemplate href="TeleportSpellMultipleDesc.txt" />
-    <range type="gameMechanics.elements.calcers.FloatData">
-        <value>5</value>
-    </range>
-    <prepareDuration>5000</prepareDuration>
-    <immutablePrepareDuration>true</immutablePrepareDuration>
-    <needLos>false</needLos>
-    <targetType>STTSelf</targetType>
-    <iffPolicy>Friends</iffPolicy>
-    <launchWhenReady>true</launchWhenReady>
-    <needInFront>false</needInFront>
-    <mechanics>
-        <casterConditions>
-            <Item type="gameMechanics.world.ship.elements.PredicateStandingOnBoundShip" />
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.map.instance.astralIsland.PredicateOnAstralIsland" />
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.world.ship.elements.PredicateInInstancedSector" />
-            </Item>
-        </casterConditions>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.SendImpactsToAddressees">
-                <addresseesFinder type="gameMechanics.elements.addresseeFinders.AddresseesCalcerGroupMembers" />
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactsSwitchTarget">
-                        <cases>
-                            <Item>
-                                <predicates>
-                                    <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
-                                </predicates>
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                        <data href="SummoneeInCombat.(ClientData).xdb" />
-                                        <calcers>
-                                            <stringEntries>
-                                                <Item>
-                                                    <name>summonee</name>
-                                                    <calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
-                                                </Item>
-                                            </stringEntries>
-                                        </calcers>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                        <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-                                        <data href="SummonAttemptFailed.(ClientData).xdb" />
-                                    </Item>
-                                </impacts>
-                            </Item>
-                            <Item>
-                                <predicates>
-                                    <Item type="gameMechanics.world.ship.elements.PredicateStandingOnShip" />
-                                </predicates>
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                        <data href="SummoneeOnShip.(ClientData).xdb" />
-                                        <calcers>
-                                            <stringEntries>
-                                                <Item>
-                                                    <name>summonee</name>
-                                                    <calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
-                                                </Item>
-                                            </stringEntries>
-                                        </calcers>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                        <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-                                        <data href="SummonAttempFailed_OnShip.(ClientData).xdb" />
-                                    </Item>
-                                </impacts>
-                            </Item>
-                            <Item>
-                                <predicates>
-                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                        <predicate type="gameMechanics.elements.predicates.PredicateIsAlive" />
-                                    </Item>
-                                </predicates>
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                        <data href="SummoneeOnAlive.(ClientData).xdb" />
-                                        <calcers>
-                                            <stringEntries>
-                                                <Item>
-                                                    <name>summonee</name>
-                                                    <calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
-                                                </Item>
-                                            </stringEntries>
-                                        </calcers>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                        <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-                                        <data href="SummonAttempFailed_OnAlive.(ClientData).xdb" />
-                                    </Item>
-                                </impacts>
-                            </Item>
-                        </cases>
-                        <defaultImpacts>
-                            <Item type="gameMechanics.elements.impacts.ImpactsConditional">
-                                <conditions>
-                                    <Item type="gameMechanics.elements.conditions.CalcersCondition">
-                                        <comparison>CasterGreate</comparison>
-                                        <casterCalcer type="gameMechanics.elements.calcers.CalcerSectorAstralLevel" />
-                                        <targetCalcer type="gameMechanics.elements.calcers.AstralUnlockCalcer" />
-                                    </Item>
-                                </conditions>
-                                <impactsIf>
-                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                        <data href="/Mechanics/GameRoot/ClientData/Astral/AvatarLowLevelData.xdb" />
-                                        <calcers>
-                                            <stringEntries>
-                                                <Item>
-                                                    <name>name</name>
-                                                    <calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
-                                                </Item>
-                                            </stringEntries>
-                                        </calcers>
-                                    </Item>
-                                </impactsIf>
-                                <impactsElse>
-                                    <Item type="gameMechanics.elements.impacts.ImpactStartQuiz">
-                                        <question href="Question.(Question).xdb" />
-                                        <participants type="gameMechanics.elements.addresseeFinders.AddressesCalcerSingle">
-                                            <calcer type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
-                                        </participants>
-                                        <resultsHandler type="gameMechanics.elements.common.SingleResultHandler">
-                                            <impactsOnSuccess>
-                                                <Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
-                                                    <predicates>
-                                                        <Item type="gameMechanics.elements.predicates.PredicateGreaterLong">
-                                                            <lhs type="gameMechanics.elements.calcers.CalcerLongParam">
-                                                                <paramName>choice</paramName>
-                                                            </lhs>
-                                                            <rhs type="gameMechanics.elements.calcers.LongData">
-                                                                <value>0</value>
-                                                            </rhs>
-                                                        </Item>
-                                                    </predicates>
-                                                    <impactsIf>
-                                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                                            <impacts>
-                                                                <Item type="gameMechanics.elements.impacts.ImpactsConditional">
-                                                                    <conditions>
-                                                                        <Item type="gameMechanics.elements.conditions.CalcersCondition">
-                                                                            <comparison>CasterGreate</comparison>
-                                                                            <casterCalcer type="gameMechanics.elements.calcers.CalcerSectorAstralLevel" />
-                                                                            <targetCalcer type="gameMechanics.elements.calcers.AstralUnlockCalcer" />
-                                                                        </Item>
-                                                                    </conditions>
-                                                                    <impactsElse>
-                                                                        <Item type="gameMechanics.elements.impacts.ImpactsConditional">
-                                                                            <conditions>
-                                                                                <Item type="gameMechanics.elements.conditions.PredicatesCondition">
-                                                                                    <casterPredicates>
-                                                                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                                            <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
-                                                                                        </Item>
-                                                                                    </casterPredicates>
-                                                                                    <targetPredicates>
-                                                                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                                            <predicate type="gameMechanics.map.instance.astralIsland.PredicateOnAstralIsland" />
-                                                                                        </Item>
-                                                                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                                            <predicate type="gameMechanics.world.ship.elements.PredicateInInstancedSector" />
-                                                                                        </Item>
-                                                                                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-                                                                                    </targetPredicates>
-                                                                                </Item>
-                                                                            </conditions>
-                                                                            <impactsIf>
-                                                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                                                                    <impacts>
-                                                                                        <Item type="gameMechanics.elements.impacts.ImpactTeleportToCasterTransport">
-                                                                                            <slotName>Slot_Teleport_02</slotName>
-                                                                                        </Item>
-                                                                                    </impacts>
-                                                                                </Item>
-                                                                            </impactsIf>
-                                                                        </Item>
-                                                                    </impactsElse>
-                                                                </Item>
-                                                            </impacts>
-                                                        </Item>
-                                                    </impactsIf>
-                                                    <impactsElse>
-                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                            <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                                            <data href="SummoneeRefused.(ClientData).xdb" />
-                                                            <calcers>
-                                                                <stringEntries>
-                                                                    <Item>
-                                                                        <name>summonee</name>
-                                                                        <calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
-                                                                    </Item>
-                                                                </stringEntries>
-                                                            </calcers>
-                                                        </Item>
-                                                    </impactsElse>
-                                                </Item>
-                                            </impactsOnSuccess>
-                                            <impactsOnFail>
-                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                    <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                                    <data href="SummoneeRefused.(ClientData).xdb" />
-                                                    <calcers>
-                                                        <stringEntries>
-                                                            <Item>
-                                                                <name>summonee</name>
-                                                                <calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
-                                                            </Item>
-                                                        </stringEntries>
-                                                    </calcers>
-                                                </Item>
-                                            </impactsOnFail>
-                                        </resultsHandler>
-                                    </Item>
-                                </impactsElse>
-                            </Item>
-                        </defaultImpacts>
-                    </Item>
-                </impacts>
-                <excludeCaster>true</excludeCaster>
-            </Item>
-        </casterImpacts>
-        <targetImpacts />
-    </mechanics>
-    <isAE>false</isAE>
+	<Header>
+		<resourceId>361930759</resourceId>
+	</Header>
+	<contextActionInfo>
+		<contextName href="TeleportSpellMultipleName.txt" />
+		<contextDescription href="TeleportSpellMultipleDesc.txt" />
+		<contextImage href="/Interface/Icons/Spells/Mage/Gust.(UISingleTexture).xdb" />
+	</contextActionInfo>
+	<Name href="TeleportSpellMultipleName.txt" />
+	<Description href="TeleportSpellMultipleDesc.txt" />
+	<image href="/Interface/Icons/Spells/Mage/Gust.(UISingleTexture).xdb" />
+	<nameTemplate href="TeleportSpellMultipleName.txt" />
+	<descTemplate href="TeleportSpellMultipleDesc.txt" />
+	<range type="gameMechanics.elements.calcers.FloatData">
+		<value>5</value>
+	</range>
+	<prepareDuration>5000</prepareDuration>
+	<immutablePrepareDuration>true</immutablePrepareDuration>
+	<needLos>false</needLos>
+	<targetType>STTSelf</targetType>
+	<iffPolicy>Friends</iffPolicy>
+	<launchWhenReady>true</launchWhenReady>
+	<needInFront>false</needInFront>
+	<mechanics>
+		<casterConditions>
+			<Item type="gameMechanics.world.ship.elements.PredicateStandingOnBoundShip" />
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.map.instance.astralIsland.PredicateOnAstralIsland" />
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.world.ship.elements.PredicateInInstancedSector" />
+			</Item>
+		</casterConditions>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.SendImpactsToAddressees">
+				<addresseesFinder type="gameMechanics.elements.addresseeFinders.AddresseesCalcerGroupMembers" />
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.ImpactsSwitchTarget">
+						<cases>
+							<Item>
+								<predicates>
+									<Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+								</predicates>
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+										<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+										<data href="SummoneeInCombat.(ClientData).xdb" />
+										<calcers>
+											<stringEntries>
+												<Item>
+													<name>summonee</name>
+													<calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
+												</Item>
+											</stringEntries>
+										</calcers>
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+										<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+										<data href="SummonAttemptFailed.(ClientData).xdb" />
+									</Item>
+								</impacts>
+							</Item>
+							<Item>
+								<predicates>
+									<Item type="gameMechanics.world.ship.elements.PredicateStandingOnShip" />
+								</predicates>
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+										<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+										<data href="SummoneeOnShip.(ClientData).xdb" />
+										<calcers>
+											<stringEntries>
+												<Item>
+													<name>summonee</name>
+													<calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
+												</Item>
+											</stringEntries>
+										</calcers>
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+										<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+										<data href="SummonAttempFailed_OnShip.(ClientData).xdb" />
+									</Item>
+								</impacts>
+							</Item>
+							<Item>
+								<predicates>
+									<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+										<predicate type="gameMechanics.elements.predicates.PredicateIsAlive" />
+									</Item>
+								</predicates>
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+										<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+										<data href="SummoneeOnAlive.(ClientData).xdb" />
+										<calcers>
+											<stringEntries>
+												<Item>
+													<name>summonee</name>
+													<calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
+												</Item>
+											</stringEntries>
+										</calcers>
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+										<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+										<data href="SummonAttempFailed_OnAlive.(ClientData).xdb" />
+									</Item>
+								</impacts>
+							</Item>
+						</cases>
+						<defaultImpacts>
+							<Item type="gameMechanics.elements.impacts.ImpactsConditional">
+								<conditions>
+									<Item type="gameMechanics.elements.conditions.CalcersCondition">
+										<comparison>CasterGreate</comparison>
+										<casterCalcer type="gameMechanics.elements.calcers.CalcerSectorAstralLevel" />
+										<targetCalcer type="gameMechanics.elements.calcers.AstralUnlockCalcer" />
+									</Item>
+								</conditions>
+								<impactsIf>
+									<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+										<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+										<data href="/Mechanics/GameRoot/ClientData/Astral/AvatarLowLevelData.xdb" />
+										<calcers>
+											<stringEntries>
+												<Item>
+													<name>name</name>
+													<calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
+												</Item>
+											</stringEntries>
+										</calcers>
+									</Item>
+								</impactsIf>
+								<impactsElse>
+									<Item type="gameMechanics.elements.impacts.ImpactStartQuiz">
+										<question href="Question.(Question).xdb" />
+										<participants type="gameMechanics.elements.addresseeFinders.AddressesCalcerSingle">
+											<calcer type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+										</participants>
+										<resultsHandler type="gameMechanics.elements.common.SingleResultHandler">
+											<impactsOnSuccess>
+												<Item type="gameMechanics.elements.impacts.ImpactIfTargetGeneric">
+													<predicates>
+														<Item type="gameMechanics.elements.predicates.PredicateGreaterLong">
+															<lhs type="gameMechanics.elements.calcers.CalcerLongParam">
+																<paramName>choice</paramName>
+															</lhs>
+															<rhs type="gameMechanics.elements.calcers.LongData">
+																<value>0</value>
+															</rhs>
+														</Item>
+													</predicates>
+													<impactsIf>
+														<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+															<impacts>
+																<Item type="gameMechanics.elements.impacts.ImpactsConditional">
+																	<conditions>
+																		<Item type="gameMechanics.elements.conditions.CalcersCondition">
+																			<comparison>CasterGreate</comparison>
+																			<casterCalcer type="gameMechanics.elements.calcers.CalcerSectorAstralLevel" />
+																			<targetCalcer type="gameMechanics.elements.calcers.AstralUnlockCalcer" />
+																		</Item>
+																	</conditions>
+																	<impactsElse>
+																		<Item type="gameMechanics.elements.impacts.ImpactsConditional">
+																			<conditions>
+																				<Item type="gameMechanics.elements.conditions.PredicatesCondition">
+																					<casterPredicates>
+																						<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																							<predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+																						</Item>
+																					</casterPredicates>
+																					<targetPredicates>
+																						<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																							<predicate type="gameMechanics.map.instance.astralIsland.PredicateOnAstralIsland" />
+																						</Item>
+																						<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																							<predicate type="gameMechanics.world.ship.elements.PredicateInInstancedSector" />
+																						</Item>
+																						<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+																					</targetPredicates>
+																				</Item>
+																			</conditions>
+																			<impactsIf>
+																				<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+																					<impacts>
+																						<Item type="gameMechanics.elements.impacts.ImpactTeleportToCasterTransport">
+																							<slotName>Slot_Teleport_02</slotName>
+																						</Item>
+																					</impacts>
+																				</Item>
+																			</impactsIf>
+																		</Item>
+																	</impactsElse>
+																</Item>
+															</impacts>
+														</Item>
+													</impactsIf>
+													<impactsElse>
+														<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+															<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+															<data href="SummoneeRefused.(ClientData).xdb" />
+															<calcers>
+																<stringEntries>
+																	<Item>
+																		<name>summonee</name>
+																		<calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
+																	</Item>
+																</stringEntries>
+															</calcers>
+														</Item>
+													</impactsElse>
+												</Item>
+											</impactsOnSuccess>
+											<impactsOnFail>
+												<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+													<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+													<data href="SummoneeRefused.(ClientData).xdb" />
+													<calcers>
+														<stringEntries>
+															<Item>
+																<name>summonee</name>
+																<calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
+															</Item>
+														</stringEntries>
+													</calcers>
+												</Item>
+											</impactsOnFail>
+										</resultsHandler>
+									</Item>
+								</impactsElse>
+							</Item>
+						</defaultImpacts>
+					</Item>
+				</impacts>
+				<excludeCaster>true</excludeCaster>
+			</Item>
+		</casterImpacts>
+		<targetImpacts />
+	</mechanics>
+	<isAE>false</isAE>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

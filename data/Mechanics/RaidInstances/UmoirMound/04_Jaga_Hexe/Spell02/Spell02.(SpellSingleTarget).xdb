@@ -1,232 +1,232 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>739870102</resourceId>
-    </Header>
-    <Name href="Spell02.(SpellSingleTarget).Name.txt" />
-    <visualScripts href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/Spell05/Debuff_AOE.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
-    <range type="gameMechanics.elements.calcers.FloatData">
-        <value>85</value>
-    </range>
-    <prepareDuration>5000</prepareDuration>
-    <iffPolicy>Enemies</iffPolicy>
-    <mechanics>
-        <cooldown>
-            <duration>63000</duration>
-        </cooldown>
-        <casterConditions>
-            <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
-                <buff href="Jaga_BallsLimit.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                <range>
-                    <max>5</max>
-                </range>
-            </Item>
-        </casterConditions>
-        <targetConditions>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="BallHitRecently_Red.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                </predicate>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="RedBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                </predicate>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="BallHitRecently_Green.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                </predicate>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                </predicate>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="BallHitRecently_Blue.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                </predicate>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="BlueBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                </predicate>
-            </Item>
-            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-        </targetConditions>
-        <casterImpacts>
-            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                <buff href="Jaga_BallsLimit.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-            </Item>
-        </casterImpacts>
-        <targetImpacts>
-            <Item type="gameMechanics.elements.impacts.RandomConditionalImpact">
-                <entries>
-                    <Item>
-                        <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
-                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                <buff href="Jaga_CastRed.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            </predicate>
-                        </predicate>
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="Jaga_CastRed.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                        <stacks type="gameMechanics.elements.calcers.FloatData">
-                                            <value>2</value>
-                                        </stacks>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.StackBuff">
-                                        <buff href="Jaga_CastGreen.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                        <delta type="gameMechanics.elements.calcers.FloatData">
-                                            <value>-1</value>
-                                        </delta>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.StackBuff">
-                                        <buff href="Jaga_CastBlue.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                        <delta type="gameMechanics.elements.calcers.FloatData">
-                                            <value>-1</value>
-                                        </delta>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="RedBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </Item>
-                                </impacts>
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
-                                <data href="RedSpark.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                <calcers>
-                                    <addressEntries>
-                                        <Item>
-                                            <name>caster</name>
-                                            <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
-                                        </Item>
-                                        <Item>
-                                            <name>target</name>
-                                            <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
-                                        </Item>
-                                    </addressEntries>
-                                </calcers>
-                            </Item>
-                        </impacts>
-                    </Item>
-                    <Item>
-                        <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
-                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                <buff href="Jaga_CastGreen.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            </predicate>
-                        </predicate>
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="Jaga_CastGreen.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                        <stacks type="gameMechanics.elements.calcers.FloatData">
-                                            <value>2</value>
-                                        </stacks>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.StackBuff">
-                                        <buff href="Jaga_CastRed.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                        <delta type="gameMechanics.elements.calcers.FloatData">
-                                            <value>-1</value>
-                                        </delta>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.StackBuff">
-                                        <buff href="Jaga_CastBlue.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                        <delta type="gameMechanics.elements.calcers.FloatData">
-                                            <value>-1</value>
-                                        </delta>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </Item>
-                                </impacts>
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
-                                <data href="GreenSpark.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                <calcers>
-                                    <addressEntries>
-                                        <Item>
-                                            <name>caster</name>
-                                            <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
-                                        </Item>
-                                        <Item>
-                                            <name>target</name>
-                                            <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
-                                        </Item>
-                                    </addressEntries>
-                                </calcers>
-                            </Item>
-                        </impacts>
-                    </Item>
-                    <Item>
-                        <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
-                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                <buff href="Jaga_CastBlue.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            </predicate>
-                        </predicate>
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="Jaga_CastBlue.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                        <stacks type="gameMechanics.elements.calcers.FloatData">
-                                            <value>2</value>
-                                        </stacks>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.StackBuff">
-                                        <buff href="Jaga_CastRed.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                        <delta type="gameMechanics.elements.calcers.FloatData">
-                                            <value>-1</value>
-                                        </delta>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.StackBuff">
-                                        <buff href="Jaga_CastGreen.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                        <delta type="gameMechanics.elements.calcers.FloatData">
-                                            <value>-1</value>
-                                        </delta>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="BlueBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </Item>
-                                </impacts>
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
-                                <data href="BlueSpark.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                <calcers>
-                                    <addressEntries>
-                                        <Item>
-                                            <name>caster</name>
-                                            <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
-                                        </Item>
-                                        <Item>
-                                            <name>target</name>
-                                            <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
-                                        </Item>
-                                    </addressEntries>
-                                </calcers>
-                            </Item>
-                        </impacts>
-                    </Item>
-                </entries>
-            </Item>
-        </targetImpacts>
-    </mechanics>
+	<Header>
+		<resourceId>739870102</resourceId>
+	</Header>
+	<Name href="Spell02.(SpellSingleTarget).Name.txt" />
+	<visualScripts href="/Mechanics/RaidInstances/UmoirMound/04_Jaga_Hexe/Spell05/Debuff_AOE.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+	<range type="gameMechanics.elements.calcers.FloatData">
+		<value>85</value>
+	</range>
+	<prepareDuration>5000</prepareDuration>
+	<iffPolicy>Enemies</iffPolicy>
+	<mechanics>
+		<cooldown>
+			<duration>63000</duration>
+		</cooldown>
+		<casterConditions>
+			<Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+				<buff href="Jaga_BallsLimit.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				<range>
+					<max>5</max>
+				</range>
+			</Item>
+		</casterConditions>
+		<targetConditions>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="BallHitRecently_Red.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</predicate>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="RedBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</predicate>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="BallHitRecently_Green.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</predicate>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</predicate>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="BallHitRecently_Blue.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</predicate>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="BlueBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</predicate>
+			</Item>
+			<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+		</targetConditions>
+		<casterImpacts>
+			<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+				<buff href="Jaga_BallsLimit.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+			</Item>
+		</casterImpacts>
+		<targetImpacts>
+			<Item type="gameMechanics.elements.impacts.RandomConditionalImpact">
+				<entries>
+					<Item>
+						<predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+							<predicate type="gameMechanics.elements.resources.ResourceBuff">
+								<buff href="Jaga_CastRed.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							</predicate>
+						</predicate>
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.ReturningImpact">
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="Jaga_CastRed.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+										<stacks type="gameMechanics.elements.calcers.FloatData">
+											<value>2</value>
+										</stacks>
+									</Item>
+									<Item type="gameMechanics.elements.impacts.StackBuff">
+										<buff href="Jaga_CastGreen.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+										<delta type="gameMechanics.elements.calcers.FloatData">
+											<value>-1</value>
+										</delta>
+									</Item>
+									<Item type="gameMechanics.elements.impacts.StackBuff">
+										<buff href="Jaga_CastBlue.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+										<delta type="gameMechanics.elements.calcers.FloatData">
+											<value>-1</value>
+										</delta>
+									</Item>
+								</impacts>
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="RedBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+								</impacts>
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+								<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+								<data href="RedSpark.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+								<calcers>
+									<addressEntries>
+										<Item>
+											<name>caster</name>
+											<finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+										</Item>
+										<Item>
+											<name>target</name>
+											<finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+										</Item>
+									</addressEntries>
+								</calcers>
+							</Item>
+						</impacts>
+					</Item>
+					<Item>
+						<predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+							<predicate type="gameMechanics.elements.resources.ResourceBuff">
+								<buff href="Jaga_CastGreen.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							</predicate>
+						</predicate>
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.ReturningImpact">
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="Jaga_CastGreen.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+										<stacks type="gameMechanics.elements.calcers.FloatData">
+											<value>2</value>
+										</stacks>
+									</Item>
+									<Item type="gameMechanics.elements.impacts.StackBuff">
+										<buff href="Jaga_CastRed.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+										<delta type="gameMechanics.elements.calcers.FloatData">
+											<value>-1</value>
+										</delta>
+									</Item>
+									<Item type="gameMechanics.elements.impacts.StackBuff">
+										<buff href="Jaga_CastBlue.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+										<delta type="gameMechanics.elements.calcers.FloatData">
+											<value>-1</value>
+										</delta>
+									</Item>
+								</impacts>
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="GreenBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+								</impacts>
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+								<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+								<data href="GreenSpark.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+								<calcers>
+									<addressEntries>
+										<Item>
+											<name>caster</name>
+											<finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+										</Item>
+										<Item>
+											<name>target</name>
+											<finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+										</Item>
+									</addressEntries>
+								</calcers>
+							</Item>
+						</impacts>
+					</Item>
+					<Item>
+						<predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+							<predicate type="gameMechanics.elements.resources.ResourceBuff">
+								<buff href="Jaga_CastBlue.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							</predicate>
+						</predicate>
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.ReturningImpact">
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="Jaga_CastBlue.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+										<stacks type="gameMechanics.elements.calcers.FloatData">
+											<value>2</value>
+										</stacks>
+									</Item>
+									<Item type="gameMechanics.elements.impacts.StackBuff">
+										<buff href="Jaga_CastRed.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+										<delta type="gameMechanics.elements.calcers.FloatData">
+											<value>-1</value>
+										</delta>
+									</Item>
+									<Item type="gameMechanics.elements.impacts.StackBuff">
+										<buff href="Jaga_CastGreen.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+										<delta type="gameMechanics.elements.calcers.FloatData">
+											<value>-1</value>
+										</delta>
+									</Item>
+								</impacts>
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="BlueBallInside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+								</impacts>
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+								<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+								<data href="BlueSpark.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+								<calcers>
+									<addressEntries>
+										<Item>
+											<name>caster</name>
+											<finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+										</Item>
+										<Item>
+											<name>target</name>
+											<finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+										</Item>
+									</addressEntries>
+								</calcers>
+							</Item>
+						</impacts>
+					</Item>
+				</entries>
+			</Item>
+		</targetImpacts>
+	</mechanics>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

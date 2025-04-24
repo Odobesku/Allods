@@ -1,204 +1,204 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>739881152</resourceId>
-    </Header>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
-        <Item href="/Mechanics/Spells/Groups/MassTeleport.(ActionGroup).xdb" />
-    </groups>
-    <element>ASTRAL</element>
-    <Name href="Recoll.(SpellSingleTarget).Name.txt" />
-    <Description href="Recoll.(SpellSingleTarget).Description.txt" />
-    <image href="/Interface/Icons/Spells/ChampionsSpells/ChampionsBanner.(UISingleTexture).xdb" />
-    <visualScripts href="/Spells/VisScripts/Other/Recoll.(SpellVisScripts).xdb" />
-    <uiSpellBookPageType>SPELLBOOK_PAGE_OTHER</uiSpellBookPageType>
-    <prepareDuration>10000</prepareDuration>
-    <needLos>false</needLos>
-    <targetType>STTSelf</targetType>
-    <isAggro>false</isAggro>
-    <replaceLowRanks>false</replaceLowRanks>
-    <iffPolicy>Friends</iffPolicy>
-    <needInFront>false</needInFront>
-    <mechanics>
-        <cooldown>
-            <duration>600000</duration>
-        </cooldown>
-        <casterConditions>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="avatarPopulation.service.impl.matchMakingImpl.map.PredicateInstancedEventMember" />
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.map.instance.astralIsland.PredicateOnAstralIsland" />
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
-                <predicates>
-                    <Item type="gameMechanics.elements.predicates.PredicateInRaid" />
-                    <Item type="gameMechanics.elements.predicates.PredicateInGroup" />
-                </predicates>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.world.ship.elements.PredicateInAstralHub" />
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.predicates.PredicateInZone">
-                    <zone href="/Maps/ZoneContested5/Zones/ZoneContested5/ZoneContested5.(ZoneResource).xdb" />
-                </predicate>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.predicates.PredicateInZone">
-                    <zone href="/Maps/Inst_HeroesArena/Zones/HeroesArena/HeroesArena.(ZoneResource).xdb" />
-                </predicate>
-            </Item>
-        </casterConditions>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactIsolator">
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactsToUnionMembers">
-                        <affectPets>false</affectPets>
-                        <excludeCaster>true</excludeCaster>
-                        <skipSameMapCheck>true</skipSameMapCheck>
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                        <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
-                                    </Item>
-                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                        <predicate type="avatarPopulation.service.impl.matchMakingImpl.map.PredicateInstancedEventMember" />
-                                    </Item>
-                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                        <predicate type="gameMechanics.map.instance.astralIsland.PredicateOnAstralIsland" />
-                                    </Item>
-                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                        <predicate type="gameMechanics.world.ship.elements.PredicateInAstralHub" />
-                                    </Item>
-                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                            <buff href="/World/Quests/ZoneContested4/Event_L_HorseRiding/Riding.(BuffResource).xdb" />
-                                        </predicate>
-                                    </Item>
-                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                            <buff href="/World/Quests/ZoneContested4/Event_E_HorseRiding/Riding.(BuffResource).xdb" />
-                                        </predicate>
-                                    </Item>
-                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                            <buff href="/World/Quests/ArchipelagoContested8/AC8_Event_Riding/AC8_Riding.(BuffResource).xdb" />
-                                        </predicate>
-                                    </Item>
-                                </predicates>
-                                <impactsIf>
-                                    <Item type="gameMechanics.elements.impacts.ImpactStartQuiz">
-                                        <question href="Quiz.(Question).xdb" />
-                                        <participants type="gameMechanics.elements.addresseeFinders.AddressesCalcerSingle">
-                                            <calcer type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
-                                        </participants>
-                                        <resultsHandler type="gameMechanics.elements.common.SingleResultHandler">
-                                            <impactsOnSuccess>
-                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                    <predicates>
-                                                        <Item type="gameMechanics.elements.predicates.PredicateGreaterLong">
-                                                            <lhs type="gameMechanics.elements.calcers.CalcerLongParam">
-                                                                <paramName>choice</paramName>
-                                                            </lhs>
-                                                            <rhs type="gameMechanics.elements.calcers.LongData">
-                                                                <value>0</value>
-                                                            </rhs>
-                                                        </Item>
-                                                    </predicates>
-                                                    <impactsIf>
-                                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                            <predicates>
-                                                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                        <buff href="/World/Quests/ArchipelagoContested8/AC8_Event_Riding/AC8_Riding.(BuffResource).xdb" />
-                                                                    </predicate>
-                                                                </Item>
-                                                                <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-                                                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                    <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
-                                                                </Item>
-                                                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                    <predicate type="avatarPopulation.service.impl.matchMakingImpl.map.PredicateInstancedEventMember" />
-                                                                </Item>
-                                                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                    <predicate type="gameMechanics.map.instance.astralIsland.PredicateOnAstralIsland" />
-                                                                </Item>
-                                                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                    <predicate type="gameMechanics.world.ship.elements.PredicateInAstralHub" />
-                                                                </Item>
-                                                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                        <buff href="/World/Quests/ZoneContested4/Event_L_HorseRiding/Riding.(BuffResource).xdb" />
-                                                                    </predicate>
-                                                                </Item>
-                                                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                        <buff href="/World/Quests/ZoneContested4/Event_E_HorseRiding/Riding.(BuffResource).xdb" />
-                                                                    </predicate>
-                                                                </Item>
-                                                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                        <buff href="/World/Quests/ArchipelagoContested8/AC8_Event_Riding/AC8_Riding.(BuffResource).xdb" />
-                                                                    </predicate>
-                                                                </Item>
-                                                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                    <predicate type="gameMechanics.elements.predicates.PredicateInZone">
-                                                                        <zone href="/Maps/ZoneContested5/Zones/ZoneContested5/ZoneContested5.(ZoneResource).xdb" />
-                                                                    </predicate>
-                                                                </Item>
-                                                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                        <buff href="/World/Quests/ZoneContested4/Event_E_HorseRiding/start.(BuffResource).xdb" />
-                                                                    </predicate>
-                                                                </Item>
-                                                            </predicates>
-                                                            <impactsIf>
-                                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                                    <predicates>
-                                                                        <Item type="gameMechanics.elements.predicates.PredicateCreatureLevel">
-                                                                            <minLevel type="gameMechanics.formulas.MaxLevelConstant" />
-                                                                        </Item>
-                                                                    </predicates>
-                                                                    <impactsIf>
-                                                                        <Item type="gameMechanics.elements.impacts.ImpactTeleport">
-                                                                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
-                                                                        </Item>
-                                                                    </impactsIf>
-                                                                    <impactsElse>
-                                                                        <Item type="gameMechanics.elements.impacts.ImpactClientData">
-                                                                            <data href="RecollFail.(ClientData).xdb" />
-                                                                        </Item>
-                                                                    </impactsElse>
-                                                                </Item>
-                                                            </impactsIf>
-                                                            <impactsElse>
-                                                                <Item type="gameMechanics.elements.impacts.ImpactClientData">
-                                                                    <data href="RecollFail.(ClientData).xdb" />
-                                                                </Item>
-                                                            </impactsElse>
-                                                        </Item>
-                                                    </impactsIf>
-                                                </Item>
-                                            </impactsOnSuccess>
-                                        </resultsHandler>
-                                        <timeout>
-                                            <second>30</second>
-                                        </timeout>
-                                    </Item>
-                                </impactsIf>
-                            </Item>
-                        </impacts>
-                    </Item>
-                </impacts>
-            </Item>
-        </casterImpacts>
-    </mechanics>
+	<Header>
+		<resourceId>739881152</resourceId>
+	</Header>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
+		<Item href="/Mechanics/Spells/Groups/MassTeleport.(ActionGroup).xdb" />
+	</groups>
+	<element>ASTRAL</element>
+	<Name href="Recoll.(SpellSingleTarget).Name.txt" />
+	<Description href="Recoll.(SpellSingleTarget).Description.txt" />
+	<image href="/Interface/Icons/Spells/ChampionsSpells/ChampionsBanner.(UISingleTexture).xdb" />
+	<visualScripts href="/Spells/VisScripts/Other/Recoll.(SpellVisScripts).xdb" />
+	<uiSpellBookPageType>SPELLBOOK_PAGE_OTHER</uiSpellBookPageType>
+	<prepareDuration>10000</prepareDuration>
+	<needLos>false</needLos>
+	<targetType>STTSelf</targetType>
+	<isAggro>false</isAggro>
+	<replaceLowRanks>false</replaceLowRanks>
+	<iffPolicy>Friends</iffPolicy>
+	<needInFront>false</needInFront>
+	<mechanics>
+		<cooldown>
+			<duration>600000</duration>
+		</cooldown>
+		<casterConditions>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="avatarPopulation.service.impl.matchMakingImpl.map.PredicateInstancedEventMember" />
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.map.instance.astralIsland.PredicateOnAstralIsland" />
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+				<predicates>
+					<Item type="gameMechanics.elements.predicates.PredicateInRaid" />
+					<Item type="gameMechanics.elements.predicates.PredicateInGroup" />
+				</predicates>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.world.ship.elements.PredicateInAstralHub" />
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.predicates.PredicateInZone">
+					<zone href="/Maps/ZoneContested5/Zones/ZoneContested5/ZoneContested5.(ZoneResource).xdb" />
+				</predicate>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.predicates.PredicateInZone">
+					<zone href="/Maps/Inst_HeroesArena/Zones/HeroesArena/HeroesArena.(ZoneResource).xdb" />
+				</predicate>
+			</Item>
+		</casterConditions>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactIsolator">
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.ImpactsToUnionMembers">
+						<affectPets>false</affectPets>
+						<excludeCaster>true</excludeCaster>
+						<skipSameMapCheck>true</skipSameMapCheck>
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+								<predicates>
+									<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+									<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+										<predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+									</Item>
+									<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+										<predicate type="avatarPopulation.service.impl.matchMakingImpl.map.PredicateInstancedEventMember" />
+									</Item>
+									<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+										<predicate type="gameMechanics.map.instance.astralIsland.PredicateOnAstralIsland" />
+									</Item>
+									<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+										<predicate type="gameMechanics.world.ship.elements.PredicateInAstralHub" />
+									</Item>
+									<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+										<predicate type="gameMechanics.elements.resources.ResourceBuff">
+											<buff href="/World/Quests/ZoneContested4/Event_L_HorseRiding/Riding.(BuffResource).xdb" />
+										</predicate>
+									</Item>
+									<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+										<predicate type="gameMechanics.elements.resources.ResourceBuff">
+											<buff href="/World/Quests/ZoneContested4/Event_E_HorseRiding/Riding.(BuffResource).xdb" />
+										</predicate>
+									</Item>
+									<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+										<predicate type="gameMechanics.elements.resources.ResourceBuff">
+											<buff href="/World/Quests/ArchipelagoContested8/AC8_Event_Riding/AC8_Riding.(BuffResource).xdb" />
+										</predicate>
+									</Item>
+								</predicates>
+								<impactsIf>
+									<Item type="gameMechanics.elements.impacts.ImpactStartQuiz">
+										<question href="Quiz.(Question).xdb" />
+										<participants type="gameMechanics.elements.addresseeFinders.AddressesCalcerSingle">
+											<calcer type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+										</participants>
+										<resultsHandler type="gameMechanics.elements.common.SingleResultHandler">
+											<impactsOnSuccess>
+												<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+													<predicates>
+														<Item type="gameMechanics.elements.predicates.PredicateGreaterLong">
+															<lhs type="gameMechanics.elements.calcers.CalcerLongParam">
+																<paramName>choice</paramName>
+															</lhs>
+															<rhs type="gameMechanics.elements.calcers.LongData">
+																<value>0</value>
+															</rhs>
+														</Item>
+													</predicates>
+													<impactsIf>
+														<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+															<predicates>
+																<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																	<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																		<buff href="/World/Quests/ArchipelagoContested8/AC8_Event_Riding/AC8_Riding.(BuffResource).xdb" />
+																	</predicate>
+																</Item>
+																<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+																<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																	<predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+																</Item>
+																<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																	<predicate type="avatarPopulation.service.impl.matchMakingImpl.map.PredicateInstancedEventMember" />
+																</Item>
+																<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																	<predicate type="gameMechanics.map.instance.astralIsland.PredicateOnAstralIsland" />
+																</Item>
+																<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																	<predicate type="gameMechanics.world.ship.elements.PredicateInAstralHub" />
+																</Item>
+																<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																	<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																		<buff href="/World/Quests/ZoneContested4/Event_L_HorseRiding/Riding.(BuffResource).xdb" />
+																	</predicate>
+																</Item>
+																<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																	<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																		<buff href="/World/Quests/ZoneContested4/Event_E_HorseRiding/Riding.(BuffResource).xdb" />
+																	</predicate>
+																</Item>
+																<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																	<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																		<buff href="/World/Quests/ArchipelagoContested8/AC8_Event_Riding/AC8_Riding.(BuffResource).xdb" />
+																	</predicate>
+																</Item>
+																<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																	<predicate type="gameMechanics.elements.predicates.PredicateInZone">
+																		<zone href="/Maps/ZoneContested5/Zones/ZoneContested5/ZoneContested5.(ZoneResource).xdb" />
+																	</predicate>
+																</Item>
+																<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																	<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																		<buff href="/World/Quests/ZoneContested4/Event_E_HorseRiding/start.(BuffResource).xdb" />
+																	</predicate>
+																</Item>
+															</predicates>
+															<impactsIf>
+																<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+																	<predicates>
+																		<Item type="gameMechanics.elements.predicates.PredicateCreatureLevel">
+																			<minLevel type="gameMechanics.formulas.MaxLevelConstant" />
+																		</Item>
+																	</predicates>
+																	<impactsIf>
+																		<Item type="gameMechanics.elements.impacts.ImpactTeleport">
+																			<destination type="gameMechanics.map.destination.SelfPosDestination" />
+																		</Item>
+																	</impactsIf>
+																	<impactsElse>
+																		<Item type="gameMechanics.elements.impacts.ImpactClientData">
+																			<data href="RecollFail.(ClientData).xdb" />
+																		</Item>
+																	</impactsElse>
+																</Item>
+															</impactsIf>
+															<impactsElse>
+																<Item type="gameMechanics.elements.impacts.ImpactClientData">
+																	<data href="RecollFail.(ClientData).xdb" />
+																</Item>
+															</impactsElse>
+														</Item>
+													</impactsIf>
+												</Item>
+											</impactsOnSuccess>
+										</resultsHandler>
+										<timeout>
+											<second>30</second>
+										</timeout>
+									</Item>
+								</impactsIf>
+							</Item>
+						</impacts>
+					</Item>
+				</impacts>
+			</Item>
+		</casterImpacts>
+	</mechanics>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

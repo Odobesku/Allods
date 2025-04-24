@@ -1,173 +1,173 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>739952937</resourceId>
-    </Header>
-    <element>SHADOW</element>
-    <Name href="RD_Architector_Boss5_MegaAE.(SpellSingleTarget).Name.txt" />
-    <visualScripts href="RD_Architector_Boss5_MegaAE.(SpellVisScripts).xdb" />
-    <prepareDuration>3000</prepareDuration>
-    <targetType>STTSelf</targetType>
-    <iffPolicy>Friends</iffPolicy>
-    <mechanics>
-        <cooldown>
-            <duration>40000</duration>
-        </cooldown>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
-                <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
-                    <range min="0" max="60" />
-                    <withinRange>true</withinRange>
-                    <minCandidatesCount>0</minCandidatesCount>
-                    <targetCount>0</targetCount>
-                </selector>
-                <filter type="gameMechanics.world.creature.AvatarFilter" />
-                <impacts>
-                    <Item>
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.predicates.PredicateHealthHigher">
-                                        <level>0.1</level>
-                                    </Item>
-                                </predicates>
-                                <impactsIf>
-                                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
-                                        <element>SHADOW</element>
-                                        <damage>1</damage>
-                                        <impactsOnHitTarget>
-                                            <Item type="gameMechanics.elements.impacts.ImpactBaseHealth">
-                                                <healthMultiplier>0.1</healthMultiplier>
-                                            </Item>
-                                        </impactsOnHitTarget>
-                                        <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-                                            <scalers>
-                                                <Item type="gameMechanics.elements.scalers.MagicScaler" />
-                                                <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                    <mulCalcer type="constructor.elements.CalcerFloatExternal">
-                                                        <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/InescapableDamage_1_5second_Boss.(CalcerFloatResource).xdb" />
-                                                    </mulCalcer>
-                                                </Item>
-                                            </scalers>
-                                        </scaler>
-                                    </Item>
-                                </impactsIf>
-                                <impactsElse>
-                                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
-                                        <element>SHADOW</element>
-                                        <damage>1</damage>
-                                        <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-                                            <scalers>
-                                                <Item type="gameMechanics.elements.scalers.MagicScaler" />
-                                                <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                    <mulCalcer type="constructor.elements.CalcerFloatExternal">
-                                                        <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/InescapableDamage_1_5second_Boss.(CalcerFloatResource).xdb" />
-                                                    </mulCalcer>
-                                                </Item>
-                                            </scalers>
-                                        </scaler>
-                                    </Item>
-                                </impactsElse>
-                            </Item>
-                        </impacts>
-                    </Item>
-                </impacts>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.RepeatedImpact">
-                        <impact type="gameMechanics.elements.impacts.ImpactInstantiating">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-                                    <projectileData>
-                                        <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
-                                            <destination type="gameMechanics.map.destination.DestinationModified">
-                                                <destination type="gameMechanics.map.destination.RelativePos" />
-                                                <modifiers>
-                                                    <Item type="gameMechanics.map.destination.modifier.ModifierTrail">
-                                                        <modifier type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
-                                                            <radius type="gameMechanics.elements.calcers.FloatData">
-                                                                <value>15</value>
-                                                            </radius>
-                                                        </modifier>
-                                                    </Item>
-                                                </modifiers>
-                                            </destination>
-                                        </moveType>
-                                        <resource href="/Mechanics/Spells/Rifts/Abilities/HealingSphere.(ProjectileResource).xdb" />
-                                    </projectileData>
-                                    <pool href="/Mechanics/Spells/Rifts/Abilities/HealingSpheres.(SummonPool).xdb" />
-                                </Item>
-                            </impacts>
-                        </impact>
-                        <count type="gameMechanics.elements.calcers.FloatData">
-                            <value>3</value>
-                        </count>
-                    </Item>
-                </impacts>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                <impacts>
-                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                        <buff href="/Mechanics/Spells/Rifts/Abilities/StopBuff.(BuffResource).xdb" />
-                    </Item>
-                </impacts>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
-                <pool href="/Mechanics/Spells/Rifts/Abilities/RD_BossSummonPool.(SummonPool).xdb" />
-                <isPersonalPool>true</isPersonalPool>
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                        <predicates>
-                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                                <mobs>
-                                    <Item href="/Mechanics/Spells/Rifts/RiftRandomMobs/Mobs/RD_Architector_Boss1/RD_Architector_Boss1_AddMelee.(MobWorld).xdb" />
-                                    <Item href="/Mechanics/Spells/Rifts/RiftRandomMobs/Mobs/RD_Architector_Boss1/RD_Architector_Boss1_AddRanged.(MobWorld).xdb" />
-                                </mobs>
-                            </Item>
-                        </predicates>
-                        <impactsIf>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="/Mechanics/Spells/CommonBuffs/Stun/BuffStun.xdb" />
-                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                    <multiplier>6</multiplier>
-                                </durationScaler>
-                            </Item>
-                        </impactsIf>
-                    </Item>
-                </impacts>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                <radius>40</radius>
-                <affectGroup>All</affectGroup>
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                        <predicates>
-                            <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
-                        </predicates>
-                        <impactsIf>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="/Mechanics/Spells/CommonBuffs/Stun/BuffStun.xdb" />
-                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                    <multiplier>6</multiplier>
-                                </durationScaler>
-                            </Item>
-                        </impactsIf>
-                    </Item>
-                </impacts>
-                <filter type="gameMechanics.constructor.basicElements.FilterAnd">
-                    <filters>
-                        <Item type="gameMechanics.world.creature.MobFilter" />
-                        <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
-                            <predicates>
-                                <Item type="gameMechanics.elements.predicates.PredicateFaction">
-                                    <faction href="/World/Factions/Wild.xdb" />
-                                </Item>
-                            </predicates>
-                        </Item>
-                    </filters>
-                </filter>
-            </Item>
-        </casterImpacts>
-    </mechanics>
+	<Header>
+		<resourceId>739952937</resourceId>
+	</Header>
+	<element>SHADOW</element>
+	<Name href="RD_Architector_Boss5_MegaAE.(SpellSingleTarget).Name.txt" />
+	<visualScripts href="RD_Architector_Boss5_MegaAE.(SpellVisScripts).xdb" />
+	<prepareDuration>3000</prepareDuration>
+	<targetType>STTSelf</targetType>
+	<iffPolicy>Friends</iffPolicy>
+	<mechanics>
+		<cooldown>
+			<duration>40000</duration>
+		</cooldown>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+				<selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+					<range min="0" max="60" />
+					<withinRange>true</withinRange>
+					<minCandidatesCount>0</minCandidatesCount>
+					<targetCount>0</targetCount>
+				</selector>
+				<filter type="gameMechanics.world.creature.AvatarFilter" />
+				<impacts>
+					<Item>
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+								<predicates>
+									<Item type="gameMechanics.elements.predicates.PredicateHealthHigher">
+										<level>0.1</level>
+									</Item>
+								</predicates>
+								<impactsIf>
+									<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+										<element>SHADOW</element>
+										<damage>1</damage>
+										<impactsOnHitTarget>
+											<Item type="gameMechanics.elements.impacts.ImpactBaseHealth">
+												<healthMultiplier>0.1</healthMultiplier>
+											</Item>
+										</impactsOnHitTarget>
+										<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+											<scalers>
+												<Item type="gameMechanics.elements.scalers.MagicScaler" />
+												<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+													<mulCalcer type="constructor.elements.CalcerFloatExternal">
+														<externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/InescapableDamage_1_5second_Boss.(CalcerFloatResource).xdb" />
+													</mulCalcer>
+												</Item>
+											</scalers>
+										</scaler>
+									</Item>
+								</impactsIf>
+								<impactsElse>
+									<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+										<element>SHADOW</element>
+										<damage>1</damage>
+										<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+											<scalers>
+												<Item type="gameMechanics.elements.scalers.MagicScaler" />
+												<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+													<mulCalcer type="constructor.elements.CalcerFloatExternal">
+														<externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/InescapableDamage_1_5second_Boss.(CalcerFloatResource).xdb" />
+													</mulCalcer>
+												</Item>
+											</scalers>
+										</scaler>
+									</Item>
+								</impactsElse>
+							</Item>
+						</impacts>
+					</Item>
+				</impacts>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.RepeatedImpact">
+						<impact type="gameMechanics.elements.impacts.ImpactInstantiating">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+									<projectileData>
+										<moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+											<destination type="gameMechanics.map.destination.DestinationModified">
+												<destination type="gameMechanics.map.destination.RelativePos" />
+												<modifiers>
+													<Item type="gameMechanics.map.destination.modifier.ModifierTrail">
+														<modifier type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
+															<radius type="gameMechanics.elements.calcers.FloatData">
+																<value>15</value>
+															</radius>
+														</modifier>
+													</Item>
+												</modifiers>
+											</destination>
+										</moveType>
+										<resource href="/Mechanics/Spells/Rifts/Abilities/HealingSphere.(ProjectileResource).xdb" />
+									</projectileData>
+									<pool href="/Mechanics/Spells/Rifts/Abilities/HealingSpheres.(SummonPool).xdb" />
+								</Item>
+							</impacts>
+						</impact>
+						<count type="gameMechanics.elements.calcers.FloatData">
+							<value>3</value>
+						</count>
+					</Item>
+				</impacts>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+				<impacts>
+					<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+						<buff href="/Mechanics/Spells/Rifts/Abilities/StopBuff.(BuffResource).xdb" />
+					</Item>
+				</impacts>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+				<pool href="/Mechanics/Spells/Rifts/Abilities/RD_BossSummonPool.(SummonPool).xdb" />
+				<isPersonalPool>true</isPersonalPool>
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+								<mobs>
+									<Item href="/Mechanics/Spells/Rifts/RiftRandomMobs/Mobs/RD_Architector_Boss1/RD_Architector_Boss1_AddMelee.(MobWorld).xdb" />
+									<Item href="/Mechanics/Spells/Rifts/RiftRandomMobs/Mobs/RD_Architector_Boss1/RD_Architector_Boss1_AddRanged.(MobWorld).xdb" />
+								</mobs>
+							</Item>
+						</predicates>
+						<impactsIf>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="/Mechanics/Spells/CommonBuffs/Stun/BuffStun.xdb" />
+								<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+									<multiplier>6</multiplier>
+								</durationScaler>
+							</Item>
+						</impactsIf>
+					</Item>
+				</impacts>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+				<radius>40</radius>
+				<affectGroup>All</affectGroup>
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+						</predicates>
+						<impactsIf>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="/Mechanics/Spells/CommonBuffs/Stun/BuffStun.xdb" />
+								<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+									<multiplier>6</multiplier>
+								</durationScaler>
+							</Item>
+						</impactsIf>
+					</Item>
+				</impacts>
+				<filter type="gameMechanics.constructor.basicElements.FilterAnd">
+					<filters>
+						<Item type="gameMechanics.world.creature.MobFilter" />
+						<Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+							<predicates>
+								<Item type="gameMechanics.elements.predicates.PredicateFaction">
+									<faction href="/World/Factions/Wild.xdb" />
+								</Item>
+							</predicates>
+						</Item>
+					</filters>
+				</filter>
+			</Item>
+		</casterImpacts>
+	</mechanics>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

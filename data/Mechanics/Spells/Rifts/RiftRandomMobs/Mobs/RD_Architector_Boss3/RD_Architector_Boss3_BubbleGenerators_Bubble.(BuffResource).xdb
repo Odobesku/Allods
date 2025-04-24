@@ -1,141 +1,141 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <gameMechanics.constructor.schemes.buff.BuffResource>
-    <Header>
-        <resourceId>739952860</resourceId>
-    </Header>
-    <Name href="RD_Architector_Boss3_BubbleGenerators_Bubble.(BuffResource).Name.txt" />
-    <image href="/Interface/Icons/Mounts/EnergyShield.(UISingleTexture).xdb" />
-    <visScript href="RD_Architector_Boss3_BubbleGenerators_Bubble.(BuffVisScripts).xdb" />
-    <effects>
-        <Item type="gameMechanics.elements.effects.LifeGuard">
-            <level>1</level>
-        </Item>
-        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                <buff href="RD_Architector_Boss3_BubbleGenerators_multiple.(BuffResource).xdb" />
-                            </predicate>
-                        </Item>
-                    </predicates>
-                    <impactsIf>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="RD_Architector_Boss3_BubbleGenerators_multiple.(BuffResource).xdb" />
-                        </Item>
-                    </impactsIf>
-                </Item>
-            </impacts>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectDisableAct">
-            <actions>
-                <Item>Move</Item>
-            </actions>
-            <rooted>true</rooted>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectDisableAbility">
-            <ability href="/Mechanics/Abilities/Bosses/ActivityTracker/Ability01.xdb" />
-        </Item>
-        <Item type="gameMechanics.elements.effects.LifeGuard">
-            <level>1</level>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
-                            <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
-                                <range min="0" max="1" />
-                                <withinRange>false</withinRange>
-                                <minCandidatesCount>0</minCandidatesCount>
-                                <targetCount>0</targetCount>
-                            </selector>
-                            <filter type="gameMechanics.world.creature.AvatarFilter" />
-                            <impacts>
-                                <Item>
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
-                                            <element>LIGHTNING</element>
-                                            <damage>1</damage>
-                                            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-                                                <scalers>
-                                                    <Item type="gameMechanics.elements.scalers.MagicScaler" />
-                                                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                        <mul>1</mul>
-                                                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
-                                                            <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/PartiallyEscapableDamageBoss.(CalcerFloatResource).xdb" />
-                                                        </mulCalcer>
-                                                    </Item>
-                                                    <Item type="gameMechanics.elements.scalers.ScalerBuff">
-                                                        <buff href="RD_Architector_Boss3_BubbleGenerators_Stacks.(BuffResource).xdb" />
-                                                        <summand>1</summand>
-                                                        <checkCaster>true</checkCaster>
-                                                    </Item>
-                                                </scalers>
-                                            </scaler>
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                    <buff href="RD_Architector_Boss3_BubbleGenerators_Stacks.(BuffResource).xdb" />
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                    <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
-                    <data href="RD_Architector_Boss3_BubbleGenerators_BubbleExplosion.(ClientData).xdb" />
-                </Item>
-            </impacts>
-        </Item>
-        <Item type="gameMechanics.elements.effects.Switch">
-            <impactsOff>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="RD_Architector_Boss3_BubbleGenerators_multiple.(BuffResource).xdb" />
-                </Item>
-                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                    <buff href="/Mechanics/Spells/Rifts/Abilities/StopBuff.(BuffResource).xdb" />
-                </Item>
-            </impactsOff>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectDisableAllActionsExceptGroup">
-            <groups>
-                <Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/RiftAutoattack.(ActionGroup).xdb" />
-            </groups>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectDamageTrigger">
-            <damageType>Absorb</damageType>
-            <predicates>
-                <Item type="gameMechanics.elements.predicates.offender.PredicateActionGroup">
-                    <groups>
-                        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
-                    </groups>
-                </Item>
-            </predicates>
-            <impacts>
-                <targetToOffender>
-                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
-                                <value>50000</value>
-                            </Item>
-                        </impacts>
-                    </Item>
-                </targetToOffender>
-            </impacts>
-        </Item>
-    </effects>
-    <duration>20000</duration>
-    <isHelpful>true</isHelpful>
-    <canBeSaved>false</canBeSaved>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
-        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
-    </groups>
+	<Header>
+		<resourceId>739952860</resourceId>
+	</Header>
+	<Name href="RD_Architector_Boss3_BubbleGenerators_Bubble.(BuffResource).Name.txt" />
+	<image href="/Interface/Icons/Mounts/EnergyShield.(UISingleTexture).xdb" />
+	<visScript href="RD_Architector_Boss3_BubbleGenerators_Bubble.(BuffVisScripts).xdb" />
+	<effects>
+		<Item type="gameMechanics.elements.effects.LifeGuard">
+			<level>1</level>
+		</Item>
+		<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+							<predicate type="gameMechanics.elements.resources.ResourceBuff">
+								<buff href="RD_Architector_Boss3_BubbleGenerators_multiple.(BuffResource).xdb" />
+							</predicate>
+						</Item>
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="RD_Architector_Boss3_BubbleGenerators_multiple.(BuffResource).xdb" />
+						</Item>
+					</impactsIf>
+				</Item>
+			</impacts>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectDisableAct">
+			<actions>
+				<Item>Move</Item>
+			</actions>
+			<rooted>true</rooted>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectDisableAbility">
+			<ability href="/Mechanics/Abilities/Bosses/ActivityTracker/Ability01.xdb" />
+		</Item>
+		<Item type="gameMechanics.elements.effects.LifeGuard">
+			<level>1</level>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+							<selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+								<range min="0" max="1" />
+								<withinRange>false</withinRange>
+								<minCandidatesCount>0</minCandidatesCount>
+								<targetCount>0</targetCount>
+							</selector>
+							<filter type="gameMechanics.world.creature.AvatarFilter" />
+							<impacts>
+								<Item>
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+											<element>LIGHTNING</element>
+											<damage>1</damage>
+											<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+												<scalers>
+													<Item type="gameMechanics.elements.scalers.MagicScaler" />
+													<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+														<mul>1</mul>
+														<mulCalcer type="constructor.elements.CalcerFloatExternal">
+															<externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/PartiallyEscapableDamageBoss.(CalcerFloatResource).xdb" />
+														</mulCalcer>
+													</Item>
+													<Item type="gameMechanics.elements.scalers.ScalerBuff">
+														<buff href="RD_Architector_Boss3_BubbleGenerators_Stacks.(BuffResource).xdb" />
+														<summand>1</summand>
+														<checkCaster>true</checkCaster>
+													</Item>
+												</scalers>
+											</scaler>
+										</Item>
+									</impacts>
+								</Item>
+							</impacts>
+						</Item>
+						<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.BuffDetacher">
+									<buff href="RD_Architector_Boss3_BubbleGenerators_Stacks.(BuffResource).xdb" />
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+					<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+					<data href="RD_Architector_Boss3_BubbleGenerators_BubbleExplosion.(ClientData).xdb" />
+				</Item>
+			</impacts>
+		</Item>
+		<Item type="gameMechanics.elements.effects.Switch">
+			<impactsOff>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="RD_Architector_Boss3_BubbleGenerators_multiple.(BuffResource).xdb" />
+				</Item>
+				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+					<buff href="/Mechanics/Spells/Rifts/Abilities/StopBuff.(BuffResource).xdb" />
+				</Item>
+			</impactsOff>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectDisableAllActionsExceptGroup">
+			<groups>
+				<Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/RiftAutoattack.(ActionGroup).xdb" />
+			</groups>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectDamageTrigger">
+			<damageType>Absorb</damageType>
+			<predicates>
+				<Item type="gameMechanics.elements.predicates.offender.PredicateActionGroup">
+					<groups>
+						<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+					</groups>
+				</Item>
+			</predicates>
+			<impacts>
+				<targetToOffender>
+					<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+								<value>50000</value>
+							</Item>
+						</impacts>
+					</Item>
+				</targetToOffender>
+			</impacts>
+		</Item>
+	</effects>
+	<duration>20000</duration>
+	<isHelpful>true</isHelpful>
+	<canBeSaved>false</canBeSaved>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+		<Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+	</groups>
 </gameMechanics.constructor.schemes.buff.BuffResource>

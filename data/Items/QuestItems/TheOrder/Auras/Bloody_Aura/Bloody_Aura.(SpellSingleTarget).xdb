@@ -1,37 +1,43 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>8879915</resourceId>
-    </Header>
-    <needLos>false</needLos>
-    <targetType>STTSelf</targetType>
-    <isAggro>false</isAggro>
-    <iffPolicy>Friends</iffPolicy>
-    <needInFront>false</needInFront>
-    <mechanics>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                <predicates>
-                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                            <buff href="Aura.(BuffResource).xdb" />
-                        </predicate>
-                    </Item>
-                </predicates>
-                <impacts>
-                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                        <buff href="Aura.(BuffResource).xdb" />
-                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                            <mulCalcer type="gameMechanics.elements.calcers.CalcerActiveItemLifetime" />
-                        </durationScaler>
-                    </Item>
-                </impacts>
-                <elseImpacts>
-                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                        <buff href="Aura.(BuffResource).xdb" />
-                    </Item>
-                </elseImpacts>
-            </Item>
-        </casterImpacts>
-    </mechanics>
+	<Header>
+		<resourceId>740138868</resourceId>
+	</Header>
+	<Description href="Bloody_Aura.(SpellSingleTarget).Description.txt" />
+	<Name href="Bloody_Aura.(SpellSingleTarget).Name.txt" />
+	<image href="/Interface/Icons/Special/Halo/BloodAura.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+	<uiSpellBookPageType>SPELLBOOK_PAGE_OTHER</uiSpellBookPageType>
+	<targetType>STTSelf</targetType>
+	<iffPolicy>Friends</iffPolicy>
+	<triggersGlobalCooldown>false</triggersGlobalCooldown>
+	<mechanics>
+		<cooldown>
+			<duration>5000</duration>
+		</cooldown>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+				<predicates>
+					<Item type="gameMechanics.elements.resources.ResourceBuff">
+						<buff href="Aura.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+					</Item>
+				</predicates>
+				<impactsIf>
+					<Item type="gameMechanics.elements.impacts.BuffDetacher">
+						<buff href="Aura.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+					</Item>
+					<Item type="gameMechanics.elements.impacts.BuffDetacher">
+						<buff href="Bloody_Aura_ProxyBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+					</Item>
+				</impactsIf>
+				<impactsElse>
+					<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+						<buff href="Aura.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+					</Item>
+					<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+						<buff href="Bloody_Aura_ProxyBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+					</Item>
+				</impactsElse>
+			</Item>
+		</casterImpacts>
+	</mechanics>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

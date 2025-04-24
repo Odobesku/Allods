@@ -1,139 +1,139 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.area.SpellArea>
-    <Header>
-        <resourceId>739951479</resourceId>
-    </Header>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/FireSpells.xdb" />
-        <Item href="/Mechanics/Spells/Groups/Magics.xdb" />
-        <Item href="/Mechanics/Spells/Groups/MagicAttacks.xdb" />
-    </groups>
-    <element>FIRE</element>
-    <Name href="ZC12_Map2_Maas_Svon.(SpellArea).Name.txt" />
-    <image href="/Interface/Icons/Equipment/Ships/TorpedoBigTypeIcon.(UISingleTexture).xdb" />
-    <visualScripts href="/Spells/VisScripts/Mage/Fireball.(SpellVisScripts).xdb" />
-    <nameTemplate href="ZC12_Map2_Maas_Svon.(SpellArea).NameTemplate.txt" />
-    <range type="gameMechanics.elements.calcers.FloatData">
-        <value>40</value>
-    </range>
-    <prepareDuration>1000</prepareDuration>
-    <iffPolicy>Enemies</iffPolicy>
-    <triggersGlobalCooldown>false</triggersGlobalCooldown>
-    <mechanics>
-        <cooldown>
-            <duration>3500</duration>
-        </cooldown>
-        <targetConditions>
-            <Item type="gameMechanics.elements.predicates.PredicateCreature" />
-        </targetConditions>
-        <casterResources>
-            <Item type="gameMechanics.elements.resources.ResourceBuff">
-                <buff href="/World/Quests/ZC12_Map02/WW_12_2/WW_12_2_item.(BuffResource).xdb" />
-                <consumeStacks>1</consumeStacks>
-            </Item>
-        </casterResources>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                <predicates>
-                    <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
-                        <buff href="/World/Quests/ZC12_Map02/WW_12_2/WW_12_2_item.(BuffResource).xdb" />
-                        <range>
-                            <min>1</min>
-                            <max>1</max>
-                        </range>
-                    </Item>
-                </predicates>
-                <impactsIf>
-                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
-                        <data href="/World/Quests/ZC12_Map02/WW_12_2/WW_12_2_03.(ClientData).xdb" />
-                    </Item>
-                </impactsIf>
-            </Item>
-        </casterImpacts>
-        <targetImpacts>
-            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
-                <element>FIRE</element>
-                <damage>40</damage>
-                <impactsOnHitTarget>
-                    <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
-                        <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
-                            <value>1</value>
-                        </chanceCalcer>
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
-                                <data href="/Spells/ClientData/HitFire.(ClientData).xdb" />
-                            </Item>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="/Mechanics/Spells/CommonBuffs/KnockDown/BuffKnockDown.xdb" />
-                            </Item>
-                        </impacts>
-                    </Item>
-                </impactsOnHitTarget>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ProbabilisticImpactBinary">
-                <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
-                    <value>0.5</value>
-                </chanceCalcer>
-                <impactsSuccess>
-                    <Item type="gameMechanics.elements.impacts.ProbabilisticImpactBinary">
-                        <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
-                            <value>0.5</value>
-                        </chanceCalcer>
-                        <impactsSuccess>
-                            <Item type="gameMechanics.elements.impacts.DirectDamage">
-                                <damage>1</damage>
-                                <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
-                                        <multiplier>0.4</multiplier>
-                                    </mulCalcer>
-                                </scalerTarget>
-                            </Item>
-                        </impactsSuccess>
-                        <impactsFailure>
-                            <Item type="gameMechanics.elements.impacts.DirectDamage">
-                                <damage>1</damage>
-                                <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
-                                        <multiplier>0.45</multiplier>
-                                    </mulCalcer>
-                                </scalerTarget>
-                            </Item>
-                        </impactsFailure>
-                    </Item>
-                </impactsSuccess>
-                <impactsFailure>
-                    <Item type="gameMechanics.elements.impacts.ProbabilisticImpactBinary">
-                        <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
-                            <value>0.5</value>
-                        </chanceCalcer>
-                        <impactsSuccess>
-                            <Item type="gameMechanics.elements.impacts.DirectDamage">
-                                <damage>1</damage>
-                                <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
-                                        <multiplier>0.35</multiplier>
-                                    </mulCalcer>
-                                </scalerTarget>
-                            </Item>
-                        </impactsSuccess>
-                        <impactsFailure>
-                            <Item type="gameMechanics.elements.impacts.DirectDamage">
-                                <damage>1</damage>
-                                <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
-                                        <multiplier>0.5</multiplier>
-                                    </mulCalcer>
-                                </scalerTarget>
-                            </Item>
-                        </impactsFailure>
-                    </Item>
-                </impactsFailure>
-            </Item>
-        </targetImpacts>
-    </mechanics>
-    <speed>25</speed>
-    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
-    <radius>12</radius>
+	<Header>
+		<resourceId>739951479</resourceId>
+	</Header>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/FireSpells.xdb" />
+		<Item href="/Mechanics/Spells/Groups/Magics.xdb" />
+		<Item href="/Mechanics/Spells/Groups/MagicAttacks.xdb" />
+	</groups>
+	<element>FIRE</element>
+	<Name href="ZC12_Map2_Maas_Svon.(SpellArea).Name.txt" />
+	<image href="/Interface/Icons/Equipment/Ships/TorpedoBigTypeIcon.(UISingleTexture).xdb" />
+	<visualScripts href="/Spells/VisScripts/Mage/Fireball.(SpellVisScripts).xdb" />
+	<nameTemplate href="ZC12_Map2_Maas_Svon.(SpellArea).NameTemplate.txt" />
+	<range type="gameMechanics.elements.calcers.FloatData">
+		<value>40</value>
+	</range>
+	<prepareDuration>1000</prepareDuration>
+	<iffPolicy>Enemies</iffPolicy>
+	<triggersGlobalCooldown>false</triggersGlobalCooldown>
+	<mechanics>
+		<cooldown>
+			<duration>3500</duration>
+		</cooldown>
+		<targetConditions>
+			<Item type="gameMechanics.elements.predicates.PredicateCreature" />
+		</targetConditions>
+		<casterResources>
+			<Item type="gameMechanics.elements.resources.ResourceBuff">
+				<buff href="/World/Quests/ZC12_Map02/WW_12_2/WW_12_2_item.(BuffResource).xdb" />
+				<consumeStacks>1</consumeStacks>
+			</Item>
+		</casterResources>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+				<predicates>
+					<Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+						<buff href="/World/Quests/ZC12_Map02/WW_12_2/WW_12_2_item.(BuffResource).xdb" />
+						<range>
+							<min>1</min>
+							<max>1</max>
+						</range>
+					</Item>
+				</predicates>
+				<impactsIf>
+					<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+						<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+						<data href="/World/Quests/ZC12_Map02/WW_12_2/WW_12_2_03.(ClientData).xdb" />
+					</Item>
+				</impactsIf>
+			</Item>
+		</casterImpacts>
+		<targetImpacts>
+			<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+				<element>FIRE</element>
+				<damage>40</damage>
+				<impactsOnHitTarget>
+					<Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+						<chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+							<value>1</value>
+						</chanceCalcer>
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+								<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+								<data href="/Spells/ClientData/HitFire.(ClientData).xdb" />
+							</Item>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="/Mechanics/Spells/CommonBuffs/KnockDown/BuffKnockDown.xdb" />
+							</Item>
+						</impacts>
+					</Item>
+				</impactsOnHitTarget>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ProbabilisticImpactBinary">
+				<chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+					<value>0.5</value>
+				</chanceCalcer>
+				<impactsSuccess>
+					<Item type="gameMechanics.elements.impacts.ProbabilisticImpactBinary">
+						<chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+							<value>0.5</value>
+						</chanceCalcer>
+						<impactsSuccess>
+							<Item type="gameMechanics.elements.impacts.DirectDamage">
+								<damage>1</damage>
+								<scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+									<mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+										<multiplier>0.4</multiplier>
+									</mulCalcer>
+								</scalerTarget>
+							</Item>
+						</impactsSuccess>
+						<impactsFailure>
+							<Item type="gameMechanics.elements.impacts.DirectDamage">
+								<damage>1</damage>
+								<scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+									<mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+										<multiplier>0.45</multiplier>
+									</mulCalcer>
+								</scalerTarget>
+							</Item>
+						</impactsFailure>
+					</Item>
+				</impactsSuccess>
+				<impactsFailure>
+					<Item type="gameMechanics.elements.impacts.ProbabilisticImpactBinary">
+						<chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+							<value>0.5</value>
+						</chanceCalcer>
+						<impactsSuccess>
+							<Item type="gameMechanics.elements.impacts.DirectDamage">
+								<damage>1</damage>
+								<scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+									<mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+										<multiplier>0.35</multiplier>
+									</mulCalcer>
+								</scalerTarget>
+							</Item>
+						</impactsSuccess>
+						<impactsFailure>
+							<Item type="gameMechanics.elements.impacts.DirectDamage">
+								<damage>1</damage>
+								<scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+									<mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+										<multiplier>0.5</multiplier>
+									</mulCalcer>
+								</scalerTarget>
+							</Item>
+						</impactsFailure>
+					</Item>
+				</impactsFailure>
+			</Item>
+		</targetImpacts>
+	</mechanics>
+	<speed>25</speed>
+	<shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+	<radius>12</radius>
 </gameMechanics.constructor.schemes.spell.area.SpellArea>

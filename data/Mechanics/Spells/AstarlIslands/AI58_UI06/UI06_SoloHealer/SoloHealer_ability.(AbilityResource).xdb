@@ -1,129 +1,129 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
-    <Header>
-        <resourceId>739850652</resourceId>
-    </Header>
-    <effects>
-        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.elements.resources.ResourceBuff">
-                            <buff href="SoloHealer_ready.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                    </predicates>
-                    <impactsIf>
-                        <Item type="gameMechanics.elements.impacts.RepeatedImpact">
-                            <impact type="gameMechanics.elements.impacts.ImpactSummon">
-                                <destination type="gameMechanics.map.destination.DestinationModified">
-                                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
-                                    <modifiers>
-                                        <Item type="gameMechanics.map.destination.modifier.ModifierTrail">
-                                            <modifier type="gameMechanics.map.destination.modifier.SpreadModifier">
-                                                <verticalRange min="0" max="0" />
-                                                <horizontalRange min="1" max="4" />
-                                            </modifier>
-                                        </Item>
-                                    </modifiers>
-                                </destination>
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                        <impacts>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="SoloHealer_Wisps.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ImpactCopyAggroList" />
-                                </impacts>
-                                <object href="/Mechanics/Spells/AstarlIslands/AI58_UI06/UI06_LightWisp/UI06_LightWisp_summoned.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
-                                <pool href="SoloHealer_Wisp.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
-                            </impact>
-                            <count type="gameMechanics.elements.calcers.FloatData">
-                                <value>5</value>
-                            </count>
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="SoloHealer_ready.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                    </impactsIf>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.elements.resources.ResourceBuff">
-                            <buff href="SoloHealer_WispsVisual.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            <consumeStacks>5</consumeStacks>
-                        </Item>
-                    </predicates>
-                    <impactsIf>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="SoloHealer_shield.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                    </impactsIf>
-                    <impactsElse>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="SoloHealer_shield.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                    </impactsElse>
-                </Item>
-            </impacts>
-        </Item>
-        <Item type="gameMechanics.elements.effects.Switch">
-            <impactsOn>
-                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                    <buff href="SoloHealer_ready.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                </Item>
-            </impactsOn>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
-            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        </Item>
-        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
-            <onEnter>
-                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                                            <radius>30</radius>
-                                            <affectGroup>Friends</affectGroup>
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                    <predicates>
-                                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                            <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
-                                                        </Item>
-                                                    </predicates>
-                                                    <impactsIf>
-                                                        <Item type="gameMechanics.elements.impacts.ImpactCopyAggroList" />
-                                                    </impactsIf>
-                                                </Item>
-                                            </impacts>
-                                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-                                                <predicates>
-                                                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                                                        <mobs>
-                                                            <Item href="/Mechanics/Spells/AstarlIslands/AI58_UI06/UI06_LightWisp/UI06_LightWisp_summoned.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
-                                                        </mobs>
-                                                    </Item>
-                                                </predicates>
-                                            </filter>
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                </Item>
-            </onEnter>
-            <onLeave>
-                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                    <buff href="SoloHealer_ready.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                </Item>
-            </onLeave>
-        </Item>
-    </effects>
-    <disableWhileDead>true</disableWhileDead>
+	<Header>
+		<resourceId>739850652</resourceId>
+	</Header>
+	<effects>
+		<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.resources.ResourceBuff">
+							<buff href="SoloHealer_ready.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.elements.impacts.RepeatedImpact">
+							<impact type="gameMechanics.elements.impacts.ImpactSummon">
+								<destination type="gameMechanics.map.destination.DestinationModified">
+									<destination type="gameMechanics.map.destination.SelfPosDestination" />
+									<modifiers>
+										<Item type="gameMechanics.map.destination.modifier.ModifierTrail">
+											<modifier type="gameMechanics.map.destination.modifier.SpreadModifier">
+												<verticalRange min="0" max="0" />
+												<horizontalRange min="1" max="4" />
+											</modifier>
+										</Item>
+									</modifiers>
+								</destination>
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+										<impacts>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="SoloHealer_Wisps.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+											</Item>
+										</impacts>
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ImpactCopyAggroList" />
+								</impacts>
+								<object href="/Mechanics/Spells/AstarlIslands/AI58_UI06/UI06_LightWisp/UI06_LightWisp_summoned.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+								<pool href="SoloHealer_Wisp.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+							</impact>
+							<count type="gameMechanics.elements.calcers.FloatData">
+								<value>5</value>
+							</count>
+						</Item>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="SoloHealer_ready.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+					</impactsIf>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.resources.ResourceBuff">
+							<buff href="SoloHealer_WispsVisual.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							<consumeStacks>5</consumeStacks>
+						</Item>
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="SoloHealer_shield.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+					</impactsIf>
+					<impactsElse>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="SoloHealer_shield.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+					</impactsElse>
+				</Item>
+			</impacts>
+		</Item>
+		<Item type="gameMechanics.elements.effects.Switch">
+			<impactsOn>
+				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+					<buff href="SoloHealer_ready.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</Item>
+			</impactsOn>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+			<group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		</Item>
+		<Item type="gameMechanics.elements.effects.CombatStateTrigger">
+			<onEnter>
+				<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+											<radius>30</radius>
+											<affectGroup>Friends</affectGroup>
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+													<predicates>
+														<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+															<predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+														</Item>
+													</predicates>
+													<impactsIf>
+														<Item type="gameMechanics.elements.impacts.ImpactCopyAggroList" />
+													</impactsIf>
+												</Item>
+											</impacts>
+											<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+												<predicates>
+													<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+														<mobs>
+															<Item href="/Mechanics/Spells/AstarlIslands/AI58_UI06/UI06_LightWisp/UI06_LightWisp_summoned.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+														</mobs>
+													</Item>
+												</predicates>
+											</filter>
+										</Item>
+									</impacts>
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+			</onEnter>
+			<onLeave>
+				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+					<buff href="SoloHealer_ready.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</Item>
+			</onLeave>
+		</Item>
+	</effects>
+	<disableWhileDead>true</disableWhileDead>
 </gameMechanics.constructor.schemes.ability.AbilityResource>

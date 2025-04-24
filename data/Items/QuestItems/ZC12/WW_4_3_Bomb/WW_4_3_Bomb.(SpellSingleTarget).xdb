@@ -1,137 +1,137 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>739934402</resourceId>
-    </Header>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/QuestSpells.xdb" />
-    </groups>
-    <Name href="WW_4_3_Bomb.(SpellSingleTarget).Name02.txt" />
-    <Description href="WW_4_3_Bomb.(SpellSingleTarget).Description.txt" />
-    <visualScripts href="/Spells/VisScripts/Exploits/UseStanding.(ExploitVisScripts).xdb" />
-    <range type="gameMechanics.elements.calcers.FloatData">
-        <value>6</value>
-    </range>
-    <prepareDuration>1500</prepareDuration>
-    <targetType>STTCurrentTargetNotSelf</targetType>
-    <iffPolicy>Friends</iffPolicy>
-    <mechanics>
-        <cooldown>
-            <duration>2000</duration>
-        </cooldown>
-        <casterConditions>
-            <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
-                <quest href="/World/Quests/ZC12/WW_4_3/WW_4_3.xdb" />
-                <status>Started</status>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
-                    <quest href="/World/Quests/ZC12/WW_4_3/WW_4_3.xdb" />
-                    <counterResource href="/World/Quests/ZC12/WW_4_3/CountId_3.xdb" />
-                </predicate>
-            </Item>
-            <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
-                <quest href="/World/Quests/ZC12/WW_4_3/WW_4_3.xdb" />
-                <counterResource href="/Items/QuestItems/ZC12/WW_4_3_Cannon/WW_4_3_Cannon.(ItemResource).xdb" />
-            </Item>
-            <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
-                <quest href="/World/Quests/ZC12/WW_4_3/WW_4_3.xdb" />
-                <counterResource href="/Creatures/ArchitectBot/Instances/ZC12/ZC12_RI3_ArchitectBot.(MobWorld).xdb" />
-            </Item>
-            <Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
-                <quest href="/World/Quests/ZC12/WW_4_3/WW_4_3.xdb" />
-                <counterResource href="WW_4_3_Bomb.(ItemResource).xdb" />
-            </Item>
-        </casterConditions>
-        <targetConditions>
-            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                <mobs>
-                    <Item href="/Characters/Kania_male/Instances/ZC12/ZC12_RI3_Artillery.(MobWorld).xdb" />
-                </mobs>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="WW_4_3_BombUsed.(BuffResource).xdb" />
-                </predicate>
-            </Item>
-        </targetConditions>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactFreezeQuestCounter">
-                <quest href="/World/Quests/ZC12/WW_4_3/WW_4_3.xdb" />
-                <counterResource href="WW_4_3_Bomb.(ItemResource).xdb" />
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
-                <id href="/World/Quests/ZC12/WW_4_3/CountId_3.xdb" />
-            </Item>
-            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactDestroyItem">
-                        <item href="WW_4_3_Bomb.(ItemResource).xdb" />
-                    </Item>
-                </impacts>
-            </Item>
-        </casterImpacts>
-        <targetImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactMobChat">
-                        <msg href="WW_4_3_give_bomb.(TextMessage).xdb" />
-                    </Item>
-                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                        <buff href="WW_4_3_BombUsed.(BuffResource).xdb" />
-                    </Item>
-                    <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
-                        <spell href="/Characters/Kania_male/Instances/ZC12/ZC12_RI3_Artillery_Shot.(SpellSingleTarget).xdb" />
-                        <duration>5000</duration>
-                    </Item>
-                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                        <affectGroup>Enemies</affectGroup>
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
-                                <data href="WW_4_3_BombShot.(ClientData).xdb" />
-                                <calcers>
-                                    <addressEntries>
-                                        <Item>
-                                            <name>caster</name>
-                                            <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
-                                        </Item>
-                                        <Item>
-                                            <name>target</name>
-                                            <finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
-                                        </Item>
-                                    </addressEntries>
-                                </calcers>
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                                <delay>1500</delay>
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactKill" />
-                                </impacts>
-                            </Item>
-                        </impacts>
-                        <filter type="gameMechanics.constructor.basicElements.FilterAnd">
-                            <filters>
-                                <Item type="gameMechanics.world.creature.MobFilter" />
-                                <Item type="gameMechanics.world.creature.AliveFilter" />
-                                <Item type="gameMechanics.constructor.basicElements.FilterPredicates">
-                                    <predicates>
-                                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                                            <mobs>
-                                                <Item href="/Creatures/ArchitectSiege/Instances/ZC12_RI3_ArchitectSiege.(MobWorld).xdb" />
-                                            </mobs>
-                                        </Item>
-                                    </predicates>
-                                </Item>
-                            </filters>
-                        </filter>
-                        <targetsLimit>1</targetsLimit>
-                        <sorting type="gameMechanics.elements.targetSelector.sorts.SortByDistance">
-                            <order>Ascending</order>
-                        </sorting>
-                    </Item>
-                </impacts>
-            </Item>
-        </targetImpacts>
-    </mechanics>
+	<Header>
+		<resourceId>739934402</resourceId>
+	</Header>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/QuestSpells.xdb" />
+	</groups>
+	<Name href="WW_4_3_Bomb.(SpellSingleTarget).Name02.txt" />
+	<Description href="WW_4_3_Bomb.(SpellSingleTarget).Description.txt" />
+	<visualScripts href="/Spells/VisScripts/Exploits/UseStanding.(ExploitVisScripts).xdb" />
+	<range type="gameMechanics.elements.calcers.FloatData">
+		<value>6</value>
+	</range>
+	<prepareDuration>1500</prepareDuration>
+	<targetType>STTCurrentTargetNotSelf</targetType>
+	<iffPolicy>Friends</iffPolicy>
+	<mechanics>
+		<cooldown>
+			<duration>2000</duration>
+		</cooldown>
+		<casterConditions>
+			<Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+				<quest href="/World/Quests/ZC12/WW_4_3/WW_4_3.xdb" />
+				<status>Started</status>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+					<quest href="/World/Quests/ZC12/WW_4_3/WW_4_3.xdb" />
+					<counterResource href="/World/Quests/ZC12/WW_4_3/CountId_3.xdb" />
+				</predicate>
+			</Item>
+			<Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+				<quest href="/World/Quests/ZC12/WW_4_3/WW_4_3.xdb" />
+				<counterResource href="/Items/QuestItems/ZC12/WW_4_3_Cannon/WW_4_3_Cannon.(ItemResource).xdb" />
+			</Item>
+			<Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+				<quest href="/World/Quests/ZC12/WW_4_3/WW_4_3.xdb" />
+				<counterResource href="/Creatures/ArchitectBot/Instances/ZC12/ZC12_RI3_ArchitectBot.(MobWorld).xdb" />
+			</Item>
+			<Item type="gameMechanics.elements.predicates.PredicateQuestCounterNotLess">
+				<quest href="/World/Quests/ZC12/WW_4_3/WW_4_3.xdb" />
+				<counterResource href="WW_4_3_Bomb.(ItemResource).xdb" />
+			</Item>
+		</casterConditions>
+		<targetConditions>
+			<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+				<mobs>
+					<Item href="/Characters/Kania_male/Instances/ZC12/ZC12_RI3_Artillery.(MobWorld).xdb" />
+				</mobs>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="WW_4_3_BombUsed.(BuffResource).xdb" />
+				</predicate>
+			</Item>
+		</targetConditions>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactFreezeQuestCounter">
+				<quest href="/World/Quests/ZC12/WW_4_3/WW_4_3.xdb" />
+				<counterResource href="WW_4_3_Bomb.(ItemResource).xdb" />
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+				<id href="/World/Quests/ZC12/WW_4_3/CountId_3.xdb" />
+			</Item>
+			<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.ImpactDestroyItem">
+						<item href="WW_4_3_Bomb.(ItemResource).xdb" />
+					</Item>
+				</impacts>
+			</Item>
+		</casterImpacts>
+		<targetImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.ImpactMobChat">
+						<msg href="WW_4_3_give_bomb.(TextMessage).xdb" />
+					</Item>
+					<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+						<buff href="WW_4_3_BombUsed.(BuffResource).xdb" />
+					</Item>
+					<Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+						<spell href="/Characters/Kania_male/Instances/ZC12/ZC12_RI3_Artillery_Shot.(SpellSingleTarget).xdb" />
+						<duration>5000</duration>
+					</Item>
+					<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+						<affectGroup>Enemies</affectGroup>
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+								<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+								<data href="WW_4_3_BombShot.(ClientData).xdb" />
+								<calcers>
+									<addressEntries>
+										<Item>
+											<name>caster</name>
+											<finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+										</Item>
+										<Item>
+											<name>target</name>
+											<finder type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+										</Item>
+									</addressEntries>
+								</calcers>
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+								<delay>1500</delay>
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactKill" />
+								</impacts>
+							</Item>
+						</impacts>
+						<filter type="gameMechanics.constructor.basicElements.FilterAnd">
+							<filters>
+								<Item type="gameMechanics.world.creature.MobFilter" />
+								<Item type="gameMechanics.world.creature.AliveFilter" />
+								<Item type="gameMechanics.constructor.basicElements.FilterPredicates">
+									<predicates>
+										<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+											<mobs>
+												<Item href="/Creatures/ArchitectSiege/Instances/ZC12_RI3_ArchitectSiege.(MobWorld).xdb" />
+											</mobs>
+										</Item>
+									</predicates>
+								</Item>
+							</filters>
+						</filter>
+						<targetsLimit>1</targetsLimit>
+						<sorting type="gameMechanics.elements.targetSelector.sorts.SortByDistance">
+							<order>Ascending</order>
+						</sorting>
+					</Item>
+				</impacts>
+			</Item>
+		</targetImpacts>
+	</mechanics>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

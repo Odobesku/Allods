@@ -1,378 +1,378 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>739910515</resourceId>
-    </Header>
-    <Name href="Compass.(SpellSingleTarget).Name.txt" />
-    <Description href="Compass.(SpellSingleTarget).Description.txt" />
-    <range type="gameMechanics.elements.calcers.FloatData">
-        <value>10</value>
-    </range>
-    <targetType>STTSelf</targetType>
-    <iffPolicy>Friends</iffPolicy>
-    <mechanics>
-        <cooldown>
-            <duration>10000</duration>
-        </cooldown>
-        <casterConditions>
-            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
-                <predicates>
-                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
-                        <quest href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/EmpireDailyGetPresents.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
-                        <status>Started</status>
-                    </Item>
-                    <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
-                        <quest href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/LeagueDailyGetPresents.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
-                        <status>Started</status>
-                    </Item>
-                </predicates>
-            </Item>
-            <Item type="gameMechanics.elements.predicates.PredicateIsRuleActive">
-                <rule href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Rules/GetTheGoat.(RuleResource).xdb#xpointer(/gameMechanics.world.rules.RuleResource)" />
-            </Item>
-        </casterConditions>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                <predicates>
-                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
-                        <predicates>
-                            <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                <buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/Zone1.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            </Item>
-                            <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                <buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/Zone2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            </Item>
-                            <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                <buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/Zone3.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            </Item>
-                        </predicates>
-                    </Item>
-                </predicates>
-                <impactsIf>
-                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                        <predicates>
-                            <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                <buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/Zone1.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            </Item>
-                        </predicates>
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.predicates.PredicateInZone">
-                                        <zone href="/Maps/2ndCircle/Zones/ZoneContested1/ZoneContested1.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
-                                    </Item>
-                                </predicates>
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                        <predicates>
-                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                <predicate type="gameMechanics.elements.predicates.PredicateDeviceNear">
-                                                    <radius>20</radius>
-                                                    <devices>
-                                                        <Item href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftBox.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
-                                                    </devices>
-                                                </predicate>
-                                            </Item>
-                                        </predicates>
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.CasterProbabilisticImpact">
-                                                <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
-                                                    <value>0.7</value>
-                                                </chanceCalcer>
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
-                                                        <destination type="gameMechanics.map.destination.DestinationModified">
-                                                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
-                                                            <modifiers>
-                                                                <Item type="gameMechanics.map.destination.modifier.ModifierSelectReachable">
-                                                                    <alternatives>
-                                                                        <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
-                                                                            <verticalRange min="0" max="0" />
-                                                                            <horizontalRange min="3" max="20" />
-                                                                        </Item>
-                                                                    </alternatives>
-                                                                </Item>
-                                                                <Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
-                                                            </modifiers>
-                                                        </destination>
-                                                        <plane href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftPlane.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
-                                                        <object href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftBox.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
-                                                    </Item>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                                        <data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/BoxIsHere.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                    </Item>
-                                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                                        <impacts>
-                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                <buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/Summon.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                            </Item>
-                                                        </impacts>
-                                                    </Item>
-                                                </impacts>
-                                                <impactsOnFail>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                                        <data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/SeekingMessage.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                    </Item>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
-                                                        <destination type="gameMechanics.map.destination.RelativePos">
-                                                            <coord x="1" y="1" />
-                                                        </destination>
-                                                        <plane href="/Mechanics/EventsAndActions/2015_NY_DailyMount/HiddenBox.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
-                                                        <object href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftBox.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
-                                                    </Item>
-                                                </impactsOnFail>
-                                            </Item>
-                                        </impacts>
-                                        <elseImpacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                                <data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/SeekingMessage.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                            </Item>
-                                        </elseImpacts>
-                                    </Item>
-                                </impacts>
-                                <elseImpacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                        <data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/ZoneMessage.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                    </Item>
-                                </elseImpacts>
-                            </Item>
-                        </impacts>
-                        <elseImpacts>
-                            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                        <buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/Zone2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </Item>
-                                </predicates>
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.predicates.PredicateInZone">
-                                                <zone href="/Maps/2ndCircle/Zones/ZoneContested2/ZoneContested2.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
-                                            </Item>
-                                        </predicates>
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                                <predicates>
-                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                        <predicate type="gameMechanics.elements.predicates.PredicateDeviceNear">
-                                                            <radius>20</radius>
-                                                            <devices>
-                                                                <Item href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftBox.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
-                                                            </devices>
-                                                        </predicate>
-                                                    </Item>
-                                                </predicates>
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.CasterProbabilisticImpact">
-                                                        <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
-                                                            <value>0.7</value>
-                                                        </chanceCalcer>
-                                                        <impacts>
-                                                            <Item type="gameMechanics.elements.impacts.ImpactSummon">
-                                                                <destination type="gameMechanics.map.destination.DestinationModified">
-                                                                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
-                                                                    <modifiers>
-                                                                        <Item type="gameMechanics.map.destination.modifier.ModifierSelectReachable">
-                                                                            <alternatives>
-                                                                                <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
-                                                                                    <verticalRange min="0" max="0" />
-                                                                                    <horizontalRange min="3" max="20" />
-                                                                                </Item>
-                                                                            </alternatives>
-                                                                        </Item>
-                                                                        <Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
-                                                                    </modifiers>
-                                                                </destination>
-                                                                <plane href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftPlane.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
-                                                                <object href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftBox.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
-                                                            </Item>
-                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                                                <data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/BoxIsHere.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                            </Item>
-                                                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                                                <impacts>
-                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                        <buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/Summon.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                    </Item>
-                                                                </impacts>
-                                                            </Item>
-                                                        </impacts>
-                                                        <impactsOnFail>
-                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                                                <data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/SeekingMessage.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                            </Item>
-                                                            <Item type="gameMechanics.elements.impacts.ImpactSummon">
-                                                                <destination type="gameMechanics.map.destination.RelativePos">
-                                                                    <coord x="1" y="1" />
-                                                                </destination>
-                                                                <plane href="/Mechanics/EventsAndActions/2015_NY_DailyMount/HiddenBox.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
-                                                                <object href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftBox.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
-                                                            </Item>
-                                                        </impactsOnFail>
-                                                    </Item>
-                                                </impacts>
-                                                <elseImpacts>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                                        <data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/SeekingMessage.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                    </Item>
-                                                </elseImpacts>
-                                            </Item>
-                                        </impacts>
-                                        <elseImpacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                                <data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/ZoneMessage1.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                            </Item>
-                                        </elseImpacts>
-                                    </Item>
-                                </impacts>
-                                <elseImpacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                                <buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/Zone3.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                            </Item>
-                                        </predicates>
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                                <predicates>
-                                                    <Item type="gameMechanics.elements.predicates.PredicateInZone">
-                                                        <zone href="/Maps/2ndCircle/Zones/ZoneContested3/ZoneContested3.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
-                                                    </Item>
-                                                </predicates>
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                                        <predicates>
-                                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                                <predicate type="gameMechanics.elements.predicates.PredicateDeviceNear">
-                                                                    <radius>20</radius>
-                                                                    <devices>
-                                                                        <Item href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftBox.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
-                                                                    </devices>
-                                                                </predicate>
-                                                            </Item>
-                                                        </predicates>
-                                                        <impacts>
-                                                            <Item type="gameMechanics.elements.impacts.CasterProbabilisticImpact">
-                                                                <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
-                                                                    <value>0.7</value>
-                                                                </chanceCalcer>
-                                                                <impacts>
-                                                                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
-                                                                        <destination type="gameMechanics.map.destination.DestinationModified">
-                                                                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
-                                                                            <modifiers>
-                                                                                <Item type="gameMechanics.map.destination.modifier.ModifierSelectReachable">
-                                                                                    <alternatives>
-                                                                                        <Item type="gameMechanics.map.destination.modifier.SpreadModifier">
-                                                                                            <verticalRange min="0" max="0" />
-                                                                                            <horizontalRange min="3" max="20" />
-                                                                                        </Item>
-                                                                                    </alternatives>
-                                                                                </Item>
-                                                                                <Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
-                                                                            </modifiers>
-                                                                        </destination>
-                                                                        <plane href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftPlane.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
-                                                                        <object href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftBox.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                                                        <data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/BoxIsHere.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                                                        <impacts>
-                                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                                <buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/Summon.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                            </Item>
-                                                                        </impacts>
-                                                                    </Item>
-                                                                </impacts>
-                                                                <impactsOnFail>
-                                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                                                        <data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/SeekingMessage.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                                    </Item>
-                                                                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
-                                                                        <destination type="gameMechanics.map.destination.RelativePos">
-                                                                            <coord x="1" y="1" />
-                                                                        </destination>
-                                                                        <plane href="/Mechanics/EventsAndActions/2015_NY_DailyMount/HiddenBox.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
-                                                                        <object href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftBox.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
-                                                                    </Item>
-                                                                </impactsOnFail>
-                                                            </Item>
-                                                        </impacts>
-                                                        <elseImpacts>
-                                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                                <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                                                <data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/SeekingMessage.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                            </Item>
-                                                        </elseImpacts>
-                                                    </Item>
-                                                </impacts>
-                                                <elseImpacts>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                                        <data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/ZoneMessage2.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                    </Item>
-                                                </elseImpacts>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </elseImpacts>
-                            </Item>
-                        </elseImpacts>
-                    </Item>
-                </impactsIf>
-                <impactsElse>
-                    <Item type="gameMechanics.elements.impacts.RandomImpact">
-                        <entries>
-                            <Item>
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/Zone1.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                        <data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/ZoneMessage.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                    </Item>
-                                </impacts>
-                            </Item>
-                            <Item>
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/Zone2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                        <data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/ZoneMessage1.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                    </Item>
-                                </impacts>
-                            </Item>
-                            <Item>
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/Zone3.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                        <data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/ZoneMessage2.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                    </Item>
-                                </impacts>
-                            </Item>
-                        </entries>
-                    </Item>
-                </impactsElse>
-            </Item>
-        </casterImpacts>
-    </mechanics>
+	<Header>
+		<resourceId>739910515</resourceId>
+	</Header>
+	<Name href="Compass.(SpellSingleTarget).Name.txt" />
+	<Description href="Compass.(SpellSingleTarget).Description.txt" />
+	<range type="gameMechanics.elements.calcers.FloatData">
+		<value>10</value>
+	</range>
+	<targetType>STTSelf</targetType>
+	<iffPolicy>Friends</iffPolicy>
+	<mechanics>
+		<cooldown>
+			<duration>10000</duration>
+		</cooldown>
+		<casterConditions>
+			<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+				<predicates>
+					<Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+						<quest href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/EmpireDailyGetPresents.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+						<status>Started</status>
+					</Item>
+					<Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+						<quest href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/LeagueDailyGetPresents.(QuestResource).xdb#xpointer(/gameMechanics.constructor.schemes.quest.QuestResource)" />
+						<status>Started</status>
+					</Item>
+				</predicates>
+			</Item>
+			<Item type="gameMechanics.elements.predicates.PredicateIsRuleActive">
+				<rule href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Rules/GetTheGoat.(RuleResource).xdb#xpointer(/gameMechanics.world.rules.RuleResource)" />
+			</Item>
+		</casterConditions>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+				<predicates>
+					<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+						<predicates>
+							<Item type="gameMechanics.elements.resources.ResourceBuff">
+								<buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/Zone1.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							</Item>
+							<Item type="gameMechanics.elements.resources.ResourceBuff">
+								<buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/Zone2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							</Item>
+							<Item type="gameMechanics.elements.resources.ResourceBuff">
+								<buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/Zone3.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							</Item>
+						</predicates>
+					</Item>
+				</predicates>
+				<impactsIf>
+					<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+						<predicates>
+							<Item type="gameMechanics.elements.resources.ResourceBuff">
+								<buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/Zone1.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							</Item>
+						</predicates>
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+								<predicates>
+									<Item type="gameMechanics.elements.predicates.PredicateInZone">
+										<zone href="/Maps/2ndCircle/Zones/ZoneContested1/ZoneContested1.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+									</Item>
+								</predicates>
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+										<predicates>
+											<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+												<predicate type="gameMechanics.elements.predicates.PredicateDeviceNear">
+													<radius>20</radius>
+													<devices>
+														<Item href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftBox.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+													</devices>
+												</predicate>
+											</Item>
+										</predicates>
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.CasterProbabilisticImpact">
+												<chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+													<value>0.7</value>
+												</chanceCalcer>
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.ImpactSummon">
+														<destination type="gameMechanics.map.destination.DestinationModified">
+															<destination type="gameMechanics.map.destination.SelfPosDestination" />
+															<modifiers>
+																<Item type="gameMechanics.map.destination.modifier.ModifierSelectReachable">
+																	<alternatives>
+																		<Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+																			<verticalRange min="0" max="0" />
+																			<horizontalRange min="3" max="20" />
+																		</Item>
+																	</alternatives>
+																</Item>
+																<Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
+															</modifiers>
+														</destination>
+														<plane href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftPlane.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+														<object href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftBox.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+													</Item>
+													<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+														<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+														<data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/BoxIsHere.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+													</Item>
+													<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+														<impacts>
+															<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																<buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/Summon.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+															</Item>
+														</impacts>
+													</Item>
+												</impacts>
+												<impactsOnFail>
+													<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+														<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+														<data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/SeekingMessage.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+													</Item>
+													<Item type="gameMechanics.elements.impacts.ImpactSummon">
+														<destination type="gameMechanics.map.destination.RelativePos">
+															<coord x="1" y="1" />
+														</destination>
+														<plane href="/Mechanics/EventsAndActions/2015_NY_DailyMount/HiddenBox.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+														<object href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftBox.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+													</Item>
+												</impactsOnFail>
+											</Item>
+										</impacts>
+										<elseImpacts>
+											<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+												<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+												<data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/SeekingMessage.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+											</Item>
+										</elseImpacts>
+									</Item>
+								</impacts>
+								<elseImpacts>
+									<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+										<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+										<data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/ZoneMessage.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+									</Item>
+								</elseImpacts>
+							</Item>
+						</impacts>
+						<elseImpacts>
+							<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+								<predicates>
+									<Item type="gameMechanics.elements.resources.ResourceBuff">
+										<buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/Zone2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+								</predicates>
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+										<predicates>
+											<Item type="gameMechanics.elements.predicates.PredicateInZone">
+												<zone href="/Maps/2ndCircle/Zones/ZoneContested2/ZoneContested2.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+											</Item>
+										</predicates>
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+												<predicates>
+													<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+														<predicate type="gameMechanics.elements.predicates.PredicateDeviceNear">
+															<radius>20</radius>
+															<devices>
+																<Item href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftBox.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+															</devices>
+														</predicate>
+													</Item>
+												</predicates>
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.CasterProbabilisticImpact">
+														<chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+															<value>0.7</value>
+														</chanceCalcer>
+														<impacts>
+															<Item type="gameMechanics.elements.impacts.ImpactSummon">
+																<destination type="gameMechanics.map.destination.DestinationModified">
+																	<destination type="gameMechanics.map.destination.SelfPosDestination" />
+																	<modifiers>
+																		<Item type="gameMechanics.map.destination.modifier.ModifierSelectReachable">
+																			<alternatives>
+																				<Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+																					<verticalRange min="0" max="0" />
+																					<horizontalRange min="3" max="20" />
+																				</Item>
+																			</alternatives>
+																		</Item>
+																		<Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
+																	</modifiers>
+																</destination>
+																<plane href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftPlane.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+																<object href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftBox.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+															</Item>
+															<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+																<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+																<data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/BoxIsHere.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+															</Item>
+															<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+																<impacts>
+																	<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																		<buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/Summon.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																	</Item>
+																</impacts>
+															</Item>
+														</impacts>
+														<impactsOnFail>
+															<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+																<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+																<data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/SeekingMessage.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+															</Item>
+															<Item type="gameMechanics.elements.impacts.ImpactSummon">
+																<destination type="gameMechanics.map.destination.RelativePos">
+																	<coord x="1" y="1" />
+																</destination>
+																<plane href="/Mechanics/EventsAndActions/2015_NY_DailyMount/HiddenBox.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+																<object href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftBox.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+															</Item>
+														</impactsOnFail>
+													</Item>
+												</impacts>
+												<elseImpacts>
+													<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+														<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+														<data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/SeekingMessage.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+													</Item>
+												</elseImpacts>
+											</Item>
+										</impacts>
+										<elseImpacts>
+											<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+												<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+												<data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/ZoneMessage1.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+											</Item>
+										</elseImpacts>
+									</Item>
+								</impacts>
+								<elseImpacts>
+									<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+										<predicates>
+											<Item type="gameMechanics.elements.resources.ResourceBuff">
+												<buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/Zone3.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+											</Item>
+										</predicates>
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+												<predicates>
+													<Item type="gameMechanics.elements.predicates.PredicateInZone">
+														<zone href="/Maps/2ndCircle/Zones/ZoneContested3/ZoneContested3.(ZoneResource).xdb#xpointer(/gameMechanics.map.zone.ZoneResource)" />
+													</Item>
+												</predicates>
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+														<predicates>
+															<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+																<predicate type="gameMechanics.elements.predicates.PredicateDeviceNear">
+																	<radius>20</radius>
+																	<devices>
+																		<Item href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftBox.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+																	</devices>
+																</predicate>
+															</Item>
+														</predicates>
+														<impacts>
+															<Item type="gameMechanics.elements.impacts.CasterProbabilisticImpact">
+																<chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+																	<value>0.7</value>
+																</chanceCalcer>
+																<impacts>
+																	<Item type="gameMechanics.elements.impacts.ImpactSummon">
+																		<destination type="gameMechanics.map.destination.DestinationModified">
+																			<destination type="gameMechanics.map.destination.SelfPosDestination" />
+																			<modifiers>
+																				<Item type="gameMechanics.map.destination.modifier.ModifierSelectReachable">
+																					<alternatives>
+																						<Item type="gameMechanics.map.destination.modifier.SpreadModifier">
+																							<verticalRange min="0" max="0" />
+																							<horizontalRange min="3" max="20" />
+																						</Item>
+																					</alternatives>
+																				</Item>
+																				<Item type="gameMechanics.map.destination.modifier.ModifierTraceDown" />
+																			</modifiers>
+																		</destination>
+																		<plane href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftPlane.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+																		<object href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftBox.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+																	</Item>
+																	<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+																		<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+																		<data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/BoxIsHere.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+																	</Item>
+																	<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+																		<impacts>
+																			<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																				<buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/Summon.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																			</Item>
+																		</impacts>
+																	</Item>
+																</impacts>
+																<impactsOnFail>
+																	<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+																		<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+																		<data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/SeekingMessage.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+																	</Item>
+																	<Item type="gameMechanics.elements.impacts.ImpactSummon">
+																		<destination type="gameMechanics.map.destination.RelativePos">
+																			<coord x="1" y="1" />
+																		</destination>
+																		<plane href="/Mechanics/EventsAndActions/2015_NY_DailyMount/HiddenBox.(Plane).xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+																		<object href="/Mechanics/EventsAndActions/2015_NY_DailyMount/GiftBox.(SteleResource).xdb#xpointer(/gameMechanics.world.device.SteleResource)" />
+																	</Item>
+																</impactsOnFail>
+															</Item>
+														</impacts>
+														<elseImpacts>
+															<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+																<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+																<data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/SeekingMessage.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+															</Item>
+														</elseImpacts>
+													</Item>
+												</impacts>
+												<elseImpacts>
+													<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+														<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+														<data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/ZoneMessage2.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+													</Item>
+												</elseImpacts>
+											</Item>
+										</impacts>
+									</Item>
+								</elseImpacts>
+							</Item>
+						</elseImpacts>
+					</Item>
+				</impactsIf>
+				<impactsElse>
+					<Item type="gameMechanics.elements.impacts.RandomImpact">
+						<entries>
+							<Item>
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/Zone1.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+										<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+										<data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Messages/ZoneMessage.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+									</Item>
+								</impacts>
+							</Item>
+							<Item>
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/Zone2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+										<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+										<data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/ZoneMessage1.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+									</Item>
+								</impacts>
+							</Item>
+							<Item>
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Buffs/Zone3.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+										<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+										<data href="/Mechanics/EventsAndActions/2015_NY_DailyMount/Quests/ZoneMessage2.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+									</Item>
+								</impacts>
+							</Item>
+						</entries>
+					</Item>
+				</impactsElse>
+			</Item>
+		</casterImpacts>
+	</mechanics>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

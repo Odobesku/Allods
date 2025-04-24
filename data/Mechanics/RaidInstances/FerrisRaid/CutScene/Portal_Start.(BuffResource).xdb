@@ -1,206 +1,206 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.buff.BuffResource>
-    <Header>
-        <resourceId>739911014</resourceId>
-    </Header>
-    <visualEffects>
-        <Item>
-            <effectFx href="/Spells/FX/Spells/Camera_CutScene.(VisObjectTemplate).xdb" />
-        </Item>
-    </visualEffects>
-    <visScript href="Portal_Start.(BuffVisScripts).xdb" />
-    <needVisualize>false</needVisualize>
-    <needVisualizeDuration>false</needVisualizeDuration>
-    <effects>
-        <Item type="gameMechanics.elements.effects.EffectDisableAct">
-            <actions>
-                <Item>Move</Item>
-                <Item>Rotate</Item>
-                <Item>Jump</Item>
-            </actions>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
-        <Item type="gameMechanics.elements.effects.Switch">
-            <impactsOn>
-                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                    <buff href="Portal_Start_CutScene.(BuffResource).xdb" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactClientData">
-                    <data href="InterfaceActive.(ClientData).xdb" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.elements.predicates.PredicateMobNear">
-                            <radius>56</radius>
-                            <mobs>
-                                <Item href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Boss/PortalBoss.(MobWorld).xdb" />
-                            </mobs>
-                        </Item>
-                    </predicates>
-                    <impactsElse>
-                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.RandomImpactGeneric">
-                                    <entries>
-                                        <Item>
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
-                                                    <destination type="gameMechanics.map.destination.DestinationLocatorSpread">
-                                                        <locator>
-                                                            <scriptID>13_JumpDestRight</scriptID>
-                                                            <map href="/Maps/FerrisRaid/MapResource.xdb" />
-                                                        </locator>
-                                                        <horizontalSpread>4</horizontalSpread>
-                                                    </destination>
-                                                </Item>
-                                            </impacts>
-                                        </Item>
-                                        <Item>
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
-                                                    <destination type="gameMechanics.map.destination.DestinationLocatorSpread">
-                                                        <locator>
-                                                            <scriptID>13_JumpDestLeft</scriptID>
-                                                            <map href="/Maps/FerrisRaid/MapResource.xdb" />
-                                                        </locator>
-                                                        <horizontalSpread>4</horizontalSpread>
-                                                    </destination>
-                                                </Item>
-                                            </impacts>
-                                        </Item>
-                                    </entries>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impactsElse>
-                </Item>
-            </impactsOn>
-            <impactsOff>
-                <Item type="gameMechanics.elements.impacts.ImpactClientData">
-                    <data href="InterfaceDeactive.(ClientData).xdb" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="Portal_Start_CutScene.(BuffResource).xdb" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="CutScene_Part_2.(BuffResource).xdb" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="CutScene_Part_3.(BuffResource).xdb" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="CutScene_Part_4.(BuffResource).xdb" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="CutScene_Part_5.(BuffResource).xdb" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="CutScene_Part_6.(BuffResource).xdb" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.elements.resources.ResourceBuff">
-                            <buff href="Cooldown_PortalIntro.(BuffResource).xdb" />
-                        </Item>
-                    </predicates>
-                    <impactsElse>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="Cooldown_PortalIntro.(BuffResource).xdb" />
-                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                <multiplier>1</multiplier>
-                            </durationScaler>
-                        </Item>
-                    </impactsElse>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
-                    <spawn>
-                        <scriptID>13_PortalBoss</scriptID>
-                        <map href="/Maps/FerrisRaid/MapResource.xdb" />
-                    </spawn>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.StackBuff">
-                            <buff href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Boss/AvatarsWatchingCutScene.(BuffResource).xdb" />
-                            <delta type="gameMechanics.elements.calcers.FloatData">
-                                <value>-1</value>
-                            </delta>
-                        </Item>
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
-                    <pool href="CutScenePool.(SummonPool).xdb" />
-                    <isPersonalPool>true</isPersonalPool>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-            </impactsOff>
-        </Item>
-        <Item type="gameMechanics.elements.effects.AddPlane">
-            <plane href="Portal_CutScene_Plane.(Plane).xdb" />
-            <personalPlane>true</personalPlane>
-        </Item>
-        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
-            <visibilityRule>
-                <channel>Visibility</channel>
-                <vector>Outgoing</vector>
-                <direction>Incoming</direction>
-                <plane href="InvisibleInCutscenes.(Plane).xdb" />
-                <action>DENY</action>
-            </visibilityRule>
-        </Item>
-        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
-            <visibilityRule>
-                <channel>Influence</channel>
-                <vector>Outgoing</vector>
-                <direction>Incoming</direction>
-                <plane href="InvisibleInCutscenes.(Plane).xdb" />
-                <action>DENY</action>
-            </visibilityRule>
-        </Item>
-        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
-            <visibilityRule>
-                <channel>Select</channel>
-                <vector>Outgoing</vector>
-                <direction>Incoming</direction>
-                <plane href="InvisibleInCutscenes.(Plane).xdb" />
-                <action>DENY</action>
-            </visibilityRule>
-        </Item>
-        <Item type="gameMechanics.constructor.basicElements.EffectNull" />
-        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
-            <visibilityRule>
-                <channel>Visibility</channel>
-                <vector>Outgoing</vector>
-                <direction>Incoming</direction>
-                <plane href="Portal_CutScene_Plane.(Plane).xdb" />
-                <personalPlane>true</personalPlane>
-            </visibilityRule>
-        </Item>
-        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
-            <visibilityRule>
-                <channel>Influence</channel>
-                <vector>Outgoing</vector>
-                <direction>Incoming</direction>
-                <plane href="Portal_CutScene_Plane.(Plane).xdb" />
-                <personalPlane>true</personalPlane>
-            </visibilityRule>
-        </Item>
-        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
-            <visibilityRule>
-                <channel>Select</channel>
-                <vector>Outgoing</vector>
-                <direction>Incoming</direction>
-                <plane href="Portal_CutScene_Plane.(Plane).xdb" />
-                <personalPlane>true</personalPlane>
-            </visibilityRule>
-        </Item>
-    </effects>
-    <duration>63500</duration>
-    <isHelpful>true</isHelpful>
-    <isDetachableOnWill>true</isDetachableOnWill>
-    <canBeSaved>false</canBeSaved>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/CutScene.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
-    </groups>
+	<Header>
+		<resourceId>739911014</resourceId>
+	</Header>
+	<visualEffects>
+		<Item>
+			<effectFx href="/Spells/FX/Spells/Camera_CutScene.(VisObjectTemplate).xdb" />
+		</Item>
+	</visualEffects>
+	<visScript href="Portal_Start.(BuffVisScripts).xdb" />
+	<needVisualize>false</needVisualize>
+	<needVisualizeDuration>false</needVisualizeDuration>
+	<effects>
+		<Item type="gameMechanics.elements.effects.EffectDisableAct">
+			<actions>
+				<Item>Move</Item>
+				<Item>Rotate</Item>
+				<Item>Jump</Item>
+			</actions>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+		<Item type="gameMechanics.elements.effects.Switch">
+			<impactsOn>
+				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+					<buff href="Portal_Start_CutScene.(BuffResource).xdb" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactClientData">
+					<data href="InterfaceActive.(ClientData).xdb" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateMobNear">
+							<radius>56</radius>
+							<mobs>
+								<Item href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Boss/PortalBoss.(MobWorld).xdb" />
+							</mobs>
+						</Item>
+					</predicates>
+					<impactsElse>
+						<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.RandomImpactGeneric">
+									<entries>
+										<Item>
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ImpactTeleport">
+													<destination type="gameMechanics.map.destination.DestinationLocatorSpread">
+														<locator>
+															<scriptID>13_JumpDestRight</scriptID>
+															<map href="/Maps/FerrisRaid/MapResource.xdb" />
+														</locator>
+														<horizontalSpread>4</horizontalSpread>
+													</destination>
+												</Item>
+											</impacts>
+										</Item>
+										<Item>
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ImpactTeleport">
+													<destination type="gameMechanics.map.destination.DestinationLocatorSpread">
+														<locator>
+															<scriptID>13_JumpDestLeft</scriptID>
+															<map href="/Maps/FerrisRaid/MapResource.xdb" />
+														</locator>
+														<horizontalSpread>4</horizontalSpread>
+													</destination>
+												</Item>
+											</impacts>
+										</Item>
+									</entries>
+								</Item>
+							</impacts>
+						</Item>
+					</impactsElse>
+				</Item>
+			</impactsOn>
+			<impactsOff>
+				<Item type="gameMechanics.elements.impacts.ImpactClientData">
+					<data href="InterfaceDeactive.(ClientData).xdb" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="Portal_Start_CutScene.(BuffResource).xdb" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="CutScene_Part_2.(BuffResource).xdb" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="CutScene_Part_3.(BuffResource).xdb" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="CutScene_Part_4.(BuffResource).xdb" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="CutScene_Part_5.(BuffResource).xdb" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="CutScene_Part_6.(BuffResource).xdb" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.resources.ResourceBuff">
+							<buff href="Cooldown_PortalIntro.(BuffResource).xdb" />
+						</Item>
+					</predicates>
+					<impactsElse>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="Cooldown_PortalIntro.(BuffResource).xdb" />
+							<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+								<multiplier>1</multiplier>
+							</durationScaler>
+						</Item>
+					</impactsElse>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+					<spawn>
+						<scriptID>13_PortalBoss</scriptID>
+						<map href="/Maps/FerrisRaid/MapResource.xdb" />
+					</spawn>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.StackBuff">
+							<buff href="/Mechanics/RaidInstances/FerrisRaid/13_Portal/Boss/AvatarsWatchingCutScene.(BuffResource).xdb" />
+							<delta type="gameMechanics.elements.calcers.FloatData">
+								<value>-1</value>
+							</delta>
+						</Item>
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+					<pool href="CutScenePool.(SummonPool).xdb" />
+					<isPersonalPool>true</isPersonalPool>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+			</impactsOff>
+		</Item>
+		<Item type="gameMechanics.elements.effects.AddPlane">
+			<plane href="Portal_CutScene_Plane.(Plane).xdb" />
+			<personalPlane>true</personalPlane>
+		</Item>
+		<Item type="gameMechanics.elements.effects.AddVisibilityRule">
+			<visibilityRule>
+				<channel>Visibility</channel>
+				<vector>Outgoing</vector>
+				<direction>Incoming</direction>
+				<plane href="InvisibleInCutscenes.(Plane).xdb" />
+				<action>DENY</action>
+			</visibilityRule>
+		</Item>
+		<Item type="gameMechanics.elements.effects.AddVisibilityRule">
+			<visibilityRule>
+				<channel>Influence</channel>
+				<vector>Outgoing</vector>
+				<direction>Incoming</direction>
+				<plane href="InvisibleInCutscenes.(Plane).xdb" />
+				<action>DENY</action>
+			</visibilityRule>
+		</Item>
+		<Item type="gameMechanics.elements.effects.AddVisibilityRule">
+			<visibilityRule>
+				<channel>Select</channel>
+				<vector>Outgoing</vector>
+				<direction>Incoming</direction>
+				<plane href="InvisibleInCutscenes.(Plane).xdb" />
+				<action>DENY</action>
+			</visibilityRule>
+		</Item>
+		<Item type="gameMechanics.constructor.basicElements.EffectNull" />
+		<Item type="gameMechanics.elements.effects.AddVisibilityRule">
+			<visibilityRule>
+				<channel>Visibility</channel>
+				<vector>Outgoing</vector>
+				<direction>Incoming</direction>
+				<plane href="Portal_CutScene_Plane.(Plane).xdb" />
+				<personalPlane>true</personalPlane>
+			</visibilityRule>
+		</Item>
+		<Item type="gameMechanics.elements.effects.AddVisibilityRule">
+			<visibilityRule>
+				<channel>Influence</channel>
+				<vector>Outgoing</vector>
+				<direction>Incoming</direction>
+				<plane href="Portal_CutScene_Plane.(Plane).xdb" />
+				<personalPlane>true</personalPlane>
+			</visibilityRule>
+		</Item>
+		<Item type="gameMechanics.elements.effects.AddVisibilityRule">
+			<visibilityRule>
+				<channel>Select</channel>
+				<vector>Outgoing</vector>
+				<direction>Incoming</direction>
+				<plane href="Portal_CutScene_Plane.(Plane).xdb" />
+				<personalPlane>true</personalPlane>
+			</visibilityRule>
+		</Item>
+	</effects>
+	<duration>63500</duration>
+	<isHelpful>true</isHelpful>
+	<isDetachableOnWill>true</isDetachableOnWill>
+	<canBeSaved>false</canBeSaved>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/CutScene.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+	</groups>
 </gameMechanics.constructor.schemes.buff.BuffResource>

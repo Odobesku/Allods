@@ -1,126 +1,126 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.buff.BuffResource>
-    <Header>
-        <resourceId>739864862</resourceId>
-        <isPrototype>true</isPrototype>
-        <Variables>
-            <damageType>ASTRAL</damageType>
-            <limit>3</limit>
-        </Variables>
-    </Header>
-    <Name href="Target.Adapt.Prototype.(BuffResource).Name.txt" />
-    <effects>
-        <Item type="gameMechanics.elements.effects.Switch">
-            <impactsOn>
-                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                    <buff href="/Mechanics/Ships/BeamCannon/TargetTickBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                    <stacks type="gameMechanics.elements.calcers.BuffStackCountCalcer">
-                        <buff href="/Mechanics/Ships/BeamCannon/SelfTickBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                    </stacks>
-                </Item>
-            </impactsOn>
-            <impactsOff>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="/Mechanics/Ships/BeamCannon/TargetTickBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                </Item>
-            </impactsOff>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EntityImpactsOverTime">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                    <buff href="/Mechanics/Ships/BeamCannon/SelfTickBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    <anyRank>false</anyRank>
-                                </Item>
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                    <impacts>
-                                        <Item type="gameMechanics.world.device.cannon.ImpactCannonDamage">
-                                            <damage type="gameMechanics.elements.calcers.CalcerMul">
-                                                <calcers>
-                                                    <Item type="gameMechanics.elements.calcers.CalcerExp">
-                                                        <base>1.33</base>
-                                                        <powCalc type="gameMechanics.elements.calcers.CalcerMin">
-                                                            <calcers>
-                                                                <Item type="gameMechanics.elements.calcers.FloatData">
-                                                                    <value>2</value>
-                                                                </Item>
-                                                                <Item type="gameMechanics.elements.calcers.CalcerMax">
-                                                                    <calcers>
-                                                                        <Item type="gameMechanics.elements.calcers.FloatData">
-                                                                            <value>0</value>
-                                                                        </Item>
-                                                                        <Item type="gameMechanics.elements.calcers.CalcerDiff">
-                                                                            <minuend type="gameMechanics.elements.calcers.AstralSectorTLCalcerFloat" />
-                                                                            <subtrahend type="gameMechanics.elements.calcers.OnItemCalcer">
-                                                                                <calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerLevel" />
-                                                                                <source type="gameMechanics.elements.item.ItemPart" />
-                                                                            </subtrahend>
-                                                                        </Item>
-                                                                        <Item type="gameMechanics.elements.calcers.CalcerSum">
-                                                                            <summands>
-                                                                                <Item type="gameMechanics.elements.calcers.CalcerTransport">
-                                                                                    <calcer type="gameMechanics.elements.calcers.LongToFloatCalcer">
-                                                                                        <calcer type="gameMechanics.world.ship.elements.calcers.CalcerShipTL" />
-                                                                                    </calcer>
-                                                                                </Item>
-                                                                                <Item type="gameMechanics.elements.calcers.CalcerMul">
-                                                                                    <calcers>
-                                                                                        <Item type="gameMechanics.elements.calcers.OnItemCalcer">
-                                                                                            <calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerLevel" />
-                                                                                            <source type="gameMechanics.elements.item.ItemPart" />
-                                                                                        </Item>
-                                                                                        <Item type="gameMechanics.elements.calcers.FloatData">
-                                                                                            <value>-1</value>
-                                                                                        </Item>
-                                                                                    </calcers>
-                                                                                </Item>
-                                                                            </summands>
-                                                                        </Item>
-                                                                    </calcers>
-                                                                </Item>
-                                                            </calcers>
-                                                        </powCalc>
-                                                    </Item>
-                                                    <Item type="gameMechanics.elements.calcers.OnItemCalcer">
-                                                        <calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerByName">
-                                                            <name>damage</name>
-                                                        </calcer>
-                                                        <source type="gameMechanics.elements.item.ItemPart" />
-                                                    </Item>
-                                                </calcers>
-                                            </damage>
-                                            <damageType var="damageType" />
-                                            <hitCalcType type="gameMechanics.world.projectile.StaticCalcType" />
-                                            <targetScaler type="gameMechanics.elements.scalers.ScalerMin">
-                                                <scaler1 type="gameMechanics.elements.scalers.LinearScaler">
-                                                    <multiplier>3</multiplier>
-                                                </scaler1>
-                                                <scaler2 type="gameMechanics.elements.scalers.ScalerBuff">
-                                                    <buff href="/Mechanics/Ships/BeamCannon/TargetTickBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                    <summand>0</summand>
-                                                    <checkCaster>true</checkCaster>
-                                                </scaler2>
-                                            </targetScaler>
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impactsIf>
-                        </Item>
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                    <buff href="/Mechanics/Ships/BeamCannon/TargetTickBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                </Item>
-            </impacts>
-        </Item>
-    </effects>
-    <isHelpful>false</isHelpful>
-    <isMultiple>true</isMultiple>
-    <canBeSaved>false</canBeSaved>
-    <isClientReplicated>false</isClientReplicated>
+	<Header>
+		<resourceId>739864862</resourceId>
+		<isPrototype>true</isPrototype>
+		<Variables>
+			<damageType>ASTRAL</damageType>
+			<limit>3</limit>
+		</Variables>
+	</Header>
+	<Name href="Target.Adapt.Prototype.(BuffResource).Name.txt" />
+	<effects>
+		<Item type="gameMechanics.elements.effects.Switch">
+			<impactsOn>
+				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+					<buff href="/Mechanics/Ships/BeamCannon/TargetTickBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+					<stacks type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+						<buff href="/Mechanics/Ships/BeamCannon/SelfTickBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+					</stacks>
+				</Item>
+			</impactsOn>
+			<impactsOff>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="/Mechanics/Ships/BeamCannon/TargetTickBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</Item>
+			</impactsOff>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EntityImpactsOverTime">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.elements.resources.ResourceBuff">
+									<buff href="/Mechanics/Ships/BeamCannon/SelfTickBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									<anyRank>false</anyRank>
+								</Item>
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+									<impacts>
+										<Item type="gameMechanics.world.device.cannon.ImpactCannonDamage">
+											<damage type="gameMechanics.elements.calcers.CalcerMul">
+												<calcers>
+													<Item type="gameMechanics.elements.calcers.CalcerExp">
+														<base>1.33</base>
+														<powCalc type="gameMechanics.elements.calcers.CalcerMin">
+															<calcers>
+																<Item type="gameMechanics.elements.calcers.FloatData">
+																	<value>2</value>
+																</Item>
+																<Item type="gameMechanics.elements.calcers.CalcerMax">
+																	<calcers>
+																		<Item type="gameMechanics.elements.calcers.FloatData">
+																			<value>0</value>
+																		</Item>
+																		<Item type="gameMechanics.elements.calcers.CalcerDiff">
+																			<minuend type="gameMechanics.elements.calcers.AstralSectorTLCalcerFloat" />
+																			<subtrahend type="gameMechanics.elements.calcers.OnItemCalcer">
+																				<calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerLevel" />
+																				<source type="gameMechanics.elements.item.ItemPart" />
+																			</subtrahend>
+																		</Item>
+																		<Item type="gameMechanics.elements.calcers.CalcerSum">
+																			<summands>
+																				<Item type="gameMechanics.elements.calcers.CalcerTransport">
+																					<calcer type="gameMechanics.elements.calcers.LongToFloatCalcer">
+																						<calcer type="gameMechanics.world.ship.elements.calcers.CalcerShipTL" />
+																					</calcer>
+																				</Item>
+																				<Item type="gameMechanics.elements.calcers.CalcerMul">
+																					<calcers>
+																						<Item type="gameMechanics.elements.calcers.OnItemCalcer">
+																							<calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerLevel" />
+																							<source type="gameMechanics.elements.item.ItemPart" />
+																						</Item>
+																						<Item type="gameMechanics.elements.calcers.FloatData">
+																							<value>-1</value>
+																						</Item>
+																					</calcers>
+																				</Item>
+																			</summands>
+																		</Item>
+																	</calcers>
+																</Item>
+															</calcers>
+														</powCalc>
+													</Item>
+													<Item type="gameMechanics.elements.calcers.OnItemCalcer">
+														<calcer type="gameMechanics.constructor.schemes.item.calcers.ItemCalcerByName">
+															<name>damage</name>
+														</calcer>
+														<source type="gameMechanics.elements.item.ItemPart" />
+													</Item>
+												</calcers>
+											</damage>
+											<damageType var="damageType" />
+											<hitCalcType type="gameMechanics.world.projectile.StaticCalcType" />
+											<targetScaler type="gameMechanics.elements.scalers.ScalerMin">
+												<scaler1 type="gameMechanics.elements.scalers.LinearScaler">
+													<multiplier>3</multiplier>
+												</scaler1>
+												<scaler2 type="gameMechanics.elements.scalers.ScalerBuff">
+													<buff href="/Mechanics/Ships/BeamCannon/TargetTickBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+													<summand>0</summand>
+													<checkCaster>true</checkCaster>
+												</scaler2>
+											</targetScaler>
+										</Item>
+									</impacts>
+								</Item>
+							</impactsIf>
+						</Item>
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+					<buff href="/Mechanics/Ships/BeamCannon/TargetTickBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</Item>
+			</impacts>
+		</Item>
+	</effects>
+	<isHelpful>false</isHelpful>
+	<isMultiple>true</isMultiple>
+	<canBeSaved>false</canBeSaved>
+	<isClientReplicated>false</isClientReplicated>
 </gameMechanics.constructor.schemes.buff.BuffResource>

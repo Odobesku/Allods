@@ -1,123 +1,123 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.area.SpellArea>
-    <Header>
-        <resourceId>739850808</resourceId>
-    </Header>
-    <Name href="Umoir_Reactor_Boss_Spell_Projectile.(SpellArea).Name.txt" />
-    <visualScripts href="Umoir_Reactor_Boss_Spell_Projectile.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
-    <nameTemplate href="Umoir_Reactor_Boss_Spell_Projectile.(SpellArea).Name.txt" />
-    <range type="gameMechanics.elements.calcers.FloatData">
-        <value>60</value>
-    </range>
-    <targetType>STTPoint</targetType>
-    <iffPolicy>Enemies</iffPolicy>
-    <triggersGlobalCooldown>false</triggersGlobalCooldown>
-    <mechanics>
-        <cooldown>
-            <duration>20000</duration>
-        </cooldown>
-        <casterConditions>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.constructor.basicElements.PredicateOr">
-                    <predicates>
-                        <Item type="gameMechanics.elements.resources.ResourceBuff">
-                            <buff href="ReactorBoss_F3_vis_01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                        <Item type="gameMechanics.elements.resources.ResourceBuff">
-                            <buff href="ReactorBoss_F2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                        <Item type="gameMechanics.elements.resources.ResourceBuff">
-                            <buff href="ReactorBoss_F3_vis.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                    </predicates>
-                </predicate>
-            </Item>
-        </casterConditions>
-        <targetConditions>
-            <Item type="gameMechanics.elements.predicates.PredicateCreature" />
-            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-        </targetConditions>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                <delay>5000</delay>
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-                        <projectileData>
-                            <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
-                                <spawnAt>Caster</spawnAt>
-                            </moveType>
-                            <resource href="ReactorBoss_Projectile_AstralKick.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
-                        </projectileData>
-                        <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
-                    </Item>
-                </impacts>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                        <affectGroup>Enemies</affectGroup>
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-                                <projectileData>
-                                    <moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
-                                    <resource href="ReactorBoss_Projectile_Decal.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
-                                </projectileData>
-                                <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
-                            </Item>
-                        </impacts>
-                        <targetsLimit>3</targetsLimit>
-                    </Item>
-                </impacts>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                <delay>5000</delay>
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactBunchesAround">
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.predicates.PredicateRespawnableResource">
-                                        <resources>
-                                            <Item href="ReactorBoss_Projectile_Decal.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
-                                        </resources>
-                                    </Item>
-                                </predicates>
-                                <impactsIf>
-                                    <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-                                        <projectileData>
-                                            <moveType type="gameMechanics.world.projectile.MoveTypeDestination" />
-                                            <resource href="ReactorBoss_Projectile.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
-                                        </projectileData>
-                                        <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
-                                    </Item>
-                                </impactsIf>
-                            </Item>
-                        </impacts>
-                        <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-                            <predicates>
-                                <Item type="gameMechanics.elements.predicates.PredicateProjectile" />
-                            </predicates>
-                        </filter>
-                        <targetsLimit>3</targetsLimit>
-                    </Item>
-                </impacts>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
-                <spell href="Umoir_Reactor_Boss_Spell_Projectile_01.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
-                <duration>0</duration>
-            </Item>
-        </casterImpacts>
-        <targetImpacts>
-            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
-                <element>FIRE</element>
-                <threatMultiplier>0</threatMultiplier>
-                <damage>25</damage>
-                <scaler type="gameMechanics.elements.scalers.MagicScaler" />
-            </Item>
-        </targetImpacts>
-    </mechanics>
-    <speed>25</speed>
-    <maxTargets>3</maxTargets>
-    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
-    <radius>5</radius>
+	<Header>
+		<resourceId>739850808</resourceId>
+	</Header>
+	<Name href="Umoir_Reactor_Boss_Spell_Projectile.(SpellArea).Name.txt" />
+	<visualScripts href="Umoir_Reactor_Boss_Spell_Projectile.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+	<nameTemplate href="Umoir_Reactor_Boss_Spell_Projectile.(SpellArea).Name.txt" />
+	<range type="gameMechanics.elements.calcers.FloatData">
+		<value>60</value>
+	</range>
+	<targetType>STTPoint</targetType>
+	<iffPolicy>Enemies</iffPolicy>
+	<triggersGlobalCooldown>false</triggersGlobalCooldown>
+	<mechanics>
+		<cooldown>
+			<duration>20000</duration>
+		</cooldown>
+		<casterConditions>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.constructor.basicElements.PredicateOr">
+					<predicates>
+						<Item type="gameMechanics.elements.resources.ResourceBuff">
+							<buff href="ReactorBoss_F3_vis_01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+						<Item type="gameMechanics.elements.resources.ResourceBuff">
+							<buff href="ReactorBoss_F2.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+						<Item type="gameMechanics.elements.resources.ResourceBuff">
+							<buff href="ReactorBoss_F3_vis.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+					</predicates>
+				</predicate>
+			</Item>
+		</casterConditions>
+		<targetConditions>
+			<Item type="gameMechanics.elements.predicates.PredicateCreature" />
+			<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+		</targetConditions>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+				<delay>5000</delay>
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+						<projectileData>
+							<moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+								<spawnAt>Caster</spawnAt>
+							</moveType>
+							<resource href="ReactorBoss_Projectile_AstralKick.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+						</projectileData>
+						<pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+					</Item>
+				</impacts>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+						<affectGroup>Enemies</affectGroup>
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+								<projectileData>
+									<moveType type="gameMechanics.world.projectile.MoveTypeIdle" />
+									<resource href="ReactorBoss_Projectile_Decal.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+								</projectileData>
+								<pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+							</Item>
+						</impacts>
+						<targetsLimit>3</targetsLimit>
+					</Item>
+				</impacts>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+				<delay>5000</delay>
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.ImpactBunchesAround">
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+								<predicates>
+									<Item type="gameMechanics.elements.predicates.PredicateRespawnableResource">
+										<resources>
+											<Item href="ReactorBoss_Projectile_Decal.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+										</resources>
+									</Item>
+								</predicates>
+								<impactsIf>
+									<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+										<projectileData>
+											<moveType type="gameMechanics.world.projectile.MoveTypeDestination" />
+											<resource href="ReactorBoss_Projectile.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+										</projectileData>
+										<pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+									</Item>
+								</impactsIf>
+							</Item>
+						</impacts>
+						<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+							<predicates>
+								<Item type="gameMechanics.elements.predicates.PredicateProjectile" />
+							</predicates>
+						</filter>
+						<targetsLimit>3</targetsLimit>
+					</Item>
+				</impacts>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+				<spell href="Umoir_Reactor_Boss_Spell_Projectile_01.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+				<duration>0</duration>
+			</Item>
+		</casterImpacts>
+		<targetImpacts>
+			<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+				<element>FIRE</element>
+				<threatMultiplier>0</threatMultiplier>
+				<damage>25</damage>
+				<scaler type="gameMechanics.elements.scalers.MagicScaler" />
+			</Item>
+		</targetImpacts>
+	</mechanics>
+	<speed>25</speed>
+	<maxTargets>3</maxTargets>
+	<shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+	<radius>5</radius>
 </gameMechanics.constructor.schemes.spell.area.SpellArea>

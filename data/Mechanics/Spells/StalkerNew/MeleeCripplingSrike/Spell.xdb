@@ -1,200 +1,200 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>252173324</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/MeleeAttacks.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        <Item href="/Mechanics/Spells/Groups/InsuranceTrigger.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        <Item href="/Mechanics/Spells/Groups/DragonRelic2.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-    </groups>
-    <element>PHYSICAL</element>
-    <descVars>
-        <Item>
-            <name>var0</name>
-            <value var="dotDamage" />
-            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-                <formula>WeaponScalerSpeed</formula>
-            </scaler>
-        </Item>
-        <Item>
-            <name>var1</name>
-            <value var="avgDamage" />
-            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-                <formula>WeaponScalerSpeedMin</formula>
-            </scaler>
-        </Item>
-        <Item>
-            <name>var2</name>
-            <value var="avgDamage" />
-            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-                <formula>RangedWeaponScalerMax</formula>
-            </scaler>
-        </Item>
-    </descVars>
-    <image href="/Interface/Icons/Spells/Stalker/CripplingStrike.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
-    <visualScripts href="/Spells/VisScripts/Stalker/CripplingStrike.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
-    <nameTemplate href="Spell_Name.txt.template" />
-    <descTemplate href="Spell_Desc.txt.template" />
-    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
-    <level>1</level>
-    <prepareDuration>0</prepareDuration>
-    <immutablePrepareDuration>false</immutablePrepareDuration>
-    <needLos>true</needLos>
-    <targetType>STTCurrentTarget</targetType>
-    <isAggro>true</isAggro>
-    <replaceLowRanks>true</replaceLowRanks>
-    <isWorkOnDead>false</isWorkOnDead>
-    <ranks>
-        <Item href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-        <Item href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-        <Item href="Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-    </ranks>
-    <iffPolicy>Enemies</iffPolicy>
-    <triggersGlobalCooldown>true</triggersGlobalCooldown>
-    <ignoreGlobalCooldown>false</ignoreGlobalCooldown>
-    <launchWhenReady>true</launchWhenReady>
-    <needInFront>true</needInFront>
-    <mechanics>
-        <cooldown>
-            <stage>Launch</stage>
-            <duration>3000</duration>
-            <group href="" />
-            <scaler type="gameMechanics.elements.scalers.WeaponSpeedScaler">
-                <normalize>true</normalize>
-            </scaler>
-        </cooldown>
-        <casterConditions>
-            <Item type="gameMechanics.elements.predicates.PredicateUsesWeapon" />
-        </casterConditions>
-        <casterResources>
-            <Item type="gameMechanics.elements.resources.ResourceMana">
-                <mana>30</mana>
-                <rawManaScaler type="gameMechanics.elements.scalers.WeaponSpeedScaler">
-                    <normalize>true</normalize>
-                </rawManaScaler>
-                <scaleByWeaponSpeed>false</scaleByWeaponSpeed>
-                <source>Mainhand</source>
-                <manaType>
-                    <Item>Energy</Item>
-                </manaType>
-            </Item>
-        </casterResources>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                        <predicates>
-                            <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                <buff href="/Mechanics/Spells/StalkerNew/MeleeIntuitiveStrike/Chain.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                <consumeStacks>3</consumeStacks>
-                            </Item>
-                        </predicates>
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                <buff href="/Mechanics/Spells/StalkerNew/MeleeIntuitiveStrike/Chain.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            </Item>
-                        </impacts>
-                    </Item>
-                </impacts>
-            </Item>
-        </casterImpacts>
-        <targetImpacts>
-            <Item type="gameMechanics.elements.impacts.ScaledPhysicalWeaponDamage">
-                <impactsOnHitTarget>
-                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                        <predicates>
-                            <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                <buff href="/Mechanics/Spells/StalkerNew/MeleeIntuitiveStrike/Chain.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                <consumeStacks>3</consumeStacks>
-                            </Item>
-                        </predicates>
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.ScaledPhysicalWeaponDamage">
-                                <impactsOnHitTarget>
-                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                        <buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                        <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
-                                    </Item>
-                                </impactsOnHitTarget>
-                                <scalerTarget type="gameMechanics.elements.scalers.BuffTicksScaler">
-                                    <buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    <tickLength>2000</tickLength>
-                                    <checkCaster>true</checkCaster>
-                                </scalerTarget>
-                                <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-                                    <scalers>
-                                        <Item type="gameMechanics.elements.scalers.WeaponScaler" />
-                                        <Item type="gameMechanics.elements.scalers.AbilityRankScaler">
-                                            <ability href="/Mechanics/Spells/StalkerNew/Talents/CrippleStrikeDamage/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-                                            <mul>0.133</mul>
-                                        </Item>
-                                    </scalers>
-                                </scaler>
-                                <avgDamage var="dotDamage" />
-                            </Item>
-                        </impacts>
-                        <elseImpacts>
-                            <Item type="gameMechanics.elements.impacts.ImpactsIf">
-                                <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromMaster">
-                                    <buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </predicate>
-                                <impactsElse>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                                <buff href="/Mechanics/Spells/StalkerNew/MeleeIntuitiveStrike/Chain.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                <consumeStacks>1</consumeStacks>
-                                            </Item>
-                                        </predicates>
-                                        <impacts>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff hrefvar="buff" />
-                                                <durationScaler type="gameMechanics.elements.scalers.AbilityRankScaler">
-                                                    <ability href="/Mechanics/Spells/StalkerNew/Talents/CrippleStrikeDuration/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-                                                    <mul>0.2</mul>
-                                                </durationScaler>
-                                            </Item>
-                                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.StackBuff">
-                                                        <buff href="/Mechanics/Spells/StalkerNew/MeleeIntuitiveStrike/Chain.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        <delta type="gameMechanics.elements.calcers.FloatData">
-                                                            <value>-1</value>
-                                                        </delta>
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impactsElse>
-                            </Item>
-                        </elseImpacts>
-                    </Item>
-                </impactsOnHitTarget>
-                <scaleByDamageImpactsOnHit>false</scaleByDamageImpactsOnHit>
-                <threatMultiplier>1</threatMultiplier>
-                <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-                    <scalers>
-                        <Item type="gameMechanics.elements.scalers.WeaponScaler" />
-                        <Item type="gameMechanics.elements.scalers.ScalerIf">
-                            <condition type="gameMechanics.elements.resources.ResourceBuff">
-                                <buff href="/Mechanics/Spells/StalkerNew/MeleeIntuitiveStrike/Chain.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                <consumeStacks>3</consumeStacks>
-                            </condition>
-                            <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
-                                <multiplier>3</multiplier>
-                            </scalerIf>
-                        </Item>
-                    </scalers>
-                </scaler>
-                <avgDamage var="avgDamage" />
-                <source>Mainhand</source>
-            </Item>
-        </targetImpacts>
-    </mechanics>
-    <speed>0</speed>
-    <isAE>false</isAE>
+	<Header>
+		<resourceId>252173324</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/MeleeAttacks.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		<Item href="/Mechanics/Spells/Groups/InsuranceTrigger.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		<Item href="/Mechanics/Spells/Groups/DragonRelic2.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+	</groups>
+	<element>PHYSICAL</element>
+	<descVars>
+		<Item>
+			<name>var0</name>
+			<value var="dotDamage" />
+			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+				<formula>WeaponScalerSpeed</formula>
+			</scaler>
+		</Item>
+		<Item>
+			<name>var1</name>
+			<value var="avgDamage" />
+			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+				<formula>WeaponScalerSpeedMin</formula>
+			</scaler>
+		</Item>
+		<Item>
+			<name>var2</name>
+			<value var="avgDamage" />
+			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+				<formula>RangedWeaponScalerMax</formula>
+			</scaler>
+		</Item>
+	</descVars>
+	<image href="/Interface/Icons/Spells/Stalker/CripplingStrike.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+	<visualScripts href="/Spells/VisScripts/Stalker/CripplingStrike.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+	<nameTemplate href="Spell_Name.txt.template" />
+	<descTemplate href="Spell_Desc.txt.template" />
+	<range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+	<level>1</level>
+	<prepareDuration>0</prepareDuration>
+	<immutablePrepareDuration>false</immutablePrepareDuration>
+	<needLos>true</needLos>
+	<targetType>STTCurrentTarget</targetType>
+	<isAggro>true</isAggro>
+	<replaceLowRanks>true</replaceLowRanks>
+	<isWorkOnDead>false</isWorkOnDead>
+	<ranks>
+		<Item href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+		<Item href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+		<Item href="Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+	</ranks>
+	<iffPolicy>Enemies</iffPolicy>
+	<triggersGlobalCooldown>true</triggersGlobalCooldown>
+	<ignoreGlobalCooldown>false</ignoreGlobalCooldown>
+	<launchWhenReady>true</launchWhenReady>
+	<needInFront>true</needInFront>
+	<mechanics>
+		<cooldown>
+			<stage>Launch</stage>
+			<duration>3000</duration>
+			<group href="" />
+			<scaler type="gameMechanics.elements.scalers.WeaponSpeedScaler">
+				<normalize>true</normalize>
+			</scaler>
+		</cooldown>
+		<casterConditions>
+			<Item type="gameMechanics.elements.predicates.PredicateUsesWeapon" />
+		</casterConditions>
+		<casterResources>
+			<Item type="gameMechanics.elements.resources.ResourceMana">
+				<mana>30</mana>
+				<rawManaScaler type="gameMechanics.elements.scalers.WeaponSpeedScaler">
+					<normalize>true</normalize>
+				</rawManaScaler>
+				<scaleByWeaponSpeed>false</scaleByWeaponSpeed>
+				<source>Mainhand</source>
+				<manaType>
+					<Item>Energy</Item>
+				</manaType>
+			</Item>
+		</casterResources>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+						<predicates>
+							<Item type="gameMechanics.elements.resources.ResourceBuff">
+								<buff href="/Mechanics/Spells/StalkerNew/MeleeIntuitiveStrike/Chain.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								<consumeStacks>3</consumeStacks>
+							</Item>
+						</predicates>
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.BuffDetacher">
+								<buff href="/Mechanics/Spells/StalkerNew/MeleeIntuitiveStrike/Chain.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							</Item>
+						</impacts>
+					</Item>
+				</impacts>
+			</Item>
+		</casterImpacts>
+		<targetImpacts>
+			<Item type="gameMechanics.elements.impacts.ScaledPhysicalWeaponDamage">
+				<impactsOnHitTarget>
+					<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+						<predicates>
+							<Item type="gameMechanics.elements.resources.ResourceBuff">
+								<buff href="/Mechanics/Spells/StalkerNew/MeleeIntuitiveStrike/Chain.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								<consumeStacks>3</consumeStacks>
+							</Item>
+						</predicates>
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.ScaledPhysicalWeaponDamage">
+								<impactsOnHitTarget>
+									<Item type="gameMechanics.elements.impacts.BuffDetacher">
+										<buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+										<casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+									</Item>
+								</impactsOnHitTarget>
+								<scalerTarget type="gameMechanics.elements.scalers.BuffTicksScaler">
+									<buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									<tickLength>2000</tickLength>
+									<checkCaster>true</checkCaster>
+								</scalerTarget>
+								<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+									<scalers>
+										<Item type="gameMechanics.elements.scalers.WeaponScaler" />
+										<Item type="gameMechanics.elements.scalers.AbilityRankScaler">
+											<ability href="/Mechanics/Spells/StalkerNew/Talents/CrippleStrikeDamage/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+											<mul>0.133</mul>
+										</Item>
+									</scalers>
+								</scaler>
+								<avgDamage var="dotDamage" />
+							</Item>
+						</impacts>
+						<elseImpacts>
+							<Item type="gameMechanics.elements.impacts.ImpactsIf">
+								<predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromMaster">
+									<buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</predicate>
+								<impactsElse>
+									<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+										<predicates>
+											<Item type="gameMechanics.elements.resources.ResourceBuff">
+												<buff href="/Mechanics/Spells/StalkerNew/MeleeIntuitiveStrike/Chain.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+												<consumeStacks>1</consumeStacks>
+											</Item>
+										</predicates>
+										<impacts>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff hrefvar="buff" />
+												<durationScaler type="gameMechanics.elements.scalers.AbilityRankScaler">
+													<ability href="/Mechanics/Spells/StalkerNew/Talents/CrippleStrikeDuration/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+													<mul>0.2</mul>
+												</durationScaler>
+											</Item>
+											<Item type="gameMechanics.elements.impacts.ReturningImpact">
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.StackBuff">
+														<buff href="/Mechanics/Spells/StalkerNew/MeleeIntuitiveStrike/Chain.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														<delta type="gameMechanics.elements.calcers.FloatData">
+															<value>-1</value>
+														</delta>
+													</Item>
+												</impacts>
+											</Item>
+										</impacts>
+									</Item>
+								</impactsElse>
+							</Item>
+						</elseImpacts>
+					</Item>
+				</impactsOnHitTarget>
+				<scaleByDamageImpactsOnHit>false</scaleByDamageImpactsOnHit>
+				<threatMultiplier>1</threatMultiplier>
+				<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+					<scalers>
+						<Item type="gameMechanics.elements.scalers.WeaponScaler" />
+						<Item type="gameMechanics.elements.scalers.ScalerIf">
+							<condition type="gameMechanics.elements.resources.ResourceBuff">
+								<buff href="/Mechanics/Spells/StalkerNew/MeleeIntuitiveStrike/Chain.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								<consumeStacks>3</consumeStacks>
+							</condition>
+							<scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+								<multiplier>3</multiplier>
+							</scalerIf>
+						</Item>
+					</scalers>
+				</scaler>
+				<avgDamage var="avgDamage" />
+				<source>Mainhand</source>
+			</Item>
+		</targetImpacts>
+	</mechanics>
+	<speed>0</speed>
+	<isAE>false</isAE>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

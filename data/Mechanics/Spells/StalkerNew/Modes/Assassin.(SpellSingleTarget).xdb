@@ -1,128 +1,128 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>739882314</resourceId>
-    </Header>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
-    </groups>
-    <Name href="Assassin.(SpellSingleTarget).Name.txt" />
-    <Description href="Assassin.(SpellSingleTarget).Description.txt" />
-    <image href="/Interface/Icons/Equipment/Dagger/DaggerVendor.(UISingleTexture).xdb" />
-    <visualScripts href="/Spells/VisScripts/Stalker/Assasin.(SpellVisScripts).xdb" />
-    <isWorkOnDead>true</isWorkOnDead>
-    <iffPolicy>Friends</iffPolicy>
-    <launchWhenReady>true</launchWhenReady>
-    <needInFront>false</needInFront>
-    <mechanics>
-        <cooldown>
-            <duration>10000</duration>
-        </cooldown>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                <predicates>
-                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
-                        <spell href="Assassin.(SpellSingleTarget).xdb" />
-                    </Item>
-                </predicates>
-                <impactsIf>
-                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
-                        <spell href="Assassin.(SpellSingleTarget).xdb" />
-                    </Item>
-                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                        <buff href="Assassin.(BuffResource).xdb" />
-                    </Item>
-                </impactsIf>
-                <impactsElse>
-                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellActivate">
-                        <spell href="Assassin.(SpellSingleTarget).xdb" />
-                        <effects>
-                            <Item type="gameMechanics.elements.effects.SummandStat">
-                                <stat type="gameMechanics.elements.stat.InnateStat">
-                                    <stat>CritChance</stat>
-                                </stat>
-                                <value>5</value>
-                                <scaler type="gameMechanics.elements.scalers.LinearScaler">
-                                    <multiplier>10</multiplier>
-                                </scaler>
-                            </Item>
-                            <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                                <buff href="/Mechanics/Spells/StalkerNew/OutOfSight/Buff01.xdb" />
-                                            </Item>
-                                        </predicates>
-                                        <impactsElse>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="InvisCount.(BuffResource).xdb" />
-                                            </Item>
-                                        </impactsElse>
-                                    </Item>
-                                </impacts>
-                                <initialDelay>-1</initialDelay>
-                            </Item>
-                            <Item type="gameMechanics.constructor.basicElements.EffectList">
-                                <effectsResource href="DisableArchery.(EffectListResource).xdb" />
-                            </Item>
-                            <Item type="gameMechanics.elements.effects.Switch">
-                                <impactsOn>
-                                    <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
-                                        <spell href="/Mechanics/Spells/StalkerNew/OutOfSight/Spell01.xdb" />
-                                        <duration>10000</duration>
-                                        <scaler type="gameMechanics.elements.scalers.AbilityRankScaler">
-                                            <ability href="/Mechanics/Spells/StalkerNew/Talents/StealthImproved/Ability01.xdb" />
-                                            <mul>-0.16666</mul>
-                                        </scaler>
-                                    </Item>
-                                </impactsOn>
-                                <impactsOff>
-                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                        <buff href="InvisCount.(BuffResource).xdb" />
-                                    </Item>
-                                </impactsOff>
-                            </Item>
-                        </effects>
-                    </Item>
-                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                        <buff href="Assassin.(BuffResource).xdb" />
-                    </Item>
-                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
-                        <spell href="Tank.(SpellSingleTarget).xdb" />
-                    </Item>
-                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                        <buff href="Tank.(BuffResource).xdb" />
-                    </Item>
-                </impactsElse>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
-                <spell href="Tank.(SpellSingleTarget).xdb" />
-                <duration>10000</duration>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                <predicates>
-                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                        <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/PhysDmg/PhysDmgEnforcer.xdb" />
-                    </Item>
-                </predicates>
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                        <impacts>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/PhysDmg/PhysDmgEnforcer.xdb" />
-                            </Item>
-                        </impacts>
-                    </Item>
-                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
-                        <spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/PhysDmg/Spell01.xdb" />
-                    </Item>
-                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                        <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/PhysDmg/PhysDmgEnforcer.xdb" />
-                    </Item>
-                </impacts>
-            </Item>
-        </casterImpacts>
-        <linkedAbility href="Assassin.(AbilityResource).xdb" />
-    </mechanics>
+	<Header>
+		<resourceId>739882314</resourceId>
+	</Header>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+	</groups>
+	<Name href="Assassin.(SpellSingleTarget).Name.txt" />
+	<Description href="Assassin.(SpellSingleTarget).Description.txt" />
+	<image href="/Interface/Icons/Equipment/Dagger/DaggerVendor.(UISingleTexture).xdb" />
+	<visualScripts href="/Spells/VisScripts/Stalker/Assasin.(SpellVisScripts).xdb" />
+	<isWorkOnDead>true</isWorkOnDead>
+	<iffPolicy>Friends</iffPolicy>
+	<launchWhenReady>true</launchWhenReady>
+	<needInFront>false</needInFront>
+	<mechanics>
+		<cooldown>
+			<duration>10000</duration>
+		</cooldown>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+				<predicates>
+					<Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+						<spell href="Assassin.(SpellSingleTarget).xdb" />
+					</Item>
+				</predicates>
+				<impactsIf>
+					<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+						<spell href="Assassin.(SpellSingleTarget).xdb" />
+					</Item>
+					<Item type="gameMechanics.elements.impacts.BuffDetacher">
+						<buff href="Assassin.(BuffResource).xdb" />
+					</Item>
+				</impactsIf>
+				<impactsElse>
+					<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellActivate">
+						<spell href="Assassin.(SpellSingleTarget).xdb" />
+						<effects>
+							<Item type="gameMechanics.elements.effects.SummandStat">
+								<stat type="gameMechanics.elements.stat.InnateStat">
+									<stat>CritChance</stat>
+								</stat>
+								<value>5</value>
+								<scaler type="gameMechanics.elements.scalers.LinearScaler">
+									<multiplier>10</multiplier>
+								</scaler>
+							</Item>
+							<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+										<predicates>
+											<Item type="gameMechanics.elements.resources.ResourceBuff">
+												<buff href="/Mechanics/Spells/StalkerNew/OutOfSight/Buff01.xdb" />
+											</Item>
+										</predicates>
+										<impactsElse>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="InvisCount.(BuffResource).xdb" />
+											</Item>
+										</impactsElse>
+									</Item>
+								</impacts>
+								<initialDelay>-1</initialDelay>
+							</Item>
+							<Item type="gameMechanics.constructor.basicElements.EffectList">
+								<effectsResource href="DisableArchery.(EffectListResource).xdb" />
+							</Item>
+							<Item type="gameMechanics.elements.effects.Switch">
+								<impactsOn>
+									<Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+										<spell href="/Mechanics/Spells/StalkerNew/OutOfSight/Spell01.xdb" />
+										<duration>10000</duration>
+										<scaler type="gameMechanics.elements.scalers.AbilityRankScaler">
+											<ability href="/Mechanics/Spells/StalkerNew/Talents/StealthImproved/Ability01.xdb" />
+											<mul>-0.16666</mul>
+										</scaler>
+									</Item>
+								</impactsOn>
+								<impactsOff>
+									<Item type="gameMechanics.elements.impacts.BuffDetacher">
+										<buff href="InvisCount.(BuffResource).xdb" />
+									</Item>
+								</impactsOff>
+							</Item>
+						</effects>
+					</Item>
+					<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+						<buff href="Assassin.(BuffResource).xdb" />
+					</Item>
+					<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+						<spell href="Tank.(SpellSingleTarget).xdb" />
+					</Item>
+					<Item type="gameMechanics.elements.impacts.BuffDetacher">
+						<buff href="Tank.(BuffResource).xdb" />
+					</Item>
+				</impactsElse>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+				<spell href="Tank.(SpellSingleTarget).xdb" />
+				<duration>10000</duration>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+				<predicates>
+					<Item type="gameMechanics.elements.resources.ResourceBuff">
+						<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/PhysDmg/PhysDmgEnforcer.xdb" />
+					</Item>
+				</predicates>
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+						<impacts>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/PhysDmg/PhysDmgEnforcer.xdb" />
+							</Item>
+						</impacts>
+					</Item>
+					<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+						<spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/PhysDmg/Spell01.xdb" />
+					</Item>
+					<Item type="gameMechanics.elements.impacts.BuffDetacher">
+						<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/PhysDmg/PhysDmgEnforcer.xdb" />
+					</Item>
+				</impacts>
+			</Item>
+		</casterImpacts>
+		<linkedAbility href="Assassin.(AbilityResource).xdb" />
+	</mechanics>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

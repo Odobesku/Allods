@@ -1,141 +1,141 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
-    <Header>
-        <resourceId>235320338</resourceId>
-    </Header>
-    <name href="MovingBomb.(AbilityResource).Name.txt" />
-    <visualScript type="CreatureColorAction">
-        <colorValue>2029977600</colorValue>
-    </visualScript>
-    <nameTemplate href="MovingBomb.(AbilityResource).Name.txt" />
-    <effects>
-        <Item type="gameMechanics.elements.effects.ScalerInputDamageChannel">
-            <element>POISON</element>
-            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
-                <coeff>-0.5</coeff>
-            </scaler>
-        </Item>
-        <Item type="gameMechanics.elements.effects.ScalerInputDamageChannel">
-            <element>DISEASE</element>
-            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
-                <coeff>-0.5</coeff>
-            </scaler>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
-            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
-                <coeff>-0.5</coeff>
-            </effectScaler>
-        </Item>
-        <Item type="gameMechanics.elements.effects.TickableAura">
-            <tick>1000</tick>
-            <affectGroup>Enemies</affectGroup>
-            <radius>7</radius>
-            <filter type="gameMechanics.world.creature.AvatarFilter" />
-            <impactsIn>
-                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
-                                            <data href="Blast.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                        </Item>
-                                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                                            <radius>15</radius>
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                    <predicates>
-                                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                                <buff href="Buffs/CrystallAbsoluteShieldBuffCopy.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                            </predicate>
-                                                        </Item>
-                                                    </predicates>
-                                                    <impactsIf>
-                                                        <Item type="gameMechanics.elements.impacts.DirectDamage">
-                                                            <damage>1</damage>
-                                                            <scaler type="gameMechanics.elements.scalers.TrivialScaler" />
-                                                            <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                                <mul>2</mul>
-                                                                <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer" />
-                                                            </scalerTarget>
-                                                        </Item>
-                                                    </impactsIf>
-                                                </Item>
-                                            </impacts>
-                                            <filter type="gameMechanics.world.creature.AvatarFilter" />
-                                        </Item>
-                                        <Item type="gameMechanics.elements.impacts.ImpactKill" />
-                                    </impacts>
-                                </Item>
-                            </impactsIf>
-                        </Item>
-                    </impacts>
-                </Item>
-            </impactsIn>
-        </Item>
-        <Item type="gameMechanics.elements.effects.DeathTrigger">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-                                    <impacts>
-                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                            <buff href="Buffs/BombDemons.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                </Item>
-            </impacts>
-        </Item>
-        <Item type="gameMechanics.elements.effects.Switch">
-            <impactsOn>
-                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                    <buff href="Buffs/TemporalyStun.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                    <delay>5000</delay>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                                    <radius>95</radius>
-                                    <affectHolder>false</affectHolder>
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
-                                                    <value>10</value>
-                                                </Item>
-                                            </impacts>
-                                        </Item>
-                                    </impacts>
-                                    <filter type="gameMechanics.world.creature.AvatarFilter" />
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactForgetAbility">
-                    <ability href="/Mechanics/Abilities/Bosses/ActivityTracker/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-                </Item>
-            </impactsOn>
-        </Item>
-        <Item type="gameMechanics.elements.effects.DisableLocalEvade" />
-        <Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
-            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
-                <coeff>4</coeff>
-            </scaler>
-        </Item>
-    </effects>
+	<Header>
+		<resourceId>235320338</resourceId>
+	</Header>
+	<name href="MovingBomb.(AbilityResource).Name.txt" />
+	<visualScript type="CreatureColorAction">
+		<colorValue>2029977600</colorValue>
+	</visualScript>
+	<nameTemplate href="MovingBomb.(AbilityResource).Name.txt" />
+	<effects>
+		<Item type="gameMechanics.elements.effects.ScalerInputDamageChannel">
+			<element>POISON</element>
+			<scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+				<coeff>-0.5</coeff>
+			</scaler>
+		</Item>
+		<Item type="gameMechanics.elements.effects.ScalerInputDamageChannel">
+			<element>DISEASE</element>
+			<scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+				<coeff>-0.5</coeff>
+			</scaler>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+			<effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+				<coeff>-0.5</coeff>
+			</effectScaler>
+		</Item>
+		<Item type="gameMechanics.elements.effects.TickableAura">
+			<tick>1000</tick>
+			<affectGroup>Enemies</affectGroup>
+			<radius>7</radius>
+			<filter type="gameMechanics.world.creature.AvatarFilter" />
+			<impactsIn>
+				<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+											<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+											<data href="Blast.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+										</Item>
+										<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+											<radius>15</radius>
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+													<predicates>
+														<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+															<predicate type="gameMechanics.elements.resources.ResourceBuff">
+																<buff href="Buffs/CrystallAbsoluteShieldBuffCopy.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+															</predicate>
+														</Item>
+													</predicates>
+													<impactsIf>
+														<Item type="gameMechanics.elements.impacts.DirectDamage">
+															<damage>1</damage>
+															<scaler type="gameMechanics.elements.scalers.TrivialScaler" />
+															<scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+																<mul>2</mul>
+																<mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer" />
+															</scalerTarget>
+														</Item>
+													</impactsIf>
+												</Item>
+											</impacts>
+											<filter type="gameMechanics.world.creature.AvatarFilter" />
+										</Item>
+										<Item type="gameMechanics.elements.impacts.ImpactKill" />
+									</impacts>
+								</Item>
+							</impactsIf>
+						</Item>
+					</impacts>
+				</Item>
+			</impactsIn>
+		</Item>
+		<Item type="gameMechanics.elements.effects.DeathTrigger">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+									<impacts>
+										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+											<buff href="Buffs/BombDemons.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+										</Item>
+									</impacts>
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+			</impacts>
+		</Item>
+		<Item type="gameMechanics.elements.effects.Switch">
+			<impactsOn>
+				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+					<buff href="Buffs/TemporalyStun.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+					<delay>5000</delay>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+									<radius>95</radius>
+									<affectHolder>false</affectHolder>
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+													<value>10</value>
+												</Item>
+											</impacts>
+										</Item>
+									</impacts>
+									<filter type="gameMechanics.world.creature.AvatarFilter" />
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactForgetAbility">
+					<ability href="/Mechanics/Abilities/Bosses/ActivityTracker/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+				</Item>
+			</impactsOn>
+		</Item>
+		<Item type="gameMechanics.elements.effects.DisableLocalEvade" />
+		<Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
+			<scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+				<coeff>4</coeff>
+			</scaler>
+		</Item>
+	</effects>
 </gameMechanics.constructor.schemes.ability.AbilityResource>

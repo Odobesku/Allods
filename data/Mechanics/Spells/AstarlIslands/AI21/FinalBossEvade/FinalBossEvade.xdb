@@ -1,151 +1,150 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
-    <Header>
-        <resourceId>257599489</resourceId>
-    </Header>
-    <effects>
-        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
-            <onEnter>
-                <Item type="gameMechanics.elements.impacts.ImpactScriptZoneSetDisabled">
-                    <disable>false</disable>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                            <predicates>
-                                                <Item type="gameMechanics.elements.predicates.PredicateInScriptZone" />
-                                            </predicates>
-                                            <impactsElse>
-                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                    <buff href="AvatarGoneOutside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                </Item>
-                                            </impactsElse>
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                </Item>
-            </onEnter>
-            <onLeave>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
-                    <pool href="/Mechanics/Spells/AstarlIslands/AI21/FinalBossSummon/FinalBossSummon.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactScriptZoneSetDisabled" />
-                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                    <buff href="AvatarGoneOutside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                                <Item type="gameMechanics.elements.impacts.ImpactTeleportToScriptId">
-                                    <object>
-                                        <scriptID>EpicIsle5_Enter</scriptID>
-                                        <map href="/Maps/EpicIsle5/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
-                                    </object>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                </Item>
-            </onLeave>
-        </Item>
-        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
-            <visibilityRule>
-                <channel>Influence</channel>
-                <vector>Outgoing</vector>
-                <direction>Incoming</direction>
-                <plane href="/Mechanics/Spells/AstarlIslands/AI21/FinalBossSummon/Plane.xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
-            </visibilityRule>
-        </Item>
-        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
-            <conditionalImpacts>
-                <Item>
-                    <impacts>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="/Mechanics/Spells/AstarlIslands/AI21/FinalBossPoisonCleave/GlobalCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                <multiplier>0.25</multiplier>
-                            </durationScaler>
-                        </Item>
-                    </impacts>
-                    <conditions>
-                        <Item type="gameMechanics.constructor.basicElements.PredicateGenericNot">
-                            <predicate type="gameMechanics.elements.predicates.PredicateSpellEquals">
-                                <spells>
-                                    <Item href="/Mechanics/Spells/AstarlIslands/AI21/FinalBossPoisonCleave/PoisonCleave.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
-                                    <Item href="/Mechanics/Spells/AstarlIslands/AI21/FinalBossPoisonCleave/PoisonCleave.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                                </spells>
-                            </predicate>
-                        </Item>
-                    </conditions>
-                </Item>
-            </conditionalImpacts>
-            <stages>
-                <Item>Launch</Item>
-            </stages>
-        </Item>
-        <Item type="gameMechanics.elements.effects.LayeredHealthTriggerGeneric">
-            <layers>
-                <Item>
-                    <percent>0</percent>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
-                            <spell href="/Mechanics/Spells/AstarlIslands/AI21/FinalBossSummon/FinalBossSummon_AE.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                            <duration>6000</duration>
-                        </Item>
-                    </impacts>
-                </Item>
-            </layers>
-        </Item>
-        <Item type="gameMechanics.elements.effects.DeathTrigger">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
-                    <device>
-                        <scriptID>AI21_LastTeleport</scriptID>
-                        <map href="/Maps/EpicIsle5/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
-                    </device>
-                </Item>
-            </impacts>
-        </Item>
-        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
-            <conditionalImpacts>
-                <Item>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
-                                    <buff href="/Mechanics/Spells/AstarlIslands/AI21/FinalBossPoisonCleave/CleaveReady.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    <range>
-                                        <max>3</max>
-                                    </range>
-                                </Item>
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                    <buff href="/Mechanics/Spells/AstarlIslands/AI21/FinalBossPoisonCleave/CleaveReady.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                </Item>
-                            </impactsIf>
-                        </Item>
-                    </impacts>
-                    <conditions>
-                        <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
-                            <spells>
-                                <Item href="/Mechanics/Spells/AstarlIslands/AI21/TarantulaPoison/PoisonousBite.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                            </spells>
-                        </Item>
-                    </conditions>
-                </Item>
-            </conditionalImpacts>
-        </Item>
-    </effects>
+	<Header>
+		<resourceId>257599489</resourceId>
+	</Header>
+	<effects>
+		<Item type="gameMechanics.elements.effects.CombatStateTrigger">
+			<onEnter>
+				<Item type="gameMechanics.elements.impacts.ImpactScriptZoneSetDisabled">
+					<zone href="/Maps/AstralIsle21/ScriptZones/FinalBossSphere.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+					<disable>false</disable>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+											<predicates>
+												<Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+													<zone href="/Maps/AstralIsle21/ScriptZones/FinalBossSphere.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+												</Item>
+											</predicates>
+											<impactsElse>
+												<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+													<buff href="AvatarGoneOutside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+												</Item>
+											</impactsElse>
+										</Item>
+									</impacts>
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+			</onEnter>
+			<onLeave>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+					<pool href="/Mechanics/Spells/AstarlIslands/AI21/FinalBossSummon/FinalBossSummon.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.Disintegrate" />
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactScriptZoneSetDisabled">
+					<zone href="/Maps/AstralIsle21/ScriptZones/FinalBossSphere.(ScriptZone).xdb#xpointer(/gameMechanics.map.scriptZone.ScriptZone)" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.BuffDetacher">
+									<buff href="AvatarGoneOutside.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+			</onLeave>
+		</Item>
+		<Item type="gameMechanics.elements.effects.AddVisibilityRule">
+			<visibilityRule>
+				<channel>Influence</channel>
+				<vector>Outgoing</vector>
+				<direction>Incoming</direction>
+				<plane href="/Mechanics/Spells/AstarlIslands/AI21/FinalBossSummon/Plane.xdb#xpointer(/gameMechanics.world.visibility.Plane)" />
+			</visibilityRule>
+		</Item>
+		<Item type="gameMechanics.elements.effects.SpellCastTrigger">
+			<conditionalImpacts>
+				<Item>
+					<impacts>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="/Mechanics/Spells/AstarlIslands/AI21/FinalBossPoisonCleave/GlobalCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+								<multiplier>0.25</multiplier>
+							</durationScaler>
+						</Item>
+					</impacts>
+					<conditions>
+						<Item type="gameMechanics.constructor.basicElements.PredicateGenericNot">
+							<predicate type="gameMechanics.elements.predicates.PredicateSpellEquals">
+								<spells>
+									<Item href="/Mechanics/Spells/AstarlIslands/AI21/FinalBossPoisonCleave/PoisonCleave.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+									<Item href="/Mechanics/Spells/AstarlIslands/AI21/FinalBossPoisonCleave/PoisonCleave.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+								</spells>
+							</predicate>
+						</Item>
+					</conditions>
+				</Item>
+			</conditionalImpacts>
+			<stages>
+				<Item>Launch</Item>
+			</stages>
+		</Item>
+		<Item type="gameMechanics.elements.effects.LayeredHealthTriggerGeneric">
+			<layers>
+				<Item>
+					<percent>0</percent>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+							<spell href="/Mechanics/Spells/AstarlIslands/AI21/FinalBossSummon/FinalBossSummon_AE.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+							<duration>6000</duration>
+						</Item>
+					</impacts>
+				</Item>
+			</layers>
+		</Item>
+		<Item type="gameMechanics.elements.effects.DeathTrigger">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
+					<device>
+						<scriptID>AI21_LastTeleport</scriptID>
+						<map href="/Maps/AstralIsle21/MapResource.xdb#xpointer(/mapLoader.MapResource)" />
+					</device>
+				</Item>
+			</impacts>
+		</Item>
+		<Item type="gameMechanics.elements.effects.SpellCastTrigger">
+			<conditionalImpacts>
+				<Item>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+									<buff href="/Mechanics/Spells/AstarlIslands/AI21/FinalBossPoisonCleave/CleaveReady.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									<range>
+										<max>3</max>
+									</range>
+								</Item>
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+									<buff href="/Mechanics/Spells/AstarlIslands/AI21/FinalBossPoisonCleave/CleaveReady.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</impactsIf>
+						</Item>
+					</impacts>
+					<conditions>
+						<Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+							<spells>
+								<Item href="/Mechanics/Spells/AstarlIslands/AI21/TarantulaPoison/PoisonousBite.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+							</spells>
+						</Item>
+					</conditions>
+				</Item>
+			</conditionalImpacts>
+		</Item>
+	</effects>
 </gameMechanics.constructor.schemes.ability.AbilityResource>

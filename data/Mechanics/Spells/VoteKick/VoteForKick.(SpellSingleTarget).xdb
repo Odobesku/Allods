@@ -1,296 +1,296 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>739846115</resourceId>
-    </Header>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
-        <Item href="/Mechanics/Spells/Groups/VoteKick.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb" />
-    </groups>
-    <Name href="VoteForKick.(SpellSingleTarget).Name.txt" />
-    <Description href="VoteForKick.(SpellSingleTarget).Description.txt" />
-    <image href="/Interface/Icons/Equipment/DragonShape/Hands_2.(UISingleTexture).xdb" />
-    <needLos>false</needLos>
-    <targetType>STTSelf</targetType>
-    <isAggro>false</isAggro>
-    <isWorkOnDead>true</isWorkOnDead>
-    <iffPolicy>Friends</iffPolicy>
-    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
-    <needInFront>false</needInFront>
-    <mechanics>
-        <casterConditions>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="/Mechanics/InstancedEventResource/MM_Pvp_Arena/Arena_wait/Buff01.xdb" />
-                </predicate>
-            </Item>
-            <Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
-                <key href="/System/ContentKeys/VoteKick.(ContentKey).xdb" />
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="VoteKickStarted.(BuffResource).xdb" />
-                </predicate>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="VoteKickEnded.(BuffResource).xdb" />
-                </predicate>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="/Mechanics/InstancedEventResource/MM_Pvp_Arena/Arena_wait_timer.(BuffResource).xdb" />
-                </predicate>
-            </Item>
-            <Item type="gameMechanics.elements.predicates.PredicateOnAddressee">
-                <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderUnionMemberById">
-                    <shardId type="gameMechanics.elements.calcers.CalcerLongParam">
-                        <paramName>shardId</paramName>
-                    </shardId>
-                    <persistentId type="gameMechanics.elements.calcers.CalcerLongParam">
-                        <paramName>persistentId</paramName>
-                    </persistentId>
-                </addresseeFinder>
-                <predicates>
-                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                            <buff href="AddAvatar.(BuffResource).xdb" />
-                        </predicate>
-                    </Item>
-                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                            <buff href="/Mechanics/InstancedEventResource/MM_LFG/MM_LFG_VoteForKickCooldown.(BuffResource).xdb" />
-                        </predicate>
-                    </Item>
-                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                </predicates>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_WaitBuff.(BuffResource).xdb" />
-                </predicate>
-            </Item>
-        </casterConditions>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactStartQuiz">
-                <question href="VoteForKick.(Question).xdb" />
-                <paramsCalcers>
-                    <stringEntries>
-                        <Item>
-                            <name>avatarName</name>
-                            <calcer type="gameMechanics.elements.calcers.UnionMemberNameCalcer">
-                                <shardId type="gameMechanics.elements.calcers.CalcerLongParam">
-                                    <paramName>shardId</paramName>
-                                </shardId>
-                                <persistentId type="gameMechanics.elements.calcers.CalcerLongParam">
-                                    <paramName>persistentId</paramName>
-                                </persistentId>
-                            </calcer>
-                        </Item>
-                        <Item>
-                            <name>customText</name>
-                            <calcer type="gameMechanics.elements.calcers.CalcerStringParam">
-                                <paramName>customText</paramName>
-                            </calcer>
-                        </Item>
-                    </stringEntries>
-                </paramsCalcers>
-                <casterCalcers>
-                    <longEntries>
-                        <Item>
-                            <name>shardId</name>
-                            <calcer type="gameMechanics.elements.calcers.CalcerLongParam">
-                                <paramName>shardId</paramName>
-                            </calcer>
-                        </Item>
-                        <Item>
-                            <name>persistentId</name>
-                            <calcer type="gameMechanics.elements.calcers.CalcerLongParam">
-                                <paramName>persistentId</paramName>
-                            </calcer>
-                        </Item>
-                    </longEntries>
-                </casterCalcers>
-                <participants type="gameMechanics.elements.addresseeFinders.AddresseesCalcerFilter">
-                    <predicates>
-                        <Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
-                            <onMaster type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                            <onSlave type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                        </Item>
-                    </predicates>
-                    <calcer type="gameMechanics.elements.addresseeFinders.AddresseesCalcerUnionMembers" />
-                </participants>
-                <preResults>
-                    <Item>
-                        <addressCalcer type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
-                        <resultCalcer>
-                            <longEntries>
-                                <Item>
-                                    <name>choice</name>
-                                    <calcer type="gameMechanics.elements.calcers.LongData">
-                                        <value>1</value>
-                                    </calcer>
-                                </Item>
-                            </longEntries>
-                        </resultCalcer>
-                    </Item>
-                    <Item>
-                        <addressCalcer type="gameMechanics.elements.addresseeFinders.AddresseeFinderUnionMemberById">
-                            <shardId type="gameMechanics.elements.calcers.CalcerLongParam">
-                                <paramName>shardId</paramName>
-                            </shardId>
-                            <persistentId type="gameMechanics.elements.calcers.CalcerLongParam">
-                                <paramName>persistentId</paramName>
-                            </persistentId>
-                        </addressCalcer>
-                        <resultCalcer>
-                            <longEntries>
-                                <Item>
-                                    <name>choice</name>
-                                    <calcer type="gameMechanics.elements.calcers.LongData">
-                                        <value>0</value>
-                                    </calcer>
-                                </Item>
-                            </longEntries>
-                        </resultCalcer>
-                    </Item>
-                </preResults>
-                <resultsHandler type="gameMechanics.elements.common.SameResultsHandler">
-                    <impactsOnSuccess>
-                        <Item type="gameMechanics.elements.impacts.ImpactIsolator">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactsToUnionMembers">
-                                    <affectPets>false</affectPets>
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                            <buff href="VoteKickStarted.(BuffResource).xdb" />
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                            <distributor type="gameMechanics.elements.calcers.UnionDistributor" />
-                            <data href="VoteSuccess.(ClientData).xdb" />
-                            <calcers>
-                                <stringEntries>
-                                    <Item>
-                                        <name>avatarName</name>
-                                        <calcer type="gameMechanics.elements.calcers.UnionMemberNameCalcer">
-                                            <shardId type="gameMechanics.elements.calcers.CalcerLongParam">
-                                                <paramName>shardId</paramName>
-                                            </shardId>
-                                            <persistentId type="gameMechanics.elements.calcers.CalcerLongParam">
-                                                <paramName>persistentId</paramName>
-                                            </persistentId>
-                                        </calcer>
-                                    </Item>
-                                </stringEntries>
-                            </calcers>
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
-                            <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderUnionMemberById">
-                                <shardId type="gameMechanics.elements.calcers.CalcerLongParam">
-                                    <paramName>shardId</paramName>
-                                </shardId>
-                                <persistentId type="gameMechanics.elements.calcers.CalcerLongParam">
-                                    <paramName>persistentId</paramName>
-                                </persistentId>
-                            </addresseeFinder>
-                            <impacts>
-                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                    <buff href="VoteKickSocialChoice.(BuffResource).xdb" />
-                                </Item>
-                                <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactExitBattleEvent" />
-                            </impacts>
-                        </Item>
-                    </impactsOnSuccess>
-                    <impactsOnFail>
-                        <Item type="gameMechanics.elements.impacts.ImpactIsolator">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactsToUnionMembers">
-                                    <affectPets>false</affectPets>
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                            <buff href="VoteKickStarted.(BuffResource).xdb" />
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                            <distributor type="gameMechanics.elements.calcers.UnionDistributor" />
-                            <data href="VoteFailed.(ClientData).xdb" />
-                            <calcers>
-                                <stringEntries>
-                                    <Item>
-                                        <name>avatarName</name>
-                                        <calcer type="gameMechanics.elements.calcers.UnionMemberNameCalcer">
-                                            <shardId type="gameMechanics.elements.calcers.CalcerLongParam">
-                                                <paramName>shardId</paramName>
-                                            </shardId>
-                                            <persistentId type="gameMechanics.elements.calcers.CalcerLongParam">
-                                                <paramName>persistentId</paramName>
-                                            </persistentId>
-                                        </calcer>
-                                    </Item>
-                                </stringEntries>
-                            </calcers>
-                        </Item>
-                    </impactsOnFail>
-                    <calcers>
-                        <longEntries>
-                            <Item>
-                                <name>choice</name>
-                                <calcer type="gameMechanics.elements.calcers.LongData">
-                                    <value>1</value>
-                                </calcer>
-                            </Item>
-                        </longEntries>
-                    </calcers>
-                    <percent>0.6</percent>
-                </resultsHandler>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactIsolator">
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactsToUnionMembers">
-                        <affectPets>false</affectPets>
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                                </predicates>
-                                <impactsIf>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="VoteKickStarted.(BuffResource).xdb" />
-                                    </Item>
-                                </impactsIf>
-                            </Item>
-                        </impacts>
-                    </Item>
-                </impacts>
-            </Item>
-            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                <buff href="VoteKickEnded.(BuffResource).xdb" />
-            </Item>
-        </casterImpacts>
-    </mechanics>
-    <params>
-        <params>
-            <Item>
-                <name>shardId</name>
-                <type>Int</type>
-            </Item>
-            <Item>
-                <name>persistentId</name>
-                <type>Int</type>
-            </Item>
-            <Item>
-                <name>customText</name>
-                <type>String</type>
-            </Item>
-        </params>
-    </params>
-    <canStartNotBeeingInSpellbook>true</canStartNotBeeingInSpellbook>
+	<Header>
+		<resourceId>739846115</resourceId>
+	</Header>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+		<Item href="/Mechanics/Spells/Groups/VoteKick.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/MountedSpells.xdb" />
+	</groups>
+	<Name href="VoteForKick.(SpellSingleTarget).Name.txt" />
+	<Description href="VoteForKick.(SpellSingleTarget).Description.txt" />
+	<image href="/Interface/Icons/Equipment/DragonShape/Hands_2.(UISingleTexture).xdb" />
+	<needLos>false</needLos>
+	<targetType>STTSelf</targetType>
+	<isAggro>false</isAggro>
+	<isWorkOnDead>true</isWorkOnDead>
+	<iffPolicy>Friends</iffPolicy>
+	<ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+	<needInFront>false</needInFront>
+	<mechanics>
+		<casterConditions>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="/Mechanics/InstancedEventResource/MM_Pvp_Arena/Arena_wait/Buff01.xdb" />
+				</predicate>
+			</Item>
+			<Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
+				<key href="/System/ContentKeys/VoteKick.(ContentKey).xdb" />
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="VoteKickStarted.(BuffResource).xdb" />
+				</predicate>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="VoteKickEnded.(BuffResource).xdb" />
+				</predicate>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="/Mechanics/InstancedEventResource/MM_Pvp_Arena/Arena_wait_timer.(BuffResource).xdb" />
+				</predicate>
+			</Item>
+			<Item type="gameMechanics.elements.predicates.PredicateOnAddressee">
+				<addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderUnionMemberById">
+					<shardId type="gameMechanics.elements.calcers.CalcerLongParam">
+						<paramName>shardId</paramName>
+					</shardId>
+					<persistentId type="gameMechanics.elements.calcers.CalcerLongParam">
+						<paramName>persistentId</paramName>
+					</persistentId>
+				</addresseeFinder>
+				<predicates>
+					<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+						<predicate type="gameMechanics.elements.resources.ResourceBuff">
+							<buff href="AddAvatar.(BuffResource).xdb" />
+						</predicate>
+					</Item>
+					<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+						<predicate type="gameMechanics.elements.resources.ResourceBuff">
+							<buff href="/Mechanics/InstancedEventResource/MM_LFG/MM_LFG_VoteForKickCooldown.(BuffResource).xdb" />
+						</predicate>
+					</Item>
+					<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+				</predicates>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="/Mechanics/InstancedEventResource/MM_LastStand/MM_LastStand_WaitBuff.(BuffResource).xdb" />
+				</predicate>
+			</Item>
+		</casterConditions>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactStartQuiz">
+				<question href="VoteForKick.(Question).xdb" />
+				<paramsCalcers>
+					<stringEntries>
+						<Item>
+							<name>avatarName</name>
+							<calcer type="gameMechanics.elements.calcers.UnionMemberNameCalcer">
+								<shardId type="gameMechanics.elements.calcers.CalcerLongParam">
+									<paramName>shardId</paramName>
+								</shardId>
+								<persistentId type="gameMechanics.elements.calcers.CalcerLongParam">
+									<paramName>persistentId</paramName>
+								</persistentId>
+							</calcer>
+						</Item>
+						<Item>
+							<name>customText</name>
+							<calcer type="gameMechanics.elements.calcers.CalcerStringParam">
+								<paramName>customText</paramName>
+							</calcer>
+						</Item>
+					</stringEntries>
+				</paramsCalcers>
+				<casterCalcers>
+					<longEntries>
+						<Item>
+							<name>shardId</name>
+							<calcer type="gameMechanics.elements.calcers.CalcerLongParam">
+								<paramName>shardId</paramName>
+							</calcer>
+						</Item>
+						<Item>
+							<name>persistentId</name>
+							<calcer type="gameMechanics.elements.calcers.CalcerLongParam">
+								<paramName>persistentId</paramName>
+							</calcer>
+						</Item>
+					</longEntries>
+				</casterCalcers>
+				<participants type="gameMechanics.elements.addresseeFinders.AddresseesCalcerFilter">
+					<predicates>
+						<Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
+							<onMaster type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+							<onSlave type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+						</Item>
+					</predicates>
+					<calcer type="gameMechanics.elements.addresseeFinders.AddresseesCalcerUnionMembers" />
+				</participants>
+				<preResults>
+					<Item>
+						<addressCalcer type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+						<resultCalcer>
+							<longEntries>
+								<Item>
+									<name>choice</name>
+									<calcer type="gameMechanics.elements.calcers.LongData">
+										<value>1</value>
+									</calcer>
+								</Item>
+							</longEntries>
+						</resultCalcer>
+					</Item>
+					<Item>
+						<addressCalcer type="gameMechanics.elements.addresseeFinders.AddresseeFinderUnionMemberById">
+							<shardId type="gameMechanics.elements.calcers.CalcerLongParam">
+								<paramName>shardId</paramName>
+							</shardId>
+							<persistentId type="gameMechanics.elements.calcers.CalcerLongParam">
+								<paramName>persistentId</paramName>
+							</persistentId>
+						</addressCalcer>
+						<resultCalcer>
+							<longEntries>
+								<Item>
+									<name>choice</name>
+									<calcer type="gameMechanics.elements.calcers.LongData">
+										<value>0</value>
+									</calcer>
+								</Item>
+							</longEntries>
+						</resultCalcer>
+					</Item>
+				</preResults>
+				<resultsHandler type="gameMechanics.elements.common.SameResultsHandler">
+					<impactsOnSuccess>
+						<Item type="gameMechanics.elements.impacts.ImpactIsolator">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactsToUnionMembers">
+									<affectPets>false</affectPets>
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.BuffDetacher">
+											<buff href="VoteKickStarted.(BuffResource).xdb" />
+										</Item>
+									</impacts>
+								</Item>
+							</impacts>
+						</Item>
+						<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+							<distributor type="gameMechanics.elements.calcers.UnionDistributor" />
+							<data href="VoteSuccess.(ClientData).xdb" />
+							<calcers>
+								<stringEntries>
+									<Item>
+										<name>avatarName</name>
+										<calcer type="gameMechanics.elements.calcers.UnionMemberNameCalcer">
+											<shardId type="gameMechanics.elements.calcers.CalcerLongParam">
+												<paramName>shardId</paramName>
+											</shardId>
+											<persistentId type="gameMechanics.elements.calcers.CalcerLongParam">
+												<paramName>persistentId</paramName>
+											</persistentId>
+										</calcer>
+									</Item>
+								</stringEntries>
+							</calcers>
+						</Item>
+						<Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+							<addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderUnionMemberById">
+								<shardId type="gameMechanics.elements.calcers.CalcerLongParam">
+									<paramName>shardId</paramName>
+								</shardId>
+								<persistentId type="gameMechanics.elements.calcers.CalcerLongParam">
+									<paramName>persistentId</paramName>
+								</persistentId>
+							</addresseeFinder>
+							<impacts>
+								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+									<buff href="VoteKickSocialChoice.(BuffResource).xdb" />
+								</Item>
+								<Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactExitBattleEvent" />
+							</impacts>
+						</Item>
+					</impactsOnSuccess>
+					<impactsOnFail>
+						<Item type="gameMechanics.elements.impacts.ImpactIsolator">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactsToUnionMembers">
+									<affectPets>false</affectPets>
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.BuffDetacher">
+											<buff href="VoteKickStarted.(BuffResource).xdb" />
+										</Item>
+									</impacts>
+								</Item>
+							</impacts>
+						</Item>
+						<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+							<distributor type="gameMechanics.elements.calcers.UnionDistributor" />
+							<data href="VoteFailed.(ClientData).xdb" />
+							<calcers>
+								<stringEntries>
+									<Item>
+										<name>avatarName</name>
+										<calcer type="gameMechanics.elements.calcers.UnionMemberNameCalcer">
+											<shardId type="gameMechanics.elements.calcers.CalcerLongParam">
+												<paramName>shardId</paramName>
+											</shardId>
+											<persistentId type="gameMechanics.elements.calcers.CalcerLongParam">
+												<paramName>persistentId</paramName>
+											</persistentId>
+										</calcer>
+									</Item>
+								</stringEntries>
+							</calcers>
+						</Item>
+					</impactsOnFail>
+					<calcers>
+						<longEntries>
+							<Item>
+								<name>choice</name>
+								<calcer type="gameMechanics.elements.calcers.LongData">
+									<value>1</value>
+								</calcer>
+							</Item>
+						</longEntries>
+					</calcers>
+					<percent>0.6</percent>
+				</resultsHandler>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactIsolator">
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.ImpactsToUnionMembers">
+						<affectPets>false</affectPets>
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+								<predicates>
+									<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+								</predicates>
+								<impactsIf>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="VoteKickStarted.(BuffResource).xdb" />
+									</Item>
+								</impactsIf>
+							</Item>
+						</impacts>
+					</Item>
+				</impacts>
+			</Item>
+			<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+				<buff href="VoteKickEnded.(BuffResource).xdb" />
+			</Item>
+		</casterImpacts>
+	</mechanics>
+	<params>
+		<params>
+			<Item>
+				<name>shardId</name>
+				<type>Int</type>
+			</Item>
+			<Item>
+				<name>persistentId</name>
+				<type>Int</type>
+			</Item>
+			<Item>
+				<name>customText</name>
+				<type>String</type>
+			</Item>
+		</params>
+	</params>
+	<canStartNotBeeingInSpellbook>true</canStartNotBeeingInSpellbook>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

@@ -1,137 +1,137 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.area.SpellArea>
-    <Header>
-        <resourceId>739879786</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/DragonRelic1.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/EngineerArtillerySpells.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb" />
-        <Item href="/Mechanics/Spells/Groups/EngineerLevitatingSpells.(ActionGroup).xdb" />
-    </groups>
-    <element>FIRE</element>
-    <Name href="Turret.(SpellArea).Name.txt" />
-    <Description href="Turret.(SpellArea).Description.txt" />
-    <descVars>
-        <Item>
-            <name>fuel</name>
-            <value var="fuelT" />
-            <text href="" />
-            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula" />
-        </Item>
-        <Item>
-            <name>damage</name>
-            <value var="damage" />
-            <text href="" />
-            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-                <formula>MagicScaler</formula>
-            </scaler>
-        </Item>
-    </descVars>
-    <image href="/Interface/Icons/Spells/Engineer/EngineerFireTurrel.(UISingleTexture).xdb" />
-    <visualScripts href="/Spells/VisScripts/Engineer/Turret.(SpellVisScripts).xdb" />
-    <aeMarker href="/Mechanics/Spells/AEMarks/AEMarkerArrow.(AEMarkerDecal).xdb" />
-    <range type="gameMechanics.elements.calcers.FloatData">
-        <value>20</value>
-    </range>
-    <targetType>STTPoint</targetType>
-    <ranks>
-        <Item href="Flamethrower01.(SpellArea).xdb" />
-        <Item href="Flamethrower02.(SpellArea).xdb" />
-        <Item href="Flamethrower03.(SpellArea).xdb" />
-    </ranks>
-    <iffPolicy>Friends</iffPolicy>
-    <launchWhenReady>true</launchWhenReady>
-    <needInFront>false</needInFront>
-    <mechanics>
-        <cooldown>
-            <duration>40000</duration>
-            <group href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
-        </cooldown>
-        <casterConditions>
-            <Item type="gameMechanics.elements.predicates.PredicateVariableEqualsLessThan">
-                <resource href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb" />
-                <maxValue>100</maxValue>
-                <threshold>0</threshold>
-            </Item>
-        </casterConditions>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                <predicates>
-                    <Item type="gameMechanics.elements.predicates.PredicateFaction">
-                        <faction href="/World/Factions/Empire.xdb" />
-                    </Item>
-                </predicates>
-                <impacts>
-                    <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                        <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint">
-                            <yawDelta type="constructor.basicElements.AngleDegrees">
-                                <value>180</value>
-                            </yawDelta>
-                        </destination>
-                        <impacts>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff hrefvar="buff" />
-                            </Item>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="Fuel.(BuffResource).xdb" />
-                                <stacks type="gameMechanics.elements.calcers.FloatData">
-                                    <value var="fuelM" />
-                                </stacks>
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.MarkedImpact">
-                                <mark href="/Mechanics/Spells/Engineer/Abilities/PhysicalDamage/Engineer_Summon_OffenceDevice.(MarkResource).xdb" />
-                            </Item>
-                        </impacts>
-                        <assistantResource href="Flamethrower.(AssistantResource).xdb" />
-                        <mobResource href="FlamethrowerHadagan.(MobWorld).xdb" />
-                        <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                        <linkMode>Stats</linkMode>
-                        <planeSyncStrategy>Copy</planeSyncStrategy>
-                    </Item>
-                </impacts>
-                <elseImpacts>
-                    <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                        <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint">
-                            <yawDelta type="constructor.basicElements.AngleDegrees">
-                                <value>180</value>
-                            </yawDelta>
-                        </destination>
-                        <impacts>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff hrefvar="buff" />
-                            </Item>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="Fuel.(BuffResource).xdb" />
-                                <stacks type="gameMechanics.elements.calcers.FloatData">
-                                    <value var="fuelM" />
-                                </stacks>
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.MarkedImpact">
-                                <mark href="/Mechanics/Spells/Engineer/Abilities/PhysicalDamage/Engineer_Summon_OffenceDevice.(MarkResource).xdb" />
-                            </Item>
-                        </impacts>
-                        <assistantResource href="Flamethrower.(AssistantResource).xdb" />
-                        <mobResource href="Flamethrower.(MobWorld).xdb" />
-                        <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                        <linkMode>Stats</linkMode>
-                        <planeSyncStrategy>Copy</planeSyncStrategy>
-                    </Item>
-                </elseImpacts>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
-                <variable href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb" />
-                <summand>100</summand>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.ImpactList">
-                <impactsResource href="/Mechanics/Spells/Engineer/EngineerDismount.(ImpactListResource).xdb" />
-            </Item>
-        </casterImpacts>
-    </mechanics>
-    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
-    <radius>2</radius>
-    <needLosToTarget>true</needLosToTarget>
+	<Header>
+		<resourceId>739879786</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/DragonRelic1.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/EngineerArtillerySpells.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/MountedSpells.xdb" />
+		<Item href="/Mechanics/Spells/Groups/EngineerLevitatingSpells.(ActionGroup).xdb" />
+	</groups>
+	<element>FIRE</element>
+	<Name href="Turret.(SpellArea).Name.txt" />
+	<Description href="Turret.(SpellArea).Description.txt" />
+	<descVars>
+		<Item>
+			<name>fuel</name>
+			<value var="fuelT" />
+			<text href="" />
+			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula" />
+		</Item>
+		<Item>
+			<name>damage</name>
+			<value var="damage" />
+			<text href="" />
+			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+				<formula>MagicScaler</formula>
+			</scaler>
+		</Item>
+	</descVars>
+	<image href="/Interface/Icons/Spells/Engineer/EngineerFireTurrel.(UISingleTexture).xdb" />
+	<visualScripts href="/Spells/VisScripts/Engineer/Turret.(SpellVisScripts).xdb" />
+	<aeMarker href="/Mechanics/Spells/AEMarks/AEMarkerArrow.(AEMarkerDecal).xdb" />
+	<range type="gameMechanics.elements.calcers.FloatData">
+		<value>20</value>
+	</range>
+	<targetType>STTPoint</targetType>
+	<ranks>
+		<Item href="Flamethrower01.(SpellArea).xdb" />
+		<Item href="Flamethrower02.(SpellArea).xdb" />
+		<Item href="Flamethrower03.(SpellArea).xdb" />
+	</ranks>
+	<iffPolicy>Friends</iffPolicy>
+	<launchWhenReady>true</launchWhenReady>
+	<needInFront>false</needInFront>
+	<mechanics>
+		<cooldown>
+			<duration>40000</duration>
+			<group href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
+		</cooldown>
+		<casterConditions>
+			<Item type="gameMechanics.elements.predicates.PredicateVariableEqualsLessThan">
+				<resource href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb" />
+				<maxValue>100</maxValue>
+				<threshold>0</threshold>
+			</Item>
+		</casterConditions>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+				<predicates>
+					<Item type="gameMechanics.elements.predicates.PredicateFaction">
+						<faction href="/World/Factions/Empire.xdb" />
+					</Item>
+				</predicates>
+				<impacts>
+					<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+						<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint">
+							<yawDelta type="constructor.basicElements.AngleDegrees">
+								<value>180</value>
+							</yawDelta>
+						</destination>
+						<impacts>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff hrefvar="buff" />
+							</Item>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="Fuel.(BuffResource).xdb" />
+								<stacks type="gameMechanics.elements.calcers.FloatData">
+									<value var="fuelM" />
+								</stacks>
+							</Item>
+							<Item type="gameMechanics.elements.impacts.MarkedImpact">
+								<mark href="/Mechanics/Spells/Engineer/Abilities/PhysicalDamage/Engineer_Summon_OffenceDevice.(MarkResource).xdb" />
+							</Item>
+						</impacts>
+						<assistantResource href="Flamethrower.(AssistantResource).xdb" />
+						<mobResource href="FlamethrowerHadagan.(MobWorld).xdb" />
+						<level type="gameMechanics.elements.calcers.CalcerLevel" />
+						<linkMode>Stats</linkMode>
+						<planeSyncStrategy>Copy</planeSyncStrategy>
+					</Item>
+				</impacts>
+				<elseImpacts>
+					<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+						<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint">
+							<yawDelta type="constructor.basicElements.AngleDegrees">
+								<value>180</value>
+							</yawDelta>
+						</destination>
+						<impacts>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff hrefvar="buff" />
+							</Item>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="Fuel.(BuffResource).xdb" />
+								<stacks type="gameMechanics.elements.calcers.FloatData">
+									<value var="fuelM" />
+								</stacks>
+							</Item>
+							<Item type="gameMechanics.elements.impacts.MarkedImpact">
+								<mark href="/Mechanics/Spells/Engineer/Abilities/PhysicalDamage/Engineer_Summon_OffenceDevice.(MarkResource).xdb" />
+							</Item>
+						</impacts>
+						<assistantResource href="Flamethrower.(AssistantResource).xdb" />
+						<mobResource href="Flamethrower.(MobWorld).xdb" />
+						<level type="gameMechanics.elements.calcers.CalcerLevel" />
+						<linkMode>Stats</linkMode>
+						<planeSyncStrategy>Copy</planeSyncStrategy>
+					</Item>
+				</elseImpacts>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+				<variable href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb" />
+				<summand>100</summand>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.ImpactList">
+				<impactsResource href="/Mechanics/Spells/Engineer/EngineerDismount.(ImpactListResource).xdb" />
+			</Item>
+		</casterImpacts>
+	</mechanics>
+	<shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+	<radius>2</radius>
+	<needLosToTarget>true</needLosToTarget>
 </gameMechanics.constructor.schemes.spell.area.SpellArea>

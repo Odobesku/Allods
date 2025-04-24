@@ -1,287 +1,287 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>739868710</resourceId>
-    </Header>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/MobsCooldowns.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-    </groups>
-    <Name href="Evade.(SpellSingleTarget).Name.txt" />
-    <image href="/Interface/Icons/Spells/Stalker/StalkerRecoilJump.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
-    <visualScripts href="/Spells/VisScripts/Bosses/UmoirMound/NairaEvade.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
-    <range type="gameMechanics.elements.calcers.FloatData">
-        <value>50</value>
-    </range>
-    <prepareDuration>500</prepareDuration>
-    <iffPolicy>Enemies</iffPolicy>
-    <mechanics>
-        <cooldown>
-            <duration>25000</duration>
-        </cooldown>
-        <casterConditions>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="NairaMultishot.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                </predicate>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="NairaJumps.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                </predicate>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="NairaCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                </predicate>
-            </Item>
-        </casterConditions>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                <predicates>
-                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                        <buff href="CurseBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                    </Item>
-                </predicates>
-                <impactsIf>
-                    <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
-                        <spell href="Evade.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                        <duration>10000</duration>
-                    </Item>
-                </impactsIf>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                <predicates>
-                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                        <buff href="HeroResurrected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                    </Item>
-                </predicates>
-                <impactsIf>
-                    <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-                        <projectileData>
-                            <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
-                                <destination type="gameMechanics.map.destination.DestinationModified">
-                                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
-                                    <modifiers>
-                                        <Item type="gameMechanics.map.destination.modifier.ModifierTraceDown">
-                                            <useWater>false</useWater>
-                                        </Item>
-                                    </modifiers>
-                                </destination>
-                            </moveType>
-                            <resource href="NairasBallsOfSteel.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
-                        </projectileData>
-                        <pool href="NairaBallsPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
-                    </Item>
-                </impactsIf>
-            </Item>
-            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                <buff href="NairaJumps.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                <predicates>
-                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                            <buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </predicate>
-                    </Item>
-                </predicates>
-                <impactsIf>
-                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                        <predicates>
-                            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                        <buff href="HeroResurrected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                        <buff href="CurseBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </Item>
-                                </predicates>
-                            </Item>
-                        </predicates>
-                        <impactsIf>
-                            <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-                                                <data href="/Mechanics/RaidInstances/UmoirMound/Voice/Heroes/Combat/Naira/19_Jump_Cursed.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                                                <mobs>
-                                                    <Item href="Naira.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
-                                                </mobs>
-                                            </Item>
-                                        </predicates>
-                                        <impactsIf>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                    <multiplier>16000</multiplier>
-                                                </durationScaler>
-                                            </Item>
-                                        </impactsIf>
-                                        <impactsElse>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                    <multiplier>8000</multiplier>
-                                                </durationScaler>
-                                            </Item>
-                                        </impactsElse>
-                                    </Item>
-                                </impacts>
-                                <spawnResource href="/Maps/UmoirMound/SpawnTables/07_Party.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
-                            </Item>
-                        </impactsIf>
-                        <impactsElse>
-                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                <predicates>
-                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                            <buff href="HeroResurrected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                        </predicate>
-                                    </Item>
-                                </predicates>
-                                <impactsIf>
-                                    <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                        <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-                                                        <data href="/Mechanics/RaidInstances/UmoirMound/Voice/Heroes/Combat/Naira/11_Jump.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                <predicates>
-                                                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                                                        <mobs>
-                                                            <Item href="Naira.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
-                                                        </mobs>
-                                                    </Item>
-                                                </predicates>
-                                                <impactsIf>
-                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                        <buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                            <multiplier>16000</multiplier>
-                                                        </durationScaler>
-                                                    </Item>
-                                                </impactsIf>
-                                                <impactsElse>
-                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                        <buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                            <multiplier>8000</multiplier>
-                                                        </durationScaler>
-                                                    </Item>
-                                                </impactsElse>
-                                            </Item>
-                                        </impacts>
-                                        <spawnResource href="/Maps/UmoirMound/SpawnTables/07_Party.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
-                                    </Item>
-                                </impactsIf>
-                            </Item>
-                        </impactsElse>
-                    </Item>
-                </impactsIf>
-            </Item>
-        </casterImpacts>
-        <targetImpacts>
-            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
-                        <time>1500</time>
-                        <impactsOnLand>
-                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                <predicates>
-                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
-                                        <predicates>
-                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                                    <buff href="HeroResurrected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                </predicate>
-                                            </Item>
-                                            <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
-                                                <predicates>
-                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                                        <buff href="HeroResurrected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                    </Item>
-                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                                        <buff href="CurseBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                    </Item>
-                                                </predicates>
-                                            </Item>
-                                        </predicates>
-                                    </Item>
-                                </predicates>
-                                <impactsIf>
-                                    <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                        <impacts>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="NairaMultishot.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                <impactsOnAttach>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                        <predicates>
-                                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                                                <buff href="CurseBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                            </Item>
-                                                        </predicates>
-                                                        <impactsIf>
-                                                            <Item type="gameMechanics.elements.impacts.ImpactIncrementBuffDuration">
-                                                                <buff href="NairaMultishot.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                <delta type="gameMechanics.elements.calcers.FloatData">
-                                                                    <value>4000</value>
-                                                                </delta>
-                                                            </Item>
-                                                        </impactsIf>
-                                                    </Item>
-                                                </impactsOnAttach>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
-                                        <spell href="NairaMultishot.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                                    </Item>
-                                </impactsIf>
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                <buff href="NairaJumps.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            </Item>
-                        </impactsOnLand>
-                        <distance>30</distance>
-                    </Item>
-                </impacts>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                <predicates>
-                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                            <buff href="HeroResurrected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </predicate>
-                    </Item>
-                </predicates>
-                <impacts>
-                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                        <buff href="NairaEvadeStun.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                    </Item>
-                </impacts>
-            </Item>
-        </targetImpacts>
-    </mechanics>
+	<Header>
+		<resourceId>739868710</resourceId>
+	</Header>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/MobsCooldowns.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+	</groups>
+	<Name href="Evade.(SpellSingleTarget).Name.txt" />
+	<image href="/Interface/Icons/Spells/Stalker/StalkerRecoilJump.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+	<visualScripts href="/Spells/VisScripts/Bosses/UmoirMound/NairaEvade.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+	<range type="gameMechanics.elements.calcers.FloatData">
+		<value>50</value>
+	</range>
+	<prepareDuration>500</prepareDuration>
+	<iffPolicy>Enemies</iffPolicy>
+	<mechanics>
+		<cooldown>
+			<duration>25000</duration>
+		</cooldown>
+		<casterConditions>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="NairaMultishot.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</predicate>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="NairaJumps.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</predicate>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="NairaCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</predicate>
+			</Item>
+		</casterConditions>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+				<predicates>
+					<Item type="gameMechanics.elements.resources.ResourceBuff">
+						<buff href="CurseBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+					</Item>
+				</predicates>
+				<impactsIf>
+					<Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+						<spell href="Evade.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+						<duration>10000</duration>
+					</Item>
+				</impactsIf>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+				<predicates>
+					<Item type="gameMechanics.elements.resources.ResourceBuff">
+						<buff href="HeroResurrected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+					</Item>
+				</predicates>
+				<impactsIf>
+					<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+						<projectileData>
+							<moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+								<destination type="gameMechanics.map.destination.DestinationModified">
+									<destination type="gameMechanics.map.destination.SelfPosDestination" />
+									<modifiers>
+										<Item type="gameMechanics.map.destination.modifier.ModifierTraceDown">
+											<useWater>false</useWater>
+										</Item>
+									</modifiers>
+								</destination>
+							</moveType>
+							<resource href="NairasBallsOfSteel.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+						</projectileData>
+						<pool href="NairaBallsPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+					</Item>
+				</impactsIf>
+			</Item>
+			<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+				<buff href="NairaJumps.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+				<predicates>
+					<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+						<predicate type="gameMechanics.elements.resources.ResourceBuff">
+							<buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</predicate>
+					</Item>
+				</predicates>
+				<impactsIf>
+					<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+						<predicates>
+							<Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+								<predicates>
+									<Item type="gameMechanics.elements.resources.ResourceBuff">
+										<buff href="HeroResurrected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+									<Item type="gameMechanics.elements.resources.ResourceBuff">
+										<buff href="CurseBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+								</predicates>
+							</Item>
+						</predicates>
+						<impactsIf>
+							<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+												<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+												<data href="/Mechanics/RaidInstances/UmoirMound/Voice/Heroes/Combat/Naira/19_Jump_Cursed.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+											</Item>
+										</impacts>
+									</Item>
+								</impacts>
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+										<predicates>
+											<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+												<mobs>
+													<Item href="Naira.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+												</mobs>
+											</Item>
+										</predicates>
+										<impactsIf>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+												<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+													<multiplier>16000</multiplier>
+												</durationScaler>
+											</Item>
+										</impactsIf>
+										<impactsElse>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+												<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+													<multiplier>8000</multiplier>
+												</durationScaler>
+											</Item>
+										</impactsElse>
+									</Item>
+								</impacts>
+								<spawnResource href="/Maps/UmoirMound/SpawnTables/07_Party.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+							</Item>
+						</impactsIf>
+						<impactsElse>
+							<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+								<predicates>
+									<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+										<predicate type="gameMechanics.elements.resources.ResourceBuff">
+											<buff href="HeroResurrected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+										</predicate>
+									</Item>
+								</predicates>
+								<impactsIf>
+									<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+														<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+														<data href="/Mechanics/RaidInstances/UmoirMound/Voice/Heroes/Combat/Naira/11_Jump.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+													</Item>
+												</impacts>
+											</Item>
+										</impacts>
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+												<predicates>
+													<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+														<mobs>
+															<Item href="Naira.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+														</mobs>
+													</Item>
+												</predicates>
+												<impactsIf>
+													<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+														<buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+															<multiplier>16000</multiplier>
+														</durationScaler>
+													</Item>
+												</impactsIf>
+												<impactsElse>
+													<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+														<buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+															<multiplier>8000</multiplier>
+														</durationScaler>
+													</Item>
+												</impactsElse>
+											</Item>
+										</impacts>
+										<spawnResource href="/Maps/UmoirMound/SpawnTables/07_Party.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+									</Item>
+								</impactsIf>
+							</Item>
+						</impactsElse>
+					</Item>
+				</impactsIf>
+			</Item>
+		</casterImpacts>
+		<targetImpacts>
+			<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+						<time>1500</time>
+						<impactsOnLand>
+							<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+								<predicates>
+									<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+										<predicates>
+											<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+												<predicate type="gameMechanics.elements.resources.ResourceBuff">
+													<buff href="HeroResurrected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+												</predicate>
+											</Item>
+											<Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+												<predicates>
+													<Item type="gameMechanics.elements.resources.ResourceBuff">
+														<buff href="HeroResurrected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+													</Item>
+													<Item type="gameMechanics.elements.resources.ResourceBuff">
+														<buff href="CurseBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+													</Item>
+												</predicates>
+											</Item>
+										</predicates>
+									</Item>
+								</predicates>
+								<impactsIf>
+									<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+										<impacts>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="NairaMultishot.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+												<impactsOnAttach>
+													<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+														<predicates>
+															<Item type="gameMechanics.elements.resources.ResourceBuff">
+																<buff href="CurseBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+															</Item>
+														</predicates>
+														<impactsIf>
+															<Item type="gameMechanics.elements.impacts.ImpactIncrementBuffDuration">
+																<buff href="NairaMultishot.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																<delta type="gameMechanics.elements.calcers.FloatData">
+																	<value>4000</value>
+																</delta>
+															</Item>
+														</impactsIf>
+													</Item>
+												</impactsOnAttach>
+											</Item>
+										</impacts>
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+										<spell href="NairaMultishot.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+									</Item>
+								</impactsIf>
+							</Item>
+							<Item type="gameMechanics.elements.impacts.BuffDetacher">
+								<buff href="NairaJumps.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							</Item>
+						</impactsOnLand>
+						<distance>30</distance>
+					</Item>
+				</impacts>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+				<predicates>
+					<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+						<predicate type="gameMechanics.elements.resources.ResourceBuff">
+							<buff href="HeroResurrected.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</predicate>
+					</Item>
+				</predicates>
+				<impacts>
+					<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+						<buff href="NairaEvadeStun.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+					</Item>
+				</impacts>
+			</Item>
+		</targetImpacts>
+	</mechanics>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

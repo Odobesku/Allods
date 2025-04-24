@@ -1,150 +1,150 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
-    <Header>
-        <resourceId>739967614</resourceId>
-    </Header>
-    <visualScript type="VisActionList">
-        <play>Simultaneously</play>
-        <elements>
-            <Item type="CreatureIfFlagVisAction">
-                <visualFlag href="ThreadsFlag.(VisualFlag).xdb" />
-                <visScriptLoop type="CreatureEffectsAction">
-                    <visualEffects>
-                        <Item>
-                            <effectFx href="/Spells/FX/Spells/ArchitectRope_Buff.(VisObjectTemplate).xdb" />
-                            <locator>Slot_TopFX</locator>
-                            <ignoreParentRotation>true</ignoreParentRotation>
-                        </Item>
-                    </visualEffects>
-                    <stopOnDeath>true</stopOnDeath>
-                </visScriptLoop>
-            </Item>
-        </elements>
-    </visualScript>
-    <effects>
-        <Item type="gameMechanics.elements.effects.Switch">
-            <impactsOn>
-                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                    <delay>5000</delay>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                                    <radius>50</radius>
-                                    <affectGroup>Enemies</affectGroup>
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ForceAggro" />
-                                            </impacts>
-                                        </Item>
-                                    </impacts>
-                                    <impactsOnNoTargets>
-                                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
-                                            <impacts>
-                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                    <buff href="Aggro.(BuffResource).xdb" />
-                                                </Item>
-                                            </impacts>
-                                        </Item>
-                                    </impactsOnNoTargets>
-                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                                                <mobs>
-                                                    <Item href="/Creatures/ArchitectRanger/Instances/WW_10_7_ArchitectRanger.(MobWorld).xdb" />
-                                                    <Item href="/Creatures/ArchitectMele/Instances/WW_10_7_ArchitectMele.(MobWorld).xdb" />
-                                                </mobs>
-                                            </Item>
-                                        </predicates>
-                                    </filter>
-                                    <targetsLimit>1</targetsLimit>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                </Item>
-            </impactsOn>
-        </Item>
-        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
-            <onLeave>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-                    </predicates>
-                    <impactsIf>
-                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                            <delay>6000</delay>
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                                    <radius>50</radius>
-                                    <affectGroup>Enemies</affectGroup>
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ForceAggro" />
-                                            </impacts>
-                                        </Item>
-                                    </impacts>
-                                    <impactsOnNoTargets>
-                                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
-                                            <impacts>
-                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                    <buff href="Aggro.(BuffResource).xdb" />
-                                                </Item>
-                                            </impacts>
-                                        </Item>
-                                    </impactsOnNoTargets>
-                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                                                <mobs>
-                                                    <Item href="/Creatures/ArchitectRanger/Instances/WW_10_7_ArchitectRanger.(MobWorld).xdb" />
-                                                    <Item href="/Creatures/ArchitectMele/Instances/WW_10_7_ArchitectMele.(MobWorld).xdb" />
-                                                    <Item href="/Characters/Kania_male/Instances/ZC12/WW_10_7_NoSoulSolders.(MobWorld).xdb" />
-                                                </mobs>
-                                            </Item>
-                                        </predicates>
-                                    </filter>
-                                    <targetsLimit>1</targetsLimit>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impactsIf>
-                </Item>
-            </onLeave>
-        </Item>
-        <Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
-            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
-                <coeff>1</coeff>
-            </scaler>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectSetTaggingType">
-            <taggingType>None</taggingType>
-        </Item>
-        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                            <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
-                        </Item>
-                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                <buff href="Aggro.(BuffResource).xdb" />
-                            </predicate>
-                        </Item>
-                    </predicates>
-                    <impactsIf>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="Aggro.(BuffResource).xdb" />
-                        </Item>
-                    </impactsIf>
-                </Item>
-            </impacts>
-            <tick>60000</tick>
-            <initialDelay>30000</initialDelay>
-        </Item>
-    </effects>
-    <disableWhileDead>true</disableWhileDead>
+	<Header>
+		<resourceId>739967614</resourceId>
+	</Header>
+	<visualScript type="VisActionList">
+		<play>Simultaneously</play>
+		<elements>
+			<Item type="CreatureIfFlagVisAction">
+				<visualFlag href="ThreadsFlag.(VisualFlag).xdb" />
+				<visScriptLoop type="CreatureEffectsAction">
+					<visualEffects>
+						<Item>
+							<effectFx href="/Spells/FX/Spells/ArchitectRope_Buff.(VisObjectTemplate).xdb" />
+							<locator>Slot_TopFX</locator>
+							<ignoreParentRotation>true</ignoreParentRotation>
+						</Item>
+					</visualEffects>
+					<stopOnDeath>true</stopOnDeath>
+				</visScriptLoop>
+			</Item>
+		</elements>
+	</visualScript>
+	<effects>
+		<Item type="gameMechanics.elements.effects.Switch">
+			<impactsOn>
+				<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+					<delay>5000</delay>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+									<radius>50</radius>
+									<affectGroup>Enemies</affectGroup>
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ForceAggro" />
+											</impacts>
+										</Item>
+									</impacts>
+									<impactsOnNoTargets>
+										<Item type="gameMechanics.elements.impacts.ReturningImpact">
+											<impacts>
+												<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+													<buff href="Aggro.(BuffResource).xdb" />
+												</Item>
+											</impacts>
+										</Item>
+									</impactsOnNoTargets>
+									<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+										<predicates>
+											<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+												<mobs>
+													<Item href="/Creatures/ArchitectRanger/Instances/WW_10_7_ArchitectRanger.(MobWorld).xdb" />
+													<Item href="/Creatures/ArchitectMele/Instances/WW_10_7_ArchitectMele.(MobWorld).xdb" />
+												</mobs>
+											</Item>
+										</predicates>
+									</filter>
+									<targetsLimit>1</targetsLimit>
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+			</impactsOn>
+		</Item>
+		<Item type="gameMechanics.elements.effects.CombatStateTrigger">
+			<onLeave>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+							<delay>6000</delay>
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+									<radius>50</radius>
+									<affectGroup>Enemies</affectGroup>
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ForceAggro" />
+											</impacts>
+										</Item>
+									</impacts>
+									<impactsOnNoTargets>
+										<Item type="gameMechanics.elements.impacts.ReturningImpact">
+											<impacts>
+												<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+													<buff href="Aggro.(BuffResource).xdb" />
+												</Item>
+											</impacts>
+										</Item>
+									</impactsOnNoTargets>
+									<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+										<predicates>
+											<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+												<mobs>
+													<Item href="/Creatures/ArchitectRanger/Instances/WW_10_7_ArchitectRanger.(MobWorld).xdb" />
+													<Item href="/Creatures/ArchitectMele/Instances/WW_10_7_ArchitectMele.(MobWorld).xdb" />
+													<Item href="/Characters/Kania_male/Instances/ZC12/WW_10_7_NoSoulSolders.(MobWorld).xdb" />
+												</mobs>
+											</Item>
+										</predicates>
+									</filter>
+									<targetsLimit>1</targetsLimit>
+								</Item>
+							</impacts>
+						</Item>
+					</impactsIf>
+				</Item>
+			</onLeave>
+		</Item>
+		<Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
+			<scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+				<coeff>1</coeff>
+			</scaler>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectSetTaggingType">
+			<taggingType>None</taggingType>
+		</Item>
+		<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+							<predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+						</Item>
+						<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+							<predicate type="gameMechanics.elements.resources.ResourceBuff">
+								<buff href="Aggro.(BuffResource).xdb" />
+							</predicate>
+						</Item>
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="Aggro.(BuffResource).xdb" />
+						</Item>
+					</impactsIf>
+				</Item>
+			</impacts>
+			<tick>60000</tick>
+			<initialDelay>30000</initialDelay>
+		</Item>
+	</effects>
+	<disableWhileDead>true</disableWhileDead>
 </gameMechanics.constructor.schemes.ability.AbilityResource>

@@ -1,161 +1,162 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
-    <Header>
-        <resourceId>169156618</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <name href="Ability01_Name.txt" />
-    <description href="Ability01_Desc.txt" />
-    <descVars>
-        <Item>
-            <name>var0</name>
-            <value var="duration" />
-            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-                <formula>FormulaSeconds</formula>
-            </scaler>
-        </Item>
-        <Item>
-            <name>var1</name>
-            <value var="dmgBonusPerc" />
-        </Item>
-        <Item>
-            <name>var2</name>
-            <value var="comboLength" />
-        </Item>
-    </descVars>
-    <image href="/Interface/Icons/Equipment/Fists/Fist_1H_Hadagan_B01.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
-    <nameTemplate href="Ability_Name.txt.template" />
-    <descTemplate href="Ability_Desc.txt.template" />
-    <effects>
-        <Item type="gameMechanics.elements.effects.EquipTrigger">
-            <slot>DUALWIELD</slot>
-            <itemClasses>
-                <Item href="/Mechanics/ItemClasses/PairOfFists.xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemClass)" />
-            </itemClasses>
-            <effects>
-                <Item type="gameMechanics.elements.effects.SpellExtraImpacts">
-                    <casterImpacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactSpellGroupCooldown">
-                            <group href="/Mechanics/Spells/Groups/DruidStrikeOne.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-                            <duration var="duration2" />
-                        </Item>
-                    </casterImpacts>
-                    <targetImpacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                            <delay>300</delay>
-                            <limit var="limit" />
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
-                                    <impacts>
-                                        <Item type="gameMechanics.constructor.basicElements.MiniSpell">
-                                            <resource type="gameMechanics.elements.resources.ResourceMana">
-                                                <mana>13</mana>
-                                                <scaleByWeaponSpeed>true</scaleByWeaponSpeed>
-                                                <manaType>
-                                                    <Item>Mana</Item>
-                                                </manaType>
-                                            </resource>
-                                            <impact type="gameMechanics.elements.impacts.ImpactsIf">
-                                                <predicate type="gameMechanics.constructor.basicElements.BinaryPredicateAnd">
-                                                    <predicates>
-                                                        <Item type="gameMechanics.elements.predicates.PredicateReachTarget" />
-                                                        <Item type="gameMechanics.constructor.basicElements.BinaryPredicateOr">
-                                                            <predicates>
-                                                                <Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
-                                                                    <affectGroup>Enemies</affectGroup>
-                                                                </Item>
-                                                            </predicates>
-                                                        </Item>
-                                                    </predicates>
-                                                </predicate>
-                                                <impactsIf>
-                                                    <Item type="gameMechanics.elements.impacts.ScaledPhysicalWeaponDamage">
-                                                        <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-                                                            <scalers>
-                                                                <Item type="gameMechanics.elements.scalers.WeaponScaler" />
-                                                                <Item type="gameMechanics.elements.scalers.ScalerIf">
-                                                                    <condition type="gameMechanics.elements.predicates.PredicateHasSpell">
-                                                                        <spell href="/Mechanics/Spells/DruidV2/WeaponStrikeUpgrade/Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                                                                        <anyRank>false</anyRank>
-                                                                    </condition>
-                                                                    <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
-                                                                        <multiplier var="multiplier1" />
-                                                                    </scalerIf>
-                                                                    <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
-                                                                        <condition type="gameMechanics.elements.predicates.PredicateHasSpell">
-                                                                            <spell href="/Mechanics/Spells/DruidV2/WeaponStrikeUpgrade/Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                                                                            <anyRank>false</anyRank>
-                                                                        </condition>
-                                                                        <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
-                                                                            <multiplier var="multiplier2" />
-                                                                        </scalerIf>
-                                                                        <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
-                                                                            <condition type="gameMechanics.elements.predicates.PredicateHasSpell">
-                                                                                <spell href="/Mechanics/Spells/DruidV2/WeaponStrike/Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                                                                                <anyRank>false</anyRank>
-                                                                            </condition>
-                                                                            <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
-                                                                                <multiplier var="multiplier3" />
-                                                                            </scalerIf>
-                                                                            <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
-                                                                                <condition type="gameMechanics.elements.predicates.PredicateHasSpell">
-                                                                                    <spell href="/Mechanics/Spells/DruidV2/WeaponStrike/Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                                                                                    <anyRank>false</anyRank>
-                                                                                </condition>
-                                                                                <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
-                                                                                    <multiplier var="multiplier4" />
-                                                                                </scalerIf>
-                                                                                <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
-                                                                                    <condition type="gameMechanics.elements.predicates.PredicateHasSpell">
-                                                                                        <spell href="/Mechanics/Spells/DruidV2/WeaponStrikeUpgrade/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                                                                                        <anyRank>false</anyRank>
-                                                                                    </condition>
-                                                                                    <scalerIf type="gameMechanics.elements.scalers.LinearScaler">
-                                                                                        <multiplier var="multiplier5" />
-                                                                                    </scalerIf>
-                                                                                    <scalerElse type="gameMechanics.elements.scalers.LinearScaler">
-                                                                                        <multiplier var="multiplier6" />
-                                                                                    </scalerElse>
-                                                                                </scalerElse>
-                                                                            </scalerElse>
-                                                                        </scalerElse>
-                                                                    </scalerElse>
-                                                                </Item>
-                                                            </scalers>
-                                                        </scaler>
-                                                        <avgDamage>1</avgDamage>
-                                                        <source>Mainhand</source>
-                                                    </Item>
-                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                        <buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                    </Item>
-                                                </impactsIf>
-                                            </impact>
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                            <useSpellEnvelopeTargetEffects>false</useSpellEnvelopeTargetEffects>
-                        </Item>
-                    </targetImpacts>
-                    <destination type="gameMechanics.elements.effects.SpellExtraImpacts$DestinationGroups">
-                        <groups>
-                            <Item href="/Mechanics/Spells/Groups/DruidStrikeOne.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-                        </groups>
-                    </destination>
-                </Item>
-            </effects>
-            <secondary>false</secondary>
-        </Item>
-        <Item type="gameMechanics.constructor.basicElements.EffectNull"></Item>
-    </effects>
-    <majorEffect>-1</majorEffect>
-    <level>1</level>
-    <ranks>
-        <Item href="Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-        <Item href="Ability02.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-        <Item href="Ability03.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-    </ranks>
-    <disableWhileDead>false</disableWhileDead>
-    <saveState>false</saveState>
+	<Header>
+		<resourceId>169156618</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<name href="Ability01_Name.txt" />
+	<description href="Ability01_Desc.txt" />
+	<descVars>
+		<Item>
+			<name>var0</name>
+			<value var="duration" />
+			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+				<formula>FormulaSeconds</formula>
+			</scaler>
+		</Item>
+		<Item>
+			<name>var1</name>
+			<value var="dmgBonusPerc" />
+		</Item>
+		<Item>
+			<name>var2</name>
+			<value var="comboLength" />
+		</Item>
+	</descVars>
+	<image href="/Interface/Icons/Equipment/Fists/Fist_1H_Hadagan_B01.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+	<nameTemplate href="Ability_Name.txt.template" />
+	<descTemplate href="Ability_Desc.txt.template" />
+	<effects>
+		<Item type="gameMechanics.elements.effects.EquipTrigger">
+			<slot>DUALWIELD</slot>
+			<itemClasses>
+				<Item href="/Mechanics/ItemClasses/PairOfFists.xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemClass)" />
+			</itemClasses>
+			<effects>
+				<Item type="gameMechanics.elements.effects.SpellExtraImpacts">
+					<casterImpacts>
+						<Item type="gameMechanics.elements.impacts.ImpactSpellGroupCooldown">
+							<group href="/Mechanics/Spells/Groups/DruidStrikeOne.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+							<duration var="duration2" />
+						</Item>
+					</casterImpacts>
+					<targetImpacts>
+						<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+							<delay>300</delay>
+							<limit var="limit" />
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ReturningImpact">
+									<impacts>
+										<Item type="gameMechanics.constructor.basicElements.MiniSpell">
+											<resource type="gameMechanics.elements.resources.ResourceMana">
+												<mana>13</mana>
+												<scaleByWeaponSpeed>true</scaleByWeaponSpeed>
+												<manaType>
+													<Item>Mana</Item>
+												</manaType>
+											</resource>
+											<impact type="gameMechanics.elements.impacts.ImpactsIf">
+												<predicate type="gameMechanics.constructor.basicElements.BinaryPredicateAnd">
+													<predicates>
+														<Item type="gameMechanics.elements.predicates.PredicateReachTarget" />
+														<Item type="gameMechanics.constructor.basicElements.BinaryPredicateOr">
+															<predicates>
+																<Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
+																	<affectGroup>Enemies</affectGroup>
+																</Item>
+															</predicates>
+														</Item>
+													</predicates>
+												</predicate>
+												<impactsIf>
+													<Item type="gameMechanics.elements.impacts.ScaledPhysicalWeaponDamage">
+														<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+															<scalers>
+																<Item type="gameMechanics.elements.scalers.WeaponScaler" />
+																<Item type="gameMechanics.elements.scalers.ScalerIf">
+																	<condition type="gameMechanics.elements.predicates.PredicateHasSpell">
+																		<spell href="/Mechanics/Spells/DruidV2/WeaponStrikeUpgrade/Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+																		<anyRank>false</anyRank>
+																	</condition>
+																	<scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+																		<multiplier var="multiplier1" />
+																	</scalerIf>
+																	<scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+																		<condition type="gameMechanics.elements.predicates.PredicateHasSpell">
+																			<spell href="/Mechanics/Spells/DruidV2/WeaponStrikeUpgrade/Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+																			<anyRank>false</anyRank>
+																		</condition>
+																		<scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+																			<multiplier var="multiplier2" />
+																		</scalerIf>
+																		<scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+																			<condition type="gameMechanics.elements.predicates.PredicateHasSpell">
+																				<spell href="/Mechanics/Spells/DruidV2/WeaponStrike/Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+																				<anyRank>false</anyRank>
+																			</condition>
+																			<scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+																				<multiplier var="multiplier3" />
+																			</scalerIf>
+																			<scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+																				<condition type="gameMechanics.elements.predicates.PredicateHasSpell">
+																					<spell href="/Mechanics/Spells/DruidV2/WeaponStrike/Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+																					<anyRank>false</anyRank>
+																				</condition>
+																				<scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+																					<multiplier var="multiplier4" />
+																				</scalerIf>
+																				<scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+																					<condition type="gameMechanics.elements.predicates.PredicateHasSpell">
+																						<spell href="/Mechanics/Spells/DruidV2/WeaponStrikeUpgrade/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+																						<anyRank>false</anyRank>
+																					</condition>
+																					<scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+																						<multiplier var="multiplier5" />
+																					</scalerIf>
+																					<scalerElse type="gameMechanics.elements.scalers.LinearScaler">
+																						<multiplier var="multiplier6" />
+																					</scalerElse>
+																				</scalerElse>
+																			</scalerElse>
+																		</scalerElse>
+																	</scalerElse>
+																</Item>
+															</scalers>
+														</scaler>
+														<avgDamage>1</avgDamage>
+														<source>Mainhand</source>
+													</Item>
+													<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+														<buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+													</Item>
+												</impactsIf>
+											</impact>
+										</Item>
+									</impacts>
+								</Item>
+							</impacts>
+							<useSpellEnvelopeTargetEffects>false</useSpellEnvelopeTargetEffects>
+						</Item>
+					</targetImpacts>
+					<destination type="gameMechanics.elements.effects.SpellExtraImpacts$DestinationGroups">
+						<groups>
+							<Item href="/Mechanics/Spells/Groups/DruidStrikeOne.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+						</groups>
+					</destination>
+				</Item>
+			</effects>
+			<secondary>false</secondary>
+		</Item>
+		<Item type="gameMechanics.constructor.basicElements.EffectNull">
+		</Item>
+	</effects>
+	<majorEffect>-1</majorEffect>
+	<level>1</level>
+	<ranks>
+		<Item href="Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+		<Item href="Ability02.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+		<Item href="Ability03.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+	</ranks>
+	<disableWhileDead>false</disableWhileDead>
+	<saveState>false</saveState>
 </gameMechanics.constructor.schemes.ability.AbilityResource>

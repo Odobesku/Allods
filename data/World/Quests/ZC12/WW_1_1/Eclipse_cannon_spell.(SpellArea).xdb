@@ -1,165 +1,165 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.area.SpellArea>
-    <Header>
-        <resourceId>739931407</resourceId>
-    </Header>
-    <Name href="Eclipse_cannon_spell.(SpellArea).Name.txt" />
-    <Description href="Eclipse_cannon_spell.(SpellArea).Description.txt" />
-    <image href="/Interface/Icons/Equipment/Ships/CannonGeneralShot_01.(UISingleTexture).xdb" />
-    <nameTemplate href="Eclipse_cannon_spell.(SpellArea).NameTemplate.txt" />
-    <range type="gameMechanics.elements.calcers.FloatData">
-        <value>700</value>
-    </range>
-    <needLos>false</needLos>
-    <targetType>STTSelf</targetType>
-    <iffPolicy>Enemies</iffPolicy>
-    <mechanics>
-        <cooldown>
-            <duration>3000</duration>
-        </cooldown>
-        <casterConditions>
-            <Item type="gameMechanics.world.device.cannon.DeviceHasUser" />
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="Cannon_Malfunction.(BuffResource).xdb" />
-                </predicate>
-            </Item>
-        </casterConditions>
-        <targetConditions>
-            <Item type="gameMechanics.world.ship.parts.PredicateCannonTargetable" />
-            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                <mobs>
-                    <Item href="/Creatures/ArchitectSiege/Instances/ZC12/Architect_ship.(MobWorld).xdb" />
-                </mobs>
-            </Item>
-        </targetConditions>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactClientData">
-                <data href="/Mechanics/Ships/Cannon/CannonAttack.(ClientData).xdb" />
-            </Item>
-            <Item type="gameMechanics.world.device.cannon.ImpactSendLaunchEvent">
-                <clientData href="ArchitectShipHit.(AstralSpell).xdb" />
-                <targetDestination type="gameMechanics.map.destination.DestinationModified">
-                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
-                    <modifiers>
-                        <Item type="gameMechanics.map.destination.modifier.ModifierShiftForward">
-                            <radius type="gameMechanics.elements.calcers.FloatData">
-                                <value>700</value>
-                            </radius>
-                        </Item>
-                    </modifiers>
-                </targetDestination>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                <predicates>
-                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                            <buff href="ShootCount.(BuffResource).xdb" />
-                        </predicate>
-                    </Item>
-                </predicates>
-                <impactsIf>
-                    <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
-                        <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
-                            <value>0.3</value>
-                        </chanceCalcer>
-                        <impacts>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="Cannon_Malfunction.(BuffResource).xdb" />
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
-                                <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderDeviceUser" />
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                        <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-                                        <data href="Malfuntion.(ClientData).xdb" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactAvatarFinishUse" />
-                                        </impacts>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ImpactSummon">
-                                <destination type="gameMechanics.map.destination.DestinationModified">
-                                    <destination type="gameMechanics.map.destination.RelativePos">
-                                        <faceSourcePos>false</faceSourcePos>
-                                    </destination>
-                                    <modifiers>
-                                        <Item type="gameMechanics.map.destination.modifier.ModifierShift">
-                                            <shift x="0" y="0" z="3" />
-                                        </Item>
-                                    </modifiers>
-                                </destination>
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                                        <delay>25000</delay>
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                                        </impacts>
-                                    </Item>
-                                </impacts>
-                                <object href="Malfuntion_smoke.(SteleResource).xdb" />
-                            </Item>
-                        </impacts>
-                    </Item>
-                </impactsIf>
-            </Item>
-        </casterImpacts>
-        <targetImpacts>
-            <Item type="gameMechanics.elements.impacts.EntityImpactCreaturesAround">
-                <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
-                <radius>35</radius>
-                <impacts>
-                    <Item type="gameMechanics.world.device.cannon.ImpactCannonDamage">
-                        <damage type="gameMechanics.elements.calcers.FloatData">
-                            <value>1</value>
-                        </damage>
-                        <damageType>ASTRAL</damageType>
-                        <hitCalcType type="gameMechanics.world.projectile.CannonCalcType">
-                            <critFactor>1.8</critFactor>
-                            <glanceFactor>0.8</glanceFactor>
-                        </hitCalcType>
-                        <targetScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                            <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
-                                <multiplier>0.02</multiplier>
-                            </mulCalcer>
-                            <additionalMultiplier>
-                                <scaler type="gameMechanics.elements.scalers.RandomScaler">
-                                    <range>
-                                        <min>4</min>
-                                        <max>8</max>
-                                    </range>
-                                </scaler>
-                            </additionalMultiplier>
-                        </targetScaler>
-                    </Item>
-                    <Item type="gameMechanics.elements.impacts.ImpactClientData">
-                        <data href="Hit.(ClientData).xdb" />
-                    </Item>
-                </impacts>
-                <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-                    <predicates>
-                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                            <mobs>
-                                <Item href="/Creatures/ArchitectSiege/Instances/ZC12/Architect_ship.(MobWorld).xdb" />
-                            </mobs>
-                        </Item>
-                    </predicates>
-                </filter>
-            </Item>
-        </targetImpacts>
-    </mechanics>
-    <speed>50</speed>
-    <autotargetSelector type="gameMechanics.constructor.schemes.spell.multiTarget.ClosestAutotarget">
-        <group>Enemies</group>
-    </autotargetSelector>
-    <shape type="gameMechanics.constructor.schemes.spell.area.Ray">
-        <objectsProvider>ClientSelected</objectsProvider>
-    </shape>
-    <shapeOrientation type="gameMechanics.elements.common.ShapeOrientationYawAndPitch" />
-    <radius>700</radius>
-    <useAverageThrowDuration>true</useAverageThrowDuration>
-    <stopOnNoTargets>false</stopOnNoTargets>
+	<Header>
+		<resourceId>739931407</resourceId>
+	</Header>
+	<Name href="Eclipse_cannon_spell.(SpellArea).Name.txt" />
+	<Description href="Eclipse_cannon_spell.(SpellArea).Description.txt" />
+	<image href="/Interface/Icons/Equipment/Ships/CannonGeneralShot_01.(UISingleTexture).xdb" />
+	<nameTemplate href="Eclipse_cannon_spell.(SpellArea).NameTemplate.txt" />
+	<range type="gameMechanics.elements.calcers.FloatData">
+		<value>700</value>
+	</range>
+	<needLos>false</needLos>
+	<targetType>STTSelf</targetType>
+	<iffPolicy>Enemies</iffPolicy>
+	<mechanics>
+		<cooldown>
+			<duration>3000</duration>
+		</cooldown>
+		<casterConditions>
+			<Item type="gameMechanics.world.device.cannon.DeviceHasUser" />
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="Cannon_Malfunction.(BuffResource).xdb" />
+				</predicate>
+			</Item>
+		</casterConditions>
+		<targetConditions>
+			<Item type="gameMechanics.world.ship.parts.PredicateCannonTargetable" />
+			<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+				<mobs>
+					<Item href="/Creatures/ArchitectSiege/Instances/ZC12/Architect_ship.(MobWorld).xdb" />
+				</mobs>
+			</Item>
+		</targetConditions>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactClientData">
+				<data href="/Mechanics/Ships/Cannon/CannonAttack.(ClientData).xdb" />
+			</Item>
+			<Item type="gameMechanics.world.device.cannon.ImpactSendLaunchEvent">
+				<clientData href="ArchitectShipHit.(AstralSpell).xdb" />
+				<targetDestination type="gameMechanics.map.destination.DestinationModified">
+					<destination type="gameMechanics.map.destination.SelfPosDestination" />
+					<modifiers>
+						<Item type="gameMechanics.map.destination.modifier.ModifierShiftForward">
+							<radius type="gameMechanics.elements.calcers.FloatData">
+								<value>700</value>
+							</radius>
+						</Item>
+					</modifiers>
+				</targetDestination>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+				<predicates>
+					<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+						<predicate type="gameMechanics.elements.resources.ResourceBuff">
+							<buff href="ShootCount.(BuffResource).xdb" />
+						</predicate>
+					</Item>
+				</predicates>
+				<impactsIf>
+					<Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+						<chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+							<value>0.3</value>
+						</chanceCalcer>
+						<impacts>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="Cannon_Malfunction.(BuffResource).xdb" />
+							</Item>
+							<Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+								<addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderDeviceUser" />
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+										<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+										<data href="Malfuntion.(ClientData).xdb" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ImpactAvatarFinishUse" />
+										</impacts>
+									</Item>
+								</impacts>
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ImpactSummon">
+								<destination type="gameMechanics.map.destination.DestinationModified">
+									<destination type="gameMechanics.map.destination.RelativePos">
+										<faceSourcePos>false</faceSourcePos>
+									</destination>
+									<modifiers>
+										<Item type="gameMechanics.map.destination.modifier.ModifierShift">
+											<shift x="0" y="0" z="3" />
+										</Item>
+									</modifiers>
+								</destination>
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+										<delay>25000</delay>
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.Disintegrate" />
+										</impacts>
+									</Item>
+								</impacts>
+								<object href="Malfuntion_smoke.(SteleResource).xdb" />
+							</Item>
+						</impacts>
+					</Item>
+				</impactsIf>
+			</Item>
+		</casterImpacts>
+		<targetImpacts>
+			<Item type="gameMechanics.elements.impacts.EntityImpactCreaturesAround">
+				<shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+				<radius>35</radius>
+				<impacts>
+					<Item type="gameMechanics.world.device.cannon.ImpactCannonDamage">
+						<damage type="gameMechanics.elements.calcers.FloatData">
+							<value>1</value>
+						</damage>
+						<damageType>ASTRAL</damageType>
+						<hitCalcType type="gameMechanics.world.projectile.CannonCalcType">
+							<critFactor>1.8</critFactor>
+							<glanceFactor>0.8</glanceFactor>
+						</hitCalcType>
+						<targetScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+							<mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+								<multiplier>0.02</multiplier>
+							</mulCalcer>
+							<additionalMultiplier>
+								<scaler type="gameMechanics.elements.scalers.RandomScaler">
+									<range>
+										<min>4</min>
+										<max>8</max>
+									</range>
+								</scaler>
+							</additionalMultiplier>
+						</targetScaler>
+					</Item>
+					<Item type="gameMechanics.elements.impacts.ImpactClientData">
+						<data href="Hit.(ClientData).xdb" />
+					</Item>
+				</impacts>
+				<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+							<mobs>
+								<Item href="/Creatures/ArchitectSiege/Instances/ZC12/Architect_ship.(MobWorld).xdb" />
+							</mobs>
+						</Item>
+					</predicates>
+				</filter>
+			</Item>
+		</targetImpacts>
+	</mechanics>
+	<speed>50</speed>
+	<autotargetSelector type="gameMechanics.constructor.schemes.spell.multiTarget.ClosestAutotarget">
+		<group>Enemies</group>
+	</autotargetSelector>
+	<shape type="gameMechanics.constructor.schemes.spell.area.Ray">
+		<objectsProvider>ClientSelected</objectsProvider>
+	</shape>
+	<shapeOrientation type="gameMechanics.elements.common.ShapeOrientationYawAndPitch" />
+	<radius>700</radius>
+	<useAverageThrowDuration>true</useAverageThrowDuration>
+	<stopOnNoTargets>false</stopOnNoTargets>
 </gameMechanics.constructor.schemes.spell.area.SpellArea>

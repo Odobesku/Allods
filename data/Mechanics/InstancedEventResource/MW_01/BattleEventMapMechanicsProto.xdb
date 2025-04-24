@@ -1,269 +1,269 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.battleground.BattleEventMapMechanics>
-    <Header>
-        <resourceId>739826494</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <score href="MegaWar_01.(BattleEventAchievementResource).xdb" />
-    <map hrefvar="map" />
-    <waitBuff href="MW_WaitBuff01.(BuffResource).xdb" />
-    <impactsOnStart>
-        <Item type="gameMechanics.elements.impacts.ImpactEnableBunchEffects">
-            <enable>true</enable>
-        </Item>
-        <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactUpdateEventAchievementGeneric">
-            <achievement href="DefaultWinner.(BattleEventAchievementResource).xdb" />
-            <summand type="gameMechanics.elements.calcers.FloatData">
-                <value>1</value>
-            </summand>
-            <mark href="/Mechanics/MegaWar/Marks/Blue.(BattlegroundPlayerSpawnPlace).xdb" />
-        </Item>
-    </impactsOnStart>
-    <impactsOnFinish>
-        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="/Mechanics/MegaWar/Assistants/CanSummonMegaPet.(BuffResource).xdb" />
-                        </Item>
-                    </impacts>
-                </Item>
-            </impacts>
-        </Item>
-    </impactsOnFinish>
-    <impactsOnRoundFinish>
-        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="/Mechanics/MegaWar/Assistants/PetsCounterBuff.(BuffResource).xdb" />
-                        </Item>
-                    </impacts>
-                </Item>
-            </impacts>
-        </Item>
-        <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-            <predicates>
-                <Item type="gameMechanics.map.variables.PredicateMapVariableLess">
-                    <variableResource href="/Mechanics/MegaWar/Variables/Round.(MapVariableResource).xdb" />
-                    <maxValue type="gameMechanics.elements.calcers.FloatData">
-                        <value>2</value>
-                    </maxValue>
-                </Item>
-            </predicates>
-            <impacts>
-                <Item type="gameMechanics.map.variables.ImpactMapVariableSummandGeneric">
-                    <variable href="/Mechanics/MegaWar/Variables/Round.(MapVariableResource).xdb" />
-                    <summand>1</summand>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactCaptureSpawnPlaceGeneric">
-                    <invider href="/Mechanics/MegaWar/Marks/Red.(BattlegroundPlayerSpawnPlace).xdb" />
-                    <recapturableSpawnPlace>Start_blue</recapturableSpawnPlace>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactCaptureSpawnPlaceGeneric">
-                    <invider href="/Mechanics/MegaWar/Marks/Blue.(BattlegroundPlayerSpawnPlace).xdb" />
-                    <recapturableSpawnPlace>Start_red</recapturableSpawnPlace>
-                </Item>
-                <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactShiftRoundDuration">
-                    <shift type="gameMechanics.elements.calcers.CalcerLongSum">
-                        <calcers>
-                            <Item type="avatarPopulation.service.impl.matchMakingImpl.map.PreviousRoundDurationCalcer" />
-                            <Item type="gameMechanics.elements.calcers.CalcerLongMul">
-                                <calcers>
-                                    <Item type="gameMechanics.elements.calcers.TimeStampCalcer">
-                                        <value>
-                                            <minute>9</minute>
-                                        </value>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.calcers.LongData">
-                                        <value>-1</value>
-                                    </Item>
-                                </calcers>
-                            </Item>
-                        </calcers>
-                    </shift>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactRecapturableStateGeneric">
-                    <scriptID>MW01_Flag01</scriptID>
-                    <invider href="/Mechanics/MegaWar/Marks/Red.(BattlegroundPlayerSpawnPlace).xdb" />
-                    <resetProgress>true</resetProgress>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactRecapturableStateGeneric">
-                    <scriptID>MW01_Flag02</scriptID>
-                    <invider href="/Mechanics/MegaWar/Marks/Red.(BattlegroundPlayerSpawnPlace).xdb" />
-                    <resetProgress>true</resetProgress>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactRecapturableStateGeneric">
-                    <scriptID>MW01_Flag03</scriptID>
-                    <invider href="/Mechanics/MegaWar/Marks/Red.(BattlegroundPlayerSpawnPlace).xdb" />
-                    <resetProgress>true</resetProgress>
-                </Item>
-            </impacts>
-        </Item>
-    </impactsOnRoundFinish>
-    <startAnnounce href="/Mechanics/InstancedEventResource/MM_BG01/StartAnnounce.(ClientData).xdb" />
-    <impactsOnAvatars>
-        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-            <buff href="/Mechanics/MegaWar/Assistants/RuneBuff.(BuffResource).xdb" />
-            <stacks type="constructor.elements.CalcerFloatExternal">
-                <externalCalcer href="/Mechanics/MegaWar/Assistants/RuneBuffsStacksCalcer.xdb" />
-            </stacks>
-        </Item>
-        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-            <predicates>
-                <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
-                    <predicates>
-                        <Item type="gameMechanics.elements.predicates.PredicateEquipped">
-                            <dressType>TABARD</dressType>
-                        </Item>
-                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
-                            <predicates>
-                                <Item type="gameMechanics.elements.predicates.PredicateResourceReady">
-                                    <resource href="/Items/GuildItems/GuildTabard.xdb" />
-                                </Item>
-                                <Item type="gameMechanics.elements.predicates.PredicateResourceReady">
-                                    <resource href="/Items/GuildItems/GuildChampionTabard.xdb" />
-                                </Item>
-                            </predicates>
-                        </Item>
-                    </predicates>
-                </Item>
-            </predicates>
-            <impactsIf>
-                <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactUpdateEventAchievement">
-                    <achievement href="HasTabard.(BattleEventAchievementResource).xdb" />
-                    <summand>1</summand>
-                </Item>
-            </impactsIf>
-        </Item>
-        <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactUpdateEventAchievement">
-            <achievement href="PlayersCounter.(BattleEventAchievementResource).xdb" />
-            <summand>1</summand>
-        </Item>
-        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-            <predicates>
-                <Item type="avatarPopulation.service.impl.matchMakingImpl.event.predicates.PredicateBattleEventMember">
-                    <eventResource href="MegaWar_01.(InstancedEventResource).xdb" />
-                </Item>
-            </predicates>
-            <impactsIf>
-                <Item type="gameMechanics.elements.impacts.ImpactLogAvatarStats">
-                    <resource href="MegaWar_01.(InstancedEventResource).xdb" />
-                </Item>
-            </impactsIf>
-        </Item>
-        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-            <predicates>
-                <Item type="avatarPopulation.service.impl.matchMakingImpl.event.predicates.PredicateBattleEventMember">
-                    <eventResource href="MW5_LadderEvent.(InstancedEventResource).xdb" />
-                </Item>
-            </predicates>
-            <impactsIf>
-                <Item type="gameMechanics.elements.impacts.ImpactLogAvatarStats">
-                    <resource href="MW5_LadderEvent.(InstancedEventResource).xdb" />
-                </Item>
-            </impactsIf>
-        </Item>
-        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-            <predicates>
-                <Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
-                    <key href="/System/ContentKeys/GoodPVP.(ContentKey).xdb" />
-                </Item>
-            </predicates>
-            <impactsIf>
-                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                    <buff href="/Mechanics/InstancedEventResource/CommonMechanics/GoodPVP.(BuffResource).xdb" />
-                </Item>
-            </impactsIf>
-        </Item>
-    </impactsOnAvatars>
-    <assignWinnerOnDraw>false</assignWinnerOnDraw>
-    <roundsCount>2</roundsCount>
-    <shiftEntrances>true</shiftEntrances>
-    <impactsOnEarlyExit>
-        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-            <buff href="/Mechanics/MegaWar/Assistants/CanSummonMegaPet.(BuffResource).xdb" />
-        </Item>
-        <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactUpdateEventAchievement">
-            <achievement href="PlayersCounter.(BattleEventAchievementResource).xdb" />
-            <summand>-1</summand>
-        </Item>
-        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-            <predicates>
-                <Item type="avatarPopulation.service.impl.matchMakingImpl.event.predicates.PredicateBattleEventMember">
-                    <eventResource href="MegaWar_01.(InstancedEventResource).xdb" />
-                </Item>
-            </predicates>
-            <impactsIf>
-                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                    <buff href="/Mechanics/InstancedEventResource/MM_BG01/LeaverDebuff.(BuffResource).xdb" />
-                </Item>
-            </impactsIf>
-        </Item>
-        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-            <buff href="/Mechanics/InstancedEventResource/CommonMechanics/GoodPVP.(BuffResource).xdb" />
-        </Item>
-    </impactsOnEarlyExit>
-    <impactsOnWinners>
-        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-            <buff href="/Mechanics/InstancedEventResource/CommonMechanics/GoodPVP.(BuffResource).xdb" />
-        </Item>
-        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
-            <id href="/World/Quests/LoginEventNew/LoginEventNew03_A1.(QuestCountId).xdb" />
-        </Item>
-        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
-            <id href="/Mechanics/LoginEvent3/LE3SoloQuest02.(QuestCountId).xdb" />
-        </Item>
-    </impactsOnWinners>
-    <impactsOnLosers>
-        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-            <buff href="/Mechanics/InstancedEventResource/CommonMechanics/GoodPVP.(BuffResource).xdb" />
-        </Item>
-    </impactsOnLosers>
-    <roundDuration>
-        <minute>9</minute>
-    </roundDuration>
-    <prepareTime>
-        <minute>1</minute>
-    </prepareTime>
-    <duration>
-        <hour>1</hour>
-    </duration>
-    <achievements>
-        <Item>
-            <resource href="MegaWar_01.(BattleEventAchievementResource).xdb" />
-            <count>2500</count>
-            <weight>1</weight>
-            <finalWeight>10</finalWeight>
-        </Item>
-        <Item>
-            <showInTable>true</showInTable>
-            <resource href="/Mechanics/InstancedEventResource/Achievements/Kills.(BattleEventAchievementResource).xdb" />
-        </Item>
-        <Item>
-            <showInTable>true</showInTable>
-            <resource href="/Mechanics/InstancedEventResource/Achievements/Deaths.(BattleEventAchievementResource).xdb" />
-        </Item>
-        <Item>
-            <showInTable>true</showInTable>
-            <resource href="/Mechanics/InstancedEventResource/Achievements/TotalDamageDone.(BattleEventAchievementResource).xdb" />
-        </Item>
-        <Item>
-            <showInTable>true</showInTable>
-            <resource href="/Mechanics/InstancedEventResource/Achievements/TotalHealDone.(BattleEventAchievementResource).xdb" />
-        </Item>
-        <Item>
-            <resource href="HasTabard.(BattleEventAchievementResource).xdb" />
-        </Item>
-        <Item>
-            <resource href="DefaultWinner.(BattleEventAchievementResource).xdb" />
-            <finalWeight>10</finalWeight>
-        </Item>
-        <Item>
-            <resource href="PlayersCounter.(BattleEventAchievementResource).xdb" />
-            <finalWeight>1</finalWeight>
-        </Item>
-    </achievements>
+	<Header>
+		<resourceId>739826494</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<score href="MegaWar_01.(BattleEventAchievementResource).xdb" />
+	<map hrefvar="map" />
+	<waitBuff href="MW_WaitBuff01.(BuffResource).xdb" />
+	<impactsOnStart>
+		<Item type="gameMechanics.elements.impacts.ImpactEnableBunchEffects">
+			<enable>true</enable>
+		</Item>
+		<Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactUpdateEventAchievementGeneric">
+			<achievement href="DefaultWinner.(BattleEventAchievementResource).xdb" />
+			<summand type="gameMechanics.elements.calcers.FloatData">
+				<value>1</value>
+			</summand>
+			<mark href="/Mechanics/MegaWar/Marks/Blue.(BattlegroundPlayerSpawnPlace).xdb" />
+		</Item>
+	</impactsOnStart>
+	<impactsOnFinish>
+		<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="/Mechanics/MegaWar/Assistants/CanSummonMegaPet.(BuffResource).xdb" />
+						</Item>
+					</impacts>
+				</Item>
+			</impacts>
+		</Item>
+	</impactsOnFinish>
+	<impactsOnRoundFinish>
+		<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="/Mechanics/MegaWar/Assistants/PetsCounterBuff.(BuffResource).xdb" />
+						</Item>
+					</impacts>
+				</Item>
+			</impacts>
+		</Item>
+		<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+			<predicates>
+				<Item type="gameMechanics.map.variables.PredicateMapVariableLess">
+					<variableResource href="/Mechanics/MegaWar/Variables/Round.(MapVariableResource).xdb" />
+					<maxValue type="gameMechanics.elements.calcers.FloatData">
+						<value>2</value>
+					</maxValue>
+				</Item>
+			</predicates>
+			<impacts>
+				<Item type="gameMechanics.map.variables.ImpactMapVariableSummandGeneric">
+					<variable href="/Mechanics/MegaWar/Variables/Round.(MapVariableResource).xdb" />
+					<summand>1</summand>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactCaptureSpawnPlaceGeneric">
+					<invider href="/Mechanics/MegaWar/Marks/Red.(BattlegroundPlayerSpawnPlace).xdb" />
+					<recapturableSpawnPlace>Start_blue</recapturableSpawnPlace>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactCaptureSpawnPlaceGeneric">
+					<invider href="/Mechanics/MegaWar/Marks/Blue.(BattlegroundPlayerSpawnPlace).xdb" />
+					<recapturableSpawnPlace>Start_red</recapturableSpawnPlace>
+				</Item>
+				<Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactShiftRoundDuration">
+					<shift type="gameMechanics.elements.calcers.CalcerLongSum">
+						<calcers>
+							<Item type="avatarPopulation.service.impl.matchMakingImpl.map.PreviousRoundDurationCalcer" />
+							<Item type="gameMechanics.elements.calcers.CalcerLongMul">
+								<calcers>
+									<Item type="gameMechanics.elements.calcers.TimeStampCalcer">
+										<value>
+											<minute>9</minute>
+										</value>
+									</Item>
+									<Item type="gameMechanics.elements.calcers.LongData">
+										<value>-1</value>
+									</Item>
+								</calcers>
+							</Item>
+						</calcers>
+					</shift>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactRecapturableStateGeneric">
+					<scriptID>MW01_Flag01</scriptID>
+					<invider href="/Mechanics/MegaWar/Marks/Red.(BattlegroundPlayerSpawnPlace).xdb" />
+					<resetProgress>true</resetProgress>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactRecapturableStateGeneric">
+					<scriptID>MW01_Flag02</scriptID>
+					<invider href="/Mechanics/MegaWar/Marks/Red.(BattlegroundPlayerSpawnPlace).xdb" />
+					<resetProgress>true</resetProgress>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactRecapturableStateGeneric">
+					<scriptID>MW01_Flag03</scriptID>
+					<invider href="/Mechanics/MegaWar/Marks/Red.(BattlegroundPlayerSpawnPlace).xdb" />
+					<resetProgress>true</resetProgress>
+				</Item>
+			</impacts>
+		</Item>
+	</impactsOnRoundFinish>
+	<startAnnounce href="/Mechanics/InstancedEventResource/MM_BG01/StartAnnounce.(ClientData).xdb" />
+	<impactsOnAvatars>
+		<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+			<buff href="/Mechanics/MegaWar/Assistants/RuneBuff.(BuffResource).xdb" />
+			<stacks type="constructor.elements.CalcerFloatExternal">
+				<externalCalcer href="/Mechanics/MegaWar/Assistants/RuneBuffsStacksCalcer.xdb" />
+			</stacks>
+		</Item>
+		<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+			<predicates>
+				<Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateEquipped">
+							<dressType>TABARD</dressType>
+						</Item>
+						<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+							<predicates>
+								<Item type="gameMechanics.elements.predicates.PredicateResourceReady">
+									<resource href="/Items/GuildItems/GuildTabard.xdb" />
+								</Item>
+								<Item type="gameMechanics.elements.predicates.PredicateResourceReady">
+									<resource href="/Items/GuildItems/GuildChampionTabard.xdb" />
+								</Item>
+							</predicates>
+						</Item>
+					</predicates>
+				</Item>
+			</predicates>
+			<impactsIf>
+				<Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactUpdateEventAchievement">
+					<achievement href="HasTabard.(BattleEventAchievementResource).xdb" />
+					<summand>1</summand>
+				</Item>
+			</impactsIf>
+		</Item>
+		<Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactUpdateEventAchievement">
+			<achievement href="PlayersCounter.(BattleEventAchievementResource).xdb" />
+			<summand>1</summand>
+		</Item>
+		<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+			<predicates>
+				<Item type="avatarPopulation.service.impl.matchMakingImpl.event.predicates.PredicateBattleEventMember">
+					<eventResource href="MegaWar_01.(InstancedEventResource).xdb" />
+				</Item>
+			</predicates>
+			<impactsIf>
+				<Item type="gameMechanics.elements.impacts.ImpactLogAvatarStats">
+					<resource href="MegaWar_01.(InstancedEventResource).xdb" />
+				</Item>
+			</impactsIf>
+		</Item>
+		<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+			<predicates>
+				<Item type="avatarPopulation.service.impl.matchMakingImpl.event.predicates.PredicateBattleEventMember">
+					<eventResource href="MW5_LadderEvent.(InstancedEventResource).xdb" />
+				</Item>
+			</predicates>
+			<impactsIf>
+				<Item type="gameMechanics.elements.impacts.ImpactLogAvatarStats">
+					<resource href="MW5_LadderEvent.(InstancedEventResource).xdb" />
+				</Item>
+			</impactsIf>
+		</Item>
+		<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+			<predicates>
+				<Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
+					<key href="/System/ContentKeys/GoodPVP.(ContentKey).xdb" />
+				</Item>
+			</predicates>
+			<impactsIf>
+				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+					<buff href="/Mechanics/InstancedEventResource/CommonMechanics/GoodPVP.(BuffResource).xdb" />
+				</Item>
+			</impactsIf>
+		</Item>
+	</impactsOnAvatars>
+	<assignWinnerOnDraw>false</assignWinnerOnDraw>
+	<roundsCount>2</roundsCount>
+	<shiftEntrances>true</shiftEntrances>
+	<impactsOnEarlyExit>
+		<Item type="gameMechanics.elements.impacts.BuffDetacher">
+			<buff href="/Mechanics/MegaWar/Assistants/CanSummonMegaPet.(BuffResource).xdb" />
+		</Item>
+		<Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactUpdateEventAchievement">
+			<achievement href="PlayersCounter.(BattleEventAchievementResource).xdb" />
+			<summand>-1</summand>
+		</Item>
+		<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+			<predicates>
+				<Item type="avatarPopulation.service.impl.matchMakingImpl.event.predicates.PredicateBattleEventMember">
+					<eventResource href="MegaWar_01.(InstancedEventResource).xdb" />
+				</Item>
+			</predicates>
+			<impactsIf>
+				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+					<buff href="/Mechanics/InstancedEventResource/MM_BG01/LeaverDebuff.(BuffResource).xdb" />
+				</Item>
+			</impactsIf>
+		</Item>
+		<Item type="gameMechanics.elements.impacts.BuffDetacher">
+			<buff href="/Mechanics/InstancedEventResource/CommonMechanics/GoodPVP.(BuffResource).xdb" />
+		</Item>
+	</impactsOnEarlyExit>
+	<impactsOnWinners>
+		<Item type="gameMechanics.elements.impacts.BuffDetacher">
+			<buff href="/Mechanics/InstancedEventResource/CommonMechanics/GoodPVP.(BuffResource).xdb" />
+		</Item>
+		<Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+			<id href="/World/Quests/LoginEventNew/LoginEventNew03_A1.(QuestCountId).xdb" />
+		</Item>
+		<Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+			<id href="/Mechanics/LoginEvent3/LE3SoloQuest02.(QuestCountId).xdb" />
+		</Item>
+	</impactsOnWinners>
+	<impactsOnLosers>
+		<Item type="gameMechanics.elements.impacts.BuffDetacher">
+			<buff href="/Mechanics/InstancedEventResource/CommonMechanics/GoodPVP.(BuffResource).xdb" />
+		</Item>
+	</impactsOnLosers>
+	<roundDuration>
+		<minute>9</minute>
+	</roundDuration>
+	<prepareTime>
+		<minute>1</minute>
+	</prepareTime>
+	<duration>
+		<hour>1</hour>
+	</duration>
+	<achievements>
+		<Item>
+			<resource href="MegaWar_01.(BattleEventAchievementResource).xdb" />
+			<count>2500</count>
+			<weight>1</weight>
+			<finalWeight>10</finalWeight>
+		</Item>
+		<Item>
+			<showInTable>true</showInTable>
+			<resource href="/Mechanics/InstancedEventResource/Achievements/Kills.(BattleEventAchievementResource).xdb" />
+		</Item>
+		<Item>
+			<showInTable>true</showInTable>
+			<resource href="/Mechanics/InstancedEventResource/Achievements/Deaths.(BattleEventAchievementResource).xdb" />
+		</Item>
+		<Item>
+			<showInTable>true</showInTable>
+			<resource href="/Mechanics/InstancedEventResource/Achievements/TotalDamageDone.(BattleEventAchievementResource).xdb" />
+		</Item>
+		<Item>
+			<showInTable>true</showInTable>
+			<resource href="/Mechanics/InstancedEventResource/Achievements/TotalHealDone.(BattleEventAchievementResource).xdb" />
+		</Item>
+		<Item>
+			<resource href="HasTabard.(BattleEventAchievementResource).xdb" />
+		</Item>
+		<Item>
+			<resource href="DefaultWinner.(BattleEventAchievementResource).xdb" />
+			<finalWeight>10</finalWeight>
+		</Item>
+		<Item>
+			<resource href="PlayersCounter.(BattleEventAchievementResource).xdb" />
+			<finalWeight>1</finalWeight>
+		</Item>
+	</achievements>
 </gameMechanics.battleground.BattleEventMapMechanics>

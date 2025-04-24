@@ -1,168 +1,168 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.area.SpellArea>
-    <Header>
-        <resourceId>739932001</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/EngineerTurrets.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/EngineerAttackDevices.(ActionGroup).xdb" />
-    </groups>
-    <element>ACID</element>
-    <Name href="FireTurret.(SpellArea).Name.txt" />
-    <Description href="FireTurret.(SpellArea).Description.txt" />
-    <descVars>
-        <Item>
-            <name>dmg</name>
-            <value>1</value>
-            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-                <scalers>
-                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
-                            <externalCalcer hrefvar="externalCalcer" />
-                        </mulCalcer>
-                    </Item>
-                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-                        <formula>MagicScaler</formula>
-                    </Item>
-                </scalers>
-            </scaler>
-        </Item>
-    </descVars>
-    <image href="/Interface/Icons/Spells/Engineer/EngineerAcidTurrel.(UISingleTexture).xdb" />
-    <aeMarker href="/Mechanics/Spells/AEMarks/AEMarkerArrow.(AEMarkerDecal).xdb" />
-    <visualScripts href="/Spells/VisScripts/Engineer/Turret.(SpellVisScripts).xdb" />
-    <durationBuff href="AcidTurretLifeTime.(BuffResource).xdb" />
-    <range type="gameMechanics.elements.calcers.FloatData">
-        <value>25</value>
-    </range>
-    <targetType>STTPoint</targetType>
-    <isAggro>false</isAggro>
-    <ranks>
-        <Item href="FireTurret01.(SpellArea).xdb" />
-        <Item href="FireTurret02.(SpellArea).xdb" />
-        <Item href="FireTurret03.(SpellArea).xdb" />
-    </ranks>
-    <iffPolicy>Everyone</iffPolicy>
-    <triggersGlobalCooldown>false</triggersGlobalCooldown>
-    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
-    <needInFront>false</needInFront>
-    <mechanics>
-        <cooldown>
-            <duration>25000</duration>
-        </cooldown>
-        <casterConditions>
-            <Item type="gameMechanics.elements.predicates.PredicateHasPath">
-                <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                <maxLength>85</maxLength>
-            </Item>
-        </casterConditions>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                <predicates>
-                    <Item type="gameMechanics.elements.predicates.PredicateFaction">
-                        <faction href="/World/Factions/League.xdb" />
-                    </Item>
-                </predicates>
-                <impacts>
-                    <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                        <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint">
-                            <yawDelta type="constructor.basicElements.AngleDegrees">
-                                <value>180</value>
-                            </yawDelta>
-                        </destination>
-                        <impacts>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff hrefvar="buff" />
-                            </Item>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.MarkedImpact">
-                                <mark href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/DeviceFall.(MarkResource).xdb" />
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                                        <delay>200</delay>
-                                        <impacts>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="AcidTurretLifeTime.(BuffResource).xdb" />
-                                                <durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
-                                                    <buff href="FireTurretStuff01.(BuffResource).xdb" />
-                                                    <tickLength>1000</tickLength>
-                                                </durationScaler>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                        </impacts>
-                        <traceDown>true</traceDown>
-                        <assistantResource href="FireTurret.(AssistantResource).xdb" />
-                        <mobResource href="LeagueFireTurret.(MobWorld).xdb" />
-                        <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                        <linkMode>ModifiedHealth</linkMode>
-                        <planeSyncStrategy>Sync</planeSyncStrategy>
-                    </Item>
-                </impacts>
-                <elseImpacts>
-                    <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                        <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint">
-                            <yawDelta type="constructor.basicElements.AngleDegrees">
-                                <value>180</value>
-                            </yawDelta>
-                        </destination>
-                        <impacts>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff hrefvar="buff" />
-                            </Item>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.MarkedImpact">
-                                <mark href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/DeviceFall.(MarkResource).xdb" />
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                                        <delay>200</delay>
-                                        <impacts>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="AcidTurretLifeTime.(BuffResource).xdb" />
-                                                <durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
-                                                    <buff href="FireTurretStuff01.(BuffResource).xdb" />
-                                                    <tickLength>1000</tickLength>
-                                                </durationScaler>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                        </impacts>
-                        <traceDown>true</traceDown>
-                        <assistantResource href="FireTurret.(AssistantResource).xdb" />
-                        <mobResource href="/Mechanics/Spells/Engineer63/Spells/Turret/EmpireFireTurret.(MobWorld).xdb" />
-                        <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                        <linkMode>ModifiedHealth</linkMode>
-                        <planeSyncStrategy>Sync</planeSyncStrategy>
-                    </Item>
-                </elseImpacts>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
-                <spell href="/Mechanics/Spells/Engineer63/Spells/Turret/Turret01.(SpellArea).xdb" />
-                <duration>25000</duration>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.MarkedImpact">
-                <mark href="FireTurretCast.(MarkResource).xdb" />
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactSpellGroupCooldown">
-                <group href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
-                <duration>1000</duration>
-            </Item>
-        </casterImpacts>
-    </mechanics>
-    <radius>2</radius>
+	<Header>
+		<resourceId>739932001</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/EngineerTurrets.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/EngineerAttackDevices.(ActionGroup).xdb" />
+	</groups>
+	<element>ACID</element>
+	<Name href="FireTurret.(SpellArea).Name.txt" />
+	<Description href="FireTurret.(SpellArea).Description.txt" />
+	<descVars>
+		<Item>
+			<name>dmg</name>
+			<value>1</value>
+			<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+				<scalers>
+					<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+						<mulCalcer type="constructor.elements.CalcerFloatExternal">
+							<externalCalcer hrefvar="externalCalcer" />
+						</mulCalcer>
+					</Item>
+					<Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+						<formula>MagicScaler</formula>
+					</Item>
+				</scalers>
+			</scaler>
+		</Item>
+	</descVars>
+	<image href="/Interface/Icons/Spells/Engineer/EngineerAcidTurrel.(UISingleTexture).xdb" />
+	<aeMarker href="/Mechanics/Spells/AEMarks/AEMarkerArrow.(AEMarkerDecal).xdb" />
+	<visualScripts href="/Spells/VisScripts/Engineer/Turret.(SpellVisScripts).xdb" />
+	<durationBuff href="AcidTurretLifeTime.(BuffResource).xdb" />
+	<range type="gameMechanics.elements.calcers.FloatData">
+		<value>25</value>
+	</range>
+	<targetType>STTPoint</targetType>
+	<isAggro>false</isAggro>
+	<ranks>
+		<Item href="FireTurret01.(SpellArea).xdb" />
+		<Item href="FireTurret02.(SpellArea).xdb" />
+		<Item href="FireTurret03.(SpellArea).xdb" />
+	</ranks>
+	<iffPolicy>Everyone</iffPolicy>
+	<triggersGlobalCooldown>false</triggersGlobalCooldown>
+	<ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+	<needInFront>false</needInFront>
+	<mechanics>
+		<cooldown>
+			<duration>25000</duration>
+		</cooldown>
+		<casterConditions>
+			<Item type="gameMechanics.elements.predicates.PredicateHasPath">
+				<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+				<maxLength>85</maxLength>
+			</Item>
+		</casterConditions>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+				<predicates>
+					<Item type="gameMechanics.elements.predicates.PredicateFaction">
+						<faction href="/World/Factions/League.xdb" />
+					</Item>
+				</predicates>
+				<impacts>
+					<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+						<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint">
+							<yawDelta type="constructor.basicElements.AngleDegrees">
+								<value>180</value>
+							</yawDelta>
+						</destination>
+						<impacts>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff hrefvar="buff" />
+							</Item>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
+							</Item>
+							<Item type="gameMechanics.elements.impacts.MarkedImpact">
+								<mark href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/DeviceFall.(MarkResource).xdb" />
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+										<delay>200</delay>
+										<impacts>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="AcidTurretLifeTime.(BuffResource).xdb" />
+												<durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
+													<buff href="FireTurretStuff01.(BuffResource).xdb" />
+													<tickLength>1000</tickLength>
+												</durationScaler>
+											</Item>
+										</impacts>
+									</Item>
+								</impacts>
+							</Item>
+						</impacts>
+						<traceDown>true</traceDown>
+						<assistantResource href="FireTurret.(AssistantResource).xdb" />
+						<mobResource href="LeagueFireTurret.(MobWorld).xdb" />
+						<level type="gameMechanics.elements.calcers.CalcerLevel" />
+						<linkMode>ModifiedHealth</linkMode>
+						<planeSyncStrategy>Sync</planeSyncStrategy>
+					</Item>
+				</impacts>
+				<elseImpacts>
+					<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+						<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint">
+							<yawDelta type="constructor.basicElements.AngleDegrees">
+								<value>180</value>
+							</yawDelta>
+						</destination>
+						<impacts>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff hrefvar="buff" />
+							</Item>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
+							</Item>
+							<Item type="gameMechanics.elements.impacts.MarkedImpact">
+								<mark href="/Mechanics/Spells/Engineer63/Abilities/FallingDevices/DeviceFall.(MarkResource).xdb" />
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+										<delay>200</delay>
+										<impacts>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="AcidTurretLifeTime.(BuffResource).xdb" />
+												<durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
+													<buff href="FireTurretStuff01.(BuffResource).xdb" />
+													<tickLength>1000</tickLength>
+												</durationScaler>
+											</Item>
+										</impacts>
+									</Item>
+								</impacts>
+							</Item>
+						</impacts>
+						<traceDown>true</traceDown>
+						<assistantResource href="FireTurret.(AssistantResource).xdb" />
+						<mobResource href="/Mechanics/Spells/Engineer63/Spells/Turret/EmpireFireTurret.(MobWorld).xdb" />
+						<level type="gameMechanics.elements.calcers.CalcerLevel" />
+						<linkMode>ModifiedHealth</linkMode>
+						<planeSyncStrategy>Sync</planeSyncStrategy>
+					</Item>
+				</elseImpacts>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+				<spell href="/Mechanics/Spells/Engineer63/Spells/Turret/Turret01.(SpellArea).xdb" />
+				<duration>25000</duration>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.MarkedImpact">
+				<mark href="FireTurretCast.(MarkResource).xdb" />
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactSpellGroupCooldown">
+				<group href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
+				<duration>1000</duration>
+			</Item>
+		</casterImpacts>
+	</mechanics>
+	<radius>2</radius>
 </gameMechanics.constructor.schemes.spell.area.SpellArea>

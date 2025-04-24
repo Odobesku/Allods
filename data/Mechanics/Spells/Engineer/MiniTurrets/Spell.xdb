@@ -1,128 +1,128 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.area.SpellArea>
-    <Header>
-        <resourceId>739859195</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        <Item href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        <Item href="/Mechanics/Spells/Groups/DragonRelic7.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        <Item href="/Mechanics/Spells/Groups/EngineerArtillerySpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        <Item href="/Mechanics/Spells/Groups/EngineerLevitatingSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-    </groups>
-    <element>FIRE</element>
-    <Name href="Spell01.(SpellArea).Name.txt" />
-    <Description href="Spell01.(SpellArea).Description.txt" />
-    <descVars>
-        <Item>
-            <name>dmg</name>
-            <value var="damage" />
-            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-                <formula>MagicScaler</formula>
-            </scaler>
-        </Item>
-        <Item>
-            <name>fuel</name>
-            <value var="fuel" />
-        </Item>
-    </descVars>
-    <image href="/Interface/Icons/Spells/Engineer/EngineerTurrel.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
-    <visualScripts href="/Spells/VisScripts/Engineer/MiniTurrets_Call.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
-    <range type="gameMechanics.elements.calcers.FloatData">
-        <value>20</value>
-    </range>
-    <targetType>STTPoint</targetType>
-    <isAggro>false</isAggro>
-    <ranks>
-        <Item href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
-        <Item href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
-        <Item href="Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
-    </ranks>
-    <mechanics>
-        <cooldown>
-            <duration>30000</duration>
-            <group href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        </cooldown>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                <predicates>
-                    <Item type="gameMechanics.elements.predicates.PredicateFaction">
-                        <faction href="/World/Factions/League.xdb#xpointer(/gameMechanics.world.creature.Faction)" />
-                    </Item>
-                </predicates>
-                <impacts>
-                    <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                        <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                        <impacts>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="Fuel.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                <stacks type="gameMechanics.elements.calcers.FloatData">
-                                    <value var="fuel" />
-                                </stacks>
-                            </Item>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="/Mechanics/Spells/Engineer/MeleeBot/SpellToMobDamageTransmission.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                <stacks type="gameMechanics.elements.calcers.FloatData">
-                                    <value var="DmgKoef" />
-                                </stacks>
-                            </Item>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="/Mechanics/Spells/Engineer/SummonedMobsGeneral/DontLeaveMe.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            </Item>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="CanBeDisassembled.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.MarkedImpact">
-                                <mark href="/Mechanics/Spells/Engineer/Abilities/PhysicalDamage/Engineer_Summon_OffenceDevice.(MarkResource).xdb#xpointer(/gameMechanics.constructor.basicElements.MarkResource)" />
-                            </Item>
-                        </impacts>
-                        <assistantResource href="MiniTurret.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
-                        <mobResource href="MiniTurret.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
-                        <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                        <linkMode>Stats</linkMode>
-                        <planeSyncStrategy>Copy</planeSyncStrategy>
-                    </Item>
-                </impacts>
-                <elseImpacts>
-                    <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                        <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                        <impacts>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="Fuel.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                <stacks type="gameMechanics.elements.calcers.FloatData">
-                                    <value var="fuel" />
-                                </stacks>
-                            </Item>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="/Mechanics/Spells/Engineer/MeleeBot/SpellToMobDamageTransmission.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                <stacks type="gameMechanics.elements.calcers.FloatData">
-                                    <value var="DmgKoef" />
-                                </stacks>
-                            </Item>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="/Mechanics/Spells/Engineer/SummonedMobsGeneral/DontLeaveMe.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            </Item>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="CanBeDisassembled.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.MarkedImpact">
-                                <mark href="/Mechanics/Spells/Engineer/Abilities/PhysicalDamage/Engineer_Summon_OffenceDevice.(MarkResource).xdb#xpointer(/gameMechanics.constructor.basicElements.MarkResource)" />
-                            </Item>
-                        </impacts>
-                        <assistantResource href="MiniTurret.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
-                        <mobResource href="MiniTurretHadagan.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
-                        <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                        <linkMode>Stats</linkMode>
-                        <planeSyncStrategy>Copy</planeSyncStrategy>
-                    </Item>
-                </elseImpacts>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.ImpactList">
-                <impactsResource href="/Mechanics/Spells/Engineer/EngineerDismount.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
-            </Item>
-        </casterImpacts>
-    </mechanics>
-    <radius>2</radius>
+	<Header>
+		<resourceId>739859195</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		<Item href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		<Item href="/Mechanics/Spells/Groups/DragonRelic7.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		<Item href="/Mechanics/Spells/Groups/EngineerArtillerySpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		<Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		<Item href="/Mechanics/Spells/Groups/EngineerLevitatingSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+	</groups>
+	<element>FIRE</element>
+	<Name href="Spell01.(SpellArea).Name.txt" />
+	<Description href="Spell01.(SpellArea).Description.txt" />
+	<descVars>
+		<Item>
+			<name>dmg</name>
+			<value var="damage" />
+			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+				<formula>MagicScaler</formula>
+			</scaler>
+		</Item>
+		<Item>
+			<name>fuel</name>
+			<value var="fuel" />
+		</Item>
+	</descVars>
+	<image href="/Interface/Icons/Spells/Engineer/EngineerTurrel.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+	<visualScripts href="/Spells/VisScripts/Engineer/MiniTurrets_Call.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+	<range type="gameMechanics.elements.calcers.FloatData">
+		<value>20</value>
+	</range>
+	<targetType>STTPoint</targetType>
+	<isAggro>false</isAggro>
+	<ranks>
+		<Item href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+		<Item href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+		<Item href="Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+	</ranks>
+	<mechanics>
+		<cooldown>
+			<duration>30000</duration>
+			<group href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		</cooldown>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+				<predicates>
+					<Item type="gameMechanics.elements.predicates.PredicateFaction">
+						<faction href="/World/Factions/League.xdb#xpointer(/gameMechanics.world.creature.Faction)" />
+					</Item>
+				</predicates>
+				<impacts>
+					<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+						<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+						<impacts>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="Fuel.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								<stacks type="gameMechanics.elements.calcers.FloatData">
+									<value var="fuel" />
+								</stacks>
+							</Item>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="/Mechanics/Spells/Engineer/MeleeBot/SpellToMobDamageTransmission.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								<stacks type="gameMechanics.elements.calcers.FloatData">
+									<value var="DmgKoef" />
+								</stacks>
+							</Item>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="/Mechanics/Spells/Engineer/SummonedMobsGeneral/DontLeaveMe.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							</Item>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="CanBeDisassembled.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							</Item>
+							<Item type="gameMechanics.elements.impacts.MarkedImpact">
+								<mark href="/Mechanics/Spells/Engineer/Abilities/PhysicalDamage/Engineer_Summon_OffenceDevice.(MarkResource).xdb#xpointer(/gameMechanics.constructor.basicElements.MarkResource)" />
+							</Item>
+						</impacts>
+						<assistantResource href="MiniTurret.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+						<mobResource href="MiniTurret.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+						<level type="gameMechanics.elements.calcers.CalcerLevel" />
+						<linkMode>Stats</linkMode>
+						<planeSyncStrategy>Copy</planeSyncStrategy>
+					</Item>
+				</impacts>
+				<elseImpacts>
+					<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+						<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+						<impacts>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="Fuel.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								<stacks type="gameMechanics.elements.calcers.FloatData">
+									<value var="fuel" />
+								</stacks>
+							</Item>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="/Mechanics/Spells/Engineer/MeleeBot/SpellToMobDamageTransmission.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								<stacks type="gameMechanics.elements.calcers.FloatData">
+									<value var="DmgKoef" />
+								</stacks>
+							</Item>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="/Mechanics/Spells/Engineer/SummonedMobsGeneral/DontLeaveMe.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							</Item>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="CanBeDisassembled.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							</Item>
+							<Item type="gameMechanics.elements.impacts.MarkedImpact">
+								<mark href="/Mechanics/Spells/Engineer/Abilities/PhysicalDamage/Engineer_Summon_OffenceDevice.(MarkResource).xdb#xpointer(/gameMechanics.constructor.basicElements.MarkResource)" />
+							</Item>
+						</impacts>
+						<assistantResource href="MiniTurret.(AssistantResource).xdb#xpointer(/gameMechanics.world.avatar.assistants.AssistantResource)" />
+						<mobResource href="MiniTurretHadagan.(MobWorld).xdb#xpointer(/gameMechanics.world.mob.MobWorld)" />
+						<level type="gameMechanics.elements.calcers.CalcerLevel" />
+						<linkMode>Stats</linkMode>
+						<planeSyncStrategy>Copy</planeSyncStrategy>
+					</Item>
+				</elseImpacts>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.ImpactList">
+				<impactsResource href="/Mechanics/Spells/Engineer/EngineerDismount.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+			</Item>
+		</casterImpacts>
+	</mechanics>
+	<radius>2</radius>
 </gameMechanics.constructor.schemes.spell.area.SpellArea>

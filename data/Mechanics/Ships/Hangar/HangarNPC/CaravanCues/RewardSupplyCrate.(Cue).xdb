@@ -1,114 +1,114 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.world.mob.interaction.Cue>
-    <Header>
-        <resourceId>284234761</resourceId>
-    </Header>
-    <name href="RewardSupplyCrate.txt" />
-    <text href="RewardSupplyCrate.Text.txt" />
-    <data>
-        <Item type="CueDataMoney">
-            <alias>Price</alias>
-            <calcer type="constructor.elements.CalcerLongExternal">
-                <externalCalcer href="Calcers/RewardSupply.(CalcerLongResource).xdb#xpointer(/constructor.elements.CalcerLongResource)" />
-            </calcer>
-        </Item>
-    </data>
-    <conditions>
-        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
-            <predicates>
-                <Item type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="/Mechanics/Rules/Astral/Caravans/RewardBuffs/SupplyFullReward.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                </Item>
-                <Item type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="/Mechanics/Rules/Astral/Caravans/RewardBuffs/SupplyPartReward.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                </Item>
-            </predicates>
-        </Item>
-        <Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
-            <key href="/System/ContentKeys/AstralCaravans.(ContentKey).xdb#xpointer(/basement.contentkey.ContentKey)" />
-        </Item>
-        <Item type="gameMechanics.world.ship.elements.PredicateOnBoundShip">
-            <predicates>
-                <Item type="gameMechanics.world.ship.elements.PredicatePermission">
-                    <permission>BuyChests</permission>
-                </Item>
-                <Item type="gameMechanics.elements.predicates.PredicateOnSameMap" />
-            </predicates>
-        </Item>
-    </conditions>
-    <additionalConditions>
-        <Item type="gameMechanics.elements.predicates.PredicateCreatureLevel">
-            <minLevel type="gameMechanics.formulas.IntConstantValue">
-                <value>48</value>
-            </minLevel>
-        </Item>
-    </additionalConditions>
-    <impacts>
-        <Item type="gameMechanics.elements.impacts.ScaledImpacts">
-            <scalerCaster type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                <mulCalcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
-                    <buff href="/Mechanics/Rules/Astral/Caravans/RewardBuffs/SupplyFullReward.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                    <forAllRanks>true</forAllRanks>
-                </mulCalcer>
-                <additionalMultiplier>
-                    <scaler type="gameMechanics.elements.scalers.TrivialScaler" />
-                    <value>1</value>
-                </additionalMultiplier>
-            </scalerCaster>
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactAddMoney">
-                    <sumCalcer type="constructor.elements.CalcerLongExternal">
-                        <externalCalcer href="Calcers/RewardSupply.(CalcerLongResource).xdb#xpointer(/constructor.elements.CalcerLongResource)" />
-                    </sumCalcer>
-                </Item>
-            </impacts>
-        </Item>
-        <Item type="gameMechanics.elements.impacts.ScaledImpacts">
-            <scalerCaster type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                <mulCalcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
-                    <buff href="/Mechanics/Rules/Astral/Caravans/RewardBuffs/SupplyPartReward.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                    <forAllRanks>true</forAllRanks>
-                </mulCalcer>
-                <additionalMultiplier>
-                    <scaler type="gameMechanics.elements.scalers.TrivialScaler" />
-                    <value>1</value>
-                </additionalMultiplier>
-            </scalerCaster>
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactAddMoney">
-                    <sumCalcer type="gameMechanics.elements.calcers.CalcerLongSum">
-                        <calcers>
-                            <Item type="constructor.elements.CalcerLongExternal">
-                                <externalCalcer href="Calcers/RewardSupply.(CalcerLongResource).xdb#xpointer(/constructor.elements.CalcerLongResource)" />
-                            </Item>
-                            <Item type="gameMechanics.elements.calcers.CalcerLongMul">
-                                <calcers>
-                                    <Item type="constructor.elements.CalcerLongExternal">
-                                        <externalCalcer href="Calcers/LoadSupply.(CalcerLongResource).xdb#xpointer(/constructor.elements.CalcerLongResource)" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.calcers.LongData">
-                                        <value>-1</value>
-                                    </Item>
-                                </calcers>
-                            </Item>
-                        </calcers>
-                    </sumCalcer>
-                </Item>
-            </impacts>
-        </Item>
-        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-            <buff href="/Mechanics/Rules/Astral/Caravans/RewardBuffs/SupplyFullReward.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-        </Item>
-        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-            <buff href="/Mechanics/Rules/Astral/Caravans/RewardBuffs/SupplyPartReward.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-        </Item>
-    </impacts>
-    <nextCues>
-        <Item href="RewardSupplyCrate.(Cue).xdb#xpointer(/gameMechanics.world.mob.interaction.Cue)" />
-        <Item href="LoadResourceCrateEvent.(Cue).xdb#xpointer(/gameMechanics.world.mob.interaction.Cue)" />
-        <Item href="LoadResourceCrateEventNoSpace.(Cue).xdb#xpointer(/gameMechanics.world.mob.interaction.Cue)" />
-        <Item href="LoadResourceCrate.(Cue).xdb#xpointer(/gameMechanics.world.mob.interaction.Cue)" />
-        <Item href="LoadResourceCrateNoShip.(Cue).xdb#xpointer(/gameMechanics.world.mob.interaction.Cue)" />
-        <Item href="RefundResourceCrate.(Cue).xdb#xpointer(/gameMechanics.world.mob.interaction.Cue)" />
-    </nextCues>
+	<Header>
+		<resourceId>284234761</resourceId>
+	</Header>
+	<name href="RewardSupplyCrate.txt" />
+	<text href="RewardSupplyCrate.Text.txt" />
+	<data>
+		<Item type="CueDataMoney">
+			<alias>Price</alias>
+			<calcer type="constructor.elements.CalcerLongExternal">
+				<externalCalcer href="Calcers/RewardSupply.(CalcerLongResource).xdb#xpointer(/constructor.elements.CalcerLongResource)" />
+			</calcer>
+		</Item>
+	</data>
+	<conditions>
+		<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+			<predicates>
+				<Item type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="/Mechanics/Rules/Astral/Caravans/RewardBuffs/SupplyFullReward.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</Item>
+				<Item type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="/Mechanics/Rules/Astral/Caravans/RewardBuffs/SupplyPartReward.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</Item>
+			</predicates>
+		</Item>
+		<Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
+			<key href="/System/ContentKeys/AstralCaravans.(ContentKey).xdb#xpointer(/basement.contentkey.ContentKey)" />
+		</Item>
+		<Item type="gameMechanics.world.ship.elements.PredicateOnBoundShip">
+			<predicates>
+				<Item type="gameMechanics.world.ship.elements.PredicatePermission">
+					<permission>BuyChests</permission>
+				</Item>
+				<Item type="gameMechanics.elements.predicates.PredicateOnSameMap" />
+			</predicates>
+		</Item>
+	</conditions>
+	<additionalConditions>
+		<Item type="gameMechanics.elements.predicates.PredicateCreatureLevel">
+			<minLevel type="gameMechanics.formulas.IntConstantValue">
+				<value>48</value>
+			</minLevel>
+		</Item>
+	</additionalConditions>
+	<impacts>
+		<Item type="gameMechanics.elements.impacts.ScaledImpacts">
+			<scalerCaster type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+				<mulCalcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+					<buff href="/Mechanics/Rules/Astral/Caravans/RewardBuffs/SupplyFullReward.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+					<forAllRanks>true</forAllRanks>
+				</mulCalcer>
+				<additionalMultiplier>
+					<scaler type="gameMechanics.elements.scalers.TrivialScaler" />
+					<value>1</value>
+				</additionalMultiplier>
+			</scalerCaster>
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactAddMoney">
+					<sumCalcer type="constructor.elements.CalcerLongExternal">
+						<externalCalcer href="Calcers/RewardSupply.(CalcerLongResource).xdb#xpointer(/constructor.elements.CalcerLongResource)" />
+					</sumCalcer>
+				</Item>
+			</impacts>
+		</Item>
+		<Item type="gameMechanics.elements.impacts.ScaledImpacts">
+			<scalerCaster type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+				<mulCalcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+					<buff href="/Mechanics/Rules/Astral/Caravans/RewardBuffs/SupplyPartReward.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+					<forAllRanks>true</forAllRanks>
+				</mulCalcer>
+				<additionalMultiplier>
+					<scaler type="gameMechanics.elements.scalers.TrivialScaler" />
+					<value>1</value>
+				</additionalMultiplier>
+			</scalerCaster>
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactAddMoney">
+					<sumCalcer type="gameMechanics.elements.calcers.CalcerLongSum">
+						<calcers>
+							<Item type="constructor.elements.CalcerLongExternal">
+								<externalCalcer href="Calcers/RewardSupply.(CalcerLongResource).xdb#xpointer(/constructor.elements.CalcerLongResource)" />
+							</Item>
+							<Item type="gameMechanics.elements.calcers.CalcerLongMul">
+								<calcers>
+									<Item type="constructor.elements.CalcerLongExternal">
+										<externalCalcer href="Calcers/LoadSupply.(CalcerLongResource).xdb#xpointer(/constructor.elements.CalcerLongResource)" />
+									</Item>
+									<Item type="gameMechanics.elements.calcers.LongData">
+										<value>-1</value>
+									</Item>
+								</calcers>
+							</Item>
+						</calcers>
+					</sumCalcer>
+				</Item>
+			</impacts>
+		</Item>
+		<Item type="gameMechanics.elements.impacts.BuffDetacher">
+			<buff href="/Mechanics/Rules/Astral/Caravans/RewardBuffs/SupplyFullReward.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+		</Item>
+		<Item type="gameMechanics.elements.impacts.BuffDetacher">
+			<buff href="/Mechanics/Rules/Astral/Caravans/RewardBuffs/SupplyPartReward.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+		</Item>
+	</impacts>
+	<nextCues>
+		<Item href="RewardSupplyCrate.(Cue).xdb#xpointer(/gameMechanics.world.mob.interaction.Cue)" />
+		<Item href="LoadResourceCrateEvent.(Cue).xdb#xpointer(/gameMechanics.world.mob.interaction.Cue)" />
+		<Item href="LoadResourceCrateEventNoSpace.(Cue).xdb#xpointer(/gameMechanics.world.mob.interaction.Cue)" />
+		<Item href="LoadResourceCrate.(Cue).xdb#xpointer(/gameMechanics.world.mob.interaction.Cue)" />
+		<Item href="LoadResourceCrateNoShip.(Cue).xdb#xpointer(/gameMechanics.world.mob.interaction.Cue)" />
+		<Item href="RefundResourceCrate.(Cue).xdb#xpointer(/gameMechanics.world.mob.interaction.Cue)" />
+	</nextCues>
 </gameMechanics.world.mob.interaction.Cue>

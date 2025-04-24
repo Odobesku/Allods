@@ -1,137 +1,137 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.buff.BuffResource>
-    <Header>
-        <resourceId>739967927</resourceId>
-    </Header>
-    <Name href="ArchitectTrip.(BuffResource).Name.txt" />
-    <Description href="ArchitectTrip.(BuffResource).Description.txt" />
-    <image href="/Interface/Icons/Spells/Mage/MageInvisibility.(UISingleTexture).xdb" />
-    <visScript href="ArchitectTrip.(BuffVisScripts).xdb" />
-    <effects>
-        <Item type="gameMechanics.elements.effects.Switch">
-            <impactsOn>
-                <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
-                    <id href="Counter1.(QuestCountId).xdb" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                    <impacts>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="/World/Quests/ZC12/WW_1_8/Arc_vis.(BuffResource).xdb" />
-                        </Item>
-                    </impacts>
-                </Item>
-            </impactsOn>
-            <impactsOff>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
-                            <quest href="WW_10_9.xdb" />
-                            <status>Completed</status>
-                        </Item>
-                    </predicates>
-                    <impactsElse>
-                        <Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
-                            <id href="Counter1.(QuestCountId).xdb" />
-                            <value>-1</value>
-                        </Item>
-                    </impactsElse>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
-                    <pool href="TripPool.(SummonPool).xdb" />
-                    <isPersonalPool>true</isPersonalPool>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactKill" />
-                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                            <delay>1000</delay>
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                            </impacts>
-                        </Item>
-                    </impacts>
-                </Item>
-            </impactsOff>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectsDeferred">
-            <delay>3000</delay>
-            <effects>
-                <Item type="gameMechanics.elements.effects.Switch">
-                    <impactsOn>
-                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.RepeatedImpact">
-                                    <impact type="gameMechanics.elements.impacts.ImpactSummon">
-                                        <destination type="gameMechanics.map.destination.DestinationModified">
-                                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
-                                            <modifiers>
-                                                <Item type="gameMechanics.map.destination.modifier.ModifierSelectReachable">
-                                                    <alternatives>
-                                                        <Item type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
-                                                            <radius type="gameMechanics.elements.calcers.FloatData">
-                                                                <value>25</value>
-                                                            </radius>
-                                                        </Item>
-                                                    </alternatives>
-                                                </Item>
-                                            </modifiers>
-                                        </destination>
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ForceAggro" />
-                                            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                                                <delay>300000</delay>
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                                                </impacts>
-                                            </Item>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="/World/Quests/ZC12/WW_1_8/Arc_plane.(BuffResource).xdb" />
-                                            </Item>
-                                        </impacts>
-                                        <object href="/Creatures/ArchitectBot/Instances/ZC12_Map02/WW_10_9_Architect_bot.(MobWorld).xdb" />
-                                        <pool href="TripPool.(SummonPool).xdb" />
-                                        <isPersonalPool>true</isPersonalPool>
-                                    </impact>
-                                    <count type="gameMechanics.elements.calcers.FloatData">
-                                        <value>3</value>
-                                    </count>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impactsOn>
-                </Item>
-            </effects>
-        </Item>
-        <Item type="gameMechanics.elements.effects.DeathTrigger">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
-                    <pool href="TripPool.(SummonPool).xdb" />
-                    <isPersonalPool>true</isPersonalPool>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                            <delay>1000</delay>
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                            </impacts>
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.ImpactKill" />
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
-                    <quest href="WW_10_9.xdb" />
-                </Item>
-            </impacts>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectZoneEnterLeaveChecker">
-            <impactsOnLeave>
-                <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
-                    <quest href="WW_10_9.xdb" />
-                </Item>
-            </impactsOnLeave>
-            <activeZone href="/Maps/ZC12_Map02/Zones/ZC12_Map02/ZC12_Map02.(ZoneResource).xdb" />
-        </Item>
-    </effects>
-    <isHelpful>true</isHelpful>
-    <canBeSaved>false</canBeSaved>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
-    </groups>
+	<Header>
+		<resourceId>739967927</resourceId>
+	</Header>
+	<Name href="ArchitectTrip.(BuffResource).Name.txt" />
+	<Description href="ArchitectTrip.(BuffResource).Description.txt" />
+	<image href="/Interface/Icons/Spells/Mage/MageInvisibility.(UISingleTexture).xdb" />
+	<visScript href="ArchitectTrip.(BuffVisScripts).xdb" />
+	<effects>
+		<Item type="gameMechanics.elements.effects.Switch">
+			<impactsOn>
+				<Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+					<id href="Counter1.(QuestCountId).xdb" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+					<impacts>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="/World/Quests/ZC12/WW_1_8/Arc_vis.(BuffResource).xdb" />
+						</Item>
+					</impacts>
+				</Item>
+			</impactsOn>
+			<impactsOff>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+							<quest href="WW_10_9.xdb" />
+							<status>Completed</status>
+						</Item>
+					</predicates>
+					<impactsElse>
+						<Item type="gameMechanics.elements.impacts.ImpactIncreaseQuestCount">
+							<id href="Counter1.(QuestCountId).xdb" />
+							<value>-1</value>
+						</Item>
+					</impactsElse>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+					<pool href="TripPool.(SummonPool).xdb" />
+					<isPersonalPool>true</isPersonalPool>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactKill" />
+						<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+							<delay>1000</delay>
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.Disintegrate" />
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+			</impactsOff>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectsDeferred">
+			<delay>3000</delay>
+			<effects>
+				<Item type="gameMechanics.elements.effects.Switch">
+					<impactsOn>
+						<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.RepeatedImpact">
+									<impact type="gameMechanics.elements.impacts.ImpactSummon">
+										<destination type="gameMechanics.map.destination.DestinationModified">
+											<destination type="gameMechanics.map.destination.SelfPosDestination" />
+											<modifiers>
+												<Item type="gameMechanics.map.destination.modifier.ModifierSelectReachable">
+													<alternatives>
+														<Item type="gameMechanics.map.destination.modifier.ModifierRelativeRandomDir">
+															<radius type="gameMechanics.elements.calcers.FloatData">
+																<value>25</value>
+															</radius>
+														</Item>
+													</alternatives>
+												</Item>
+											</modifiers>
+										</destination>
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ForceAggro" />
+											<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+												<delay>300000</delay>
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.Disintegrate" />
+												</impacts>
+											</Item>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="/World/Quests/ZC12/WW_1_8/Arc_plane.(BuffResource).xdb" />
+											</Item>
+										</impacts>
+										<object href="/Creatures/ArchitectBot/Instances/ZC12_Map02/WW_10_9_Architect_bot.(MobWorld).xdb" />
+										<pool href="TripPool.(SummonPool).xdb" />
+										<isPersonalPool>true</isPersonalPool>
+									</impact>
+									<count type="gameMechanics.elements.calcers.FloatData">
+										<value>3</value>
+									</count>
+								</Item>
+							</impacts>
+						</Item>
+					</impactsOn>
+				</Item>
+			</effects>
+		</Item>
+		<Item type="gameMechanics.elements.effects.DeathTrigger">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+					<pool href="TripPool.(SummonPool).xdb" />
+					<isPersonalPool>true</isPersonalPool>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+							<delay>1000</delay>
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.Disintegrate" />
+							</impacts>
+						</Item>
+						<Item type="gameMechanics.elements.impacts.ImpactKill" />
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+					<quest href="WW_10_9.xdb" />
+				</Item>
+			</impacts>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectZoneEnterLeaveChecker">
+			<impactsOnLeave>
+				<Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+					<quest href="WW_10_9.xdb" />
+				</Item>
+			</impactsOnLeave>
+			<activeZone href="/Maps/ZC12_Map02/Zones/ZC12_Map02/ZC12_Map02.(ZoneResource).xdb" />
+		</Item>
+	</effects>
+	<isHelpful>true</isHelpful>
+	<canBeSaved>false</canBeSaved>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+	</groups>
 </gameMechanics.constructor.schemes.buff.BuffResource>

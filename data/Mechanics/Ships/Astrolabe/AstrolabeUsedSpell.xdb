@@ -1,207 +1,207 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>217719809</resourceId>
-    </Header>
-    <groups>
-        <Item href="AstrolabeSpells.xdb" />
-        <Item href="/Mechanics/Spells/Groups/ShipDeviceActions.xdb" />
-    </groups>
-    <Name href="AstrolabeName.txt" />
-    <Description href="AstrolabeUsage.txt" />
-    <image href="/Interface/Icons/Equipment/Ships/Astralyabiya.(UISingleTexture).xdb" />
-    <prepareDuration>0</prepareDuration>
-    <targetType>STTSelf</targetType>
-    <isWorkOnDead>false</isWorkOnDead>
-    <iffPolicy>Friends</iffPolicy>
-    <triggersGlobalCooldown>false</triggersGlobalCooldown>
-    <ignoreGlobalCooldown>false</ignoreGlobalCooldown>
-    <mechanics>
-        <casterConditions>
-            <Item type="gameMechanics.world.ship.elements.PredicateStandingOnBoundShip" />
-            <Item type="gameMechanics.elements.predicates.PredicateOnParentShip">
-                <predicates>
-                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                        <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
-                            <groups>
-                                <Item href="AstrolabeDisabler.xdb" />
-                            </groups>
-                        </predicate>
-                    </Item>
-                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                        <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                            <buff href="BuffAstralAstrolabeJump.(BuffResource).xdb" />
-                        </predicate>
-                    </Item>
-                    <Item type="gameMechanics.elements.predicates.PredicateOnAddressees">
-                        <addresseesFinder type="gameMechanics.elements.addresseeFinders.AddressesCalcerOnlineShipBounds" />
-                        <predicates>
-                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                    <buff href="CooldownBuff.(BuffResource).xdb" />
-                                </predicate>
-                            </Item>
-                        </predicates>
-                    </Item>
-                </predicates>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
-                <predicates>
-                    <Item type="gameMechanics.world.ship.elements.PredicateStandingOnOwnShip" />
-                    <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
-                        <predicates>
-                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                <predicate type="gameMechanics.world.ship.elements.PredicateStandingOnPersistentShip" />
-                            </Item>
-                            <Item type="gameMechanics.elements.predicates.PredicateIsGroupLeader" />
-                        </predicates>
-                    </Item>
-                </predicates>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
-                <predicates>
-                    <Item type="gameMechanics.world.ship.elements.PredicateInAstralHub" />
-                    <Item type="gameMechanics.world.ship.elements.PredicateInHangar" />
-                </predicates>
-            </Item>
-            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
-                <predicate type="gameMechanics.elements.predicates.PredicateOnParentShip">
-                    <predicates>
-                        <Item type="gameMechanics.elements.predicates.PredicateHealthHigher">
-                            <level>0</level>
-                        </Item>
-                    </predicates>
-                </predicate>
-                <clientData href="RepairCD.(ClientData).xdb" />
-            </Item>
-        </casterConditions>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                <predicates>
-                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                        <buff href="/Mechanics/GameRoot/LFGQueue.(BuffResource).xdb" />
-                    </Item>
-                </predicates>
-                <impactsIf>
-                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                        <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-                        <data href="/Mechanics/GameRoot/ClientData/BlockAstral.(ClientData).xdb" />
-                    </Item>
-                </impactsIf>
-                <impactsElse>
-                    <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
-                        <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderBoundShip" />
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                <predicates>
-                                    <Item type="gameMechanics.constructor.basicElements.PredicateOr">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.predicates.PredicateIsDead" />
-                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                                                <predicate type="gameMechanics.elements.predicates.PredicateHealthHigher">
-                                                    <level>0</level>
-                                                </predicate>
-                                            </Item>
-                                        </predicates>
-                                    </Item>
-                                </predicates>
-                                <impactsIf>
-                                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactSendGeneralError">
-                                                <cause>ShipIsNotPersistent</cause>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impactsIf>
-                                <impactsElse>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.predicates.PredicateShipCanUseAstrolabe" />
-                                        </predicates>
-                                        <impactsIf>
-                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                <predicates>
-                                                    <Item type="gameMechanics.world.ship.elements.PredicateInAstralHub" />
-                                                </predicates>
-                                                <impactsIf>
-                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                        <buff href="BuffAstralAstrolabeJump.(BuffResource).xdb" />
-                                                        <durationScalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                            <mulCalcer type="gameMechanics.elements.calcers.CalcerMin">
-                                                                <calcers>
-                                                                    <Item type="gameMechanics.elements.calcers.ShipJumpTimeCalcer" />
-                                                                    <Item type="gameMechanics.elements.calcers.FloatData">
-                                                                        <value>300000</value>
-                                                                    </Item>
-                                                                </calcers>
-                                                            </mulCalcer>
-                                                        </durationScalerTarget>
-                                                    </Item>
-                                                </impactsIf>
-                                                <impactsElse>
-                                                    <Item type="gameMechanics.world.ship.elements.ImpactTeleportShipToPoi">
-                                                        <destination type="gameMechanics.elements.calcers.CalcerLongParam">
-                                                            <paramName>destination</paramName>
-                                                        </destination>
-                                                        <impacts>
-                                                            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                                                <impacts>
-                                                                    <Item type="gameMechanics.elements.impacts.SendImpactsToAddressees">
-                                                                        <addresseesFinder type="gameMechanics.elements.addresseeFinders.AddressesCalcerOnlineShipBounds" />
-                                                                        <impacts>
-                                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                                <buff href="CooldownBuff.(BuffResource).xdb" />
-                                                                            </Item>
-                                                                        </impacts>
-                                                                    </Item>
-                                                                </impacts>
-                                                            </Item>
-                                                        </impacts>
-                                                    </Item>
-                                                </impactsElse>
-                                            </Item>
-                                        </impactsIf>
-                                        <impactsElse>
-                                            <Item type="gameMechanics.world.ship.elements.ImpactAstrolabeBlockedReason" />
-                                        </impactsElse>
-                                    </Item>
-                                </impactsElse>
-                            </Item>
-                            <Item type="gameMechanics.world.ship.elements.ImpactAllDevices">
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                                <buff href="/Mechanics/Ships/Engine/Remote/ShipMovingBuff.(BuffResource).xdb" />
-                                            </Item>
-                                        </predicates>
-                                        <impactsElse>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="/Mechanics/Ships/Engine/Remote/ShipMovingBuff.(BuffResource).xdb" />
-                                            </Item>
-                                        </impactsElse>
-                                    </Item>
-                                </impacts>
-                                <filter type="gameMechanics.world.device.filters.UsableDeviceTypeFilter">
-                                    <allowedTypes>
-                                        <Item href="/Mechanics/Ships/UsableDeviceTypes/EngineVertical.xdb" />
-                                    </allowedTypes>
-                                </filter>
-                            </Item>
-                        </impacts>
-                    </Item>
-                </impactsElse>
-            </Item>
-        </casterImpacts>
-    </mechanics>
-    <params>
-        <params>
-            <Item>
-                <name>destination</name>
-                <type>Int</type>
-            </Item>
-        </params>
-    </params>
-    <canStartNotBeeingInSpellbook>true</canStartNotBeeingInSpellbook>
+	<Header>
+		<resourceId>217719809</resourceId>
+	</Header>
+	<groups>
+		<Item href="AstrolabeSpells.xdb" />
+		<Item href="/Mechanics/Spells/Groups/ShipDeviceActions.xdb" />
+	</groups>
+	<Name href="AstrolabeName.txt" />
+	<Description href="AstrolabeUsage.txt" />
+	<image href="/Interface/Icons/Equipment/Ships/Astralyabiya.(UISingleTexture).xdb" />
+	<prepareDuration>0</prepareDuration>
+	<targetType>STTSelf</targetType>
+	<isWorkOnDead>false</isWorkOnDead>
+	<iffPolicy>Friends</iffPolicy>
+	<triggersGlobalCooldown>false</triggersGlobalCooldown>
+	<ignoreGlobalCooldown>false</ignoreGlobalCooldown>
+	<mechanics>
+		<casterConditions>
+			<Item type="gameMechanics.world.ship.elements.PredicateStandingOnBoundShip" />
+			<Item type="gameMechanics.elements.predicates.PredicateOnParentShip">
+				<predicates>
+					<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+						<predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+							<groups>
+								<Item href="AstrolabeDisabler.xdb" />
+							</groups>
+						</predicate>
+					</Item>
+					<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+						<predicate type="gameMechanics.elements.resources.ResourceBuff">
+							<buff href="BuffAstralAstrolabeJump.(BuffResource).xdb" />
+						</predicate>
+					</Item>
+					<Item type="gameMechanics.elements.predicates.PredicateOnAddressees">
+						<addresseesFinder type="gameMechanics.elements.addresseeFinders.AddressesCalcerOnlineShipBounds" />
+						<predicates>
+							<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+								<predicate type="gameMechanics.elements.resources.ResourceBuff">
+									<buff href="CooldownBuff.(BuffResource).xdb" />
+								</predicate>
+							</Item>
+						</predicates>
+					</Item>
+				</predicates>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+				<predicates>
+					<Item type="gameMechanics.world.ship.elements.PredicateStandingOnOwnShip" />
+					<Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+						<predicates>
+							<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+								<predicate type="gameMechanics.world.ship.elements.PredicateStandingOnPersistentShip" />
+							</Item>
+							<Item type="gameMechanics.elements.predicates.PredicateIsGroupLeader" />
+						</predicates>
+					</Item>
+				</predicates>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+				<predicates>
+					<Item type="gameMechanics.world.ship.elements.PredicateInAstralHub" />
+					<Item type="gameMechanics.world.ship.elements.PredicateInHangar" />
+				</predicates>
+			</Item>
+			<Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+				<predicate type="gameMechanics.elements.predicates.PredicateOnParentShip">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateHealthHigher">
+							<level>0</level>
+						</Item>
+					</predicates>
+				</predicate>
+				<clientData href="RepairCD.(ClientData).xdb" />
+			</Item>
+		</casterConditions>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+				<predicates>
+					<Item type="gameMechanics.elements.resources.ResourceBuff">
+						<buff href="/Mechanics/GameRoot/LFGQueue.(BuffResource).xdb" />
+					</Item>
+				</predicates>
+				<impactsIf>
+					<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+						<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+						<data href="/Mechanics/GameRoot/ClientData/BlockAstral.(ClientData).xdb" />
+					</Item>
+				</impactsIf>
+				<impactsElse>
+					<Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+						<addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderBoundShip" />
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+								<predicates>
+									<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+										<predicates>
+											<Item type="gameMechanics.elements.predicates.PredicateIsDead" />
+											<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+												<predicate type="gameMechanics.elements.predicates.PredicateHealthHigher">
+													<level>0</level>
+												</predicate>
+											</Item>
+										</predicates>
+									</Item>
+								</predicates>
+								<impactsIf>
+									<Item type="gameMechanics.elements.impacts.ReturningImpact">
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ImpactSendGeneralError">
+												<cause>ShipIsNotPersistent</cause>
+											</Item>
+										</impacts>
+									</Item>
+								</impactsIf>
+								<impactsElse>
+									<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+										<predicates>
+											<Item type="gameMechanics.elements.predicates.PredicateShipCanUseAstrolabe" />
+										</predicates>
+										<impactsIf>
+											<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+												<predicates>
+													<Item type="gameMechanics.world.ship.elements.PredicateInAstralHub" />
+												</predicates>
+												<impactsIf>
+													<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+														<buff href="BuffAstralAstrolabeJump.(BuffResource).xdb" />
+														<durationScalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+															<mulCalcer type="gameMechanics.elements.calcers.CalcerMin">
+																<calcers>
+																	<Item type="gameMechanics.elements.calcers.ShipJumpTimeCalcer" />
+																	<Item type="gameMechanics.elements.calcers.FloatData">
+																		<value>300000</value>
+																	</Item>
+																</calcers>
+															</mulCalcer>
+														</durationScalerTarget>
+													</Item>
+												</impactsIf>
+												<impactsElse>
+													<Item type="gameMechanics.world.ship.elements.ImpactTeleportShipToPoi">
+														<destination type="gameMechanics.elements.calcers.CalcerLongParam">
+															<paramName>destination</paramName>
+														</destination>
+														<impacts>
+															<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+																<impacts>
+																	<Item type="gameMechanics.elements.impacts.SendImpactsToAddressees">
+																		<addresseesFinder type="gameMechanics.elements.addresseeFinders.AddressesCalcerOnlineShipBounds" />
+																		<impacts>
+																			<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																				<buff href="CooldownBuff.(BuffResource).xdb" />
+																			</Item>
+																		</impacts>
+																	</Item>
+																</impacts>
+															</Item>
+														</impacts>
+													</Item>
+												</impactsElse>
+											</Item>
+										</impactsIf>
+										<impactsElse>
+											<Item type="gameMechanics.world.ship.elements.ImpactAstrolabeBlockedReason" />
+										</impactsElse>
+									</Item>
+								</impactsElse>
+							</Item>
+							<Item type="gameMechanics.world.ship.elements.ImpactAllDevices">
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+										<predicates>
+											<Item type="gameMechanics.elements.resources.ResourceBuff">
+												<buff href="/Mechanics/Ships/Engine/Remote/ShipMovingBuff.(BuffResource).xdb" />
+											</Item>
+										</predicates>
+										<impactsElse>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="/Mechanics/Ships/Engine/Remote/ShipMovingBuff.(BuffResource).xdb" />
+											</Item>
+										</impactsElse>
+									</Item>
+								</impacts>
+								<filter type="gameMechanics.world.device.filters.UsableDeviceTypeFilter">
+									<allowedTypes>
+										<Item href="/Mechanics/Ships/UsableDeviceTypes/EngineVertical.xdb" />
+									</allowedTypes>
+								</filter>
+							</Item>
+						</impacts>
+					</Item>
+				</impactsElse>
+			</Item>
+		</casterImpacts>
+	</mechanics>
+	<params>
+		<params>
+			<Item>
+				<name>destination</name>
+				<type>Int</type>
+			</Item>
+		</params>
+	</params>
+	<canStartNotBeeingInSpellbook>true</canStartNotBeeingInSpellbook>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

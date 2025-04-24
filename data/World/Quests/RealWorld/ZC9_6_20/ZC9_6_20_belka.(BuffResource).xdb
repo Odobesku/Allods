@@ -1,147 +1,147 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.buff.BuffResource>
-    <Header>
-        <resourceId>344841275</resourceId>
-    </Header>
-    <Name href="ZC9_6_20_belka.(BuffResource).Name.txt" />
-    <visScript href="ZC9_6_20_belka.(BuffVisScripts).xdb" />
-    <needVisualize>false</needVisualize>
-    <effects>
-        <Item type="gameMechanics.elements.effects.EffectDisableAllActionsExceptGroup">
-            <groups>
-                <Item href="/Mechanics/Spells/Groups/Operation.xdb" />
-            </groups>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectAddContextActions">
-            <actions>
-                <Item href="ZC9_6_20_belka_Spell.(SpellCasterSelf).xdb" />
-            </actions>
-        </Item>
-        <Item type="gameMechanics.elements.effects.Parry" />
-        <Item type="gameMechanics.elements.effects.DisableSpellsPredicate">
-            <predicate type="gameMechanics.elements.predicates.PredicateIsMountAction" />
-        </Item>
-        <Item type="gameMechanics.elements.effects.LifeGuard">
-            <level>0.01</level>
-        </Item>
-        <Item type="gameMechanics.elements.effects.HealthTrigger">
-            <healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
-                <multiplier>0.05</multiplier>
-            </healthOn>
-            <impactsOn>
-                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
-                    <destination type="gameMechanics.map.destination.DestinationLocator">
-                        <locator>
-                            <scriptID>ZC9_6_start</scriptID>
-                            <map href="/Maps/RealWorld/Tower_MapResource.xdb" />
-                        </locator>
-                    </destination>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="ZC9_6_20_belka.(BuffResource).xdb" />
-                    <anyRank>false</anyRank>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
-                    <quest href="ZC9_6_20.xdb" />
-                </Item>
-            </impactsOn>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectHandleLeaveMission">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="ZC9_6_20_belka.(BuffResource).xdb" />
-                    <anyRank>false</anyRank>
-                </Item>
-            </impacts>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectZoneEnterLeaveChecker">
-            <impactsOnEnter>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="ZC9_6_20_belka.(BuffResource).xdb" />
-                    <anyRank>false</anyRank>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
-                            <quest href="ZC9_6_20.xdb" />
-                            <status>Active</status>
-                        </Item>
-                    </predicates>
-                    <impactsIf>
-                        <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
-                            <quest href="ZC9_6_20.xdb" />
-                        </Item>
-                    </impactsIf>
-                </Item>
-            </impactsOnEnter>
-            <activeZone href="/Maps/RealWorld/Zones/ZC9_EastPost.(ZoneResource).xdb" />
-            <checkTopLevelZonesOnly>false</checkTopLevelZonesOnly>
-        </Item>
-        <Item type="gameMechanics.elements.effects.Switch">
-            <impactsOn>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
-                            <characterClass href="/Mechanics/Classes/Necromancer.xdb" />
-                        </Item>
-                    </predicates>
-                    <impactsIf>
-                        <Item type="gameMechanics.world.pet.ImpactDismissPet" />
-                    </impactsIf>
-                    <impactsElse>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
-                                    <characterClass href="/Mechanics/Classes/Druid.xdb" />
-                                </Item>
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.elements.impacts.ImpactsToPet">
-                                    <impacts>
-                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                            <buff href="/Mechanics/Spells/DruidV2/Pet/InactiveBuff/Buff_PetPlane.xdb" />
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impactsIf>
-                        </Item>
-                    </impactsElse>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.elements.predicates.PredicateMounted" />
-                    </predicates>
-                    <impactsIf>
-                        <Item type="gameMechanics.elements.impacts.ImpactDismount" />
-                    </impactsIf>
-                </Item>
-            </impactsOn>
-            <impactsOff>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
-                            <quest href="ZC9_6_20.xdb" />
-                            <status>Started</status>
-                        </Item>
-                    </predicates>
-                    <impactsIf>
-                        <Item type="gameMechanics.elements.impacts.ImpactFailQuest">
-                            <quest href="ZC9_6_20.xdb" />
-                        </Item>
-                    </impactsIf>
-                </Item>
-            </impactsOff>
-        </Item>
-        <Item type="gameMechanics.elements.effects.MultiplyStat">
-            <stat type="gameMechanics.elements.stat.StatResistance">
-                <element>EPHYSICAL</element>
-            </stat>
-            <multiplier>2</multiplier>
-        </Item>
-    </effects>
-    <isHelpful>true</isHelpful>
-    <canBeSaved>true</canBeSaved>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/Dismount.xdb" />
-    </groups>
+	<Header>
+		<resourceId>344841275</resourceId>
+	</Header>
+	<Name href="ZC9_6_20_belka.(BuffResource).Name.txt" />
+	<visScript href="ZC9_6_20_belka.(BuffVisScripts).xdb" />
+	<needVisualize>false</needVisualize>
+	<effects>
+		<Item type="gameMechanics.elements.effects.EffectDisableAllActionsExceptGroup">
+			<groups>
+				<Item href="/Mechanics/Spells/Groups/Operation.xdb" />
+			</groups>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectAddContextActions">
+			<actions>
+				<Item href="ZC9_6_20_belka_Spell.(SpellCasterSelf).xdb" />
+			</actions>
+		</Item>
+		<Item type="gameMechanics.elements.effects.Parry" />
+		<Item type="gameMechanics.elements.effects.DisableSpellsPredicate">
+			<predicate type="gameMechanics.elements.predicates.PredicateIsMountAction" />
+		</Item>
+		<Item type="gameMechanics.elements.effects.LifeGuard">
+			<level>0.01</level>
+		</Item>
+		<Item type="gameMechanics.elements.effects.HealthTrigger">
+			<healthOn type="gameMechanics.elements.calcers.FullHealthCalcer">
+				<multiplier>0.05</multiplier>
+			</healthOn>
+			<impactsOn>
+				<Item type="gameMechanics.elements.impacts.ImpactTeleport">
+					<destination type="gameMechanics.map.destination.DestinationLocator">
+						<locator>
+							<scriptID>ZC9_6_start</scriptID>
+							<map href="/Maps/RealWorld/Tower_MapResource.xdb" />
+						</locator>
+					</destination>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="ZC9_6_20_belka.(BuffResource).xdb" />
+					<anyRank>false</anyRank>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+					<quest href="ZC9_6_20.xdb" />
+				</Item>
+			</impactsOn>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectHandleLeaveMission">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="ZC9_6_20_belka.(BuffResource).xdb" />
+					<anyRank>false</anyRank>
+				</Item>
+			</impacts>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectZoneEnterLeaveChecker">
+			<impactsOnEnter>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="ZC9_6_20_belka.(BuffResource).xdb" />
+					<anyRank>false</anyRank>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+							<quest href="ZC9_6_20.xdb" />
+							<status>Active</status>
+						</Item>
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+							<quest href="ZC9_6_20.xdb" />
+						</Item>
+					</impactsIf>
+				</Item>
+			</impactsOnEnter>
+			<activeZone href="/Maps/RealWorld/Zones/ZC9_EastPost.(ZoneResource).xdb" />
+			<checkTopLevelZonesOnly>false</checkTopLevelZonesOnly>
+		</Item>
+		<Item type="gameMechanics.elements.effects.Switch">
+			<impactsOn>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+							<characterClass href="/Mechanics/Classes/Necromancer.xdb" />
+						</Item>
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.world.pet.ImpactDismissPet" />
+					</impactsIf>
+					<impactsElse>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.elements.predicates.PredicateCharacterClass">
+									<characterClass href="/Mechanics/Classes/Druid.xdb" />
+								</Item>
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.elements.impacts.ImpactsToPet">
+									<impacts>
+										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+											<buff href="/Mechanics/Spells/DruidV2/Pet/InactiveBuff/Buff_PetPlane.xdb" />
+										</Item>
+									</impacts>
+								</Item>
+							</impactsIf>
+						</Item>
+					</impactsElse>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateMounted" />
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.elements.impacts.ImpactDismount" />
+					</impactsIf>
+				</Item>
+			</impactsOn>
+			<impactsOff>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateQuestStatus">
+							<quest href="ZC9_6_20.xdb" />
+							<status>Started</status>
+						</Item>
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.elements.impacts.ImpactFailQuest">
+							<quest href="ZC9_6_20.xdb" />
+						</Item>
+					</impactsIf>
+				</Item>
+			</impactsOff>
+		</Item>
+		<Item type="gameMechanics.elements.effects.MultiplyStat">
+			<stat type="gameMechanics.elements.stat.StatResistance">
+				<element>EPHYSICAL</element>
+			</stat>
+			<multiplier>2</multiplier>
+		</Item>
+	</effects>
+	<isHelpful>true</isHelpful>
+	<canBeSaved>true</canBeSaved>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/Dismount.xdb" />
+	</groups>
 </gameMechanics.constructor.schemes.buff.BuffResource>

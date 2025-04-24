@@ -1,167 +1,167 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.buff.BuffResource>
-    <Header>
-        <resourceId>739881750</resourceId>
-    </Header>
-    <Name href="VertigoBuff_Eternal.(BuffResource).Name.txt" />
-    <Description href="VertigoBuff_Eternal.(BuffResource).Description.txt" />
-    <image href="/Interface/Icons/Spells/Warrior/WarriorWhirlwindUpgrade.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
-    <visScript href="/Spells/VisScripts/Bosses/UmoirMound/07_VertigoBuff.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
-    <effects>
-        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                    <radius>5.5</radius>
-                    <affectGroup>Enemies</affectGroup>
-                    <affectHolder>false</affectHolder>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
-                            <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
-                            <minDamage>12</minDamage>
-                            <maxDamage>12</maxDamage>
-                        </Item>
-                    </impacts>
-                    <filter type="gameMechanics.world.creature.AvatarFilter" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.elements.resources.ResourceBuff">
-                            <buff href="CurseBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                    </predicates>
-                    <impactsIf>
-                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-                            <projectileData>
-                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
-                                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
-                                </moveType>
-                                <resource href="FirePuddle.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
-                            </projectileData>
-                            <pool href="PuddlesPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
-                        </Item>
-                    </impactsIf>
-                </Item>
-            </impacts>
-            <tick>1000</tick>
-            <initialDelay>1000</initialDelay>
-        </Item>
-        <Item type="gameMechanics.elements.effects.ImmunityToSpellFromGroup">
-            <groups>
-                <Item href="/Mechanics/Spells/Groups/Taunt.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-            </groups>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
-            <group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
-            <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
-                <coeff>-0.55</coeff>
-            </effectScaler>
-        </Item>
-        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactSetAllAggro" />
-                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
-                    <selector type="gameMechanics.tools.SelectorRandomNotLess">
-                        <minIndex>0</minIndex>
-                    </selector>
-                    <filter type="gameMechanics.world.creature.AvatarFilter" />
-                    <impacts>
-                        <Item>
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.ForceAggro" />
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                </Item>
-            </impacts>
-            <tick>20000</tick>
-            <initialDelay>20000</initialDelay>
-        </Item>
-        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                <buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            </predicate>
-                        </Item>
-                        <Item type="gameMechanics.elements.resources.ResourceBuff">
-                            <buff href="CurseBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                        </Item>
-                    </predicates>
-                    <impactsIf>
-                        <Item type="gameMechanics.elements.impacts.RandomImpactGeneric">
-                            <entries>
-                                <Item>
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-                                                    <impacts>
-                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-                                                            <data href="/Mechanics/RaidInstances/UmoirMound/Voice/Heroes/Combat/Danas/20_CursedWhirlWind.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                        </Item>
-                                                    </impacts>
-                                                </Item>
-                                            </impacts>
-                                        </Item>
-                                        <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-                                            <impacts>
-                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                    <buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                        <multiplier>16000</multiplier>
-                                                    </durationScaler>
-                                                </Item>
-                                            </impacts>
-                                            <spawnResource href="/Maps/UmoirMound/SpawnTables/07_Party.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                                <Item>
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-                                                    <impacts>
-                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-                                                            <data href="/Mechanics/RaidInstances/UmoirMound/Voice/Heroes/Combat/Danas/21_CursedWhirlWind.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                        </Item>
-                                                    </impacts>
-                                                </Item>
-                                            </impacts>
-                                        </Item>
-                                        <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-                                            <impacts>
-                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                    <buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                        <multiplier>16000</multiplier>
-                                                    </durationScaler>
-                                                </Item>
-                                            </impacts>
-                                            <spawnResource href="/Maps/UmoirMound/SpawnTables/07_Party.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </entries>
-                        </Item>
-                    </impactsIf>
-                </Item>
-            </impacts>
-            <initialDelay>8000</initialDelay>
-        </Item>
-    </effects>
-    <isStackable>false</isStackable>
-    <isHelpful>true</isHelpful>
-    <isMultiple>true</isMultiple>
-    <canBeSaved>false</canBeSaved>
+	<Header>
+		<resourceId>739881750</resourceId>
+	</Header>
+	<Name href="VertigoBuff_Eternal.(BuffResource).Name.txt" />
+	<Description href="VertigoBuff_Eternal.(BuffResource).Description.txt" />
+	<image href="/Interface/Icons/Spells/Warrior/WarriorWhirlwindUpgrade.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+	<visScript href="/Spells/VisScripts/Bosses/UmoirMound/07_VertigoBuff.(BuffVisScripts).xdb#xpointer(/BuffVisScripts)" />
+	<effects>
+		<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+					<radius>5.5</radius>
+					<affectGroup>Enemies</affectGroup>
+					<affectHolder>false</affectHolder>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+							<scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+							<minDamage>12</minDamage>
+							<maxDamage>12</maxDamage>
+						</Item>
+					</impacts>
+					<filter type="gameMechanics.world.creature.AvatarFilter" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.resources.ResourceBuff">
+							<buff href="CurseBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+							<projectileData>
+								<moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+									<destination type="gameMechanics.map.destination.SelfPosDestination" />
+								</moveType>
+								<resource href="FirePuddle.(ProjectileResource).xdb#xpointer(/gameMechanics.world.projectile.ProjectileResource)" />
+							</projectileData>
+							<pool href="PuddlesPool.(SummonPool).xdb#xpointer(/gameMechanics.map.spawn.SummonPool)" />
+						</Item>
+					</impactsIf>
+				</Item>
+			</impacts>
+			<tick>1000</tick>
+			<initialDelay>1000</initialDelay>
+		</Item>
+		<Item type="gameMechanics.elements.effects.ImmunityToSpellFromGroup">
+			<groups>
+				<Item href="/Mechanics/Spells/Groups/Taunt.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+			</groups>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectDisableActionsGroup">
+			<group href="/Mechanics/Spells/Groups/AutoAttackShared.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+			<effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+				<coeff>-0.55</coeff>
+			</effectScaler>
+		</Item>
+		<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactSetAllAggro" />
+				<Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+					<selector type="gameMechanics.tools.SelectorRandomNotLess">
+						<minIndex>0</minIndex>
+					</selector>
+					<filter type="gameMechanics.world.creature.AvatarFilter" />
+					<impacts>
+						<Item>
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ForceAggro" />
+									</impacts>
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+			</impacts>
+			<tick>20000</tick>
+			<initialDelay>20000</initialDelay>
+		</Item>
+		<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+							<predicate type="gameMechanics.elements.resources.ResourceBuff">
+								<buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							</predicate>
+						</Item>
+						<Item type="gameMechanics.elements.resources.ResourceBuff">
+							<buff href="CurseBuff.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.elements.impacts.RandomImpactGeneric">
+							<entries>
+								<Item>
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+													<impacts>
+														<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+															<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+															<data href="/Mechanics/RaidInstances/UmoirMound/Voice/Heroes/Combat/Danas/20_CursedWhirlWind.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+														</Item>
+													</impacts>
+												</Item>
+											</impacts>
+										</Item>
+										<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+											<impacts>
+												<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+													<buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+													<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+														<multiplier>16000</multiplier>
+													</durationScaler>
+												</Item>
+											</impacts>
+											<spawnResource href="/Maps/UmoirMound/SpawnTables/07_Party.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+										</Item>
+									</impacts>
+								</Item>
+								<Item>
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+													<impacts>
+														<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+															<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+															<data href="/Mechanics/RaidInstances/UmoirMound/Voice/Heroes/Combat/Danas/21_CursedWhirlWind.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+														</Item>
+													</impacts>
+												</Item>
+											</impacts>
+										</Item>
+										<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+											<impacts>
+												<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+													<buff href="VoiceCooldown.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+													<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+														<multiplier>16000</multiplier>
+													</durationScaler>
+												</Item>
+											</impacts>
+											<spawnResource href="/Maps/UmoirMound/SpawnTables/07_Party.(SpawnTable).xdb#xpointer(/gameMechanics.map.spawn.SpawnTable)" />
+										</Item>
+									</impacts>
+								</Item>
+							</entries>
+						</Item>
+					</impactsIf>
+				</Item>
+			</impacts>
+			<initialDelay>8000</initialDelay>
+		</Item>
+	</effects>
+	<isStackable>false</isStackable>
+	<isHelpful>true</isHelpful>
+	<isMultiple>true</isMultiple>
+	<canBeSaved>false</canBeSaved>
 </gameMechanics.constructor.schemes.buff.BuffResource>

@@ -1,243 +1,243 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>167653397</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/DragonRelic2.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        <Item href="/Mechanics/Spells/Groups/MeleeAttacks.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-    </groups>
-    <element>PHYSICAL</element>
-    <descVars />
-    <image href="/Interface/Icons/Spells/Druid/DruidPetLockJaw.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
-    <visualScripts href="/Spells/VisScripts/Druid/PetLockJaw.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
-    <sysName />
-    <nameTemplate href="Spell_Name.txt.template" />
-    <descTemplate href="Spell_Desc.txt.template" />
-    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
-    <level>1</level>
-    <prepareDuration>0</prepareDuration>
-    <immutablePrepareDuration>false</immutablePrepareDuration>
-    <needLos>true</needLos>
-    <targetType>STTCurrentTargetNotSelf</targetType>
-    <isAggro>true</isAggro>
-    <replaceLowRanks>true</replaceLowRanks>
-    <isWorkOnDead>false</isWorkOnDead>
-    <ranks>
-        <Item href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-        <Item href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-    </ranks>
-    <modifiers>
-        <Item type="gameMechanics.elements.spell.SpellEnvelopeModifier">
-            <effects>
-                <Item type="gameMechanics.elements.effects.OutgoingCritAndGlanceSupressor" />
-            </effects>
-            <onBehalfOfHolder>true</onBehalfOfHolder>
-        </Item>
-    </modifiers>
-    <iffPolicy>Enemies</iffPolicy>
-    <triggersGlobalCooldown>false</triggersGlobalCooldown>
-    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
-    <launchWhenReady>false</launchWhenReady>
-    <needInFront>true</needInFront>
-    <mechanics>
-        <cooldown>
-            <stage>Launch</stage>
-            <duration>-1</duration>
-            <group href="" />
-        </cooldown>
-        <casterResources>
-            <Item type="gameMechanics.elements.resources.ResourceMana">
-                <hideText>false</hideText>
-                <mana>10</mana>
-                <scaleByWeaponSpeed>false</scaleByWeaponSpeed>
-                <source>Mainhand</source>
-            </Item>
-        </casterResources>
-        <targetImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactsIf">
-                <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromAddressee">
-                    <hideText>false</hideText>
-                    <buff href="/Mechanics/Spells/DruidV2/Shock/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                    <from type="gameMechanics.elements.addresseeFinders.AddresseeFinderCasterMaster" />
-                    <anyRank>false</anyRank>
-                </predicate>
-                <impactsIf>
-                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
-                        <data href="/Mechanics/Spells/DruidV2/Shock/Shock.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                    </Item>
-                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.ImpactIsolator">
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactsToMaster">
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                <predicates>
-                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                                        <buff href="/Mechanics/Abilities/DruidTalentsV2/AdvancedCombo/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                    </Item>
-                                                </predicates>
-                                                <impactsIf>
-                                                    <Item type="gameMechanics.elements.impacts.StackBuff">
-                                                        <buff href="/Mechanics/Abilities/DruidTalentsV2/AdvancedCombo/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        <delta type="gameMechanics.elements.calcers.FloatData">
-                                                            <value>3</value>
-                                                        </delta>
-                                                    </Item>
-                                                </impactsIf>
-                                                <impactsElse>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                        <predicates>
-                                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                                                <buff href="/Mechanics/Spells/DruidV2/BuffStatic/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                            </Item>
-                                                        </predicates>
-                                                        <impactsIf>
-                                                            <Item type="gameMechanics.elements.impacts.StackBuff">
-                                                                <buff href="/Mechanics/Spells/DruidV2/BuffStatic/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                <delta type="gameMechanics.elements.calcers.FloatData">
-                                                                    <value>3</value>
-                                                                </delta>
-                                                            </Item>
-                                                        </impactsIf>
-                                                    </Item>
-                                                </impactsElse>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                        </impacts>
-                    </Item>
-                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                        <predicates>
-                            <Item type="gameMechanics.elements.predicates.PredicateOnAddressee">
-                                <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCasterMaster" />
-                                <predicates>
-                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                        <buff href="/Mechanics/Spells/DruidV2/BuffStatic/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
-                                        <ability href="/Mechanics/Abilities/DruidTalentsV2/Survival/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-                                    </Item>
-                                </predicates>
-                            </Item>
-                        </predicates>
-                        <impacts>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="Dot_Static.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
-                                        <element>LIGHTNING</element>
-                                        <damage var="damage" />
-                                        <impactsOnHitTarget>
-                                            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                                        <buff href="/Mechanics/Spells/DruidV2/Shock/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCasterMaster" />
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </impactsOnHitTarget>
-                                        <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-                                            <scalers>
-                                                <Item type="gameMechanics.elements.scalers.MagicScaler" />
-                                                <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                    <mul>0.01</mul>
-                                                    <mulCalcer type="gameMechanics.elements.calcers.CalcerPetMaster">
-                                                        <calcer type="gameMechanics.elements.calcers.CalcerMul">
-                                                            <calcers>
-                                                                <Item type="gameMechanics.elements.calcers.BuffStackCountCalcer">
-                                                                    <buff href="/Mechanics/Spells/DruidV2/BuffStatic/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                    <forAllRanks>true</forAllRanks>
-                                                                </Item>
-                                                                <Item type="gameMechanics.elements.calcers.AbilityRankCalcer">
-                                                                    <ability href="/Mechanics/Abilities/DruidTalentsV2/Survival/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-                                                                    <mul>1</mul>
-                                                                </Item>
-                                                            </calcers>
-                                                        </calcer>
-                                                    </mulCalcer>
-                                                    <sum>1</sum>
-                                                </Item>
-                                            </scalers>
-                                        </scaler>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                        </impacts>
-                        <elseImpacts>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="Dot_NoStatic.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
-                                        <element>POISON</element>
-                                        <damage var="damage" />
-                                        <impactsOnHitTarget>
-                                            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                                        <buff href="/Mechanics/Spells/DruidV2/Shock/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                        <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCasterMaster" />
-                                                    </Item>
-                                                </impacts>
-                                            </Item>
-                                        </impactsOnHitTarget>
-                                        <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-                                            <scalers>
-                                                <Item type="gameMechanics.elements.scalers.MagicScaler" />
-                                                <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                    <mul>0.01</mul>
-                                                    <mulCalcer type="gameMechanics.elements.calcers.CalcerPetMaster">
-                                                        <calcer type="gameMechanics.elements.calcers.CalcerMul">
-                                                            <calcers>
-                                                                <Item type="gameMechanics.elements.calcers.BuffStackCountCalcer">
-                                                                    <buff href="/Mechanics/Abilities/DruidTalentsV2/AdvancedCombo/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                    <forAllRanks>true</forAllRanks>
-                                                                </Item>
-                                                                <Item type="gameMechanics.elements.calcers.AbilityRankCalcer">
-                                                                    <ability href="/Mechanics/Abilities/DruidTalentsV2/Survival/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-                                                                    <mul>1</mul>
-                                                                </Item>
-                                                            </calcers>
-                                                        </calcer>
-                                                    </mulCalcer>
-                                                    <sum>1</sum>
-                                                </Item>
-                                            </scalers>
-                                        </scaler>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                        </elseImpacts>
-                    </Item>
-                </impactsIf>
-                <impactsElse>
-                    <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
-                        <impactsOnHitTarget>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="Dot.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            </Item>
-                        </impactsOnHitTarget>
-                        <scaleByDamageImpactsOnHit>false</scaleByDamageImpactsOnHit>
-                        <threatMultiplier>0.5</threatMultiplier>
-                        <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
-                        <minDamage var="minDamage" />
-                        <maxDamage var="maxDamage" />
-                    </Item>
-                </impactsElse>
-            </Item>
-        </targetImpacts>
-    </mechanics>
-    <speed>0</speed>
-    <isAE>false</isAE>
+	<Header>
+		<resourceId>167653397</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/DragonRelic2.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		<Item href="/Mechanics/Spells/Groups/MeleeAttacks.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+	</groups>
+	<element>PHYSICAL</element>
+	<descVars />
+	<image href="/Interface/Icons/Spells/Druid/DruidPetLockJaw.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+	<visualScripts href="/Spells/VisScripts/Druid/PetLockJaw.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+	<sysName />
+	<nameTemplate href="Spell_Name.txt.template" />
+	<descTemplate href="Spell_Desc.txt.template" />
+	<range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+	<level>1</level>
+	<prepareDuration>0</prepareDuration>
+	<immutablePrepareDuration>false</immutablePrepareDuration>
+	<needLos>true</needLos>
+	<targetType>STTCurrentTargetNotSelf</targetType>
+	<isAggro>true</isAggro>
+	<replaceLowRanks>true</replaceLowRanks>
+	<isWorkOnDead>false</isWorkOnDead>
+	<ranks>
+		<Item href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+		<Item href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+	</ranks>
+	<modifiers>
+		<Item type="gameMechanics.elements.spell.SpellEnvelopeModifier">
+			<effects>
+				<Item type="gameMechanics.elements.effects.OutgoingCritAndGlanceSupressor" />
+			</effects>
+			<onBehalfOfHolder>true</onBehalfOfHolder>
+		</Item>
+	</modifiers>
+	<iffPolicy>Enemies</iffPolicy>
+	<triggersGlobalCooldown>false</triggersGlobalCooldown>
+	<ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+	<launchWhenReady>false</launchWhenReady>
+	<needInFront>true</needInFront>
+	<mechanics>
+		<cooldown>
+			<stage>Launch</stage>
+			<duration>-1</duration>
+			<group href="" />
+		</cooldown>
+		<casterResources>
+			<Item type="gameMechanics.elements.resources.ResourceMana">
+				<hideText>false</hideText>
+				<mana>10</mana>
+				<scaleByWeaponSpeed>false</scaleByWeaponSpeed>
+				<source>Mainhand</source>
+			</Item>
+		</casterResources>
+		<targetImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactsIf">
+				<predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromAddressee">
+					<hideText>false</hideText>
+					<buff href="/Mechanics/Spells/DruidV2/Shock/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+					<from type="gameMechanics.elements.addresseeFinders.AddresseeFinderCasterMaster" />
+					<anyRank>false</anyRank>
+				</predicate>
+				<impactsIf>
+					<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+						<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+						<data href="/Mechanics/Spells/DruidV2/Shock/Shock.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+					</Item>
+					<Item type="gameMechanics.elements.impacts.ReturningImpact">
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.ImpactIsolator">
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactsToMaster">
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+												<predicates>
+													<Item type="gameMechanics.elements.resources.ResourceBuff">
+														<buff href="/Mechanics/Abilities/DruidTalentsV2/AdvancedCombo/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+													</Item>
+												</predicates>
+												<impactsIf>
+													<Item type="gameMechanics.elements.impacts.StackBuff">
+														<buff href="/Mechanics/Abilities/DruidTalentsV2/AdvancedCombo/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														<delta type="gameMechanics.elements.calcers.FloatData">
+															<value>3</value>
+														</delta>
+													</Item>
+												</impactsIf>
+												<impactsElse>
+													<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+														<predicates>
+															<Item type="gameMechanics.elements.resources.ResourceBuff">
+																<buff href="/Mechanics/Spells/DruidV2/BuffStatic/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+															</Item>
+														</predicates>
+														<impactsIf>
+															<Item type="gameMechanics.elements.impacts.StackBuff">
+																<buff href="/Mechanics/Spells/DruidV2/BuffStatic/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																<delta type="gameMechanics.elements.calcers.FloatData">
+																	<value>3</value>
+																</delta>
+															</Item>
+														</impactsIf>
+													</Item>
+												</impactsElse>
+											</Item>
+										</impacts>
+									</Item>
+								</impacts>
+							</Item>
+						</impacts>
+					</Item>
+					<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicateOnAddressee">
+								<addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCasterMaster" />
+								<predicates>
+									<Item type="gameMechanics.elements.resources.ResourceBuff">
+										<buff href="/Mechanics/Spells/DruidV2/BuffStatic/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+									<Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+										<ability href="/Mechanics/Abilities/DruidTalentsV2/Survival/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+									</Item>
+								</predicates>
+							</Item>
+						</predicates>
+						<impacts>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="Dot_Static.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							</Item>
+							<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+										<element>LIGHTNING</element>
+										<damage var="damage" />
+										<impactsOnHitTarget>
+											<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.BuffDetacher">
+														<buff href="/Mechanics/Spells/DruidV2/Shock/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														<casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCasterMaster" />
+													</Item>
+												</impacts>
+											</Item>
+										</impactsOnHitTarget>
+										<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+											<scalers>
+												<Item type="gameMechanics.elements.scalers.MagicScaler" />
+												<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+													<mul>0.01</mul>
+													<mulCalcer type="gameMechanics.elements.calcers.CalcerPetMaster">
+														<calcer type="gameMechanics.elements.calcers.CalcerMul">
+															<calcers>
+																<Item type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+																	<buff href="/Mechanics/Spells/DruidV2/BuffStatic/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																	<forAllRanks>true</forAllRanks>
+																</Item>
+																<Item type="gameMechanics.elements.calcers.AbilityRankCalcer">
+																	<ability href="/Mechanics/Abilities/DruidTalentsV2/Survival/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+																	<mul>1</mul>
+																</Item>
+															</calcers>
+														</calcer>
+													</mulCalcer>
+													<sum>1</sum>
+												</Item>
+											</scalers>
+										</scaler>
+									</Item>
+								</impacts>
+							</Item>
+						</impacts>
+						<elseImpacts>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="Dot_NoStatic.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							</Item>
+							<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+										<element>POISON</element>
+										<damage var="damage" />
+										<impactsOnHitTarget>
+											<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.BuffDetacher">
+														<buff href="/Mechanics/Spells/DruidV2/Shock/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+														<casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCasterMaster" />
+													</Item>
+												</impacts>
+											</Item>
+										</impactsOnHitTarget>
+										<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+											<scalers>
+												<Item type="gameMechanics.elements.scalers.MagicScaler" />
+												<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+													<mul>0.01</mul>
+													<mulCalcer type="gameMechanics.elements.calcers.CalcerPetMaster">
+														<calcer type="gameMechanics.elements.calcers.CalcerMul">
+															<calcers>
+																<Item type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+																	<buff href="/Mechanics/Abilities/DruidTalentsV2/AdvancedCombo/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																	<forAllRanks>true</forAllRanks>
+																</Item>
+																<Item type="gameMechanics.elements.calcers.AbilityRankCalcer">
+																	<ability href="/Mechanics/Abilities/DruidTalentsV2/Survival/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+																	<mul>1</mul>
+																</Item>
+															</calcers>
+														</calcer>
+													</mulCalcer>
+													<sum>1</sum>
+												</Item>
+											</scalers>
+										</scaler>
+									</Item>
+								</impacts>
+							</Item>
+						</elseImpacts>
+					</Item>
+				</impactsIf>
+				<impactsElse>
+					<Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+						<impactsOnHitTarget>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="Dot.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							</Item>
+						</impactsOnHitTarget>
+						<scaleByDamageImpactsOnHit>false</scaleByDamageImpactsOnHit>
+						<threatMultiplier>0.5</threatMultiplier>
+						<scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+						<minDamage var="minDamage" />
+						<maxDamage var="maxDamage" />
+					</Item>
+				</impactsElse>
+			</Item>
+		</targetImpacts>
+	</mechanics>
+	<speed>0</speed>
+	<isAE>false</isAE>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

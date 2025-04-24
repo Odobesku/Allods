@@ -1,218 +1,231 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>739951601</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/Magics.xdb" />
-        <Item href="/Mechanics/Spells/Groups/FireSpells.xdb" />
-        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
-        <Item href="/Mechanics/Spells/Groups/InsuranceTrigger.xdb" />
-        <Item href="/Mechanics/Spells/Groups/MagicAttacks.xdb" />
-    </groups>
-    <element>FIRE</element>
-    <Name href="FireStar.(SpellSingleTarget).Name.txt" />
-    <Description href="FireStar.(SpellSingleTarget).Description.txt" />
-    <descVars>
-        <Item>
-            <name>dur</name>
-            <value var="dur" />
-        </Item>
-        <Item>
-            <name>dmg</name>
-            <value>13</value>
-            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-                <formula>MagicScaler</formula>
-            </scaler>
-        </Item>
-        <Item>
-            <name>time</name>
-            <value var="time" />
-        </Item>
-        <Item>
-            <name>aoe</name>
-            <value var="damage" />
-            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-                <formula>MagicScaler</formula>
-            </scaler>
-        </Item>
-        <Item>
-            <name>heal</name>
-            <value var="value" />
-            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-                <formula>FormulaPercent</formula>
-            </scaler>
-        </Item>
-    </descVars>
-    <image href="/Interface/Icons/Spells/Mage/FireTrap.(UISingleTexture).xdb" />
-    <visualScripts href="FireStar.(SpellVisScripts).xdb" />
-    <range type="gameMechanics.elements.calcers.FloatData">
-        <value>40</value>
-    </range>
-    <ranks>
-        <Item href="FireStar01.(SpellSingleTarget).xdb" />
-        <Item href="FireStar02.(SpellSingleTarget).xdb" />
-        <Item href="FireStar03.(SpellSingleTarget).xdb" />
-    </ranks>
-    <iffPolicy>Enemies</iffPolicy>
-    <mechanics>
-        <cooldown>
-            <duration>1500</duration>
-        </cooldown>
-        <casterConditions>
-            <Item type="gameMechanics.elements.resources.ResourceBuff">
-                <buff href="/Mechanics/Spells/CommonBuffs/Aspects/Support/Buff01.(BuffResource).xdb" />
-            </Item>
-        </casterConditions>
-        <casterResources>
-            <Item type="gameMechanics.elements.resources.ResourceIf">
-                <predicates>
-                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
-                        <spell hrefvar="spell" />
-                    </Item>
-                </predicates>
-                <resourceIf type="gameMechanics.constructor.basicElements.ResourceUniversal" />
-                <resourceElse type="gameMechanics.elements.resources.ResourceVariable">
-                    <variable href="/Mechanics/Spells/Mage63/Abilities/ElementalPower/FireVar.(VariableResource).xdb" />
-                    <sub>2</sub>
-                </resourceElse>
-            </Item>
-        </casterResources>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                <predicates>
-                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
-                        <spell hrefvar="spell" />
-                    </Item>
-                </predicates>
-                <impactsIf>
-                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
-                        <spell hrefvar="spell" />
-                    </Item>
-                </impactsIf>
-                <impactsElse>
-                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellActivate">
-                        <spell hrefvar="spell" />
-                        <effects>
-                            <Item type="gameMechanics.elements.effects.EffectsDeferred">
-                                <delay>10000</delay>
-                                <effects>
-                                    <Item type="gameMechanics.elements.effects.Switch">
-                                        <impactsOn>
-                                            <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
-                                                <spell hrefvar="spell" />
-                                            </Item>
-                                        </impactsOn>
-                                    </Item>
-                                </effects>
-                            </Item>
-                            <Item type="gameMechanics.elements.effects.Switch">
-                                <impactsOff>
-                                    <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
-                                        <spell href="FireStar01.(SpellSingleTarget).xdb" />
-                                        <duration>45000</duration>
-                                    </Item>
-                                </impactsOff>
-                            </Item>
-                        </effects>
-                    </Item>
-                </impactsElse>
-            </Item>
-        </casterImpacts>
-        <targetImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                <predicates>
-                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
-                        <spell hrefvar="spell" />
-                    </Item>
-                </predicates>
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactsIf">
-                        <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromMaster">
-                            <buff href="FireStar.(BuffResource).xdb" />
-                        </predicate>
-                        <impactsIf>
-                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                <buff href="FireStar.(BuffResource).xdb" />
-                                <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                                <radius>15</radius>
-                                <affectGroup>Enemies</affectGroup>
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
-                                                <element>FIRE</element>
-                                                <forceAE>true</forceAE>
-                                                <damage var="damage" />
-                                                <impactsOnHitTarget>
-                                                    <Item type="gameMechanics.elements.impacts.RandomImpact">
-                                                        <entries>
-                                                            <Item>
-                                                                <impacts>
-                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                        <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Cowardice/Cowardice.(BuffResource).xdb" />
-                                                                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                                            <mulCalcer type="gameMechanics.elements.calcers.SpellRankCalcer">
-                                                                                <spell href="FireStar01.(SpellSingleTarget).xdb" />
-                                                                                <mul>0.5</mul>
-                                                                            </mulCalcer>
-                                                                        </durationScaler>
-                                                                    </Item>
-                                                                </impacts>
-                                                            </Item>
-                                                            <Item>
-                                                                <impacts>
-                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                        <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Vulnerability/Vulnerability.(BuffResource).xdb" />
-                                                                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                                            <mulCalcer type="gameMechanics.elements.calcers.SpellRankCalcer">
-                                                                                <spell href="FireStar01.(SpellSingleTarget).xdb" />
-                                                                                <mul>0.5</mul>
-                                                                            </mulCalcer>
-                                                                        </durationScaler>
-                                                                    </Item>
-                                                                </impacts>
-                                                            </Item>
-                                                        </entries>
-                                                    </Item>
-                                                </impactsOnHitTarget>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impacts>
-                                <filter type="gameMechanics.world.creature.AliveFilter" />
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ImpactClientData">
-                                <data href="FireStarHit.(ClientData).xdb" />
-                            </Item>
-                        </impactsIf>
-                    </Item>
-                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.PureHeal">
-                                <heal var="heal" />
-                                <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                    <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer" />
-                                </scalerTarget>
-                            </Item>
-                        </impacts>
-                    </Item>
-                </impacts>
-                <elseImpacts>
-                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                        <buff href="FireStar.(BuffResource).xdb" />
-                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                            <multiplier var="dur" />
-                        </durationScaler>
-                    </Item>
-                </elseImpacts>
-            </Item>
-        </targetImpacts>
-        <linkedAbility href="FireStar.(AbilityResource).xdb" />
-    </mechanics>
-    <isAE>true</isAE>
+	<Header>
+		<resourceId>739951601</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/Magics.xdb" />
+		<Item href="/Mechanics/Spells/Groups/FireSpells.xdb" />
+		<Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
+		<Item href="/Mechanics/Spells/Groups/InsuranceTrigger.xdb" />
+		<Item href="/Mechanics/Spells/Groups/MagicAttacks.xdb" />
+	</groups>
+	<element>FIRE</element>
+	<Name href="FireStar.(SpellSingleTarget).Name.txt" />
+	<Description href="FireStar.(SpellSingleTarget).Description.txt" />
+	<descVars>
+		<Item>
+			<name>dur</name>
+			<value var="dur" />
+		</Item>
+		<Item>
+			<name>dmg</name>
+			<value>13</value>
+			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+				<formula>MagicScaler</formula>
+			</scaler>
+		</Item>
+		<Item>
+			<name>time</name>
+			<value var="time" />
+		</Item>
+		<Item>
+			<name>aoe</name>
+			<value var="damage" />
+			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+				<formula>MagicScaler</formula>
+			</scaler>
+		</Item>
+		<Item>
+			<name>heal</name>
+			<value var="value" />
+			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+				<formula>FormulaPercent</formula>
+			</scaler>
+		</Item>
+	</descVars>
+	<image href="/Interface/Icons/Spells/Mage/FireTrap.(UISingleTexture).xdb" />
+	<visualScripts href="FireStar.(SpellVisScripts).xdb" />
+	<range type="gameMechanics.elements.calcers.FloatData">
+		<value>40</value>
+	</range>
+	<ranks>
+		<Item href="FireStar01.(SpellSingleTarget).xdb" />
+		<Item href="FireStar02.(SpellSingleTarget).xdb" />
+		<Item href="FireStar03.(SpellSingleTarget).xdb" />
+	</ranks>
+	<iffPolicy>Enemies</iffPolicy>
+	<mechanics>
+		<cooldown>
+			<duration>1500</duration>
+		</cooldown>
+		<casterConditions>
+			<Item type="gameMechanics.elements.resources.ResourceBuff">
+				<buff href="/Mechanics/Spells/CommonBuffs/Aspects/Support/Buff01.(BuffResource).xdb" />
+			</Item>
+		</casterConditions>
+		<casterResources>
+			<Item type="gameMechanics.elements.resources.ResourceIf">
+				<predicates>
+					<Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+						<spell hrefvar="spell" />
+					</Item>
+				</predicates>
+				<resourceIf type="gameMechanics.constructor.basicElements.ResourceUniversal" />
+				<resourceElse type="gameMechanics.elements.resources.ResourceVariable">
+					<variable href="/Mechanics/Spells/Mage63/Abilities/ElementalPower/FireVar.(VariableResource).xdb" />
+					<sub>2</sub>
+				</resourceElse>
+			</Item>
+		</casterResources>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+				<predicates>
+					<Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+						<spell hrefvar="spell" />
+					</Item>
+				</predicates>
+				<impactsIf>
+					<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+						<spell hrefvar="spell" />
+					</Item>
+				</impactsIf>
+				<impactsElse>
+					<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellActivate">
+						<spell hrefvar="spell" />
+						<effects>
+							<Item type="gameMechanics.elements.effects.EffectsDeferred">
+								<delay>10000</delay>
+								<effects>
+									<Item type="gameMechanics.elements.effects.Switch">
+										<impactsOn>
+											<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+												<spell hrefvar="spell" />
+											</Item>
+										</impactsOn>
+									</Item>
+								</effects>
+							</Item>
+							<Item type="gameMechanics.elements.effects.Switch">
+								<impactsOff>
+									<Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+										<spell href="FireStar01.(SpellSingleTarget).xdb" />
+										<duration>45000</duration>
+									</Item>
+								</impactsOff>
+							</Item>
+						</effects>
+					</Item>
+				</impactsElse>
+			</Item>
+		</casterImpacts>
+		<targetImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+				<predicates>
+					<Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+						<spell hrefvar="spell" />
+					</Item>
+				</predicates>
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.ImpactsIf">
+						<predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromMaster">
+							<buff href="FireStar.(BuffResource).xdb" />
+						</predicate>
+						<impactsIf>
+							<Item type="gameMechanics.elements.impacts.BuffDetacher">
+								<buff href="FireStar.(BuffResource).xdb" />
+								<casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+								<radius>15</radius>
+								<affectGroup>Enemies</affectGroup>
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+												<element>FIRE</element>
+												<forceAE>true</forceAE>
+												<damage var="damage" />
+												<impactsOnHitTarget>
+													<Item type="gameMechanics.elements.impacts.RandomImpact">
+														<entries>
+															<Item>
+																<impacts>
+																	<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																		<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Stupefaction/Stupefaction.(BuffResource).xdb" />
+																		<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+																			<mulCalcer type="gameMechanics.elements.calcers.SpellRankCalcer">
+																				<spell href="FireStar01.(SpellSingleTarget).xdb" />
+																				<mul>0.5</mul>
+																			</mulCalcer>
+																		</durationScaler>
+																	</Item>
+																</impacts>
+															</Item>
+															<Item>
+																<impacts>
+																	<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																		<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Cowardice/Cowardice.(BuffResource).xdb" />
+																		<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+																			<mulCalcer type="gameMechanics.elements.calcers.SpellRankCalcer">
+																				<spell href="FireStar01.(SpellSingleTarget).xdb" />
+																				<mul>0.5</mul>
+																			</mulCalcer>
+																		</durationScaler>
+																	</Item>
+																</impacts>
+															</Item>
+															<Item>
+																<impacts>
+																	<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																		<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Vulnerability/Vulnerability.(BuffResource).xdb" />
+																		<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+																			<mulCalcer type="gameMechanics.elements.calcers.SpellRankCalcer">
+																				<spell href="FireStar01.(SpellSingleTarget).xdb" />
+																				<mul>0.5</mul>
+																			</mulCalcer>
+																		</durationScaler>
+																	</Item>
+																</impacts>
+															</Item>
+														</entries>
+													</Item>
+												</impactsOnHitTarget>
+											</Item>
+										</impacts>
+									</Item>
+								</impacts>
+								<filter type="gameMechanics.world.creature.AliveFilter" />
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ImpactClientData">
+								<data href="FireStarHit.(ClientData).xdb" />
+							</Item>
+						</impactsIf>
+					</Item>
+					<Item type="gameMechanics.elements.impacts.ReturningImpact">
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.PureHeal">
+								<heal var="heal" />
+								<scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+									<mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer" />
+								</scalerTarget>
+							</Item>
+						</impacts>
+					</Item>
+				</impacts>
+				<elseImpacts>
+					<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+						<buff href="FireStar.(BuffResource).xdb" />
+						<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+							<multiplier var="dur" />
+						</durationScaler>
+					</Item>
+				</elseImpacts>
+			</Item>
+		</targetImpacts>
+		<linkedAbility href="FireStar.(AbilityResource).xdb" />
+	</mechanics>
+	<isAE>true</isAE>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

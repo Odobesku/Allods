@@ -1,149 +1,149 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.buff.BuffResource>
-    <Header>
-        <resourceId>739904828</resourceId>
-    </Header>
-    <Name href="PortalDispell_disable.(BuffResource).Name.txt" />
-    <Description href="PortalDispell_disable.(BuffResource).Description.txt" />
-    <image href="/Interface/Icons/Spells/Mage/MagePortal.(UISingleTexture).xdb" />
-    <visScript href="PortalDispell_disable.(BuffVisScripts).xdb" />
-    <effects>
-        <Item type="gameMechanics.elements.effects.EffectDisableAct">
-            <actions>
-                <Item>Move</Item>
-            </actions>
-            <rooted>true</rooted>
-        </Item>
-        <Item type="gameMechanics.elements.effects.Switch">
-            <impactsOff>
-                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
-                            <pool href="PortalSpecial.(SummonPool).xdb" />
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
-                                    <visualState>2</visualState>
-                                </Item>
-                                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                                    <delay>2000</delay>
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                            <buff href="PortalDispell_Permission.(BuffResource).xdb" />
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </impacts>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="PortalSpecial_Green.(BuffResource).xdb" />
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="PortalSpecial_Blue.(BuffResource).xdb" />
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="PortalSpecial_Yellow.(BuffResource).xdb" />
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="PortalSpecial_Red.(BuffResource).xdb" />
-                        </Item>
-                    </impacts>
-                    <spawnResource href="/Maps/FerrisRaid/SpawnTables/9_RoboBoss.(SpawnTable).xdb" />
-                </Item>
-            </impactsOff>
-        </Item>
-        <Item type="gameMechanics.elements.effects.NotStackableEffects">
-            <effects>
-                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.PureDamage">
-                            <damage>1</damage>
-                            <scaler type="gameMechanics.elements.scalers.TrivialScaler" />
-                            <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
-                                    <multiplier>0.125</multiplier>
-                                </mulCalcer>
-                            </scalerTarget>
-                        </Item>
-                    </impacts>
-                </Item>
-            </effects>
-        </Item>
-        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
-            <onLeave>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="PortalDispell_Permission.(BuffResource).xdb" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="PortalDispell_disable.(BuffResource).xdb" />
-                </Item>
-            </onLeave>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
-        <Item type="gameMechanics.elements.effects.DispelInterceptor">
-            <policy>CancelSilently</policy>
-            <holderImpacts>
-                <Item type="gameMechanics.elements.impacts.StackBuff">
-                    <buff href="PortalDispell_disable.(BuffResource).xdb" />
-                    <resetTimer>false</resetTimer>
-                    <delta type="gameMechanics.elements.calcers.FloatData">
-                        <value>-1</value>
-                    </delta>
-                </Item>
-            </holderImpacts>
-            <predicates>
-                <Item type="gameMechanics.constructor.schemes.buff.PredicateBuffEquals">
-                    <buff href="PortalDispell_disable.(BuffResource).xdb" />
-                </Item>
-            </predicates>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                    <radius>6</radius>
-                    <impacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                    <buff href="PortalDispell_Permission.(BuffResource).xdb" />
-                                </Item>
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.elements.impacts.ImpactKill" />
-                            </impactsIf>
-                        </Item>
-                    </impacts>
-                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-                        <predicates>
-                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-                        </predicates>
-                    </filter>
-                </Item>
-            </impacts>
-        </Item>
-    </effects>
-    <duration>13000</duration>
-    <stackLimit>2</stackLimit>
-    <isHelpful>false</isHelpful>
-    <canBeSaved>false</canBeSaved>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
-        <Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
-        <Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/Magics.xdb" />
-    </groups>
+	<Header>
+		<resourceId>739904828</resourceId>
+	</Header>
+	<Name href="PortalDispell_disable.(BuffResource).Name.txt" />
+	<Description href="PortalDispell_disable.(BuffResource).Description.txt" />
+	<image href="/Interface/Icons/Spells/Mage/MagePortal.(UISingleTexture).xdb" />
+	<visScript href="PortalDispell_disable.(BuffVisScripts).xdb" />
+	<effects>
+		<Item type="gameMechanics.elements.effects.EffectDisableAct">
+			<actions>
+				<Item>Move</Item>
+			</actions>
+			<rooted>true</rooted>
+		</Item>
+		<Item type="gameMechanics.elements.effects.Switch">
+			<impactsOff>
+				<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+							<pool href="PortalSpecial.(SummonPool).xdb" />
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+									<visualState>2</visualState>
+								</Item>
+								<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+									<delay>2000</delay>
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.Disintegrate" />
+									</impacts>
+								</Item>
+							</impacts>
+						</Item>
+						<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.BuffDetacher">
+											<buff href="PortalDispell_Permission.(BuffResource).xdb" />
+										</Item>
+									</impacts>
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="PortalSpecial_Green.(BuffResource).xdb" />
+						</Item>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="PortalSpecial_Blue.(BuffResource).xdb" />
+						</Item>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="PortalSpecial_Yellow.(BuffResource).xdb" />
+						</Item>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="PortalSpecial_Red.(BuffResource).xdb" />
+						</Item>
+					</impacts>
+					<spawnResource href="/Maps/FerrisRaid/SpawnTables/9_RoboBoss.(SpawnTable).xdb" />
+				</Item>
+			</impactsOff>
+		</Item>
+		<Item type="gameMechanics.elements.effects.NotStackableEffects">
+			<effects>
+				<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.PureDamage">
+							<damage>1</damage>
+							<scaler type="gameMechanics.elements.scalers.TrivialScaler" />
+							<scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+								<mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+									<multiplier>0.125</multiplier>
+								</mulCalcer>
+							</scalerTarget>
+						</Item>
+					</impacts>
+				</Item>
+			</effects>
+		</Item>
+		<Item type="gameMechanics.elements.effects.CombatStateTrigger">
+			<onLeave>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="PortalDispell_Permission.(BuffResource).xdb" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="PortalDispell_disable.(BuffResource).xdb" />
+				</Item>
+			</onLeave>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+		<Item type="gameMechanics.elements.effects.DispelInterceptor">
+			<policy>CancelSilently</policy>
+			<holderImpacts>
+				<Item type="gameMechanics.elements.impacts.StackBuff">
+					<buff href="PortalDispell_disable.(BuffResource).xdb" />
+					<resetTimer>false</resetTimer>
+					<delta type="gameMechanics.elements.calcers.FloatData">
+						<value>-1</value>
+					</delta>
+				</Item>
+			</holderImpacts>
+			<predicates>
+				<Item type="gameMechanics.constructor.schemes.buff.PredicateBuffEquals">
+					<buff href="PortalDispell_disable.(BuffResource).xdb" />
+				</Item>
+			</predicates>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectOnBuffTimeout">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+					<radius>6</radius>
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.elements.resources.ResourceBuff">
+									<buff href="PortalDispell_Permission.(BuffResource).xdb" />
+								</Item>
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.elements.impacts.ImpactKill" />
+							</impactsIf>
+						</Item>
+					</impacts>
+					<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+							<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+						</predicates>
+					</filter>
+				</Item>
+			</impacts>
+		</Item>
+	</effects>
+	<duration>13000</duration>
+	<stackLimit>2</stackLimit>
+	<isHelpful>false</isHelpful>
+	<canBeSaved>false</canBeSaved>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+		<Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+		<Item href="/Mechanics/Spells/Groups/FerrisRaid.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/Magics.xdb" />
+	</groups>
 </gameMechanics.constructor.schemes.buff.BuffResource>

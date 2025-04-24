@@ -1,218 +1,218 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.buff.BuffResource>
-    <Header>
-        <resourceId>739845896</resourceId>
-    </Header>
-    <Name href="GolemRed.(BuffResource).Name.txt" />
-    <Description href="GolemRed.(BuffResource).Description.txt" />
-    <image href="/Interface/Icons/Misc/Event/GolemJunes.(UISingleTexture).xdb" />
-    <visScript href="GolemRed.(BuffVisScripts).xdb" />
-    <nameTemplate href="GolemRed.(BuffResource).Name.txt" />
-    <effects>
-        <Item type="gameMechanics.elements.effects.EffectInZoneTracker">
-            <buff href="GolemRed.(BuffResource).xdb" />
-            <activeZone href="/Maps/Domination03/Zones/Domination03/Domination03.(ZoneResource).xdb" />
-            <trackData href="GolemRed.(TrackDataResource).xdb" />
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectDisableAllActionsExceptGroup">
-            <groups>
-                <Item href="/Mechanics/Spells/Groups/BG03_Golems.(ActionGroup).xdb" />
-                <Item href="BG3_GolemSpells.(ActionGroup).xdb" />
-                <Item href="/Mechanics/Spells/Groups/VoteKick.(ActionGroup).xdb" />
-            </groups>
-        </Item>
-        <Item type="gameMechanics.elements.effects.Switch">
-            <impactsOn>
-                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
-                    <group href="/Mechanics/Spells/Groups/SpeedBoosts.xdb" />
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactDismount" />
-                <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellGroupDeactivate">
-                    <group href="/Mechanics/Spells/Groups/SpeedBoosts.xdb" />
-                </Item>
-            </impactsOn>
-            <impactsOff>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                            <predicate type="gameMechanics.elements.predicates.PredicateInScriptZone">
-                                <zone href="GolemBlue.(ScriptZone).xdb" />
-                            </predicate>
-                        </Item>
-                        <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
-                            <zone href="/Maps/Domination03/ScriptZones/Domination03Zone.(ScriptZone).xdb" />
-                        </Item>
-                    </predicates>
-                    <impactsIf>
-                        <Item type="gameMechanics.elements.impacts.ImpactSummon">
-                            <destination type="gameMechanics.map.destination.DestinationModified">
-                                <destination type="gameMechanics.map.destination.SelfPosDestination" />
-                                <modifiers>
-                                    <Item type="gameMechanics.map.destination.modifier.ModifierTraceNear" />
-                                </modifiers>
-                            </destination>
-                            <traceDown>true</traceDown>
-                            <object href="GolemRedBroken.(SteleResource).xdb" />
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                            <distributor type="gameMechanics.elements.calcers.ZoneDistributor">
-                                <zone type="gameMechanics.elements.calcers.ZoneDistributor$OwnZone" />
-                            </distributor>
-                            <data href="CD/RedGolemBroken.(ClientData).xdb" />
-                        </Item>
-                    </impactsIf>
-                    <impactsElse>
-                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                            <predicates>
-                                <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
-                                    <zone href="GolemBlue.(ScriptZone).xdb" />
-                                </Item>
-                                <Item type="gameMechanics.map.variables.PredicateMapVariableEquals">
-                                    <variableResource href="/Mechanics/InstancedEventResource/MM_BG03/BlueGolemOnBase.(MapVariableResource).xdb" />
-                                    <expectedValue type="gameMechanics.elements.calcers.FloatData">
-                                        <value>0</value>
-                                    </expectedValue>
-                                </Item>
-                            </predicates>
-                            <impactsIf>
-                                <Item type="gameMechanics.elements.impacts.ImpactSummon">
-                                    <destination type="gameMechanics.map.destination.DestinationModified">
-                                        <destination type="gameMechanics.map.destination.SelfPosDestination" />
-                                        <modifiers>
-                                            <Item type="gameMechanics.map.destination.modifier.ModifierTraceNear" />
-                                        </modifiers>
-                                    </destination>
-                                    <traceDown>true</traceDown>
-                                    <object href="GolemRedBroken.(SteleResource).xdb" />
-                                </Item>
-                            </impactsIf>
-                        </Item>
-                    </impactsElse>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.ImpactLogAvatarStats">
-                    <resource href="GolemRed.(BuffResource).xdb" />
-                </Item>
-            </impactsOff>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectGiveSpell">
-            <spell href="SpamSpell.(SpellSingleTarget).xdb" />
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectGiveSpell">
-            <spell href="Golem_Jump.(SpellArea).xdb" />
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectGiveSpell">
-            <spell href="KnockDawn.(SpellSingleTarget).xdb" />
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectGiveSpell">
-            <spell href="Energy_Shield.(SpellSingleTarget).xdb" />
-        </Item>
-        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                                <buff href="GoleamHeal.(BuffResource).xdb" />
-                            </predicate>
-                        </Item>
-                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                            <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
-                        </Item>
-                    </predicates>
-                    <impactsIf>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="GoleamHeal.(BuffResource).xdb" />
-                        </Item>
-                    </impactsIf>
-                </Item>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="GoleamHeal.(BuffResource).xdb" />
-                </Item>
-            </impacts>
-        </Item>
-        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
-                            <groups>
-                                <Item href="/Mechanics/Spells/Groups/Escapes.xdb" />
-                                <Item href="/Mechanics/Spells/Groups/Shroud.xdb" />
-                            </groups>
-                        </Item>
-                    </predicates>
-                    <impactsIf>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="GolemRed.(BuffResource).xdb" />
-                            <anyRank>false</anyRank>
-                        </Item>
-                    </impactsIf>
-                </Item>
-            </impacts>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectHandleLeaveMission">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                    <buff href="GolemRed.(BuffResource).xdb" />
-                    <anyRank>false</anyRank>
-                </Item>
-            </impacts>
-        </Item>
-        <Item type="gameMechanics.elements.effects.DisableSpellsPredicate">
-            <predicate type="gameMechanics.elements.predicates.PredicateSpellInGroup">
-                <group href="/Mechanics/Spells/Groups/SpeedBoosts.xdb" />
-            </predicate>
-        </Item>
-        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                    <predicates>
-                        <Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
-                            <zone href="GolemBlue.(ScriptZone).xdb" />
-                        </Item>
-                        <Item type="gameMechanics.map.variables.PredicateMapVariableEquals">
-                            <variableResource href="/Mechanics/InstancedEventResource/MM_BG03/BlueGolemOnBase.(MapVariableResource).xdb" />
-                            <expectedValue type="gameMechanics.elements.calcers.FloatData">
-                                <value>1</value>
-                            </expectedValue>
-                        </Item>
-                        <Item type="gameMechanics.elements.resources.ResourceBuff">
-                            <buff href="GolemRed.(BuffResource).xdb" />
-                        </Item>
-                    </predicates>
-                    <impactsIf>
-                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                            <buff href="GolemRed.(BuffResource).xdb" />
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
-                            <table href="/Maps/Domination03/SpawnTables/GolemRed.(SpawnTable).xdb" />
-                        </Item>
-                        <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
-                            <variable href="/Mechanics/InstancedEventResource/MM_BG03/RedGolemOnBase.(MapVariableResource).xdb" />
-                            <summand>1</summand>
-                        </Item>
-                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                            <distributor type="gameMechanics.elements.calcers.ZoneDistributor">
-                                <zone type="gameMechanics.elements.calcers.ZoneDistributor$OwnZone" />
-                            </distributor>
-                            <data href="CD/RedGolemCaptured.(ClientData).xdb" />
-                        </Item>
-                        <Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactUpdateEventAchievement">
-                            <achievement href="/Mechanics/InstancedEventResource/MM_BG03/MM_BG03.(BattleEventAchievementResource).xdb" />
-                            <summand>1000</summand>
-                        </Item>
-                    </impactsIf>
-                </Item>
-            </impacts>
-            <initialDelay>-1</initialDelay>
-        </Item>
-        <Item type="gameMechanics.elements.effects.EffectMapWideReplicated" />
-    </effects>
-    <isHelpful>true</isHelpful>
-    <isDetachableOnWill>true</isDetachableOnWill>
-    <canBeSaved>false</canBeSaved>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
-        <Item href="/Mechanics/Spells/Groups/CantBeChopperPassenger.(ActionGroup).xdb" />
-    </groups>
+	<Header>
+		<resourceId>739845896</resourceId>
+	</Header>
+	<Name href="GolemRed.(BuffResource).Name.txt" />
+	<Description href="GolemRed.(BuffResource).Description.txt" />
+	<image href="/Interface/Icons/Misc/Event/GolemJunes.(UISingleTexture).xdb" />
+	<visScript href="GolemRed.(BuffVisScripts).xdb" />
+	<nameTemplate href="GolemRed.(BuffResource).Name.txt" />
+	<effects>
+		<Item type="gameMechanics.elements.effects.EffectInZoneTracker">
+			<buff href="GolemRed.(BuffResource).xdb" />
+			<activeZone href="/Maps/Domination03/Zones/Domination03/Domination03.(ZoneResource).xdb" />
+			<trackData href="GolemRed.(TrackDataResource).xdb" />
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectDisableAllActionsExceptGroup">
+			<groups>
+				<Item href="/Mechanics/Spells/Groups/BG03_Golems.(ActionGroup).xdb" />
+				<Item href="BG3_GolemSpells.(ActionGroup).xdb" />
+				<Item href="/Mechanics/Spells/Groups/VoteKick.(ActionGroup).xdb" />
+			</groups>
+		</Item>
+		<Item type="gameMechanics.elements.effects.Switch">
+			<impactsOn>
+				<Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+					<group href="/Mechanics/Spells/Groups/SpeedBoosts.xdb" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactDismount" />
+				<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellGroupDeactivate">
+					<group href="/Mechanics/Spells/Groups/SpeedBoosts.xdb" />
+				</Item>
+			</impactsOn>
+			<impactsOff>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+							<predicate type="gameMechanics.elements.predicates.PredicateInScriptZone">
+								<zone href="GolemBlue.(ScriptZone).xdb" />
+							</predicate>
+						</Item>
+						<Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+							<zone href="/Maps/Domination03/ScriptZones/Domination03Zone.(ScriptZone).xdb" />
+						</Item>
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.elements.impacts.ImpactSummon">
+							<destination type="gameMechanics.map.destination.DestinationModified">
+								<destination type="gameMechanics.map.destination.SelfPosDestination" />
+								<modifiers>
+									<Item type="gameMechanics.map.destination.modifier.ModifierTraceNear" />
+								</modifiers>
+							</destination>
+							<traceDown>true</traceDown>
+							<object href="GolemRedBroken.(SteleResource).xdb" />
+						</Item>
+						<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+							<distributor type="gameMechanics.elements.calcers.ZoneDistributor">
+								<zone type="gameMechanics.elements.calcers.ZoneDistributor$OwnZone" />
+							</distributor>
+							<data href="CD/RedGolemBroken.(ClientData).xdb" />
+						</Item>
+					</impactsIf>
+					<impactsElse>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+									<zone href="GolemBlue.(ScriptZone).xdb" />
+								</Item>
+								<Item type="gameMechanics.map.variables.PredicateMapVariableEquals">
+									<variableResource href="/Mechanics/InstancedEventResource/MM_BG03/BlueGolemOnBase.(MapVariableResource).xdb" />
+									<expectedValue type="gameMechanics.elements.calcers.FloatData">
+										<value>0</value>
+									</expectedValue>
+								</Item>
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.elements.impacts.ImpactSummon">
+									<destination type="gameMechanics.map.destination.DestinationModified">
+										<destination type="gameMechanics.map.destination.SelfPosDestination" />
+										<modifiers>
+											<Item type="gameMechanics.map.destination.modifier.ModifierTraceNear" />
+										</modifiers>
+									</destination>
+									<traceDown>true</traceDown>
+									<object href="GolemRedBroken.(SteleResource).xdb" />
+								</Item>
+							</impactsIf>
+						</Item>
+					</impactsElse>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.ImpactLogAvatarStats">
+					<resource href="GolemRed.(BuffResource).xdb" />
+				</Item>
+			</impactsOff>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectGiveSpell">
+			<spell href="SpamSpell.(SpellSingleTarget).xdb" />
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectGiveSpell">
+			<spell href="Golem_Jump.(SpellArea).xdb" />
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectGiveSpell">
+			<spell href="KnockDawn.(SpellSingleTarget).xdb" />
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectGiveSpell">
+			<spell href="Energy_Shield.(SpellSingleTarget).xdb" />
+		</Item>
+		<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+							<predicate type="gameMechanics.elements.resources.ResourceBuff">
+								<buff href="GoleamHeal.(BuffResource).xdb" />
+							</predicate>
+						</Item>
+						<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+							<predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+						</Item>
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="GoleamHeal.(BuffResource).xdb" />
+						</Item>
+					</impactsIf>
+				</Item>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="GoleamHeal.(BuffResource).xdb" />
+				</Item>
+			</impacts>
+		</Item>
+		<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+							<groups>
+								<Item href="/Mechanics/Spells/Groups/Escapes.xdb" />
+								<Item href="/Mechanics/Spells/Groups/Shroud.xdb" />
+							</groups>
+						</Item>
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="GolemRed.(BuffResource).xdb" />
+							<anyRank>false</anyRank>
+						</Item>
+					</impactsIf>
+				</Item>
+			</impacts>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectHandleLeaveMission">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="GolemRed.(BuffResource).xdb" />
+					<anyRank>false</anyRank>
+				</Item>
+			</impacts>
+		</Item>
+		<Item type="gameMechanics.elements.effects.DisableSpellsPredicate">
+			<predicate type="gameMechanics.elements.predicates.PredicateSpellInGroup">
+				<group href="/Mechanics/Spells/Groups/SpeedBoosts.xdb" />
+			</predicate>
+		</Item>
+		<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateInScriptZone">
+							<zone href="GolemBlue.(ScriptZone).xdb" />
+						</Item>
+						<Item type="gameMechanics.map.variables.PredicateMapVariableEquals">
+							<variableResource href="/Mechanics/InstancedEventResource/MM_BG03/BlueGolemOnBase.(MapVariableResource).xdb" />
+							<expectedValue type="gameMechanics.elements.calcers.FloatData">
+								<value>1</value>
+							</expectedValue>
+						</Item>
+						<Item type="gameMechanics.elements.resources.ResourceBuff">
+							<buff href="GolemRed.(BuffResource).xdb" />
+						</Item>
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="GolemRed.(BuffResource).xdb" />
+						</Item>
+						<Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+							<table href="/Maps/Domination03/SpawnTables/GolemRed.(SpawnTable).xdb" />
+						</Item>
+						<Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+							<variable href="/Mechanics/InstancedEventResource/MM_BG03/RedGolemOnBase.(MapVariableResource).xdb" />
+							<summand>1</summand>
+						</Item>
+						<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+							<distributor type="gameMechanics.elements.calcers.ZoneDistributor">
+								<zone type="gameMechanics.elements.calcers.ZoneDistributor$OwnZone" />
+							</distributor>
+							<data href="CD/RedGolemCaptured.(ClientData).xdb" />
+						</Item>
+						<Item type="avatarPopulation.service.impl.matchMakingImpl.map.ImpactUpdateEventAchievement">
+							<achievement href="/Mechanics/InstancedEventResource/MM_BG03/MM_BG03.(BattleEventAchievementResource).xdb" />
+							<summand>1000</summand>
+						</Item>
+					</impactsIf>
+				</Item>
+			</impacts>
+			<initialDelay>-1</initialDelay>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectMapWideReplicated" />
+	</effects>
+	<isHelpful>true</isHelpful>
+	<isDetachableOnWill>true</isDetachableOnWill>
+	<canBeSaved>false</canBeSaved>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+		<Item href="/Mechanics/Spells/Groups/CantBeChopperPassenger.(ActionGroup).xdb" />
+	</groups>
 </gameMechanics.constructor.schemes.buff.BuffResource>

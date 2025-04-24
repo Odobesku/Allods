@@ -1,251 +1,251 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>739892634</resourceId>
-    </Header>
-    <element>ACID</element>
-    <Name href="AcidSpit.(SpellSingleTarget).Name.txt" />
-    <visualScripts href="AcidSpit.(SpellVisScripts).xdb" />
-    <prepareDuration>1000</prepareDuration>
-    <needLos>false</needLos>
-    <isAggro>false</isAggro>
-    <replaceLowRanks>false</replaceLowRanks>
-    <iffPolicy>Enemies</iffPolicy>
-    <triggersGlobalCooldown>false</triggersGlobalCooldown>
-    <needInFront>false</needInFront>
-    <mechanics>
-        <cooldown>
-            <duration>2000</duration>
-        </cooldown>
-        <casterConditions>
-            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
-                <predicate type="gameMechanics.elements.resources.ResourceBuff">
-                    <buff href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/WormGlacialBoss/MovementBuff.(BuffResource).xdb" />
-                </predicate>
-            </Item>
-            <Item type="gameMechanics.elements.resources.ResourceBuff">
-                <buff href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/WormGlacialBoss/Phase1.(BuffResource).xdb" />
-            </Item>
-        </casterConditions>
-        <targetConditions>
-            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-        </targetConditions>
-        <targetImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                <predicates>
-                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                        <buff href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/WormGlacialBoss/Phase1.(BuffResource).xdb" />
-                    </Item>
-                </predicates>
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                        <predicates>
-                            <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
-                                <buff href="AcidSpitsCount.(BuffResource).xdb" />
-                                <range>
-                                    <min>5</min>
-                                    <max>5</max>
-                                </range>
-                            </Item>
-                        </predicates>
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.RepeatedImpactsGenericCountCaster">
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactSummon">
-                                        <destination type="gameMechanics.map.destination.RelativeRotatePos">
-                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
-                                            <offset>3</offset>
-                                        </destination>
-                                        <object href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/CorruptedSlime/CorruptedSlime.(MobWorld).xdb" />
-                                        <pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb" />
-                                    </Item>
-                                </impacts>
-                                <count type="gameMechanics.elements.calcers.FloatToLongCalcer">
-                                    <calcer type="gameMechanics.elements.calcers.CalcerSum">
-                                        <summands>
-                                            <Item type="gameMechanics.elements.calcers.BuffStackCountCalcer">
-                                                <buff href="SummonsCount.(BuffResource).xdb" />
-                                            </Item>
-                                            <Item type="gameMechanics.elements.calcers.FloatData">
-                                                <value>2</value>
-                                            </Item>
-                                        </summands>
-                                    </calcer>
-                                </count>
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                                <buff href="AcidSpitsCount.(BuffResource).xdb" />
-                                            </Item>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="SummonsCount.(BuffResource).xdb" />
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                        </impacts>
-                        <elseImpacts>
-                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
-                                <impacts>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="AcidSpitsCount.(BuffResource).xdb" />
-                                    </Item>
-                                </impacts>
-                            </Item>
-                        </elseImpacts>
-                    </Item>
-                </impacts>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-                <radius>5</radius>
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                        <predicates>
-                            <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                <buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
-                            </Item>
-                        </predicates>
-                        <impacts>
-                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                <predicates>
-                                    <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                                        <mobs>
-                                            <Item href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/AllyMasterOfTurrets/MasterOfTurrets.(MobWorld).xdb" />
-                                        </mobs>
-                                    </Item>
-                                </predicates>
-                                <impactsIf>
-                                    <Item type="gameMechanics.elements.impacts.PureDamage">
-                                        <damage>1</damage>
-                                        <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                            <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
-                                                <multiplier>0.3</multiplier>
-                                            </mulCalcer>
-                                        </scalerTarget>
-                                    </Item>
-                                </impactsIf>
-                                <impactsElse>
-                                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
-                                        <element>ACID</element>
-                                        <damage>10</damage>
-                                        <scaler type="gameMechanics.elements.scalers.MagicScaler" />
-                                    </Item>
-                                </impactsElse>
-                            </Item>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="HMAcidDOT.(BuffResource).xdb" />
-                            </Item>
-                        </impacts>
-                        <elseImpacts>
-                            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
-                                <element>ACID</element>
-                                <damage>16</damage>
-                                <scaler type="gameMechanics.elements.scalers.MagicScaler" />
-                            </Item>
-                        </elseImpacts>
-                    </Item>
-                </impacts>
-                <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-                    <predicates>
-                        <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
-                            <predicates>
-                                <Item type="gameMechanics.constructor.basicElements.PredicateOr">
-                                    <predicates>
-                                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-                                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                                            <mobs>
-                                                <Item href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/AllyMasterOfTurrets/MasterOfTurrets.(MobWorld).xdb" />
-                                            </mobs>
-                                        </Item>
-                                    </predicates>
-                                </Item>
-                                <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-                            </predicates>
-                        </Item>
-                    </predicates>
-                </filter>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-                <impacts>
-                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                        <predicates>
-                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-                                <mobs>
-                                    <Item href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/WormGlacialBoss/WormGlacialBoss.(MobWorld).xdb" />
-                                </mobs>
-                            </Item>
-                        </predicates>
-                        <impactsIf>
-                            <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                                <predicates>
-                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
-                                                        <buff href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/AllyMasterOfTurrets/TurretProtected.(BuffResource).xdb" />
-                                                    </Item>
-                                                </predicates>
-                                                <impactsIf>
-                                                    <Item type="gameMechanics.elements.impacts.PureDamage">
-                                                        <damage>1</damage>
-                                                        <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                            <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
-                                                                <multiplier>0.000625</multiplier>
-                                                            </mulCalcer>
-                                                            <additionalMultiplier>
-                                                                <scaler type="gameMechanics.elements.scalers.RandomScaler">
-                                                                    <range>
-                                                                        <min>10</min>
-                                                                        <max>20</max>
-                                                                    </range>
-                                                                </scaler>
-                                                            </additionalMultiplier>
-                                                        </scalerTarget>
-                                                    </Item>
-                                                </impactsIf>
-                                                <impactsElse>
-                                                    <Item type="gameMechanics.elements.impacts.PureDamage">
-                                                        <damage>1</damage>
-                                                        <scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                            <mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
-                                                                <multiplier>0.0075</multiplier>
-                                                            </mulCalcer>
-                                                            <additionalMultiplier>
-                                                                <scaler type="gameMechanics.elements.scalers.RandomScaler">
-                                                                    <range>
-                                                                        <min>10</min>
-                                                                        <max>20</max>
-                                                                    </range>
-                                                                </scaler>
-                                                            </additionalMultiplier>
-                                                        </scalerTarget>
-                                                    </Item>
-                                                </impactsElse>
-                                            </Item>
-                                        </impacts>
-                                        <spawnResource href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/Turrets.(SpawnTable).xdb" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-                                        <impacts>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="HMAcidDOT.(BuffResource).xdb" />
-                                            </Item>
-                                        </impacts>
-                                        <spawnResource href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/Engineers.(SpawnTable).xdb" />
-                                    </Item>
-                                </impacts>
-                            </Item>
-                        </impactsIf>
-                    </Item>
-                </impacts>
-                <spawnResource href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/WormBoss.(SpawnTable).xdb" />
-            </Item>
-        </targetImpacts>
-    </mechanics>
-    <speed>75</speed>
+	<Header>
+		<resourceId>739892634</resourceId>
+	</Header>
+	<element>ACID</element>
+	<Name href="AcidSpit.(SpellSingleTarget).Name.txt" />
+	<visualScripts href="AcidSpit.(SpellVisScripts).xdb" />
+	<prepareDuration>1000</prepareDuration>
+	<needLos>false</needLos>
+	<isAggro>false</isAggro>
+	<replaceLowRanks>false</replaceLowRanks>
+	<iffPolicy>Enemies</iffPolicy>
+	<triggersGlobalCooldown>false</triggersGlobalCooldown>
+	<needInFront>false</needInFront>
+	<mechanics>
+		<cooldown>
+			<duration>2000</duration>
+		</cooldown>
+		<casterConditions>
+			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+				<predicate type="gameMechanics.elements.resources.ResourceBuff">
+					<buff href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/WormGlacialBoss/MovementBuff.(BuffResource).xdb" />
+				</predicate>
+			</Item>
+			<Item type="gameMechanics.elements.resources.ResourceBuff">
+				<buff href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/WormGlacialBoss/Phase1.(BuffResource).xdb" />
+			</Item>
+		</casterConditions>
+		<targetConditions>
+			<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+		</targetConditions>
+		<targetImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+				<predicates>
+					<Item type="gameMechanics.elements.resources.ResourceBuff">
+						<buff href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/WormGlacialBoss/Phase1.(BuffResource).xdb" />
+					</Item>
+				</predicates>
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+								<buff href="AcidSpitsCount.(BuffResource).xdb" />
+								<range>
+									<min>5</min>
+									<max>5</max>
+								</range>
+							</Item>
+						</predicates>
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.RepeatedImpactsGenericCountCaster">
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactSummon">
+										<destination type="gameMechanics.map.destination.RelativeRotatePos">
+											<base type="gameMechanics.map.destination.SelfPosDestination" />
+											<offset>3</offset>
+										</destination>
+										<object href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/CorruptedSlime/CorruptedSlime.(MobWorld).xdb" />
+										<pool href="/Mechanics/RaidInstances/UmoirRaid/1_PierBoss/ClearingPool.(SummonPool).xdb" />
+									</Item>
+								</impacts>
+								<count type="gameMechanics.elements.calcers.FloatToLongCalcer">
+									<calcer type="gameMechanics.elements.calcers.CalcerSum">
+										<summands>
+											<Item type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+												<buff href="SummonsCount.(BuffResource).xdb" />
+											</Item>
+											<Item type="gameMechanics.elements.calcers.FloatData">
+												<value>2</value>
+											</Item>
+										</summands>
+									</calcer>
+								</count>
+							</Item>
+							<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ReturningImpact">
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.BuffDetacher">
+												<buff href="AcidSpitsCount.(BuffResource).xdb" />
+											</Item>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="SummonsCount.(BuffResource).xdb" />
+											</Item>
+										</impacts>
+									</Item>
+								</impacts>
+							</Item>
+						</impacts>
+						<elseImpacts>
+							<Item type="gameMechanics.elements.impacts.ReturningImpact">
+								<impacts>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="AcidSpitsCount.(BuffResource).xdb" />
+									</Item>
+								</impacts>
+							</Item>
+						</elseImpacts>
+					</Item>
+				</impacts>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+				<radius>5</radius>
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+						<predicates>
+							<Item type="gameMechanics.elements.resources.ResourceBuff">
+								<buff href="/Mechanics/RaidInstances/IsHM.(BuffResource).xdb" />
+							</Item>
+						</predicates>
+						<impacts>
+							<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+								<predicates>
+									<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+										<mobs>
+											<Item href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/AllyMasterOfTurrets/MasterOfTurrets.(MobWorld).xdb" />
+										</mobs>
+									</Item>
+								</predicates>
+								<impactsIf>
+									<Item type="gameMechanics.elements.impacts.PureDamage">
+										<damage>1</damage>
+										<scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+											<mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+												<multiplier>0.3</multiplier>
+											</mulCalcer>
+										</scalerTarget>
+									</Item>
+								</impactsIf>
+								<impactsElse>
+									<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+										<element>ACID</element>
+										<damage>10</damage>
+										<scaler type="gameMechanics.elements.scalers.MagicScaler" />
+									</Item>
+								</impactsElse>
+							</Item>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="HMAcidDOT.(BuffResource).xdb" />
+							</Item>
+						</impacts>
+						<elseImpacts>
+							<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+								<element>ACID</element>
+								<damage>16</damage>
+								<scaler type="gameMechanics.elements.scalers.MagicScaler" />
+							</Item>
+						</elseImpacts>
+					</Item>
+				</impacts>
+				<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+					<predicates>
+						<Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+							<predicates>
+								<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+									<predicates>
+										<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+										<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+											<mobs>
+												<Item href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/AllyMasterOfTurrets/MasterOfTurrets.(MobWorld).xdb" />
+											</mobs>
+										</Item>
+									</predicates>
+								</Item>
+								<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+							</predicates>
+						</Item>
+					</predicates>
+				</filter>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+				<impacts>
+					<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+								<mobs>
+									<Item href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/WormGlacialBoss/WormGlacialBoss.(MobWorld).xdb" />
+								</mobs>
+							</Item>
+						</predicates>
+						<impactsIf>
+							<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+												<predicates>
+													<Item type="gameMechanics.elements.resources.ResourceBuff">
+														<buff href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/AllyMasterOfTurrets/TurretProtected.(BuffResource).xdb" />
+													</Item>
+												</predicates>
+												<impactsIf>
+													<Item type="gameMechanics.elements.impacts.PureDamage">
+														<damage>1</damage>
+														<scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+															<mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+																<multiplier>0.000625</multiplier>
+															</mulCalcer>
+															<additionalMultiplier>
+																<scaler type="gameMechanics.elements.scalers.RandomScaler">
+																	<range>
+																		<min>10</min>
+																		<max>20</max>
+																	</range>
+																</scaler>
+															</additionalMultiplier>
+														</scalerTarget>
+													</Item>
+												</impactsIf>
+												<impactsElse>
+													<Item type="gameMechanics.elements.impacts.PureDamage">
+														<damage>1</damage>
+														<scalerTarget type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+															<mulCalcer type="gameMechanics.elements.calcers.FullHealthCalcer">
+																<multiplier>0.0075</multiplier>
+															</mulCalcer>
+															<additionalMultiplier>
+																<scaler type="gameMechanics.elements.scalers.RandomScaler">
+																	<range>
+																		<min>10</min>
+																		<max>20</max>
+																	</range>
+																</scaler>
+															</additionalMultiplier>
+														</scalerTarget>
+													</Item>
+												</impactsElse>
+											</Item>
+										</impacts>
+										<spawnResource href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/Turrets.(SpawnTable).xdb" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+										<impacts>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="HMAcidDOT.(BuffResource).xdb" />
+											</Item>
+										</impacts>
+										<spawnResource href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/Engineers.(SpawnTable).xdb" />
+									</Item>
+								</impacts>
+							</Item>
+						</impactsIf>
+					</Item>
+				</impacts>
+				<spawnResource href="/Mechanics/RaidInstances/FerrisRaid/8_WormGlacial/WormBoss.(SpawnTable).xdb" />
+			</Item>
+		</targetImpacts>
+	</mechanics>
+	<speed>75</speed>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

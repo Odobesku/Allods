@@ -1,252 +1,252 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>739846805</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/EngineerArtillerySpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        <Item href="/Mechanics/Spells/Groups/EngineerHeatSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        <Item href="/Mechanics/Spells/Groups/DragonRelic2.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-    </groups>
-    <element>ASTRAL</element>
-    <Name href="Spell.(SpellSingleTarget).Name.txt" />
-    <Description href="Spell.(SpellSingleTarget).Description.txt" />
-    <descVars>
-        <Item>
-            <name>dmg</name>
-            <value var="damage" />
-            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-                <formula>MagicScaler</formula>
-            </scaler>
-        </Item>
-        <Item>
-            <name>dmg2</name>
-            <value var="damage2" />
-            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-                <formula>MagicScaler</formula>
-            </scaler>
-        </Item>
-        <Item>
-            <name>dmg3</name>
-            <value var="damage3" />
-            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-                <formula>MagicScaler</formula>
-            </scaler>
-        </Item>
-    </descVars>
-    <image href="/Interface/Icons/Spells/Engineer/AstralRayGun.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
-    <visualScripts href="/Spells/VisScripts/Engineer/BeamCannon.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
-    <nameTemplate href="Spell.(SpellSingleTarget).NameTemplate.txt" />
-    <descTemplate href="Spell.(SpellSingleTarget).DescTemplate.txt" />
-    <targetType>STTSelf</targetType>
-    <ranks>
-        <Item href="Spell01.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-        <Item href="Spell02.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-        <Item href="Spell03.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-    </ranks>
-    <iffPolicy>Friends</iffPolicy>
-    <triggersGlobalCooldown>false</triggersGlobalCooldown>
-    <needInFront>false</needInFront>
-    <mechanics>
-        <casterConditions>
-            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
-                <predicates>
-                    <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
-                        <predicates>
-                            <Item type="gameMechanics.elements.predicates.PredicateVariableEqualsLessThan">
-                                <resource href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
-                                <maxValue>25</maxValue>
-                            </Item>
-                            <Item type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
-                                <resource href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
-                                <minValue>-111</minValue>
-                            </Item>
-                        </predicates>
-                    </Item>
-                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
-                        <spell href="Spell01.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                    </Item>
-                </predicates>
-            </Item>
-        </casterConditions>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                <predicates>
-                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
-                        <spell href="Spell01.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                    </Item>
-                </predicates>
-                <impacts>
-                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
-                        <spell hrefvar="spell" />
-                    </Item>
-                </impacts>
-                <elseImpacts>
-                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellActivate">
-                        <spell hrefvar="spell" />
-                        <effects>
-                            <Item type="gameMechanics.elements.effects.Switch">
-                                <impactsOn>
-                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                        <buff href="CooldownCalcer.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </Item>
-                                </impactsOn>
-                                <impactsOff>
-                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                        <buff href="CasterBeamPowerCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                                <buff href="CooldownCalcer.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                    <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
-                                        <spell hrefvar="spell" />
-                                        <duration>1</duration>
-                                        <scaler type="gameMechanics.elements.scalers.BuffTicksScaler">
-                                            <buff href="CooldownCalcer.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                            <tickLength>1</tickLength>
-                                        </scaler>
-                                    </Item>
-                                </impactsOff>
-                            </Item>
-                            <Item type="gameMechanics.elements.effects.DisableSpellsPredicate">
-                                <predicate type="gameMechanics.constructor.basicElements.PredicateGenericNot">
-                                    <predicate type="gameMechanics.constructor.basicElements.PredicateGenericOr">
-                                        <predicates>
-                                            <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
-                                                <spells>
-                                                    <Item href="Spell01.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                                                </spells>
-                                            </Item>
-                                            <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
-                                                <spells>
-                                                    <Item href="/Mechanics/Spells/Fairy/Willpower/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                                                </spells>
-                                            </Item>
-                                        </predicates>
-                                    </predicate>
-                                </predicate>
-                            </Item>
-                            <Item type="gameMechanics.elements.effects.ImpactsOverTime">
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-                                        <impacts>
-                                            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                                                <predicates>
-                                                    <Item type="gameMechanics.elements.predicates.PredicateGreater">
-                                                        <lhs type="gameMechanics.elements.calcers.VariableValueCalcer">
-                                                            <variable href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
-                                                        </lhs>
-                                                        <rhs type="gameMechanics.elements.calcers.CalcerSum">
-                                                            <summands>
-                                                                <Item type="gameMechanics.elements.calcers.FloatData">
-                                                                    <value>-200</value>
-                                                                </Item>
-                                                                <Item type="gameMechanics.elements.calcers.CalcerMul">
-                                                                    <calcers>
-                                                                        <Item type="gameMechanics.elements.calcers.FloatData">
-                                                                            <value>40</value>
-                                                                        </Item>
-                                                                        <Item type="gameMechanics.constructor.basicElements.ScalerCalcer">
-                                                                            <scaler type="gameMechanics.elements.scalers.ScalerBuff">
-                                                                                <buff href="CasterBeamPowerCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                                <summand>0</summand>
-                                                                                <stackCountSummand>1</stackCountSummand>
-                                                                            </scaler>
-                                                                            <value>1</value>
-                                                                        </Item>
-                                                                    </calcers>
-                                                                </Item>
-                                                            </summands>
-                                                        </rhs>
-                                                    </Item>
-                                                </predicates>
-                                                <impacts>
-                                                    <Item type="gameMechanics.elements.impacts.RunImpactsInShape">
-                                                        <impacts>
-                                                            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
-                                                                <element>ASTRAL</element>
-                                                                <damage var="damage" />
-                                                                <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-                                                                    <scalers>
-                                                                        <Item type="gameMechanics.elements.scalers.MagicScaler" />
-                                                                        <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-                                                                            <mulCalcer type="gameMechanics.constructor.basicElements.ScalerCalcer">
-                                                                                <scaler type="gameMechanics.elements.scalers.ScalerBuff">
-                                                                                    <buff href="CasterBeamPowerCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                                    <summand>0</summand>
-                                                                                    <stackCountSummand>1</stackCountSummand>
-                                                                                </scaler>
-                                                                                <value>1</value>
-                                                                            </mulCalcer>
-                                                                        </Item>
-                                                                        <Item type="gameMechanics.elements.scalers.AbilityRankScaler">
-                                                                            <ability href="/Mechanics/Spells/Engineer/Abilities/BeamCannonUpg/Ability01.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-                                                                            <mul>0.1</mul>
-                                                                        </Item>
-                                                                    </scalers>
-                                                                </scaler>
-                                                            </Item>
-                                                        </impacts>
-                                                        <shape type="gameMechanics.constructor.schemes.spell.area.RectangularRay">
-                                                            <width>7</width>
-                                                        </shape>
-                                                        <affectGroup>Enemies</affectGroup>
-                                                        <radius type="gameMechanics.elements.impacts.RunImpactsInShape$FixedRadius">
-                                                            <value>20</value>
-                                                        </radius>
-                                                        <workOnDead>false</workOnDead>
-                                                    </Item>
-                                                    <Item type="gameMechanics.elements.impacts.RepeatedImpact">
-                                                        <impact type="gameMechanics.elements.impacts.ImpactVariableSummand">
-                                                            <variable href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
-                                                            <summand>-30</summand>
-                                                        </impact>
-                                                        <count type="gameMechanics.elements.calcers.CalcerSum">
-                                                            <summands>
-                                                                <Item type="gameMechanics.elements.calcers.BuffStackCountCalcer">
-                                                                    <buff href="CasterBeamPowerCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                                </Item>
-                                                                <Item type="gameMechanics.elements.calcers.FloatData">
-                                                                    <value>1</value>
-                                                                </Item>
-                                                            </summands>
-                                                        </count>
-                                                    </Item>
-                                                    <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                                                        <impacts>
-                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                                <buff href="CasterBeamPowerCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                                                            </Item>
-                                                        </impacts>
-                                                    </Item>
-                                                </impacts>
-                                                <elseImpacts>
-                                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-                                                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-                                                        <data href="BeamCannonOverheating.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-                                                    </Item>
-                                                    <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
-                                                        <spell href="Spell01.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-                                                    </Item>
-                                                </elseImpacts>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                        </effects>
-                    </Item>
-                </elseImpacts>
-            </Item>
-            <Item type="gameMechanics.constructor.basicElements.ImpactList">
-                <impactsResource href="/Mechanics/Spells/Engineer/EngineerDismount.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
-            </Item>
-        </casterImpacts>
-    </mechanics>
+	<Header>
+		<resourceId>739846805</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/EngineerArtillerySpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		<Item href="/Mechanics/Spells/Groups/EngineerHeatSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		<Item href="/Mechanics/Spells/Groups/DragonRelic2.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+		<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+	</groups>
+	<element>ASTRAL</element>
+	<Name href="Spell.(SpellSingleTarget).Name.txt" />
+	<Description href="Spell.(SpellSingleTarget).Description.txt" />
+	<descVars>
+		<Item>
+			<name>dmg</name>
+			<value var="damage" />
+			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+				<formula>MagicScaler</formula>
+			</scaler>
+		</Item>
+		<Item>
+			<name>dmg2</name>
+			<value var="damage2" />
+			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+				<formula>MagicScaler</formula>
+			</scaler>
+		</Item>
+		<Item>
+			<name>dmg3</name>
+			<value var="damage3" />
+			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+				<formula>MagicScaler</formula>
+			</scaler>
+		</Item>
+	</descVars>
+	<image href="/Interface/Icons/Spells/Engineer/AstralRayGun.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+	<visualScripts href="/Spells/VisScripts/Engineer/BeamCannon.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+	<nameTemplate href="Spell.(SpellSingleTarget).NameTemplate.txt" />
+	<descTemplate href="Spell.(SpellSingleTarget).DescTemplate.txt" />
+	<targetType>STTSelf</targetType>
+	<ranks>
+		<Item href="Spell01.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+		<Item href="Spell02.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+		<Item href="Spell03.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+	</ranks>
+	<iffPolicy>Friends</iffPolicy>
+	<triggersGlobalCooldown>false</triggersGlobalCooldown>
+	<needInFront>false</needInFront>
+	<mechanics>
+		<casterConditions>
+			<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+				<predicates>
+					<Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+						<predicates>
+							<Item type="gameMechanics.elements.predicates.PredicateVariableEqualsLessThan">
+								<resource href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+								<maxValue>25</maxValue>
+							</Item>
+							<Item type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
+								<resource href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+								<minValue>-111</minValue>
+							</Item>
+						</predicates>
+					</Item>
+					<Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+						<spell href="Spell01.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+					</Item>
+				</predicates>
+			</Item>
+		</casterConditions>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+				<predicates>
+					<Item type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+						<spell href="Spell01.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+					</Item>
+				</predicates>
+				<impacts>
+					<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+						<spell hrefvar="spell" />
+					</Item>
+				</impacts>
+				<elseImpacts>
+					<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellActivate">
+						<spell hrefvar="spell" />
+						<effects>
+							<Item type="gameMechanics.elements.effects.Switch">
+								<impactsOn>
+									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+										<buff href="CooldownCalcer.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+								</impactsOn>
+								<impactsOff>
+									<Item type="gameMechanics.elements.impacts.BuffDetacher">
+										<buff href="CasterBeamPowerCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									</Item>
+									<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.BuffDetacher">
+												<buff href="CooldownCalcer.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+											</Item>
+										</impacts>
+									</Item>
+									<Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+										<spell hrefvar="spell" />
+										<duration>1</duration>
+										<scaler type="gameMechanics.elements.scalers.BuffTicksScaler">
+											<buff href="CooldownCalcer.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+											<tickLength>1</tickLength>
+										</scaler>
+									</Item>
+								</impactsOff>
+							</Item>
+							<Item type="gameMechanics.elements.effects.DisableSpellsPredicate">
+								<predicate type="gameMechanics.constructor.basicElements.PredicateGenericNot">
+									<predicate type="gameMechanics.constructor.basicElements.PredicateGenericOr">
+										<predicates>
+											<Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+												<spells>
+													<Item href="Spell01.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+												</spells>
+											</Item>
+											<Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+												<spells>
+													<Item href="/Mechanics/Spells/Fairy/Willpower/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+												</spells>
+											</Item>
+										</predicates>
+									</predicate>
+								</predicate>
+							</Item>
+							<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+										<impacts>
+											<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+												<predicates>
+													<Item type="gameMechanics.elements.predicates.PredicateGreater">
+														<lhs type="gameMechanics.elements.calcers.VariableValueCalcer">
+															<variable href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+														</lhs>
+														<rhs type="gameMechanics.elements.calcers.CalcerSum">
+															<summands>
+																<Item type="gameMechanics.elements.calcers.FloatData">
+																	<value>-200</value>
+																</Item>
+																<Item type="gameMechanics.elements.calcers.CalcerMul">
+																	<calcers>
+																		<Item type="gameMechanics.elements.calcers.FloatData">
+																			<value>40</value>
+																		</Item>
+																		<Item type="gameMechanics.constructor.basicElements.ScalerCalcer">
+																			<scaler type="gameMechanics.elements.scalers.ScalerBuff">
+																				<buff href="CasterBeamPowerCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																				<summand>0</summand>
+																				<stackCountSummand>1</stackCountSummand>
+																			</scaler>
+																			<value>1</value>
+																		</Item>
+																	</calcers>
+																</Item>
+															</summands>
+														</rhs>
+													</Item>
+												</predicates>
+												<impacts>
+													<Item type="gameMechanics.elements.impacts.RunImpactsInShape">
+														<impacts>
+															<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+																<element>ASTRAL</element>
+																<damage var="damage" />
+																<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+																	<scalers>
+																		<Item type="gameMechanics.elements.scalers.MagicScaler" />
+																		<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+																			<mulCalcer type="gameMechanics.constructor.basicElements.ScalerCalcer">
+																				<scaler type="gameMechanics.elements.scalers.ScalerBuff">
+																					<buff href="CasterBeamPowerCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																					<summand>0</summand>
+																					<stackCountSummand>1</stackCountSummand>
+																				</scaler>
+																				<value>1</value>
+																			</mulCalcer>
+																		</Item>
+																		<Item type="gameMechanics.elements.scalers.AbilityRankScaler">
+																			<ability href="/Mechanics/Spells/Engineer/Abilities/BeamCannonUpg/Ability01.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+																			<mul>0.1</mul>
+																		</Item>
+																	</scalers>
+																</scaler>
+															</Item>
+														</impacts>
+														<shape type="gameMechanics.constructor.schemes.spell.area.RectangularRay">
+															<width>7</width>
+														</shape>
+														<affectGroup>Enemies</affectGroup>
+														<radius type="gameMechanics.elements.impacts.RunImpactsInShape$FixedRadius">
+															<value>20</value>
+														</radius>
+														<workOnDead>false</workOnDead>
+													</Item>
+													<Item type="gameMechanics.elements.impacts.RepeatedImpact">
+														<impact type="gameMechanics.elements.impacts.ImpactVariableSummand">
+															<variable href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+															<summand>-30</summand>
+														</impact>
+														<count type="gameMechanics.elements.calcers.CalcerSum">
+															<summands>
+																<Item type="gameMechanics.elements.calcers.BuffStackCountCalcer">
+																	<buff href="CasterBeamPowerCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+																</Item>
+																<Item type="gameMechanics.elements.calcers.FloatData">
+																	<value>1</value>
+																</Item>
+															</summands>
+														</count>
+													</Item>
+													<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+														<impacts>
+															<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																<buff href="CasterBeamPowerCounter.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+															</Item>
+														</impacts>
+													</Item>
+												</impacts>
+												<elseImpacts>
+													<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+														<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+														<data href="BeamCannonOverheating.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+													</Item>
+													<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+														<spell href="Spell01.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+													</Item>
+												</elseImpacts>
+											</Item>
+										</impacts>
+									</Item>
+								</impacts>
+							</Item>
+						</effects>
+					</Item>
+				</elseImpacts>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.ImpactList">
+				<impactsResource href="/Mechanics/Spells/Engineer/EngineerDismount.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+			</Item>
+		</casterImpacts>
+	</mechanics>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
