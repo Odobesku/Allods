@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameMechanics.constructor.schemes.mount.MountResource>
+	<Header>
+		<resourceId>739997534</resourceId>
+		<Prototype href="/Mechanics/Mounts/Prototypes/NormalBattleMount.(MountResource).xdb#xpointer(/gameMechanics.constructor.schemes.mount.MountResource)" />
+	</Header>
+	<contextActionInfo>
+		<priority>100</priority>
+	</contextActionInfo>
+	<Name href="ManaBike_upgrade.(MountResource).Name.txt" />
+	<alternativeSkins href="/Mechanics/Mounts/Skins/BattleMounts/ManaBike.(SkinListResource).xdb#xpointer(/gameMechanics.constructor.schemes.mount.SkinListResource)" />
+	<basicSkin href="/Mechanics/Mounts/Skins/BattleMounts/ManaBikeStandart.(MountSkin).xdb#xpointer(/gameMechanics.constructor.schemes.mount.MountSkin)" />
+	<contextActions>
+		<Item href="/Mechanics/Spells/Mounts/ManaBike/BlazingTrailActivation/Spell01_upgrade.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+		<Item href="/Mechanics/Spells/Mounts/ManaBike/Pulse/Pulse_NormalManaBike.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+		<Item href="/Mechanics/Spells/Mounts/Energize_common.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+	</contextActions>
+	<ridingEffects>
+		<Item type="gameMechanics.elements.effects.ImpactsOverTime">
+			<impacts>
+				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateIsMountFed">
+							<mount href="ManaBike_upgrade.(MountResource).xdb#xpointer(/gameMechanics.constructor.schemes.mount.MountResource)" />
+						</Item>
+						<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+							<predicate type="gameMechanics.elements.resources.ResourceBuff">
+								<buff href="/Mechanics/Spells/Mounts/ManaBike/Acceleration/SwimTrigger01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+							</predicate>
+						</Item>
+					</predicates>
+					<impactsIf>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="/Mechanics/Spells/Mounts/ManaBike/Acceleration/DistanceMeasure01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+					</impactsIf>
+					<impactsElse>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="/Mechanics/Spells/Mounts/ManaBike/Acceleration/AngleMeasure01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="/Mechanics/Spells/Mounts/ManaBike/Acceleration/Acceleration01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+						<Item type="gameMechanics.elements.impacts.BuffDetacher">
+							<buff href="/Mechanics/Spells/Mounts/ManaBike/Acceleration/TechAcceleration01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+						</Item>
+					</impactsElse>
+				</Item>
+			</impacts>
+			<tick>600</tick>
+			<initialDelay>600</initialDelay>
+		</Item>
+		<Item type="gameMechanics.elements.effects.Switch">
+			<impactsOn>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="/Mechanics/Spells/Mounts/ManaBike/Acceleration/Immunity01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="/Mechanics/Spells/Mounts/ManaBike/Acceleration/TechAcceleration01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</Item>
+			</impactsOn>
+			<impactsOff>
+				<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+							<predicates>
+								<Item type="gameMechanics.elements.resources.ResourceBuff">
+									<buff href="/Mechanics/Spells/Mounts/ManaBike/Acceleration/TechAcceleration01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+								</Item>
+							</predicates>
+							<impactsIf>
+								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+									<buff href="/Mechanics/Spells/Mounts/ManaBike/Acceleration/Immunity01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+									<durationScaler type="gameMechanics.elements.scalers.ScalerBuff">
+										<buff href="/Mechanics/Spells/Mounts/ManaBike/Acceleration/TechAcceleration01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+										<summand>0</summand>
+									</durationScaler>
+								</Item>
+							</impactsIf>
+						</Item>
+					</impacts>
+				</Item>
+			</impactsOff>
+		</Item>
+		<Item type="gameMechanics.elements.effects.EffectSwimTrigger">
+			<impactsOnStartSwim>
+				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+					<buff href="/Mechanics/Spells/Mounts/ManaBike/Acceleration/SwimTrigger01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="/Mechanics/Spells/Mounts/ManaBike/Acceleration/DistanceMeasure01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="/Mechanics/Spells/Mounts/ManaBike/Acceleration/AngleMeasure01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="/Mechanics/Spells/Mounts/ManaBike/Acceleration/Acceleration01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="/Mechanics/Spells/Mounts/ManaBike/Acceleration/TechAcceleration01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="/Mechanics/Spells/Mounts/ManaBike/Acceleration/HasteStackTrigger.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</Item>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="/Mechanics/Spells/Mounts/ManaBike/Acceleration/HasteVisual.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</Item>
+			</impactsOnStartSwim>
+			<impactsOnStopSwim>
+				<Item type="gameMechanics.elements.impacts.BuffDetacher">
+					<buff href="/Mechanics/Spells/Mounts/ManaBike/Acceleration/SwimTrigger01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+				</Item>
+			</impactsOnStopSwim>
+		</Item>
+	</ridingEffects>
+	<corpulence>2.2</corpulence>
+	<description href="/Mechanics/Mounts/Prototypes/NormalBattleMount.(MountResource).Description.txt" />
+	<grade>7</grade>
+	<mechanics>
+		<health>2.05</health>
+		<healthDelta>0.03</healthDelta>
+		<healthLevelDelta>0</healthLevelDelta>
+		<prepareDuration>600</prepareDuration>
+		<prepareDurationDelta>30</prepareDurationDelta>
+		<regen>0.2</regen>
+		<speed>1.85</speed>
+		<speedDelta>0.015</speedDelta>
+		<ignoreWater>true</ignoreWater>
+	</mechanics>
+	<overrideMounts>
+		<Item href="/Mechanics/Mounts/5thGrade/Mounts/ManaBikeStandart.(MountResource).xdb#xpointer(/gameMechanics.constructor.schemes.mount.MountResource)" />
+	</overrideMounts>
+	<penaltyCalcer type="gameMechanics.elements.calcers.OverLevelPenaltyCalcer">
+		<exponent>1</exponent>
+		<level>75</level>
+		<multiplier>0</multiplier>
+	</penaltyCalcer>
+	<sysName>advanced</sysName>
+	<timeLeft>
+		<day>0</day>
+		<hour>0</hour>
+		<minute>0</minute>
+		<ms>0</ms>
+		<second>0</second>
+	</timeLeft>
+	<canBeMorphed>true</canBeMorphed>
+	<isExoMount>false</isExoMount>
+	<isProbe>false</isProbe>
+</gameMechanics.constructor.schemes.mount.MountResource>

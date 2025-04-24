@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
+	<Header>
+		<resourceId>740156753</resourceId>
+	</Header>
+	<contextActionInfo>
+		<priority>100</priority>
+	</contextActionInfo>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroupElement)" />
+		<Item href="/Mechanics/Spells/Groups/MountSpeedBoosts.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroupElement)" />
+	</groups>
+	<Description href="Umka_SpeedBoost.(SpellSingleTarget).Description.txt" />
+	<Name href="Umka_SpeedBoost.(SpellSingleTarget).Name.txt" />
+	<defaultAction>-1</defaultAction>
+	<element>PHYSICAL</element>
+	<iffPolicy>Friends</iffPolicy>
+	<image href="/Interface/Icons/Mounts/SpellsMounts/LionJump.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+	<level>1</level>
+	<mechanics>
+		<casterConditions>
+			<Item type="gameMechanics.elements.predicates.PredicateMounted">
+				<hideText>false</hideText>
+			</Item>
+			<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+				<hideText>false</hideText>
+				<predicates>
+					<Item type="gameMechanics.elements.predicates.PredicateMountFromGroupFeeded">
+						<hideText>false</hideText>
+					</Item>
+					<Item type="gameMechanics.elements.predicates.PredicateHasContentKey">
+						<hideText>false</hideText>
+						<key href="/System/ContentKeys/P2P_shard/P2P_shard_Server.(ContentKey).xdb#xpointer(/basement.contentkey.ContentKey)" />
+					</Item>
+				</predicates>
+			</Item>
+		</casterConditions>
+		<cooldown type="gameMechanics.constructor.schemes.spell.SpellSimpleCooldown">
+			<duration>1000</duration>
+			<scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+				<additionalMultiplier>
+					<value>1</value>
+				</additionalMultiplier>
+				<mul>1</mul>
+				<mulCalcer type="gameMechanics.elements.calcers.CalcerSum">
+					<summands>
+						<Item type="gameMechanics.elements.calcers.FloatData">
+							<value>60</value>
+						</Item>
+						<Item type="gameMechanics.elements.calcers.CalcerMul">
+							<calcers>
+								<Item type="gameMechanics.elements.calcers.FloatData">
+									<value>6</value>
+								</Item>
+								<Item type="gameMechanics.elements.calcers.CalcerDiff">
+									<minuend type="gameMechanics.elements.calcers.FloatData">
+										<value>10</value>
+									</minuend>
+									<subtrahend type="gameMechanics.elements.calcers.CalcerMountFromGroupMaxLevel">
+										<group href="/Mechanics/Mounts/Groups/MountUmka.(MountGroupResource).xdb#xpointer(/gameMechanics.constructor.schemes.mount.MountGroupResource)" />
+									</subtrahend>
+								</Item>
+							</calcers>
+						</Item>
+					</summands>
+				</mulCalcer>
+				<sum>0</sum>
+			</scaler>
+			<stage>Launch</stage>
+		</cooldown>
+	</mechanics>
+	<prepareDuration>0</prepareDuration>
+	<targetType>STTSelf</targetType>
+	<uiSpellBookPageType>SPELLBOOK_PAGE_NORMAL</uiSpellBookPageType>
+	<visualScripts href="/Mechanics/Spells/Mounts/Umka/Umka_SpeedBoost.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+	<autoAppendToActionPanel>true</autoAppendToActionPanel>
+	<ignoreGlobalCooldown>false</ignoreGlobalCooldown>
+	<isExploit>false</isExploit>
+	<isHiddenAction>false</isHiddenAction>
+	<isWorkOnDead>false</isWorkOnDead>
+	<launchWhenReady>false</launchWhenReady>
+	<needInFront>true</needInFront>
+	<replaceLowRanks>true</replaceLowRanks>
+	<triggersGlobalCooldown>true</triggersGlobalCooldown>
+</gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
