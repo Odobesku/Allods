@@ -12,6 +12,7 @@ INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "posi
 INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "position", "hidden") VALUES (5, 'Halo.txt', 151291905, 170579989, 1, 'f');
 INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "position", "hidden") VALUES (6, 'Services.txt', 151291905, 170579972, 1, 'f');
 INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "position", "hidden") VALUES (66, 'Services.txt', 151291922, 170579972, 2, 'f');
+INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "position", "hidden") VALUES (666, 'Services.txt', 151291916, 170579972, 3, 'f');
 INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "position", "hidden") VALUES (7, 'Rates.txt', 151291905, 171537408, 1, 'f');
 INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "position", "hidden") VALUES (77, 'Rates.txt', 155176960, 171537408, 2, 'f');
 INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "position", "hidden") VALUES (777, 'Rates.txt', 151291911, 171537408, 3, 'f');
@@ -46,10 +47,12 @@ INSERT INTO public.item (res_id, stack_count, category_id, position, is_activate
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (222773264, 1, 6, 11, 1, 'ITEM', 'sellable', null, 0);
 
 -- Service Лабиринт и величие 66 категория (услуги)
-INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (275909633, 1, 66, 1, 1, 'ITEM', 'sellable', null, 0);
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (739814541, 1, 66, 2, 1, 'ITEM', 'sellable', null, 0);
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (739821903, 1, 66, 4, 1, 'ITEM', 'sellable', null, 0);
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (739821899, 1, 66, 5, 1, 'ITEM', 'sellable', null, 0);
+
+-- Service Кристаллы 666 категория (услуги)
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (269163540, 1, 666, 1, 1, 'ITEM', 'sellable', null, 0);
 
 -- Rates 7 категория (рейты)
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id)VALUES (739924511, 1, 7, 11, 1, 'ITEM', 'sellable', null, 0);
@@ -115,7 +118,7 @@ INSERT INTO public.item (res_id, stack_count, category_id, position, is_activate
 
 -- Inventory 8 категория (сумка)
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739871028, 1, 8, 2, 1, 'ITEM', 'sellable', null, 0);
-INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 108144673, 1, 8, 1, 1, 'ITEM', 'sellable', null, 0);
+--INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 108144673, 1, 8, 1, 1, 'ITEM', 'sellable', null, 0);
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 739872994, 1, 8, 3, 1, 'ITEM', 'sellable', null, 0);
 
 -- Transport 9 категория (транспорт)
@@ -260,3 +263,7 @@ select  i.id as item_id , 1 as price , 1 as currency_id, 'BUYONLY' from item as 
 
 insert into item_price (item_id, price, currency_id, type)
 select  i.id as item_id , 1 as price , 2 as currency_id, 'BUYONLY' from item as i;
+
+-- премиальные кристаллы 500
+update item_price set price = 500000 where item_id = 269163540 and currency_id = 1;
+update item_price set price = 500 where item_id = 269163540 and currency_id = 2;
