@@ -265,5 +265,5 @@ insert into item_price (item_id, price, currency_id, type)
 select  i.id as item_id , 1 as price , 2 as currency_id, 'BUYONLY' from item as i;
 
 -- премиальные кристаллы 500
-update item_price set price = 500000 where item_id = 269163540 and currency_id = 1;
-update item_price set price = 500 where item_id = 269163540 and currency_id = 2;
+update item_price set price = 500000, type = 'SELLABLE' where item_id = (select id from item where item.res_id = 269163540) and currency_id = 1;
+update item_price set price = 500, type = 'SELLABLE' where item_id = (select id from item where res_id = 269163540) and currency_id = 2;
