@@ -26,6 +26,7 @@ INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "posi
 INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "position", "hidden") VALUES (11, 'Chests.txt', 151291905, 170579976, 1, 'f');
 INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "position", "hidden") VALUES (111, 'Chests.txt', 151291907, 170579976, 2, 'f');
 INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "position", "hidden") VALUES (13, 'Style.txt', 172021769, 170579998, 1, 'f');
+INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "position", "hidden") VALUES (130, 'Style.txt', 151291908, 170579998, 2, 'f');
 INSERT INTO "category"("id", "name", "cat_res_id", "root_category_res_id", "position", "hidden") VALUES (14, 'Crafting.txt', 151291920, 170579981, 1, 'f');
 
 delete from item where true;
@@ -148,6 +149,19 @@ INSERT INTO public.item (res_id, stack_count, category_id, position, is_activate
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (739868955, 1, 9, 21, 1, 'ITEM', 'SELLABLE', null, 0);
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (739894983, 1, 9, 22, 1, 'ITEM', 'SELLABLE', null, 0);
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (739907762, 1, 9, 23, 1, 'ITEM', 'SELLABLE', null, 0);
+--- Астральный ковёр-самолёт и окрасы
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (739844008, 1, 9, 24, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (739868912, 1, 9, 25, 1, 'ITEM', 'SELLABLE', null, 0);
+
+--- Подкова Пегаса и окрасы
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (739866587, 1, 9, 27, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (739866588, 1, 9, 28, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (739911493, 1, 9, 29, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (739917446, 1, 9, 30, 1, 'ITEM', 'SELLABLE', null, 0);
+--- Рог Сохатого и окрасы
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (739878499, 1, 9, 31, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (739910216, 1, 9, 32, 1, 'ITEM', 'SELLABLE', null, 0);
+
 --- Разное
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (308750338, 1, 9, 40, 1, 'ITEM', 'SELLABLE', null, 0);
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (274484225, 1, 9, 41, 1, 'ITEM', 'SELLABLE', null, 0);
@@ -162,6 +176,7 @@ INSERT INTO public.item (res_id, stack_count, category_id, position, is_activate
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (236592137, 1, 9, 53, 1, 'ITEM', 'SELLABLE', null, 0);
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (202200075, 1, 9, 54, 1, 'ITEM', 'SELLABLE', null, 0);
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (280431627, 1, 9, 55, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (739833983, 1, 9, 56, 1, 'ITEM', 'SELLABLE', null, 0);
 
 -- Transport 90 категория - Броня и окрасы (транспорт)
 -- Мистическая броня «Экзарх»
@@ -284,6 +299,35 @@ INSERT INTO public.item (res_id, stack_count, category_id, position, is_activate
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 178556945, 1, 13, 35, 1, 'ITEM', 'SELLABLE', null, 0);
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 275378176, 1, 13, 36, 1, 'ITEM', 'SELLABLE', null, 0);
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 178556974, 1, 13, 37, 1, 'ITEM', 'SELLABLE', null, 0);
+
+-- Style - стиль 130 категория (Костюмы Легенд)
+--- Set Опустошителя
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740093267, 1, 130, 1, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740093265, 1, 130, 2, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740093271, 1, 130, 3, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740093266, 1, 130, 4, 1, 'ITEM', 'SELLABLE', null, 0);
+--- Set мрачного рыцаря
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740063044, 1, 130, 5, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740063040, 1, 130, 6, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740063038, 1, 130, 7, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740063042, 1, 130, 8, 1, 'ITEM', 'SELLABLE', null, 0);
+--- Set высшего жреца
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740139723, 1, 130, 9, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740139726, 1, 130, 10, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740139722, 1, 130, 11, 1, 'ITEM', 'SELLABLE', null, 0);
+--- Set драконьего духа
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740134193, 1, 130, 12, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740134195, 1, 130, 13, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740134194, 1, 130, 14, 1, 'ITEM', 'SELLABLE', null, 0);
+--- Set тёмного металла
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740127806, 1, 130, 15, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740127805, 1, 130, 16, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740127807, 1, 130, 17, 1, 'ITEM', 'SELLABLE', null, 0);
+--- Set яростной тьмы
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740127823, 1, 130, 18, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740127824, 1, 130, 19, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740127825, 1, 130, 20, 1, 'ITEM', 'SELLABLE', null, 0);
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 740127826, 1, 130, 21, 1, 'ITEM', 'SELLABLE', null, 0);
 
 -- Crafting - ремёсла 14 категория (ремёсла)
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES ( 288729088, 1, 14, 1, 1, 'ITEM', 'SELLABLE', null, 0);
