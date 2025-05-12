@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
     <Header>
         <resourceId>739923270</resourceId>
@@ -10,6 +10,13 @@
         <Item>
             <name>var0</name>
             <value var="coeff" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>FormulaPercent</formula>
+            </scaler>
+        </Item>
+        <Item>
+            <name>var1</name>
+            <value var="mana_multiplier" />
             <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
                 <formula>FormulaPercent</formula>
             </scaler>
@@ -46,6 +53,27 @@
                 <Item type="gameMechanics.elements.effects.OverrideOutgoingSubElement">
                     <impactProducer href="/Mechanics/Spells/Druid70/Spells/Strike/Spell01.(SpellSingleTarget).xdb" />
                     <newElement>LIGHTNING</newElement>
+                </Item>
+                <Item type="gameMechanics.elements.effects.SpellExtraImpacts">
+                    <casterImpacts>
+                        <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.IncrementMana">
+                                    <manaType>Mana</manaType>
+                                    <amount var="mana_multiplier" />
+                                    <threatMultiplier>0</threatMultiplier>
+                                    <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                        <mulCalcer type="gameMechanics.elements.calcers.FullManaCalcer" />
+                                    </scaler>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </casterImpacts>
+                    <destination type="gameMechanics.elements.effects.SpellExtraImpacts$DestinationSpells">
+                        <spells>
+                            <Item href="/Mechanics/Spells/Druid70/Spells/RageOfNature/Spell01.(SpellSingleTarget).xdb" />
+                        </spells>
+                    </destination>
                 </Item>
             </effects>
         </Item>

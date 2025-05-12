@@ -5,10 +5,10 @@
         <isPrototype>true</isPrototype>
     </Header>
     <groups>
-        <Item href="/Mechanics/Spells/Groups/FireSpells.xdb" />
-        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
-        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/CrowdControlSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/FireSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroupElement)" />
+        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/CrowdControlSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
     </groups>
     <element>FIRE</element>
     <Name href="Spell.(SpellSingleTarget).Name.txt" />
@@ -22,15 +22,15 @@
             </scaler>
         </Item>
     </descVars>
-    <image href="/Interface/Icons/Spells/Mage/MageConflagrate.(UISingleTexture).xdb" />
-    <visualScripts href="/Spells/VisScripts/Mage/FireTrap.(SpellVisScripts).xdb" />
+    <image href="/Interface/Icons/Spells/Mage/MageConflagrate.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Mage/FireTrap.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
     <range type="gameMechanics.elements.calcers.FloatData">
         <value>40</value>
     </range>
     <ranks>
-        <Item href="Spell01.(SpellSingleTarget).xdb" />
-        <Item href="Spell02.(SpellSingleTarget).xdb" />
-        <Item href="Spell03.(SpellSingleTarget).xdb" />
+        <Item href="Spell01.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        <Item href="Spell02.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        <Item href="Spell03.(SpellSingleTarget).xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
     </ranks>
     <iffPolicy>Enemies</iffPolicy>
     <mechanics>
@@ -39,9 +39,18 @@
         </cooldown>
         <targetImpacts>
             <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                <buff href="/Mechanics/Spells/CommonBuffs/Disorient/Buff00.(BuffResource).xdb" />
-                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                    <multiplier>1.5</multiplier>
+                <buff href="/Mechanics/Spells/CommonBuffs/Disorient/Buff00.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                <durationScaler type="gameMechanics.elements.scalers.ScalerIf">
+                    <condition type="gameMechanics.elements.predicates.PredicateItemEquipped">
+                        <resource href="/Items/Relic/70/belt_Will.(ItemResource).xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemResource)" />
+                    </condition>
+                    <scalerIf type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mul>1.5</mul>
+                        <sum>0.5</sum>
+                    </scalerIf>
+                    <scalerElse type="gameMechanics.elements.scalers.LinearScaler">
+                        <multiplier>1.5</multiplier>
+                    </scalerElse>
                 </durationScaler>
             </Item>
         </targetImpacts>
