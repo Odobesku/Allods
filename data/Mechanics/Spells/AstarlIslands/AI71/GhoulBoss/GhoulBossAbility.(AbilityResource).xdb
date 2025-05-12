@@ -1,362 +1,362 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
-	<Header>
-		<resourceId>739935439</resourceId>
-	</Header>
-	<nameTemplate href="PoisonBomb.(ProjectileResource).Name.txt" />
-	<effects>
-		<Item type="gameMechanics.elements.effects.DeathTrigger">
-			<impacts>
-				<Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
-					<variable href="/Mechanics/Spells/AstarlIslands/AI71/Common/CityPortalNetwork/CityTeleport.(MapVariableResource).xdb" />
-					<summand>1</summand>
-				</Item>
-				<Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
-					<device>
-						<scriptID>PortalNetwork_1_Stele</scriptID>
-						<map href="/Maps/AstralIsle71/MapResource.xdb" />
-					</device>
-				</Item>
-				<Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
-					<spawn>
-						<scriptID>PortalNetwork_0_Stele</scriptID>
-						<map href="/Maps/AstralIsle71/MapResource.xdb" />
-					</spawn>
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
-							<visualState>1</visualState>
-						</Item>
-					</impacts>
-				</Item>
-			</impacts>
-		</Item>
-		<Item type="gameMechanics.elements.effects.CombatStateTrigger">
-			<onEnter>
-				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-					<buff href="BombOnStrike.(BuffResource).xdb" />
-				</Item>
-			</onEnter>
-			<onLeave>
-				<Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
-					<pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.Disintegrate" />
-					</impacts>
-				</Item>
-				<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
-									<group href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
-								</Item>
-								<Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
-									<affectPets>false</affectPets>
-									<impacts>
-										<Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
-											<group href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
-										</Item>
-									</impacts>
-								</Item>
-							</impacts>
-						</Item>
-					</impacts>
-				</Item>
-			</onLeave>
-			<effects>
-				<Item type="gameMechanics.elements.effects.ImpactsOverTime">
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-							<predicates>
-								<Item type="gameMechanics.elements.predicates.PredicateHasAbility">
-									<ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
-								</Item>
-							</predicates>
-							<impactsIf>
-								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-									<predicates>
-										<Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
-											<buff href="PuddleDebuffCounter.(BuffResource).xdb" />
-											<range>
-												<min>5</min>
-												<max>6</max>
-											</range>
-										</Item>
-									</predicates>
-									<impactsIf>
-										<Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
-											<selector type="gameMechanics.elements.calcers.RangeSelectorResource">
-												<range min="0" max="1" />
-												<withinRange>false</withinRange>
-												<minCandidatesCount>1</minCandidatesCount>
-												<targetCount>1</targetCount>
-											</selector>
-											<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-												<predicates>
-													<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-													<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-													<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-														<predicate type="gameMechanics.elements.resources.ResourceAnyBuff">
-															<buffs>
-																<Item href="PuddleDebuffImmunity_Temporary.(BuffResource).xdb" />
-																<Item href="PuddleDebuff.(BuffResource).xdb" />
-																<Item href="/Mechanics/RaidInstances/Tank.(BuffResource).xdb" />
-															</buffs>
-														</predicate>
-													</Item>
-												</predicates>
-											</filter>
-											<impacts>
-												<Item>
-													<impacts>
-														<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-															<impacts>
-																<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-																	<impacts>
-																		<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																			<buff href="PuddleDebuff.(BuffResource).xdb" />
-																		</Item>
-																	</impacts>
-																</Item>
-															</impacts>
-														</Item>
-													</impacts>
-												</Item>
-												<Item>
-													<impacts>
-														<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-															<impacts>
-																<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-																	<impacts>
-																		<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																			<buff href="PuddleDebuff.(BuffResource).xdb" />
-																		</Item>
-																	</impacts>
-																</Item>
-															</impacts>
-														</Item>
-													</impacts>
-												</Item>
-											</impacts>
-										</Item>
-									</impactsIf>
-									<impactsElse>
-										<Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
-											<selector type="gameMechanics.elements.calcers.RangeSelectorResource">
-												<range min="0" max="1" />
-												<withinRange>false</withinRange>
-												<minCandidatesCount>1</minCandidatesCount>
-												<targetCount>1</targetCount>
-											</selector>
-											<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-												<predicates>
-													<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-													<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-													<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-														<predicate type="gameMechanics.elements.resources.ResourceAnyBuff">
-															<buffs>
-																<Item href="PuddleDebuffImmunity.(BuffResource).xdb" />
-																<Item href="PuddleDebuffImmunity_Temporary.(BuffResource).xdb" />
-																<Item href="PuddleDebuff.(BuffResource).xdb" />
-																<Item href="/Mechanics/RaidInstances/Tank.(BuffResource).xdb" />
-															</buffs>
-														</predicate>
-													</Item>
-												</predicates>
-											</filter>
-											<impacts>
-												<Item>
-													<impacts>
-														<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-															<impacts>
-																<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-																	<impacts>
-																		<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																			<buff href="PuddleDebuff.(BuffResource).xdb" />
-																		</Item>
-																	</impacts>
-																</Item>
-															</impacts>
-														</Item>
-														<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-															<buff href="PuddleDebuffImmunity.(BuffResource).xdb" />
-														</Item>
-													</impacts>
-												</Item>
-											</impacts>
-										</Item>
-									</impactsElse>
-								</Item>
-							</impactsIf>
-							<impactsElse>
-								<Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
-									<selector type="gameMechanics.elements.calcers.RangeSelectorResource">
-										<range min="0" max="1" />
-										<withinRange>false</withinRange>
-										<minCandidatesCount>1</minCandidatesCount>
-										<targetCount>1</targetCount>
-									</selector>
-									<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-										<predicates>
-											<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-											<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-											<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-												<predicate type="gameMechanics.elements.resources.ResourceAnyBuff">
-													<buffs>
-														<Item href="PuddleDebuffImmunity.(BuffResource).xdb" />
-														<Item href="PuddleDebuffImmunity_Temporary.(BuffResource).xdb" />
-														<Item href="PuddleDebuff.(BuffResource).xdb" />
-														<Item href="/Mechanics/RaidInstances/Tank.(BuffResource).xdb" />
-													</buffs>
-												</predicate>
-											</Item>
-										</predicates>
-									</filter>
-									<impacts>
-										<Item>
-											<impacts>
-												<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-													<impacts>
-														<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-															<impacts>
-																<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																	<buff href="PuddleDebuff.(BuffResource).xdb" />
-																</Item>
-															</impacts>
-														</Item>
-													</impacts>
-												</Item>
-											</impacts>
-										</Item>
-									</impacts>
-								</Item>
-							</impactsElse>
-						</Item>
-					</impacts>
-					<tick>6000</tick>
-					<initialDelay>6000</initialDelay>
-				</Item>
-				<Item type="gameMechanics.elements.effects.ImpactsOverTime">
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-							<predicates>
-								<Item type="gameMechanics.elements.predicates.PredicateHasAbility">
-									<ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
-								</Item>
-							</predicates>
-							<impactsIf>
-								<Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
-									<selector type="gameMechanics.elements.calcers.RangeSelectorResource">
-										<range min="0" max="1" />
-										<withinRange>false</withinRange>
-										<minCandidatesCount>1</minCandidatesCount>
-										<targetCount>1</targetCount>
-									</selector>
-									<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-										<predicates>
-											<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-											<Item type="gameMechanics.constructor.basicElements.PredicateOr">
-												<predicates>
-													<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-													<Item type="gameMechanics.elements.resources.ResourceBuff">
-														<buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
-													</Item>
-												</predicates>
-											</Item>
-										</predicates>
-									</filter>
-									<impacts>
-										<Item>
-											<impacts>
-												<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-													<impacts>
-														<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-															<impacts>
-																<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																	<buff href="/Mechanics/Spells/AstarlIslands/AI71/Common/PlagueCarrier/PlagueDOT.(BuffResource).xdb" />
-																</Item>
-															</impacts>
-														</Item>
-													</impacts>
-												</Item>
-											</impacts>
-										</Item>
-									</impacts>
-								</Item>
-							</impactsIf>
-							<impactsElse>
-								<Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
-									<selector type="gameMechanics.elements.calcers.RangeSelectorResource">
-										<range min="0" max="1" />
-										<withinRange>false</withinRange>
-										<minCandidatesCount>1</minCandidatesCount>
-										<targetCount>1</targetCount>
-									</selector>
-									<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-										<predicates>
-											<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-											<Item type="gameMechanics.constructor.basicElements.PredicateOr">
-												<predicates>
-													<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-													<Item type="gameMechanics.elements.resources.ResourceBuff">
-														<buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
-													</Item>
-												</predicates>
-											</Item>
-										</predicates>
-									</filter>
-									<impacts>
-										<Item>
-											<impacts>
-												<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-													<impacts>
-														<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-															<impacts>
-																<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																	<buff href="/Mechanics/Spells/AstarlIslands/AI71/Common/PlagueCarrier/PlagueDOT.(BuffResource).xdb" />
-																</Item>
-															</impacts>
-														</Item>
-													</impacts>
-												</Item>
-											</impacts>
-										</Item>
-									</impacts>
-								</Item>
-							</impactsElse>
-						</Item>
-					</impacts>
-					<tick>10000</tick>
-					<initialDelay>4000</initialDelay>
-				</Item>
-				<Item type="gameMechanics.elements.effects.LayeredHealthTriggerGeneric">
-					<layers>
-						<Item>
-							<percent>0.5</percent>
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-									<predicates>
-										<Item type="gameMechanics.elements.predicates.PredicateHasAbility">
-											<ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
-										</Item>
-									</predicates>
-									<impactsIf>
-										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-											<buff href="HM_PlagueBombSpawning.(BuffResource).xdb" />
-											<scalerTarget type="gameMechanics.elements.scalers.RandomScaler">
-												<range>
-													<min>1</min>
-													<max>4</max>
-												</range>
-											</scalerTarget>
-										</Item>
-									</impactsIf>
-								</Item>
-							</impacts>
-						</Item>
-					</layers>
-				</Item>
-			</effects>
-		</Item>
-	</effects>
+    <Header>
+        <resourceId>739935439</resourceId>
+    </Header>
+    <nameTemplate href="PoisonBomb.(ProjectileResource).Name.txt" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                    <variable href="/Mechanics/Spells/AstarlIslands/AI71/Common/CityPortalNetwork/CityTeleport.(MapVariableResource).xdb" />
+                    <summand>1</summand>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
+                    <device>
+                        <scriptID>PortalNetwork_1_Stele</scriptID>
+                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
+                    </device>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSingleSpawn">
+                    <spawn>
+                        <scriptID>PortalNetwork_0_Stele</scriptID>
+                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
+                    </spawn>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactSetVisualState">
+                            <visualState>1</visualState>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="BombOnStrike.(BuffResource).xdb" />
+                </Item>
+            </onEnter>
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                                    <group href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
+                                    <affectPets>false</affectPets>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                                            <group href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </onLeave>
+            <effects>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                    <ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                            <buff href="PuddleDebuffCounter.(BuffResource).xdb" />
+                                            <range>
+                                                <min>5</min>
+                                                <max>6</max>
+                                            </range>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                                            <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+                                                <range min="0" max="1" />
+                                                <withinRange>false</withinRange>
+                                                <minCandidatesCount>1</minCandidatesCount>
+                                                <targetCount>1</targetCount>
+                                            </selector>
+                                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.resources.ResourceAnyBuff">
+                                                            <buffs>
+                                                                <Item href="PuddleDebuffImmunity_Temporary.(BuffResource).xdb" />
+                                                                <Item href="PuddleDebuff.(BuffResource).xdb" />
+                                                                <Item href="/Mechanics/RaidInstances/Tank.(BuffResource).xdb" />
+                                                            </buffs>
+                                                        </predicate>
+                                                    </Item>
+                                                </predicates>
+                                            </filter>
+                                            <impacts>
+                                                <Item>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="PuddleDebuff.(BuffResource).xdb" />
+                                                                        </Item>
+                                                                    </impacts>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                                <Item>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="PuddleDebuff.(BuffResource).xdb" />
+                                                                        </Item>
+                                                                    </impacts>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                                            <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+                                                <range min="0" max="1" />
+                                                <withinRange>false</withinRange>
+                                                <minCandidatesCount>1</minCandidatesCount>
+                                                <targetCount>1</targetCount>
+                                            </selector>
+                                            <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                        <predicate type="gameMechanics.elements.resources.ResourceAnyBuff">
+                                                            <buffs>
+                                                                <Item href="PuddleDebuffImmunity.(BuffResource).xdb" />
+                                                                <Item href="PuddleDebuffImmunity_Temporary.(BuffResource).xdb" />
+                                                                <Item href="PuddleDebuff.(BuffResource).xdb" />
+                                                                <Item href="/Mechanics/RaidInstances/Tank.(BuffResource).xdb" />
+                                                            </buffs>
+                                                        </predicate>
+                                                    </Item>
+                                                </predicates>
+                                            </filter>
+                                            <impacts>
+                                                <Item>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="PuddleDebuff.(BuffResource).xdb" />
+                                                                        </Item>
+                                                                    </impacts>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="PuddleDebuffImmunity.(BuffResource).xdb" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                                    <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+                                        <range min="0" max="1" />
+                                        <withinRange>false</withinRange>
+                                        <minCandidatesCount>1</minCandidatesCount>
+                                        <targetCount>1</targetCount>
+                                    </selector>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                <predicate type="gameMechanics.elements.resources.ResourceAnyBuff">
+                                                    <buffs>
+                                                        <Item href="PuddleDebuffImmunity.(BuffResource).xdb" />
+                                                        <Item href="PuddleDebuffImmunity_Temporary.(BuffResource).xdb" />
+                                                        <Item href="PuddleDebuff.(BuffResource).xdb" />
+                                                        <Item href="/Mechanics/RaidInstances/Tank.(BuffResource).xdb" />
+                                                    </buffs>
+                                                </predicate>
+                                            </Item>
+                                        </predicates>
+                                    </filter>
+                                    <impacts>
+                                        <Item>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff href="PuddleDebuff.(BuffResource).xdb" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impacts>
+                    <tick>6000</tick>
+                    <initialDelay>6000</initialDelay>
+                </Item>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                    <ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                                    <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+                                        <range min="0" max="1" />
+                                        <withinRange>false</withinRange>
+                                        <minCandidatesCount>1</minCandidatesCount>
+                                        <targetCount>1</targetCount>
+                                    </selector>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                                    </Item>
+                                                </predicates>
+                                            </Item>
+                                        </predicates>
+                                    </filter>
+                                    <impacts>
+                                        <Item>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff href="/Mechanics/Spells/AstarlIslands/AI71/Common/PlagueCarrier/PlagueDOT.(BuffResource).xdb" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                                    <selector type="gameMechanics.elements.calcers.RangeSelectorResource">
+                                        <range min="0" max="1" />
+                                        <withinRange>false</withinRange>
+                                        <minCandidatesCount>1</minCandidatesCount>
+                                        <targetCount>1</targetCount>
+                                    </selector>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                                    </Item>
+                                                </predicates>
+                                            </Item>
+                                        </predicates>
+                                    </filter>
+                                    <impacts>
+                                        <Item>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff href="/Mechanics/Spells/AstarlIslands/AI71/Common/PlagueCarrier/PlagueDOT.(BuffResource).xdb" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impacts>
+                    <tick>10000</tick>
+                    <initialDelay>4000</initialDelay>
+                </Item>
+                <Item type="gameMechanics.elements.effects.LayeredHealthTriggerGeneric">
+                    <layers>
+                        <Item>
+                            <percent>0.5</percent>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                            <ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="HM_PlagueBombSpawning.(BuffResource).xdb" />
+                                            <scalerTarget type="gameMechanics.elements.scalers.RandomScaler">
+                                                <range>
+                                                    <min>1</min>
+                                                    <max>4</max>
+                                                </range>
+                                            </scalerTarget>
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </layers>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
 </gameMechanics.constructor.schemes.ability.AbilityResource>

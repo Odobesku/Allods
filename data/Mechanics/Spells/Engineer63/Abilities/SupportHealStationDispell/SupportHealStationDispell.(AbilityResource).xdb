@@ -1,165 +1,165 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
-	<Header>
-		<resourceId>739933803</resourceId>
-		<isPrototype>true</isPrototype>
-	</Header>
-	<name href="SupportHealStationDispell.(AbilityResource).Name.txt" />
-	<description href="SupportHealStationDispell.(AbilityResource).Description.txt" />
-	<descVars>
-		<Item>
-			<name>var0</name>
-			<value var="value" />
-			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-				<formula>FormulaPercent</formula>
-			</scaler>
-		</Item>
-	</descVars>
-	<image href="/Interface/Icons/Spells/Mage/MageDispelMagic.(UISingleTexture).xdb" />
-	<effects>
-		<Item type="gameMechanics.elements.effects.BuffExtraEffects">
-			<buffs>
-				<Item href="/Mechanics/Spells/Engineer63/Spells/HealStation/Healing01.(BuffResource).xdb" />
-			</buffs>
-			<effects>
-				<Item type="gameMechanics.elements.effects.ImpactsOverTime">
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
-							<chanceCalcer type="gameMechanics.elements.calcers.FloatData">
-								<value var="value" />
-							</chanceCalcer>
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.MassBuffDetacher">
-									<predicates>
-										<Item type="gameMechanics.constructor.schemes.buff.PredicateBuffHarmful" />
-										<Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
-											<groups>
-												<Item href="/Mechanics/Spells/Groups/Magics.xdb" />
-												<Item href="/Mechanics/Spells/Groups/Poisons.xdb" />
-												<Item href="/Mechanics/Spells/Groups/Diseases.xdb" />
-												<Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb" />
-											</groups>
-										</Item>
-									</predicates>
-									<detachCount type="gameMechanics.elements.calcers.LongData">
-										<value>1</value>
-									</detachCount>
-									<impactsOnHolder>
-										<Item type="gameMechanics.elements.impacts.ReturningImpact">
-											<impacts>
-												<Item type="gameMechanics.world.avatar.assistants.ImpactsToAssistant">
-													<impacts>
-														<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-															<impacts>
-																<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																	<buff href="DispellStacks.(BuffResource).xdb" />
-																</Item>
-															</impacts>
-														</Item>
-													</impacts>
-													<assistantResource href="/Mechanics/Spells/Engineer63/Spells/HealStation/HealStation.(AssistantResource).xdb" />
-												</Item>
-											</impacts>
-										</Item>
-									</impactsOnHolder>
-								</Item>
-							</impacts>
-						</Item>
-					</impacts>
-					<tick>1000</tick>
-					<initialDelay>1000</initialDelay>
-				</Item>
-			</effects>
-		</Item>
-		<Item type="gameMechanics.elements.effects.BuffExtraEffects">
-			<buffs>
-				<Item href="/Mechanics/Spells/Engineer63/Spells/HealStation/HealStation01.(BuffResource).xdb" />
-			</buffs>
-			<effects>
-				<Item type="gameMechanics.elements.effects.Switch">
-					<impactsOn>
-						<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-							<radius>15</radius>
-							<affectGroup>Group</affectGroup>
-							<affectHolder>false</affectHolder>
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.MassBuffDetacher">
-									<predicates>
-										<Item type="gameMechanics.constructor.schemes.buff.PredicateBuffHarmful" />
-										<Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
-											<groups>
-												<Item href="/Mechanics/Spells/Groups/Magics.xdb" />
-												<Item href="/Mechanics/Spells/Groups/Poisons.xdb" />
-												<Item href="/Mechanics/Spells/Groups/Diseases.xdb" />
-												<Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb" />
-											</groups>
-										</Item>
-									</predicates>
-									<detachCount type="gameMechanics.elements.calcers.LongData">
-										<value>1</value>
-									</detachCount>
-									<impactsOnHolder>
-										<Item type="gameMechanics.elements.impacts.ReturningImpact">
-											<impacts>
-												<Item type="gameMechanics.world.avatar.assistants.ImpactsToAssistant">
-													<impacts>
-														<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-															<impacts>
-																<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																	<buff href="DispellStacks.(BuffResource).xdb" />
-																</Item>
-															</impacts>
-														</Item>
-													</impacts>
-													<assistantResource href="/Mechanics/Spells/Engineer63/Spells/HealStation/HealStation.(AssistantResource).xdb" />
-												</Item>
-											</impacts>
-										</Item>
-									</impactsOnHolder>
-								</Item>
-							</impacts>
-						</Item>
-					</impactsOn>
-					<impactsOff>
-						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-							<predicates>
-								<Item type="gameMechanics.elements.resources.ResourceBuff">
-									<buff href="DispellStacks.(BuffResource).xdb" />
-								</Item>
-							</predicates>
-							<impactsIf>
-								<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-									<impacts>
-										<Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
-											<addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderMaster" />
-											<impacts>
-												<Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
-													<radius>40</radius>
-													<affectPets>false</affectPets>
-													<impacts>
-														<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-															<buff href="DispellAfterDispell.(BuffResource).xdb" />
-															<durationScaler type="gameMechanics.elements.scalers.ScalerBuff">
-																<buff href="DispellStacks.(BuffResource).xdb" />
-																<summand>0</summand>
-															</durationScaler>
-														</Item>
-													</impacts>
-												</Item>
-											</impacts>
-										</Item>
-									</impacts>
-								</Item>
-							</impactsIf>
-						</Item>
-					</impactsOff>
-				</Item>
-			</effects>
-		</Item>
-	</effects>
-	<ranks>
-		<Item href="SupportHealStationDispell01.(AbilityResource).xdb" />
-		<Item href="SupportHealStationDispell02.(AbilityResource).xdb" />
-		<Item href="SupportHealStationDispell03.(AbilityResource).xdb" />
-	</ranks>
+    <Header>
+        <resourceId>739933803</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <name href="SupportHealStationDispell.(AbilityResource).Name.txt" />
+    <description href="SupportHealStationDispell.(AbilityResource).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value var="value" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>FormulaPercent</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Mage/MageDispelMagic.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.BuffExtraEffects">
+            <buffs>
+                <Item href="/Mechanics/Spells/Engineer63/Spells/HealStation/Healing01.(BuffResource).xdb" />
+            </buffs>
+            <effects>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                            <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                                <value var="value" />
+                            </chanceCalcer>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.MassBuffDetacher">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.schemes.buff.PredicateBuffHarmful" />
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                                            <groups>
+                                                <Item href="/Mechanics/Spells/Groups/Magics.xdb" />
+                                                <Item href="/Mechanics/Spells/Groups/Poisons.xdb" />
+                                                <Item href="/Mechanics/Spells/Groups/Diseases.xdb" />
+                                                <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb" />
+                                            </groups>
+                                        </Item>
+                                    </predicates>
+                                    <detachCount type="gameMechanics.elements.calcers.LongData">
+                                        <value>1</value>
+                                    </detachCount>
+                                    <impactsOnHolder>
+                                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.world.avatar.assistants.ImpactsToAssistant">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff href="DispellStacks.(BuffResource).xdb" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                    <assistantResource href="/Mechanics/Spells/Engineer63/Spells/HealStation/HealStation.(AssistantResource).xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impactsOnHolder>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <tick>1000</tick>
+                    <initialDelay>1000</initialDelay>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.BuffExtraEffects">
+            <buffs>
+                <Item href="/Mechanics/Spells/Engineer63/Spells/HealStation/HealStation01.(BuffResource).xdb" />
+            </buffs>
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                            <radius>15</radius>
+                            <affectGroup>Group</affectGroup>
+                            <affectHolder>false</affectHolder>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.MassBuffDetacher">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.schemes.buff.PredicateBuffHarmful" />
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffInGroup">
+                                            <groups>
+                                                <Item href="/Mechanics/Spells/Groups/Magics.xdb" />
+                                                <Item href="/Mechanics/Spells/Groups/Poisons.xdb" />
+                                                <Item href="/Mechanics/Spells/Groups/Diseases.xdb" />
+                                                <Item href="/Mechanics/Spells/Groups/CrowdControlBuffs.xdb" />
+                                            </groups>
+                                        </Item>
+                                    </predicates>
+                                    <detachCount type="gameMechanics.elements.calcers.LongData">
+                                        <value>1</value>
+                                    </detachCount>
+                                    <impactsOnHolder>
+                                        <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                            <impacts>
+                                                <Item type="gameMechanics.world.avatar.assistants.ImpactsToAssistant">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff href="DispellStacks.(BuffResource).xdb" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                    <assistantResource href="/Mechanics/Spells/Engineer63/Spells/HealStation/HealStation.(AssistantResource).xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impactsOnHolder>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsOn>
+                    <impactsOff>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="DispellStacks.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                                            <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderMaster" />
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
+                                                    <radius>40</radius>
+                                                    <affectPets>false</affectPets>
+                                                    <impacts>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="DispellAfterDispell.(BuffResource).xdb" />
+                                                            <durationScaler type="gameMechanics.elements.scalers.ScalerBuff">
+                                                                <buff href="DispellStacks.(BuffResource).xdb" />
+                                                                <summand>0</summand>
+                                                            </durationScaler>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsOff>
+                </Item>
+            </effects>
+        </Item>
+    </effects>
+    <ranks>
+        <Item href="SupportHealStationDispell01.(AbilityResource).xdb" />
+        <Item href="SupportHealStationDispell02.(AbilityResource).xdb" />
+        <Item href="SupportHealStationDispell03.(AbilityResource).xdb" />
+    </ranks>
 </gameMechanics.constructor.schemes.ability.AbilityResource>

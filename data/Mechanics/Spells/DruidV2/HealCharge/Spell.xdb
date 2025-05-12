@@ -1,138 +1,138 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-	<Header>
-		<resourceId>739873713</resourceId>
-		<isPrototype>true</isPrototype>
-	</Header>
-	<groups>
-		<Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-		<Item href="/Mechanics/Spells/Groups/DruidForce.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-		<Item href="/Mechanics/Spells/Groups/DruidAll.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-		<Item href="/Mechanics/Spells/Groups/InsuranceHealTrigger.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-		<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-		<Item href="/Mechanics/Spells/Groups/DragonRelic4.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-		<Item href="/Mechanics/Spells/Groups/LesserHeals.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-	</groups>
-	<element>LIGHTNING</element>
-	<descVars>
-		<Item>
-			<name>var0</name>
-			<value var="heal" />
-			<scaler type="gameMechanics.elements.scalers.HealScaler" />
-		</Item>
-	</descVars>
-	<image href="/Interface/Icons/Spells/Druid/DruidRejuvenatingConcoction.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
-	<visualScripts href="/Spells/VisScripts/Druid/Heal.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
-	<nameTemplate href="Spell_Name.txt.template" />
-	<descTemplate href="Spell_Desc.txt.template" />
-	<range type="gameMechanics.elements.calcers.FloatData">
-		<value>40</value>
-	</range>
-	<level>1</level>
-	<prepareDuration>0</prepareDuration>
-	<immutablePrepareDuration>false</immutablePrepareDuration>
-	<needLos>true</needLos>
-	<targetType>STTCurrentTarget</targetType>
-	<replaceLowRanks>true</replaceLowRanks>
-	<isWorkOnDead>false</isWorkOnDead>
-	<ranks>
-		<Item href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-		<Item href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-		<Item href="Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-	</ranks>
-	<iffPolicy>Friends</iffPolicy>
-	<triggersGlobalCooldown>true</triggersGlobalCooldown>
-	<ignoreGlobalCooldown>false</ignoreGlobalCooldown>
-	<launchWhenReady>true</launchWhenReady>
-	<needInFront>true</needInFront>
-	<mechanics>
-		<casterResources>
-			<Item type="gameMechanics.elements.resources.ResourceMana">
-				<hideText>false</hideText>
-				<mana>23.72</mana>
-				<scaleByWeaponSpeed>false</scaleByWeaponSpeed>
-				<source>Mainhand</source>
-				<manaType>
-					<Item>Mana</Item>
-				</manaType>
-			</Item>
-			<Item type="gameMechanics.elements.resources.ResourceBuff">
-				<hideText>false</hideText>
-				<buff href="Charges.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-				<anyRank>true</anyRank>
-				<consumeStacks>1</consumeStacks>
-			</Item>
-		</casterResources>
-		<targetImpacts>
-			<Item type="gameMechanics.elements.impacts.ImpactsIf">
-				<predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromMaster">
-					<hideText>false</hideText>
-					<buff hrefvar="buff" />
-					<anyRank>true</anyRank>
-				</predicate>
-				<impactsIf>
-					<Item type="gameMechanics.elements.impacts.ImpactHeal">
-						<heal var="heal" />
-						<threatMultiplier>1</threatMultiplier>
-						<scalerTarget type="gameMechanics.elements.scalers.BuffTicksScaler">
-							<buff hrefvar="bu_1" />
-							<tickLength>2000</tickLength>
-							<checkCaster>true</checkCaster>
-							<anyRank>true</anyRank>
-						</scalerTarget>
-						<scalerCaster type="gameMechanics.constructor.basicElements.ScalerMultiple">
-							<scalers>
-								<Item type="gameMechanics.elements.scalers.HealScaler" />
-								<Item type="gameMechanics.elements.scalers.AbilityRankScaler">
-									<ability href="/Mechanics/Abilities/DruidTalentsV2/ElectroTherapy/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-									<mul>0.15</mul>
-								</Item>
-							</scalers>
-						</scalerCaster>
-					</Item>
-					<Item type="gameMechanics.elements.impacts.StackBuff">
-						<buff hrefvar="bu_2" />
-						<resetTimer>true</resetTimer>
-						<anyRank>true</anyRank>
-						<delta type="gameMechanics.elements.calcers.FloatData">
-							<value>0</value>
-						</delta>
-					</Item>
-				</impactsIf>
-				<impactsElse>
-					<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-						<buff hrefvar="bu_3" />
-					</Item>
-					<Item type="gameMechanics.elements.impacts.ImpactsIf">
-						<predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromMaster">
-							<buff href="/Mechanics/Spells/DruidV2/HealChargeUpgrade/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-						</predicate>
-						<impactsIf>
-							<Item type="gameMechanics.elements.impacts.ImpactHeal">
-								<heal var="heal" />
-								<scalerTarget type="gameMechanics.elements.scalers.BuffTicksScaler">
-									<buff href="/Mechanics/Spells/DruidV2/HealChargeUpgrade/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-									<tickLength>2000</tickLength>
-									<checkCaster>true</checkCaster>
-								</scalerTarget>
-								<scalerCaster type="gameMechanics.constructor.basicElements.ScalerMultiple">
-									<scalers>
-										<Item type="gameMechanics.elements.scalers.HealScaler" />
-										<Item type="gameMechanics.elements.scalers.AbilityRankScaler">
-											<ability hrefvar="ability" />
-											<mul>0.15</mul>
-										</Item>
-									</scalers>
-								</scalerCaster>
-							</Item>
-							<Item type="gameMechanics.elements.impacts.BuffDetacher">
-								<buff href="/Mechanics/Spells/DruidV2/HealChargeUpgrade/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-							</Item>
-						</impactsIf>
-					</Item>
-				</impactsElse>
-			</Item>
-		</targetImpacts>
-	</mechanics>
-	<speed>0</speed>
+    <Header>
+        <resourceId>739873713</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DruidForce.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DruidAll.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/InsuranceHealTrigger.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DragonRelic4.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/LesserHeals.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <element>LIGHTNING</element>
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value var="heal" />
+            <scaler type="gameMechanics.elements.scalers.HealScaler" />
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Druid/DruidRejuvenatingConcoction.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Druid/Heal.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="Spell_Name.txt.template" />
+    <descTemplate href="Spell_Desc.txt.template" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <level>1</level>
+    <prepareDuration>0</prepareDuration>
+    <immutablePrepareDuration>false</immutablePrepareDuration>
+    <needLos>true</needLos>
+    <targetType>STTCurrentTarget</targetType>
+    <replaceLowRanks>true</replaceLowRanks>
+    <isWorkOnDead>false</isWorkOnDead>
+    <ranks>
+        <Item href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        <Item href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+        <Item href="Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+    </ranks>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>true</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>false</ignoreGlobalCooldown>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>true</needInFront>
+    <mechanics>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceMana">
+                <hideText>false</hideText>
+                <mana>23.72</mana>
+                <scaleByWeaponSpeed>false</scaleByWeaponSpeed>
+                <source>Mainhand</source>
+                <manaType>
+                    <Item>Mana</Item>
+                </manaType>
+            </Item>
+            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                <hideText>false</hideText>
+                <buff href="Charges.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                <anyRank>true</anyRank>
+                <consumeStacks>1</consumeStacks>
+            </Item>
+        </casterResources>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactsIf">
+                <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromMaster">
+                    <hideText>false</hideText>
+                    <buff hrefvar="buff" />
+                    <anyRank>true</anyRank>
+                </predicate>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactHeal">
+                        <heal var="heal" />
+                        <threatMultiplier>1</threatMultiplier>
+                        <scalerTarget type="gameMechanics.elements.scalers.BuffTicksScaler">
+                            <buff hrefvar="bu_1" />
+                            <tickLength>2000</tickLength>
+                            <checkCaster>true</checkCaster>
+                            <anyRank>true</anyRank>
+                        </scalerTarget>
+                        <scalerCaster type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                            <scalers>
+                                <Item type="gameMechanics.elements.scalers.HealScaler" />
+                                <Item type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                    <ability href="/Mechanics/Abilities/DruidTalentsV2/ElectroTherapy/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                    <mul>0.15</mul>
+                                </Item>
+                            </scalers>
+                        </scalerCaster>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.StackBuff">
+                        <buff hrefvar="bu_2" />
+                        <resetTimer>true</resetTimer>
+                        <anyRank>true</anyRank>
+                        <delta type="gameMechanics.elements.calcers.FloatData">
+                            <value>0</value>
+                        </delta>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff hrefvar="bu_3" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactsIf">
+                        <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromMaster">
+                            <buff href="/Mechanics/Spells/DruidV2/HealChargeUpgrade/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        </predicate>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ImpactHeal">
+                                <heal var="heal" />
+                                <scalerTarget type="gameMechanics.elements.scalers.BuffTicksScaler">
+                                    <buff href="/Mechanics/Spells/DruidV2/HealChargeUpgrade/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                    <tickLength>2000</tickLength>
+                                    <checkCaster>true</checkCaster>
+                                </scalerTarget>
+                                <scalerCaster type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                                    <scalers>
+                                        <Item type="gameMechanics.elements.scalers.HealScaler" />
+                                        <Item type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                            <ability hrefvar="ability" />
+                                            <mul>0.15</mul>
+                                        </Item>
+                                    </scalers>
+                                </scalerCaster>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                <buff href="/Mechanics/Spells/DruidV2/HealChargeUpgrade/Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                            </Item>
+                        </impactsIf>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>0</speed>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

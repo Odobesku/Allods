@@ -1,410 +1,410 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-	<Header>
-		<resourceId>739940464</resourceId>
-		<isPrototype>true</isPrototype>
-	</Header>
-	<groups>
-		<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
-		<Item href="/Mechanics/Spells/Groups/EngBardNatureDamageBuff.(ActionGroup).xdb" />
-	</groups>
-	<element>DISEASE</element>
-	<Name href="PoisonAttackBuff.(SpellSingleTarget).Name.txt" />
-	<Description href="PoisonAttackBuff.(SpellSingleTarget).Description.txt" />
-	<descVars>
-		<Item>
-			<name>var0</name>
-			<value var="sum2" />
-			<scaler type="gameMechanics.elements.scalers.LinearScaler">
-				<multiplier>0.5</multiplier>
-			</scaler>
-		</Item>
-		<Item>
-			<name>dmg</name>
-			<value>1</value>
-			<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-				<scalers>
-					<Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-						<formula>MagicScaler</formula>
-					</Item>
-					<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-						<mulCalcer type="constructor.elements.CalcerFloatExternal">
-							<externalCalcer hrefvar="externalCalcer" />
-						</mulCalcer>
-					</Item>
-				</scalers>
-			</scaler>
-		</Item>
-		<Item>
-			<name>var1</name>
-			<value var="value" />
-		</Item>
-	</descVars>
-	<image href="/Interface/Icons/Spells/Bard/LamentExtraHealBlock.(UISingleTexture).xdb" />
-	<visualScripts href="/Spells/VisScripts/Bard/Bard_MuseSpell.(SpellVisScripts).xdb" />
-	<range type="gameMechanics.elements.calcers.FloatData">
-		<value>40</value>
-	</range>
-	<targetType>STTSelf</targetType>
-	<isAggro>false</isAggro>
-	<ranks>
-		<Item href="PoisonAttackBuff01.(SpellSingleTarget).xdb" />
-		<Item href="PoisonAttackBuff02.(SpellSingleTarget).xdb" />
-		<Item href="PoisonAttackBuff03.(SpellSingleTarget).xdb" />
-	</ranks>
-	<iffPolicy>Friends</iffPolicy>
-	<triggersGlobalCooldown>false</triggersGlobalCooldown>
-	<ignoreGlobalCooldown>true</ignoreGlobalCooldown>
-	<launchWhenReady>true</launchWhenReady>
-	<needInFront>false</needInFront>
-	<mechanics>
-		<cooldown>
-			<duration>50000</duration>
-		</cooldown>
-		<casterConditions>
-			<Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
-				<hideText>true</hideText>
-				<predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
-					<groups>
-						<Item href="/Mechanics/Spells/Groups/BardCommonBuffTrigger.(ActionGroup).xdb" />
-					</groups>
-				</predicate>
-				<clientData href="PredicateText.(ClientData).xdb" />
-			</Item>
-		</casterConditions>
-		<casterResources>
-			<Item type="gameMechanics.elements.resources.ResourceVariable">
-				<variable href="/Mechanics/Spells/Bard63/Abilities/DriveResource/Drive.(VariableResource).xdb" />
-				<sub>2</sub>
-			</Item>
-		</casterResources>
-		<casterImpacts>
-			<Item type="gameMechanics.elements.impacts.ImpactIsolator">
-				<impacts>
-					<Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
-						<radius>40</radius>
-						<affectPets>false</affectPets>
-						<impacts>
-							<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-								<predicates>
-									<Item type="gameMechanics.elements.resources.ResourceBuff">
-										<buff href="PowerCasted.(BuffResource).xdb" />
-									</Item>
-								</predicates>
-								<impacts>
-									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-										<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/StatIncr/StatIncr01.(BuffResource).xdb" />
-										<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-											<mul>0.5</mul>
-											<mulCalcer type="gameMechanics.elements.calcers.SpellRankCalcer">
-												<spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/StatIncr/StatIncr1.(SpellSingleTarget).xdb" />
-												<mul>1</mul>
-												<sum var="sum2" />
-											</mulCalcer>
-										</durationScaler>
-									</Item>
-									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-										<buff hrefvar="buff2" />
-										<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-											<mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
-												<calcers>
-													<Item type="gameMechanics.elements.calcers.CalcerIf">
-														<predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
-															<ability href="/Mechanics/Spells/Bard63/Abilities/ExtendPoisonBuff/ExtendPoisonBuff.(AbilityResource).xdb" />
-														</predicate>
-														<calcerIf type="gameMechanics.elements.calcers.CalcerSum">
-															<summands>
-																<Item type="gameMechanics.elements.calcers.CalcerMul">
-																	<calcers>
-																		<Item type="gameMechanics.elements.calcers.CalcerStatValue">
-																			<stat type="gameMechanics.elements.stat.SpecialStat">
-																				<stat href="/Mechanics/SpecialStats/CritPower.(SpecialStatResource).xdb" />
-																			</stat>
-																			<valueType>ShortTerm</valueType>
-																		</Item>
-																		<Item type="gameMechanics.elements.calcers.FloatData">
-																			<value>0.001</value>
-																		</Item>
-																	</calcers>
-																</Item>
-																<Item type="gameMechanics.elements.calcers.FloatData">
-																	<value>1</value>
-																</Item>
-															</summands>
-														</calcerIf>
-														<calcerElse type="gameMechanics.elements.calcers.FloatData">
-															<value>1</value>
-														</calcerElse>
-													</Item>
-													<Item type="gameMechanics.elements.calcers.FloatData">
-														<value var="value" />
-													</Item>
-												</calcers>
-											</mulCalcer>
-										</durationScaler>
-									</Item>
-								</impacts>
-								<elseImpacts>
-									<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-										<predicates>
-											<Item type="gameMechanics.elements.resources.ResourceBuff">
-												<buff href="AgilityCasted.(BuffResource).xdb" />
-											</Item>
-										</predicates>
-										<impacts>
-											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-												<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Agility/Agility.(BuffResource).xdb" />
-												<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-													<mul>0.5</mul>
-													<mulCalcer type="gameMechanics.elements.calcers.SpellRankCalcer">
-														<spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Agility/Agility1.(SpellSingleTarget).xdb" />
-														<mul>1</mul>
-														<sum var="sum2" />
-													</mulCalcer>
-												</durationScaler>
-											</Item>
-											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-												<buff hrefvar="buff2" />
-												<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-													<mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
-														<calcers>
-															<Item type="gameMechanics.elements.calcers.CalcerIf">
-																<predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
-																	<ability href="/Mechanics/Spells/Bard63/Abilities/ExtendPoisonBuff/ExtendPoisonBuff.(AbilityResource).xdb" />
-																</predicate>
-																<calcerIf type="gameMechanics.elements.calcers.CalcerSum">
-																	<summands>
-																		<Item type="gameMechanics.elements.calcers.CalcerMul">
-																			<calcers>
-																				<Item type="gameMechanics.elements.calcers.CalcerStatValue">
-																					<stat type="gameMechanics.elements.stat.SpecialStat">
-																						<stat href="/Mechanics/SpecialStats/CritPower.(SpecialStatResource).xdb" />
-																					</stat>
-																					<valueType>ShortTerm</valueType>
-																				</Item>
-																				<Item type="gameMechanics.elements.calcers.FloatData">
-																					<value>0.001</value>
-																				</Item>
-																			</calcers>
-																		</Item>
-																		<Item type="gameMechanics.elements.calcers.FloatData">
-																			<value>1</value>
-																		</Item>
-																	</summands>
-																</calcerIf>
-																<calcerElse type="gameMechanics.elements.calcers.FloatData">
-																	<value>1</value>
-																</calcerElse>
-															</Item>
-															<Item type="gameMechanics.elements.calcers.FloatData">
-																<value var="value" />
-															</Item>
-														</calcers>
-													</mulCalcer>
-												</durationScaler>
-											</Item>
-										</impacts>
-										<elseImpacts>
-											<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-												<predicates>
-													<Item type="gameMechanics.elements.resources.ResourceBuff">
-														<buff href="StrengthCasted.(BuffResource).xdb" />
-													</Item>
-												</predicates>
-												<impacts>
-													<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-														<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Strength/Strength.(BuffResource).xdb" />
-														<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-															<mul>0.5</mul>
-															<mulCalcer type="gameMechanics.elements.calcers.SpellRankCalcer">
-																<spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Strength/Strength1.(SpellSingleTarget).xdb" />
-																<mul>1</mul>
-																<sum var="sum2" />
-															</mulCalcer>
-														</durationScaler>
-													</Item>
-													<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-														<buff hrefvar="buff2" />
-														<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-															<mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
-																<calcers>
-																	<Item type="gameMechanics.elements.calcers.CalcerIf">
-																		<predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
-																			<ability href="/Mechanics/Spells/Bard63/Abilities/ExtendPoisonBuff/ExtendPoisonBuff.(AbilityResource).xdb" />
-																		</predicate>
-																		<calcerIf type="gameMechanics.elements.calcers.CalcerSum">
-																			<summands>
-																				<Item type="gameMechanics.elements.calcers.CalcerMul">
-																					<calcers>
-																						<Item type="gameMechanics.elements.calcers.CalcerStatValue">
-																							<stat type="gameMechanics.elements.stat.SpecialStat">
-																								<stat href="/Mechanics/SpecialStats/CritPower.(SpecialStatResource).xdb" />
-																							</stat>
-																							<valueType>ShortTerm</valueType>
-																						</Item>
-																						<Item type="gameMechanics.elements.calcers.FloatData">
-																							<value>0.001</value>
-																						</Item>
-																					</calcers>
-																				</Item>
-																				<Item type="gameMechanics.elements.calcers.FloatData">
-																					<value>1</value>
-																				</Item>
-																			</summands>
-																		</calcerIf>
-																		<calcerElse type="gameMechanics.elements.calcers.FloatData">
-																			<value>1</value>
-																		</calcerElse>
-																	</Item>
-																	<Item type="gameMechanics.elements.calcers.FloatData">
-																		<value var="value" />
-																	</Item>
-																</calcers>
-															</mulCalcer>
-														</durationScaler>
-													</Item>
-												</impacts>
-												<elseImpacts>
-													<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-														<predicates>
-															<Item type="gameMechanics.elements.resources.ResourceBuff">
-																<buff href="WillPowerCasted.(BuffResource).xdb" />
-															</Item>
-														</predicates>
-														<impacts>
-															<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/WillPower/WillPower.(BuffResource).xdb" />
-																<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-																	<mul>0.5</mul>
-																	<mulCalcer type="gameMechanics.elements.calcers.SpellRankCalcer">
-																		<spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/WillPower/WillPower1.(SpellSingleTarget).xdb" />
-																		<mul>1</mul>
-																		<sum var="sum2" />
-																	</mulCalcer>
-																</durationScaler>
-															</Item>
-															<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																<buff hrefvar="buff2" />
-																<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-																	<mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
-																		<calcers>
-																			<Item type="gameMechanics.elements.calcers.CalcerIf">
-																				<predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
-																					<ability href="/Mechanics/Spells/Bard63/Abilities/ExtendPoisonBuff/ExtendPoisonBuff.(AbilityResource).xdb" />
-																				</predicate>
-																				<calcerIf type="gameMechanics.elements.calcers.CalcerSum">
-																					<summands>
-																						<Item type="gameMechanics.elements.calcers.CalcerMul">
-																							<calcers>
-																								<Item type="gameMechanics.elements.calcers.CalcerStatValue">
-																									<stat type="gameMechanics.elements.stat.SpecialStat">
-																										<stat href="/Mechanics/SpecialStats/CritPower.(SpecialStatResource).xdb" />
-																									</stat>
-																									<valueType>ShortTerm</valueType>
-																								</Item>
-																								<Item type="gameMechanics.elements.calcers.FloatData">
-																									<value>0.001</value>
-																								</Item>
-																							</calcers>
-																						</Item>
-																						<Item type="gameMechanics.elements.calcers.FloatData">
-																							<value>1</value>
-																						</Item>
-																					</summands>
-																				</calcerIf>
-																				<calcerElse type="gameMechanics.elements.calcers.FloatData">
-																					<value>1</value>
-																				</calcerElse>
-																			</Item>
-																			<Item type="gameMechanics.elements.calcers.FloatData">
-																				<value var="value" />
-																			</Item>
-																		</calcers>
-																	</mulCalcer>
-																</durationScaler>
-															</Item>
-														</impacts>
-														<elseImpacts>
-															<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-																<predicates>
-																	<Item type="gameMechanics.elements.resources.ResourceBuff">
-																		<buff href="BloodlustCasted.(BuffResource).xdb" />
-																	</Item>
-																</predicates>
-																<impacts>
-																	<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																		<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Bloodlust/Bloodlust.(BuffResource).xdb" />
-																		<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-																			<mul>0.5</mul>
-																			<mulCalcer type="gameMechanics.elements.calcers.SpellRankCalcer">
-																				<spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Bloodlust/Bloodlust1.(SpellSingleTarget).xdb" />
-																				<mul>1</mul>
-																				<sum var="sum2" />
-																			</mulCalcer>
-																		</durationScaler>
-																	</Item>
-																	<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																		<buff hrefvar="buff2" />
-																		<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-																			<mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
-																				<calcers>
-																					<Item type="gameMechanics.elements.calcers.CalcerIf">
-																						<predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
-																							<ability href="/Mechanics/Spells/Bard63/Abilities/ExtendPoisonBuff/ExtendPoisonBuff.(AbilityResource).xdb" />
-																						</predicate>
-																						<calcerIf type="gameMechanics.elements.calcers.CalcerSum">
-																							<summands>
-																								<Item type="gameMechanics.elements.calcers.CalcerMul">
-																									<calcers>
-																										<Item type="gameMechanics.elements.calcers.CalcerStatValue">
-																											<stat type="gameMechanics.elements.stat.SpecialStat">
-																												<stat href="/Mechanics/SpecialStats/CritPower.(SpecialStatResource).xdb" />
-																											</stat>
-																											<valueType>ShortTerm</valueType>
-																										</Item>
-																										<Item type="gameMechanics.elements.calcers.FloatData">
-																											<value>0.001</value>
-																										</Item>
-																									</calcers>
-																								</Item>
-																								<Item type="gameMechanics.elements.calcers.FloatData">
-																									<value>1</value>
-																								</Item>
-																							</summands>
-																						</calcerIf>
-																						<calcerElse type="gameMechanics.elements.calcers.FloatData">
-																							<value>1</value>
-																						</calcerElse>
-																					</Item>
-																					<Item type="gameMechanics.elements.calcers.FloatData">
-																						<value var="value" />
-																					</Item>
-																				</calcers>
-																			</mulCalcer>
-																		</durationScaler>
-																	</Item>
-																</impacts>
-															</Item>
-														</elseImpacts>
-													</Item>
-												</elseImpacts>
-											</Item>
-										</elseImpacts>
-									</Item>
-								</elseImpacts>
-							</Item>
-						</impacts>
-					</Item>
-					<Item type="gameMechanics.elements.impacts.PostponedImpacts">
-						<impacts>
-							<Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
-								<group href="/Mechanics/Spells/Groups/BardCommonBuffTrigger.(ActionGroup).xdb" />
-							</Item>
-						</impacts>
-					</Item>
-				</impacts>
-			</Item>
-		</casterImpacts>
-		<linkedAbility href="CommonBuffCastTrigger.(AbilityResource).xdb" />
-	</mechanics>
+    <Header>
+        <resourceId>739940464</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/EngBardNatureDamageBuff.(ActionGroup).xdb" />
+    </groups>
+    <element>DISEASE</element>
+    <Name href="PoisonAttackBuff.(SpellSingleTarget).Name.txt" />
+    <Description href="PoisonAttackBuff.(SpellSingleTarget).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value var="sum2" />
+            <scaler type="gameMechanics.elements.scalers.LinearScaler">
+                <multiplier>0.5</multiplier>
+            </scaler>
+        </Item>
+        <Item>
+            <name>dmg</name>
+            <value>1</value>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                        <formula>MagicScaler</formula>
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                            <externalCalcer hrefvar="externalCalcer" />
+                        </mulCalcer>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+        <Item>
+            <name>var1</name>
+            <value var="value" />
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Bard/LamentExtraHealBlock.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Bard/Bard_MuseSpell.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <ranks>
+        <Item href="PoisonAttackBuff01.(SpellSingleTarget).xdb" />
+        <Item href="PoisonAttackBuff02.(SpellSingleTarget).xdb" />
+        <Item href="PoisonAttackBuff03.(SpellSingleTarget).xdb" />
+    </ranks>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>true</ignoreGlobalCooldown>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <cooldown>
+            <duration>50000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                <hideText>true</hideText>
+                <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/BardCommonBuffTrigger.(ActionGroup).xdb" />
+                    </groups>
+                </predicate>
+                <clientData href="PredicateText.(ClientData).xdb" />
+            </Item>
+        </casterConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceVariable">
+                <variable href="/Mechanics/Spells/Bard63/Abilities/DriveResource/Drive.(VariableResource).xdb" />
+                <sub>2</sub>
+            </Item>
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIsolator">
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
+                        <radius>40</radius>
+                        <affectPets>false</affectPets>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="PowerCasted.(BuffResource).xdb" />
+                                    </Item>
+                                </predicates>
+                                <impacts>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/StatIncr/StatIncr01.(BuffResource).xdb" />
+                                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                            <mul>0.5</mul>
+                                            <mulCalcer type="gameMechanics.elements.calcers.SpellRankCalcer">
+                                                <spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/StatIncr/StatIncr1.(SpellSingleTarget).xdb" />
+                                                <mul>1</mul>
+                                                <sum var="sum2" />
+                                            </mulCalcer>
+                                        </durationScaler>
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff hrefvar="buff2" />
+                                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                            <mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                                                <calcers>
+                                                    <Item type="gameMechanics.elements.calcers.CalcerIf">
+                                                        <predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                                            <ability href="/Mechanics/Spells/Bard63/Abilities/ExtendPoisonBuff/ExtendPoisonBuff.(AbilityResource).xdb" />
+                                                        </predicate>
+                                                        <calcerIf type="gameMechanics.elements.calcers.CalcerSum">
+                                                            <summands>
+                                                                <Item type="gameMechanics.elements.calcers.CalcerMul">
+                                                                    <calcers>
+                                                                        <Item type="gameMechanics.elements.calcers.CalcerStatValue">
+                                                                            <stat type="gameMechanics.elements.stat.SpecialStat">
+                                                                                <stat href="/Mechanics/SpecialStats/CritPower.(SpecialStatResource).xdb" />
+                                                                            </stat>
+                                                                            <valueType>ShortTerm</valueType>
+                                                                        </Item>
+                                                                        <Item type="gameMechanics.elements.calcers.FloatData">
+                                                                            <value>0.001</value>
+                                                                        </Item>
+                                                                    </calcers>
+                                                                </Item>
+                                                                <Item type="gameMechanics.elements.calcers.FloatData">
+                                                                    <value>1</value>
+                                                                </Item>
+                                                            </summands>
+                                                        </calcerIf>
+                                                        <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                                                            <value>1</value>
+                                                        </calcerElse>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.calcers.FloatData">
+                                                        <value var="value" />
+                                                    </Item>
+                                                </calcers>
+                                            </mulCalcer>
+                                        </durationScaler>
+                                    </Item>
+                                </impacts>
+                                <elseImpacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                        <predicates>
+                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="AgilityCasted.(BuffResource).xdb" />
+                                            </Item>
+                                        </predicates>
+                                        <impacts>
+                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Agility/Agility.(BuffResource).xdb" />
+                                                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                    <mul>0.5</mul>
+                                                    <mulCalcer type="gameMechanics.elements.calcers.SpellRankCalcer">
+                                                        <spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Agility/Agility1.(SpellSingleTarget).xdb" />
+                                                        <mul>1</mul>
+                                                        <sum var="sum2" />
+                                                    </mulCalcer>
+                                                </durationScaler>
+                                            </Item>
+                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                <buff hrefvar="buff2" />
+                                                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                    <mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                                                        <calcers>
+                                                            <Item type="gameMechanics.elements.calcers.CalcerIf">
+                                                                <predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                                                    <ability href="/Mechanics/Spells/Bard63/Abilities/ExtendPoisonBuff/ExtendPoisonBuff.(AbilityResource).xdb" />
+                                                                </predicate>
+                                                                <calcerIf type="gameMechanics.elements.calcers.CalcerSum">
+                                                                    <summands>
+                                                                        <Item type="gameMechanics.elements.calcers.CalcerMul">
+                                                                            <calcers>
+                                                                                <Item type="gameMechanics.elements.calcers.CalcerStatValue">
+                                                                                    <stat type="gameMechanics.elements.stat.SpecialStat">
+                                                                                        <stat href="/Mechanics/SpecialStats/CritPower.(SpecialStatResource).xdb" />
+                                                                                    </stat>
+                                                                                    <valueType>ShortTerm</valueType>
+                                                                                </Item>
+                                                                                <Item type="gameMechanics.elements.calcers.FloatData">
+                                                                                    <value>0.001</value>
+                                                                                </Item>
+                                                                            </calcers>
+                                                                        </Item>
+                                                                        <Item type="gameMechanics.elements.calcers.FloatData">
+                                                                            <value>1</value>
+                                                                        </Item>
+                                                                    </summands>
+                                                                </calcerIf>
+                                                                <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                                                                    <value>1</value>
+                                                                </calcerElse>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.calcers.FloatData">
+                                                                <value var="value" />
+                                                            </Item>
+                                                        </calcers>
+                                                    </mulCalcer>
+                                                </durationScaler>
+                                            </Item>
+                                        </impacts>
+                                        <elseImpacts>
+                                            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                        <buff href="StrengthCasted.(BuffResource).xdb" />
+                                                    </Item>
+                                                </predicates>
+                                                <impacts>
+                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                        <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Strength/Strength.(BuffResource).xdb" />
+                                                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                            <mul>0.5</mul>
+                                                            <mulCalcer type="gameMechanics.elements.calcers.SpellRankCalcer">
+                                                                <spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Strength/Strength1.(SpellSingleTarget).xdb" />
+                                                                <mul>1</mul>
+                                                                <sum var="sum2" />
+                                                            </mulCalcer>
+                                                        </durationScaler>
+                                                    </Item>
+                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                        <buff hrefvar="buff2" />
+                                                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                            <mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                                                                <calcers>
+                                                                    <Item type="gameMechanics.elements.calcers.CalcerIf">
+                                                                        <predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                                                            <ability href="/Mechanics/Spells/Bard63/Abilities/ExtendPoisonBuff/ExtendPoisonBuff.(AbilityResource).xdb" />
+                                                                        </predicate>
+                                                                        <calcerIf type="gameMechanics.elements.calcers.CalcerSum">
+                                                                            <summands>
+                                                                                <Item type="gameMechanics.elements.calcers.CalcerMul">
+                                                                                    <calcers>
+                                                                                        <Item type="gameMechanics.elements.calcers.CalcerStatValue">
+                                                                                            <stat type="gameMechanics.elements.stat.SpecialStat">
+                                                                                                <stat href="/Mechanics/SpecialStats/CritPower.(SpecialStatResource).xdb" />
+                                                                                            </stat>
+                                                                                            <valueType>ShortTerm</valueType>
+                                                                                        </Item>
+                                                                                        <Item type="gameMechanics.elements.calcers.FloatData">
+                                                                                            <value>0.001</value>
+                                                                                        </Item>
+                                                                                    </calcers>
+                                                                                </Item>
+                                                                                <Item type="gameMechanics.elements.calcers.FloatData">
+                                                                                    <value>1</value>
+                                                                                </Item>
+                                                                            </summands>
+                                                                        </calcerIf>
+                                                                        <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                                                                            <value>1</value>
+                                                                        </calcerElse>
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.elements.calcers.FloatData">
+                                                                        <value var="value" />
+                                                                    </Item>
+                                                                </calcers>
+                                                            </mulCalcer>
+                                                        </durationScaler>
+                                                    </Item>
+                                                </impacts>
+                                                <elseImpacts>
+                                                    <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                                        <predicates>
+                                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                                <buff href="WillPowerCasted.(BuffResource).xdb" />
+                                                            </Item>
+                                                        </predicates>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/WillPower/WillPower.(BuffResource).xdb" />
+                                                                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                    <mul>0.5</mul>
+                                                                    <mulCalcer type="gameMechanics.elements.calcers.SpellRankCalcer">
+                                                                        <spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/WillPower/WillPower1.(SpellSingleTarget).xdb" />
+                                                                        <mul>1</mul>
+                                                                        <sum var="sum2" />
+                                                                    </mulCalcer>
+                                                                </durationScaler>
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff hrefvar="buff2" />
+                                                                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                    <mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                                                                        <calcers>
+                                                                            <Item type="gameMechanics.elements.calcers.CalcerIf">
+                                                                                <predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                                                                    <ability href="/Mechanics/Spells/Bard63/Abilities/ExtendPoisonBuff/ExtendPoisonBuff.(AbilityResource).xdb" />
+                                                                                </predicate>
+                                                                                <calcerIf type="gameMechanics.elements.calcers.CalcerSum">
+                                                                                    <summands>
+                                                                                        <Item type="gameMechanics.elements.calcers.CalcerMul">
+                                                                                            <calcers>
+                                                                                                <Item type="gameMechanics.elements.calcers.CalcerStatValue">
+                                                                                                    <stat type="gameMechanics.elements.stat.SpecialStat">
+                                                                                                        <stat href="/Mechanics/SpecialStats/CritPower.(SpecialStatResource).xdb" />
+                                                                                                    </stat>
+                                                                                                    <valueType>ShortTerm</valueType>
+                                                                                                </Item>
+                                                                                                <Item type="gameMechanics.elements.calcers.FloatData">
+                                                                                                    <value>0.001</value>
+                                                                                                </Item>
+                                                                                            </calcers>
+                                                                                        </Item>
+                                                                                        <Item type="gameMechanics.elements.calcers.FloatData">
+                                                                                            <value>1</value>
+                                                                                        </Item>
+                                                                                    </summands>
+                                                                                </calcerIf>
+                                                                                <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                                                                                    <value>1</value>
+                                                                                </calcerElse>
+                                                                            </Item>
+                                                                            <Item type="gameMechanics.elements.calcers.FloatData">
+                                                                                <value var="value" />
+                                                                            </Item>
+                                                                        </calcers>
+                                                                    </mulCalcer>
+                                                                </durationScaler>
+                                                            </Item>
+                                                        </impacts>
+                                                        <elseImpacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                                                                <predicates>
+                                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                                        <buff href="BloodlustCasted.(BuffResource).xdb" />
+                                                                    </Item>
+                                                                </predicates>
+                                                                <impacts>
+                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                        <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Bloodlust/Bloodlust.(BuffResource).xdb" />
+                                                                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                            <mul>0.5</mul>
+                                                                            <mulCalcer type="gameMechanics.elements.calcers.SpellRankCalcer">
+                                                                                <spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Bloodlust/Bloodlust1.(SpellSingleTarget).xdb" />
+                                                                                <mul>1</mul>
+                                                                                <sum var="sum2" />
+                                                                            </mulCalcer>
+                                                                        </durationScaler>
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                        <buff hrefvar="buff2" />
+                                                                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                            <mulCalcer type="gameMechanics.elements.calcers.CalcerMul">
+                                                                                <calcers>
+                                                                                    <Item type="gameMechanics.elements.calcers.CalcerIf">
+                                                                                        <predicate type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                                                                            <ability href="/Mechanics/Spells/Bard63/Abilities/ExtendPoisonBuff/ExtendPoisonBuff.(AbilityResource).xdb" />
+                                                                                        </predicate>
+                                                                                        <calcerIf type="gameMechanics.elements.calcers.CalcerSum">
+                                                                                            <summands>
+                                                                                                <Item type="gameMechanics.elements.calcers.CalcerMul">
+                                                                                                    <calcers>
+                                                                                                        <Item type="gameMechanics.elements.calcers.CalcerStatValue">
+                                                                                                            <stat type="gameMechanics.elements.stat.SpecialStat">
+                                                                                                                <stat href="/Mechanics/SpecialStats/CritPower.(SpecialStatResource).xdb" />
+                                                                                                            </stat>
+                                                                                                            <valueType>ShortTerm</valueType>
+                                                                                                        </Item>
+                                                                                                        <Item type="gameMechanics.elements.calcers.FloatData">
+                                                                                                            <value>0.001</value>
+                                                                                                        </Item>
+                                                                                                    </calcers>
+                                                                                                </Item>
+                                                                                                <Item type="gameMechanics.elements.calcers.FloatData">
+                                                                                                    <value>1</value>
+                                                                                                </Item>
+                                                                                            </summands>
+                                                                                        </calcerIf>
+                                                                                        <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                                                                                            <value>1</value>
+                                                                                        </calcerElse>
+                                                                                    </Item>
+                                                                                    <Item type="gameMechanics.elements.calcers.FloatData">
+                                                                                        <value var="value" />
+                                                                                    </Item>
+                                                                                </calcers>
+                                                                            </mulCalcer>
+                                                                        </durationScaler>
+                                                                    </Item>
+                                                                </impacts>
+                                                            </Item>
+                                                        </elseImpacts>
+                                                    </Item>
+                                                </elseImpacts>
+                                            </Item>
+                                        </elseImpacts>
+                                    </Item>
+                                </elseImpacts>
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                                <group href="/Mechanics/Spells/Groups/BardCommonBuffTrigger.(ActionGroup).xdb" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+        <linkedAbility href="CommonBuffCastTrigger.(AbilityResource).xdb" />
+    </mechanics>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

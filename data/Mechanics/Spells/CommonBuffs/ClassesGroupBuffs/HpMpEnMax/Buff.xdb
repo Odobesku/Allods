@@ -1,151 +1,151 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.buff.BuffResource>
-	<Header>
-		<resourceId>197071937</resourceId>
-		<isPrototype>true</isPrototype>
-	</Header>
-	<image href="/Interface/Icons/Spells/HpMpEnMax.(UISingleTexture).xdb" />
-	<visScript href="/Spells/VisScripts/Common/HpMpEnMax.(BuffVisScripts).xdb" />
-	<nameTemplate href="Buff_Name.txt.template" />
-	<descTemplate href="Buff_Desc.txt.template" />
-	<effects>
-		<Item type="gameMechanics.elements.effects.EffectsIfTarget">
-			<predicates>
-				<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-					<hideText>false</hideText>
-					<predicate type="gameMechanics.elements.predicates.PredicateMobWorld">
-						<hideText>false</hideText>
-						<mobs>
-							<Item href="/Mechanics/Spells/PsionicNew/Mislead/Dummy.xdb" />
-						</mobs>
-					</predicate>
-				</Item>
-			</predicates>
-			<effectsIf>
-				<Item type="gameMechanics.elements.effects.EffectIncreaseHealth">
-					<bonusHealthPercent var="bonusHealthPercent" />
-					<increaseHealth>false</increaseHealth>
-				</Item>
-				<Item type="gameMechanics.elements.effects.EffectIncreaseMana">
-					<bonusManaPercent var="bonusManaPercent" />
-				</Item>
-				<Item type="gameMechanics.elements.effects.AbonentLostWatcher">
-					<addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.BuffDetacher">
-							<buff href="Buff01.xdb" />
-							<anyRank>true</anyRank>
-						</Item>
-					</impacts>
-				</Item>
-				<Item type="gameMechanics.elements.effects.EventTrigger">
-					<conditionalEvents>
-						<Item>
-							<obj>gameMechanics.elements.events.EventSpellLaunched</obj>
-							<predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
-								<spell href="Spell01.xdb" />
-							</predicate>
-						</Item>
-						<Item>
-							<obj>gameMechanics.elements.events.EventSpellLaunched</obj>
-							<predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
-								<spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/MagDmg/Spell01.xdb" />
-							</predicate>
-						</Item>
-					</conditionalEvents>
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.BuffDetacher">
-							<buff href="Buff01.xdb" />
-							<anyRank>true</anyRank>
-						</Item>
-					</impacts>
-					<eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
-				</Item>
-			</effectsIf>
-			<recheckOnLoad>false</recheckOnLoad>
-		</Item>
-		<Item type="gameMechanics.elements.effects.Switch">
-			<impactsOff>
-				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-					<predicates>
-						<Item type="gameMechanics.constructor.basicElements.PredicateOr">
-							<predicates>
-								<Item type="gameMechanics.elements.resources.ResourceBuff">
-									<buff hrefvar="buff" />
-								</Item>
-								<Item type="gameMechanics.elements.resources.ResourceBuff">
-									<buff hrefvar="buff02" />
-								</Item>
-								<Item type="gameMechanics.elements.resources.ResourceBuff">
-									<buff hrefvar="buff03" />
-								</Item>
-							</predicates>
-						</Item>
-					</predicates>
-					<impactsElse>
-						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-							<predicates>
-								<Item type="gameMechanics.elements.resources.ResourceBuff">
-									<buff href="/Mechanics/Spells/Bard/Marches/HpMpEnMax/Counter03.xdb" />
-								</Item>
-							</predicates>
-							<impactsIf>
-								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-									<buff href="/Mechanics/Spells/Bard/Marches/HpMpEnMax/Buff_02_03.xdb" />
-								</Item>
-							</impactsIf>
-							<impactsElse>
-								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-									<predicates>
-										<Item type="gameMechanics.elements.resources.ResourceBuff">
-											<buff href="/Mechanics/Spells/Bard/Marches/HpMpEnMax/Counter02.xdb" />
-										</Item>
-									</predicates>
-									<impactsIf>
-										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-											<buff href="/Mechanics/Spells/Bard/Marches/HpMpEnMax/Buff_02_02.xdb" />
-										</Item>
-									</impactsIf>
-									<impactsElse>
-										<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-											<predicates>
-												<Item type="gameMechanics.elements.resources.ResourceBuff">
-													<buff href="/Mechanics/Spells/Bard/Marches/HpMpEnMax/Counter01.xdb" />
-												</Item>
-											</predicates>
-											<impactsIf>
-												<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-													<buff href="/Mechanics/Spells/Bard/Marches/HpMpEnMax/Buff_02_01.xdb" />
-												</Item>
-											</impactsIf>
-										</Item>
-									</impactsElse>
-								</Item>
-							</impactsElse>
-						</Item>
-					</impactsElse>
-				</Item>
-			</impactsOff>
-			<rerunOnLoad>false</rerunOnLoad>
-		</Item>
-	</effects>
-	<duration>1800000</duration>
-	<isStackable>true</isStackable>
-	<stackLimit>1</stackLimit>
-	<isGradual>false</isGradual>
-	<isHelpful>true</isHelpful>
-	<isDetachableOnWill>true</isDetachableOnWill>
-	<isMultiple>false</isMultiple>
-	<ranks>
-		<Item href="Buff01.xdb" />
-		<Item href="Buff02.xdb" />
-		<Item href="Buff03.xdb" />
-	</ranks>
-	<canBeSaved>false</canBeSaved>
-	<isClientReplicated>true</isClientReplicated>
-	<groups>
-		<Item href="/Mechanics/Spells/Groups/AstralSpells.xdb" />
-		<Item href="/Mechanics/Spells/Groups/Magics.xdb" />
-		<Item href="/Mechanics/Spells/Groups/PvPRemoveBuff.(ActionGroup).xdb" />
-	</groups>
+    <Header>
+        <resourceId>197071937</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <image href="/Interface/Icons/Spells/HpMpEnMax.(UISingleTexture).xdb" />
+    <visScript href="/Spells/VisScripts/Common/HpMpEnMax.(BuffVisScripts).xdb" />
+    <nameTemplate href="Buff_Name.txt.template" />
+    <descTemplate href="Buff_Desc.txt.template" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectsIfTarget">
+            <predicates>
+                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <hideText>false</hideText>
+                    <predicate type="gameMechanics.elements.predicates.PredicateMobWorld">
+                        <hideText>false</hideText>
+                        <mobs>
+                            <Item href="/Mechanics/Spells/PsionicNew/Mislead/Dummy.xdb" />
+                        </mobs>
+                    </predicate>
+                </Item>
+            </predicates>
+            <effectsIf>
+                <Item type="gameMechanics.elements.effects.EffectIncreaseHealth">
+                    <bonusHealthPercent var="bonusHealthPercent" />
+                    <increaseHealth>false</increaseHealth>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectIncreaseMana">
+                    <bonusManaPercent var="bonusManaPercent" />
+                </Item>
+                <Item type="gameMechanics.elements.effects.AbonentLostWatcher">
+                    <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Buff01.xdb" />
+                            <anyRank>true</anyRank>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EventTrigger">
+                    <conditionalEvents>
+                        <Item>
+                            <obj>gameMechanics.elements.events.EventSpellLaunched</obj>
+                            <predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
+                                <spell href="Spell01.xdb" />
+                            </predicate>
+                        </Item>
+                        <Item>
+                            <obj>gameMechanics.elements.events.EventSpellLaunched</obj>
+                            <predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
+                                <spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/MagDmg/Spell01.xdb" />
+                            </predicate>
+                        </Item>
+                    </conditionalEvents>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="Buff01.xdb" />
+                            <anyRank>true</anyRank>
+                        </Item>
+                    </impacts>
+                    <eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                </Item>
+            </effectsIf>
+            <recheckOnLoad>false</recheckOnLoad>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff hrefvar="buff" />
+                                </Item>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff hrefvar="buff02" />
+                                </Item>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff hrefvar="buff03" />
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </predicates>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/Spells/Bard/Marches/HpMpEnMax/Counter03.xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/Spells/Bard/Marches/HpMpEnMax/Buff_02_03.xdb" />
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                            <buff href="/Mechanics/Spells/Bard/Marches/HpMpEnMax/Counter02.xdb" />
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="/Mechanics/Spells/Bard/Marches/HpMpEnMax/Buff_02_02.xdb" />
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                    <buff href="/Mechanics/Spells/Bard/Marches/HpMpEnMax/Counter01.xdb" />
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="/Mechanics/Spells/Bard/Marches/HpMpEnMax/Buff_02_01.xdb" />
+                                                </Item>
+                                            </impactsIf>
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsOff>
+            <rerunOnLoad>false</rerunOnLoad>
+        </Item>
+    </effects>
+    <duration>1800000</duration>
+    <isStackable>true</isStackable>
+    <stackLimit>1</stackLimit>
+    <isGradual>false</isGradual>
+    <isHelpful>true</isHelpful>
+    <isDetachableOnWill>true</isDetachableOnWill>
+    <isMultiple>false</isMultiple>
+    <ranks>
+        <Item href="Buff01.xdb" />
+        <Item href="Buff02.xdb" />
+        <Item href="Buff03.xdb" />
+    </ranks>
+    <canBeSaved>false</canBeSaved>
+    <isClientReplicated>true</isClientReplicated>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/AstralSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/Magics.xdb" />
+        <Item href="/Mechanics/Spells/Groups/PvPRemoveBuff.(ActionGroup).xdb" />
+    </groups>
 </gameMechanics.constructor.schemes.buff.BuffResource>

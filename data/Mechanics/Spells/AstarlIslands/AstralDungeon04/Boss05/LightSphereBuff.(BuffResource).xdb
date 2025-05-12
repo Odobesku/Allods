@@ -1,196 +1,196 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.buff.BuffResource>
-	<Header>
-		<resourceId>739964996</resourceId>
-	</Header>
-	<Name href="LightSphereBuff.(BuffResource).Name.txt" />
-	<Description href="LightSphereBuff.(BuffResource).Description.txt" />
-	<image href="/Interface/Icons/Misc/Buffs/BuffURGoldenPulse.(UISingleTexture).xdb" />
-	<visScript href="LightSphereBuff.(BuffVisScripts).xdb" />
-	<effects>
-		<Item type="gameMechanics.elements.effects.AddVisibilityRule">
-			<visibilityRule>
-				<channel>Influence</channel>
-				<vector>Outgoing</vector>
-				<direction>Incoming</direction>
-				<plane href="/Mechanics/Spells/AstarlIslands/AstralDungeon04/Boss04/DarkSpherePlane.(Plane).xdb" />
-			</visibilityRule>
-		</Item>
-		<Item type="gameMechanics.elements.effects.EffectInstantiating">
-			<effects>
-				<Item type="gameMechanics.elements.effects.TickableAura">
-					<tick>1000</tick>
-					<affectGroup>All</affectGroup>
-					<radius>1.5</radius>
-					<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-						<predicates>
-							<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-								<mobs>
-									<Item href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss04/DarkSphere.(MobWorld).xdb" />
-								</mobs>
-							</Item>
-							<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-							<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-								<predicate type="gameMechanics.elements.resources.ResourceBuff">
-									<buff href="/Mechanics/Spells/AstarlIslands/AstralDungeon04/Boss04/SummonSphere.(BuffResource).xdb" />
-								</predicate>
-							</Item>
-						</predicates>
-					</filter>
-					<impactsIn>
-						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-							<buff href="SphereAbsorbBuff.(BuffResource).xdb" />
-						</Item>
-						<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-									<impacts>
-										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-											<buff href="SpheresCollectedCount.(BuffResource).xdb" />
-										</Item>
-									</impacts>
-								</Item>
-							</impacts>
-							<spawnResource href="/Maps/AstralDungeon04/SpawnTables/FinalBoss.(SpawnTable).xdb" />
-						</Item>
-						<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-							<projectileData>
-								<moveType type="gameMechanics.world.projectile.MoveTypeIdle">
-									<destination type="gameMechanics.map.destination.SelfPosDestination" />
-								</moveType>
-								<resource href="SphereAbsorbBuff2.(ProjectileResource).xdb" />
-							</projectileData>
-						</Item>
-					</impactsIn>
-				</Item>
-				<Item type="gameMechanics.elements.effects.ImpactsOverTime">
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
-							<pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/Boss04Spheres.(SummonPool).xdb" />
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-									<predicates>
-										<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-											<mobs>
-												<Item href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss04/DarkSphere.(MobWorld).xdb" />
-											</mobs>
-										</Item>
-										<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-											<predicate type="gameMechanics.elements.resources.ResourceAnyBuff">
-												<buffs>
-													<Item href="SphereMarkers.(BuffResource).xdb" />
-													<Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/Wait.(BuffResource).xdb" />
-													<Item href="/Mechanics/Spells/AstarlIslands/AstralDungeon04/Boss04/SummonSphere.(BuffResource).xdb" />
-												</buffs>
-											</predicate>
-										</Item>
-									</predicates>
-									<impactsIf>
-										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-											<buff href="SphereMarkers.(BuffResource).xdb" />
-										</Item>
-										<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-											<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-											<data href="SphereMorph1.(ClientData).xdb" />
-										</Item>
-									</impactsIf>
-								</Item>
-							</impacts>
-						</Item>
-					</impacts>
-					<tick>1000</tick>
-					<initialDelay>250</initialDelay>
-				</Item>
-				<Item type="gameMechanics.elements.effects.Switch">
-					<impactsOff>
-						<Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
-							<pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/Boss04Spheres.(SummonPool).xdb" />
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-									<predicates>
-										<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-											<mobs>
-												<Item href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss04/DarkSphere.(MobWorld).xdb" />
-											</mobs>
-										</Item>
-										<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-											<predicate type="gameMechanics.elements.resources.ResourceBuff">
-												<buff href="SphereAbsorbBuff.(BuffResource).xdb" />
-											</predicate>
-										</Item>
-									</predicates>
-									<impactsIf>
-										<Item type="gameMechanics.elements.impacts.BuffDetacher">
-											<buff href="SphereMarkers.(BuffResource).xdb" />
-										</Item>
-										<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-											<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-											<data href="SphereMorph2.(ClientData).xdb" />
-										</Item>
-									</impactsIf>
-								</Item>
-							</impacts>
-						</Item>
-						<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-									<impacts>
-										<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-											<predicates>
-												<Item type="gameMechanics.elements.predicates.PredicateInCombat" />
-											</predicates>
-											<impactsIf>
-												<Item type="gameMechanics.elements.impacts.SpawnTableObjects">
-													<table href="/Maps/AstralDungeon04/SpawnTables/Boss03_LightSphere.(SpawnTable).xdb" />
-												</Item>
-											</impactsIf>
-										</Item>
-									</impacts>
-								</Item>
-							</impacts>
-							<spawnResource href="/Maps/AstralDungeon04/SpawnTables/FinalBoss.(SpawnTable).xdb" />
-						</Item>
-						<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-							<impacts>
-								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-									<buff href="DarkSpheresPower.(BuffResource).xdb" />
-								</Item>
-							</impacts>
-						</Item>
-						<Item type="gameMechanics.elements.impacts.BuffDetacher">
-							<buff href="LightSphereBuffAOEMain.(BuffResource).xdb" />
-						</Item>
-					</impactsOff>
-				</Item>
-			</effects>
-		</Item>
-		<Item type="gameMechanics.elements.effects.EffectsDeferred">
-			<delay>16500</delay>
-			<effects>
-				<Item type="gameMechanics.elements.effects.EffectDisableAction">
-					<action href="LightSphereActionAOE.(SpellSingleTarget).xdb" />
-				</Item>
-			</effects>
-		</Item>
-		<Item type="gameMechanics.elements.effects.EffectDisableSpellsExceptGroup">
-			<groups>
-				<Item href="/Mechanics/Spells/Groups/ActionBarChange.(ActionGroup).xdb" />
-			</groups>
-		</Item>
-		<Item type="gameMechanics.elements.effects.EffectGiveSpell">
-			<spell href="LightSphereActionSpeed.(SpellSingleTarget).xdb" />
-		</Item>
-		<Item type="gameMechanics.elements.effects.EffectGiveSpell">
-			<spell href="LightSphereActionAOE.(SpellSingleTarget).xdb" />
-		</Item>
-	</effects>
-	<duration>15000</duration>
-	<isHelpful>false</isHelpful>
-	<canBeSaved>false</canBeSaved>
-	<groups>
-		<Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
-		<Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
-		<Item href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
-		<Item href="/Mechanics/Spells/Groups/ActionBarChange.(ActionGroup).xdb" />
-	</groups>
+    <Header>
+        <resourceId>739964996</resourceId>
+    </Header>
+    <Name href="LightSphereBuff.(BuffResource).Name.txt" />
+    <Description href="LightSphereBuff.(BuffResource).Description.txt" />
+    <image href="/Interface/Icons/Misc/Buffs/BuffURGoldenPulse.(UISingleTexture).xdb" />
+    <visScript href="LightSphereBuff.(BuffVisScripts).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Influence</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="/Mechanics/Spells/AstarlIslands/AstralDungeon04/Boss04/DarkSpherePlane.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectInstantiating">
+            <effects>
+                <Item type="gameMechanics.elements.effects.TickableAura">
+                    <tick>1000</tick>
+                    <affectGroup>All</affectGroup>
+                    <radius>1.5</radius>
+                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                <mobs>
+                                    <Item href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss04/DarkSphere.(MobWorld).xdb" />
+                                </mobs>
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="/Mechanics/Spells/AstarlIslands/AstralDungeon04/Boss04/SummonSphere.(BuffResource).xdb" />
+                                </predicate>
+                            </Item>
+                        </predicates>
+                    </filter>
+                    <impactsIn>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="SphereAbsorbBuff.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="SpheresCollectedCount.(BuffResource).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                            <spawnResource href="/Maps/AstralDungeon04/SpawnTables/FinalBoss.(SpawnTable).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                            <projectileData>
+                                <moveType type="gameMechanics.world.projectile.MoveTypeIdle">
+                                    <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                </moveType>
+                                <resource href="SphereAbsorbBuff2.(ProjectileResource).xdb" />
+                            </projectileData>
+                        </Item>
+                    </impactsIn>
+                </Item>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                            <pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/Boss04Spheres.(SummonPool).xdb" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                            <mobs>
+                                                <Item href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss04/DarkSphere.(MobWorld).xdb" />
+                                            </mobs>
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.resources.ResourceAnyBuff">
+                                                <buffs>
+                                                    <Item href="SphereMarkers.(BuffResource).xdb" />
+                                                    <Item href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/Wait.(BuffResource).xdb" />
+                                                    <Item href="/Mechanics/Spells/AstarlIslands/AstralDungeon04/Boss04/SummonSphere.(BuffResource).xdb" />
+                                                </buffs>
+                                            </predicate>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="SphereMarkers.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                            <data href="SphereMorph1.(ClientData).xdb" />
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                    <tick>1000</tick>
+                    <initialDelay>250</initialDelay>
+                </Item>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOff>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                            <pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/Boss04Spheres.(SummonPool).xdb" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                            <mobs>
+                                                <Item href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss04/DarkSphere.(MobWorld).xdb" />
+                                            </mobs>
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="SphereAbsorbBuff.(BuffResource).xdb" />
+                                            </predicate>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="SphereMarkers.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                            <data href="SphereMorph2.(ClientData).xdb" />
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                                                    <table href="/Maps/AstralDungeon04/SpawnTables/Boss03_LightSphere.(SpawnTable).xdb" />
+                                                </Item>
+                                            </impactsIf>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                            <spawnResource href="/Maps/AstralDungeon04/SpawnTables/FinalBoss.(SpawnTable).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="DarkSpheresPower.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="LightSphereBuffAOEMain.(BuffResource).xdb" />
+                        </Item>
+                    </impactsOff>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>16500</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectDisableAction">
+                    <action href="LightSphereActionAOE.(SpellSingleTarget).xdb" />
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectDisableSpellsExceptGroup">
+            <groups>
+                <Item href="/Mechanics/Spells/Groups/ActionBarChange.(ActionGroup).xdb" />
+            </groups>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectGiveSpell">
+            <spell href="LightSphereActionSpeed.(SpellSingleTarget).xdb" />
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectGiveSpell">
+            <spell href="LightSphereActionAOE.(SpellSingleTarget).xdb" />
+        </Item>
+    </effects>
+    <duration>15000</duration>
+    <isHelpful>false</isHelpful>
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/RemovesNot.xdb" />
+        <Item href="/Mechanics/Spells/Groups/MapLocalBuffs.xdb" />
+        <Item href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/ActionBarChange.(ActionGroup).xdb" />
+    </groups>
 </gameMechanics.constructor.schemes.buff.BuffResource>

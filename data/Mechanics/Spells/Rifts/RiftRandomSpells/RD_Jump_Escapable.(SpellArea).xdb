@@ -1,111 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gameMechanics.constructor.schemes.spell.area.SpellArea>
-	<Header>
-		<resourceId>739931454</resourceId>
-	</Header>
-	<groups>
-		<Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/RiftTankSpells.(ActionGroup).xdb" />
-		<Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/RiftMeleeSpells.(ActionGroup).xdb" />
-		<Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/HumanoidSpells.(ActionGroup).xdb" />
-	</groups>
-	<Name href="RD_Jump_Escapable.(SpellArea).Name.txt" />
-	<visualScripts href="RD_Jump_Escapable.(SpellVisScripts).xdb" />
-	<range type="gameMechanics.elements.calcers.FloatData">
-		<value>30</value>
-	</range>
-	<prepareDuration>2000</prepareDuration>
-	<targetType>STTPoint</targetType>
-	<iffPolicy>Enemies</iffPolicy>
-	<mechanics>
-		<cooldown>
-			<duration>16000</duration>
-		</cooldown>
-		<targetConditions>
-			<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-			<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-		</targetConditions>
-		<casterImpacts>
-			<Item type="gameMechanics.elements.impacts.ImpactAstralKickToPoint">
-				<time>1000</time>
-				<impactsOnLand>
-					<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-						<radius>6</radius>
-						<affectGroup>Enemies</affectGroup>
-						<impacts>
-							<Item type="gameMechanics.elements.impacts.ImpactAstralKick">
-								<time>500</time>
-								<distance>6</distance>
-							</Item>
-							<Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
-								<impactsOnHitCaster />
-								<impactsOnHitTarget />
-								<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-									<scalers>
-										<Item type="gameMechanics.elements.scalers.WeaponScaler" />
-										<Item type="gameMechanics.elements.scalers.ScalerIf">
-											<condition type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
-												<quality href="/Mechanics/MobQualities/Elite.xdb" />
-											</condition>
-											<scalerIf type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-												<mulCalcer type="constructor.elements.CalcerFloatExternal">
-													<externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/PartiallyEscapableDamageCommon.(CalcerFloatResource).xdb" />
-												</mulCalcer>
-											</scalerIf>
-											<scalerElse type="gameMechanics.elements.scalers.ScalerIf">
-												<condition type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
-													<quality href="/Mechanics/MobQualities/Boss.xdb" />
-												</condition>
-												<scalerIf type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-													<mulCalcer type="constructor.elements.CalcerFloatExternal">
-														<externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/PartiallyEscapableDamageElite.(CalcerFloatResource).xdb" />
-													</mulCalcer>
-												</scalerIf>
-												<scalerElse type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-													<mulCalcer type="constructor.elements.CalcerFloatExternal">
-														<externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/PartiallyEscapableDamageBoss.(CalcerFloatResource).xdb" />
-													</mulCalcer>
-												</scalerElse>
-											</scalerElse>
-										</Item>
-									</scalers>
-								</scaler>
-								<minDamage>1</minDamage>
-								<maxDamage>1</maxDamage>
-							</Item>
-						</impacts>
-						<filter type="gameMechanics.constructor.basicElements.FilterAnd">
-							<filters>
-								<Item type="gameMechanics.world.creature.AvatarFilter" />
-								<Item type="gameMechanics.world.creature.AliveFilter" />
-							</filters>
-						</filter>
-					</Item>
-					<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-						<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
-						<data href="/Mechanics/Spells/Rifts/RiftDungeon1/Mobs/DemonScout2_jump.(ClientData).xdb" />
-					</Item>
-					<Item type="gameMechanics.elements.impacts.PostponedImpacts">
-						<impacts>
-							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-								<buff href="/Mechanics/Spells/Rifts/Abilities/StopBuff.(BuffResource).xdb" />
-							</Item>
-						</impacts>
-					</Item>
-				</impactsOnLand>
-				<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-			</Item>
-			<Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
-				<chanceCalcer type="gameMechanics.elements.calcers.FloatData">
-					<value>0.4</value>
-				</chanceCalcer>
-				<impacts>
-					<Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
-						<spell href="RD_Jump_Escapable.(SpellArea).xdb" />
-					</Item>
-				</impacts>
-			</Item>
-		</casterImpacts>
-	</mechanics>
-	<shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
-	<radius>6</radius>
+    <Header>
+        <resourceId>739931454</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/RiftTankSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/RiftMeleeSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Rifts/RiftSpellGroups/HumanoidSpells.(ActionGroup).xdb" />
+    </groups>
+    <Name href="RD_Jump_Escapable.(SpellArea).Name.txt" />
+    <visualScripts href="RD_Jump_Escapable.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>30</value>
+    </range>
+    <prepareDuration>2000</prepareDuration>
+    <targetType>STTPoint</targetType>
+    <iffPolicy>Enemies</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>16000</duration>
+        </cooldown>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactAstralKickToPoint">
+                <time>1000</time>
+                <impactsOnLand>
+                    <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                        <radius>6</radius>
+                        <affectGroup>Enemies</affectGroup>
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                                <time>500</time>
+                                <distance>6</distance>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                                <impactsOnHitCaster />
+                                <impactsOnHitTarget />
+                                <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                                    <scalers>
+                                        <Item type="gameMechanics.elements.scalers.WeaponScaler" />
+                                        <Item type="gameMechanics.elements.scalers.ScalerIf">
+                                            <condition type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+                                                <quality href="/Mechanics/MobQualities/Elite.xdb" />
+                                            </condition>
+                                            <scalerIf type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                    <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/PartiallyEscapableDamageCommon.(CalcerFloatResource).xdb" />
+                                                </mulCalcer>
+                                            </scalerIf>
+                                            <scalerElse type="gameMechanics.elements.scalers.ScalerIf">
+                                                <condition type="gameMechanics.elements.predicates.PredicateMobQualityLessThan">
+                                                    <quality href="/Mechanics/MobQualities/Boss.xdb" />
+                                                </condition>
+                                                <scalerIf type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                    <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                        <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/PartiallyEscapableDamageElite.(CalcerFloatResource).xdb" />
+                                                    </mulCalcer>
+                                                </scalerIf>
+                                                <scalerElse type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                    <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                                        <externalCalcer href="/Mechanics/Spells/Rifts/ExternalCalcers/PartiallyEscapableDamageBoss.(CalcerFloatResource).xdb" />
+                                                    </mulCalcer>
+                                                </scalerElse>
+                                            </scalerElse>
+                                        </Item>
+                                    </scalers>
+                                </scaler>
+                                <minDamage>1</minDamage>
+                                <maxDamage>1</maxDamage>
+                            </Item>
+                        </impacts>
+                        <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                            <filters>
+                                <Item type="gameMechanics.world.creature.AvatarFilter" />
+                                <Item type="gameMechanics.world.creature.AliveFilter" />
+                            </filters>
+                        </filter>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                        <data href="/Mechanics/Spells/Rifts/RiftDungeon1/Mobs/DemonScout2_jump.(ClientData).xdb" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/Mechanics/Spells/Rifts/Abilities/StopBuff.(BuffResource).xdb" />
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsOnLand>
+                <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                    <value>0.4</value>
+                </chanceCalcer>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactClearSpellCooldown">
+                        <spell href="RD_Jump_Escapable.(SpellArea).xdb" />
+                    </Item>
+                </impacts>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+    <radius>6</radius>
 </gameMechanics.constructor.schemes.spell.area.SpellArea>

@@ -1,329 +1,329 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
-	<Header>
-		<resourceId>739920308</resourceId>
-	</Header>
-	<name href="GiveZealVariable.(AbilityResource).Name.txt" />
-	<description href="GiveZealVariable.(AbilityResource).Description.txt" />
-	<image href="/Interface/Icons/Spells/Priest/PriestZeal.(UISingleTexture).xdb" />
-	<effects>
-		<Item type="gameMechanics.elements.effects.EffectVariable">
-			<resource href="Zeal.(VariableResource).xdb" />
-			<impactsOnChange>
-				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-					<predicates>
-						<Item type="gameMechanics.constructor.basicElements.PredicateAnd">
-							<predicates>
-								<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-									<predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
-								</Item>
-								<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-									<predicate type="gameMechanics.elements.predicates.PredicateVariableEquals">
-										<resource href="Zeal.(VariableResource).xdb" />
-										<value>2</value>
-									</predicate>
-								</Item>
-							</predicates>
-						</Item>
-					</predicates>
-					<impactsIf>
-						<Item type="gameMechanics.elements.impacts.ImpactVariableReset">
-							<variable href="Zeal.(VariableResource).xdb" />
-						</Item>
-					</impactsIf>
-					<impactsElse />
-				</Item>
-			</impactsOnChange>
-			<impactsOnInc>
-				<Item type="gameMechanics.elements.impacts.RepeatedImpactScale">
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.PostponedImpacts">
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-									<predicates>
-										<Item type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
-											<resource href="Zeal.(VariableResource).xdb" />
-											<minValue>1</minValue>
-										</Item>
-										<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-											<predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
-										</Item>
-									</predicates>
-									<impactsIf>
-										<Item type="gameMechanics.elements.impacts.ImpactVariableReset">
-											<variable href="Zeal.(VariableResource).xdb" />
-										</Item>
-									</impactsIf>
-								</Item>
-							</impacts>
-						</Item>
-						<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-							<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
-							<data href="NewZeal.(ClientData).xdb" />
-						</Item>
-					</impacts>
-				</Item>
-			</impactsOnInc>
-			<impactsOnDec>
-				<Item type="gameMechanics.elements.impacts.RepeatedImpactScale">
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-							<predicates>
-								<Item type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
-									<resource href="Faith.(VariableResource).xdb" />
-									<minValue>2</minValue>
-								</Item>
-							</predicates>
-							<impactsIf>
-								<Item type="gameMechanics.elements.impacts.PostponedImpacts">
-									<impacts>
-										<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-											<impacts>
-												<Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
-													<variable href="Zeal.(VariableResource).xdb" />
-												</Item>
-												<Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
-													<variable href="Faith.(VariableResource).xdb" />
-													<summand>-3</summand>
-												</Item>
-											</impacts>
-										</Item>
-									</impacts>
-								</Item>
-							</impactsIf>
-						</Item>
-					</impacts>
-				</Item>
-			</impactsOnDec>
-			<valueTriggers>
-				<Item>
-					<onGreaterOrEqual>true</onGreaterOrEqual>
-					<value type="gameMechanics.elements.calcers.FloatData">
-						<value>1</value>
-					</value>
-					<effects>
-						<Item type="gameMechanics.elements.effects.SpellPrepareDurationModifier">
-							<spell href="/Mechanics/Spells/Priest63/Spells/HeavenlyStrike/Spell01.(SpellArea).xdb" />
-							<factor>-1</factor>
-						</Item>
-						<Item type="gameMechanics.elements.effects.SpellPrepareDurationModifier">
-							<spell href="/Mechanics/Spells/Priest63/Spells/ChainSmite/Spell01.(SpellSingleTarget).xdb" />
-							<factor>-1</factor>
-						</Item>
-						<Item type="gameMechanics.elements.effects.SpellPrepareDurationModifier">
-							<spell href="/Mechanics/Spells/Priest63/Spells/CompleteHealUpgrade/Spell01.(SpellSingleTarget).xdb" />
-							<factor>-1</factor>
-						</Item>
-						<Item type="gameMechanics.elements.effects.SpellPrepareDurationModifier">
-							<spell href="/Mechanics/Spells/Priest63/Spells/CompleteHeal/Spell01.(SpellSingleTarget).xdb" />
-							<factor>-1</factor>
-						</Item>
-						<Item type="gameMechanics.elements.effects.SpellCastTrigger">
-							<conditionalImpacts>
-								<Item>
-									<impacts>
-										<Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
-											<variable href="Zeal.(VariableResource).xdb" />
-											<summand>-1</summand>
-										</Item>
-									</impacts>
-									<conditions>
-										<Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
-											<spells>
-												<Item href="/Mechanics/Spells/Priest63/Spells/HeavenlyStrike/Spell01.(SpellArea).xdb" />
-											</spells>
-										</Item>
-									</conditions>
-								</Item>
-							</conditionalImpacts>
-							<stages>
-								<Item>Start</Item>
-							</stages>
-						</Item>
-						<Item type="gameMechanics.elements.effects.SpellCastTrigger">
-							<conditionalImpacts>
-								<Item>
-									<impacts>
-										<Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
-											<variable href="Zeal.(VariableResource).xdb" />
-											<summand>-1</summand>
-										</Item>
-									</impacts>
-									<conditions>
-										<Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
-											<spells>
-												<Item href="/Mechanics/Spells/Priest63/Spells/CompleteHealUpgrade/Spell01.(SpellSingleTarget).xdb" />
-											</spells>
-										</Item>
-									</conditions>
-								</Item>
-							</conditionalImpacts>
-							<stages>
-								<Item>Start</Item>
-							</stages>
-						</Item>
-						<Item type="gameMechanics.elements.effects.SpellCastTrigger">
-							<conditionalImpacts>
-								<Item>
-									<impacts>
-										<Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
-											<variable href="Zeal.(VariableResource).xdb" />
-											<summand>-1</summand>
-										</Item>
-									</impacts>
-									<conditions>
-										<Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
-											<spells>
-												<Item href="/Mechanics/Spells/Priest63/Spells/ChainSmite/Spell01.(SpellSingleTarget).xdb" />
-											</spells>
-										</Item>
-									</conditions>
-								</Item>
-							</conditionalImpacts>
-							<stages>
-								<Item>Start</Item>
-							</stages>
-						</Item>
-					</effects>
-				</Item>
-				<Item>
-					<value type="gameMechanics.elements.calcers.CalcerDiff">
-						<minuend type="gameMechanics.elements.calcers.CalcerVariableMaxValue">
-							<variable href="Zeal.(VariableResource).xdb" />
-						</minuend>
-						<subtrahend type="gameMechanics.elements.calcers.FloatData">
-							<value>1</value>
-						</subtrahend>
-					</value>
-					<effects>
-						<Item type="gameMechanics.elements.effects.Switch">
-							<impactsOn>
-								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-									<predicates>
-										<Item type="gameMechanics.elements.predicates.PredicateEqualsLong">
-											<lhs type="gameMechanics.elements.calcers.FloatToLongCalcer">
-												<calcer type="gameMechanics.elements.calcers.VariableValueCalcer">
-													<variable href="Faith.(VariableResource).xdb" />
-												</calcer>
-											</lhs>
-											<rhs type="gameMechanics.elements.calcers.FloatToLongCalcer">
-												<calcer type="gameMechanics.elements.calcers.CalcerVariableMaxValue">
-													<variable href="Faith.(VariableResource).xdb" />
-												</calcer>
-											</rhs>
-										</Item>
-									</predicates>
-									<impactsIf>
-										<Item type="gameMechanics.elements.impacts.ImpactVariableReset">
-											<variable href="Faith.(VariableResource).xdb" />
-										</Item>
-										<Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
-											<variable href="Zeal.(VariableResource).xdb" />
-										</Item>
-									</impactsIf>
-								</Item>
-							</impactsOn>
-						</Item>
-					</effects>
-				</Item>
-			</valueTriggers>
-		</Item>
-		<Item type="gameMechanics.elements.effects.EffectVariable">
-			<resource href="Faith.(VariableResource).xdb" />
-			<impactsOnChange>
-				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-					<predicates>
-						<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-							<predicate type="gameMechanics.elements.predicates.PredicateEqualsLong">
-								<lhs type="gameMechanics.elements.calcers.FloatToLongCalcer">
-									<calcer type="gameMechanics.elements.calcers.VariableValueCalcer">
-										<variable href="Zeal.(VariableResource).xdb" />
-									</calcer>
-								</lhs>
-								<rhs type="gameMechanics.elements.calcers.FloatToLongCalcer">
-									<calcer type="gameMechanics.elements.calcers.CalcerVariableMaxValue">
-										<variable href="Zeal.(VariableResource).xdb" />
-									</calcer>
-								</rhs>
-							</predicate>
-						</Item>
-						<Item type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
-							<resource href="Faith.(VariableResource).xdb" />
-							<minValue>2</minValue>
-						</Item>
-					</predicates>
-					<impactsIf>
-						<Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
-							<variable href="Zeal.(VariableResource).xdb" />
-						</Item>
-						<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
-									<variable href="Faith.(VariableResource).xdb" />
-									<summand>-3</summand>
-								</Item>
-							</impacts>
-						</Item>
-					</impactsIf>
-					<impactsElse>
-						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-							<predicates>
-								<Item type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
-									<resource href="Faith.(VariableResource).xdb" />
-									<minValue>3</minValue>
-								</Item>
-							</predicates>
-							<impactsIf>
-								<Item type="gameMechanics.elements.impacts.PostponedImpacts">
-									<impacts>
-										<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-											<impacts>
-												<Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
-													<variable href="Faith.(VariableResource).xdb" />
-													<summand>-1</summand>
-													<scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-														<mulCalcer type="gameMechanics.elements.calcers.CalcerDiff">
-															<minuend type="gameMechanics.elements.calcers.VariableValueCalcer">
-																<variable href="Faith.(VariableResource).xdb" />
-															</minuend>
-															<subtrahend type="gameMechanics.elements.calcers.FloatData">
-																<value>3</value>
-															</subtrahend>
-														</mulCalcer>
-													</scaler>
-												</Item>
-											</impacts>
-										</Item>
-									</impacts>
-								</Item>
-							</impactsIf>
-						</Item>
-					</impactsElse>
-				</Item>
-			</impactsOnChange>
-		</Item>
-		<Item type="gameMechanics.elements.effects.AbilityUnlockerEffect">
-			<abilities>
-				<Item href="ZealOvertime.(AbilityResource).xdb" />
-			</abilities>
-		</Item>
-		<Item type="gameMechanics.elements.effects.CombatStateTrigger">
-			<onLeave>
-				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-					<buff href="CombatReset.(BuffResource).xdb" />
-				</Item>
-			</onLeave>
-		</Item>
-		<Item type="gameMechanics.elements.effects.EventTrigger">
-			<eventClasses>
-				<Item>gameMechanics.elements.events.EventRevive</Item>
-			</eventClasses>
-			<impacts>
-				<Item type="gameMechanics.elements.impacts.ImpactVariableReset">
-					<variable href="Zeal.(VariableResource).xdb" />
-				</Item>
-			</impacts>
-			<eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
-		</Item>
-	</effects>
+    <Header>
+        <resourceId>739920308</resourceId>
+    </Header>
+    <name href="GiveZealVariable.(AbilityResource).Name.txt" />
+    <description href="GiveZealVariable.(AbilityResource).Description.txt" />
+    <image href="/Interface/Icons/Spells/Priest/PriestZeal.(UISingleTexture).xdb" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.EffectVariable">
+            <resource href="Zeal.(VariableResource).xdb" />
+            <impactsOnChange>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                </Item>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.elements.predicates.PredicateVariableEquals">
+                                        <resource href="Zeal.(VariableResource).xdb" />
+                                        <value>2</value>
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                            <variable href="Zeal.(VariableResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                    <impactsElse />
+                </Item>
+            </impactsOnChange>
+            <impactsOnInc>
+                <Item type="gameMechanics.elements.impacts.RepeatedImpactScale">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
+                                            <resource href="Zeal.(VariableResource).xdb" />
+                                            <minValue>1</minValue>
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                                            <variable href="Zeal.(VariableResource).xdb" />
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                            <data href="NewZeal.(ClientData).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOnInc>
+            <impactsOnDec>
+                <Item type="gameMechanics.elements.impacts.RepeatedImpactScale">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
+                                    <resource href="Faith.(VariableResource).xdb" />
+                                    <minValue>2</minValue>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                                                    <variable href="Zeal.(VariableResource).xdb" />
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                                                    <variable href="Faith.(VariableResource).xdb" />
+                                                    <summand>-3</summand>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOnDec>
+            <valueTriggers>
+                <Item>
+                    <onGreaterOrEqual>true</onGreaterOrEqual>
+                    <value type="gameMechanics.elements.calcers.FloatData">
+                        <value>1</value>
+                    </value>
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.SpellPrepareDurationModifier">
+                            <spell href="/Mechanics/Spells/Priest63/Spells/HeavenlyStrike/Spell01.(SpellArea).xdb" />
+                            <factor>-1</factor>
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.SpellPrepareDurationModifier">
+                            <spell href="/Mechanics/Spells/Priest63/Spells/ChainSmite/Spell01.(SpellSingleTarget).xdb" />
+                            <factor>-1</factor>
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.SpellPrepareDurationModifier">
+                            <spell href="/Mechanics/Spells/Priest63/Spells/CompleteHealUpgrade/Spell01.(SpellSingleTarget).xdb" />
+                            <factor>-1</factor>
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.SpellPrepareDurationModifier">
+                            <spell href="/Mechanics/Spells/Priest63/Spells/CompleteHeal/Spell01.(SpellSingleTarget).xdb" />
+                            <factor>-1</factor>
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+                            <conditionalImpacts>
+                                <Item>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                                            <variable href="Zeal.(VariableResource).xdb" />
+                                            <summand>-1</summand>
+                                        </Item>
+                                    </impacts>
+                                    <conditions>
+                                        <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                                            <spells>
+                                                <Item href="/Mechanics/Spells/Priest63/Spells/HeavenlyStrike/Spell01.(SpellArea).xdb" />
+                                            </spells>
+                                        </Item>
+                                    </conditions>
+                                </Item>
+                            </conditionalImpacts>
+                            <stages>
+                                <Item>Start</Item>
+                            </stages>
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+                            <conditionalImpacts>
+                                <Item>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                                            <variable href="Zeal.(VariableResource).xdb" />
+                                            <summand>-1</summand>
+                                        </Item>
+                                    </impacts>
+                                    <conditions>
+                                        <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                                            <spells>
+                                                <Item href="/Mechanics/Spells/Priest63/Spells/CompleteHealUpgrade/Spell01.(SpellSingleTarget).xdb" />
+                                            </spells>
+                                        </Item>
+                                    </conditions>
+                                </Item>
+                            </conditionalImpacts>
+                            <stages>
+                                <Item>Start</Item>
+                            </stages>
+                        </Item>
+                        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+                            <conditionalImpacts>
+                                <Item>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                                            <variable href="Zeal.(VariableResource).xdb" />
+                                            <summand>-1</summand>
+                                        </Item>
+                                    </impacts>
+                                    <conditions>
+                                        <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                                            <spells>
+                                                <Item href="/Mechanics/Spells/Priest63/Spells/ChainSmite/Spell01.(SpellSingleTarget).xdb" />
+                                            </spells>
+                                        </Item>
+                                    </conditions>
+                                </Item>
+                            </conditionalImpacts>
+                            <stages>
+                                <Item>Start</Item>
+                            </stages>
+                        </Item>
+                    </effects>
+                </Item>
+                <Item>
+                    <value type="gameMechanics.elements.calcers.CalcerDiff">
+                        <minuend type="gameMechanics.elements.calcers.CalcerVariableMaxValue">
+                            <variable href="Zeal.(VariableResource).xdb" />
+                        </minuend>
+                        <subtrahend type="gameMechanics.elements.calcers.FloatData">
+                            <value>1</value>
+                        </subtrahend>
+                    </value>
+                    <effects>
+                        <Item type="gameMechanics.elements.effects.Switch">
+                            <impactsOn>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateEqualsLong">
+                                            <lhs type="gameMechanics.elements.calcers.FloatToLongCalcer">
+                                                <calcer type="gameMechanics.elements.calcers.VariableValueCalcer">
+                                                    <variable href="Faith.(VariableResource).xdb" />
+                                                </calcer>
+                                            </lhs>
+                                            <rhs type="gameMechanics.elements.calcers.FloatToLongCalcer">
+                                                <calcer type="gameMechanics.elements.calcers.CalcerVariableMaxValue">
+                                                    <variable href="Faith.(VariableResource).xdb" />
+                                                </calcer>
+                                            </rhs>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                                            <variable href="Faith.(VariableResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                                            <variable href="Zeal.(VariableResource).xdb" />
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impactsOn>
+                        </Item>
+                    </effects>
+                </Item>
+            </valueTriggers>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectVariable">
+            <resource href="Faith.(VariableResource).xdb" />
+            <impactsOnChange>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                            <predicate type="gameMechanics.elements.predicates.PredicateEqualsLong">
+                                <lhs type="gameMechanics.elements.calcers.FloatToLongCalcer">
+                                    <calcer type="gameMechanics.elements.calcers.VariableValueCalcer">
+                                        <variable href="Zeal.(VariableResource).xdb" />
+                                    </calcer>
+                                </lhs>
+                                <rhs type="gameMechanics.elements.calcers.FloatToLongCalcer">
+                                    <calcer type="gameMechanics.elements.calcers.CalcerVariableMaxValue">
+                                        <variable href="Zeal.(VariableResource).xdb" />
+                                    </calcer>
+                                </rhs>
+                            </predicate>
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
+                            <resource href="Faith.(VariableResource).xdb" />
+                            <minValue>2</minValue>
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                            <variable href="Zeal.(VariableResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                                    <variable href="Faith.(VariableResource).xdb" />
+                                    <summand>-3</summand>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
+                                    <resource href="Faith.(VariableResource).xdb" />
+                                    <minValue>3</minValue>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                                                    <variable href="Faith.(VariableResource).xdb" />
+                                                    <summand>-1</summand>
+                                                    <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                        <mulCalcer type="gameMechanics.elements.calcers.CalcerDiff">
+                                                            <minuend type="gameMechanics.elements.calcers.VariableValueCalcer">
+                                                                <variable href="Faith.(VariableResource).xdb" />
+                                                            </minuend>
+                                                            <subtrahend type="gameMechanics.elements.calcers.FloatData">
+                                                                <value>3</value>
+                                                            </subtrahend>
+                                                        </mulCalcer>
+                                                    </scaler>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </impactsOnChange>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AbilityUnlockerEffect">
+            <abilities>
+                <Item href="ZealOvertime.(AbilityResource).xdb" />
+            </abilities>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onLeave>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="CombatReset.(BuffResource).xdb" />
+                </Item>
+            </onLeave>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EventTrigger">
+            <eventClasses>
+                <Item>gameMechanics.elements.events.EventRevive</Item>
+            </eventClasses>
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                    <variable href="Zeal.(VariableResource).xdb" />
+                </Item>
+            </impacts>
+            <eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+        </Item>
+    </effects>
 </gameMechanics.constructor.schemes.ability.AbilityResource>

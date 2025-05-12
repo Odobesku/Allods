@@ -1,227 +1,227 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-	<Header>
-		<resourceId>739846318</resourceId>
-		<isPrototype>true</isPrototype>
-	</Header>
-	<groups>
-		<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
-		<Item href="/Mechanics/Spells/Groups/MeleeAttacks.xdb" />
-	</groups>
-	<element>LIGHTNING</element>
-	<Name href="Spell.(SpellSingleTarget).Name.txt" />
-	<Description href="Spell.(SpellSingleTarget).Description.txt" />
-	<descVars>
-		<Item>
-			<name>ImmunityTime</name>
-			<value var="ImmunityDuration" />
-			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-				<formula>FormulaSeconds</formula>
-			</scaler>
-		</Item>
-		<Item>
-			<name>StunTime</name>
-			<value var="StunDuration" />
-			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-				<formula>FormulaSeconds</formula>
-			</scaler>
-		</Item>
-		<Item>
-			<name>dmg</name>
-			<value var="damage" />
-			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-				<formula>MagicScaler</formula>
-			</scaler>
-		</Item>
-	</descVars>
-	<image href="/Interface/Icons/Spells/Engineer/Defibrillation.(UISingleTexture).xdb" />
-	<visualScripts href="/Spells/VisScripts/Engineer/Defibrillation.(SpellVisScripts).xdb" />
-	<range type="gameMechanics.elements.calcers.FloatData">
-		<value>20</value>
-	</range>
-	<prepareDuration>3000</prepareDuration>
-	<targetType>STTCurrentTargetNotSelf</targetType>
-	<isWorkOnDead>true</isWorkOnDead>
-	<ranks>
-		<Item href="Spell01.(SpellSingleTarget).xdb" />
-		<Item href="Spell02.(SpellSingleTarget).xdb" />
-		<Item href="Spell03.(SpellSingleTarget).xdb" />
-	</ranks>
-	<launchWhenReady>true</launchWhenReady>
-	<mechanics>
-		<conditions>
-			<Item type="gameMechanics.constructor.basicElements.BinaryPredicateOr">
-				<predicates>
-					<Item type="gameMechanics.constructor.basicElements.BinaryPredicateAnd">
-						<predicates>
-							<Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
-								<affectGroup>Enemies</affectGroup>
-							</Item>
-							<Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
-								<onSlave type="gameMechanics.elements.predicates.PredicateIsAlive" />
-							</Item>
-						</predicates>
-					</Item>
-					<Item type="gameMechanics.constructor.basicElements.BinaryPredicateAnd">
-						<predicates>
-							<Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
-								<onSlave type="gameMechanics.constructor.basicElements.PredicateAnd">
-									<predicates>
-										<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-											<predicate type="gameMechanics.constructor.basicElements.PredicateOr">
-												<predicates>
-													<Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
-														<buff href="/Mechanics/RaidInstances/BattleResLimit/NoRes.(BuffResource).xdb" />
-														<range>
-															<min>4</min>
-															<max>4</max>
-														</range>
-													</Item>
-													<Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
-														<buff href="/Mechanics/RaidInstances/BattleResLimit/NoResSmallRaid.(BuffResource).xdb" />
-														<range>
-															<min>2</min>
-															<max>2</max>
-														</range>
-													</Item>
-												</predicates>
-											</predicate>
-										</Item>
-										<Item type="gameMechanics.elements.predicates.PredicateIsDead" />
-										<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-											<predicate type="gameMechanics.elements.predicates.PredicateResurrectActive" />
-										</Item>
-										<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-											<predicate type="gameMechanics.elements.resources.ResourceBuff">
-												<buff href="/Mechanics/InstancedEventResource/RatePvPArena/Arena_Revive.(BuffResource).xdb" />
-											</predicate>
-										</Item>
-									</predicates>
-								</onSlave>
-							</Item>
-							<Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
-								<affectGroup>Raid</affectGroup>
-							</Item>
-						</predicates>
-					</Item>
-				</predicates>
-			</Item>
-		</conditions>
-		<casterImpacts>
-			<Item type="gameMechanics.constructor.basicElements.ImpactList">
-				<impactsResource href="/Mechanics/Spells/Engineer/EngineerDismount.(ImpactListResource).xdb" />
-			</Item>
-		</casterImpacts>
-		<targetImpacts>
-			<Item type="gameMechanics.elements.impacts.ImpactsIf">
-				<predicate type="gameMechanics.elements.predicates.PredicateAffectGroup">
-					<affectGroup>Friends</affectGroup>
-				</predicate>
-				<impactsIf>
-					<Item type="gameMechanics.elements.impacts.Resurrect">
-						<impacts>
-							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-								<buff hrefvar="buff" />
-								<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-									<mulCalcer type="gameMechanics.elements.calcers.CalcerSum">
-										<summands>
-											<Item type="gameMechanics.elements.calcers.AbilityRankCalcer">
-												<ability href="/Mechanics/Spells/Engineer/Abilities/DefibrilationUpg/Ability01.xdb" />
-												<mul>1</mul>
-											</Item>
-											<Item type="gameMechanics.elements.calcers.SpellRankCalcer">
-												<spell href="Spell01.(SpellSingleTarget).xdb" />
-												<mul>1</mul>
-											</Item>
-										</summands>
-									</mulCalcer>
-								</durationScaler>
-							</Item>
-							<Item type="gameMechanics.elements.impacts.ImpactBaseHealth">
-								<healthMultiplier>0.01</healthMultiplier>
-							</Item>
-							<Item type="gameMechanics.elements.impacts.ImpactBaseMana">
-								<manaMultiplier>0.2</manaMultiplier>
-							</Item>
-							<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-								<predicates>
-									<Item type="gameMechanics.elements.resources.ResourceBuff">
-										<buff href="/Mechanics/RaidInstances/BattleResLimit/NoResInstance.(BuffResource).xdb" />
-									</Item>
-									<Item type="gameMechanics.elements.predicates.PredicateInCombat" />
-								</predicates>
-								<impactsIf>
-									<Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
-										<variable href="/Mechanics/RaidInstances/BattleResLimit/BattleResLimitRaid.(MapVariableResource).xdb" />
-										<summand>1</summand>
-									</Item>
-								</impactsIf>
-							</Item>
-							<Item type="gameMechanics.constructor.basicElements.ImpactList">
-								<impactsResource href="/Mechanics/Spells/CommonSpells/TeleportToResurrecter/EngineerBattle.(ImpactListResource).xdb" />
-							</Item>
-						</impacts>
-						<timeOut>1</timeOut>
-						<force>true</force>
-					</Item>
-					<Item type="gameMechanics.elements.impacts.ReturningImpact">
-						<impacts>
-							<Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
-								<spell href="Spell01.(SpellSingleTarget).xdb" />
-								<duration>900000</duration>
-								<scaler type="gameMechanics.elements.scalers.AbilityRankScaler">
-									<ability href="/Mechanics/Spells/Engineer/Abilities/DefibrilationUpg/Ability01.xdb" />
-									<mul>-0.11</mul>
-								</scaler>
-							</Item>
-						</impacts>
-					</Item>
-				</impactsIf>
-				<impactsElse>
-					<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
-						<element>LIGHTNING</element>
-						<damage var="damage" />
-						<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-							<scalers>
-								<Item type="gameMechanics.elements.scalers.MagicScaler" />
-								<Item type="gameMechanics.elements.scalers.AbilityRankScaler">
-									<ability href="/Mechanics/Spells/Engineer/Abilities/ExtraElectroControl/Ability01.(AbilityResource).xdb" />
-									<mul>-0.11</mul>
-								</Item>
-							</scalers>
-						</scaler>
-					</Item>
-					<Item type="gameMechanics.elements.impacts.ReturningImpact">
-						<impacts>
-							<Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
-								<spell href="Spell01.(SpellSingleTarget).xdb" />
-								<duration>60000</duration>
-								<scaler type="gameMechanics.elements.scalers.AbilityRankScaler">
-									<ability href="/Mechanics/Spells/Engineer/Abilities/ExtraElectroControl/Ability01.(AbilityResource).xdb" />
-									<mul>-0.11</mul>
-								</scaler>
-							</Item>
-						</impacts>
-					</Item>
-					<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-						<buff href="/Mechanics/Spells/CommonBuffs/Stun/BuffStun.xdb" />
-						<durationScaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-							<scalers>
-								<Item type="gameMechanics.elements.scalers.LinearScaler">
-									<multiplier var="StunDuration" />
-								</Item>
-								<Item type="gameMechanics.elements.scalers.AbilityRankScaler">
-									<ability href="/Mechanics/Spells/Engineer/Abilities/ExtraElectroControl/Ability01.(AbilityResource).xdb" />
-									<mul>0.3333</mul>
-								</Item>
-								<Item type="gameMechanics.elements.scalers.LinearScaler">
-									<multiplier>0.001</multiplier>
-								</Item>
-							</scalers>
-						</durationScaler>
-					</Item>
-				</impactsElse>
-			</Item>
-		</targetImpacts>
-	</mechanics>
+    <Header>
+        <resourceId>739846318</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/MeleeAttacks.xdb" />
+    </groups>
+    <element>LIGHTNING</element>
+    <Name href="Spell.(SpellSingleTarget).Name.txt" />
+    <Description href="Spell.(SpellSingleTarget).Description.txt" />
+    <descVars>
+        <Item>
+            <name>ImmunityTime</name>
+            <value var="ImmunityDuration" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>FormulaSeconds</formula>
+            </scaler>
+        </Item>
+        <Item>
+            <name>StunTime</name>
+            <value var="StunDuration" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>FormulaSeconds</formula>
+            </scaler>
+        </Item>
+        <Item>
+            <name>dmg</name>
+            <value var="damage" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>MagicScaler</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Engineer/Defibrillation.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Engineer/Defibrillation.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>20</value>
+    </range>
+    <prepareDuration>3000</prepareDuration>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <isWorkOnDead>true</isWorkOnDead>
+    <ranks>
+        <Item href="Spell01.(SpellSingleTarget).xdb" />
+        <Item href="Spell02.(SpellSingleTarget).xdb" />
+        <Item href="Spell03.(SpellSingleTarget).xdb" />
+    </ranks>
+    <launchWhenReady>true</launchWhenReady>
+    <mechanics>
+        <conditions>
+            <Item type="gameMechanics.constructor.basicElements.BinaryPredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.BinaryPredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
+                                <affectGroup>Enemies</affectGroup>
+                            </Item>
+                            <Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
+                                <onSlave type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                            </Item>
+                        </predicates>
+                    </Item>
+                    <Item type="gameMechanics.constructor.basicElements.BinaryPredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.BinaryPredicateWrapper">
+                                <onSlave type="gameMechanics.constructor.basicElements.PredicateAnd">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                                        <buff href="/Mechanics/RaidInstances/BattleResLimit/NoRes.(BuffResource).xdb" />
+                                                        <range>
+                                                            <min>4</min>
+                                                            <max>4</max>
+                                                        </range>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+                                                        <buff href="/Mechanics/RaidInstances/BattleResLimit/NoResSmallRaid.(BuffResource).xdb" />
+                                                        <range>
+                                                            <min>2</min>
+                                                            <max>2</max>
+                                                        </range>
+                                                    </Item>
+                                                </predicates>
+                                            </predicate>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.predicates.PredicateIsDead" />
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.predicates.PredicateResurrectActive" />
+                                        </Item>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                <buff href="/Mechanics/InstancedEventResource/RatePvPArena/Arena_Revive.(BuffResource).xdb" />
+                                            </predicate>
+                                        </Item>
+                                    </predicates>
+                                </onSlave>
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
+                                <affectGroup>Raid</affectGroup>
+                            </Item>
+                        </predicates>
+                    </Item>
+                </predicates>
+            </Item>
+        </conditions>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                <impactsResource href="/Mechanics/Spells/Engineer/EngineerDismount.(ImpactListResource).xdb" />
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactsIf">
+                <predicate type="gameMechanics.elements.predicates.PredicateAffectGroup">
+                    <affectGroup>Friends</affectGroup>
+                </predicate>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.Resurrect">
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff hrefvar="buff" />
+                                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mulCalcer type="gameMechanics.elements.calcers.CalcerSum">
+                                        <summands>
+                                            <Item type="gameMechanics.elements.calcers.AbilityRankCalcer">
+                                                <ability href="/Mechanics/Spells/Engineer/Abilities/DefibrilationUpg/Ability01.xdb" />
+                                                <mul>1</mul>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.calcers.SpellRankCalcer">
+                                                <spell href="Spell01.(SpellSingleTarget).xdb" />
+                                                <mul>1</mul>
+                                            </Item>
+                                        </summands>
+                                    </mulCalcer>
+                                </durationScaler>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactBaseHealth">
+                                <healthMultiplier>0.01</healthMultiplier>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactBaseMana">
+                                <manaMultiplier>0.2</manaMultiplier>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                        <buff href="/Mechanics/RaidInstances/BattleResLimit/NoResInstance.(BuffResource).xdb" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                                        <variable href="/Mechanics/RaidInstances/BattleResLimit/BattleResLimitRaid.(MapVariableResource).xdb" />
+                                        <summand>1</summand>
+                                    </Item>
+                                </impactsIf>
+                            </Item>
+                            <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                <impactsResource href="/Mechanics/Spells/CommonSpells/TeleportToResurrecter/EngineerBattle.(ImpactListResource).xdb" />
+                            </Item>
+                        </impacts>
+                        <timeOut>1</timeOut>
+                        <force>true</force>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                                <spell href="Spell01.(SpellSingleTarget).xdb" />
+                                <duration>900000</duration>
+                                <scaler type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                    <ability href="/Mechanics/Spells/Engineer/Abilities/DefibrilationUpg/Ability01.xdb" />
+                                    <mul>-0.11</mul>
+                                </scaler>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                        <element>LIGHTNING</element>
+                        <damage var="damage" />
+                        <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                            <scalers>
+                                <Item type="gameMechanics.elements.scalers.MagicScaler" />
+                                <Item type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                    <ability href="/Mechanics/Spells/Engineer/Abilities/ExtraElectroControl/Ability01.(AbilityResource).xdb" />
+                                    <mul>-0.11</mul>
+                                </Item>
+                            </scalers>
+                        </scaler>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                                <spell href="Spell01.(SpellSingleTarget).xdb" />
+                                <duration>60000</duration>
+                                <scaler type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                    <ability href="/Mechanics/Spells/Engineer/Abilities/ExtraElectroControl/Ability01.(AbilityResource).xdb" />
+                                    <mul>-0.11</mul>
+                                </scaler>
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="/Mechanics/Spells/CommonBuffs/Stun/BuffStun.xdb" />
+                        <durationScaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                            <scalers>
+                                <Item type="gameMechanics.elements.scalers.LinearScaler">
+                                    <multiplier var="StunDuration" />
+                                </Item>
+                                <Item type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                    <ability href="/Mechanics/Spells/Engineer/Abilities/ExtraElectroControl/Ability01.(AbilityResource).xdb" />
+                                    <mul>0.3333</mul>
+                                </Item>
+                                <Item type="gameMechanics.elements.scalers.LinearScaler">
+                                    <multiplier>0.001</multiplier>
+                                </Item>
+                            </scalers>
+                        </durationScaler>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </targetImpacts>
+    </mechanics>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

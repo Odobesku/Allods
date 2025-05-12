@@ -1,252 +1,252 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-	<Header>
-		<resourceId>739849230</resourceId>
-		<isPrototype>true</isPrototype>
-	</Header>
-	<groups>
-		<Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-	</groups>
-	<Name href="TakeUp_SpellProto.(SpellSingleTarget).Name.txt" />
-	<Description href="TakeUp_SpellProto.(SpellSingleTarget).Description.txt" />
-	<image href="/Interface/Icons/Spells/WornHands.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
-	<visualScripts href="/Mechanics/Spells/Family/TakeOnHands/TakeOnHandsFlirt.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
-	<uiSpellBookPageType>SPELLBOOK_PAGE_OTHER</uiSpellBookPageType>
-	<range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
-	<prepareDuration>3100</prepareDuration>
-	<targetType>STTCurrentTargetNotSelf</targetType>
-	<isAggro>false</isAggro>
-	<replaceLowRanks>false</replaceLowRanks>
-	<iffPolicy>Friends</iffPolicy>
-	<launchWhenReady>true</launchWhenReady>
-	<mechanics>
-		<casterConditions>
-			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-				<predicate type="gameMechanics.elements.resources.ResourceBuff">
-					<buff hrefvar="CasterBuff" />
-				</predicate>
-			</Item>
-			<Item type="gameMechanics.constructor.basicElements.PredicateExternal">
-				<predicateResource href="TakeUp_PredicatesOnCasterAndTarget.(PredicateResource).xdb#xpointer(/gameMechanics.constructor.basicElements.PredicateResource)" />
-			</Item>
-		</casterConditions>
-		<targetConditions>
-			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-				<predicate type="gameMechanics.elements.resources.ResourceBuff">
-					<buff hrefvar="TargetBuff" />
-				</predicate>
-			</Item>
-			<Item type="gameMechanics.constructor.basicElements.PredicateExternal">
-				<predicateResource href="TakeUp_PredicatesOnCasterAndTarget.(PredicateResource).xdb#xpointer(/gameMechanics.constructor.basicElements.PredicateResource)" />
-			</Item>
-			<Item type="gameMechanics.elements.predicates.PredicateCharacterSex">
-				<sex hrefvar="wrongCasterSex" />
-			</Item>
-		</targetConditions>
-		<targetImpacts>
-			<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-				<predicates>
-					<Item type="gameMechanics.elements.predicates.PredicateCharacterSex">
-						<sex hrefvar="wrongCasterSex" />
-					</Item>
-				</predicates>
-				<impacts>
-					<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-						<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-						<data hrefvar="ClientData" />
-					</Item>
-				</impacts>
-				<elseImpacts>
-					<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-						<buff href="/Mechanics/Mounts/Prototypes/QuizTarget.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-						<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-							<multiplier>30</multiplier>
-						</durationScaler>
-					</Item>
-					<Item type="gameMechanics.elements.impacts.ReturningImpact">
-						<impacts>
-							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-								<buff href="/Mechanics/Mounts/Prototypes/QuizCaster.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-								<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-									<multiplier>30</multiplier>
-								</durationScaler>
-							</Item>
-						</impacts>
-					</Item>
-					<Item type="gameMechanics.elements.impacts.ImpactStartQuiz">
-						<question hrefvar="quizQuestion" />
-						<paramsCalcers>
-							<stringEntries>
-								<Item>
-									<name>caster</name>
-									<calcer type="gameMechanics.elements.calcers.CasterNameCalcer" />
-								</Item>
-							</stringEntries>
-						</paramsCalcers>
-						<participants type="gameMechanics.elements.addresseeFinders.AddressesCalcerSingle">
-							<calcer type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
-						</participants>
-						<resultsHandler type="gameMechanics.elements.common.SingleResultHandler">
-							<impactsOnSuccess>
-								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-									<predicates>
-										<Item type="gameMechanics.elements.predicates.PredicateGreaterLong">
-											<lhs type="gameMechanics.elements.calcers.CalcerLongParam">
-												<paramName>choice</paramName>
-											</lhs>
-											<rhs type="gameMechanics.elements.calcers.LongData">
-												<value>0</value>
-											</rhs>
-										</Item>
-									</predicates>
-									<impactsIf>
-										<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-											<predicates>
-												<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-													<predicate type="gameMechanics.elements.predicates.PredicateToInterlocutor">
-														<predicates>
-															<predicates>
-																<Item type="gameMechanics.constructor.basicElements.PredicateTrue" />
-															</predicates>
-														</predicates>
-													</predicate>
-												</Item>
-											</predicates>
-											<impactsIf>
-												<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-													<predicates>
-														<Item type="gameMechanics.elements.predicates.PredicateOnAddressee">
-															<addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
-															<predicates>
-																<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-																	<predicate type="gameMechanics.constructor.basicElements.PredicateOr">
-																		<predicates>
-																			<Item type="gameMechanics.elements.predicates.PredicateInCombat" />
-																			<Item type="gameMechanics.elements.resources.ResourceBuff">
-																				<buff hrefvar="CasterBuff" />
-																			</Item>
-																			<Item type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
-																				<groups>
-																					<Item href="/Mechanics/Spells/Groups/Transformation.(ActionGroup).xdb" />
-																					<Item href="BearerBurden.(ActionGroup).xdb" />
-																				</groups>
-																			</Item>
-																			<Item type="gameMechanics.elements.resources.ResourceBuff">
-																				<buff href="/Mechanics/Spells/ItemSpells/LoreEventItems/OrkDrunkSleep.(BuffResource).xdb" />
-																			</Item>
-																		</predicates>
-																	</predicate>
-																</Item>
-															</predicates>
-														</Item>
-														<Item type="gameMechanics.elements.predicates.PredicateCharacterSex">
-															<sex hrefvar="wrongCasterSex" />
-														</Item>
-														<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-														<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-															<predicate type="gameMechanics.constructor.basicElements.PredicateOr">
-																<predicates>
-																	<Item type="gameMechanics.elements.predicates.PredicateInCombat" />
-																	<Item type="gameMechanics.elements.resources.ResourceBuff">
-																		<buff hrefvar="TargetBuff" />
-																	</Item>
-																	<Item type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
-																		<groups>
-																			<Item href="/Mechanics/Spells/Groups/Transformation.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-																			<Item href="BearerBurden.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-																		</groups>
-																	</Item>
-																	<Item type="gameMechanics.elements.resources.ResourceBuff">
-																		<buff href="/Mechanics/Spells/ItemSpells/LoreEventItems/OrkDrunkSleep.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-																	</Item>
-																</predicates>
-															</predicate>
-														</Item>
-													</predicates>
-													<impactsIf>
-														<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-															<buff hrefvar="TargetBuff" />
-														</Item>
-														<Item type="gameMechanics.elements.impacts.ImpactDismount" />
-														<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-															<impacts>
-																<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																	<buff hrefvar="CasterBuff" />
-																</Item>
-																<Item type="gameMechanics.elements.impacts.ImpactDismount" />
-															</impacts>
-														</Item>
-													</impactsIf>
-												</Item>
-											</impactsIf>
-											<impactsElse>
-												<Item type="gameMechanics.constructor.basicElements.ImpactList">
-													<impactsResource href="/Mechanics/Mounts/Prototypes/DetachQuizQuestion.(ImpactListResource).xdb" />
-												</Item>
-												<Item type="gameMechanics.elements.impacts.BuffDetacher">
-													<buff href="Buff_02_01.xdb" />
-												</Item>
-												<Item type="gameMechanics.elements.impacts.BuffDetacher">
-													<buff href="Buff01.xdb" />
-												</Item>
-												<Item type="gameMechanics.elements.impacts.ReturningImpact">
-													<impacts>
-														<Item type="gameMechanics.elements.impacts.BuffDetacher">
-															<buff href="Buff_02_01.xdb" />
-														</Item>
-														<Item type="gameMechanics.elements.impacts.BuffDetacher">
-															<buff href="Buff01.xdb" />
-														</Item>
-													</impacts>
-												</Item>
-											</impactsElse>
-										</Item>
-									</impactsIf>
-									<impactsElse>
-										<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-											<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-											<data href="/World/Quests/ZoneHadagan1/ZH1_Wedding/NotMarriage.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
-											<calcers>
-												<stringEntries>
-													<Item>
-														<name>caster2</name>
-														<calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
-													</Item>
-												</stringEntries>
-											</calcers>
-										</Item>
-									</impactsElse>
-								</Item>
-								<Item type="gameMechanics.constructor.basicElements.ImpactList">
-									<impactsResource href="/Mechanics/Mounts/Prototypes/DetachQuizQuestion.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
-								</Item>
-							</impactsOnSuccess>
-							<impactsOnFail>
-								<Item type="gameMechanics.constructor.basicElements.ImpactList">
-									<impactsResource href="/Mechanics/Mounts/Prototypes/DetachQuizQuestion.(ImpactListResource).xdb" />
-								</Item>
-								<Item type="gameMechanics.elements.impacts.BuffDetacher">
-									<buff href="Buff_02_01.xdb" />
-								</Item>
-								<Item type="gameMechanics.elements.impacts.BuffDetacher">
-									<buff href="Buff01.xdb" />
-								</Item>
-								<Item type="gameMechanics.elements.impacts.ReturningImpact">
-									<impacts>
-										<Item type="gameMechanics.elements.impacts.BuffDetacher">
-											<buff href="Buff_02_01.xdb" />
-										</Item>
-										<Item type="gameMechanics.elements.impacts.BuffDetacher">
-											<buff href="Buff01.xdb" />
-										</Item>
-									</impacts>
-								</Item>
-							</impactsOnFail>
-						</resultsHandler>
-					</Item>
-				</elseImpacts>
-			</Item>
-		</targetImpacts>
-	</mechanics>
-	<speed>10</speed>
+    <Header>
+        <resourceId>739849230</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <Name href="TakeUp_SpellProto.(SpellSingleTarget).Name.txt" />
+    <Description href="TakeUp_SpellProto.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Spells/WornHands.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Mechanics/Spells/Family/TakeOnHands/TakeOnHandsFlirt.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <uiSpellBookPageType>SPELLBOOK_PAGE_OTHER</uiSpellBookPageType>
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <prepareDuration>3100</prepareDuration>
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <isAggro>false</isAggro>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Friends</iffPolicy>
+    <launchWhenReady>true</launchWhenReady>
+    <mechanics>
+        <casterConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff hrefvar="CasterBuff" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateExternal">
+                <predicateResource href="TakeUp_PredicatesOnCasterAndTarget.(PredicateResource).xdb#xpointer(/gameMechanics.constructor.basicElements.PredicateResource)" />
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff hrefvar="TargetBuff" />
+                </predicate>
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateExternal">
+                <predicateResource href="TakeUp_PredicatesOnCasterAndTarget.(PredicateResource).xdb#xpointer(/gameMechanics.constructor.basicElements.PredicateResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateCharacterSex">
+                <sex hrefvar="wrongCasterSex" />
+            </Item>
+        </targetConditions>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateCharacterSex">
+                        <sex hrefvar="wrongCasterSex" />
+                    </Item>
+                </predicates>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                        <data hrefvar="ClientData" />
+                    </Item>
+                </impacts>
+                <elseImpacts>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="/Mechanics/Mounts/Prototypes/QuizTarget.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                            <multiplier>30</multiplier>
+                        </durationScaler>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/Mechanics/Mounts/Prototypes/QuizCaster.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                    <multiplier>30</multiplier>
+                                </durationScaler>
+                            </Item>
+                        </impacts>
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactStartQuiz">
+                        <question hrefvar="quizQuestion" />
+                        <paramsCalcers>
+                            <stringEntries>
+                                <Item>
+                                    <name>caster</name>
+                                    <calcer type="gameMechanics.elements.calcers.CasterNameCalcer" />
+                                </Item>
+                            </stringEntries>
+                        </paramsCalcers>
+                        <participants type="gameMechanics.elements.addresseeFinders.AddressesCalcerSingle">
+                            <calcer type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                        </participants>
+                        <resultsHandler type="gameMechanics.elements.common.SingleResultHandler">
+                            <impactsOnSuccess>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateGreaterLong">
+                                            <lhs type="gameMechanics.elements.calcers.CalcerLongParam">
+                                                <paramName>choice</paramName>
+                                            </lhs>
+                                            <rhs type="gameMechanics.elements.calcers.LongData">
+                                                <value>0</value>
+                                            </rhs>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                    <predicate type="gameMechanics.elements.predicates.PredicateToInterlocutor">
+                                                        <predicates>
+                                                            <predicates>
+                                                                <Item type="gameMechanics.constructor.basicElements.PredicateTrue" />
+                                                            </predicates>
+                                                        </predicates>
+                                                    </predicate>
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                    <predicates>
+                                                        <Item type="gameMechanics.elements.predicates.PredicateOnAddressee">
+                                                            <addresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                                            <predicates>
+                                                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                                    <predicate type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                                        <predicates>
+                                                                            <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                                                <buff hrefvar="CasterBuff" />
+                                                                            </Item>
+                                                                            <Item type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+                                                                                <groups>
+                                                                                    <Item href="/Mechanics/Spells/Groups/Transformation.(ActionGroup).xdb" />
+                                                                                    <Item href="BearerBurden.(ActionGroup).xdb" />
+                                                                                </groups>
+                                                                            </Item>
+                                                                            <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                                                <buff href="/Mechanics/Spells/ItemSpells/LoreEventItems/OrkDrunkSleep.(BuffResource).xdb" />
+                                                                            </Item>
+                                                                        </predicates>
+                                                                    </predicate>
+                                                                </Item>
+                                                            </predicates>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.predicates.PredicateCharacterSex">
+                                                            <sex hrefvar="wrongCasterSex" />
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                            <predicate type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                                <predicates>
+                                                                    <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                                        <buff hrefvar="TargetBuff" />
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+                                                                        <groups>
+                                                                            <Item href="/Mechanics/Spells/Groups/Transformation.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                                                                            <Item href="BearerBurden.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+                                                                        </groups>
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                                        <buff href="/Mechanics/Spells/ItemSpells/LoreEventItems/OrkDrunkSleep.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                    </Item>
+                                                                </predicates>
+                                                            </predicate>
+                                                        </Item>
+                                                    </predicates>
+                                                    <impactsIf>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff hrefvar="TargetBuff" />
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactDismount" />
+                                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                    <buff hrefvar="CasterBuff" />
+                                                                </Item>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactDismount" />
+                                                            </impacts>
+                                                        </Item>
+                                                    </impactsIf>
+                                                </Item>
+                                            </impactsIf>
+                                            <impactsElse>
+                                                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                                    <impactsResource href="/Mechanics/Mounts/Prototypes/DetachQuizQuestion.(ImpactListResource).xdb" />
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                    <buff href="Buff_02_01.xdb" />
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                    <buff href="Buff01.xdb" />
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                            <buff href="Buff_02_01.xdb" />
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                            <buff href="Buff01.xdb" />
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impactsElse>
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                            <data href="/World/Quests/ZoneHadagan1/ZH1_Wedding/NotMarriage.(ClientData).xdb#xpointer(/gameMechanics.world.ClientData)" />
+                                            <calcers>
+                                                <stringEntries>
+                                                    <Item>
+                                                        <name>caster2</name>
+                                                        <calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
+                                                    </Item>
+                                                </stringEntries>
+                                            </calcers>
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                    <impactsResource href="/Mechanics/Mounts/Prototypes/DetachQuizQuestion.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+                                </Item>
+                            </impactsOnSuccess>
+                            <impactsOnFail>
+                                <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                                    <impactsResource href="/Mechanics/Mounts/Prototypes/DetachQuizQuestion.(ImpactListResource).xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="Buff_02_01.xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="Buff01.xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="Buff_02_01.xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="Buff01.xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsOnFail>
+                        </resultsHandler>
+                    </Item>
+                </elseImpacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>10</speed>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

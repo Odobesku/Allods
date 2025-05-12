@@ -1,150 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gameMechanics.constructor.schemes.buff.BuffResource>
-	<Header>
-		<resourceId>739936914</resourceId>
-	</Header>
-	<Name href="/Mechanics/Spells/Creatures/NihazSphereArchitect/Charge/Charge.(BuffResource).Name.txt" />
-	<image href="/Interface/Icons/Mounts/ChargeRhino.(UISingleTexture).xdb" />
-	<visualEffects />
-	<visualPostEffects />
-	<visualEffectsIncCount />
-	<visualEffectsDecCount />
-	<visScript href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/YakBoss/Charge/YakCharge.(BuffVisScripts).xdb" />
-	<uiComponents />
-	<descVars />
-	<gainSpells />
-	<effects>
-		<Item type="gameMechanics.elements.effects.DisableLocalEvade" />
-		<Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
-		<Item type="gameMechanics.elements.effects.EffectNoAggro" />
-		<Item type="gameMechanics.elements.effects.EffectDisableAct">
-			<actions>
-				<Item>Rotate</Item>
-			</actions>
-		</Item>
-		<Item type="gameMechanics.elements.effects.EffectsDeferred">
-			<delay>2000</delay>
-			<effects>
-				<Item type="gameMechanics.elements.effects.EffectSpeedModifier">
-					<effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
-						<coeff>1.6</coeff>
-					</effectScaler>
-				</Item>
-				<Item type="gameMechanics.elements.effects.EffectForceMove">
-					<destinations>
-						<Item type="gameMechanics.map.destination.RelativeRotatePos">
-							<base type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-							<offset>2</offset>
-							<yaw type="constructor.basicElements.AngleDegrees" />
-						</Item>
-					</destinations>
-					<impactsOnArrived>
-						<Item type="gameMechanics.elements.impacts.BuffDetacher">
-							<buff href="/Mechanics/Spells/Creatures/NihazSphereArchitect/Charge/Charge.(BuffResource).xdb" />
-						</Item>
-						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-							<buff href="/Mechanics/Spells/Creatures/NihazSphereArchitect/Charge/DontMove.(BuffResource).xdb" />
-							<impactsOnAttach />
-							<impactsOnFail />
-							<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-								<multiplier>1.25</multiplier>
-							</durationScaler>
-						</Item>
-						<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-							<radius>10</radius>
-							<conditions />
-							<affectHolder>false</affectHolder>
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
-									<impactsOnHitCaster />
-									<impactsOnHitTarget>
-										<Item type="gameMechanics.elements.impacts.ImpactAstralKick">
-											<time>800</time>
-											<impactsOnLand />
-											<distance>10</distance>
-										</Item>
-									</impactsOnHitTarget>
-									<scaler type="gameMechanics.elements.scalers.WeaponScaler" />
-									<minDamage>30</minDamage>
-									<maxDamage>30</maxDamage>
-								</Item>
-							</impacts>
-							<impactsOnNoTargets />
-							<impactsOnTargetsFound />
-							<finishImpacts />
-							<filter type="gameMechanics.constructor.basicElements.FilterAnd">
-								<filters>
-									<Item type="gameMechanics.world.creature.AliveFilter" />
-									<Item type="gameMechanics.world.creature.AvatarFilter" />
-								</filters>
-							</filter>
-						</Item>
-						<Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
-							<pool href="/Mechanics/Spells/Creatures/NihazSphereArchitect/Charge/ChargeTargetDecal.(SummonPool).xdb" />
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.Disintegrate" />
-							</impacts>
-						</Item>
-						<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-							<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
-							<data href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChieftainBoss/Charge/ChargeHitFX.(ClientData).xdb" />
-						</Item>
-						<Item type="gameMechanics.elements.impacts.ImpactSetAllAggro" />
-					</impactsOnArrived>
-					<impactsOnPathNotFound />
-				</Item>
-			</effects>
-		</Item>
-		<Item type="gameMechanics.elements.effects.ImpactsOverTime">
-			<impacts>
-				<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.RunImpactsInShape">
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-									<predicates>
-										<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-									</predicates>
-									<impactsIf>
-										<Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
-											<impactsOnHitCaster />
-											<impactsOnHitTarget>
-												<Item type="gameMechanics.elements.impacts.ImpactAstralKick">
-													<time>1000</time>
-													<impactsOnLand />
-													<distance>12</distance>
-												</Item>
-											</impactsOnHitTarget>
-											<scaler type="gameMechanics.elements.scalers.WeaponScaler" />
-											<minDamage>25</minDamage>
-											<maxDamage>25</maxDamage>
-										</Item>
-									</impactsIf>
-									<impactsElse />
-								</Item>
-							</impacts>
-							<shape type="gameMechanics.constructor.schemes.spell.area.RectangularRay">
-								<width>6</width>
-								<topPlane>6</topPlane>
-								<bottomPlane>-6</bottomPlane>
-							</shape>
-							<affectGroup>All</affectGroup>
-							<radius type="gameMechanics.elements.impacts.RunImpactsInShape$FixedRadius">
-								<value>10</value>
-							</radius>
-						</Item>
-					</impacts>
-				</Item>
-			</impacts>
-			<tick>400</tick>
-			<initialDelay>1800</initialDelay>
-		</Item>
-	</effects>
-	<duration>12000</duration>
-	<isHelpful>true</isHelpful>
-	<ranks />
-	<canBeSaved>false</canBeSaved>
-	<groups>
-		<Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb" />
-	</groups>
+    <Header>
+        <resourceId>739936914</resourceId>
+    </Header>
+    <Name href="/Mechanics/Spells/Creatures/NihazSphereArchitect/Charge/Charge.(BuffResource).Name.txt" />
+    <image href="/Interface/Icons/Mounts/ChargeRhino.(UISingleTexture).xdb" />
+    <visualEffects />
+    <visualPostEffects />
+    <visualEffectsIncCount />
+    <visualEffectsDecCount />
+    <visScript href="/Mechanics/RaidInstances/FerrisRaid/7_Yak/YakBoss/Charge/YakCharge.(BuffVisScripts).xdb" />
+    <uiComponents />
+    <descVars />
+    <gainSpells />
+    <effects>
+        <Item type="gameMechanics.elements.effects.DisableLocalEvade" />
+        <Item type="gameMechanics.elements.effects.EffectDisableAllActions" />
+        <Item type="gameMechanics.elements.effects.EffectNoAggro" />
+        <Item type="gameMechanics.elements.effects.EffectDisableAct">
+            <actions>
+                <Item>Rotate</Item>
+            </actions>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <delay>2000</delay>
+            <effects>
+                <Item type="gameMechanics.elements.effects.EffectSpeedModifier">
+                    <effectScaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                        <coeff>1.6</coeff>
+                    </effectScaler>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectForceMove">
+                    <destinations>
+                        <Item type="gameMechanics.map.destination.RelativeRotatePos">
+                            <base type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+                            <offset>2</offset>
+                            <yaw type="constructor.basicElements.AngleDegrees" />
+                        </Item>
+                    </destinations>
+                    <impactsOnArrived>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/Mechanics/Spells/Creatures/NihazSphereArchitect/Charge/Charge.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="/Mechanics/Spells/Creatures/NihazSphereArchitect/Charge/DontMove.(BuffResource).xdb" />
+                            <impactsOnAttach />
+                            <impactsOnFail />
+                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                                <multiplier>1.25</multiplier>
+                            </durationScaler>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                            <radius>10</radius>
+                            <conditions />
+                            <affectHolder>false</affectHolder>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                                    <impactsOnHitCaster />
+                                    <impactsOnHitTarget>
+                                        <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                                            <time>800</time>
+                                            <impactsOnLand />
+                                            <distance>10</distance>
+                                        </Item>
+                                    </impactsOnHitTarget>
+                                    <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                                    <minDamage>30</minDamage>
+                                    <maxDamage>30</maxDamage>
+                                </Item>
+                            </impacts>
+                            <impactsOnNoTargets />
+                            <impactsOnTargetsFound />
+                            <finishImpacts />
+                            <filter type="gameMechanics.constructor.basicElements.FilterAnd">
+                                <filters>
+                                    <Item type="gameMechanics.world.creature.AliveFilter" />
+                                    <Item type="gameMechanics.world.creature.AvatarFilter" />
+                                </filters>
+                            </filter>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                            <pool href="/Mechanics/Spells/Creatures/NihazSphereArchitect/Charge/ChargeTargetDecal.(SummonPool).xdb" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                            <distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
+                            <data href="/Mechanics/RaidInstances/FerrisRaid/2_Leader/ChieftainBoss/Charge/ChargeHitFX.(ClientData).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactSetAllAggro" />
+                    </impactsOnArrived>
+                    <impactsOnPathNotFound />
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.RunImpactsInShape">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ScaledPhysicalDamage">
+                                            <impactsOnHitCaster />
+                                            <impactsOnHitTarget>
+                                                <Item type="gameMechanics.elements.impacts.ImpactAstralKick">
+                                                    <time>1000</time>
+                                                    <impactsOnLand />
+                                                    <distance>12</distance>
+                                                </Item>
+                                            </impactsOnHitTarget>
+                                            <scaler type="gameMechanics.elements.scalers.WeaponScaler" />
+                                            <minDamage>25</minDamage>
+                                            <maxDamage>25</maxDamage>
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse />
+                                </Item>
+                            </impacts>
+                            <shape type="gameMechanics.constructor.schemes.spell.area.RectangularRay">
+                                <width>6</width>
+                                <topPlane>6</topPlane>
+                                <bottomPlane>-6</bottomPlane>
+                            </shape>
+                            <affectGroup>All</affectGroup>
+                            <radius type="gameMechanics.elements.impacts.RunImpactsInShape$FixedRadius">
+                                <value>10</value>
+                            </radius>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impacts>
+            <tick>400</tick>
+            <initialDelay>1800</initialDelay>
+        </Item>
+    </effects>
+    <duration>12000</duration>
+    <isHelpful>true</isHelpful>
+    <ranks />
+    <canBeSaved>false</canBeSaved>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/DisableActions.(ActionGroup).xdb" />
+    </groups>
 </gameMechanics.constructor.schemes.buff.BuffResource>
