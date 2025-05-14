@@ -1,125 +1,125 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.area.SpellArea>
-	<Header>
-		<resourceId>739858945</resourceId>
-		<isPrototype>true</isPrototype>
-	</Header>
-	<groups>
-		<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-		<Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-		<Item href="/Mechanics/Spells/Groups/EngineerArtillerySpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-		<Item href="/Mechanics/Spells/Groups/EngineerHeatSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-		<Item href="/Mechanics/Spells/Groups/DragonRelic9.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-		<Item href="/Mechanics/Spells/Groups/RangedAttacks.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-	</groups>
-	<element>SHADOW</element>
-	<Name href="Spell.Name.txt" />
-	<Description href="Spell.Description.txt" />
-	<descVars>
-		<Item>
-			<name>dmg</name>
-			<value var="damage" />
-			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-				<formula>MagicScaler</formula>
-			</scaler>
-		</Item>
-		<Item>
-			<name>DoTdmg</name>
-			<value var="DoTdamage" />
-			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-				<formula>MagicScaler</formula>
-			</scaler>
-		</Item>
-	</descVars>
-	<image href="/Interface/Icons/Spells/Engineer/AntimatterGrenade.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
-	<visualScripts href="/Spells/VisScripts/Engineer/AntiMatter.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
-	<range type="gameMechanics.elements.calcers.FloatData">
-		<value>25</value>
-	</range>
-	<prepareDuration>800</prepareDuration>
-	<targetType>STTPoint</targetType>
-	<ranks>
-		<Item href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
-		<Item href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
-		<Item href="Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
-	</ranks>
-	<iffPolicy>Enemies</iffPolicy>
-	<launchWhenReady>true</launchWhenReady>
-	<mechanics>
-		<cooldown>
-			<duration>45000</duration>
-		</cooldown>
-		<casterConditions>
-			<Item type="gameMechanics.elements.predicates.PredicateVariableLessThan">
-				<resource href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
-				<value>-50</value>
-			</Item>
-		</casterConditions>
-		<targetConditions>
-			<Item type="gameMechanics.elements.predicates.PredicateCreature" />
-		</targetConditions>
-		<casterResources>
-			<Item type="gameMechanics.elements.resources.ResourceIf">
-				<predicates>
-					<Item type="gameMechanics.elements.resources.ResourceBuff">
-						<buff href="/Mechanics/Spells/Engineer/ArtilleryForm/Buff01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-					</Item>
-				</predicates>
-				<resourceIf type="gameMechanics.elements.resources.ResourceMana">
-					<mana>0</mana>
-				</resourceIf>
-				<resourceElse type="gameMechanics.elements.resources.ResourceMana">
-					<mana>10</mana>
-					<manaType>
-						<Item>Energy</Item>
-					</manaType>
-				</resourceElse>
-			</Item>
-		</casterResources>
-		<casterImpacts>
-			<Item type="gameMechanics.constructor.basicElements.ImpactList">
-				<impactsResource href="/Mechanics/Spells/Engineer/EngineerDismount.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
-			</Item>
-			<Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
-				<spell href="/Mechanics/Spells/Engineer/AirStrike/Spell01.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
-				<duration>45000</duration>
-			</Item>
-		</casterImpacts>
-		<targetImpacts>
-			<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-				<buff hrefvar="buff" />
-				<stacks type="gameMechanics.elements.calcers.CalcerMul">
-					<calcers>
-						<Item type="gameMechanics.elements.calcers.VariableValueCalcer">
-							<variable href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
-						</Item>
-						<Item type="gameMechanics.elements.calcers.InverseCalcer">
-							<value type="gameMechanics.elements.calcers.FloatData">
-								<value>-50</value>
-							</value>
-						</Item>
-					</calcers>
-				</stacks>
-			</Item>
-			<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
-				<element>SHADOW</element>
-				<damage var="damage" />
-				<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-					<scalers>
-						<Item type="gameMechanics.elements.scalers.MagicScaler" />
-						<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-							<mulCalcer type="gameMechanics.elements.calcers.VariableValueCalcer">
-								<variable href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
-								<mul>-0.005</mul>
-							</mulCalcer>
-						</Item>
-					</scalers>
-				</scaler>
-			</Item>
-		</targetImpacts>
-	</mechanics>
-	<speed>20</speed>
-	<maxTargets>1</maxTargets>
-	<shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
-	<radius var="radius" />
+    <Header>
+        <resourceId>739858945</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/EngineerArtillerySpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/EngineerHeatSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DragonRelic9.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/RangedAttacks.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <element>SHADOW</element>
+    <Name href="Spell.Name.txt" />
+    <Description href="Spell.Description.txt" />
+    <descVars>
+        <Item>
+            <name>dmg</name>
+            <value var="damage" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>MagicScaler</formula>
+            </scaler>
+        </Item>
+        <Item>
+            <name>DoTdmg</name>
+            <value var="DoTdamage" />
+            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                <formula>MagicScaler</formula>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Engineer/AntimatterGrenade.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Engineer/AntiMatter.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>25</value>
+    </range>
+    <prepareDuration>800</prepareDuration>
+    <targetType>STTPoint</targetType>
+    <ranks>
+        <Item href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+        <Item href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+        <Item href="Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+    </ranks>
+    <iffPolicy>Enemies</iffPolicy>
+    <launchWhenReady>true</launchWhenReady>
+    <mechanics>
+        <cooldown>
+            <duration>45000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateVariableLessThan">
+                <resource href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                <value>-50</value>
+            </Item>
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateCreature" />
+        </targetConditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceIf">
+                <predicates>
+                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/Spells/Engineer/ArtilleryForm/Buff01.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                </predicates>
+                <resourceIf type="gameMechanics.elements.resources.ResourceMana">
+                    <mana>0</mana>
+                </resourceIf>
+                <resourceElse type="gameMechanics.elements.resources.ResourceMana">
+                    <mana>10</mana>
+                    <manaType>
+                        <Item>Energy</Item>
+                    </manaType>
+                </resourceElse>
+            </Item>
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                <impactsResource href="/Mechanics/Spells/Engineer/EngineerDismount.(ImpactListResource).xdb#xpointer(/gameMechanics.constructor.basicElements.ImpactListResource)" />
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
+                <spell href="/Mechanics/Spells/Engineer/AirStrike/Spell01.(SpellArea).xdb#xpointer(/gameMechanics.constructor.schemes.spell.area.SpellArea)" />
+                <duration>45000</duration>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff hrefvar="buff" />
+                <stacks type="gameMechanics.elements.calcers.CalcerMul">
+                    <calcers>
+                        <Item type="gameMechanics.elements.calcers.VariableValueCalcer">
+                            <variable href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                        </Item>
+                        <Item type="gameMechanics.elements.calcers.InverseCalcer">
+                            <value type="gameMechanics.elements.calcers.FloatData">
+                                <value>-50</value>
+                            </value>
+                        </Item>
+                    </calcers>
+                </stacks>
+            </Item>
+            <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                <element>SHADOW</element>
+                <damage var="damage" />
+                <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                    <scalers>
+                        <Item type="gameMechanics.elements.scalers.MagicScaler" />
+                        <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mulCalcer type="gameMechanics.elements.calcers.VariableValueCalcer">
+                                <variable href="/Mechanics/Spells/Engineer/Overheating/Overheating.(VariableResource).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                                <mul>-0.005</mul>
+                            </mulCalcer>
+                        </Item>
+                    </scalers>
+                </scaler>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>20</speed>
+    <maxTargets>1</maxTargets>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+    <radius var="radius" />
 </gameMechanics.constructor.schemes.spell.area.SpellArea>

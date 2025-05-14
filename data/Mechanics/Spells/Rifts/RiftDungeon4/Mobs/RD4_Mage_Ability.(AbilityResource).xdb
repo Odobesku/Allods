@@ -1,153 +1,153 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
-	<Header>
-		<resourceId>739936980</resourceId>
-	</Header>
-	<visualScript type="VisActionList">
-		<play>Simultaneously</play>
-		<elements>
-			<Item type="CreatureAnimationAction">
-				<mode>LOOP</mode>
-				<animations>
-					<Item>readySpellDirectedSky</Item>
-				</animations>
-				<channel>CHANNEL_ATTACK</channel>
-				<channelOverrideControllers>TOP_ONLY</channelOverrideControllers>
-			</Item>
-			<Item type="CreatureEffectsAction">
-				<visualEffects>
-					<Item>
-						<effectFx href="/Spells/FX/Mobs/GolemJunes_Shield_2.(VisObjectTemplate).xdb" />
-						<scale>1.5</scale>
-					</Item>
-				</visualEffects>
-			</Item>
-		</elements>
-	</visualScript>
-	<effects>
-		<Item type="gameMechanics.elements.effects.TickableAura">
-			<affectGroup>Enemies</affectGroup>
-			<radius>30</radius>
-			<filter type="gameMechanics.world.creature.MobFilter" />
-			<predicates>
-				<Item type="gameMechanics.elements.predicates.PredicateFaction">
-					<faction href="/World/Factions/Wild.xdb" />
-				</Item>
-			</predicates>
-			<onBehalfOfHolder>true</onBehalfOfHolder>
-			<impactsIn>
-				<Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
-					<value>100</value>
-				</Item>
-			</impactsIn>
-		</Item>
-		<Item type="gameMechanics.elements.effects.TickableAura">
-			<affectGroup>Friends</affectGroup>
-			<radius>12</radius>
-			<filter type="gameMechanics.world.creature.AvatarFilter" />
-			<predicates>
-				<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-					<predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
-				</Item>
-				<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-					<predicate type="gameMechanics.elements.resources.ResourceBuff">
-						<buff href="/Maps/RiftDungeon4/Scenarios/RD4_Mage_CD.(BuffResource).xdb" />
-					</predicate>
-				</Item>
-			</predicates>
-			<onBehalfOfHolder>true</onBehalfOfHolder>
-			<impactsIn>
-				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-					<buff href="/Maps/RiftDungeon4/Scenarios/RD4_Mage_CD.(BuffResource).xdb" />
-				</Item>
-			</impactsIn>
-			<impactsOut>
-				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-					<predicates>
-						<Item type="gameMechanics.elements.predicates.PredicateInCombat" />
-					</predicates>
-					<impactsIf>
-						<Item type="gameMechanics.elements.impacts.BuffDetacher">
-							<buff href="/Maps/RiftDungeon4/Scenarios/RD4_Mage_CD.(BuffResource).xdb" />
-						</Item>
-					</impactsIf>
-				</Item>
-			</impactsOut>
-		</Item>
-		<Item type="gameMechanics.elements.effects.TickableAura">
-			<affectGroup>Friends</affectGroup>
-			<radius>12</radius>
-			<filter type="gameMechanics.constructor.basicElements.FilterOr">
-				<filters>
-					<Item type="gameMechanics.world.creature.MobFilter" />
-					<Item type="gameMechanics.world.creature.AvatarFilter" />
-				</filters>
-			</filter>
-			<onBehalfOfHolder>true</onBehalfOfHolder>
-			<impactsIn>
-				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-					<buff href="/Maps/RiftDungeon4/Scenarios/RD4_ShieldDefence.(BuffResource).xdb" />
-				</Item>
-			</impactsIn>
-			<impactsOut>
-				<Item type="gameMechanics.elements.impacts.BuffDetacher">
-					<buff href="/Maps/RiftDungeon4/Scenarios/RD4_ShieldDefence.(BuffResource).xdb" />
-				</Item>
-				<Item type="gameMechanics.elements.impacts.BuffDetacher">
-					<buff href="/Maps/RiftDungeon4/Scenarios/RD4_Mage_CD.(BuffResource).xdb" />
-				</Item>
-			</impactsOut>
-		</Item>
-		<Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
-			<scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
-				<coeff>-0.9</coeff>
-			</scaler>
-		</Item>
-		<Item type="gameMechanics.elements.effects.DeathTrigger">
-			<impacts>
-				<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-					<delay>3000</delay>
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.Disintegrate" />
-					</impacts>
-				</Item>
-			</impacts>
-		</Item>
-		<Item type="gameMechanics.elements.effects.Switch">
-			<impactsOff>
-				<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnCell">
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.BuffDetacher">
-							<buff href="/Maps/RiftDungeon4/Scenarios/RD4_Bombs.(BuffResource).xdb" />
-						</Item>
-					</impacts>
-				</Item>
-			</impactsOff>
-		</Item>
-		<Item type="gameMechanics.elements.effects.TickableAura">
-			<affectGroup>Enemies</affectGroup>
-			<radius>12</radius>
-			<filter type="gameMechanics.world.creature.MobFilter" />
-			<predicates>
-				<Item type="gameMechanics.elements.resources.ResourceBuff">
-					<buff href="/Mechanics/Spells/Rifts/RiftRandomSpells/RD_Whirlwind_Architector.(BuffResource).xdb" />
-				</Item>
-			</predicates>
-			<onBehalfOfHolder>true</onBehalfOfHolder>
-			<impactsIn>
-				<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-							<delay>4000</delay>
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.BuffDetacher">
-									<buff href="/Mechanics/Spells/Rifts/RiftRandomSpells/RD_Whirlwind_Architector.(BuffResource).xdb" />
-								</Item>
-							</impacts>
-						</Item>
-					</impacts>
-				</Item>
-			</impactsIn>
-		</Item>
-	</effects>
+    <Header>
+        <resourceId>739936980</resourceId>
+    </Header>
+    <visualScript type="VisActionList">
+        <play>Simultaneously</play>
+        <elements>
+            <Item type="CreatureAnimationAction">
+                <mode>LOOP</mode>
+                <animations>
+                    <Item>readySpellDirectedSky</Item>
+                </animations>
+                <channel>CHANNEL_ATTACK</channel>
+                <channelOverrideControllers>TOP_ONLY</channelOverrideControllers>
+            </Item>
+            <Item type="CreatureEffectsAction">
+                <visualEffects>
+                    <Item>
+                        <effectFx href="/Spells/FX/Mobs/GolemJunes_Shield_2.(VisObjectTemplate).xdb" />
+                        <scale>1.5</scale>
+                    </Item>
+                </visualEffects>
+            </Item>
+        </elements>
+    </visualScript>
+    <effects>
+        <Item type="gameMechanics.elements.effects.TickableAura">
+            <affectGroup>Enemies</affectGroup>
+            <radius>30</radius>
+            <filter type="gameMechanics.world.creature.MobFilter" />
+            <predicates>
+                <Item type="gameMechanics.elements.predicates.PredicateFaction">
+                    <faction href="/World/Factions/Wild.xdb" />
+                </Item>
+            </predicates>
+            <onBehalfOfHolder>true</onBehalfOfHolder>
+            <impactsIn>
+                <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                    <value>100</value>
+                </Item>
+            </impactsIn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.TickableAura">
+            <affectGroup>Friends</affectGroup>
+            <radius>12</radius>
+            <filter type="gameMechanics.world.creature.AvatarFilter" />
+            <predicates>
+                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <predicate type="gameMechanics.elements.predicates.PredicateInCombat" />
+                </Item>
+                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Maps/RiftDungeon4/Scenarios/RD4_Mage_CD.(BuffResource).xdb" />
+                    </predicate>
+                </Item>
+            </predicates>
+            <onBehalfOfHolder>true</onBehalfOfHolder>
+            <impactsIn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Maps/RiftDungeon4/Scenarios/RD4_Mage_CD.(BuffResource).xdb" />
+                </Item>
+            </impactsIn>
+            <impactsOut>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/Maps/RiftDungeon4/Scenarios/RD4_Mage_CD.(BuffResource).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </impactsOut>
+        </Item>
+        <Item type="gameMechanics.elements.effects.TickableAura">
+            <affectGroup>Friends</affectGroup>
+            <radius>12</radius>
+            <filter type="gameMechanics.constructor.basicElements.FilterOr">
+                <filters>
+                    <Item type="gameMechanics.world.creature.MobFilter" />
+                    <Item type="gameMechanics.world.creature.AvatarFilter" />
+                </filters>
+            </filter>
+            <onBehalfOfHolder>true</onBehalfOfHolder>
+            <impactsIn>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="/Maps/RiftDungeon4/Scenarios/RD4_ShieldDefence.(BuffResource).xdb" />
+                </Item>
+            </impactsIn>
+            <impactsOut>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="/Maps/RiftDungeon4/Scenarios/RD4_ShieldDefence.(BuffResource).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="/Maps/RiftDungeon4/Scenarios/RD4_Mage_CD.(BuffResource).xdb" />
+                </Item>
+            </impactsOut>
+        </Item>
+        <Item type="gameMechanics.elements.effects.ScalerAllInputDamage">
+            <scaler type="gameMechanics.elements.scalers.LinearEffectScaler">
+                <coeff>-0.9</coeff>
+            </scaler>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                    <delay>3000</delay>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOff>
+                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnCell">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/Maps/RiftDungeon4/Scenarios/RD4_Bombs.(BuffResource).xdb" />
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsOff>
+        </Item>
+        <Item type="gameMechanics.elements.effects.TickableAura">
+            <affectGroup>Enemies</affectGroup>
+            <radius>12</radius>
+            <filter type="gameMechanics.world.creature.MobFilter" />
+            <predicates>
+                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                    <buff href="/Mechanics/Spells/Rifts/RiftRandomSpells/RD_Whirlwind_Architector.(BuffResource).xdb" />
+                </Item>
+            </predicates>
+            <onBehalfOfHolder>true</onBehalfOfHolder>
+            <impactsIn>
+                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                            <delay>4000</delay>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="/Mechanics/Spells/Rifts/RiftRandomSpells/RD_Whirlwind_Architector.(BuffResource).xdb" />
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+            </impactsIn>
+        </Item>
+    </effects>
 </gameMechanics.constructor.schemes.ability.AbilityResource>

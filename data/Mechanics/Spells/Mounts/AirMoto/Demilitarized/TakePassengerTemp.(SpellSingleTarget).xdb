@@ -1,266 +1,266 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-	<Header>
-		<resourceId>739978107</resourceId>
-	</Header>
-	<contextActionInfo>
-		<priority>6</priority>
-	</contextActionInfo>
-	<groups>
-		<Item href="/Mechanics/Spells/Groups/MountedSpells.xdb" />
-	</groups>
-	<Name href="TakePassenger.(SpellSingleTarget).Name.txt" />
-	<Description href="TakePassenger.(SpellSingleTarget).Description.txt" />
-	<image href="/Interface/Icons/Mounts/SpellsMounts/InvitePassAirMoto.(UISingleTexture).xdb" />
-	<range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
-	<targetType>STTCurrentTargetNotSelf</targetType>
-	<iffPolicy>Friends</iffPolicy>
-	<mechanics>
-		<cooldown>
-			<duration>30000</duration>
-		</cooldown>
-		<casterConditions>
-			<Item type="gameMechanics.elements.predicates.PredicateMounted" />
-		</casterConditions>
-		<targetConditions>
-			<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-			<Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
-				<predicate type="gameMechanics.constructor.basicElements.PredicateNot">
-					<predicate type="gameMechanics.elements.resources.ResourceBuff">
-						<buff href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/TakePassenger_Target.(BuffResource).xdb" />
-					</predicate>
-				</predicate>
-				<clientData href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/TakePassenger_Target.(ClientData).xdb" />
-			</Item>
-			<Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
-				<predicate type="gameMechanics.constructor.basicElements.PredicateNot">
-					<predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
-						<groups>
-							<Item href="/Mechanics/Spells/Groups/QuizQuestion.(ActionGroup).xdb" />
-							<Item href="/Mechanics/Spells/Groups/BearingBuffs.xdb" />
-							<Item href="/Mechanics/Spells/Groups/Transformation.(ActionGroup).xdb" />
-						</groups>
-					</predicate>
-				</predicate>
-				<clientData href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/Transform_Target.(ClientData).xdb" />
-			</Item>
-			<Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
-				<predicate type="gameMechanics.constructor.basicElements.PredicateNot">
-					<predicate type="gameMechanics.elements.predicates.PredicateToInterlocutor">
-						<predicates>
-							<predicates>
-								<Item type="gameMechanics.constructor.basicElements.PredicateTrue" />
-							</predicates>
-						</predicates>
-					</predicate>
-				</predicate>
-				<clientData href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/Busy.(ClientData).xdb" />
-			</Item>
-			<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-				<predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
-					<groups>
-						<Item href="/Mechanics/Spells/Groups/BearingBuffs.xdb" />
-						<Item href="/Mechanics/Spells/Groups/QuizQuestion.(ActionGroup).xdb" />
-						<Item href="/Mechanics/Spells/Groups/CantBeChopperPassenger.(ActionGroup).xdb" />
-					</groups>
-				</predicate>
-			</Item>
-		</targetConditions>
-		<casterImpacts>
-			<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-				<buff href="/Mechanics/Mounts/Prototypes/QuizCaster.(BuffResource).xdb" />
-				<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-					<multiplier>30</multiplier>
-				</durationScaler>
-			</Item>
-		</casterImpacts>
-		<targetImpacts>
-			<Item type="gameMechanics.elements.impacts.ImpactStartQuiz">
-				<question href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/GetOnMyHorse.(Question).xdb" />
-				<paramsCalcers>
-					<stringEntries>
-						<Item>
-							<name>caster</name>
-							<calcer type="gameMechanics.elements.calcers.CasterNameCalcer" />
-						</Item>
-					</stringEntries>
-				</paramsCalcers>
-				<participants type="gameMechanics.elements.addresseeFinders.AddressesCalcerSingle">
-					<calcer type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
-				</participants>
-				<resultsHandler type="gameMechanics.elements.common.SingleResultHandler">
-					<impactsOnSuccess>
-						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-							<predicates>
-								<Item type="gameMechanics.elements.predicates.PredicateGreaterLong">
-									<lhs type="gameMechanics.elements.calcers.CalcerLongParam">
-										<paramName>choice</paramName>
-									</lhs>
-									<rhs type="gameMechanics.elements.calcers.LongData">
-										<value>0</value>
-									</rhs>
-								</Item>
-							</predicates>
-							<impactsIf>
-								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-									<predicates>
-										<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-											<predicate type="gameMechanics.elements.predicates.PredicateToInterlocutor">
-												<predicates>
-													<predicates>
-														<Item type="gameMechanics.constructor.basicElements.PredicateTrue" />
-													</predicates>
-												</predicates>
-											</predicate>
-										</Item>
-									</predicates>
-									<impactsIf>
-										<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-											<predicates>
-												<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-													<predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
-														<groups>
-															<Item href="/Mechanics/Spells/Groups/Transformation.(ActionGroup).xdb" />
-															<Item href="/Mechanics/Spells/Groups/BearingBuffs.xdb" />
-															<Item href="/Mechanics/Spells/Groups/CantBeChopperPassenger.(ActionGroup).xdb" />
-														</groups>
-													</predicate>
-												</Item>
-											</predicates>
-											<impactsIf>
-												<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-													<impacts>
-														<Item type="gameMechanics.elements.impacts.ImpactsIf">
-															<predicate type="gameMechanics.constructor.basicElements.BinaryPredicateAnd">
-																<predicates>
-																	<Item type="gameMechanics.elements.predicates.PredicateDistance">
-																		<range min="0" max="5" />
-																	</Item>
-																	<Item type="gameMechanics.elements.predicates.PredicateOnSameMap" />
-																</predicates>
-															</predicate>
-															<impactsIf>
-																<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-																	<predicates>
-																		<Item type="gameMechanics.elements.resources.ResourceBuff">
-																			<buff href="TakePassengerTemp.(BuffResource).xdb" />
-																		</Item>
-																	</predicates>
-																	<impactsIf>
-																		<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																			<buff href="Bearer_Holder.(BuffResource).xdb" />
-																		</Item>
-																		<Item type="gameMechanics.elements.impacts.BuffDetacher">
-																			<buff href="TakePassengerTemp.(BuffResource).xdb" />
-																		</Item>
-																		<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																			<buff href="DropPassengerTemp.(BuffResource).xdb" />
-																		</Item>
-																		<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-																			<impacts>
-																				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																					<buff href="Burden_PassengerTemp.(BuffResource).xdb" />
-																					<impactsOnAttach>
-																						<Item type="gameMechanics.elements.impacts.ImpactDismount" />
-																					</impactsOnAttach>
-																				</Item>
-																			</impacts>
-																		</Item>
-																		<Item type="gameMechanics.elements.impacts.BuffDetacher">
-																			<buff href="/Mechanics/Mounts/Prototypes/QuizCaster.(BuffResource).xdb" />
-																		</Item>
-																	</impactsIf>
-																	<impactsElse>
-																		<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-																			<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-																			<data href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/FarDistance.(ClientData).xdb" />
-																			<calcers>
-																				<stringEntries>
-																					<Item>
-																						<name>caster</name>
-																						<calcer type="gameMechanics.elements.calcers.CasterNameCalcer" />
-																					</Item>
-																				</stringEntries>
-																			</calcers>
-																		</Item>
-																		<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-																			<impacts>
-																				<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-																					<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-																					<data href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/FarDistance2.(ClientData).xdb" />
-																					<calcers>
-																						<stringEntries>
-																							<Item>
-																								<name>caster</name>
-																								<calcer type="gameMechanics.elements.calcers.CasterNameCalcer" />
-																							</Item>
-																						</stringEntries>
-																					</calcers>
-																				</Item>
-																			</impacts>
-																		</Item>
-																	</impactsElse>
-																</Item>
-															</impactsIf>
-														</Item>
-													</impacts>
-												</Item>
-											</impactsIf>
-											<impactsElse>
-												<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-													<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-													<data href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/Transform_Target.(ClientData).xdb" />
-												</Item>
-											</impactsElse>
-										</Item>
-									</impactsIf>
-									<impactsElse>
-										<Item type="gameMechanics.elements.impacts.BuffDetacher">
-											<buff href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/TakePassenger_Target.(BuffResource).xdb" />
-										</Item>
-										<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-											<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-											<data href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/CantMountWhileTalking.(ClientData).xdb" />
-										</Item>
-										<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-											<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-											<data href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/Busy.(ClientData).xdb" />
-										</Item>
-									</impactsElse>
-								</Item>
-							</impactsIf>
-							<impactsElse>
-								<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-									<distributor type="gameMechanics.elements.calcers.CasterDistributor" />
-									<data href="/World/Quests/ZoneHadagan1/ZH1_Wedding/NotMarriage.(ClientData).xdb" />
-									<calcers>
-										<stringEntries>
-											<Item>
-												<name>caster2</name>
-												<calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
-											</Item>
-										</stringEntries>
-									</calcers>
-								</Item>
-								<Item type="gameMechanics.elements.impacts.BuffDetacher">
-									<buff href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/TakePassenger_Target.(BuffResource).xdb" />
-								</Item>
-							</impactsElse>
-						</Item>
-						<Item type="gameMechanics.constructor.basicElements.ImpactList">
-							<impactsResource href="/Mechanics/Mounts/Prototypes/DetachQuizQuestion.(ImpactListResource).xdb" />
-						</Item>
-					</impactsOnSuccess>
-					<impactsOnFail>
-						<Item type="gameMechanics.elements.impacts.BuffDetacher">
-							<buff href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/TakePassenger_Target.(BuffResource).xdb" />
-						</Item>
-						<Item type="gameMechanics.constructor.basicElements.ImpactList">
-							<impactsResource href="/Mechanics/Mounts/Prototypes/DetachQuizQuestion.(ImpactListResource).xdb" />
-						</Item>
-					</impactsOnFail>
-				</resultsHandler>
-			</Item>
-		</targetImpacts>
-	</mechanics>
+    <Header>
+        <resourceId>739978107</resourceId>
+    </Header>
+    <contextActionInfo>
+        <priority>6</priority>
+    </contextActionInfo>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb" />
+    </groups>
+    <Name href="TakePassenger.(SpellSingleTarget).Name.txt" />
+    <Description href="TakePassenger.(SpellSingleTarget).Description.txt" />
+    <image href="/Interface/Icons/Mounts/SpellsMounts/InvitePassAirMoto.(UISingleTexture).xdb" />
+    <range type="gameMechanics.elements.calcers.MeleeRangeCalcer" />
+    <targetType>STTCurrentTargetNotSelf</targetType>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>30000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateMounted" />
+        </casterConditions>
+        <targetConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                        <buff href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/TakePassenger_Target.(BuffResource).xdb" />
+                    </predicate>
+                </predicate>
+                <clientData href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/TakePassenger_Target.(ClientData).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+                        <groups>
+                            <Item href="/Mechanics/Spells/Groups/QuizQuestion.(ActionGroup).xdb" />
+                            <Item href="/Mechanics/Spells/Groups/BearingBuffs.xdb" />
+                            <Item href="/Mechanics/Spells/Groups/Transformation.(ActionGroup).xdb" />
+                        </groups>
+                    </predicate>
+                </predicate>
+                <clientData href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/Transform_Target.(ClientData).xdb" />
+            </Item>
+            <Item type="gameMechanics.elements.predicates.PredicateWrapClientData">
+                <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+                    <predicate type="gameMechanics.elements.predicates.PredicateToInterlocutor">
+                        <predicates>
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateTrue" />
+                            </predicates>
+                        </predicates>
+                    </predicate>
+                </predicate>
+                <clientData href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/Busy.(ClientData).xdb" />
+            </Item>
+            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+                    <groups>
+                        <Item href="/Mechanics/Spells/Groups/BearingBuffs.xdb" />
+                        <Item href="/Mechanics/Spells/Groups/QuizQuestion.(ActionGroup).xdb" />
+                        <Item href="/Mechanics/Spells/Groups/CantBeChopperPassenger.(ActionGroup).xdb" />
+                    </groups>
+                </predicate>
+            </Item>
+        </targetConditions>
+        <casterImpacts>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff href="/Mechanics/Mounts/Prototypes/QuizCaster.(BuffResource).xdb" />
+                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+                    <multiplier>30</multiplier>
+                </durationScaler>
+            </Item>
+        </casterImpacts>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactStartQuiz">
+                <question href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/GetOnMyHorse.(Question).xdb" />
+                <paramsCalcers>
+                    <stringEntries>
+                        <Item>
+                            <name>caster</name>
+                            <calcer type="gameMechanics.elements.calcers.CasterNameCalcer" />
+                        </Item>
+                    </stringEntries>
+                </paramsCalcers>
+                <participants type="gameMechanics.elements.addresseeFinders.AddressesCalcerSingle">
+                    <calcer type="gameMechanics.elements.addresseeFinders.AddresseeFinderSelf" />
+                </participants>
+                <resultsHandler type="gameMechanics.elements.common.SingleResultHandler">
+                    <impactsOnSuccess>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateGreaterLong">
+                                    <lhs type="gameMechanics.elements.calcers.CalcerLongParam">
+                                        <paramName>choice</paramName>
+                                    </lhs>
+                                    <rhs type="gameMechanics.elements.calcers.LongData">
+                                        <value>0</value>
+                                    </rhs>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                            <predicate type="gameMechanics.elements.predicates.PredicateToInterlocutor">
+                                                <predicates>
+                                                    <predicates>
+                                                        <Item type="gameMechanics.constructor.basicElements.PredicateTrue" />
+                                                    </predicates>
+                                                </predicates>
+                                            </predicate>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                    <predicate type="gameMechanics.elements.predicates.PredicateHasBuffFromGroup">
+                                                        <groups>
+                                                            <Item href="/Mechanics/Spells/Groups/Transformation.(ActionGroup).xdb" />
+                                                            <Item href="/Mechanics/Spells/Groups/BearingBuffs.xdb" />
+                                                            <Item href="/Mechanics/Spells/Groups/CantBeChopperPassenger.(ActionGroup).xdb" />
+                                                        </groups>
+                                                    </predicate>
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactsIf">
+                                                            <predicate type="gameMechanics.constructor.basicElements.BinaryPredicateAnd">
+                                                                <predicates>
+                                                                    <Item type="gameMechanics.elements.predicates.PredicateDistance">
+                                                                        <range min="0" max="5" />
+                                                                    </Item>
+                                                                    <Item type="gameMechanics.elements.predicates.PredicateOnSameMap" />
+                                                                </predicates>
+                                                            </predicate>
+                                                            <impactsIf>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                                                    <predicates>
+                                                                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                                            <buff href="TakePassengerTemp.(BuffResource).xdb" />
+                                                                        </Item>
+                                                                    </predicates>
+                                                                    <impactsIf>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="Bearer_Holder.(BuffResource).xdb" />
+                                                                        </Item>
+                                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                                            <buff href="TakePassengerTemp.(BuffResource).xdb" />
+                                                                        </Item>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="DropPassengerTemp.(BuffResource).xdb" />
+                                                                        </Item>
+                                                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                                            <impacts>
+                                                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                                    <buff href="Burden_PassengerTemp.(BuffResource).xdb" />
+                                                                                    <impactsOnAttach>
+                                                                                        <Item type="gameMechanics.elements.impacts.ImpactDismount" />
+                                                                                    </impactsOnAttach>
+                                                                                </Item>
+                                                                            </impacts>
+                                                                        </Item>
+                                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                                            <buff href="/Mechanics/Mounts/Prototypes/QuizCaster.(BuffResource).xdb" />
+                                                                        </Item>
+                                                                    </impactsIf>
+                                                                    <impactsElse>
+                                                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                                            <data href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/FarDistance.(ClientData).xdb" />
+                                                                            <calcers>
+                                                                                <stringEntries>
+                                                                                    <Item>
+                                                                                        <name>caster</name>
+                                                                                        <calcer type="gameMechanics.elements.calcers.CasterNameCalcer" />
+                                                                                    </Item>
+                                                                                </stringEntries>
+                                                                            </calcers>
+                                                                        </Item>
+                                                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                                            <impacts>
+                                                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                                                    <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                                                                    <data href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/FarDistance2.(ClientData).xdb" />
+                                                                                    <calcers>
+                                                                                        <stringEntries>
+                                                                                            <Item>
+                                                                                                <name>caster</name>
+                                                                                                <calcer type="gameMechanics.elements.calcers.CasterNameCalcer" />
+                                                                                            </Item>
+                                                                                        </stringEntries>
+                                                                                    </calcers>
+                                                                                </Item>
+                                                                            </impacts>
+                                                                        </Item>
+                                                                    </impactsElse>
+                                                                </Item>
+                                                            </impactsIf>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impactsIf>
+                                            <impactsElse>
+                                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                                    <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                                    <data href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/Transform_Target.(ClientData).xdb" />
+                                                </Item>
+                                            </impactsElse>
+                                        </Item>
+                                    </impactsIf>
+                                    <impactsElse>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/TakePassenger_Target.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                            <data href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/CantMountWhileTalking.(ClientData).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                            <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                            <data href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/Busy.(ClientData).xdb" />
+                                        </Item>
+                                    </impactsElse>
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                    <distributor type="gameMechanics.elements.calcers.CasterDistributor" />
+                                    <data href="/World/Quests/ZoneHadagan1/ZH1_Wedding/NotMarriage.(ClientData).xdb" />
+                                    <calcers>
+                                        <stringEntries>
+                                            <Item>
+                                                <name>caster2</name>
+                                                <calcer type="gameMechanics.elements.calcers.TargetNameCalcer" />
+                                            </Item>
+                                        </stringEntries>
+                                    </calcers>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/TakePassenger_Target.(BuffResource).xdb" />
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                            <impactsResource href="/Mechanics/Mounts/Prototypes/DetachQuizQuestion.(ImpactListResource).xdb" />
+                        </Item>
+                    </impactsOnSuccess>
+                    <impactsOnFail>
+                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                            <buff href="/Mechanics/Spells/Mounts/AirMoto/TakePassenger/TakePassenger_Target.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.constructor.basicElements.ImpactList">
+                            <impactsResource href="/Mechanics/Mounts/Prototypes/DetachQuizQuestion.(ImpactListResource).xdb" />
+                        </Item>
+                    </impactsOnFail>
+                </resultsHandler>
+            </Item>
+        </targetImpacts>
+    </mechanics>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

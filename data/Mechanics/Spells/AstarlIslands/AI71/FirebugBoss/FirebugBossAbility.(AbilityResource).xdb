@@ -1,512 +1,512 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
-	<Header>
-		<resourceId>739936157</resourceId>
-	</Header>
-	<name href="CleansingFire.(SpellSingleTarget).Name.txt" />
-	<effects>
-		<Item type="gameMechanics.elements.effects.DeathTrigger">
-			<impacts>
-				<Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
-					<variable href="/Mechanics/Spells/AstarlIslands/AI71/Common/CityPortalNetwork/CityTeleport.(MapVariableResource).xdb" />
-					<summand>1</summand>
-				</Item>
-				<Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
-					<device>
-						<scriptID>PortalNetwork_3_Stele</scriptID>
-						<map href="/Maps/AstralIsle71/MapResource.xdb" />
-					</device>
-				</Item>
-			</impacts>
-		</Item>
-		<Item type="gameMechanics.elements.effects.CombatStateTrigger">
-			<onEnter>
-				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-					<predicates>
-						<Item type="gameMechanics.elements.predicates.PredicateHasAbility">
-							<ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
-						</Item>
-					</predicates>
-					<impactsIf>
-						<Item type="gameMechanics.elements.impacts.SpawnTableObjects">
-							<table href="/Maps/AstralIsle71/SpawnTables/3_Boss03FireSpheres.(SpawnTable).xdb" />
-						</Item>
-					</impactsIf>
-				</Item>
-			</onEnter>
-			<onLeave>
-				<Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
-					<pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.Disintegrate" />
-					</impacts>
-				</Item>
-				<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
-									<group href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
-								</Item>
-								<Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
-									<affectPets>false</affectPets>
-									<impacts>
-										<Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
-											<group href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
-										</Item>
-									</impacts>
-								</Item>
-							</impacts>
-						</Item>
-					</impacts>
-				</Item>
-				<Item type="gameMechanics.elements.impacts.ResetSpawnTable">
-					<table href="/Maps/AstralIsle71/SpawnTables/3_Boss03FireSpheres.(SpawnTable).xdb" />
-				</Item>
-				<Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
-					<group href="/Mechanics/RaidInstances/Phase5.(ActionGroup).xdb" />
-				</Item>
-			</onLeave>
-			<effects>
-				<Item type="gameMechanics.elements.effects.ImpactsOverTime">
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-							<predicates>
-								<Item type="gameMechanics.elements.resources.ResourceAnyBuff">
-									<buffs>
-										<Item href="PhaseRefresh.(BuffResource).xdb" />
-										<Item href="CleansingFire.(BuffResource).xdb" />
-									</buffs>
-								</Item>
-							</predicates>
-							<impactsElse>
-								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-									<buff href="PhaseRefresh.(BuffResource).xdb" />
-								</Item>
-							</impactsElse>
-						</Item>
-					</impacts>
-				</Item>
-			</effects>
-		</Item>
-		<Item type="gameMechanics.elements.effects.SpellCastTrigger">
-			<conditionalImpacts>
-				<Item>
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-							<predicates>
-								<Item type="gameMechanics.elements.resources.ResourceBuff">
-									<buff href="CleansingFireStep.(BuffResource).xdb" />
-									<consumeStacks>1</consumeStacks>
-								</Item>
-							</predicates>
-							<impactsIf>
-								<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-									<impacts>
-										<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-											<projectileData>
-												<moveType type="gameMechanics.world.projectile.MoveTypeDestination">
-													<receiver>Caster</receiver>
-													<to type="gameMechanics.map.destination.RelativeRotatePos">
-														<base type="gameMechanics.map.destination.RelativeRotatePos">
-															<base type="gameMechanics.map.destination.SelfPosDestination" />
-															<offset>85</offset>
-															<yaw type="constructor.basicElements.AngleDegrees">
-																<value>36</value>
-															</yaw>
-															<turn>ToTarget</turn>
-														</base>
-														<offset>9</offset>
-														<turn>ToTarget</turn>
-													</to>
-												</moveType>
-												<resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
-											</projectileData>
-											<pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
-										</Item>
-										<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-											<projectileData>
-												<moveType type="gameMechanics.world.projectile.MoveTypeDestination">
-													<receiver>Caster</receiver>
-													<to type="gameMechanics.map.destination.RelativeRotatePos">
-														<base type="gameMechanics.map.destination.RelativeRotatePos">
-															<base type="gameMechanics.map.destination.SelfPosDestination" />
-															<offset>85</offset>
-															<yaw type="constructor.basicElements.AngleDegrees">
-																<value>108</value>
-															</yaw>
-															<turn>ToTarget</turn>
-														</base>
-														<offset>9</offset>
-														<turn>ToTarget</turn>
-													</to>
-												</moveType>
-												<resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
-											</projectileData>
-											<pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
-										</Item>
-										<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-											<projectileData>
-												<moveType type="gameMechanics.world.projectile.MoveTypeDestination">
-													<receiver>Caster</receiver>
-													<to type="gameMechanics.map.destination.RelativeRotatePos">
-														<base type="gameMechanics.map.destination.RelativeRotatePos">
-															<base type="gameMechanics.map.destination.SelfPosDestination" />
-															<offset>85</offset>
-															<yaw type="constructor.basicElements.AngleDegrees">
-																<value>180</value>
-															</yaw>
-															<turn>ToTarget</turn>
-														</base>
-														<offset>9</offset>
-														<turn>ToTarget</turn>
-													</to>
-												</moveType>
-												<resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
-											</projectileData>
-											<pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
-										</Item>
-										<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-											<projectileData>
-												<moveType type="gameMechanics.world.projectile.MoveTypeDestination">
-													<receiver>Caster</receiver>
-													<to type="gameMechanics.map.destination.RelativeRotatePos">
-														<base type="gameMechanics.map.destination.RelativeRotatePos">
-															<base type="gameMechanics.map.destination.SelfPosDestination" />
-															<offset>85</offset>
-															<yaw type="constructor.basicElements.AngleDegrees">
-																<value>252</value>
-															</yaw>
-															<turn>ToTarget</turn>
-														</base>
-														<offset>9</offset>
-														<turn>ToTarget</turn>
-													</to>
-												</moveType>
-												<resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
-											</projectileData>
-											<pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
-										</Item>
-										<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-											<projectileData>
-												<moveType type="gameMechanics.world.projectile.MoveTypeDestination">
-													<receiver>Caster</receiver>
-													<to type="gameMechanics.map.destination.RelativeRotatePos">
-														<base type="gameMechanics.map.destination.RelativeRotatePos">
-															<base type="gameMechanics.map.destination.SelfPosDestination" />
-															<offset>85</offset>
-															<yaw type="constructor.basicElements.AngleDegrees">
-																<value>324</value>
-															</yaw>
-															<turn>ToTarget</turn>
-														</base>
-														<offset>9</offset>
-														<turn>ToTarget</turn>
-													</to>
-												</moveType>
-												<resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
-											</projectileData>
-											<pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
-										</Item>
-									</impacts>
-								</Item>
-								<Item type="gameMechanics.elements.impacts.BuffDetacher">
-									<buff href="CleansingFireStep.(BuffResource).xdb" />
-								</Item>
-							</impactsIf>
-							<impactsElse>
-								<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-									<impacts>
-										<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-											<projectileData>
-												<moveType type="gameMechanics.world.projectile.MoveTypeDestination">
-													<receiver>Caster</receiver>
-													<to type="gameMechanics.map.destination.RelativeRotatePos">
-														<base type="gameMechanics.map.destination.RelativeRotatePos">
-															<base type="gameMechanics.map.destination.SelfPosDestination" />
-															<offset>85</offset>
-															<yaw type="constructor.basicElements.AngleDegrees" />
-															<turn>ToTarget</turn>
-														</base>
-														<offset>9</offset>
-														<turn>ToTarget</turn>
-													</to>
-												</moveType>
-												<resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
-											</projectileData>
-											<pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
-										</Item>
-										<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-											<projectileData>
-												<moveType type="gameMechanics.world.projectile.MoveTypeDestination">
-													<receiver>Caster</receiver>
-													<to type="gameMechanics.map.destination.RelativeRotatePos">
-														<base type="gameMechanics.map.destination.RelativeRotatePos">
-															<base type="gameMechanics.map.destination.SelfPosDestination" />
-															<offset>85</offset>
-															<yaw type="constructor.basicElements.AngleDegrees">
-																<value>72</value>
-															</yaw>
-															<turn>ToTarget</turn>
-														</base>
-														<offset>9</offset>
-														<turn>ToTarget</turn>
-													</to>
-												</moveType>
-												<resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
-											</projectileData>
-											<pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
-										</Item>
-										<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-											<projectileData>
-												<moveType type="gameMechanics.world.projectile.MoveTypeDestination">
-													<receiver>Caster</receiver>
-													<to type="gameMechanics.map.destination.RelativeRotatePos">
-														<base type="gameMechanics.map.destination.RelativeRotatePos">
-															<base type="gameMechanics.map.destination.SelfPosDestination" />
-															<offset>85</offset>
-															<yaw type="constructor.basicElements.AngleDegrees">
-																<value>144</value>
-															</yaw>
-															<turn>ToTarget</turn>
-														</base>
-														<offset>9</offset>
-														<turn>ToTarget</turn>
-													</to>
-												</moveType>
-												<resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
-											</projectileData>
-											<pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
-										</Item>
-										<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-											<projectileData>
-												<moveType type="gameMechanics.world.projectile.MoveTypeDestination">
-													<receiver>Caster</receiver>
-													<to type="gameMechanics.map.destination.RelativeRotatePos">
-														<base type="gameMechanics.map.destination.RelativeRotatePos">
-															<base type="gameMechanics.map.destination.SelfPosDestination" />
-															<offset>85</offset>
-															<yaw type="constructor.basicElements.AngleDegrees">
-																<value>216</value>
-															</yaw>
-															<turn>ToTarget</turn>
-														</base>
-														<offset>9</offset>
-														<turn>ToTarget</turn>
-													</to>
-												</moveType>
-												<resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
-											</projectileData>
-											<pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
-										</Item>
-										<Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
-											<projectileData>
-												<moveType type="gameMechanics.world.projectile.MoveTypeDestination">
-													<receiver>Caster</receiver>
-													<to type="gameMechanics.map.destination.RelativeRotatePos">
-														<base type="gameMechanics.map.destination.RelativeRotatePos">
-															<base type="gameMechanics.map.destination.SelfPosDestination" />
-															<offset>85</offset>
-															<yaw type="constructor.basicElements.AngleDegrees">
-																<value>288</value>
-															</yaw>
-															<turn>ToTarget</turn>
-														</base>
-														<offset>9</offset>
-														<turn>ToTarget</turn>
-													</to>
-												</moveType>
-												<resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
-											</projectileData>
-											<pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
-										</Item>
-									</impacts>
-								</Item>
-								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-									<buff href="CleansingFireStep.(BuffResource).xdb" />
-								</Item>
-							</impactsElse>
-						</Item>
-					</impacts>
-					<conditions>
-						<Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
-							<spells>
-								<Item href="CleansingFire.(SpellSingleTarget).xdb" />
-							</spells>
-						</Item>
-					</conditions>
-				</Item>
-			</conditionalImpacts>
-			<stages>
-				<Item>Start</Item>
-			</stages>
-		</Item>
-		<Item type="gameMechanics.elements.effects.SpellCastTrigger">
-			<conditionalImpacts>
-				<Item>
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-							<predicates>
-								<Item type="gameMechanics.elements.predicates.PredicateHasAbility">
-									<ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
-								</Item>
-							</predicates>
-							<impactsIf>
-								<Item type="gameMechanics.elements.impacts.RepeatedImpact">
-									<impact type="gameMechanics.elements.impacts.ImpactInstantiating">
-										<impacts>
-											<Item type="gameMechanics.elements.impacts.RandomConditionalImpact">
-												<entries>
-													<Item>
-														<predicate type="gameMechanics.constructor.basicElements.PredicateNot">
-															<predicate type="gameMechanics.elements.resources.ResourceBuff">
-																<buff href="SphereActive1.(BuffResource).xdb" />
-															</predicate>
-														</predicate>
-														<impacts>
-															<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-																<spawn>
-																	<scriptID>713_Ball1</scriptID>
-																	<map href="/Maps/AstralIsle71/MapResource.xdb" />
-																</spawn>
-																<impacts>
-																	<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																		<buff href="FireSphereActivationPre.(BuffResource).xdb" />
-																		<impactsOnAttach>
-																			<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																				<buff href="SphereActive1.(BuffResource).xdb" />
-																			</Item>
-																		</impactsOnAttach>
-																		<stacks type="gameMechanics.elements.calcers.FloatData">
-																			<value>3</value>
-																		</stacks>
-																	</Item>
-																</impacts>
-															</Item>
-															<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																<buff href="SphereActive1.(BuffResource).xdb" />
-															</Item>
-														</impacts>
-													</Item>
-													<Item>
-														<predicate type="gameMechanics.constructor.basicElements.PredicateNot">
-															<predicate type="gameMechanics.elements.resources.ResourceBuff">
-																<buff href="SphereActive2.(BuffResource).xdb" />
-															</predicate>
-														</predicate>
-														<impacts>
-															<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-																<spawn>
-																	<scriptID>713_Ball2</scriptID>
-																	<map href="/Maps/AstralIsle71/MapResource.xdb" />
-																</spawn>
-																<impacts>
-																	<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																		<buff href="FireSphereActivationPre.(BuffResource).xdb" />
-																		<impactsOnAttach>
-																			<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																				<buff href="SphereActive2.(BuffResource).xdb" />
-																			</Item>
-																		</impactsOnAttach>
-																		<stacks type="gameMechanics.elements.calcers.FloatData">
-																			<value>3</value>
-																		</stacks>
-																	</Item>
-																</impacts>
-															</Item>
-															<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																<buff href="SphereActive2.(BuffResource).xdb" />
-															</Item>
-														</impacts>
-													</Item>
-													<Item>
-														<predicate type="gameMechanics.constructor.basicElements.PredicateNot">
-															<predicate type="gameMechanics.elements.resources.ResourceBuff">
-																<buff href="SphereActive3.(BuffResource).xdb" />
-															</predicate>
-														</predicate>
-														<impacts>
-															<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-																<spawn>
-																	<scriptID>713_Ball3</scriptID>
-																	<map href="/Maps/AstralIsle71/MapResource.xdb" />
-																</spawn>
-																<impacts>
-																	<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																		<buff href="FireSphereActivationPre.(BuffResource).xdb" />
-																		<impactsOnAttach>
-																			<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																				<buff href="SphereActive3.(BuffResource).xdb" />
-																			</Item>
-																		</impactsOnAttach>
-																		<stacks type="gameMechanics.elements.calcers.FloatData">
-																			<value>3</value>
-																		</stacks>
-																	</Item>
-																</impacts>
-															</Item>
-															<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																<buff href="SphereActive3.(BuffResource).xdb" />
-															</Item>
-														</impacts>
-													</Item>
-													<Item>
-														<predicate type="gameMechanics.constructor.basicElements.PredicateNot">
-															<predicate type="gameMechanics.elements.resources.ResourceBuff">
-																<buff href="SphereActive4.(BuffResource).xdb" />
-															</predicate>
-														</predicate>
-														<impacts>
-															<Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
-																<spawn>
-																	<scriptID>713_Ball4</scriptID>
-																	<map href="/Maps/AstralIsle71/MapResource.xdb" />
-																</spawn>
-																<impacts>
-																	<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																		<buff href="FireSphereActivationPre.(BuffResource).xdb" />
-																		<impactsOnAttach>
-																			<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																				<buff href="SphereActive4.(BuffResource).xdb" />
-																			</Item>
-																		</impactsOnAttach>
-																		<stacks type="gameMechanics.elements.calcers.FloatData">
-																			<value>3</value>
-																		</stacks>
-																	</Item>
-																</impacts>
-															</Item>
-															<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																<buff href="SphereActive4.(BuffResource).xdb" />
-															</Item>
-														</impacts>
-													</Item>
-												</entries>
-											</Item>
-										</impacts>
-									</impact>
-									<count type="gameMechanics.elements.calcers.FloatData">
-										<value>2</value>
-									</count>
-								</Item>
-								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-									<buff href="SphereActivationBossVisual.(BuffResource).xdb" />
-								</Item>
-							</impactsIf>
-						</Item>
-					</impacts>
-					<conditions>
-						<Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
-							<spells>
-								<Item href="OverheatBlastBoss.(SpellArea).xdb" />
-							</spells>
-						</Item>
-					</conditions>
-				</Item>
-			</conditionalImpacts>
-			<stages>
-				<Item>Start</Item>
-			</stages>
-		</Item>
-	</effects>
+    <Header>
+        <resourceId>739936157</resourceId>
+    </Header>
+    <name href="CleansingFire.(SpellSingleTarget).Name.txt" />
+    <effects>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.map.variables.ImpactMapVariableSummand">
+                    <variable href="/Mechanics/Spells/AstarlIslands/AI71/Common/CityPortalNetwork/CityTeleport.(MapVariableResource).xdb" />
+                    <summand>1</summand>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.SpawnSingleDevice">
+                    <device>
+                        <scriptID>PortalNetwork_3_Stele</scriptID>
+                        <map href="/Maps/AstralIsle71/MapResource.xdb" />
+                    </device>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                            <ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
+                        </Item>
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.SpawnTableObjects">
+                            <table href="/Maps/AstralIsle71/SpawnTables/3_Boss03FireSpheres.(SpawnTable).xdb" />
+                        </Item>
+                    </impactsIf>
+                </Item>
+            </onEnter>
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                                    <group href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
+                                    <affectPets>false</affectPets>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                                            <group href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ResetSpawnTable">
+                    <table href="/Maps/AstralIsle71/SpawnTables/3_Boss03FireSpheres.(SpawnTable).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                    <group href="/Mechanics/RaidInstances/Phase5.(ActionGroup).xdb" />
+                </Item>
+            </onLeave>
+            <effects>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceAnyBuff">
+                                    <buffs>
+                                        <Item href="PhaseRefresh.(BuffResource).xdb" />
+                                        <Item href="CleansingFire.(BuffResource).xdb" />
+                                    </buffs>
+                                </Item>
+                            </predicates>
+                            <impactsElse>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="PhaseRefresh.(BuffResource).xdb" />
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impacts>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+            <conditionalImpacts>
+                <Item>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="CleansingFireStep.(BuffResource).xdb" />
+                                    <consumeStacks>1</consumeStacks>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                            <projectileData>
+                                                <moveType type="gameMechanics.world.projectile.MoveTypeDestination">
+                                                    <receiver>Caster</receiver>
+                                                    <to type="gameMechanics.map.destination.RelativeRotatePos">
+                                                        <base type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>85</offset>
+                                                            <yaw type="constructor.basicElements.AngleDegrees">
+                                                                <value>36</value>
+                                                            </yaw>
+                                                            <turn>ToTarget</turn>
+                                                        </base>
+                                                        <offset>9</offset>
+                                                        <turn>ToTarget</turn>
+                                                    </to>
+                                                </moveType>
+                                                <resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
+                                            </projectileData>
+                                            <pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                            <projectileData>
+                                                <moveType type="gameMechanics.world.projectile.MoveTypeDestination">
+                                                    <receiver>Caster</receiver>
+                                                    <to type="gameMechanics.map.destination.RelativeRotatePos">
+                                                        <base type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>85</offset>
+                                                            <yaw type="constructor.basicElements.AngleDegrees">
+                                                                <value>108</value>
+                                                            </yaw>
+                                                            <turn>ToTarget</turn>
+                                                        </base>
+                                                        <offset>9</offset>
+                                                        <turn>ToTarget</turn>
+                                                    </to>
+                                                </moveType>
+                                                <resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
+                                            </projectileData>
+                                            <pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                            <projectileData>
+                                                <moveType type="gameMechanics.world.projectile.MoveTypeDestination">
+                                                    <receiver>Caster</receiver>
+                                                    <to type="gameMechanics.map.destination.RelativeRotatePos">
+                                                        <base type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>85</offset>
+                                                            <yaw type="constructor.basicElements.AngleDegrees">
+                                                                <value>180</value>
+                                                            </yaw>
+                                                            <turn>ToTarget</turn>
+                                                        </base>
+                                                        <offset>9</offset>
+                                                        <turn>ToTarget</turn>
+                                                    </to>
+                                                </moveType>
+                                                <resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
+                                            </projectileData>
+                                            <pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                            <projectileData>
+                                                <moveType type="gameMechanics.world.projectile.MoveTypeDestination">
+                                                    <receiver>Caster</receiver>
+                                                    <to type="gameMechanics.map.destination.RelativeRotatePos">
+                                                        <base type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>85</offset>
+                                                            <yaw type="constructor.basicElements.AngleDegrees">
+                                                                <value>252</value>
+                                                            </yaw>
+                                                            <turn>ToTarget</turn>
+                                                        </base>
+                                                        <offset>9</offset>
+                                                        <turn>ToTarget</turn>
+                                                    </to>
+                                                </moveType>
+                                                <resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
+                                            </projectileData>
+                                            <pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                            <projectileData>
+                                                <moveType type="gameMechanics.world.projectile.MoveTypeDestination">
+                                                    <receiver>Caster</receiver>
+                                                    <to type="gameMechanics.map.destination.RelativeRotatePos">
+                                                        <base type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>85</offset>
+                                                            <yaw type="constructor.basicElements.AngleDegrees">
+                                                                <value>324</value>
+                                                            </yaw>
+                                                            <turn>ToTarget</turn>
+                                                        </base>
+                                                        <offset>9</offset>
+                                                        <turn>ToTarget</turn>
+                                                    </to>
+                                                </moveType>
+                                                <resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
+                                            </projectileData>
+                                            <pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                    <buff href="CleansingFireStep.(BuffResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                            <projectileData>
+                                                <moveType type="gameMechanics.world.projectile.MoveTypeDestination">
+                                                    <receiver>Caster</receiver>
+                                                    <to type="gameMechanics.map.destination.RelativeRotatePos">
+                                                        <base type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>85</offset>
+                                                            <yaw type="constructor.basicElements.AngleDegrees" />
+                                                            <turn>ToTarget</turn>
+                                                        </base>
+                                                        <offset>9</offset>
+                                                        <turn>ToTarget</turn>
+                                                    </to>
+                                                </moveType>
+                                                <resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
+                                            </projectileData>
+                                            <pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                            <projectileData>
+                                                <moveType type="gameMechanics.world.projectile.MoveTypeDestination">
+                                                    <receiver>Caster</receiver>
+                                                    <to type="gameMechanics.map.destination.RelativeRotatePos">
+                                                        <base type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>85</offset>
+                                                            <yaw type="constructor.basicElements.AngleDegrees">
+                                                                <value>72</value>
+                                                            </yaw>
+                                                            <turn>ToTarget</turn>
+                                                        </base>
+                                                        <offset>9</offset>
+                                                        <turn>ToTarget</turn>
+                                                    </to>
+                                                </moveType>
+                                                <resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
+                                            </projectileData>
+                                            <pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                            <projectileData>
+                                                <moveType type="gameMechanics.world.projectile.MoveTypeDestination">
+                                                    <receiver>Caster</receiver>
+                                                    <to type="gameMechanics.map.destination.RelativeRotatePos">
+                                                        <base type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>85</offset>
+                                                            <yaw type="constructor.basicElements.AngleDegrees">
+                                                                <value>144</value>
+                                                            </yaw>
+                                                            <turn>ToTarget</turn>
+                                                        </base>
+                                                        <offset>9</offset>
+                                                        <turn>ToTarget</turn>
+                                                    </to>
+                                                </moveType>
+                                                <resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
+                                            </projectileData>
+                                            <pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                            <projectileData>
+                                                <moveType type="gameMechanics.world.projectile.MoveTypeDestination">
+                                                    <receiver>Caster</receiver>
+                                                    <to type="gameMechanics.map.destination.RelativeRotatePos">
+                                                        <base type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>85</offset>
+                                                            <yaw type="constructor.basicElements.AngleDegrees">
+                                                                <value>216</value>
+                                                            </yaw>
+                                                            <turn>ToTarget</turn>
+                                                        </base>
+                                                        <offset>9</offset>
+                                                        <turn>ToTarget</turn>
+                                                    </to>
+                                                </moveType>
+                                                <resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
+                                            </projectileData>
+                                            <pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactLaunchProjectile">
+                                            <projectileData>
+                                                <moveType type="gameMechanics.world.projectile.MoveTypeDestination">
+                                                    <receiver>Caster</receiver>
+                                                    <to type="gameMechanics.map.destination.RelativeRotatePos">
+                                                        <base type="gameMechanics.map.destination.RelativeRotatePos">
+                                                            <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                            <offset>85</offset>
+                                                            <yaw type="constructor.basicElements.AngleDegrees">
+                                                                <value>288</value>
+                                                            </yaw>
+                                                            <turn>ToTarget</turn>
+                                                        </base>
+                                                        <offset>9</offset>
+                                                        <turn>ToTarget</turn>
+                                                    </to>
+                                                </moveType>
+                                                <resource href="/Mechanics/Spells/AstarlIslands/AI71/Exterminator/FireWave.(ProjectileResource).xdb" />
+                                            </projectileData>
+                                            <pool href="/Mechanics/Spells/AstarlIslands/AI71/Common/AI71Pool.(SummonPool).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="CleansingFireStep.(BuffResource).xdb" />
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                    </impacts>
+                    <conditions>
+                        <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                            <spells>
+                                <Item href="CleansingFire.(SpellSingleTarget).xdb" />
+                            </spells>
+                        </Item>
+                    </conditions>
+                </Item>
+            </conditionalImpacts>
+            <stages>
+                <Item>Start</Item>
+            </stages>
+        </Item>
+        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+            <conditionalImpacts>
+                <Item>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                    <ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.RepeatedImpact">
+                                    <impact type="gameMechanics.elements.impacts.ImpactInstantiating">
+                                        <impacts>
+                                            <Item type="gameMechanics.elements.impacts.RandomConditionalImpact">
+                                                <entries>
+                                                    <Item>
+                                                        <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                                <buff href="SphereActive1.(BuffResource).xdb" />
+                                                            </predicate>
+                                                        </predicate>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+                                                                <spawn>
+                                                                    <scriptID>713_Ball1</scriptID>
+                                                                    <map href="/Maps/AstralIsle71/MapResource.xdb" />
+                                                                </spawn>
+                                                                <impacts>
+                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                        <buff href="FireSphereActivationPre.(BuffResource).xdb" />
+                                                                        <impactsOnAttach>
+                                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                                <buff href="SphereActive1.(BuffResource).xdb" />
+                                                                            </Item>
+                                                                        </impactsOnAttach>
+                                                                        <stacks type="gameMechanics.elements.calcers.FloatData">
+                                                                            <value>3</value>
+                                                                        </stacks>
+                                                                    </Item>
+                                                                </impacts>
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="SphereActive1.(BuffResource).xdb" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                    <Item>
+                                                        <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                                <buff href="SphereActive2.(BuffResource).xdb" />
+                                                            </predicate>
+                                                        </predicate>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+                                                                <spawn>
+                                                                    <scriptID>713_Ball2</scriptID>
+                                                                    <map href="/Maps/AstralIsle71/MapResource.xdb" />
+                                                                </spawn>
+                                                                <impacts>
+                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                        <buff href="FireSphereActivationPre.(BuffResource).xdb" />
+                                                                        <impactsOnAttach>
+                                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                                <buff href="SphereActive2.(BuffResource).xdb" />
+                                                                            </Item>
+                                                                        </impactsOnAttach>
+                                                                        <stacks type="gameMechanics.elements.calcers.FloatData">
+                                                                            <value>3</value>
+                                                                        </stacks>
+                                                                    </Item>
+                                                                </impacts>
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="SphereActive2.(BuffResource).xdb" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                    <Item>
+                                                        <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                                <buff href="SphereActive3.(BuffResource).xdb" />
+                                                            </predicate>
+                                                        </predicate>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+                                                                <spawn>
+                                                                    <scriptID>713_Ball3</scriptID>
+                                                                    <map href="/Maps/AstralIsle71/MapResource.xdb" />
+                                                                </spawn>
+                                                                <impacts>
+                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                        <buff href="FireSphereActivationPre.(BuffResource).xdb" />
+                                                                        <impactsOnAttach>
+                                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                                <buff href="SphereActive3.(BuffResource).xdb" />
+                                                                            </Item>
+                                                                        </impactsOnAttach>
+                                                                        <stacks type="gameMechanics.elements.calcers.FloatData">
+                                                                            <value>3</value>
+                                                                        </stacks>
+                                                                    </Item>
+                                                                </impacts>
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="SphereActive3.(BuffResource).xdb" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                    <Item>
+                                                        <predicate type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                            <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                                <buff href="SphereActive4.(BuffResource).xdb" />
+                                                            </predicate>
+                                                        </predicate>
+                                                        <impacts>
+                                                            <Item type="gameMechanics.elements.impacts.ImpactsToSpawnObjects">
+                                                                <spawn>
+                                                                    <scriptID>713_Ball4</scriptID>
+                                                                    <map href="/Maps/AstralIsle71/MapResource.xdb" />
+                                                                </spawn>
+                                                                <impacts>
+                                                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                        <buff href="FireSphereActivationPre.(BuffResource).xdb" />
+                                                                        <impactsOnAttach>
+                                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                                <buff href="SphereActive4.(BuffResource).xdb" />
+                                                                            </Item>
+                                                                        </impactsOnAttach>
+                                                                        <stacks type="gameMechanics.elements.calcers.FloatData">
+                                                                            <value>3</value>
+                                                                        </stacks>
+                                                                    </Item>
+                                                                </impacts>
+                                                            </Item>
+                                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                <buff href="SphereActive4.(BuffResource).xdb" />
+                                                            </Item>
+                                                        </impacts>
+                                                    </Item>
+                                                </entries>
+                                            </Item>
+                                        </impacts>
+                                    </impact>
+                                    <count type="gameMechanics.elements.calcers.FloatData">
+                                        <value>2</value>
+                                    </count>
+                                </Item>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="SphereActivationBossVisual.(BuffResource).xdb" />
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                    <conditions>
+                        <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                            <spells>
+                                <Item href="OverheatBlastBoss.(SpellArea).xdb" />
+                            </spells>
+                        </Item>
+                    </conditions>
+                </Item>
+            </conditionalImpacts>
+            <stages>
+                <Item>Start</Item>
+            </stages>
+        </Item>
+    </effects>
 </gameMechanics.constructor.schemes.ability.AbilityResource>

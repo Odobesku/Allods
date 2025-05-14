@@ -1,129 +1,129 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-	<Header>
-		<resourceId>107987975</resourceId>
-	</Header>
-	<groups>
-		<Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-		<Item href="/Mechanics/Spells/Groups/CrowdControlSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-		<Item href="/Mechanics/Spells/Groups/DRMesmerize.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-		<Item href="/Mechanics/Spells/Groups/Magics.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-		<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
-	</groups>
-	<element>SHADOW</element>
-	<Name href="Spell_Name.txt" />
-	<Description href="Spell_Desc.txt" />
-	<image href="/Interface/Icons/Spells/Necromancer/NecromancerSleepingDropsy.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
-	<visualScripts href="/Spells/VisScripts/Necromancer/GhostWorld.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
-	<nameTemplate href="Spell_Name.txt.template" />
-	<descTemplate href="Spell_Desc.txt.template" />
-	<range type="gameMechanics.elements.calcers.FloatData">
-		<value>40</value>
-	</range>
-	<level>32</level>
-	<prepareDuration>2000</prepareDuration>
-	<immutablePrepareDuration>false</immutablePrepareDuration>
-	<needLos>true</needLos>
-	<targetType>STTCurrentTarget</targetType>
-	<isAggro>true</isAggro>
-	<replaceLowRanks>true</replaceLowRanks>
-	<isWorkOnDead>false</isWorkOnDead>
-	<ranks />
-	<triggersGlobalCooldown>true</triggersGlobalCooldown>
-	<ignoreGlobalCooldown>false</ignoreGlobalCooldown>
-	<launchWhenReady>true</launchWhenReady>
-	<needInFront>true</needInFront>
-	<mechanics>
-		<cooldown>
-			<stage>Launch</stage>
-			<duration>5000</duration>
-			<group href="" />
-		</cooldown>
-		<conditions>
-			<Item type="gameMechanics.constructor.basicElements.BinaryPredicateOr">
-				<predicates>
-					<Item type="gameMechanics.constructor.basicElements.BinaryPredicateAnd">
-						<predicates>
-							<Item type="gameMechanics.constructor.basicElements.BinaryPredicateNot">
-								<predicate type="gameMechanics.elements.predicates.PredicateNotMaster" />
-							</Item>
-							<Item type="gameMechanics.elements.predicates.PredicateHasBuffFromAddressee">
-								<buff href="Watcher.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-								<from type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
-							</Item>
-						</predicates>
-					</Item>
-					<Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
-						<affectGroup>Enemies</affectGroup>
-					</Item>
-				</predicates>
-			</Item>
-		</conditions>
-		<casterResources>
-			<Item type="gameMechanics.elements.resources.ResourceMana">
-				<mana>35</mana>
-			</Item>
-			<Item type="gameMechanics.elements.resources.ResourceVariable">
-				<variable href="/Mechanics/Spells/Necromancer/BloodPool/BloodPool.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
-				<ability href="/Mechanics/Spells/Necromancer/BloodPool/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-				<sub>4</sub>
-			</Item>
-		</casterResources>
-		<targetImpacts>
-			<Item type="gameMechanics.elements.impacts.ImpactsIf">
-				<predicate type="gameMechanics.elements.predicates.PredicateAffectGroup">
-					<affectGroup>Enemies</affectGroup>
-				</predicate>
-				<impactsIf>
-					<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-						<buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-						<impactsOnAttach>
-							<Item type="gameMechanics.elements.impacts.ReturningImpact">
-								<impacts>
-									<Item type="gameMechanics.elements.impacts.ImpactVariableReset">
-										<variable href="/Mechanics/Spells/Necromancer/BloodPool/BloodPool.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
-									</Item>
-									<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-										<delay>1000</delay>
-										<impacts>
-											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-												<buff href="Watcher.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-											</Item>
-										</impacts>
-									</Item>
-								</impacts>
-							</Item>
-						</impactsOnAttach>
-						<impactsOnFail>
-							<Item type="gameMechanics.elements.impacts.ReturningImpact">
-								<impacts>
-									<Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
-										<variable href="/Mechanics/Spells/Necromancer/BloodPool/BloodPool.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
-										<summand>-1</summand>
-									</Item>
-								</impacts>
-							</Item>
-						</impactsOnFail>
-						<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-							<mulCalcer type="gameMechanics.elements.calcers.VariableValueCalcer">
-								<variable href="/Mechanics/Spells/Necromancer/BloodPool/BloodPool.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
-								<mul>5000</mul>
-							</mulCalcer>
-						</durationScaler>
-					</Item>
-				</impactsIf>
-				<impactsElse>
-					<Item type="gameMechanics.elements.impacts.BuffDetacher">
-						<buff href="Watcher.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-					</Item>
-					<Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
-						<variable href="/Mechanics/Spells/Necromancer/BloodPool/BloodPool.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
-						<summand>4</summand>
-					</Item>
-				</impactsElse>
-			</Item>
-		</targetImpacts>
-	</mechanics>
-	<speed>0</speed>
-	<isAE>false</isAE>
+    <Header>
+        <resourceId>107987975</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/CrowdControlSpells.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/DRMesmerize.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/Magics.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb#xpointer(/gameMechanics.constructor.basicInterfaces.ActionGroup)" />
+    </groups>
+    <element>SHADOW</element>
+    <Name href="Spell_Name.txt" />
+    <Description href="Spell_Desc.txt" />
+    <image href="/Interface/Icons/Spells/Necromancer/NecromancerSleepingDropsy.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
+    <visualScripts href="/Spells/VisScripts/Necromancer/GhostWorld.(SpellVisScripts).xdb#xpointer(/SpellVisScripts)" />
+    <nameTemplate href="Spell_Name.txt.template" />
+    <descTemplate href="Spell_Desc.txt.template" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>40</value>
+    </range>
+    <level>32</level>
+    <prepareDuration>2000</prepareDuration>
+    <immutablePrepareDuration>false</immutablePrepareDuration>
+    <needLos>true</needLos>
+    <targetType>STTCurrentTarget</targetType>
+    <isAggro>true</isAggro>
+    <replaceLowRanks>true</replaceLowRanks>
+    <isWorkOnDead>false</isWorkOnDead>
+    <ranks />
+    <triggersGlobalCooldown>true</triggersGlobalCooldown>
+    <ignoreGlobalCooldown>false</ignoreGlobalCooldown>
+    <launchWhenReady>true</launchWhenReady>
+    <needInFront>true</needInFront>
+    <mechanics>
+        <cooldown>
+            <stage>Launch</stage>
+            <duration>5000</duration>
+            <group href="" />
+        </cooldown>
+        <conditions>
+            <Item type="gameMechanics.constructor.basicElements.BinaryPredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.BinaryPredicateAnd">
+                        <predicates>
+                            <Item type="gameMechanics.constructor.basicElements.BinaryPredicateNot">
+                                <predicate type="gameMechanics.elements.predicates.PredicateNotMaster" />
+                            </Item>
+                            <Item type="gameMechanics.elements.predicates.PredicateHasBuffFromAddressee">
+                                <buff href="Watcher.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                <from type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                            </Item>
+                        </predicates>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
+                        <affectGroup>Enemies</affectGroup>
+                    </Item>
+                </predicates>
+            </Item>
+        </conditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceMana">
+                <mana>35</mana>
+            </Item>
+            <Item type="gameMechanics.elements.resources.ResourceVariable">
+                <variable href="/Mechanics/Spells/Necromancer/BloodPool/BloodPool.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                <ability href="/Mechanics/Spells/Necromancer/BloodPool/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                <sub>4</sub>
+            </Item>
+        </casterResources>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactsIf">
+                <predicate type="gameMechanics.elements.predicates.PredicateAffectGroup">
+                    <affectGroup>Enemies</affectGroup>
+                </predicate>
+                <impactsIf>
+                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                        <buff href="Buff01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                        <impactsOnAttach>
+                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactVariableReset">
+                                        <variable href="/Mechanics/Spells/Necromancer/BloodPool/BloodPool.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                                        <delay>1000</delay>
+                                        <impacts>
+                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                <buff href="Watcher.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                            </Item>
+                                        </impacts>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impactsOnAttach>
+                        <impactsOnFail>
+                            <Item type="gameMechanics.elements.impacts.ReturningImpact">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                                        <variable href="/Mechanics/Spells/Necromancer/BloodPool/BloodPool.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                                        <summand>-1</summand>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impactsOnFail>
+                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                            <mulCalcer type="gameMechanics.elements.calcers.VariableValueCalcer">
+                                <variable href="/Mechanics/Spells/Necromancer/BloodPool/BloodPool.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                                <mul>5000</mul>
+                            </mulCalcer>
+                        </durationScaler>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                        <buff href="Watcher.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                    </Item>
+                    <Item type="gameMechanics.elements.impacts.ImpactVariableSummand">
+                        <variable href="/Mechanics/Spells/Necromancer/BloodPool/BloodPool.xdb#xpointer(/gameMechanics.constructor.basicInterfaces.VariableResource)" />
+                        <summand>4</summand>
+                    </Item>
+                </impactsElse>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>0</speed>
+    <isAE>false</isAE>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

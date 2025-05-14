@@ -1,446 +1,446 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.basicElements.ImpactListResource>
-	<Header>
-		<resourceId>739851194</resourceId>
-	</Header>
-	<impacts>
-		<Item type="gameMechanics.elements.impacts.ImpactCaseGeneric">
-			<cases>
-				<Item>
-					<predicates>
-						<Item type="gameMechanics.elements.predicates.PredicateHasSpell">
-							<spell href="Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-							<anyRank>false</anyRank>
-						</Item>
-					</predicates>
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-							<predicates>
-								<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-									<predicate type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
-										<spell href="Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-									</predicate>
-								</Item>
-							</predicates>
-							<impactsIf>
-								<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellActivate">
-									<spell href="Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-									<effects>
-										<Item type="gameMechanics.elements.effects.MultiplyStat">
-											<stat type="gameMechanics.elements.stat.StatResistance">
-												<element>EPHYSICAL</element>
-											</stat>
-											<multiplier>0.7</multiplier>
-											<scaler type="gameMechanics.elements.scalers.ScalerMax">
-												<scaler1 type="gameMechanics.elements.scalers.AbilityRankScaler">
-													<ability href="/Mechanics/Spells/WarriorV3/Abilities/AuraArmorPenaltyRedution/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-													<mul>0.142857</mul>
-												</scaler1>
-												<scaler2 type="gameMechanics.elements.scalers.ScalerMax">
-													<scaler1 type="gameMechanics.elements.scalers.AbilityRankScaler">
-														<ability href="/Mechanics/Abilities/DruidTalentsV2/ImprovedPetDodge/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-														<mul>0.142857</mul>
-													</scaler1>
-													<scaler2 type="gameMechanics.elements.scalers.ScalerMax">
-														<scaler1 type="gameMechanics.elements.scalers.AbilityRankScaler">
-															<ability href="/Mechanics/Abilities/PaladinTalentsV2/CounterStrike/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-															<mul>0.142857</mul>
-														</scaler1>
-														<scaler2 type="gameMechanics.elements.scalers.ScalerIf">
-															<condition type="gameMechanics.elements.resources.ResourceBuff">
-																<buff href="/Mechanics/Spells/StalkerNew/Modes/Assassin.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-															</condition>
-															<scalerIf type="gameMechanics.elements.scalers.AbilityRankScaler">
-																<ability href="/Mechanics/Spells/StalkerNew/Talents/ShadowStepBuffs/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-																<mul>0.142857</mul>
-															</scalerIf>
-															<scalerElse type="gameMechanics.elements.scalers.TrivialScaler" />
-														</scaler2>
-													</scaler2>
-												</scaler2>
-											</scaler>
-										</Item>
-										<Item type="gameMechanics.elements.effects.SpellPrepareDurationModifier">
-											<spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-											<factor>-1</factor>
-										</Item>
-										<Item type="gameMechanics.elements.effects.SpellCostModifier">
-											<spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-											<factor>-1</factor>
-										</Item>
-										<Item type="gameMechanics.elements.effects.EquipTrigger">
-											<slot>OFFHAND</slot>
-											<itemClasses>
-												<Item href="/Mechanics/ItemClasses/Shield.xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemClass)" />
-											</itemClasses>
-											<effects>
-												<Item type="gameMechanics.elements.effects.Switch">
-													<impactsOn>
-														<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
-															<spell href="Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-														</Item>
-														<Item type="gameMechanics.elements.impacts.BuffDetacher">
-															<buff href="PhysDmgEnforcer.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-														</Item>
-													</impactsOn>
-												</Item>
-											</effects>
-										</Item>
-										<Item type="gameMechanics.elements.effects.WhileAlive">
-											<effects>
-												<Item type="gameMechanics.elements.effects.GroupAura">
-													<affectSelf>true</affectSelf>
-													<radius>85</radius>
-													<predicates>
-														<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-													</predicates>
-													<impactsIn>
-														<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-															<buff href="Counter03.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-														</Item>
-													</impactsIn>
-													<impactsOut>
-														<Item type="gameMechanics.elements.impacts.PostponedImpacts">
-															<impacts>
-																<Item type="gameMechanics.elements.impacts.StackBuff">
-																	<buff href="Counter03.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-																	<delta type="gameMechanics.elements.calcers.FloatData">
-																		<value>-1</value>
-																	</delta>
-																</Item>
-															</impacts>
-														</Item>
-													</impactsOut>
-												</Item>
-											</effects>
-										</Item>
-										<Item type="gameMechanics.elements.effects.EventTrigger">
-											<conditionalEvents>
-												<Item>
-													<obj>avatarPopulation.service.commands.bulletinboard.CmdBulletinBoardAdd</obj>
-													<predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
-														<spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-													</predicate>
-												</Item>
-												<Item>
-													<obj>avatarPopulation.service.commands.bulletinboard.CmdBulletinBoardAdd</obj>
-													<predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
-														<spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/EnMpRegenStalker/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.group.SpellGroup)" />
-													</predicate>
-												</Item>
-												<Item>
-													<obj>avatarPopulation.service.commands.bulletinboard.CmdBulletinBoardAdd</obj>
-													<predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
-														<spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/EnMpRegenDru/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.group.SpellGroup)" />
-													</predicate>
-												</Item>
-											</conditionalEvents>
-											<impacts>
-												<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
-													<spell href="Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-												</Item>
-												<Item type="gameMechanics.elements.impacts.BuffDetacher">
-													<buff href="PhysDmgEnforcer.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-												</Item>
-											</impacts>
-											<eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
-										</Item>
-									</effects>
-								</Item>
-							</impactsIf>
-						</Item>
-					</impacts>
-				</Item>
-				<Item>
-					<predicates>
-						<Item type="gameMechanics.elements.predicates.PredicateHasSpell">
-							<spell href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-							<anyRank>false</anyRank>
-						</Item>
-					</predicates>
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-							<predicates>
-								<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-									<predicate type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
-										<spell href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-									</predicate>
-								</Item>
-							</predicates>
-							<impactsIf>
-								<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellActivate">
-									<spell href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-									<effects>
-										<Item type="gameMechanics.elements.effects.MultiplyStat">
-											<stat type="gameMechanics.elements.stat.StatResistance">
-												<element>EPHYSICAL</element>
-											</stat>
-											<multiplier>0.7</multiplier>
-											<scaler type="gameMechanics.elements.scalers.ScalerMax">
-												<scaler1 type="gameMechanics.elements.scalers.AbilityRankScaler">
-													<ability href="/Mechanics/Spells/WarriorV3/Abilities/AuraArmorPenaltyRedution/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-													<mul>0.142857</mul>
-												</scaler1>
-												<scaler2 type="gameMechanics.elements.scalers.ScalerMax">
-													<scaler1 type="gameMechanics.elements.scalers.AbilityRankScaler">
-														<ability href="/Mechanics/Abilities/DruidTalentsV2/ImprovedPetDodge/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-														<mul>0.142857</mul>
-													</scaler1>
-													<scaler2 type="gameMechanics.elements.scalers.ScalerMax">
-														<scaler1 type="gameMechanics.elements.scalers.AbilityRankScaler">
-															<ability href="/Mechanics/Abilities/PaladinTalentsV2/CounterStrike/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-															<mul>0.142857</mul>
-														</scaler1>
-														<scaler2 type="gameMechanics.elements.scalers.ScalerIf">
-															<condition type="gameMechanics.elements.resources.ResourceBuff">
-																<buff href="/Mechanics/Spells/StalkerNew/Modes/Assassin.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-															</condition>
-															<scalerIf type="gameMechanics.elements.scalers.AbilityRankScaler">
-																<ability href="/Mechanics/Spells/StalkerNew/Talents/ShadowStepBuffs/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-																<mul>0.142857</mul>
-															</scalerIf>
-															<scalerElse type="gameMechanics.elements.scalers.TrivialScaler" />
-														</scaler2>
-													</scaler2>
-												</scaler2>
-											</scaler>
-										</Item>
-										<Item type="gameMechanics.elements.effects.SpellPrepareDurationModifier">
-											<spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-											<factor>-1</factor>
-										</Item>
-										<Item type="gameMechanics.elements.effects.SpellCostModifier">
-											<spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-											<factor>-1</factor>
-										</Item>
-										<Item type="gameMechanics.elements.effects.EquipTrigger">
-											<slot>OFFHAND</slot>
-											<itemClasses>
-												<Item href="/Mechanics/ItemClasses/Shield.xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemClass)" />
-											</itemClasses>
-											<effects>
-												<Item type="gameMechanics.elements.effects.Switch">
-													<impactsOn>
-														<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
-															<spell href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-														</Item>
-														<Item type="gameMechanics.elements.impacts.BuffDetacher">
-															<buff href="PhysDmgEnforcer.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-														</Item>
-													</impactsOn>
-												</Item>
-											</effects>
-										</Item>
-										<Item type="gameMechanics.elements.effects.WhileAlive">
-											<effects>
-												<Item type="gameMechanics.elements.effects.GroupAura">
-													<affectSelf>true</affectSelf>
-													<radius>85</radius>
-													<impactsIn>
-														<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-															<buff href="Counter02.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-														</Item>
-													</impactsIn>
-													<impactsOut>
-														<Item type="gameMechanics.elements.impacts.PostponedImpacts">
-															<impacts>
-																<Item type="gameMechanics.elements.impacts.StackBuff">
-																	<buff href="Counter02.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-																	<delta type="gameMechanics.elements.calcers.FloatData">
-																		<value>-1</value>
-																	</delta>
-																</Item>
-															</impacts>
-														</Item>
-													</impactsOut>
-												</Item>
-											</effects>
-										</Item>
-										<Item type="gameMechanics.elements.effects.EventTrigger">
-											<conditionalEvents>
-												<Item>
-													<obj>avatarPopulation.service.commands.bulletinboard.CmdBulletinBoardAdd</obj>
-													<predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
-														<spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-													</predicate>
-												</Item>
-												<Item>
-													<obj>avatarPopulation.service.commands.bulletinboard.CmdBulletinBoardAdd</obj>
-													<predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
-														<spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/EnMpRegenStalker/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.group.SpellGroup)" />
-													</predicate>
-												</Item>
-												<Item>
-													<obj>avatarPopulation.service.commands.bulletinboard.CmdBulletinBoardAdd</obj>
-													<predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
-														<spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/EnMpRegenDru/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.group.SpellGroup)" />
-													</predicate>
-												</Item>
-											</conditionalEvents>
-											<impacts>
-												<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
-													<spell href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-												</Item>
-												<Item type="gameMechanics.elements.impacts.BuffDetacher">
-													<buff href="PhysDmgEnforcer.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-												</Item>
-											</impacts>
-											<eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
-										</Item>
-									</effects>
-								</Item>
-							</impactsIf>
-						</Item>
-					</impacts>
-				</Item>
-				<Item>
-					<predicates>
-						<Item type="gameMechanics.elements.predicates.PredicateHasSpell">
-							<spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-							<anyRank>false</anyRank>
-						</Item>
-					</predicates>
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-							<predicates>
-								<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-									<predicate type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
-										<spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-									</predicate>
-								</Item>
-							</predicates>
-							<impactsIf>
-								<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellActivate">
-									<spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-									<effects>
-										<Item type="gameMechanics.elements.effects.MultiplyStat">
-											<stat type="gameMechanics.elements.stat.StatResistance">
-												<element>EPHYSICAL</element>
-											</stat>
-											<multiplier>0.7</multiplier>
-											<scaler type="gameMechanics.elements.scalers.ScalerMax">
-												<scaler1 type="gameMechanics.elements.scalers.AbilityRankScaler">
-													<ability href="/Mechanics/Spells/WarriorV3/Abilities/AuraArmorPenaltyRedution/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-													<mul>0.142857</mul>
-												</scaler1>
-												<scaler2 type="gameMechanics.elements.scalers.ScalerMax">
-													<scaler1 type="gameMechanics.elements.scalers.AbilityRankScaler">
-														<ability href="/Mechanics/Abilities/DruidTalentsV2/ImprovedPetDodge/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-														<mul>0.142857</mul>
-													</scaler1>
-													<scaler2 type="gameMechanics.elements.scalers.ScalerMax">
-														<scaler1 type="gameMechanics.elements.scalers.AbilityRankScaler">
-															<ability href="/Mechanics/Abilities/PaladinTalentsV2/CounterStrike/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-															<mul>0.142857</mul>
-														</scaler1>
-														<scaler2 type="gameMechanics.elements.scalers.ScalerIf">
-															<condition type="gameMechanics.elements.resources.ResourceBuff">
-																<buff href="/Mechanics/Spells/StalkerNew/Modes/Assassin.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-															</condition>
-															<scalerIf type="gameMechanics.elements.scalers.AbilityRankScaler">
-																<ability href="/Mechanics/Spells/StalkerNew/Talents/ShadowStepBuffs/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-																<mul>0.142857</mul>
-															</scalerIf>
-															<scalerElse type="gameMechanics.elements.scalers.TrivialScaler" />
-														</scaler2>
-													</scaler2>
-												</scaler2>
-											</scaler>
-										</Item>
-										<Item type="gameMechanics.elements.effects.SpellPrepareDurationModifier">
-											<spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-											<factor>-1</factor>
-										</Item>
-										<Item type="gameMechanics.elements.effects.SpellCostModifier">
-											<spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-											<factor>-1</factor>
-										</Item>
-										<Item type="gameMechanics.elements.effects.EquipTrigger">
-											<slot>OFFHAND</slot>
-											<itemClasses>
-												<Item href="/Mechanics/ItemClasses/Shield.xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemClass)" />
-											</itemClasses>
-											<effects>
-												<Item type="gameMechanics.elements.effects.Switch">
-													<impactsOn>
-														<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
-															<spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-														</Item>
-														<Item type="gameMechanics.elements.impacts.BuffDetacher">
-															<buff href="PhysDmgEnforcer.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-														</Item>
-													</impactsOn>
-												</Item>
-											</effects>
-										</Item>
-										<Item type="gameMechanics.elements.effects.WhileAlive">
-											<effects>
-												<Item type="gameMechanics.elements.effects.GroupAura">
-													<affectSelf>true</affectSelf>
-													<radius>85</radius>
-													<impactsIn>
-														<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-															<buff href="Counter01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-														</Item>
-													</impactsIn>
-													<impactsOut>
-														<Item type="gameMechanics.elements.impacts.PostponedImpacts">
-															<impacts>
-																<Item type="gameMechanics.elements.impacts.StackBuff">
-																	<buff href="Counter01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-																	<delta type="gameMechanics.elements.calcers.FloatData">
-																		<value>-1</value>
-																	</delta>
-																</Item>
-															</impacts>
-														</Item>
-													</impactsOut>
-												</Item>
-											</effects>
-										</Item>
-										<Item type="gameMechanics.elements.effects.EventTrigger">
-											<conditionalEvents>
-												<Item>
-													<obj>avatarPopulation.service.commands.bulletinboard.CmdBulletinBoardAdd</obj>
-													<predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
-														<spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-													</predicate>
-												</Item>
-												<Item>
-													<obj>avatarPopulation.service.commands.bulletinboard.CmdBulletinBoardAdd</obj>
-													<predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
-														<spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/EnMpRegenStalker/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.group.SpellGroup)" />
-													</predicate>
-												</Item>
-												<Item>
-													<obj>avatarPopulation.service.commands.bulletinboard.CmdBulletinBoardAdd</obj>
-													<predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
-														<spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/EnMpRegenDru/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.group.SpellGroup)" />
-													</predicate>
-												</Item>
-											</conditionalEvents>
-											<impacts>
-												<Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
-													<spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
-												</Item>
-												<Item type="gameMechanics.elements.impacts.BuffDetacher">
-													<buff href="PhysDmgEnforcer.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-												</Item>
-											</impacts>
-											<eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
-										</Item>
-									</effects>
-								</Item>
-							</impactsIf>
-						</Item>
-					</impacts>
-				</Item>
-			</cases>
-			<defaultImpacts>
-				<Item type="gameMechanics.elements.impacts.BuffDetacher">
-					<buff href="PhysDmgEnforcer.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-				</Item>
-			</defaultImpacts>
-		</Item>
-	</impacts>
+    <Header>
+        <resourceId>739851194</resourceId>
+    </Header>
+    <impacts>
+        <Item type="gameMechanics.elements.impacts.ImpactCaseGeneric">
+            <cases>
+                <Item>
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHasSpell">
+                            <spell href="Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                            <anyRank>false</anyRank>
+                        </Item>
+                    </predicates>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+                                        <spell href="Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellActivate">
+                                    <spell href="Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                    <effects>
+                                        <Item type="gameMechanics.elements.effects.MultiplyStat">
+                                            <stat type="gameMechanics.elements.stat.StatResistance">
+                                                <element>EPHYSICAL</element>
+                                            </stat>
+                                            <multiplier>0.7</multiplier>
+                                            <scaler type="gameMechanics.elements.scalers.ScalerMax">
+                                                <scaler1 type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                                    <ability href="/Mechanics/Spells/WarriorV3/Abilities/AuraArmorPenaltyRedution/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                    <mul>0.142857</mul>
+                                                </scaler1>
+                                                <scaler2 type="gameMechanics.elements.scalers.ScalerMax">
+                                                    <scaler1 type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                                        <ability href="/Mechanics/Abilities/DruidTalentsV2/ImprovedPetDodge/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                        <mul>0.142857</mul>
+                                                    </scaler1>
+                                                    <scaler2 type="gameMechanics.elements.scalers.ScalerMax">
+                                                        <scaler1 type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                                            <ability href="/Mechanics/Abilities/PaladinTalentsV2/CounterStrike/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                            <mul>0.142857</mul>
+                                                        </scaler1>
+                                                        <scaler2 type="gameMechanics.elements.scalers.ScalerIf">
+                                                            <condition type="gameMechanics.elements.resources.ResourceBuff">
+                                                                <buff href="/Mechanics/Spells/StalkerNew/Modes/Assassin.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </condition>
+                                                            <scalerIf type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                                                <ability href="/Mechanics/Spells/StalkerNew/Talents/ShadowStepBuffs/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                                <mul>0.142857</mul>
+                                                            </scalerIf>
+                                                            <scalerElse type="gameMechanics.elements.scalers.TrivialScaler" />
+                                                        </scaler2>
+                                                    </scaler2>
+                                                </scaler2>
+                                            </scaler>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.effects.SpellPrepareDurationModifier">
+                                            <spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                            <factor>-1</factor>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.effects.SpellCostModifier">
+                                            <spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                            <factor>-1</factor>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.effects.EquipTrigger">
+                                            <slot>OFFHAND</slot>
+                                            <itemClasses>
+                                                <Item href="/Mechanics/ItemClasses/Shield.xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemClass)" />
+                                            </itemClasses>
+                                            <effects>
+                                                <Item type="gameMechanics.elements.effects.Switch">
+                                                    <impactsOn>
+                                                        <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+                                                            <spell href="Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                            <buff href="PhysDmgEnforcer.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </Item>
+                                                    </impactsOn>
+                                                </Item>
+                                            </effects>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.effects.WhileAlive">
+                                            <effects>
+                                                <Item type="gameMechanics.elements.effects.GroupAura">
+                                                    <affectSelf>true</affectSelf>
+                                                    <radius>85</radius>
+                                                    <predicates>
+                                                        <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                                    </predicates>
+                                                    <impactsIn>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="Counter03.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </Item>
+                                                    </impactsIn>
+                                                    <impactsOut>
+                                                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.StackBuff">
+                                                                    <buff href="Counter03.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                    <delta type="gameMechanics.elements.calcers.FloatData">
+                                                                        <value>-1</value>
+                                                                    </delta>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impactsOut>
+                                                </Item>
+                                            </effects>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.effects.EventTrigger">
+                                            <conditionalEvents>
+                                                <Item>
+                                                    <obj>avatarPopulation.service.commands.bulletinboard.CmdBulletinBoardAdd</obj>
+                                                    <predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
+                                                        <spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                                    </predicate>
+                                                </Item>
+                                                <Item>
+                                                    <obj>avatarPopulation.service.commands.bulletinboard.CmdBulletinBoardAdd</obj>
+                                                    <predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
+                                                        <spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/EnMpRegenStalker/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.group.SpellGroup)" />
+                                                    </predicate>
+                                                </Item>
+                                                <Item>
+                                                    <obj>avatarPopulation.service.commands.bulletinboard.CmdBulletinBoardAdd</obj>
+                                                    <predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
+                                                        <spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/EnMpRegenDru/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.group.SpellGroup)" />
+                                                    </predicate>
+                                                </Item>
+                                            </conditionalEvents>
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+                                                    <spell href="Spell03.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                    <buff href="PhysDmgEnforcer.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </Item>
+                                            </impacts>
+                                            <eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                        </Item>
+                                    </effects>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item>
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHasSpell">
+                            <spell href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                            <anyRank>false</anyRank>
+                        </Item>
+                    </predicates>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+                                        <spell href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellActivate">
+                                    <spell href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                    <effects>
+                                        <Item type="gameMechanics.elements.effects.MultiplyStat">
+                                            <stat type="gameMechanics.elements.stat.StatResistance">
+                                                <element>EPHYSICAL</element>
+                                            </stat>
+                                            <multiplier>0.7</multiplier>
+                                            <scaler type="gameMechanics.elements.scalers.ScalerMax">
+                                                <scaler1 type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                                    <ability href="/Mechanics/Spells/WarriorV3/Abilities/AuraArmorPenaltyRedution/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                    <mul>0.142857</mul>
+                                                </scaler1>
+                                                <scaler2 type="gameMechanics.elements.scalers.ScalerMax">
+                                                    <scaler1 type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                                        <ability href="/Mechanics/Abilities/DruidTalentsV2/ImprovedPetDodge/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                        <mul>0.142857</mul>
+                                                    </scaler1>
+                                                    <scaler2 type="gameMechanics.elements.scalers.ScalerMax">
+                                                        <scaler1 type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                                            <ability href="/Mechanics/Abilities/PaladinTalentsV2/CounterStrike/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                            <mul>0.142857</mul>
+                                                        </scaler1>
+                                                        <scaler2 type="gameMechanics.elements.scalers.ScalerIf">
+                                                            <condition type="gameMechanics.elements.resources.ResourceBuff">
+                                                                <buff href="/Mechanics/Spells/StalkerNew/Modes/Assassin.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </condition>
+                                                            <scalerIf type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                                                <ability href="/Mechanics/Spells/StalkerNew/Talents/ShadowStepBuffs/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                                <mul>0.142857</mul>
+                                                            </scalerIf>
+                                                            <scalerElse type="gameMechanics.elements.scalers.TrivialScaler" />
+                                                        </scaler2>
+                                                    </scaler2>
+                                                </scaler2>
+                                            </scaler>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.effects.SpellPrepareDurationModifier">
+                                            <spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                            <factor>-1</factor>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.effects.SpellCostModifier">
+                                            <spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                            <factor>-1</factor>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.effects.EquipTrigger">
+                                            <slot>OFFHAND</slot>
+                                            <itemClasses>
+                                                <Item href="/Mechanics/ItemClasses/Shield.xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemClass)" />
+                                            </itemClasses>
+                                            <effects>
+                                                <Item type="gameMechanics.elements.effects.Switch">
+                                                    <impactsOn>
+                                                        <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+                                                            <spell href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                            <buff href="PhysDmgEnforcer.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </Item>
+                                                    </impactsOn>
+                                                </Item>
+                                            </effects>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.effects.WhileAlive">
+                                            <effects>
+                                                <Item type="gameMechanics.elements.effects.GroupAura">
+                                                    <affectSelf>true</affectSelf>
+                                                    <radius>85</radius>
+                                                    <impactsIn>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="Counter02.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </Item>
+                                                    </impactsIn>
+                                                    <impactsOut>
+                                                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.StackBuff">
+                                                                    <buff href="Counter02.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                    <delta type="gameMechanics.elements.calcers.FloatData">
+                                                                        <value>-1</value>
+                                                                    </delta>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impactsOut>
+                                                </Item>
+                                            </effects>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.effects.EventTrigger">
+                                            <conditionalEvents>
+                                                <Item>
+                                                    <obj>avatarPopulation.service.commands.bulletinboard.CmdBulletinBoardAdd</obj>
+                                                    <predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
+                                                        <spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                                    </predicate>
+                                                </Item>
+                                                <Item>
+                                                    <obj>avatarPopulation.service.commands.bulletinboard.CmdBulletinBoardAdd</obj>
+                                                    <predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
+                                                        <spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/EnMpRegenStalker/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.group.SpellGroup)" />
+                                                    </predicate>
+                                                </Item>
+                                                <Item>
+                                                    <obj>avatarPopulation.service.commands.bulletinboard.CmdBulletinBoardAdd</obj>
+                                                    <predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
+                                                        <spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/EnMpRegenDru/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.group.SpellGroup)" />
+                                                    </predicate>
+                                                </Item>
+                                            </conditionalEvents>
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+                                                    <spell href="Spell02.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                    <buff href="PhysDmgEnforcer.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </Item>
+                                            </impacts>
+                                            <eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                        </Item>
+                                    </effects>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+                <Item>
+                    <predicates>
+                        <Item type="gameMechanics.elements.predicates.PredicateHasSpell">
+                            <spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                            <anyRank>false</anyRank>
+                        </Item>
+                    </predicates>
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                    <predicate type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+                                        <spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                    </predicate>
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellActivate">
+                                    <spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                    <effects>
+                                        <Item type="gameMechanics.elements.effects.MultiplyStat">
+                                            <stat type="gameMechanics.elements.stat.StatResistance">
+                                                <element>EPHYSICAL</element>
+                                            </stat>
+                                            <multiplier>0.7</multiplier>
+                                            <scaler type="gameMechanics.elements.scalers.ScalerMax">
+                                                <scaler1 type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                                    <ability href="/Mechanics/Spells/WarriorV3/Abilities/AuraArmorPenaltyRedution/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                    <mul>0.142857</mul>
+                                                </scaler1>
+                                                <scaler2 type="gameMechanics.elements.scalers.ScalerMax">
+                                                    <scaler1 type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                                        <ability href="/Mechanics/Abilities/DruidTalentsV2/ImprovedPetDodge/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                        <mul>0.142857</mul>
+                                                    </scaler1>
+                                                    <scaler2 type="gameMechanics.elements.scalers.ScalerMax">
+                                                        <scaler1 type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                                            <ability href="/Mechanics/Abilities/PaladinTalentsV2/CounterStrike/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                            <mul>0.142857</mul>
+                                                        </scaler1>
+                                                        <scaler2 type="gameMechanics.elements.scalers.ScalerIf">
+                                                            <condition type="gameMechanics.elements.resources.ResourceBuff">
+                                                                <buff href="/Mechanics/Spells/StalkerNew/Modes/Assassin.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                            </condition>
+                                                            <scalerIf type="gameMechanics.elements.scalers.AbilityRankScaler">
+                                                                <ability href="/Mechanics/Spells/StalkerNew/Talents/ShadowStepBuffs/Ability01.xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+                                                                <mul>0.142857</mul>
+                                                            </scalerIf>
+                                                            <scalerElse type="gameMechanics.elements.scalers.TrivialScaler" />
+                                                        </scaler2>
+                                                    </scaler2>
+                                                </scaler2>
+                                            </scaler>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.effects.SpellPrepareDurationModifier">
+                                            <spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                            <factor>-1</factor>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.effects.SpellCostModifier">
+                                            <spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                            <factor>-1</factor>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.effects.EquipTrigger">
+                                            <slot>OFFHAND</slot>
+                                            <itemClasses>
+                                                <Item href="/Mechanics/ItemClasses/Shield.xdb#xpointer(/gameMechanics.constructor.schemes.item.ItemClass)" />
+                                            </itemClasses>
+                                            <effects>
+                                                <Item type="gameMechanics.elements.effects.Switch">
+                                                    <impactsOn>
+                                                        <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+                                                            <spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                            <buff href="PhysDmgEnforcer.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </Item>
+                                                    </impactsOn>
+                                                </Item>
+                                            </effects>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.effects.WhileAlive">
+                                            <effects>
+                                                <Item type="gameMechanics.elements.effects.GroupAura">
+                                                    <affectSelf>true</affectSelf>
+                                                    <radius>85</radius>
+                                                    <impactsIn>
+                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                            <buff href="Counter01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                        </Item>
+                                                    </impactsIn>
+                                                    <impactsOut>
+                                                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.StackBuff">
+                                                                    <buff href="Counter01.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                                    <delta type="gameMechanics.elements.calcers.FloatData">
+                                                                        <value>-1</value>
+                                                                    </delta>
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impactsOut>
+                                                </Item>
+                                            </effects>
+                                        </Item>
+                                        <Item type="gameMechanics.elements.effects.EventTrigger">
+                                            <conditionalEvents>
+                                                <Item>
+                                                    <obj>avatarPopulation.service.commands.bulletinboard.CmdBulletinBoardAdd</obj>
+                                                    <predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
+                                                        <spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                                    </predicate>
+                                                </Item>
+                                                <Item>
+                                                    <obj>avatarPopulation.service.commands.bulletinboard.CmdBulletinBoardAdd</obj>
+                                                    <predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
+                                                        <spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/EnMpRegenStalker/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.group.SpellGroup)" />
+                                                    </predicate>
+                                                </Item>
+                                                <Item>
+                                                    <obj>avatarPopulation.service.commands.bulletinboard.CmdBulletinBoardAdd</obj>
+                                                    <predicate type="gameMechanics.elements.predicates.PredicateEventSpellLaunched">
+                                                        <spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/EnMpRegenDru/Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.group.SpellGroup)" />
+                                                    </predicate>
+                                                </Item>
+                                            </conditionalEvents>
+                                            <impacts>
+                                                <Item type="gameMechanics.constructor.schemes.spell.spellstate.ImpactSpellDeactivate">
+                                                    <spell href="Spell01.xdb#xpointer(/gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget)" />
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                                    <buff href="PhysDmgEnforcer.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                                                </Item>
+                                            </impacts>
+                                            <eventsSource type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                        </Item>
+                                    </effects>
+                                </Item>
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                </Item>
+            </cases>
+            <defaultImpacts>
+                <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                    <buff href="PhysDmgEnforcer.xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+                </Item>
+            </defaultImpacts>
+        </Item>
+    </impacts>
 </gameMechanics.constructor.basicElements.ImpactListResource>

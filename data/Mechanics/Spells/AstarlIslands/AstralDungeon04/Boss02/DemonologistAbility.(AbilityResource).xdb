@@ -1,448 +1,448 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
-	<Header>
-		<resourceId>739951533</resourceId>
-	</Header>
-	<effects>
-		<Item type="gameMechanics.elements.effects.Switch">
-			<impactsOn>
-				<Item type="gameMechanics.elements.impacts.ImpactGoTo">
-					<destination type="gameMechanics.map.destination.DestinationLocator">
-						<locator>
-							<scriptID>Boss02Point</scriptID>
-							<map href="/Maps/AstralDungeon04/MapResource.xdb" />
-						</locator>
-					</destination>
-				</Item>
-				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-					<buff href="DemonAlive.(BuffResource).xdb" />
-				</Item>
-			</impactsOn>
-		</Item>
-		<Item type="gameMechanics.elements.effects.EffectsDeferred">
-			<effects>
-				<Item type="gameMechanics.elements.effects.Switch">
-					<impactsOn>
-						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-							<buff href="DemonAlive.(BuffResource).xdb" />
-						</Item>
-					</impactsOn>
-				</Item>
-			</effects>
-		</Item>
-		<Item type="gameMechanics.elements.effects.CombatStateTrigger">
-			<onEnter>
-				<Item type="gameMechanics.elements.impacts.ImpactTeleport">
-					<destination type="gameMechanics.map.destination.DestinationLocator">
-						<locator>
-							<scriptID>Boss02Point</scriptID>
-							<map href="/Maps/AstralDungeon04/MapResource.xdb" />
-						</locator>
-					</destination>
-				</Item>
-			</onEnter>
-			<onLeave>
-				<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-					<predicates>
-						<Item type="gameMechanics.elements.resources.ResourceBuff">
-							<buff href="DemonAlive.(BuffResource).xdb" />
-						</Item>
-						<Item type="gameMechanics.elements.predicates.PredicateIsDead" />
-					</predicates>
-					<impactsIf>
-						<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-									<predicates>
-										<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-											<mobs>
-												<Item href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss02/Demon.(MobWorld).xdb" />
-											</mobs>
-										</Item>
-									</predicates>
-									<impactsIf>
-										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-											<buff href="MasterDead.(BuffResource).xdb" />
-										</Item>
-										<Item type="gameMechanics.elements.impacts.BuffDetacher">
-											<buff href="MasterAlive.(BuffResource).xdb" />
-										</Item>
-									</impactsIf>
-								</Item>
-							</impacts>
-							<spawnResource href="/Maps/AstralDungeon04/SpawnTables/Boss02.(SpawnTable).xdb" />
-						</Item>
-					</impactsIf>
-					<impactsElse>
-						<Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
-							<pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.Disintegrate" />
-							</impacts>
-						</Item>
-						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-							<predicates>
-								<Item type="gameMechanics.elements.predicates.PredicateIsDead" />
-							</predicates>
-							<impactsElse>
-								<Item type="gameMechanics.elements.impacts.ResetSpawnTable">
-									<table href="/Maps/AstralDungeon04/SpawnTables/Boss02.(SpawnTable).xdb" />
-								</Item>
-							</impactsElse>
-						</Item>
-						<Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
-									<impacts>
-										<Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
-											<group href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
-										</Item>
-										<Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
-											<affectPets>false</affectPets>
-											<impacts>
-												<Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
-													<group href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
-												</Item>
-											</impacts>
-										</Item>
-									</impacts>
-								</Item>
-							</impacts>
-						</Item>
-					</impactsElse>
-				</Item>
-			</onLeave>
-			<effects>
-				<Item type="gameMechanics.elements.effects.SpellCastTrigger">
-					<conditionalImpacts>
-						<Item>
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.ImpactSummon">
-									<destination type="gameMechanics.map.destination.RelativeRotatePos">
-										<base type="gameMechanics.map.destination.SelfPosDestination" />
-										<offset>8</offset>
-									</destination>
-									<impacts>
-										<Item type="gameMechanics.elements.impacts.ImpactCopyAggroList" />
-										<Item type="gameMechanics.elements.impacts.ImpactSetAllAggro" />
-									</impacts>
-									<object href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss02/Demon.(MobWorld).xdb" />
-									<pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
-								</Item>
-							</impacts>
-							<conditions>
-								<Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
-									<spells>
-										<Item href="Summon.(SpellArea).xdb" />
-									</spells>
-								</Item>
-							</conditions>
-						</Item>
-					</conditionalImpacts>
-					<stages>
-						<Item>Start</Item>
-					</stages>
-				</Item>
-				<Item type="gameMechanics.elements.effects.SpellCastTrigger">
-					<conditionalImpacts>
-						<Item>
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
-									<spell href="AcidBolt.(SpellSingleTarget).xdb" />
-									<duration>
-										<second>15</second>
-									</duration>
-								</Item>
-								<Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
-									<addresseeFinder type="gameMechanics.elements.addresseeFinders.FinderActiveSpellTarget" />
-									<impacts>
-										<Item type="gameMechanics.elements.impacts.ImpactSummon">
-											<destination type="gameMechanics.map.destination.SelfPosDestination" />
-											<impacts>
-												<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-													<impacts>
-														<Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
-															<value>1</value>
-														</Item>
-													</impacts>
-												</Item>
-											</impacts>
-											<impactsFromTarget>
-												<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-													<buff href="/Mechanics/Spells/AstarlIslands/AstralDungeon04/Boss04/PursuitingSphere.(BuffResource).xdb" />
-												</Item>
-											</impactsFromTarget>
-											<object href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss04/SmallDemon.(MobWorld).xdb" />
-											<pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
-										</Item>
-									</impacts>
-								</Item>
-								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-									<buff href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/Cultists/AcidBombsChannelBuff.(BuffResource).xdb" />
-									<stacks type="gameMechanics.elements.calcers.FloatData">
-										<value>20</value>
-									</stacks>
-								</Item>
-							</impacts>
-							<conditions>
-								<Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
-									<spells>
-										<Item href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/Cultists/AcidTorrentReady.(SpellSingleTarget).xdb" />
-									</spells>
-								</Item>
-							</conditions>
-						</Item>
-					</conditionalImpacts>
-					<stages>
-						<Item>Start</Item>
-					</stages>
-				</Item>
-				<Item type="gameMechanics.elements.effects.ImpactsOverTime">
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-							<predicates>
-								<Item type="gameMechanics.elements.resources.ResourceBuff">
-									<buff href="DemonAlive.(BuffResource).xdb" />
-								</Item>
-							</predicates>
-							<impactsIf>
-								<Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
-									<selector type="gameMechanics.tools.SelectorRandomNotLess">
-										<minIndex>0</minIndex>
-									</selector>
-									<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-										<predicates>
-											<Item type="gameMechanics.constructor.basicElements.PredicateOr">
-												<predicates>
-													<Item type="gameMechanics.elements.resources.ResourceBuff">
-														<buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
-													</Item>
-													<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-												</predicates>
-											</Item>
-											<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-											<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-												<predicate type="gameMechanics.elements.resources.ResourceBuff">
-													<buff href="/Mechanics/Spells/AstarlIslands/AI71/GhoulBombAdd/ChaseTargetBuff.(BuffResource).xdb" />
-												</predicate>
-											</Item>
-										</predicates>
-									</filter>
-									<impacts>
-										<Item>
-											<impacts>
-												<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-													<impacts>
-														<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-															<impacts>
-																<Item type="gameMechanics.elements.impacts.ImpactSummon">
-																	<destination type="gameMechanics.map.destination.RelativeRotatePos">
-																		<base type="gameMechanics.map.destination.SelfPosDestination" />
-																		<offset>12</offset>
-																	</destination>
-																	<impacts>
-																		<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																			<buff href="CreepingDemonBuff.(BuffResource).xdb" />
-																		</Item>
-																		<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																			<buff href="DisableMovement.(BuffResource).xdb" />
-																		</Item>
-																	</impacts>
-																	<impactsFromTarget>
-																		<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																			<buff href="/Mechanics/Spells/AstarlIslands/AI71/GhoulBombAdd/ChaserBuff.(BuffResource).xdb" />
-																		</Item>
-																	</impactsFromTarget>
-																	<object href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss02/CreepingDemon.(MobWorld).xdb" />
-																	<pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
-																</Item>
-															</impacts>
-														</Item>
-													</impacts>
-												</Item>
-											</impacts>
-										</Item>
-									</impacts>
-								</Item>
-							</impactsIf>
-							<impactsElse>
-								<Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
-									<selector type="gameMechanics.tools.SelectorRandomNotLess">
-										<minIndex>0</minIndex>
-									</selector>
-									<filter type="gameMechanics.constructor.basicElements.FilterPredicates">
-										<predicates>
-											<Item type="gameMechanics.constructor.basicElements.PredicateOr">
-												<predicates>
-													<Item type="gameMechanics.elements.resources.ResourceBuff">
-														<buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
-													</Item>
-													<Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
-												</predicates>
-											</Item>
-											<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-											<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-												<predicate type="gameMechanics.elements.resources.ResourceBuff">
-													<buff href="/Mechanics/Spells/AstarlIslands/AI71/GhoulBombAdd/ChaseTargetBuff.(BuffResource).xdb" />
-												</predicate>
-											</Item>
-										</predicates>
-									</filter>
-									<impacts>
-										<Item>
-											<impacts>
-												<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-													<impacts>
-														<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-															<impacts>
-																<Item type="gameMechanics.elements.impacts.ImpactSummon">
-																	<destination type="gameMechanics.map.destination.RelativeRotatePos">
-																		<base type="gameMechanics.map.destination.SelfPosDestination" />
-																		<offset>12</offset>
-																	</destination>
-																	<impacts>
-																		<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																			<buff href="CreepingDemonBuff.(BuffResource).xdb" />
-																		</Item>
-																	</impacts>
-																	<impactsFromTarget>
-																		<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-																			<buff href="/Mechanics/Spells/AstarlIslands/AI71/GhoulBombAdd/ChaserBuff.(BuffResource).xdb" />
-																		</Item>
-																	</impactsFromTarget>
-																	<object href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss02/CreepingDemon.(MobWorld).xdb" />
-																	<pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
-																</Item>
-															</impacts>
-														</Item>
-													</impacts>
-												</Item>
-											</impacts>
-										</Item>
-									</impacts>
-								</Item>
-							</impactsElse>
-						</Item>
-						<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-							<impacts>
-								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-									<predicates>
-										<Item type="gameMechanics.elements.predicates.PredicateHasAbility">
-											<ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
-										</Item>
-										<Item type="gameMechanics.elements.predicates.PredicateMobWorld">
-											<mobs>
-												<Item href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss02/Demon.(MobWorld).xdb" />
-											</mobs>
-										</Item>
-									</predicates>
-									<impactsIf>
-										<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-											<predicates>
-												<Item type="gameMechanics.elements.resources.ResourceBuff">
-													<buff href="DemonVulnerability.(BuffResource).xdb" />
-												</Item>
-											</predicates>
-											<impactsIf>
-												<Item type="gameMechanics.elements.impacts.StackBuff">
-													<buff href="/Mechanics/Spells/AstarlIslands/AI71/GhoulBombAdd/ChaseTargetBuff.(BuffResource).xdb" />
-													<resetTimer>false</resetTimer>
-													<delta type="gameMechanics.elements.calcers.FloatData">
-														<value>-1</value>
-													</delta>
-												</Item>
-											</impactsIf>
-											<impactsElse>
-												<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-													<buff href="DemonProtection.(BuffResource).xdb" />
-												</Item>
-											</impactsElse>
-										</Item>
-									</impactsIf>
-								</Item>
-							</impacts>
-							<spawnResource href="/Maps/AstralDungeon04/SpawnTables/Boss02.(SpawnTable).xdb" />
-						</Item>
-					</impacts>
-					<tick>7500</tick>
-				</Item>
-				<Item type="gameMechanics.elements.effects.EffectDisableAct">
-					<actions>
-						<Item>Move</Item>
-					</actions>
-				</Item>
-			</effects>
-		</Item>
-		<Item type="gameMechanics.elements.effects.DeathTrigger">
-			<impacts>
-				<Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-							<predicates>
-								<Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
-							</predicates>
-							<impactsIf>
-								<Item type="gameMechanics.elements.impacts.ImpactKill" />
-							</impactsIf>
-						</Item>
-					</impacts>
-					<spawnResource href="/Maps/AstralDungeon04/SpawnTables/Boss02.(SpawnTable).xdb" />
-				</Item>
-				<Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
-					<pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.Disintegrate" />
-					</impacts>
-				</Item>
-			</impacts>
-		</Item>
-		<Item type="gameMechanics.elements.effects.AddVisibilityRule">
-			<visibilityRule>
-				<channel>Visibility</channel>
-				<vector>Outgoing</vector>
-				<direction>Incoming</direction>
-				<plane href="Pursuing.(Plane).xdb" />
-			</visibilityRule>
-		</Item>
-		<Item type="gameMechanics.elements.effects.AddVisibilityRule">
-			<visibilityRule>
-				<channel>Influence</channel>
-				<vector>Outgoing</vector>
-				<direction>Incoming</direction>
-				<plane href="Pursuing.(Plane).xdb" />
-			</visibilityRule>
-		</Item>
-		<Item type="gameMechanics.elements.effects.AddVisibilityRule">
-			<visibilityRule>
-				<channel>Select</channel>
-				<vector>Outgoing</vector>
-				<direction>Incoming</direction>
-				<plane href="Pursuing.(Plane).xdb" />
-			</visibilityRule>
-		</Item>
-		<Item type="gameMechanics.elements.effects.AddVisibilityRule">
-			<visibilityRule>
-				<channel>Visibility</channel>
-				<vector>Incoming</vector>
-				<direction>Outgoing</direction>
-				<plane href="Pursuing.(Plane).xdb" />
-			</visibilityRule>
-		</Item>
-		<Item type="gameMechanics.elements.effects.AddVisibilityRule">
-			<visibilityRule>
-				<channel>Influence</channel>
-				<vector>Incoming</vector>
-				<direction>Outgoing</direction>
-				<plane href="Pursuing.(Plane).xdb" />
-			</visibilityRule>
-		</Item>
-		<Item type="gameMechanics.elements.effects.AddVisibilityRule">
-			<visibilityRule>
-				<channel>Select</channel>
-				<vector>Incoming</vector>
-				<direction>Outgoing</direction>
-				<plane href="Pursuing.(Plane).xdb" />
-			</visibilityRule>
-		</Item>
-	</effects>
+    <Header>
+        <resourceId>739951533</resourceId>
+    </Header>
+    <effects>
+        <Item type="gameMechanics.elements.effects.Switch">
+            <impactsOn>
+                <Item type="gameMechanics.elements.impacts.ImpactGoTo">
+                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                        <locator>
+                            <scriptID>Boss02Point</scriptID>
+                            <map href="/Maps/AstralDungeon04/MapResource.xdb" />
+                        </locator>
+                    </destination>
+                </Item>
+                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                    <buff href="DemonAlive.(BuffResource).xdb" />
+                </Item>
+            </impactsOn>
+        </Item>
+        <Item type="gameMechanics.elements.effects.EffectsDeferred">
+            <effects>
+                <Item type="gameMechanics.elements.effects.Switch">
+                    <impactsOn>
+                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                            <buff href="DemonAlive.(BuffResource).xdb" />
+                        </Item>
+                    </impactsOn>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.CombatStateTrigger">
+            <onEnter>
+                <Item type="gameMechanics.elements.impacts.ImpactTeleport">
+                    <destination type="gameMechanics.map.destination.DestinationLocator">
+                        <locator>
+                            <scriptID>Boss02Point</scriptID>
+                            <map href="/Maps/AstralDungeon04/MapResource.xdb" />
+                        </locator>
+                    </destination>
+                </Item>
+            </onEnter>
+            <onLeave>
+                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                    <predicates>
+                        <Item type="gameMechanics.elements.resources.ResourceBuff">
+                            <buff href="DemonAlive.(BuffResource).xdb" />
+                        </Item>
+                        <Item type="gameMechanics.elements.predicates.PredicateIsDead" />
+                    </predicates>
+                    <impactsIf>
+                        <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                            <mobs>
+                                                <Item href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss02/Demon.(MobWorld).xdb" />
+                                            </mobs>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                            <buff href="MasterDead.(BuffResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                            <buff href="MasterAlive.(BuffResource).xdb" />
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impacts>
+                            <spawnResource href="/Maps/AstralDungeon04/SpawnTables/Boss02.(SpawnTable).xdb" />
+                        </Item>
+                    </impactsIf>
+                    <impactsElse>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                            <pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                            </impacts>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsDead" />
+                            </predicates>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ResetSpawnTable">
+                                    <table href="/Maps/AstralDungeon04/SpawnTables/Boss02.(SpawnTable).xdb" />
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactsToMapHead">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactAllAvatarsOnMap">
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                                            <group href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
+                                            <affectPets>false</affectPets>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ImpactRemoveAllBuffsFromGroup">
+                                                    <group href="/Mechanics/Spells/Groups/AstralIslandSpells.xdb" />
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impacts>
+                        </Item>
+                    </impactsElse>
+                </Item>
+            </onLeave>
+            <effects>
+                <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+                    <conditionalImpacts>
+                        <Item>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                    <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                        <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                        <offset>8</offset>
+                                    </destination>
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactCopyAggroList" />
+                                        <Item type="gameMechanics.elements.impacts.ImpactSetAllAggro" />
+                                    </impacts>
+                                    <object href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss02/Demon.(MobWorld).xdb" />
+                                    <pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
+                                </Item>
+                            </impacts>
+                            <conditions>
+                                <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                                    <spells>
+                                        <Item href="Summon.(SpellArea).xdb" />
+                                    </spells>
+                                </Item>
+                            </conditions>
+                        </Item>
+                    </conditionalImpacts>
+                    <stages>
+                        <Item>Start</Item>
+                    </stages>
+                </Item>
+                <Item type="gameMechanics.elements.effects.SpellCastTrigger">
+                    <conditionalImpacts>
+                        <Item>
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactSetCooldownFlat">
+                                    <spell href="AcidBolt.(SpellSingleTarget).xdb" />
+                                    <duration>
+                                        <second>15</second>
+                                    </duration>
+                                </Item>
+                                <Item type="gameMechanics.elements.impacts.SendImpactsToAddressee">
+                                    <addresseeFinder type="gameMechanics.elements.addresseeFinders.FinderActiveSpellTarget" />
+                                    <impacts>
+                                        <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                            <destination type="gameMechanics.map.destination.SelfPosDestination" />
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                                            <value>1</value>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                            <impactsFromTarget>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="/Mechanics/Spells/AstarlIslands/AstralDungeon04/Boss04/PursuitingSphere.(BuffResource).xdb" />
+                                                </Item>
+                                            </impactsFromTarget>
+                                            <object href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss04/SmallDemon.(MobWorld).xdb" />
+                                            <pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                    <buff href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/Cultists/AcidBombsChannelBuff.(BuffResource).xdb" />
+                                    <stacks type="gameMechanics.elements.calcers.FloatData">
+                                        <value>20</value>
+                                    </stacks>
+                                </Item>
+                            </impacts>
+                            <conditions>
+                                <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+                                    <spells>
+                                        <Item href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/Cultists/AcidTorrentReady.(SpellSingleTarget).xdb" />
+                                    </spells>
+                                </Item>
+                            </conditions>
+                        </Item>
+                    </conditionalImpacts>
+                    <stages>
+                        <Item>Start</Item>
+                    </stages>
+                </Item>
+                <Item type="gameMechanics.elements.effects.ImpactsOverTime">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                    <buff href="DemonAlive.(BuffResource).xdb" />
+                                </Item>
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                                    <selector type="gameMechanics.tools.SelectorRandomNotLess">
+                                        <minIndex>0</minIndex>
+                                    </selector>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                </predicates>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                    <buff href="/Mechanics/Spells/AstarlIslands/AI71/GhoulBombAdd/ChaseTargetBuff.(BuffResource).xdb" />
+                                                </predicate>
+                                            </Item>
+                                        </predicates>
+                                    </filter>
+                                    <impacts>
+                                        <Item>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                                    <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                                                        <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                                        <offset>12</offset>
+                                                                    </destination>
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="CreepingDemonBuff.(BuffResource).xdb" />
+                                                                        </Item>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="DisableMovement.(BuffResource).xdb" />
+                                                                        </Item>
+                                                                    </impacts>
+                                                                    <impactsFromTarget>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="/Mechanics/Spells/AstarlIslands/AI71/GhoulBombAdd/ChaserBuff.(BuffResource).xdb" />
+                                                                        </Item>
+                                                                    </impactsFromTarget>
+                                                                    <object href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss02/CreepingDemon.(MobWorld).xdb" />
+                                                                    <pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsIf>
+                            <impactsElse>
+                                <Item type="gameMechanics.elements.impacts.ImpactAggrolistMember">
+                                    <selector type="gameMechanics.tools.SelectorRandomNotLess">
+                                        <minIndex>0</minIndex>
+                                    </selector>
+                                    <filter type="gameMechanics.constructor.basicElements.FilterPredicates">
+                                        <predicates>
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateOr">
+                                                <predicates>
+                                                    <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                        <buff href="/Mechanics/Spells/Mercenaries/Controls/MercUnderControl.(BuffResource).xdb" />
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.predicates.PredicateIsAvatar" />
+                                                </predicates>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                                            <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                                                <predicate type="gameMechanics.elements.resources.ResourceBuff">
+                                                    <buff href="/Mechanics/Spells/AstarlIslands/AI71/GhoulBombAdd/ChaseTargetBuff.(BuffResource).xdb" />
+                                                </predicate>
+                                            </Item>
+                                        </predicates>
+                                    </filter>
+                                    <impacts>
+                                        <Item>
+                                            <impacts>
+                                                <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                    <impacts>
+                                                        <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                                            <impacts>
+                                                                <Item type="gameMechanics.elements.impacts.ImpactSummon">
+                                                                    <destination type="gameMechanics.map.destination.RelativeRotatePos">
+                                                                        <base type="gameMechanics.map.destination.SelfPosDestination" />
+                                                                        <offset>12</offset>
+                                                                    </destination>
+                                                                    <impacts>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="CreepingDemonBuff.(BuffResource).xdb" />
+                                                                        </Item>
+                                                                    </impacts>
+                                                                    <impactsFromTarget>
+                                                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                                            <buff href="/Mechanics/Spells/AstarlIslands/AI71/GhoulBombAdd/ChaserBuff.(BuffResource).xdb" />
+                                                                        </Item>
+                                                                    </impactsFromTarget>
+                                                                    <object href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss02/CreepingDemon.(MobWorld).xdb" />
+                                                                    <pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
+                                                                </Item>
+                                                            </impacts>
+                                                        </Item>
+                                                    </impacts>
+                                                </Item>
+                                            </impacts>
+                                        </Item>
+                                    </impacts>
+                                </Item>
+                            </impactsElse>
+                        </Item>
+                        <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                            <impacts>
+                                <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                    <predicates>
+                                        <Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+                                            <ability href="/Mechanics/InstanceModifiers/HardMode/HardMode.(AbilityResource).xdb" />
+                                        </Item>
+                                        <Item type="gameMechanics.elements.predicates.PredicateMobWorld">
+                                            <mobs>
+                                                <Item href="/Characters/Hadagan_male/Instances/AstralDungeon04/Boss02/Demon.(MobWorld).xdb" />
+                                            </mobs>
+                                        </Item>
+                                    </predicates>
+                                    <impactsIf>
+                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.resources.ResourceBuff">
+                                                    <buff href="DemonVulnerability.(BuffResource).xdb" />
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.StackBuff">
+                                                    <buff href="/Mechanics/Spells/AstarlIslands/AI71/GhoulBombAdd/ChaseTargetBuff.(BuffResource).xdb" />
+                                                    <resetTimer>false</resetTimer>
+                                                    <delta type="gameMechanics.elements.calcers.FloatData">
+                                                        <value>-1</value>
+                                                    </delta>
+                                                </Item>
+                                            </impactsIf>
+                                            <impactsElse>
+                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                    <buff href="DemonProtection.(BuffResource).xdb" />
+                                                </Item>
+                                            </impactsElse>
+                                        </Item>
+                                    </impactsIf>
+                                </Item>
+                            </impacts>
+                            <spawnResource href="/Maps/AstralDungeon04/SpawnTables/Boss02.(SpawnTable).xdb" />
+                        </Item>
+                    </impacts>
+                    <tick>7500</tick>
+                </Item>
+                <Item type="gameMechanics.elements.effects.EffectDisableAct">
+                    <actions>
+                        <Item>Move</Item>
+                    </actions>
+                </Item>
+            </effects>
+        </Item>
+        <Item type="gameMechanics.elements.effects.DeathTrigger">
+            <impacts>
+                <Item type="gameMechanics.elements.impacts.ImpactFindSpawnTable">
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                            <predicates>
+                                <Item type="gameMechanics.elements.predicates.PredicateIsAlive" />
+                            </predicates>
+                            <impactsIf>
+                                <Item type="gameMechanics.elements.impacts.ImpactKill" />
+                            </impactsIf>
+                        </Item>
+                    </impacts>
+                    <spawnResource href="/Maps/AstralDungeon04/SpawnTables/Boss02.(SpawnTable).xdb" />
+                </Item>
+                <Item type="gameMechanics.elements.impacts.ImpactsToSummonPoolGeneric">
+                    <pool href="/Mechanics/Characters/Hadagan_male/AstralDungeon04/AD04.(SummonPool).xdb" />
+                    <impacts>
+                        <Item type="gameMechanics.elements.impacts.Disintegrate" />
+                    </impacts>
+                </Item>
+            </impacts>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Visibility</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="Pursuing.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Influence</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="Pursuing.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Outgoing</vector>
+                <direction>Incoming</direction>
+                <plane href="Pursuing.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Visibility</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="Pursuing.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Influence</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="Pursuing.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+        <Item type="gameMechanics.elements.effects.AddVisibilityRule">
+            <visibilityRule>
+                <channel>Select</channel>
+                <vector>Incoming</vector>
+                <direction>Outgoing</direction>
+                <plane href="Pursuing.(Plane).xdb" />
+            </visibilityRule>
+        </Item>
+    </effects>
 </gameMechanics.constructor.schemes.ability.AbilityResource>

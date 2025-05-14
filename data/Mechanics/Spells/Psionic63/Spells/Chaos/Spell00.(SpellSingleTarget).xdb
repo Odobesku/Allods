@@ -1,270 +1,270 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-	<Header>
-		<resourceId>739924123</resourceId>
-		<isPrototype>true</isPrototype>
-	</Header>
-	<groups>
-		<Item href="/Mechanics/Spells/Groups/Magics.xdb" />
-		<Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
-		<Item href="/Mechanics/Spells/Groups/AmmoSpells.(ActionGroup).xdb" />
-	</groups>
-	<element>ASTRAL</element>
-	<Name href="Spell00.(SpellSingleTarget).Name.txt" />
-	<Description href="Spell00.(SpellSingleTarget).Description.txt" />
-	<descVars>
-		<Item>
-			<name>var0</name>
-			<value>1</value>
-			<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-				<scalers>
-					<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-						<mulCalcer type="gameMechanics.elements.calcers.CalcerIf">
-							<predicate type="gameMechanics.elements.predicates.PredicateEquipped">
-								<dressType>AMMO</dressType>
-							</predicate>
-							<calcerIf type="gameMechanics.elements.calcers.ItemQualityCalcer">
-								<dressSlot>AMMO</dressSlot>
-							</calcerIf>
-							<calcerElse type="gameMechanics.elements.calcers.FloatData">
-								<value>0</value>
-							</calcerElse>
-						</mulCalcer>
-						<sum var="damage" />
-					</Item>
-					<Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-						<formula>MagicScaler</formula>
-					</Item>
-				</scalers>
-			</scaler>
-		</Item>
-		<Item>
-			<name>var1</name>
-			<value>5</value>
-		</Item>
-		<Item>
-			<name>var2</name>
-			<value>1</value>
-			<scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-				<mulCalcer type="gameMechanics.elements.calcers.CalcerIf">
-					<predicate type="gameMechanics.elements.predicates.PredicateEquipped">
-						<dressType>AMMO</dressType>
-					</predicate>
-					<calcerIf type="gameMechanics.elements.calcers.ItemQualityCalcer">
-						<dressSlot>AMMO</dressSlot>
-					</calcerIf>
-					<calcerElse type="gameMechanics.elements.calcers.FloatData">
-						<value>1</value>
-					</calcerElse>
-				</mulCalcer>
-			</scaler>
-		</Item>
-	</descVars>
-	<image href="/Interface/Icons/Spells/Psionic/Entropy.(UISingleTexture).xdb" />
-	<visualScripts href="/Spells/VisScripts/Psionic/Chaos.(SpellVisScripts).xdb" />
-	<prepareDuration var="prepareDuration" />
-	<targetType>STTSelf</targetType>
-	<ranks>
-		<Item href="Spell01.(SpellSingleTarget).xdb" />
-		<Item href="Spell02.(SpellSingleTarget).xdb" />
-		<Item href="Spell03.(SpellSingleTarget).xdb" />
-	</ranks>
-	<iffPolicy>Friends</iffPolicy>
-	<mechanics>
-		<cooldown>
-			<duration>1000</duration>
-			<scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-				<mulCalcer type="gameMechanics.elements.calcers.CalcerIf">
-					<predicate type="gameMechanics.elements.predicates.PredicateEquipped">
-						<dressType>AMMO</dressType>
-					</predicate>
-					<calcerIf type="gameMechanics.elements.calcers.LinearCalcer">
-						<mul>-25</mul>
-						<mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
-							<dressSlot>AMMO</dressSlot>
-						</mulCalcer>
-						<sum>0</sum>
-					</calcerIf>
-					<calcerElse type="gameMechanics.elements.calcers.FloatData">
-						<value>0</value>
-					</calcerElse>
-				</mulCalcer>
-				<sum>240</sum>
-			</scaler>
-		</cooldown>
-		<casterResources>
-			<Item type="gameMechanics.elements.resources.ResourceIf">
-				<predicates>
-					<Item type="gameMechanics.elements.predicates.PredicateEquipped">
-						<dressType>AMMO</dressType>
-						<itemClass href="/Mechanics/ItemClasses/Other_InfiniteTeardrop.(ItemClass).xdb" />
-					</Item>
-				</predicates>
-				<resourceIf type="gameMechanics.constructor.basicElements.ResourceUniversal" />
-				<resourceElse type="gameMechanics.elements.resources.ResourceDressItem">
-					<slot>AMMO</slot>
-					<count>5</count>
-				</resourceElse>
-			</Item>
-		</casterResources>
-		<casterImpacts>
-			<Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
-				<radius>30</radius>
-				<affectGroup>Enemies</affectGroup>
-				<impacts>
-					<Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
-						<chanceCalcer type="gameMechanics.elements.calcers.FloatData">
-							<value>0.25</value>
-						</chanceCalcer>
-						<impacts>
-							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-								<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/SilenceDisarm/SilenceDisarm.(BuffResource).xdb" />
-								<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-									<mulCalcer type="gameMechanics.elements.calcers.CalcerSum">
-										<summands>
-											<Item type="gameMechanics.elements.calcers.CalcerIf">
-												<predicate type="gameMechanics.elements.predicates.PredicateEquipped">
-													<dressType>AMMO</dressType>
-												</predicate>
-												<calcerIf type="gameMechanics.elements.calcers.ItemQualityCalcer">
-													<dressSlot>AMMO</dressSlot>
-												</calcerIf>
-												<calcerElse type="gameMechanics.elements.calcers.FloatData">
-													<value>0</value>
-												</calcerElse>
-											</Item>
-											<Item type="gameMechanics.elements.calcers.CalcerFloor">
-												<source type="gameMechanics.elements.calcers.VariableValueCalcer">
-													<variable href="/Mechanics/Spells/Psionic63/Abilities/StressResource/StressResource.(VariableResource).xdb" />
-													<mul>0.04</mul>
-												</source>
-											</Item>
-										</summands>
-									</mulCalcer>
-								</durationScaler>
-							</Item>
-							<Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
-								<value>10</value>
-							</Item>
-						</impacts>
-						<impactsLose>
-							<Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
-								<chanceCalcer type="gameMechanics.elements.calcers.FloatData">
-									<value>0.333333</value>
-								</chanceCalcer>
-								<impacts>
-									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-										<buff href="/Mechanics/Spells/CommonBuffs/Stun/BuffStun.xdb" />
-										<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-											<mulCalcer type="gameMechanics.elements.calcers.CalcerSum">
-												<summands>
-													<Item type="gameMechanics.elements.calcers.CalcerIf">
-														<predicate type="gameMechanics.elements.predicates.PredicateEquipped">
-															<dressType>AMMO</dressType>
-														</predicate>
-														<calcerIf type="gameMechanics.elements.calcers.ItemQualityCalcer">
-															<dressSlot>AMMO</dressSlot>
-														</calcerIf>
-														<calcerElse type="gameMechanics.elements.calcers.FloatData">
-															<value>0</value>
-														</calcerElse>
-													</Item>
-													<Item type="gameMechanics.elements.calcers.CalcerFloor">
-														<source type="gameMechanics.elements.calcers.VariableValueCalcer">
-															<variable href="/Mechanics/Spells/Psionic63/Abilities/StressResource/StressResource.(VariableResource).xdb" />
-															<mul>0.04</mul>
-														</source>
-													</Item>
-												</summands>
-											</mulCalcer>
-										</durationScaler>
-									</Item>
-									<Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
-										<value>10</value>
-									</Item>
-								</impacts>
-								<impactsLose>
-									<Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
-										<chanceCalcer type="gameMechanics.elements.calcers.FloatData">
-											<value>0.5</value>
-										</chanceCalcer>
-										<impacts>
-											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-												<buff href="/Mechanics/Spells/CommonBuffs/Fear/Buff.xdb" />
-												<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-													<mulCalcer type="gameMechanics.elements.calcers.CalcerSum">
-														<summands>
-															<Item type="gameMechanics.elements.calcers.CalcerIf">
-																<predicate type="gameMechanics.elements.predicates.PredicateEquipped">
-																	<dressType>AMMO</dressType>
-																</predicate>
-																<calcerIf type="gameMechanics.elements.calcers.ItemQualityCalcer">
-																	<dressSlot>AMMO</dressSlot>
-																</calcerIf>
-																<calcerElse type="gameMechanics.elements.calcers.FloatData">
-																	<value>0</value>
-																</calcerElse>
-															</Item>
-															<Item type="gameMechanics.elements.calcers.CalcerFloor">
-																<source type="gameMechanics.elements.calcers.VariableValueCalcer">
-																	<variable href="/Mechanics/Spells/Psionic63/Abilities/StressResource/StressResource.(VariableResource).xdb" />
-																	<mul>0.04</mul>
-																</source>
-															</Item>
-														</summands>
-													</mulCalcer>
-												</durationScaler>
-											</Item>
-											<Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
-												<value>10</value>
-											</Item>
-										</impacts>
-										<impactsLose>
-											<Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
-												<impacts>
-													<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
-														<element>ASTRAL</element>
-														<damage var="damage" />
-														<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-															<scalers>
-																<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-																	<mulCalcer type="gameMechanics.elements.calcers.CalcerIf">
-																		<predicate type="gameMechanics.elements.predicates.PredicateEquipped">
-																			<dressType>AMMO</dressType>
-																		</predicate>
-																		<calcerIf type="gameMechanics.elements.calcers.ItemQualityCalcer">
-																			<dressSlot>AMMO</dressSlot>
-																		</calcerIf>
-																		<calcerElse type="gameMechanics.elements.calcers.FloatData">
-																			<value>0</value>
-																		</calcerElse>
-																	</mulCalcer>
-																</Item>
-																<Item type="gameMechanics.elements.scalers.MagicScaler" />
-																<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-																	<mulCalcer type="gameMechanics.elements.calcers.VariableValueCalcer">
-																		<variable href="/Mechanics/Spells/Psionic63/Abilities/StressResource/StressResource.(VariableResource).xdb" />
-																	</mulCalcer>
-																	<additionalMultiplier>
-																		<value>0.04</value>
-																	</additionalMultiplier>
-																	<sum>1</sum>
-																</Item>
-															</scalers>
-														</scaler>
-													</Item>
-												</impacts>
-											</Item>
-										</impactsLose>
-									</Item>
-								</impactsLose>
-							</Item>
-						</impactsLose>
-					</Item>
-				</impacts>
-				<filter type="gameMechanics.world.creature.AliveFilter" />
-			</Item>
-		</casterImpacts>
-	</mechanics>
-	<isAE>true</isAE>
+    <Header>
+        <resourceId>739924123</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/Magics.xdb" />
+        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/AmmoSpells.(ActionGroup).xdb" />
+    </groups>
+    <element>ASTRAL</element>
+    <Name href="Spell00.(SpellSingleTarget).Name.txt" />
+    <Description href="Spell00.(SpellSingleTarget).Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value>1</value>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="gameMechanics.elements.calcers.CalcerIf">
+                            <predicate type="gameMechanics.elements.predicates.PredicateEquipped">
+                                <dressType>AMMO</dressType>
+                            </predicate>
+                            <calcerIf type="gameMechanics.elements.calcers.ItemQualityCalcer">
+                                <dressSlot>AMMO</dressSlot>
+                            </calcerIf>
+                            <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                                <value>0</value>
+                            </calcerElse>
+                        </mulCalcer>
+                        <sum var="damage" />
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                        <formula>MagicScaler</formula>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+        <Item>
+            <name>var1</name>
+            <value>5</value>
+        </Item>
+        <Item>
+            <name>var2</name>
+            <value>1</value>
+            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mulCalcer type="gameMechanics.elements.calcers.CalcerIf">
+                    <predicate type="gameMechanics.elements.predicates.PredicateEquipped">
+                        <dressType>AMMO</dressType>
+                    </predicate>
+                    <calcerIf type="gameMechanics.elements.calcers.ItemQualityCalcer">
+                        <dressSlot>AMMO</dressSlot>
+                    </calcerIf>
+                    <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                        <value>1</value>
+                    </calcerElse>
+                </mulCalcer>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Psionic/Entropy.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Psionic/Chaos.(SpellVisScripts).xdb" />
+    <prepareDuration var="prepareDuration" />
+    <targetType>STTSelf</targetType>
+    <ranks>
+        <Item href="Spell01.(SpellSingleTarget).xdb" />
+        <Item href="Spell02.(SpellSingleTarget).xdb" />
+        <Item href="Spell03.(SpellSingleTarget).xdb" />
+    </ranks>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>1000</duration>
+            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mulCalcer type="gameMechanics.elements.calcers.CalcerIf">
+                    <predicate type="gameMechanics.elements.predicates.PredicateEquipped">
+                        <dressType>AMMO</dressType>
+                    </predicate>
+                    <calcerIf type="gameMechanics.elements.calcers.LinearCalcer">
+                        <mul>-25</mul>
+                        <mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
+                            <dressSlot>AMMO</dressSlot>
+                        </mulCalcer>
+                        <sum>0</sum>
+                    </calcerIf>
+                    <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                        <value>0</value>
+                    </calcerElse>
+                </mulCalcer>
+                <sum>240</sum>
+            </scaler>
+        </cooldown>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceIf">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateEquipped">
+                        <dressType>AMMO</dressType>
+                        <itemClass href="/Mechanics/ItemClasses/Other_InfiniteTeardrop.(ItemClass).xdb" />
+                    </Item>
+                </predicates>
+                <resourceIf type="gameMechanics.constructor.basicElements.ResourceUniversal" />
+                <resourceElse type="gameMechanics.elements.resources.ResourceDressItem">
+                    <slot>AMMO</slot>
+                    <count>5</count>
+                </resourceElse>
+            </Item>
+        </casterResources>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactCreaturesAround">
+                <radius>30</radius>
+                <affectGroup>Enemies</affectGroup>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                        <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                            <value>0.25</value>
+                        </chanceCalcer>
+                        <impacts>
+                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/SilenceDisarm/SilenceDisarm.(BuffResource).xdb" />
+                                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mulCalcer type="gameMechanics.elements.calcers.CalcerSum">
+                                        <summands>
+                                            <Item type="gameMechanics.elements.calcers.CalcerIf">
+                                                <predicate type="gameMechanics.elements.predicates.PredicateEquipped">
+                                                    <dressType>AMMO</dressType>
+                                                </predicate>
+                                                <calcerIf type="gameMechanics.elements.calcers.ItemQualityCalcer">
+                                                    <dressSlot>AMMO</dressSlot>
+                                                </calcerIf>
+                                                <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                                                    <value>0</value>
+                                                </calcerElse>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.calcers.CalcerFloor">
+                                                <source type="gameMechanics.elements.calcers.VariableValueCalcer">
+                                                    <variable href="/Mechanics/Spells/Psionic63/Abilities/StressResource/StressResource.(VariableResource).xdb" />
+                                                    <mul>0.04</mul>
+                                                </source>
+                                            </Item>
+                                        </summands>
+                                    </mulCalcer>
+                                </durationScaler>
+                            </Item>
+                            <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                <value>10</value>
+                            </Item>
+                        </impacts>
+                        <impactsLose>
+                            <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                                <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                                    <value>0.333333</value>
+                                </chanceCalcer>
+                                <impacts>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="/Mechanics/Spells/CommonBuffs/Stun/BuffStun.xdb" />
+                                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                            <mulCalcer type="gameMechanics.elements.calcers.CalcerSum">
+                                                <summands>
+                                                    <Item type="gameMechanics.elements.calcers.CalcerIf">
+                                                        <predicate type="gameMechanics.elements.predicates.PredicateEquipped">
+                                                            <dressType>AMMO</dressType>
+                                                        </predicate>
+                                                        <calcerIf type="gameMechanics.elements.calcers.ItemQualityCalcer">
+                                                            <dressSlot>AMMO</dressSlot>
+                                                        </calcerIf>
+                                                        <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                                                            <value>0</value>
+                                                        </calcerElse>
+                                                    </Item>
+                                                    <Item type="gameMechanics.elements.calcers.CalcerFloor">
+                                                        <source type="gameMechanics.elements.calcers.VariableValueCalcer">
+                                                            <variable href="/Mechanics/Spells/Psionic63/Abilities/StressResource/StressResource.(VariableResource).xdb" />
+                                                            <mul>0.04</mul>
+                                                        </source>
+                                                    </Item>
+                                                </summands>
+                                            </mulCalcer>
+                                        </durationScaler>
+                                    </Item>
+                                    <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                        <value>10</value>
+                                    </Item>
+                                </impacts>
+                                <impactsLose>
+                                    <Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+                                        <chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+                                            <value>0.5</value>
+                                        </chanceCalcer>
+                                        <impacts>
+                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                                <buff href="/Mechanics/Spells/CommonBuffs/Fear/Buff.xdb" />
+                                                <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                    <mulCalcer type="gameMechanics.elements.calcers.CalcerSum">
+                                                        <summands>
+                                                            <Item type="gameMechanics.elements.calcers.CalcerIf">
+                                                                <predicate type="gameMechanics.elements.predicates.PredicateEquipped">
+                                                                    <dressType>AMMO</dressType>
+                                                                </predicate>
+                                                                <calcerIf type="gameMechanics.elements.calcers.ItemQualityCalcer">
+                                                                    <dressSlot>AMMO</dressSlot>
+                                                                </calcerIf>
+                                                                <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                                                                    <value>0</value>
+                                                                </calcerElse>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.calcers.CalcerFloor">
+                                                                <source type="gameMechanics.elements.calcers.VariableValueCalcer">
+                                                                    <variable href="/Mechanics/Spells/Psionic63/Abilities/StressResource/StressResource.(VariableResource).xdb" />
+                                                                    <mul>0.04</mul>
+                                                                </source>
+                                                            </Item>
+                                                        </summands>
+                                                    </mulCalcer>
+                                                </durationScaler>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+                                                <value>10</value>
+                                            </Item>
+                                        </impacts>
+                                        <impactsLose>
+                                            <Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+                                                <impacts>
+                                                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                                                        <element>ASTRAL</element>
+                                                        <damage var="damage" />
+                                                        <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                                                            <scalers>
+                                                                <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                    <mulCalcer type="gameMechanics.elements.calcers.CalcerIf">
+                                                                        <predicate type="gameMechanics.elements.predicates.PredicateEquipped">
+                                                                            <dressType>AMMO</dressType>
+                                                                        </predicate>
+                                                                        <calcerIf type="gameMechanics.elements.calcers.ItemQualityCalcer">
+                                                                            <dressSlot>AMMO</dressSlot>
+                                                                        </calcerIf>
+                                                                        <calcerElse type="gameMechanics.elements.calcers.FloatData">
+                                                                            <value>0</value>
+                                                                        </calcerElse>
+                                                                    </mulCalcer>
+                                                                </Item>
+                                                                <Item type="gameMechanics.elements.scalers.MagicScaler" />
+                                                                <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                                                    <mulCalcer type="gameMechanics.elements.calcers.VariableValueCalcer">
+                                                                        <variable href="/Mechanics/Spells/Psionic63/Abilities/StressResource/StressResource.(VariableResource).xdb" />
+                                                                    </mulCalcer>
+                                                                    <additionalMultiplier>
+                                                                        <value>0.04</value>
+                                                                    </additionalMultiplier>
+                                                                    <sum>1</sum>
+                                                                </Item>
+                                                            </scalers>
+                                                        </scaler>
+                                                    </Item>
+                                                </impacts>
+                                            </Item>
+                                        </impactsLose>
+                                    </Item>
+                                </impactsLose>
+                            </Item>
+                        </impactsLose>
+                    </Item>
+                </impacts>
+                <filter type="gameMechanics.world.creature.AliveFilter" />
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <isAE>true</isAE>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

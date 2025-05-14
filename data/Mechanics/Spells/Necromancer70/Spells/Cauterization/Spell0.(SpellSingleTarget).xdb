@@ -1,149 +1,149 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-	<Header>
-		<resourceId>739933186</resourceId>
-		<isPrototype>true</isPrototype>
-	</Header>
-	<groups>
-		<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
-		<Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
-		<Item href="/Mechanics/Spells/Groups/Magics.xdb" />
-		<Item href="/Mechanics/Spells/Groups/InsuranceHealTrigger.xdb" />
-		<Item href="/Mechanics/Spells/Groups/HealDamage.(ActionGroup).xdb" />
-	</groups>
-	<element>FIRE</element>
-	<Name href="Spell0_Name.txt" />
-	<Description href="Spell0_Description.txt" />
-	<descVars>
-		<Item>
-			<name>var0</name>
-			<value>1</value>
-			<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-				<scalers>
-					<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-						<mul>0.5</mul>
-						<mulCalcer type="constructor.elements.CalcerFloatExternal">
-							<externalCalcer hrefvar="externalCalcer" />
-						</mulCalcer>
-					</Item>
-					<Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-						<formula>MagicScaler</formula>
-					</Item>
-				</scalers>
-			</scaler>
-		</Item>
-		<Item>
-			<name>var1</name>
-			<value var="duration" />
-		</Item>
-		<Item>
-			<name>var2</name>
-			<value>1</value>
-			<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-				<scalers>
-					<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-						<mulCalcer type="constructor.elements.CalcerFloatExternal">
-							<externalCalcer hrefvar="externalCalcer" />
-						</mulCalcer>
-					</Item>
-					<Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-						<formula>HealScaler</formula>
-					</Item>
-				</scalers>
-			</scaler>
-		</Item>
-	</descVars>
-	<image href="/Interface/Icons/Spells/Necromancer/Cautery.(UISingleTexture).xdb" />
-	<visualScripts href="/Spells/VisScripts/Necromancer/Cauterization.(SpellVisScripts).xdb" />
-	<range type="gameMechanics.elements.calcers.FloatData">
-		<value>30</value>
-	</range>
-	<ranks>
-		<Item href="Spell01.(SpellSingleTarget).xdb" />
-		<Item href="Spell02.(SpellSingleTarget).xdb" />
-		<Item href="Spell03.(SpellSingleTarget).xdb" />
-	</ranks>
-	<modifiers>
-		<Item type="gameMechanics.elements.spell.SpellEnvelopeModifier">
-			<effects>
-				<Item type="gameMechanics.elements.effects.MultiplyStat">
-					<stat type="gameMechanics.elements.stat.SpecialStat">
-						<stat href="/Mechanics/SpecialStats/AntiHeal.(SpecialStatResource).xdb" />
-					</stat>
-					<multiplier>0</multiplier>
-				</Item>
-			</effects>
-			<onBehalfOfHolder>true</onBehalfOfHolder>
-		</Item>
-	</modifiers>
-	<iffPolicy>Friends</iffPolicy>
-	<mechanics>
-		<cooldown>
-			<duration>6000</duration>
-		</cooldown>
-		<casterConditions>
-			<Item type="gameMechanics.elements.predicates.PredicateInCombat" />
-		</casterConditions>
-		<conditions>
-			<Item type="gameMechanics.constructor.basicElements.BinaryPredicateOr">
-				<predicates>
-					<Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
-						<affectGroup>Group</affectGroup>
-					</Item>
-					<Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
-						<affectGroup>Raid</affectGroup>
-					</Item>
-				</predicates>
-			</Item>
-		</conditions>
-		<casterResources>
-			<Item type="gameMechanics.elements.resources.ResourceVariable">
-				<ability href="/Mechanics/Spells/Necromancer70/Abilities/BloodDrops/Ability0.(AbilityResource).xdb" />
-				<variable href="/Mechanics/Spells/Necromancer70/Abilities/BloodDrops/BloodPool.(VariableResource).xdb" />
-				<sub>2</sub>
-			</Item>
-		</casterResources>
-		<targetImpacts>
-			<Item type="gameMechanics.elements.impacts.ExecuteImpactsUnderEffects">
-				<effects>
-					<Item type="gameMechanics.elements.abilities.DieHardObserver">
-						<dieHardBuff href="/Mechanics/Spells/Necromancer70/Abilities/SafeBuff/Safebuff.(BuffResource).xdb" />
-						<impactsOnAttach>
-							<Item type="gameMechanics.elements.impacts.PostponedImpacts">
-								<impacts>
-									<Item type="gameMechanics.elements.impacts.BuffDetacher">
-										<buff href="/Mechanics/Spells/Necromancer70/Abilities/SafeBuff/Safebuff.(BuffResource).xdb" />
-										<casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
-									</Item>
-								</impacts>
-							</Item>
-						</impactsOnAttach>
-						<suppressDamage>true</suppressDamage>
-					</Item>
-				</effects>
-				<impacts>
-					<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
-						<element>FIRE</element>
-						<offends>false</offends>
-						<damage>1</damage>
-						<impactsOnHitTarget />
-						<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-							<scalers>
-								<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-									<mul>0.5</mul>
-									<mulCalcer type="constructor.elements.CalcerFloatExternal">
-										<externalCalcer hrefvar="externalCalcer" />
-									</mulCalcer>
-								</Item>
-								<Item type="gameMechanics.elements.scalers.MagicScaler" />
-							</scalers>
-						</scaler>
-					</Item>
-				</impacts>
-			</Item>
-			<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-				<buff hrefvar="buff" />
-			</Item>
-		</targetImpacts>
-	</mechanics>
+    <Header>
+        <resourceId>739933186</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/Magics.xdb" />
+        <Item href="/Mechanics/Spells/Groups/InsuranceHealTrigger.xdb" />
+        <Item href="/Mechanics/Spells/Groups/HealDamage.(ActionGroup).xdb" />
+    </groups>
+    <element>FIRE</element>
+    <Name href="Spell0_Name.txt" />
+    <Description href="Spell0_Description.txt" />
+    <descVars>
+        <Item>
+            <name>var0</name>
+            <value>1</value>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mul>0.5</mul>
+                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                            <externalCalcer hrefvar="externalCalcer" />
+                        </mulCalcer>
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                        <formula>MagicScaler</formula>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+        <Item>
+            <name>var1</name>
+            <value var="duration" />
+        </Item>
+        <Item>
+            <name>var2</name>
+            <value>1</value>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                            <externalCalcer hrefvar="externalCalcer" />
+                        </mulCalcer>
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                        <formula>HealScaler</formula>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Necromancer/Cautery.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Necromancer/Cauterization.(SpellVisScripts).xdb" />
+    <range type="gameMechanics.elements.calcers.FloatData">
+        <value>30</value>
+    </range>
+    <ranks>
+        <Item href="Spell01.(SpellSingleTarget).xdb" />
+        <Item href="Spell02.(SpellSingleTarget).xdb" />
+        <Item href="Spell03.(SpellSingleTarget).xdb" />
+    </ranks>
+    <modifiers>
+        <Item type="gameMechanics.elements.spell.SpellEnvelopeModifier">
+            <effects>
+                <Item type="gameMechanics.elements.effects.MultiplyStat">
+                    <stat type="gameMechanics.elements.stat.SpecialStat">
+                        <stat href="/Mechanics/SpecialStats/AntiHeal.(SpecialStatResource).xdb" />
+                    </stat>
+                    <multiplier>0</multiplier>
+                </Item>
+            </effects>
+            <onBehalfOfHolder>true</onBehalfOfHolder>
+        </Item>
+    </modifiers>
+    <iffPolicy>Friends</iffPolicy>
+    <mechanics>
+        <cooldown>
+            <duration>6000</duration>
+        </cooldown>
+        <casterConditions>
+            <Item type="gameMechanics.elements.predicates.PredicateInCombat" />
+        </casterConditions>
+        <conditions>
+            <Item type="gameMechanics.constructor.basicElements.BinaryPredicateOr">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
+                        <affectGroup>Group</affectGroup>
+                    </Item>
+                    <Item type="gameMechanics.elements.predicates.PredicateAffectGroup">
+                        <affectGroup>Raid</affectGroup>
+                    </Item>
+                </predicates>
+            </Item>
+        </conditions>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceVariable">
+                <ability href="/Mechanics/Spells/Necromancer70/Abilities/BloodDrops/Ability0.(AbilityResource).xdb" />
+                <variable href="/Mechanics/Spells/Necromancer70/Abilities/BloodDrops/BloodPool.(VariableResource).xdb" />
+                <sub>2</sub>
+            </Item>
+        </casterResources>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ExecuteImpactsUnderEffects">
+                <effects>
+                    <Item type="gameMechanics.elements.abilities.DieHardObserver">
+                        <dieHardBuff href="/Mechanics/Spells/Necromancer70/Abilities/SafeBuff/Safebuff.(BuffResource).xdb" />
+                        <impactsOnAttach>
+                            <Item type="gameMechanics.elements.impacts.PostponedImpacts">
+                                <impacts>
+                                    <Item type="gameMechanics.elements.impacts.BuffDetacher">
+                                        <buff href="/Mechanics/Spells/Necromancer70/Abilities/SafeBuff/Safebuff.(BuffResource).xdb" />
+                                        <casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impactsOnAttach>
+                        <suppressDamage>true</suppressDamage>
+                    </Item>
+                </effects>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+                        <element>FIRE</element>
+                        <offends>false</offends>
+                        <damage>1</damage>
+                        <impactsOnHitTarget />
+                        <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                            <scalers>
+                                <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                    <mul>0.5</mul>
+                                    <mulCalcer type="constructor.elements.CalcerFloatExternal">
+                                        <externalCalcer hrefvar="externalCalcer" />
+                                    </mulCalcer>
+                                </Item>
+                                <Item type="gameMechanics.elements.scalers.MagicScaler" />
+                            </scalers>
+                        </scaler>
+                    </Item>
+                </impacts>
+            </Item>
+            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                <buff hrefvar="buff" />
+            </Item>
+        </targetImpacts>
+    </mechanics>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

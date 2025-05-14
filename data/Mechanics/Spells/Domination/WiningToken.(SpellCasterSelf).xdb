@@ -1,152 +1,152 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-	<Header>
-		<resourceId>273511446</resourceId>
-	</Header>
-	<groups>
-		<Item href="/Mechanics/Spells/Groups/MountedSpells.xdb" />
-	</groups>
-	<Name href="WiningToken.(SpellCasterSelf).Name.txt" />
-	<Description href="WiningToken.(SpellCasterSelf).Description.txt" />
-	<nameTemplate href="WiningToken.(SpellCasterSelf).Name.txt" />
-	<descTemplate href="WiningToken.(SpellCasterSelf).Description.txt" />
-	<needLos>false</needLos>
-	<targetType>STTSelf</targetType>
-	<isAggro>false</isAggro>
-	<replaceLowRanks>false</replaceLowRanks>
-	<iffPolicy>Friends</iffPolicy>
-	<triggersGlobalCooldown>false</triggersGlobalCooldown>
-	<needInFront>false</needInFront>
-	<mechanics>
-		<casterImpacts>
-			<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-				<predicates>
-					<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-						<predicate type="gameMechanics.elements.predicates.PredicateGreater">
-							<lhs type="gameMechanics.elements.calcers.AlternativeCurrencyCalcer">
-								<currency href="/Mechanics/AlternativeCurrencies/BGPoints.(AlternativeCurrency).xdb" />
-							</lhs>
-							<rhs type="gameMechanics.elements.calcers.FloatData">
-								<value>1499</value>
-							</rhs>
-						</predicate>
-					</Item>
-				</predicates>
-				<impactsIf>
-					<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-						<predicates>
-							<Item type="gameMechanics.elements.resources.ResourceAltCurrency">
-								<currency href="/Mechanics/AlternativeCurrencies/BG/DominationCurrency.(AlternativeCurrency).xdb" />
-								<count>1</count>
-							</Item>
-						</predicates>
-						<impactsIf>
-							<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-								<predicates>
-									<Item type="gameMechanics.elements.predicates.PredicateHasItemsCount">
-										<items>
-											<Item href="/Items/QuestItems/Domination/WiningToken.(ItemResource).xdb" />
-										</items>
-										<totalCount>100</totalCount>
-										<checkDress>false</checkDress>
-									</Item>
-								</predicates>
-								<impactsIf>
-									<Item type="gameMechanics.elements.impacts.RepeatedImpact">
-										<impact type="gameMechanics.elements.impacts.ImpactIfTarget">
-											<predicates>
-												<Item type="gameMechanics.elements.predicates.PredicateHasItemsCount">
-													<items>
-														<Item href="/Items/QuestItems/Domination/WiningToken.(ItemResource).xdb" />
-													</items>
-													<totalCount>100</totalCount>
-													<checkDress>false</checkDress>
-												</Item>
-											</predicates>
-											<impactsIf>
-												<Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
-													<currency href="/Mechanics/AlternativeCurrencies/BGPoints.(AlternativeCurrency).xdb" />
-													<sumCalcer type="gameMechanics.elements.calcers.FloatData">
-														<value>20</value>
-													</sumCalcer>
-												</Item>
-												<Item type="gameMechanics.elements.impacts.ImpactAddReputation">
-													<faction href="/World/Factions/BGFaction.(Faction).xdb" />
-													<value>35</value>
-													<scaleByGlobal>false</scaleByGlobal>
-												</Item>
-												<Item type="gameMechanics.elements.impacts.ImpactDestroyItem">
-													<item href="/Items/QuestItems/Domination/WiningToken.(ItemResource).xdb" />
-													<count>100</count>
-												</Item>
-												<Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
-													<currency href="/Mechanics/AlternativeCurrencies/BG/DominationCurrency.(AlternativeCurrency).xdb" />
-													<sumCalcer type="gameMechanics.elements.calcers.FloatData">
-														<value>-1</value>
-													</sumCalcer>
-												</Item>
-											</impactsIf>
-										</impact>
-										<count type="gameMechanics.elements.calcers.CalcerMin">
-											<calcers>
-												<Item type="gameMechanics.elements.calcers.AlternativeCurrencyCalcer">
-													<currency href="/Mechanics/AlternativeCurrencies/BG/DominationCurrency.(AlternativeCurrency).xdb" />
-												</Item>
-												<Item type="gameMechanics.elements.calcers.CalcerFloor">
-													<source type="gameMechanics.elements.calcers.CalcerMul">
-														<calcers>
-															<Item type="gameMechanics.elements.calcers.FloatData">
-																<value>0.01</value>
-															</Item>
-															<Item type="gameMechanics.elements.calcers.ItemsCalcer">
-																<item href="/Items/QuestItems/Domination/WiningToken.(ItemResource).xdb" />
-															</Item>
-														</calcers>
-													</source>
-												</Item>
-												<Item type="gameMechanics.elements.calcers.CalcerMul">
-													<calcers>
-														<Item type="gameMechanics.elements.calcers.CalcerDiff">
-															<minuend type="gameMechanics.elements.calcers.FloatData">
-																<value>1500</value>
-															</minuend>
-															<subtrahend type="gameMechanics.elements.calcers.AlternativeCurrencyCalcer">
-																<currency href="/Mechanics/AlternativeCurrencies/BGPoints.(AlternativeCurrency).xdb" />
-															</subtrahend>
-														</Item>
-														<Item type="gameMechanics.elements.calcers.FloatData">
-															<value>0.05</value>
-														</Item>
-													</calcers>
-												</Item>
-											</calcers>
-										</count>
-									</Item>
-								</impactsIf>
-								<impactsElse>
-									<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-										<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-										<data href="WiningToken2.(ClientData).xdb" />
-									</Item>
-								</impactsElse>
-							</Item>
-						</impactsIf>
-						<impactsElse>
-							<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-								<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-								<data href="DominationCurrenc.(ClientData).xdb" />
-							</Item>
-						</impactsElse>
-					</Item>
-				</impactsIf>
-				<impactsElse>
-					<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
-						<distributor type="gameMechanics.elements.calcers.TargetDistributor" />
-						<data href="WiningToken.(ClientData).xdb" />
-					</Item>
-				</impactsElse>
-			</Item>
-		</casterImpacts>
-	</mechanics>
-	<speed>50</speed>
+    <Header>
+        <resourceId>273511446</resourceId>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/MountedSpells.xdb" />
+    </groups>
+    <Name href="WiningToken.(SpellCasterSelf).Name.txt" />
+    <Description href="WiningToken.(SpellCasterSelf).Description.txt" />
+    <nameTemplate href="WiningToken.(SpellCasterSelf).Name.txt" />
+    <descTemplate href="WiningToken.(SpellCasterSelf).Description.txt" />
+    <needLos>false</needLos>
+    <targetType>STTSelf</targetType>
+    <isAggro>false</isAggro>
+    <replaceLowRanks>false</replaceLowRanks>
+    <iffPolicy>Friends</iffPolicy>
+    <triggersGlobalCooldown>false</triggersGlobalCooldown>
+    <needInFront>false</needInFront>
+    <mechanics>
+        <casterImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                <predicates>
+                    <Item type="gameMechanics.constructor.basicElements.PredicateNot">
+                        <predicate type="gameMechanics.elements.predicates.PredicateGreater">
+                            <lhs type="gameMechanics.elements.calcers.AlternativeCurrencyCalcer">
+                                <currency href="/Mechanics/AlternativeCurrencies/BGPoints.(AlternativeCurrency).xdb" />
+                            </lhs>
+                            <rhs type="gameMechanics.elements.calcers.FloatData">
+                                <value>1499</value>
+                            </rhs>
+                        </predicate>
+                    </Item>
+                </predicates>
+                <impactsIf>
+                    <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                        <predicates>
+                            <Item type="gameMechanics.elements.resources.ResourceAltCurrency">
+                                <currency href="/Mechanics/AlternativeCurrencies/BG/DominationCurrency.(AlternativeCurrency).xdb" />
+                                <count>1</count>
+                            </Item>
+                        </predicates>
+                        <impactsIf>
+                            <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                <predicates>
+                                    <Item type="gameMechanics.elements.predicates.PredicateHasItemsCount">
+                                        <items>
+                                            <Item href="/Items/QuestItems/Domination/WiningToken.(ItemResource).xdb" />
+                                        </items>
+                                        <totalCount>100</totalCount>
+                                        <checkDress>false</checkDress>
+                                    </Item>
+                                </predicates>
+                                <impactsIf>
+                                    <Item type="gameMechanics.elements.impacts.RepeatedImpact">
+                                        <impact type="gameMechanics.elements.impacts.ImpactIfTarget">
+                                            <predicates>
+                                                <Item type="gameMechanics.elements.predicates.PredicateHasItemsCount">
+                                                    <items>
+                                                        <Item href="/Items/QuestItems/Domination/WiningToken.(ItemResource).xdb" />
+                                                    </items>
+                                                    <totalCount>100</totalCount>
+                                                    <checkDress>false</checkDress>
+                                                </Item>
+                                            </predicates>
+                                            <impactsIf>
+                                                <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+                                                    <currency href="/Mechanics/AlternativeCurrencies/BGPoints.(AlternativeCurrency).xdb" />
+                                                    <sumCalcer type="gameMechanics.elements.calcers.FloatData">
+                                                        <value>20</value>
+                                                    </sumCalcer>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ImpactAddReputation">
+                                                    <faction href="/World/Factions/BGFaction.(Faction).xdb" />
+                                                    <value>35</value>
+                                                    <scaleByGlobal>false</scaleByGlobal>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ImpactDestroyItem">
+                                                    <item href="/Items/QuestItems/Domination/WiningToken.(ItemResource).xdb" />
+                                                    <count>100</count>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.impacts.ImpactAddAltCurrency">
+                                                    <currency href="/Mechanics/AlternativeCurrencies/BG/DominationCurrency.(AlternativeCurrency).xdb" />
+                                                    <sumCalcer type="gameMechanics.elements.calcers.FloatData">
+                                                        <value>-1</value>
+                                                    </sumCalcer>
+                                                </Item>
+                                            </impactsIf>
+                                        </impact>
+                                        <count type="gameMechanics.elements.calcers.CalcerMin">
+                                            <calcers>
+                                                <Item type="gameMechanics.elements.calcers.AlternativeCurrencyCalcer">
+                                                    <currency href="/Mechanics/AlternativeCurrencies/BG/DominationCurrency.(AlternativeCurrency).xdb" />
+                                                </Item>
+                                                <Item type="gameMechanics.elements.calcers.CalcerFloor">
+                                                    <source type="gameMechanics.elements.calcers.CalcerMul">
+                                                        <calcers>
+                                                            <Item type="gameMechanics.elements.calcers.FloatData">
+                                                                <value>0.01</value>
+                                                            </Item>
+                                                            <Item type="gameMechanics.elements.calcers.ItemsCalcer">
+                                                                <item href="/Items/QuestItems/Domination/WiningToken.(ItemResource).xdb" />
+                                                            </Item>
+                                                        </calcers>
+                                                    </source>
+                                                </Item>
+                                                <Item type="gameMechanics.elements.calcers.CalcerMul">
+                                                    <calcers>
+                                                        <Item type="gameMechanics.elements.calcers.CalcerDiff">
+                                                            <minuend type="gameMechanics.elements.calcers.FloatData">
+                                                                <value>1500</value>
+                                                            </minuend>
+                                                            <subtrahend type="gameMechanics.elements.calcers.AlternativeCurrencyCalcer">
+                                                                <currency href="/Mechanics/AlternativeCurrencies/BGPoints.(AlternativeCurrency).xdb" />
+                                                            </subtrahend>
+                                                        </Item>
+                                                        <Item type="gameMechanics.elements.calcers.FloatData">
+                                                            <value>0.05</value>
+                                                        </Item>
+                                                    </calcers>
+                                                </Item>
+                                            </calcers>
+                                        </count>
+                                    </Item>
+                                </impactsIf>
+                                <impactsElse>
+                                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                        <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                        <data href="WiningToken2.(ClientData).xdb" />
+                                    </Item>
+                                </impactsElse>
+                            </Item>
+                        </impactsIf>
+                        <impactsElse>
+                            <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                                <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                                <data href="DominationCurrenc.(ClientData).xdb" />
+                            </Item>
+                        </impactsElse>
+                    </Item>
+                </impactsIf>
+                <impactsElse>
+                    <Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
+                        <distributor type="gameMechanics.elements.calcers.TargetDistributor" />
+                        <data href="WiningToken.(ClientData).xdb" />
+                    </Item>
+                </impactsElse>
+            </Item>
+        </casterImpacts>
+    </mechanics>
+    <speed>50</speed>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>

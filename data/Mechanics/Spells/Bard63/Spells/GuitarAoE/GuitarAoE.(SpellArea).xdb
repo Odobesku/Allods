@@ -1,149 +1,149 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.area.SpellArea>
-	<Header>
-		<resourceId>739940440</resourceId>
-		<isPrototype>true</isPrototype>
-	</Header>
-	<groups>
-		<Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
-		<Item href="/Mechanics/Spells/Groups/InsuranceTrigger.xdb" />
-		<Item href="/Mechanics/Spells/Groups/MagicAttacks.xdb" />
-		<Item href="/Mechanics/Spells/Groups/AmmoSpells.(ActionGroup).xdb" />
-	</groups>
-	<element>DISEASE</element>
-	<Name href="GuitarAoE.(SpellArea).Name.txt" />
-	<Description href="GuitarAoE.(SpellArea).Description.txt" />
-	<descVars>
-		<Item>
-			<name>dmg</name>
-			<value>1</value>
-			<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
-				<scalers>
-					<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-						<mulCalcer type="gameMechanics.elements.calcers.CalcerSum">
-							<summands>
-								<Item type="gameMechanics.elements.calcers.LinearCalcer">
-									<mul>3</mul>
-									<mulCalcer type="gameMechanics.elements.calcers.CalcerMax">
-										<calcers>
-											<Item type="gameMechanics.elements.calcers.FloatData">
-												<value>0</value>
-											</Item>
-											<Item type="gameMechanics.elements.calcers.ItemQualityCalcer">
-												<dressSlot>AMMO</dressSlot>
-											</Item>
-										</calcers>
-									</mulCalcer>
-									<sum>0</sum>
-								</Item>
-								<Item type="constructor.elements.CalcerFloatExternal">
-									<externalCalcer hrefvar="externalCalcer" />
-								</Item>
-							</summands>
-						</mulCalcer>
-					</Item>
-					<Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-						<formula>MagicScaler</formula>
-					</Item>
-				</scalers>
-			</scaler>
-		</Item>
-		<Item>
-			<name>time</name>
-			<value>1</value>
-			<scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-				<mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
-					<mul>0.5</mul>
-					<mulCalcer type="gameMechanics.elements.calcers.CalcerMax">
-						<calcers>
-							<Item type="gameMechanics.elements.calcers.FloatData">
-								<value>0</value>
-							</Item>
-							<Item type="gameMechanics.elements.calcers.ItemQualityCalcer">
-								<dressSlot>AMMO</dressSlot>
-							</Item>
-						</calcers>
-					</mulCalcer>
-					<sum var="basetime" />
-				</mulCalcer>
-			</scaler>
-		</Item>
-	</descVars>
-	<image href="/Interface/Icons/Spells/Bard/Healsong.(UISingleTexture).xdb" />
-	<visualScripts href="/Spells/VisScripts/Bard/GuitarAoE.(SpellVisScripts).xdb" />
-	<prepareDuration>0</prepareDuration>
-	<targetType>STTSelf</targetType>
-	<ranks>
-		<Item href="GuitarAoE01.(SpellArea).xdb" />
-		<Item href="GuitarAoE02.(SpellArea).xdb" />
-		<Item href="GuitarAoE03.(SpellArea).xdb" />
-	</ranks>
-	<iffPolicy>Enemies</iffPolicy>
-	<launchWhenReady>true</launchWhenReady>
-	<mechanics>
-		<cooldown>
-			<duration>240000</duration>
-		</cooldown>
-		<casterResources>
-			<Item type="gameMechanics.elements.resources.ResourceIf">
-				<predicates>
-					<Item type="gameMechanics.elements.predicates.PredicateEquipped">
-						<dressType>AMMO</dressType>
-						<itemClass href="/Mechanics/ItemClasses/Other_InfiniteTeardrop.(ItemClass).xdb" />
-					</Item>
-				</predicates>
-				<resourceIf type="gameMechanics.elements.resources.ResourceVariable">
-					<hideText>true</hideText>
-					<variable href="/Mechanics/Spells/Bard63/Abilities/DriveResource/Drive.(VariableResource).xdb" />
-					<sub>0</sub>
-				</resourceIf>
-				<resourceElse type="gameMechanics.elements.resources.ResourceDressItem">
-					<slot>AMMO</slot>
-					<count>4</count>
-				</resourceElse>
-			</Item>
-		</casterResources>
-		<targetImpacts>
-			<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-				<delay>400</delay>
-				<impacts>
-					<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-						<impacts>
-							<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-								<impacts>
-									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-										<buff hrefvar="buff" />
-										<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-											<mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
-												<mul>0.33</mul>
-												<mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
-													<dressSlot>AMMO</dressSlot>
-												</mulCalcer>
-												<sum var="basetime" />
-											</mulCalcer>
-										</durationScaler>
-									</Item>
-									<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-										<buff href="/Mechanics/Spells/CommonBuffs/Disorient/Buff00.(BuffResource).xdb" />
-										<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-											<mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
-												<mul>0.33</mul>
-												<mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
-													<dressSlot>AMMO</dressSlot>
-												</mulCalcer>
-												<sum var="basetime" />
-											</mulCalcer>
-										</durationScaler>
-									</Item>
-								</impacts>
-							</Item>
-						</impacts>
-					</Item>
-				</impacts>
-			</Item>
-		</targetImpacts>
-	</mechanics>
-	<speed>5</speed>
-	<shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
-	<radius>20</radius>
+    <Header>
+        <resourceId>739940440</resourceId>
+        <isPrototype>true</isPrototype>
+    </Header>
+    <groups>
+        <Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
+        <Item href="/Mechanics/Spells/Groups/InsuranceTrigger.xdb" />
+        <Item href="/Mechanics/Spells/Groups/MagicAttacks.xdb" />
+        <Item href="/Mechanics/Spells/Groups/AmmoSpells.(ActionGroup).xdb" />
+    </groups>
+    <element>DISEASE</element>
+    <Name href="GuitarAoE.(SpellArea).Name.txt" />
+    <Description href="GuitarAoE.(SpellArea).Description.txt" />
+    <descVars>
+        <Item>
+            <name>dmg</name>
+            <value>1</value>
+            <scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+                <scalers>
+                    <Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                        <mulCalcer type="gameMechanics.elements.calcers.CalcerSum">
+                            <summands>
+                                <Item type="gameMechanics.elements.calcers.LinearCalcer">
+                                    <mul>3</mul>
+                                    <mulCalcer type="gameMechanics.elements.calcers.CalcerMax">
+                                        <calcers>
+                                            <Item type="gameMechanics.elements.calcers.FloatData">
+                                                <value>0</value>
+                                            </Item>
+                                            <Item type="gameMechanics.elements.calcers.ItemQualityCalcer">
+                                                <dressSlot>AMMO</dressSlot>
+                                            </Item>
+                                        </calcers>
+                                    </mulCalcer>
+                                    <sum>0</sum>
+                                </Item>
+                                <Item type="constructor.elements.CalcerFloatExternal">
+                                    <externalCalcer hrefvar="externalCalcer" />
+                                </Item>
+                            </summands>
+                        </mulCalcer>
+                    </Item>
+                    <Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+                        <formula>MagicScaler</formula>
+                    </Item>
+                </scalers>
+            </scaler>
+        </Item>
+        <Item>
+            <name>time</name>
+            <value>1</value>
+            <scaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                <mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
+                    <mul>0.5</mul>
+                    <mulCalcer type="gameMechanics.elements.calcers.CalcerMax">
+                        <calcers>
+                            <Item type="gameMechanics.elements.calcers.FloatData">
+                                <value>0</value>
+                            </Item>
+                            <Item type="gameMechanics.elements.calcers.ItemQualityCalcer">
+                                <dressSlot>AMMO</dressSlot>
+                            </Item>
+                        </calcers>
+                    </mulCalcer>
+                    <sum var="basetime" />
+                </mulCalcer>
+            </scaler>
+        </Item>
+    </descVars>
+    <image href="/Interface/Icons/Spells/Bard/Healsong.(UISingleTexture).xdb" />
+    <visualScripts href="/Spells/VisScripts/Bard/GuitarAoE.(SpellVisScripts).xdb" />
+    <prepareDuration>0</prepareDuration>
+    <targetType>STTSelf</targetType>
+    <ranks>
+        <Item href="GuitarAoE01.(SpellArea).xdb" />
+        <Item href="GuitarAoE02.(SpellArea).xdb" />
+        <Item href="GuitarAoE03.(SpellArea).xdb" />
+    </ranks>
+    <iffPolicy>Enemies</iffPolicy>
+    <launchWhenReady>true</launchWhenReady>
+    <mechanics>
+        <cooldown>
+            <duration>240000</duration>
+        </cooldown>
+        <casterResources>
+            <Item type="gameMechanics.elements.resources.ResourceIf">
+                <predicates>
+                    <Item type="gameMechanics.elements.predicates.PredicateEquipped">
+                        <dressType>AMMO</dressType>
+                        <itemClass href="/Mechanics/ItemClasses/Other_InfiniteTeardrop.(ItemClass).xdb" />
+                    </Item>
+                </predicates>
+                <resourceIf type="gameMechanics.elements.resources.ResourceVariable">
+                    <hideText>true</hideText>
+                    <variable href="/Mechanics/Spells/Bard63/Abilities/DriveResource/Drive.(VariableResource).xdb" />
+                    <sub>0</sub>
+                </resourceIf>
+                <resourceElse type="gameMechanics.elements.resources.ResourceDressItem">
+                    <slot>AMMO</slot>
+                    <count>4</count>
+                </resourceElse>
+            </Item>
+        </casterResources>
+        <targetImpacts>
+            <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+                <delay>400</delay>
+                <impacts>
+                    <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                        <impacts>
+                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+                                <impacts>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff hrefvar="buff" />
+                                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                            <mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
+                                                <mul>0.33</mul>
+                                                <mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
+                                                    <dressSlot>AMMO</dressSlot>
+                                                </mulCalcer>
+                                                <sum var="basetime" />
+                                            </mulCalcer>
+                                        </durationScaler>
+                                    </Item>
+                                    <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+                                        <buff href="/Mechanics/Spells/CommonBuffs/Disorient/Buff00.(BuffResource).xdb" />
+                                        <durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+                                            <mulCalcer type="gameMechanics.elements.calcers.LinearCalcer">
+                                                <mul>0.33</mul>
+                                                <mulCalcer type="gameMechanics.elements.calcers.ItemQualityCalcer">
+                                                    <dressSlot>AMMO</dressSlot>
+                                                </mulCalcer>
+                                                <sum var="basetime" />
+                                            </mulCalcer>
+                                        </durationScaler>
+                                    </Item>
+                                </impacts>
+                            </Item>
+                        </impacts>
+                    </Item>
+                </impacts>
+            </Item>
+        </targetImpacts>
+    </mechanics>
+    <speed>5</speed>
+    <shape type="gameMechanics.constructor.schemes.spell.area.Sphere" />
+    <radius>20</radius>
 </gameMechanics.constructor.schemes.spell.area.SpellArea>
