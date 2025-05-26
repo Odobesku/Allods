@@ -1,38 +1,67 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
-    <Header>
-        <resourceId>739921935</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <name href="Ability.(AbilityResource).Name.txt" />
-    <description href="Ability.(AbilityResource).Description.txt" />
-    <descVars>
-        <Item>
-            <name>var0</name>
-            <value var="multiplier" />
-        </Item>
-    </descVars>
-    <image href="/Interface/Icons/Spells/Mage/MageFireArrow.(UISingleTexture).xdb#xpointer(/UISingleTexture)" />
-    <effects>
-        <Item type="gameMechanics.elements.effects.EffectMarkedImpacts">
-            <mark href="Mark.(MarkResource).xdb#xpointer(/gameMechanics.constructor.basicElements.MarkResource)" />
-            <impacts>
-                <Item type="gameMechanics.elements.impacts.DoubleAttackIsolator">
-                    <impacts>
-                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                            <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Weakness/Weakness.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
-                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                <multiplier var="multiplier" />
-                            </durationScaler>
-                        </Item>
-                    </impacts>
-                </Item>
-            </impacts>
-        </Item>
-    </effects>
-    <ranks>
-        <Item href="Ability01.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-        <Item href="Ability02.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-        <Item href="Ability03.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
-    </ranks>
+	<Header>
+		<resourceId>739921935</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<name href="Ability.(AbilityResource).Name.txt" />
+	<description href="Ability.(AbilityResource).Description.txt" />
+	<descVars>
+		<Item>
+			<name>var0</name>
+			<value var="multiplier" />
+		</Item>
+	</descVars>
+	<image href="/Interface/Icons/Spells/Mage/MageFireArrow.(UISingleTexture).xdb" />
+	<effects>
+		<Item type="gameMechanics.elements.effects.BuffExtraEffects">
+			<buffs>
+				<Item href="/Mechanics/Spells/CommonBuffs/Aspects/Support/Buff01.(BuffResource).xdb" />
+			</buffs>
+			<effects>
+				<Item type="gameMechanics.elements.effects.EffectMarkedImpacts">
+					<mark href="Mark.(MarkResource).xdb" />
+					<impacts>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Stupefaction/Stupefaction.(BuffResource).xdb" />
+							<durationScaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+								<scalers>
+									<Item type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+										<mulCalcer type="gameMechanics.elements.calcers.SpellRankCalcer">
+											<spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Stupefaction/Stupefaction1.(SpellSingleTarget).xdb" />
+											<mul>1</mul>
+										</mulCalcer>
+									</Item>
+									<Item type="gameMechanics.elements.scalers.LinearScaler">
+										<multiplier var="multiplier" />
+									</Item>
+								</scalers>
+							</durationScaler>
+						</Item>
+						<Item type="gameMechanics.elements.impacts.DoubleAttackOnly">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.MarkedImpact">
+									<mark href="/Mechanics/Spells/Mage63/Abilities/DoubleAttackDebuff/FireArrowAoEDebuff.(MarkResource).xdb" />
+								</Item>
+							</impacts>
+						</Item>
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.effects.CastOnMove">
+					<spells>
+						<Item href="/Mechanics/Spells/Mage63/Spells/FireArrow/Spell01.(SpellSingleTarget).xdb" />
+					</spells>
+					<moveTypes>
+						<Item>Step</Item>
+						<Item>Fall</Item>
+					</moveTypes>
+				</Item>
+			</effects>
+		</Item>
+	</effects>
+	<ranks>
+		<Item href="Ability01.(AbilityResource).xdb" />
+		<Item href="Ability02.(AbilityResource).xdb" />
+		<Item href="Ability03.(AbilityResource).xdb" />
+	</ranks>
 </gameMechanics.constructor.schemes.ability.AbilityResource>

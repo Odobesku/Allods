@@ -1,91 +1,186 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
-    <Header>
-        <resourceId>739923238</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <name href="Ability0.(AbilityResource).Name.txt" />
-    <description href="Ability0.(AbilityResource).Description.txt" />
-    <descVars>
-        <Item>
-            <name>var0</name>
-            <value var="buff_duration" />
-        </Item>
-        <Item>
-            <name>var1</name>
-            <value var="buff_duration2" />
-        </Item>
-    </descVars>
-    <image href="/Interface/Icons/Equipment/Shield/ShieldNewbie.(UISingleTexture).xdb" />
-    <effects>
-        <Item type="gameMechanics.elements.effects.BuffExtraEffects">
-            <buffs>
-                <Item href="/Mechanics/Spells/CommonBuffs/Aspects/Heal/Buff01.(BuffResource).xdb" />
-            </buffs>
-            <effects>
-                <Item type="gameMechanics.elements.effects.SpellExtraImpacts">
-                    <casterImpacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactIsolator">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
-                                    <radius>40</radius>
-                                    <affectPets>false</affectPets>
-                                    <impacts>
-                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                            <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Defence/Defence.(BuffResource).xdb" />
-                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                <multiplier var="buff_duration" />
-                                            </durationScaler>
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </casterImpacts>
-                    <destination type="gameMechanics.elements.effects.SpellExtraImpacts$DestinationSpells">
-                        <spells>
-                            <Item href="/Mechanics/Spells/Druid70/Spells/BarkSkin/Spell01.(SpellSingleTarget).xdb" />
-                        </spells>
-                    </destination>
-                </Item>
-            </effects>
-        </Item>
-        <Item type="gameMechanics.elements.effects.BuffExtraEffects">
-            <buffs>
-                <Item href="/Mechanics/Spells/CommonBuffs/Aspects/Support/Buff01.(BuffResource).xdb" />
-            </buffs>
-            <effects>
-                <Item type="gameMechanics.elements.effects.SpellExtraImpacts">
-                    <casterImpacts>
-                        <Item type="gameMechanics.elements.impacts.ImpactIsolator">
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
-                                    <radius>40</radius>
-                                    <affectPets>false</affectPets>
-                                    <impacts>
-                                        <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                            <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Defence/Defence.(BuffResource).xdb" />
-                                            <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                <multiplier var="buff_duration2" />
-                                            </durationScaler>
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                        </Item>
-                    </casterImpacts>
-                    <destination type="gameMechanics.elements.effects.SpellExtraImpacts$DestinationSpells">
-                        <spells>
-                            <Item href="/Mechanics/Spells/Druid70/Spells/BarkSkin/Spell01.(SpellSingleTarget).xdb" />
-                        </spells>
-                    </destination>
-                </Item>
-            </effects>
-        </Item>
-    </effects>
-    <ranks>
-        <Item href="Ability01.(AbilityResource).xdb" />
-        <Item href="Ability02.(AbilityResource).xdb" />
-        <Item href="Ability03.(AbilityResource).xdb" />
-    </ranks>
+	<Header>
+		<resourceId>739923238</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<name href="Ability0.(AbilityResource).Name.txt" />
+	<description href="Ability0.(AbilityResource).Description.txt" />
+	<descVars>
+		<Item>
+			<name>var0</name>
+			<value var="buff_duration" />
+		</Item>
+	</descVars>
+	<image href="/Interface/Icons/Equipment/Shield/ShieldNewbie.(UISingleTexture).xdb" />
+	<effects>
+		<Item type="gameMechanics.elements.effects.BuffExtraEffects">
+			<buffs>
+				<Item href="/Mechanics/Spells/CommonBuffs/Aspects/Heal/Buff01.(BuffResource).xdb" />
+				<Item href="/Mechanics/Spells/CommonBuffs/Aspects/Support/Buff01.(BuffResource).xdb" />
+			</buffs>
+			<effects>
+				<Item type="gameMechanics.elements.effects.SpellExtraImpacts">
+					<casterImpacts>
+						<Item type="gameMechanics.elements.impacts.ImpactIsolator">
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
+									<radius>40</radius>
+									<affectPets>false</affectPets>
+									<impacts>
+										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+											<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Defence/Defence.(BuffResource).xdb" />
+											<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+												<multiplier var="buff_duration" />
+											</durationScaler>
+										</Item>
+										<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+											<predicates>
+												<Item type="gameMechanics.elements.predicates.PredicateHealthLower">
+													<level>0.5</level>
+												</Item>
+											</predicates>
+											<impactsIf>
+												<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+													<predicates>
+														<Item type="gameMechanics.elements.predicates.PredicateHasSpell">
+															<spell href="/Mechanics/Spells/Druid70/Spells/RejuvenationUpgrade/Spell03.(SpellSingleTarget).xdb" />
+															<anyRank>false</anyRank>
+														</Item>
+													</predicates>
+													<impacts>
+														<Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+															<impacts>
+																<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																	<buff href="/Mechanics/Spells/Druid70/Spells/RejuvenationUpgrade/Buff03.(BuffResource).xdb" />
+																</Item>
+															</impacts>
+														</Item>
+													</impacts>
+													<elseImpacts>
+														<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+															<predicates>
+																<Item type="gameMechanics.elements.predicates.PredicateHasSpell">
+																	<spell href="/Mechanics/Spells/Druid70/Spells/Rejuvenation/Spell03.(SpellSingleTarget).xdb" />
+																	<anyRank>false</anyRank>
+																</Item>
+															</predicates>
+															<impacts>
+																<Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+																	<impacts>
+																		<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																			<buff href="/Mechanics/Spells/Druid70/Spells/Rejuvenation/Buff03.(BuffResource).xdb" />
+																		</Item>
+																	</impacts>
+																</Item>
+															</impacts>
+															<elseImpacts>
+																<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+																	<predicates>
+																		<Item type="gameMechanics.elements.predicates.PredicateHasSpell">
+																			<spell href="/Mechanics/Spells/Druid70/Spells/RejuvenationUpgrade/Spell02.(SpellSingleTarget).xdb" />
+																			<anyRank>false</anyRank>
+																		</Item>
+																	</predicates>
+																	<impacts>
+																		<Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+																			<impacts>
+																				<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																					<buff href="/Mechanics/Spells/Druid70/Spells/RejuvenationUpgrade/Buff02.(BuffResource).xdb" />
+																				</Item>
+																			</impacts>
+																		</Item>
+																	</impacts>
+																	<elseImpacts>
+																		<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+																			<predicates>
+																				<Item type="gameMechanics.elements.predicates.PredicateHasSpell">
+																					<spell href="/Mechanics/Spells/Druid70/Spells/Rejuvenation/Spell02.(SpellSingleTarget).xdb" />
+																					<anyRank>false</anyRank>
+																				</Item>
+																			</predicates>
+																			<impacts>
+																				<Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+																					<impacts>
+																						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																							<buff href="/Mechanics/Spells/Druid70/Spells/Rejuvenation/Buff02.(BuffResource).xdb" />
+																						</Item>
+																					</impacts>
+																				</Item>
+																			</impacts>
+																	<elseImpacts>
+																		<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+																			<predicates>
+																				<Item type="gameMechanics.elements.predicates.PredicateHasSpell">
+																					<spell href="/Mechanics/Spells/Druid70/Spells/RejuvenationUpgrade/Spell01.(SpellSingleTarget).xdb" />
+																					<anyRank>false</anyRank>
+																				</Item>
+																			</predicates>
+																			<impacts>
+																				<Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+																					<impacts>
+																						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																							<buff href="/Mechanics/Spells/Druid70/Spells/RejuvenationUpgrade/Buff01.(BuffResource).xdb" />
+																						</Item>
+																					</impacts>
+																				</Item>
+																			</impacts>
+																			<elseImpacts>
+																				<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+																				<predicates>
+																					<Item type="gameMechanics.elements.predicates.PredicateHasSpell">
+																						<spell href="/Mechanics/Spells/Druid70/Spells/Rejuvenation/Spell01.(SpellSingleTarget).xdb" />
+																						<anyRank>false</anyRank>
+																					</Item>
+																				</predicates>
+																				<impacts>
+																					<Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
+																							<impacts>
+																								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+																									<buff href="/Mechanics/Spells/Druid70/Spells/Rejuvenation/Buff01.(BuffResource).xdb" />
+																								</Item>
+																							</impacts>
+																						</Item>
+																					</impacts>
+																				</Item>
+																				</elseImpacts>
+																			</Item>
+																		</elseImpacts>
+																	</Item>
+																</elseImpacts>
+															</Item>
+														</elseImpacts>
+													</Item>
+												</elseImpacts>
+											</Item>	
+											</impactsIf>
+										</Item>
+									</impacts>
+								</Item>
+							</impacts>
+						</Item>
+					</casterImpacts>
+					<destination type="gameMechanics.elements.effects.SpellExtraImpacts$DestinationSpells">
+						<spells>
+							<Item href="/Mechanics/Spells/Druid70/Spells/BarkSkin/Spell01.(SpellSingleTarget).xdb" />
+						</spells>
+					</destination>
+				</Item>
+				<Item type="gameMechanics.elements.effects.SpellExtraImpacts">
+					<targetImpacts>
+					</targetImpacts>
+					<destination type="gameMechanics.elements.effects.SpellExtraImpacts$DestinationSpells">
+						<spells>
+							<Item href="/Mechanics/Spells/Druid70/Spells/BarkSkin/Spell01.(SpellSingleTarget).xdb" />
+						</spells>
+					</destination>
+				</Item>
+			</effects>
+		</Item>
+	</effects>
+	<ranks>
+		<Item href="Ability01.(AbilityResource).xdb" />
+		<Item href="Ability02.(AbilityResource).xdb" />
+		<Item href="Ability03.(AbilityResource).xdb" />
+	</ranks>
 </gameMechanics.constructor.schemes.ability.AbilityResource>

@@ -1,147 +1,148 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
-    <Header>
-        <resourceId>739932425</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <groups>
-        <Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
-        <Item href="/Mechanics/Spells/Groups/EngineerSpecialDevices.(ActionGroup).xdb" />
-    </groups>
-    <Name href="Mantrap.(SpellSingleTarget).Name.txt" />
-    <Description href="Mantrap.(SpellSingleTarget).Description.txt" />
-    <descVars>
-        <Item>
-            <name>time</name>
-            <value var="multiplier" />
-        </Item>
-        <Item>
-            <name>hp</name>
-            <value var="value" />
-        </Item>
-    </descVars>
-    <image href="/Interface/Icons/Spells/Engineer/EngineerDrill.(UISingleTexture).xdb" />
-    <visualScripts href="/Spells/VisScripts/Engineer/CarnivorousMantrap_Spell.(SpellVisScripts).xdb" />
-    <durationBuff href="ManTrapLifetime.(BuffResource).xdb" />
-    <range type="gameMechanics.elements.calcers.FloatData">
-        <value>40</value>
-    </range>
-    <ranks>
-        <Item href="Mantrap01.(SpellSingleTarget).xdb" />
-        <Item href="Mantrap02.(SpellSingleTarget).xdb" />
-        <Item href="Mantrap03.(SpellSingleTarget).xdb" />
-    </ranks>
-    <iffPolicy>Enemies</iffPolicy>
-    <mechanics>
-        <cooldown>
-            <duration var="duration" />
-        </cooldown>
-        <targetConditions>
-            <Item type="gameMechanics.elements.predicates.PredicateCreature" />
-        </targetConditions>
-        <conditions>
-            <Item type="gameMechanics.elements.predicates.PredicateHasPathBinary" />
-        </conditions>
-        <casterImpacts>
-            <Item type="gameMechanics.elements.impacts.ImpactIfCaster">
-                <predicates>
-                    <Item type="gameMechanics.elements.predicates.PredicateFaction">
-                        <faction href="/World/Factions/League.xdb" />
-                    </Item>
-                </predicates>
-                <impacts>
-                    <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                        <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                        <calcDestinationOnTarget>false</calcDestinationOnTarget>
-                        <impacts>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff hrefvar="buff" />
-                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                    <multiplier var="multiplier" />
-                                </durationScaler>
-                            </Item>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                                        <delay>100</delay>
-                                        <impacts>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="ManTrapLifetime.(BuffResource).xdb" />
-                                                <durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
-                                                    <buff href="MantrapStuff01.(BuffResource).xdb" />
-                                                    <tickLength>1000</tickLength>
-                                                </durationScaler>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                        </impacts>
-                        <assistantResource href="Mantrap.(AssistantResource).xdb" />
-                        <mobResource href="Mantrap.(MobWorld).xdb" />
-                        <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                        <linkMode>ModifiedHealth</linkMode>
-                        <planeSyncStrategy>Sync</planeSyncStrategy>
-                    </Item>
-                </impacts>
-                <elseImpacts>
-                    <Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
-                        <destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
-                        <calcDestinationOnTarget>false</calcDestinationOnTarget>
-                        <impacts>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff hrefvar="buff" />
-                                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                    <multiplier var="multiplier" />
-                                </durationScaler>
-                            </Item>
-                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
-                            </Item>
-                            <Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
-                                <impacts>
-                                    <Item type="gameMechanics.elements.impacts.ImpactsDeferred">
-                                        <delay>100</delay>
-                                        <impacts>
-                                            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                <buff href="ManTrapLifetime.(BuffResource).xdb" />
-                                                <durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
-                                                    <buff href="MantrapStuff01.(BuffResource).xdb" />
-                                                    <tickLength>1000</tickLength>
-                                                </durationScaler>
-                                            </Item>
-                                        </impacts>
-                                    </Item>
-                                </impacts>
-                            </Item>
-                        </impacts>
-                        <assistantResource href="Mantrap.(AssistantResource).xdb" />
-                        <mobResource href="Mantrap.(MobWorld).xdb" />
-                        <level type="gameMechanics.elements.calcers.CalcerLevel" />
-                        <linkMode>ModifiedHealth</linkMode>
-                        <planeSyncStrategy>Sync</planeSyncStrategy>
-                    </Item>
-                </elseImpacts>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactSpellGroupCooldown">
-                <group href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
-                <duration>1000</duration>
-            </Item>
-        </casterImpacts>
-        <targetImpacts>
-            <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                <buff href="MantrapOnTargetBuff.(BuffResource).xdb" />
-                <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                    <multiplier var="multiplier" />
-                </durationScaler>
-            </Item>
-            <Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
-                <value>1</value>
-            </Item>
-        </targetImpacts>
-    </mechanics>
+	<Header>
+		<resourceId>739932425</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<groups>
+		<Item href="/Mechanics/Spells/Groups/PlayerClassSpells.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
+		<Item href="/Mechanics/Spells/Groups/EngineerSpecialDevices.(ActionGroup).xdb" />
+	</groups>
+	<Name href="Mantrap.(SpellSingleTarget).Name.txt" />
+	<Description href="Mantrap.(SpellSingleTarget).Description.txt" />
+	<descVars>
+		<Item>
+			<name>time</name>
+			<value var="multiplier" />
+		</Item>
+		<Item>
+			<name>hp</name>
+			<value var="value" />
+		</Item>
+	</descVars>
+	<image href="/Interface/Icons/Spells/Engineer/EngineerDrill.(UISingleTexture).xdb" />
+	<visualScripts href="/Spells/VisScripts/Engineer/CarnivorousMantrap_Spell.(SpellVisScripts).xdb" />
+	<durationBuff href="ManTrapLifetime.(BuffResource).xdb" />
+	<range type="gameMechanics.elements.calcers.FloatData">
+		<value>40</value>
+	</range>
+	<ranks>
+		<Item href="Mantrap01.(SpellSingleTarget).xdb" />
+		<Item href="Mantrap02.(SpellSingleTarget).xdb" />
+		<Item href="Mantrap03.(SpellSingleTarget).xdb" />
+	</ranks>
+	<iffPolicy>Enemies</iffPolicy>
+	<triggersGlobalCooldown>false</triggersGlobalCooldown>
+	<mechanics>
+		<cooldown>
+			<duration var="duration" />
+		</cooldown>
+		<targetConditions>
+			<Item type="gameMechanics.elements.predicates.PredicateCreature" />
+		</targetConditions>
+		<conditions>
+			<Item type="gameMechanics.elements.predicates.PredicateHasPathBinary" />
+		</conditions>
+		<casterImpacts>
+			<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+				<predicates>
+					<Item type="gameMechanics.elements.predicates.PredicateFaction">
+						<faction href="/World/Factions/League.xdb" />
+					</Item>
+				</predicates>
+				<impacts>
+					<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+						<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+						<calcDestinationOnTarget>false</calcDestinationOnTarget>
+						<impacts>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff hrefvar="buff" />
+								<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+									<multiplier var="multiplier" />
+								</durationScaler>
+							</Item>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+										<delay>100</delay>
+										<impacts>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="ManTrapLifetime.(BuffResource).xdb" />
+												<durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
+													<buff href="MantrapStuff01.(BuffResource).xdb" />
+													<tickLength>1000</tickLength>
+												</durationScaler>
+											</Item>
+										</impacts>
+									</Item>
+								</impacts>
+							</Item>
+						</impacts>
+						<assistantResource href="Mantrap.(AssistantResource).xdb" />
+						<mobResource href="Mantrap.(MobWorld).xdb" />
+						<level type="gameMechanics.elements.calcers.CalcerLevel" />
+						<linkMode>ModifiedHealth</linkMode>
+						<planeSyncStrategy>Sync</planeSyncStrategy>
+					</Item>
+				</impacts>
+				<elseImpacts>
+					<Item type="gameMechanics.world.avatar.assistants.ImpactSummonAssistant">
+						<destination type="gameMechanics.elements.calcers.DestinationSpellTargetPoint" />
+						<calcDestinationOnTarget>false</calcDestinationOnTarget>
+						<impacts>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff hrefvar="buff" />
+								<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+									<multiplier var="multiplier" />
+								</durationScaler>
+							</Item>
+							<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+								<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/ClassAssistant/ClassAssistant.(BuffResource).xdb" />
+							</Item>
+							<Item type="gameMechanics.elements.impacts.ReturningInstantiatingImpact">
+								<impacts>
+									<Item type="gameMechanics.elements.impacts.ImpactsDeferred">
+										<delay>100</delay>
+										<impacts>
+											<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+												<buff href="ManTrapLifetime.(BuffResource).xdb" />
+												<durationScaler type="gameMechanics.elements.scalers.BuffTicksScaler">
+													<buff href="MantrapStuff01.(BuffResource).xdb" />
+													<tickLength>1000</tickLength>
+												</durationScaler>
+											</Item>
+										</impacts>
+									</Item>
+								</impacts>
+							</Item>
+						</impacts>
+						<assistantResource href="Mantrap.(AssistantResource).xdb" />
+						<mobResource href="Mantrap.(MobWorld).xdb" />
+						<level type="gameMechanics.elements.calcers.CalcerLevel" />
+						<linkMode>ModifiedHealth</linkMode>
+						<planeSyncStrategy>Sync</planeSyncStrategy>
+					</Item>
+				</elseImpacts>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactSpellGroupCooldown">
+				<group href="/Mechanics/Spells/Groups/EngineerMechSpells.(ActionGroup).xdb" />
+				<duration>1000</duration>
+			</Item>
+		</casterImpacts>
+		<targetImpacts>
+			<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+				<buff href="MantrapOnTargetBuff.(BuffResource).xdb" />
+				<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+					<multiplier var="multiplier" />
+				</durationScaler>
+			</Item>
+			<Item type="gameMechanics.elements.impacts.ImpactActivateAggro">
+				<value>1</value>
+			</Item>
+		</targetImpacts>
+	</mechanics>
 </gameMechanics.constructor.schemes.spell.singleTarget.SpellSingleTarget>
