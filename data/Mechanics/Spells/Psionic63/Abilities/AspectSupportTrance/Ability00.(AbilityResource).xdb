@@ -100,6 +100,78 @@
 						</Item>
 					</effects>
 				</Item>
+				<Item type="gameMechanics.elements.effects.CombatStateTrigger">
+					<effects>
+						<Item type="gameMechanics.elements.effects.SpellCastTrigger">
+							<conditionalImpacts>
+								<Item>
+									<impacts>
+										<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+											<predicates>
+												<Item type="gameMechanics.constructor.basicElements.PredicateOr">
+													<predicates>
+														<Item type="gameMechanics.elements.resources.ResourceBuff">
+															<buff href="Buff02.(BuffResource).xdb" />
+														</Item>
+														<Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
+															<buff href="Proxy.(BuffResource).xdb" />
+															<range>
+																<min>3</min>
+																<max>4</max>
+															</range>
+														</Item>
+													</predicates>
+												</Item>
+											</predicates>
+											<impactsIf>
+												<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+													<buff hrefvar="buff" />
+													<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+														<multiplier var="duration" />
+													</durationScaler>
+												</Item>
+												<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+													<predicates>
+														<Item type="gameMechanics.elements.predicates.PredicateHasAbility">
+															<ability href="/Mechanics/Spells/Psionic63/Abilities/AspectSupportTranceCastwalk/Ability01.(AbilityResource).xdb" />
+														</Item>
+													</predicates>
+													<impactsIf>
+														<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+															<buff href="/Mechanics/Spells/Psionic63/Abilities/AspectSupportTranceCastwalk/Castwalk.(BuffResource).xdb" />
+															<durationScaler type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+																<mulCalcer type="gameMechanics.elements.calcers.AbilityRankCalcer">
+																	<ability href="/Mechanics/Spells/Psionic63/Abilities/AspectSupportTranceCastwalk/Ability01.(AbilityResource).xdb" />
+																	<mul>3</mul>
+																</mulCalcer>
+															</durationScaler>
+														</Item>
+													</impactsIf>
+												</Item>
+											</impactsIf>
+											<impactsElse>
+												<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+													<buff href="Proxy.(BuffResource).xdb" />
+													<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+														<multiplier var="duration" />
+													</durationScaler>
+												</Item>
+											</impactsElse>
+										</Item>
+									</impacts>
+									<conditions>
+										<Item type="gameMechanics.elements.predicates.PredicateSpellInGroup">
+											<group href="/Mechanics/Spells/Groups/AmmoSpells.(ActionGroup).xdb" />
+										</Item>
+									</conditions>
+								</Item>
+							</conditionalImpacts>
+							<stages>
+								<Item>Launch</Item>
+							</stages>
+						</Item>
+					</effects>
+				</Item>
 				<Item type="gameMechanics.elements.effects.EffectMarkedImpacts">
 					<mark href="/Mechanics/Spells/Psionic63/Spells/MentalStorm/TranceTrigger.(MarkResource).xdb" />
 					<impacts>

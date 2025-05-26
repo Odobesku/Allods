@@ -28,10 +28,19 @@
 							<impactsOn>
 								<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
 									<predicates>
-										<Item type="gameMechanics.constructor.basicElements.PredicateNot">
-											<predicate type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
-												<spell href="/Mechanics/Spells/CommonSpells/AoEDisable/AoEDisable.(SpellSingleTarget).xdb" />
-											</predicate>
+										<Item type="gameMechanics.constructor.basicElements.PredicateAnd">
+											<predicates>
+												<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+													<predicate type="gameMechanics.constructor.schemes.spell.spellstate.PredicateSpellActiveState">
+														<spell href="/Mechanics/Spells/CommonSpells/AoEDisable/AoEDisable.(SpellSingleTarget).xdb" />
+													</predicate>
+												</Item>
+												<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+													<predicate type="gameMechanics.elements.resources.ResourceBuff">
+														<buff href="MantrapPullCD.(BuffResource).xdb" />
+													</predicate>
+												</Item>
+											</predicates>
 										</Item>
 									</predicates>
 									<impacts>
@@ -49,6 +58,13 @@
 										<Item type="gameMechanics.elements.impacts.ImpactClientDataParams">
 											<distributor type="gameMechanics.elements.calcers.ObjectsAroundDistributor" />
 											<data hrefvar="data" />
+										</Item>
+										<Item type="gameMechanics.elements.impacts.ReturningImpact">
+											<impacts>
+												<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+													<buff href="MantrapPullCD.(BuffResource).xdb" />
+												</Item>
+											</impacts>
 										</Item>
 									</impacts>
 								</Item>

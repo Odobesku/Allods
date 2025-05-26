@@ -33,10 +33,23 @@
 						</Item>
 					</impacts>
 				</Item>
+				<Item type="gameMechanics.elements.effects.EffectMarkedImpacts">
+					<mark href="/Mechanics/Spells/Engineer63/Spells/Injection/BombOnTarget.(MarkResource).xdb" />
+					<impacts>
+						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+							<buff href="ShotsAcidWeakness.(BuffResource).xdb" />
+							<stacks type="gameMechanics.elements.calcers.FloatData">
+								<value>3</value>
+							</stacks>
+						</Item>
+					</impacts>
+				</Item>
 				<Item type="gameMechanics.elements.effects.SpellsModifier">
 					<predicates>
-						<Item type="gameMechanics.elements.predicates.PredicateSpellInGroup">
-							<group href="/Mechanics/Spells/Engineer/Shots/Shots.(ActionGroup).xdb" />
+						<Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+							<spells>
+								<Item href="/Mechanics/Spells/Engineer63/Spells/Acid/Acid01.(SpellSingleTarget).xdb" />
+							</spells>
 						</Item>
 					</predicates>
 					<modifiers>
@@ -60,11 +73,53 @@
 						</Item>
 					</modifiers>
 				</Item>
+				<Item type="gameMechanics.elements.effects.SpellsModifier">
+					<predicates>
+						<Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+							<spells>
+								<Item href="/Mechanics/Spells/Engineer63/Spells/Physical/Physical01.(SpellSingleTarget).xdb" />
+							</spells>
+						</Item>
+					</predicates>
+					<modifiers>
+						<Item type="gameMechanics.elements.spell.SpellEnvelopeModifier">
+							<effects>
+								<Item type="gameMechanics.elements.effects.ScalerOutDmgTargetDependent">
+									<scaler type="gameMechanics.elements.scalers.ScalerIf">
+										<condition type="gameMechanics.elements.resources.ResourceBuff">
+											<buff href="ShotsAcidWeakness.(BuffResource).xdb" />
+										</condition>
+										<scalerIf type="gameMechanics.elements.scalers.LinearScaler">
+											<multiplier var="multiplier" />
+										</scalerIf>
+										<scalerElse type="gameMechanics.elements.scalers.LinearScaler">
+											<multiplier>1</multiplier>
+										</scalerElse>
+									</scaler>
+								</Item>
+							</effects>
+							<onBehalfOfHolder>true</onBehalfOfHolder>
+						</Item>
+					</modifiers>
+				</Item>
 				<Item type="gameMechanics.elements.effects.EffectMarkedImpacts">
-					<mark href="/Mechanics/Spells/Engineer63/Spells/Acid/ShotOnTarget.(MarkResource).xdb" />
+					<mark href="/Mechanics/Spells/Engineer63/Spells/Acid/AcidShotTarget.(MarkResource).xdb" />
 					<impacts>
 						<Item type="gameMechanics.elements.impacts.StackBuff">
 							<buff href="ShotsWeakness00.(BuffResource).xdb" />
+							<resetTimer>false</resetTimer>
+							<casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
+							<delta type="gameMechanics.elements.calcers.FloatData">
+								<value>-1</value>
+							</delta>
+						</Item>
+					</impacts>
+				</Item>
+				<Item type="gameMechanics.elements.effects.EffectMarkedImpacts">
+					<mark href="/Mechanics/Spells/Engineer63/Spells/Physical/PhysShotTarget.(MarkResource).xdb" />
+					<impacts>
+						<Item type="gameMechanics.elements.impacts.StackBuff">
+							<buff href="ShotsAcidWeakness.(BuffResource).xdb" />
 							<resetTimer>false</resetTimer>
 							<casterAddresseeFinder type="gameMechanics.elements.addresseeFinders.AddresseeFinderCaster" />
 							<delta type="gameMechanics.elements.calcers.FloatData">

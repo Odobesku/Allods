@@ -12,24 +12,42 @@
 				<Item href="/Mechanics/Spells/Psionic63/Abilities/AspectCCTrance/Buff01.(BuffResource).xdb" />
 			</buffs>
 			<effects>
-				<Item type="gameMechanics.elements.effects.EffectMarkedImpacts">
-					<mark href="/Mechanics/Spells/Psionic63/Spells/MentalStorm/MentalStorm.(MarkResource).xdb" />
-					<impacts>
-						<Item type="gameMechanics.elements.impacts.DoubleAttackIsolator">
+				<Item type="gameMechanics.elements.effects.SpellExtraImpacts">
+					<targetImpacts>
+						<Item type="gameMechanics.elements.impacts.ImpactIfCaster">
+							<predicates>
+								<Item type="gameMechanics.constructor.basicElements.PredicateNot">
+									<predicate type="gameMechanics.elements.resources.ResourceBuff">
+										<buff href="CD.(BuffResource).xdb" />
+									</predicate>
+								</Item>
+							</predicates>
 							<impacts>
-								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-									<buff href="/Mechanics/Spells/CommonBuffs/Stun/BuffStunNoCC.xdb" />
-									<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-										<multiplier>0.5</multiplier>
-									</durationScaler>
+								<Item type="gameMechanics.elements.impacts.DoubleAttackIsolator">
+									<impacts>
+										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+											<buff href="/Mechanics/Spells/CommonBuffs/Stun/BuffStunNoCC.xdb" />
+											<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+												<multiplier>0.5</multiplier>
+											</durationScaler>
+										</Item>
+									</impacts>
+								</Item>
+								<Item type="gameMechanics.elements.impacts.ReturningImpact">
+									<impacts>
+										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+											<buff href="CD.(BuffResource).xdb" />
+										</Item>
+									</impacts>
 								</Item>
 							</impacts>
 						</Item>
-					</impacts>
-				</Item>
-				<Item type="gameMechanics.elements.effects.SpellCooldownMultiplier">
-					<spell href="/Mechanics/Spells/Psionic63/Spells/MentalStorm/Spell01.(SpellSingleTarget).xdb" />
-					<factor>3</factor>
+					</targetImpacts>
+					<destination type="gameMechanics.elements.effects.SpellExtraImpacts$DestinationSpells">
+						<spells>
+							<Item href="/Mechanics/Spells/Psionic63/Spells/MentalStorm/Spell01.(SpellSingleTarget).xdb" />
+						</spells>
+					</destination>
 				</Item>
 			</effects>
 		</Item>
