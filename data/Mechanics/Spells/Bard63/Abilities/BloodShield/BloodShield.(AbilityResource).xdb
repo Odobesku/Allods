@@ -17,34 +17,51 @@
 					<conditionalImpacts>
 						<Item>
 							<impacts>
-								<Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
-									<radius>40</radius>
-									<affectPets>false</affectPets>
-									<impacts>
-										<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-											<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/DoubleHeal/DoubleHeal.(BuffResource).xdb" />
-											<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-												<multiplier var="multiplier" />
-											</durationScaler>
+								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+									<predicates>
+										<Item type="gameMechanics.elements.resources.ResourceBuff">
+											<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/DoubleHeal/DoubleHealCD.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+											<anyRank>true</anyRank>
 										</Item>
-									</impacts>
-								</Item>
-								<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
-									<impacts>
-										<Item type="gameMechanics.elements.impacts.ImpactModifySpellCooldown">
-											<spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Bloodlust/Bloodlust3.(SpellSingleTarget).xdb" />
-											<factor type="gameMechanics.elements.scalers.LinearMultiplierScaler">
-												<mul var="mul" />
-												<mulCalcer type="gameMechanics.elements.calcers.CalcerStatValue">
-													<stat type="gameMechanics.elements.stat.SpecialStat">
-														<stat href="/Mechanics/SpecialStats/CritPower.(SpecialStatResource).xdb" />
-													</stat>
-													<valueType>ShortTerm</valueType>
-												</mulCalcer>
-												<sum>1</sum>
-											</factor>
+									</predicates>
+									<impactsElse>
+										<Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
+											<radius>40</radius>
+											<affectPets>false</affectPets>
+											<impacts>
+												<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+													<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/DoubleHeal/DoubleHeal.(BuffResource).xdb" />
+													<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+														<multiplier var="multiplier" />
+													</durationScaler>
+												</Item>
+												<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+													<impacts>
+														<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+															<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/DoubleHeal/DoubleHealCD.(BuffResource).xdb" />
+														</Item>
+													</impacts>
+												</Item>
+											</impacts>
 										</Item>
-									</impacts>
+										<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ImpactModifySpellCooldown">
+													<spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/Bloodlust/Bloodlust3.(SpellSingleTarget).xdb" />
+													<factor type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+														<mul var="mul" />
+														<mulCalcer type="gameMechanics.elements.calcers.CalcerStatValue">
+															<stat type="gameMechanics.elements.stat.SpecialStat">
+																<stat href="/Mechanics/SpecialStats/CritPower.(SpecialStatResource).xdb" />
+															</stat>
+															<valueType>ShortTerm</valueType>
+														</mulCalcer>
+														<sum>1</sum>
+													</factor>
+												</Item>
+											</impacts>
+										</Item>
+									</impactsElse>
 								</Item>
 							</impacts>
 							<conditions>
