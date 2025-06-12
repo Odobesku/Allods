@@ -1,76 +1,94 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
-    <Header>
-        <resourceId>739979318</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <name href="HeavyWill.(AbilityResource).Name.txt" />
-    <description href="HeavyWill.(AbilityResource).Description.txt" />
-    <descVars>
-        <Item>
-            <name>dur</name>
-            <value var="multiplier" />
-        </Item>
-        <Item>
-            <name>cd</name>
-            <value var="cool" />
-        </Item>
-    </descVars>
-    <image href="/Interface/Icons/Spells/BlessingPatron.(UISingleTexture).xdb" />
-    <effects>
-        <Item type="gameMechanics.elements.effects.BuffExtraEffects">
-            <buffs>
-                <Item href="/Mechanics/Spells/CommonBuffs/Aspects/Support/Buff01.(BuffResource).xdb" />
-            </buffs>
-            <effects>
-                <Item type="gameMechanics.elements.effects.SpellCastTrigger">
-                    <conditionalImpacts>
-                        <Item>
-                            <impacts>
-                                <Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
-                                    <radius>40</radius>
-                                    <affectPets>false</affectPets>
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.ImpactIfTarget">
-                                            <predicates>
-                                                <Item type="gameMechanics.elements.predicates.PredicateBuffStackCountRange">
-                                                    <buff href="DebuffCooldown.(BuffResource).xdb" />
-                                                    <range>
-                                                        <max>0</max>
-                                                        <max>0</max>
-                                                    </range>
-                                                </Item>
-                                            </predicates>
-                                            <impactsIf>
-                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                    <buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/IgnoreCC/IgnoreCC.(BuffResource).xdb" />
-                                                    <durationScaler type="gameMechanics.elements.scalers.LinearScaler">
-                                                        <multiplier var="multiplier" />
-                                                    </durationScaler>
-                                                </Item>
-                                                <Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-                                                    <buff href="DebuffCooldown.(BuffResource).xdb" />
-                                                </Item>
-                                            </impactsIf>
-                                        </Item>
-                                    </impacts>
-                                </Item>
-                            </impacts>
-                            <conditions>
-                                <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
-                                    <spells>
-                                        <Item href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/WillPower/WillPower3.(SpellSingleTarget).xdb" />
-                                    </spells>
-                                </Item>
-                            </conditions>
-                        </Item>
-                    </conditionalImpacts>
-                </Item>
-            </effects>
-        </Item>
-    </effects>
-    <ranks>
-        <Item href="HeavyWill01.(AbilityResource).xdb" />
-        <Item href="HeavyWill02.(AbilityResource).xdb" />
-    </ranks>
+	<Header>
+		<resourceId>739979318</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<name href="HeavyWill.(AbilityResource).Name.txt" />
+	<description href="HeavyWill.(AbilityResource).Description.txt" />
+	<descVars>
+		<Item>
+			<name>dur</name>
+			<value var="multiplier" />
+		</Item>
+		<Item>
+			<name>cd</name>
+			<value var="cool" />
+		</Item>
+	</descVars>
+	<image href="/Interface/Icons/Spells/BlessingPatron.(UISingleTexture).xdb" />
+	<effects>
+		<Item type="gameMechanics.elements.effects.BuffExtraEffects">
+			<buffs>
+				<Item href="/Mechanics/Spells/CommonBuffs/Aspects/Support/Buff01.(BuffResource).xdb" />
+			</buffs>
+			<effects>
+				<Item type="gameMechanics.elements.effects.SpellCastTrigger">
+					<conditionalImpacts>
+						<Item>
+							<impacts>
+								<Item type="gameMechanics.elements.impacts.ImpactIfTarget">
+									<predicates>
+										<Item type="gameMechanics.elements.resources.ResourceBuff">
+											<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/IgnoreCC/IgnoreCCCD.(BuffResource).xdb#xpointer(/gameMechanics.constructor.schemes.buff.BuffResource)" />
+											<anyRank>true</anyRank>
+										</Item>
+									</predicates>
+									<impactsElse>
+										<Item type="gameMechanics.elements.impacts.ImpactsToGroupMembers">
+											<radius>40</radius>
+											<affectPets>false</affectPets>
+											<impacts>
+												<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+													<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/IgnoreCC/IgnoreCC.(BuffResource).xdb" />
+													<durationScaler type="gameMechanics.elements.scalers.LinearScaler">
+														<multiplier var="multiplier" />
+													</durationScaler>
+												</Item>
+												<Item type="gameMechanics.elements.impacts.PostponedImpacts">
+													<impacts>
+														<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+															<buff href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/IgnoreCC/IgnoreCCCD.(BuffResource).xdb" />
+														</Item>
+													</impacts>
+												</Item>
+											</impacts>
+										</Item>
+										<Item type="gameMechanics.elements.impacts.ImpactInstantiating">
+											<impacts>
+												<Item type="gameMechanics.elements.impacts.ImpactModifySpellCooldown">
+													<spell href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/WillPower/WillPower3.(SpellSingleTarget).xdb" />
+													<factor type="gameMechanics.elements.scalers.LinearMultiplierScaler">
+														<mul var="mul" />
+														<mulCalcer type="gameMechanics.elements.calcers.CalcerStatValue">
+															<stat type="gameMechanics.elements.stat.SpecialStat">
+																<stat href="/Mechanics/SpecialStats/CritPower.(SpecialStatResource).xdb" />
+															</stat>
+															<valueType>ShortTerm</valueType>
+														</mulCalcer>
+														<sum>1</sum>
+													</factor>
+												</Item>
+											</impacts>
+										</Item>
+									</impactsElse>
+								</Item>
+							</impacts>
+							<conditions>
+								<Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
+									<spells>
+										<Item href="/Mechanics/Spells/CommonBuffs/ClassesGroupBuffs/WillPower/WillPower3.(SpellSingleTarget).xdb" />
+									</spells>
+								</Item>
+							</conditions>
+						</Item>
+					</conditionalImpacts>
+				</Item>
+			</effects>
+		</Item>
+	</effects>
+	<ranks>
+		<Item href="HeavyWill01.(AbilityResource).xdb" />
+		<Item href="HeavyWill02.(AbilityResource).xdb" />
+	</ranks>
 </gameMechanics.constructor.schemes.ability.AbilityResource>
