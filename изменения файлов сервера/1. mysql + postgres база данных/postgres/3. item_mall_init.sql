@@ -173,6 +173,8 @@ INSERT INTO public.item (res_id, stack_count, category_id, position, is_activate
 --- Рог Сохатого и окрасы
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (739878499, 1, 9, 31, 1, 'ITEM', 'SELLABLE', null, 0);
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (739910216, 1, 9, 32, 1, 'ITEM', 'SELLABLE', null, 0);
+-- колесница хаоса
+INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (740060155, 1, 9, 33, 1, 'ITEM', 'SELLABLE', null, 0);
 
 --- Разное
 INSERT INTO public.item (res_id, stack_count, category_id, position, is_activated, type, sellable, bundle_id, event_res_id) VALUES (308750338, 1, 9, 40, 1, 'ITEM', 'SELLABLE', null, 0);
