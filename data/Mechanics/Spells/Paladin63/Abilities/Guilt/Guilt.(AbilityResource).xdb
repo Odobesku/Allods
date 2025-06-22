@@ -1,87 +1,100 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <gameMechanics.constructor.schemes.ability.AbilityResource>
-    <Header>
-        <resourceId>739925155</resourceId>
-        <isPrototype>true</isPrototype>
-    </Header>
-    <name href="Guilt.(AbilityResource).Name.txt" />
-    <description href="Guilt.(AbilityResource).Description.txt" />
-    <descVars>
-        <Item>
-            <name>coeff</name>
-            <value var="coeff" />
-            <scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-                <formula>FormulaPercent</formula>
-            </scaler>
-        </Item>
-    </descVars>
-    <image href="/Interface/Icons/Spells/Paladin/Fervor.(UISingleTexture).xdb" />
-    <effects>
-        <Item type="gameMechanics.elements.effects.BuffExtraEffects">
-            <buffs>
-                <Item href="/Mechanics/Spells/Paladin63/Abilities/WrathGiveMark/AddPhysDamageMark.(BuffResource).xdb" />
-            </buffs>
-            <effects>
-                <Item type="gameMechanics.elements.effects.NotStackableEffects">
-                    <effects>
-                        <Item type="gameMechanics.elements.effects.SpellsModifier">
-                            <predicates>
-                                <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
-                                    <spells>
-                                        <Item href="/Mechanics/Spells/Paladin63/Spells/CleansingHit/CleansingHit01.(SpellSingleTarget).xdb" />
-                                    </spells>
-                                </Item>
-                            </predicates>
-                            <modifiers>
-                                <Item type="gameMechanics.elements.spell.SpellEnvelopeModifier">
-                                    <effects>
-                                        <Item type="gameMechanics.elements.effects.ScalerAllOutputDamage">
-                                            <scaler type="gameMechanics.elements.scalers.MultLinearEffectScaler">
-                                                <coeff var="coeff" />
-                                                <calcer type="gameMechanics.elements.calcers.BuffStackCountCalcer">
-                                                    <buff href="/Mechanics/Spells/Paladin63/Abilities/WrathGiveMark/AddPhysDamageMark.(BuffResource).xdb" />
-                                                    <forAllRanks>true</forAllRanks>
-                                                </calcer>
-                                            </scaler>
-                                        </Item>
-                                    </effects>
-                                    <onBehalfOfHolder>true</onBehalfOfHolder>
-                                </Item>
-                            </modifiers>
-                        </Item>
-                        <Item type="gameMechanics.elements.effects.SpellCastTrigger">
-                            <conditionalImpacts>
-                                <Item>
-                                    <impacts>
-                                        <Item type="gameMechanics.elements.impacts.PostponedImpacts">
-                                            <impacts>
-                                                <Item type="gameMechanics.elements.impacts.BuffDetacher">
-                                                    <buff href="/Mechanics/Spells/Paladin63/Abilities/WrathGiveMark/AddPhysDamageMark.(BuffResource).xdb" />
-                                                </Item>
-                                            </impacts>
-                                        </Item>
-                                    </impacts>
-                                    <conditions>
-                                        <Item type="gameMechanics.elements.predicates.PredicateSpellEquals">
-                                            <spells>
-                                                <Item href="/Mechanics/Spells/Paladin63/Spells/CleansingHit/CleansingHit01.(SpellSingleTarget).xdb" />
-                                            </spells>
-                                        </Item>
-                                    </conditions>
-                                </Item>
-                            </conditionalImpacts>
-                            <stages>
-                                <Item>Launch</Item>
-                            </stages>
-                        </Item>
-                    </effects>
-                </Item>
-            </effects>
-        </Item>
-    </effects>
-    <ranks>
-        <Item href="Guilt01.(AbilityResource).xdb" />
-        <Item href="Guilt02.(AbilityResource).xdb" />
-        <Item href="Guilt03.(AbilityResource).xdb" />
-    </ranks>
+	<Header>
+		<resourceId>739925155</resourceId>
+		<isPrototype>true</isPrototype>
+	</Header>
+	<name href="Guilt.(AbilityResource).Name.txt" />
+	<description href="Guilt.(AbilityResource).Description.txt" />
+	<descVars>
+		<Item>
+			<name>coeff</name>
+			<value var="coeff" />
+			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+				<formula>MagicScaler</formula>
+			</scaler>
+		</Item>
+		<Item>
+			<name>coeff3</name>
+			<value var="coeff3" />
+			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
+				<formula>MagicScaler</formula>
+			</scaler>
+		</Item>
+	</descVars>
+	<image href="/Interface/Icons/Spells/Paladin/Fervor.(UISingleTexture).xdb" />
+	<effects>
+		<Item type="gameMechanics.elements.effects.BuffExtraEffects">
+			<buffs>
+				<Item href="/Mechanics/Spells/Paladin63/Spells/Anathema/AnathemaDot01.(BuffResource).xdb" />
+			</buffs>
+			<effects>
+				<Item type="gameMechanics.elements.effects.Switch">
+					<impactsOff>
+						<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+							<element>HOLY</element>
+							<damage var="coeff3" />
+							<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+								<scalers>
+									<Item type="gameMechanics.elements.scalers.MagicScaler" />
+									<Item type="gameMechanics.elements.scalers.AbilityRankScaler">
+										<ability href="/Mechanics/Spells/Paladin63/Abilities/AnathemaMoreDamage/AnathemaMoreDamage01.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+										<mul>0.15</mul>
+									</Item>
+									<Item type="gameMechanics.elements.scalers.AbilityRankScaler">
+										<ability href="/Mechanics/Spells/Paladin63/Abilities/HolyDamage/HolyDamage01.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+										<mul>0.04</mul>
+									</Item>
+								</scalers>
+							</scaler>
+						</Item>
+					</impactsOff>
+				</Item>
+			</effects>
+		</Item>
+		<Item type="gameMechanics.elements.effects.BuffExtraEffects">
+			<buffs>
+				<Item href="/Mechanics/Spells/Paladin63/Spells/CleansingHit/CleansingHitDot01.(BuffResource).xdb" />
+			</buffs>
+			<effects>
+				<Item type="gameMechanics.elements.effects.Switch">
+					<impactsOff>
+						<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
+							<element>HOLY</element>
+							<damage var="coeff" />
+							<scaler type="gameMechanics.constructor.basicElements.ScalerMultiple">
+								<scalers>
+									<Item type="gameMechanics.elements.scalers.MagicScaler" />
+									<Item type="gameMechanics.elements.scalers.TargetBuffStackCountScaler">
+										<buff href="/Mechanics/Spells/Paladin63/Abilities/WrathGiveMark/AddPhysDamageMark.(BuffResource).xdb" />
+										<anyRank>true</anyRank>
+										<onlyFromMaster>true</onlyFromMaster>
+										<mul>0.15</mul>
+										<sum>1</sum>
+									</Item>
+									<Item type="gameMechanics.elements.scalers.AbilityRankScaler">
+										<ability href="/Mechanics/Spells/Paladin63/Abilities/CleansingGiveMark/CleansingGiveMark01.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+										<mul>0.05</mul>
+									</Item>
+									<Item type="gameMechanics.elements.scalers.AbilityRankScaler">
+										<ability href="/Mechanics/Spells/Paladin63/Abilities/CleansingHitHolyDamage/CleansingHitHolyDamage.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+										<mul>0.3</mul>
+									</Item>
+									<Item type="gameMechanics.elements.scalers.AbilityRankScaler">
+										<ability href="/Mechanics/Spells/Paladin63/Abilities/HolyDamage/HolyDamage01.(AbilityResource).xdb#xpointer(/gameMechanics.constructor.schemes.ability.AbilityResource)" />
+										<mul>0.04</mul>
+									</Item>
+								</scalers>
+							</scaler>
+						</Item>
+					</impactsOff>
+				</Item>
+			</effects>
+		</Item>
+	</effects>
+	<ranks>
+		<Item href="Guilt01.(AbilityResource).xdb" />
+		<Item href="Guilt02.(AbilityResource).xdb" />
+		<Item href="Guilt03.(AbilityResource).xdb" />
+	</ranks>
 </gameMechanics.constructor.schemes.ability.AbilityResource>
