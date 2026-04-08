@@ -10,7 +10,6 @@
 		<Item href="/Mechanics/Spells/Groups/VoiceSpells.xdb" />
 		<Item href="/Mechanics/Spells/Groups/MeleeAttacks.xdb" />
 	</groups>
-	<element>FIRE</element>
 	<Name href="Wrath.(SpellSingleTarget).Name.txt" />
 	<Description href="Wrath.(SpellSingleTarget).Description.txt" />
 	<descVars>
@@ -24,8 +23,11 @@
 							<externalCalcer hrefvar="externalCalcer" />
 						</mulCalcer>
 					</Item>
+					<Item type="gameMechanics.elements.scalers.LinearScaler">
+						<multiplier>1.66667</multiplier>
+					</Item>
 					<Item type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-						<formula>MagicScaler</formula>
+						<formula>WeaponScalerSpeed</formula>
 					</Item>
 				</scalers>
 			</scaler>
@@ -42,7 +44,7 @@
 	<iffPolicy>Enemies</iffPolicy>
 	<mechanics>
 		<cooldown>
-			<duration>4000</duration>
+			<duration>18000</duration>
 		</cooldown>
 		<casterConditions>
 			<Item type="gameMechanics.elements.predicates.PredicateUsesWeapon" />
@@ -50,7 +52,7 @@
 		<casterImpacts>
 			<Item type="gameMechanics.elements.impacts.ImpactSpellCooldown">
 				<spell href="/Mechanics/Spells/Paladin63/Spells/WrathUpgrade/WrathUpgrade01.(SpellSingleTarget).xdb" />
-				<duration>4000</duration>
+				<duration>18000</duration>
 			</Item>
 			<Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
 				<impacts>
@@ -72,13 +74,14 @@
 					</Item>
 				</impacts>
 			</Item>
+			<Item type="gameMechanics.elements.impacts.BuffDetacher">
+				<buff href="/Mechanics/Spells/Paladin63/Abilities/WrathGiveMark/ExecuteWrath.(BuffResource).xdb" />
+			</Item>
 		</casterImpacts>
 		<targetImpacts>
 			<Item type="gameMechanics.elements.impacts.DoubleAttackRepeater">
 				<impacts>
-					<Item type="gameMechanics.elements.impacts.ScaledMagicDamage">
-						<element>FIRE</element>
-						<damage>1</damage>
+					<Item type="gameMechanics.elements.impacts.ScaledPhysicalWeaponDamage">
 						<impactsOnHitTarget>
 							<Item type="gameMechanics.elements.impacts.MarkedImpact">
 								<mark href="WrathHitTargetMark.(MarkResource).xdb" />
@@ -91,31 +94,20 @@
 										<externalCalcer hrefvar="externalCalcer" />
 									</mulCalcer>
 								</Item>
-								<Item type="gameMechanics.elements.scalers.MagicScaler" />
-								<Item type="gameMechanics.elements.scalers.ScalerIf">
-									<condition type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
-										<resource href="/Mechanics/Spells/Paladin63/Abilities/Canons/LightCanon.(VariableResource).xdb" />
-									</condition>
-									<scalerIf type="gameMechanics.elements.scalers.LinearScaler">
-										<multiplier>1.5</multiplier>
-									</scalerIf>
-									<scalerElse type="gameMechanics.elements.scalers.LinearScaler">
-										<multiplier>1</multiplier>
-									</scalerElse>
+								<Item type="gameMechanics.elements.scalers.WeaponScaler" />
+								<Item type="gameMechanics.elements.scalers.LinearScaler">
+									<multiplier>1.66667</multiplier>
 								</Item>
-								<Item type="gameMechanics.elements.scalers.ScalerIf">
-									<condition type="gameMechanics.elements.predicates.PredicateVariableGreatThan">
-										<resource href="/Mechanics/Spells/Paladin63/Abilities/Canons/PurityCanon.(VariableResource).xdb" />
-									</condition>
-									<scalerIf type="gameMechanics.elements.scalers.LinearScaler">
-										<multiplier>1.5</multiplier>
-									</scalerIf>
-									<scalerElse type="gameMechanics.elements.scalers.LinearScaler">
-										<multiplier>1</multiplier>
-									</scalerElse>
+								<Item type="gameMechanics.elements.scalers.TargetBuffStackCountScaler">
+									<buff href="/Mechanics/Spells/Paladin63/Abilities/WrathGiveMark/ExecuteWrath.(BuffResource).xdb" />
+									<anyRank>true</anyRank>
+									<onlyFromMaster>true</onlyFromMaster>
+									<mul>0.25</mul>
+									<sum>1</sum>
 								</Item>
 							</scalers>
 						</scaler>
+						<avgDamage>1</avgDamage>
 					</Item>
 				</impacts>
 				<groupRepeaters>true</groupRepeaters>

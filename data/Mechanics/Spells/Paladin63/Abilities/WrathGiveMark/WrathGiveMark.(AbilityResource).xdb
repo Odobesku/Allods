@@ -8,14 +8,10 @@
 	<description href="WrathGiveMark.(AbilityResource).Description.txt" />
 	<descVars>
 		<Item>
-			<name>var0</name>
-			<value var="value" />
-		</Item>
-		<Item>
-			<name>var1</name>
-			<value>9.2</value>
+			<name>chance</name>
+			<value var="chance" />
 			<scaler type="gameMechanics.elements.scalers.ScalerDescriptionFormula">
-				<formula>WeaponScaler</formula>
+				<formula>FormulaPercent</formula>
 			</scaler>
 		</Item>
 	</descVars>
@@ -23,27 +19,29 @@
 	<effects>
 		<Item type="gameMechanics.elements.effects.BuffExtraEffects">
 			<buffs>
-				<Item href="/Mechanics/Spells/CommonBuffs/Aspects/Tank/Buff01.(BuffResource).xdb" />
+				<Item href="/Mechanics/Spells/CommonBuffs/Aspects/DD/Buff01.(BuffResource).xdb" />
 			</buffs>
 			<effects>
-				<Item type="gameMechanics.elements.effects.EffectMarkedImpacts">
-					<mark href="/Mechanics/Spells/Paladin63/Spells/Wrath/WrathSelfMark.(MarkResource).xdb" />
-					<impacts>
-						<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
-							<buff href="AddPhysDamageMark.(BuffResource).xdb" />
-							<stacks type="gameMechanics.elements.calcers.FloatData">
-								<value var="value" />
-							</stacks>
+				<Item type="gameMechanics.elements.effects.SpellExtraImpacts">
+					<casterImpacts>
+						<Item type="gameMechanics.elements.impacts.ProbabilisticImpact">
+							<chanceCalcer type="gameMechanics.elements.calcers.FloatData">
+								<value var="chance" />
+							</chanceCalcer>
+							<impacts>
+								<Item type="gameMechanics.constructor.schemes.buff.BuffAttacher">
+									<buff href="ExecuteWrath.(BuffResource).xdb" />
+								</Item>
+							</impacts>
 						</Item>
-					</impacts>
-				</Item>
-				<Item type="gameMechanics.elements.effects.OverrideOutgoingSubElement">
-					<impactProducer href="/Mechanics/Spells/Paladin63/Spells/Wrath/Wrath01.(SpellSingleTarget).xdb" />
-					<newElement>HOLY</newElement>
-				</Item>
-				<Item type="gameMechanics.elements.effects.OverrideOutgoingSubElement">
-					<impactProducer href="/Mechanics/Spells/Paladin63/Spells/WrathUpgrade/WrathUpgrade01.(SpellSingleTarget).xdb" />
-					<newElement>HOLY</newElement>
+					</casterImpacts>
+					<destination type="gameMechanics.elements.effects.SpellExtraImpacts$DestinationSpells">
+						<spells>
+							<Item href="/Mechanics/Spells/Paladin63/Spells/CleansingHit/CleansingHit01.(SpellSingleTarget).xdb" />
+							<Item href="/Mechanics/Spells/Paladin63/Spells/CrusaderHit/CrusaderHit01.(SpellSingleTarget).xdb" />
+							<Item href="/Mechanics/Spells/Paladin63/Spells/CrusaderHitUpgrade/CrusaderHitUpgrade01.(SpellSingleTarget).xdb" />
+						</spells>
+					</destination>
 				</Item>
 			</effects>
 		</Item>
